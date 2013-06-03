@@ -1,41 +1,96 @@
-*
-{
-  margin: 0;
-  padding: 0;
-  text-decoration: none;
+.btn-block + .btn-block {
+  margin-left: 0;
+  margin-top: 7px;
 }
 
-a.dojos
-{
-  display: block;
-  margin: 0.5em;
-  padding: 0.5em 1em;
-  color: #FFF;
-  font-weight: bold;
-  text-shadow: 0px 0px 3px rgba(0,0,0,0.5);
-  border-radius: 0.5em;
-  box-shadow: 1px 1px 1px rgba(000,000,000,0.3),inset 0px 0px 3px rgba(255,255,255,0.5);
-
-  border: 1px solid #1e69de;
-  background-color: #6db3f2; /* Old browsers */
-  background-image: -moz-linear-gradient(top,  #6db3f2 0%, #54a3ee 50%, #3690f0 51%, #1e69de 100%); /* FF3.6+ */
-  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#6db3f2), color-stop(50%,#54a3ee), color-stop(51%,#3690f0), color-stop(100%,#1e69de)); /* Chrome,Safari4+ */
-  background-image: -webkit-linear-gradient(top,  #6db3f2 0%,#54a3ee 50%,#3690f0 51%,#1e69de 100%); /* Chrome10+,Safari5.1+ */
-  background-image: -o-linear-gradient(top,  #6db3f2 0%,#54a3ee 50%,#3690f0 51%,#1e69de 100%); /* Opera 11.10+ */
-  background-image: -ms-linear-gradient(top,  #6db3f2 0%,#54a3ee 50%,#3690f0 51%,#1e69de 100%); /* IE10+ */
-  background-image: linear-gradient(to bottom,  #6db3f2 0%,#54a3ee 50%,#3690f0 51%,#1e69de 100%); /* W3C */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6db3f2', endColorstr='#1e69de',GradientType=0 ); /* IE6-9 */
+.btn-full-width {
+  position: relative;
+}
+.btn-full-width .dropdown-lead {
+  width: 100%;
+}
+.btn-full-width .dropdown-lead-container {
+  left: 0;
+  position: absolute;
+  right: 26px;
+}
+.btn-full-width .dropdown-toggle {
+  width: 26px;
+  float: right;
+  box-sizing: border-box;
+}
+.btn-full-width > .dropdown-lead-container + .dropdown-toggle {
+  *padding-top: 5px;
+  padding-right: 8px;
+  *padding-bottom: 5px;
+  padding-left: 8px;
+  -webkit-box-shadow: inset 1px 0 0 rgba(255, 255, 255, 0.125), inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+     -moz-box-shadow: inset 1px 0 0 rgba(255, 255, 255, 0.125), inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+          box-shadow: inset 1px 0 0 rgba(255, 255, 255, 0.125), inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
-a.visited
-{
-  border: 1px solid #6d0019;
-  background-color: #a90329; /* Old browsers */
-  background-image: -moz-linear-gradient(top,  #a90329 0%, #8f0222 44%, #6d0019 100%); /* FF3.6+ */
-  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#a90329), color-stop(44%,#8f0222), color-stop(100%,#6d0019)); /* Chrome,Safari4+ */
-  background-image: -webkit-linear-gradient(top,  #a90329 0%,#8f0222 44%,#6d0019 100%); /* Chrome10+,Safari5.1+ */
-  background-image: -o-linear-gradient(top,  #a90329 0%,#8f0222 44%,#6d0019 100%); /* Opera 11.10+ */
-  background-image: -ms-linear-gradient(top,  #a90329 0%,#8f0222 44%,#6d0019 100%); /* IE10+ */
-  background-image: linear-gradient(to bottom,  #a90329 0%,#8f0222 44%,#6d0019 100%); /* W3C */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a90329', endColorstr='#6d0019',GradientType=0 ); /* IE6-9 */
+.dojo .dropdown-lead {
+  text-align: left;
+}
+
+
+
+.btn-full-width-group {
+  position: relative;
+}
+.btn-full-width-group .btn-full-width {
+  width: 100%;
+}
+.btn-full-width-group > .btn-full-width-container {
+  left: 0;
+  position: absolute;
+  right: 40px;
+}
+.btn-full-width-group > .btn-full-width-container + .btn {
+  width: 40px;
+  float: right;
+  box-sizing: border-box;
+  *padding-top: 5px;
+  padding-right: 8px;
+  *padding-bottom: 5px;
+  padding-left: 8px;
+  -webkit-box-shadow: inset 1px 0 0 rgba(255, 255, 255, 0.125), inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+     -moz-box-shadow: inset 1px 0 0 rgba(255, 255, 255, 0.125), inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+          box-shadow: inset 1px 0 0 rgba(255, 255, 255, 0.125), inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+.btn-full-width-group.btn-full-width-large > .btn-full-width-container {
+  right: 54px;
+}
+.btn-full-width-group.btn-full-width-large > .btn-full-width-container + .btn {
+  width: 54px;
+}
+
+.dojo .btn-full-width {
+  text-align: left;
+  overflow: hidden;
+}
+
+nav,
+div.alert,
+.pill-content {
+  margin:0 0.5em 0.5em 0.5em;
+}
+
+.nav {
+  margin:0;
+}
+
+.pagination,
+.well {
+  margin:0.5em 0;
+}
+
+#adsense {
+  margin: 0 auto;
+  width: 320px;
+}
+
+#info,
+#alert {
+  display: none;
 }

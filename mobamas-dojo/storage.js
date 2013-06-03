@@ -1,39 +1,27 @@
-var Storage = function(type, namespace) {
-  type = (type == null ? false : type);
-  namespace = (namespace == null ? '' : namespace);
+var Storage = function(opt_type, opt_namespace) {
+  if (arguments.length == 0) opt_type = true;
+  if (arguments.length < 2) opt_namespace = '';
 
-  this._storage = (type ? localStorage : sessionStorage);
-  this._namespace = namespace + '_';
+  this._storage = (opt_type ? localStorage : sessionStorage);
+  this._namespace = opt_namespace + '_';
 };
 
 Storage.prototype = {
   _namespace: '',
 
-  get: function(key) {
-    try {
-      var value = this._storage.getItem(this._namespace + key);
-      value = JSON.parse(value);
-      return value;
-    }
-    catch (e) {
-      return null;
-    }
+  get: function(key, opt_defaultValue) {
+    if (arguments.length == 1) opt_defaultValue = null;
+
+    var value = this._storage.getItem(this._namespace + key);
+    return (value === null ? opt_defaultValue : JSON.parse(value));
   },
 
   set: function(key, value) {
-    try {
-      var JSONValue = JSON.stringify(value);
-      this._storage.setItem(this._namespace + key, JSONValue);
-    }
-    catch (e) {
-    }
+    var JSONValue = JSON.stringify(value);
+    this._storage.setItem(this._namespace + key, JSONValue);
   },
 
   remove: function(key) {
-    try {
-      this._storage.removeItem(this._namespace + key);
-    }
-    catch (e) {
-    }
+    this._storage.removeItem(this._namespace + key);
   }
 };

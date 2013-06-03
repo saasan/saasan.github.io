@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>モバマス道場リスト</title>
+  <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="styles.css">
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+  <script src="bootstrap/js/bootstrap.min.js"></script>
+  <script src="storage.js"></script>
+  <script src="dojo.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+</head>
+<body>
+  <div id="adsense">
+    <script>
+      google_ad_client = "ca-pub-0141905477316976";
+      google_ad_slot = "7336848578";
+      google_ad_width = 320;
+      google_ad_height = 50;
+    </script>
+    <script src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
+  </div>
+
+  <div class="alert alert-block" id="info">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <p><strong>モバマス道場リストへようこそ！</strong></p>
+    <p>
+      ここは
+      <a href="http://sp.pf.mbga.jp/12008305/" target="_blank">アイドルマスターシンデレラガールズ</a>
+      の道場一覧サイトです。
+      スマートフォン用に作ってます。
+    </p>
+    <p>
+      <del>
+      リストは毎朝5時に
+      <a href="https://docs.google.com/spreadsheet/lv?key=0Aq6mv2GCHMGLdERhLURsdEZwdVFvREdiYjE4Sy1FUnc&type=view" target="_blank">アイマスCG 殴られ屋さん一覧</a>
+      から上位300件を取得して更新されます。
+      </del>
+      現状、手動更新です。
+    </p>
+    <p>
+      凸回数によって道場の色が変わります。
+      凸回数は毎朝5時にリセットされます。
+      正確には実際の凸回数ではなくリンクをタッチした回数が記録されています。
+    </p>
+     <p>
+      道場右の &times; ボタンを押すと、不要な道場を非表示にできます。
+      守発揮値が高すぎる道場等にご利用下さい。
+      非表示にした道場は「設定」で再表示できます。
+    </p>
+ </div>
+
+  <div class="alert alert-block" id="alert">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <p id="alert-text"></p>
+  </div>
+
+  <nav>
+    <ul id="nav-tab" class="nav nav-pills">
+      <li class="active"><a href="#dojo-list" data-toggle="pill"><i class="icon-list"></i> 道場一覧</a></li>
+      <li><a href="#config" data-toggle="pill" id="configTab"><i class="icon-cog"></i> 設定</a></li>
+      <li><a href="#etc" data-toggle="pill">その他</a></li>
+    </ul>
+  </nav>
+
+  <div id="nav-tab-content" class="pill-content">
+    <section id="dojo-list" class="pill-pane active">
+      <!--
+      <div class="pagination pagination-centered">
+        <ul>
+          <li><a href="#">&laquo;</a></li>
+          <li class="active"><a href="#">1</a></li>
+          <li><a href="#">2</a></li>
+          <li><a href="#">3</a></li>
+          <li><a href="#">4</a></li>
+          <li><a href="#">&raquo; </a></li>
+        </ul>
+      </div>
+      -->
+{% if dojos|length > 0 -%}
+{%- for dojo in dojos %}
+      <div class="btn-group btn-block btn-full-width-group dojo" id="did{{ dojo.id }}">
+        <div class="btn-full-width-container">
+          <a class="btn btn-full-width btn-primary dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F{{ dojo.id }}" target="_blank" id="id{{ dojo.id }}">{{ loop.index }}. {{ dojo.lv }} {{ dojo.rank }} {{ dojo.leader }}</a>
+        </div>
+        <button class="btn btn-primary dojo-hide" id="hid{{ dojo.id }}" data-id="id{{ dojo.id }}"><i class="icon-remove icon-white"></i></button>
+      </div>
+{% endfor -%}
+{%- endif %}
+    </section>
+
+    <section id="config" class="pill-pane">
+      <label class="checkbox">
+        <input type="checkbox" id="sameTab"> 道場を同じタブで開く
+      </label>
+      <label class="checkbox">
+        <input type="checkbox" id="autoHide"> 訪問済の道場を表示しない
+      </label>
+      <div>
+        <label>道場を訪問済にする回数</label>
+        <select class="input-mini" id="visitedMax">
+          <option value="1">1</option>
+          <option value="3">3</option>
+        </select>
+        回以上開いた時
+      </div>
+      <button class="btn btn-block btn-primary" type="button" id="configOK"><i class="icon-ok icon-white"></i> OK</button>
+      <button class="btn btn-block" type="button" id="configResetVisited">凸回数をリセット</button>
+      <button class="btn btn-block" type="button" id="configResetHide">道場の非表示設定をリセット</button>
+      <button class="btn btn-block" type="button" id="configReset"><i class="icon-repeat"></i> 全ての設定をリセット</button>
+    </section>
+
+    <section id="etc" class="pill-pane">
+      <div class="well well-small">
+        最終更新 : {{ now|datetime }}
+      </div>
+      <div class="well well-small">
+        このサイトは<a href="http://sp.pf.mbga.jp/12008305/?guid=ON&url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F59953092" target="_blank">カガミ</a>が作りました。
+      </div>
+    </section>
+  </div>
+</body>
+</html>
