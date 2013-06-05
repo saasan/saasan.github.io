@@ -1,4 +1,10 @@
+'use strict';
+
 var Storage = function(opt_type, opt_namespace) {
+  if (typeof localStorage === 'undefined') {
+    throw new Error('Web Storage is not available');
+  }
+
   if (arguments.length == 0) opt_type = true;
   if (arguments.length < 2) opt_namespace = '';
 
@@ -9,11 +15,23 @@ var Storage = function(opt_type, opt_namespace) {
 Storage.prototype = {
   _namespace: '',
 
-  get: function(key, opt_defaultValue) {
+  get: function(key, opt_defaultValue, opt_reviver) {
     if (arguments.length == 1) opt_defaultValue = null;
+    if (arguments.length > 2 && typeof opt_reviver !== 'function') {
+      throw new TypeError(opt_reviver + ' is not a function');
+    }
 
     var value = this._storage.getItem(this._namespace + key);
-    return (value === null ? opt_defaultValue : JSON.parse(value));
+    if (value !== null) {
+      if (arguments.length > 2) {
+        return JSON.parse(value, opt_reviver);
+      }
+      else {
+        return JSON.parse(value);
+      }
+    }
+
+    return opt_defaultValue;
   },
 
   set: function(key, value) {

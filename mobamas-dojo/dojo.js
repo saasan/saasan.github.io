@@ -1,12 +1,58 @@
+'use strict';
+
 $(function(){
+  var Toast = function() {
+  };
+
+  Toast.prototype = {
+    _id: null,
+
+    show: function(message, opt_class, opt_hide) {
+      var self = this;
+
+      if ($('#alert-container').is(':hidden') || this._id === null) {
+        $('#alert-text').text(message);
+        var alert = $('#alert');
+        alert.removeClass('alert-success alert-error alert-danger alert-info');
+        if (arguments.length > 1) {
+          alert.addClass(opt_class);
+        }
+        $('#alert-container').show();
+
+        if (arguments.length > 2 && typeof opt_hide === 'number') {
+          var self = this;
+          this._id = setTimeout(function(){ $('#alert-container').hide(); self._id = null; }, opt_hide);
+        }
+      }
+      else {
+        $('#alert-container').hide();
+        clearTimeout(this._id);
+        this._id = setTimeout(function(){ self.show(message, opt_class, opt_hide); }, 300);
+      }
+    }
+  };
+
   var MobamasDojo = function() {
   };
 
   MobamasDojo.prototype = {
     _RESET_HOUR: 5,
     _RESET_MINUTE: 0,
+    _TOAST_TIME: 3000,
+    _toast: null,
     _storage: null,
     _config: {},
+
+    _dateReviver: function(key, value) {
+      var a;
+      if (key === 'lastTime' && typeof value === 'string') {
+        a = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}(?:\.\d*)?)Z$/.exec(value);
+        if (a) {
+          return new Date(Date.UTC(+a[1], +a[2] - 1, +a[3], +a[4], +a[5], +a[6]));
+        }
+      }
+      return value;
+    },
 
     onclickDojoLink: function(element) {
       var id = element.attr('id');
@@ -28,29 +74,29 @@ $(function(){
       this._config.visitedMax = $('#visitedMax').val();
       this.updateUI();
       this._storage.set('config', this._config);
-      this.showAlert('設定を保存しました。', 'alert-success', 1000);
+      this._toast.show('設定を保存しました。', 'alert-success', this._TOAST_TIME);
     },
 
     onclickConfigResetVisited: function(element) {
       this._config.visited = {};
       this.updateUI();
       this._storage.set('config', this._config);
-      this.showAlert('凸回数をリセットしました。', 'alert-success', 1000);
+      this._toast.show('凸回数をリセットしました。', 'alert-success', this._TOAST_TIME);
     },
 
     onclickConfigResetHide: function(element) {
       this._config.hide = {};
       this.updateUI();
       this._storage.set('config', this._config);
-      this.showAlert('道場の非表示設定をリセットしました。', 'alert-success', 1000);
+      this._toast.show('道場の非表示設定をリセットしました。', 'alert-success', this._TOAST_TIME);
     },
 
     onclickConfigReset: function(element) {
       this._config = {};
-      this.resetConfig();
+      this.setConfigDefault();
       this.updateUI();
       this._storage.set('config', this._config);
-      this.showAlert('全ての設定をリセットしました。', 'alert-success', 1000);
+      this._toast.show('全ての設定をリセットしました。', 'alert-success', this._TOAST_TIME);
     },
 
     onclosedInfo: function() {
@@ -136,37 +182,26 @@ $(function(){
       }
     },
 
-    resetConfig: function() {
+    setConfigDefault: function() {
       var configDefault = {
         visited: {},
         hide: {},
         sameTab: false,
         autoHide: false,
         visitedMax: 1,
-        infoClosed: false
+        infoClosed: false,
+        lastTime: new Date()
       };
       for (var key in configDefault) {
         if (typeof this._config[key] === 'undefined') this._config[key] = configDefault[key];
       }
     },
 
-    showAlert: function(message, opt_class, opt_hide) {
-      $('#alert-text').text(message);
-      var alert = $('#alert');
-      alert.removeClass('alert-success alert-error alert-danger alert-info');
-      if (arguments.length > 1) {
-        alert.addClass(opt_class);
-      }
-      alert.show();
-      if (arguments.length > 2 && typeof opt_hide === 'number') {
-        setTimeout(function(){ $('#alert').hide(); }, opt_hide);
-      }
-    },
-
     init: function() {
+      this._toast = new Toast();
       this._storage = new Storage(true, 'mobamas-dojo');
-      this._config = this._storage.get('config', {});
-      this.resetConfig();
+      this._config = this._storage.get('config', {}, this._dateReviver);
+      this.setConfigDefault();
 
       var i, id;
       var now = new Date();
@@ -184,15 +219,23 @@ $(function(){
     }
   };
 
-  var d = new MobamasDojo();
-  d.init();
+  try {
+    var d = new MobamasDojo();
+    d.init();
 
-  $('a.dojo-link').click(function(){ d.onclickDojoLink($(this)); });
-  $('button.dojo-hide').click(function(){ d.onclickDojoHide($(this)); });
-  $('#configOK').click(function(){ d.onclickConfigOK($(this)); });
-  $('#configResetVisited').click(function(){ d.onclickConfigResetVisited($(this)); });
-  $('#configResetHide').click(function(){ d.onclickConfigResetHide($(this)); });
-  $('#configReset').click(function(){ d.onclickConfigReset($(this)); });
-  $('#info').on('closed', function(){ d.onclosedInfo(); });
-  $('#configTab').on('shown', function(){ d.onshownConfigTab(); });
+    $('a.dojo-link').click(function(){ d.onclickDojoLink($(this)); });
+    $('button.dojo-hide').click(function(){ d.onclickDojoHide($(this)); });
+    $('#configOK').click(function(){ d.onclickConfigOK($(this)); });
+    $('#configResetVisited').click(function(){ d.onclickConfigResetVisited($(this)); });
+    $('#configResetHide').click(function(){ d.onclickConfigResetHide($(this)); });
+    $('#configReset').click(function(){ d.onclickConfigReset($(this)); });
+    $('#info').on('closed', function(){ d.onclosedInfo(); });
+    $('#configTab').on('shown', function(){ d.onshownConfigTab(); });
+  }
+  catch (e) {
+    $('#alert-text').text(e.message);
+    $('#alert').removeClass('alert-success alert-danger alert-info').addClass('alert-error');
+    $('#alert-container').show();
+  }
+
 });
