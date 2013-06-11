@@ -6,7 +6,7 @@ var Storage = function(opt_type, opt_namespace) {
   }
 
   if (arguments.length == 0) opt_type = true;
-  if (arguments.length < 2) opt_namespace = '';
+  if (arguments.length < 2 || opt_namespace == null) opt_namespace = '';
 
   this._storage = (opt_type ? localStorage : sessionStorage);
   this._namespace = opt_namespace + '_';
@@ -17,13 +17,10 @@ Storage.prototype = {
 
   get: function(key, opt_defaultValue, opt_reviver) {
     if (arguments.length == 1) opt_defaultValue = null;
-    if (arguments.length > 2 && typeof opt_reviver !== 'function') {
-      throw new TypeError(opt_reviver + ' is not a function');
-    }
 
     var value = this._storage.getItem(this._namespace + key);
     if (value !== null) {
-      if (arguments.length > 2) {
+      if (arguments.length > 2 && typeof opt_reviver === 'function') {
         return JSON.parse(value, opt_reviver);
       }
       else {

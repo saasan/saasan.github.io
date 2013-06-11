@@ -73,7 +73,7 @@
 nav,
 div.alert,
 .pill-content {
-  margin:0 0.5em 0.5em 0.5em;
+  margin:0 7px 7px 7px;
 }
 
 .nav {
@@ -82,7 +82,7 @@ div.alert,
 
 .pagination,
 .well {
-  margin:0.5em 0;
+  margin:7px 0;
 }
 
 #adsense {
@@ -107,4 +107,14 @@ div.alert,
   -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
      -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
           box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+legend {
+  font-size: 14px;
+  line-height: 30px;
+  margin-bottom: 7px;
+}
+
+legend ~ * {
+  margin-left: 1em;
 }

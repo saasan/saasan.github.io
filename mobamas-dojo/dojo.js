@@ -33,6 +33,30 @@ $(function(){
   };
 
   var MobamasDojo = function() {
+    this._toast = new Toast();
+    this._config = new Config({
+        visited: {},
+        hide: {},
+        sameTab: false,
+        autoHide: false,
+        visitedMax: 1,
+        infoClosed: false,
+        lastTime: new Date()
+    }, 'mobamas-dojo', 'config', this._dateReviver);
+    this._config.load();
+
+    var now = new Date();
+    var resetTime = this.getResetTime();
+
+    if (this._config.lastTime < resetTime && resetTime <= now) {
+      this._config.visited = {};
+    }
+
+    this._config.lastTime =  now;
+
+    this.updateUI();
+
+    this._config.save();
   };
 
   MobamasDojo.prototype = {
@@ -40,8 +64,7 @@ $(function(){
     _RESET_MINUTE: 0,
     _TOAST_TIME: 3000,
     _toast: null,
-    _storage: null,
-    _config: {},
+    _config: null,
 
     _dateReviver: function(key, value) {
       var a;
@@ -57,51 +80,55 @@ $(function(){
     onclickDojoLink: function(element) {
       var id = element.attr('id');
       this._config.visited[id] = (this._config.visited[id] == null ? 1 : ++this._config.visited[id]);
+      this._config.save();
       this.updateButtonState(id);
-      this._storage.set('config', this._config);
     },
 
     onclickDojoHide: function(element) {
       var id = element.data('id');
       this._config.hide[id] = true;
+      this._config.save();
       this.updateButtonState(id);
-      this._storage.set('config', this._config);
     },
 
     onclickConfigOK: function(element) {
       this._config.sameTab = $('#sameTab').is(':checked');
       this._config.autoHide = $('#autoHide').is(':checked');
       this._config.visitedMax = $('#visitedMax').val();
+      this._config.save();
       this.updateUI();
-      this._storage.set('config', this._config);
       this._toast.show('設定を保存しました。', 'alert-success', this._TOAST_TIME);
     },
 
     onclickConfigResetVisited: function(element) {
       this._config.visited = {};
+      this._config.save();
       this.updateUI();
-      this._storage.set('config', this._config);
-      this._toast.show('凸回数をリセットしました。', 'alert-success', this._TOAST_TIME);
+      this._toast.show('訪問回数を初期化しました。', 'alert-success', this._TOAST_TIME);
     },
 
     onclickConfigResetHide: function(element) {
       this._config.hide = {};
+      this._config.save();
       this.updateUI();
-      this._storage.set('config', this._config);
-      this._toast.show('道場の非表示設定をリセットしました。', 'alert-success', this._TOAST_TIME);
+      this._toast.show('道場の非表示設定を初期化しました。', 'alert-success', this._TOAST_TIME);
     },
 
     onclickConfigReset: function(element) {
-      this._config = {};
-      this.setConfigDefault();
+      this._config.reset();
+      this._config.save();
       this.updateUI();
-      this._storage.set('config', this._config);
-      this._toast.show('全ての設定をリセットしました。', 'alert-success', this._TOAST_TIME);
+      this._toast.show('全ての設定を初期化しました。', 'alert-success', this._TOAST_TIME);
     },
 
-    onclosedInfo: function() {
+    onclickCloseInfo: function() {
       this._config.infoClosed = true;
-      this._storage.set('config', this._config);
+      this._config.save();
+      $('#info').hide();
+    },
+
+    onclickCloseAlert: function() {
+      $('#alert-container').hide();
     },
 
     onshownConfigTab: function() {
@@ -180,48 +207,11 @@ $(function(){
       else {
         $('#info').show();
       }
-    },
-
-    setConfigDefault: function() {
-      var configDefault = {
-        visited: {},
-        hide: {},
-        sameTab: false,
-        autoHide: false,
-        visitedMax: 1,
-        infoClosed: false,
-        lastTime: new Date()
-      };
-      for (var key in configDefault) {
-        if (typeof this._config[key] === 'undefined') this._config[key] = configDefault[key];
-      }
-    },
-
-    init: function() {
-      this._toast = new Toast();
-      this._storage = new Storage(true, 'mobamas-dojo');
-      this._config = this._storage.get('config', {}, this._dateReviver);
-      this.setConfigDefault();
-
-      var i, id;
-      var now = new Date();
-      var resetTime = this.getResetTime();
-
-      if (this._config.lastTime < resetTime && resetTime <= now) {
-        this._config.visited = {};
-      }
-
-      this._config.lastTime =  now;
-
-      this.updateUI();
-
-      this._storage.set('config', this._config);
     }
   };
 
   try {
     var d = new MobamasDojo();
-    d.init();
 
     $('a.dojo-link').click(function(){ d.onclickDojoLink($(this)); });
     $('button.dojo-hide').click(function(){ d.onclickDojoHide($(this)); });
@@ -229,7 +219,8 @@ $(function(){
     $('#configResetVisited').click(function(){ d.onclickConfigResetVisited($(this)); });
     $('#configResetHide').click(function(){ d.onclickConfigResetHide($(this)); });
     $('#configReset').click(function(){ d.onclickConfigReset($(this)); });
-    $('#info').on('closed', function(){ d.onclosedInfo(); });
+    $('#closeInfo').click(function(){ d.onclickCloseInfo(); });
+    $('#closeAlert').click(function(){ d.onclickCloseAlert(); });
     $('#configTab').on('shown', function(){ d.onshownConfigTab(); });
   }
   catch (e) {
