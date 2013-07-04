@@ -1,3 +1,5 @@
+'use strict';
+
 var Config = function(opt_defaultValues, opt_storageNamespace, opt_storageKey, opt_reviver) {
   for (var i in this) {
     this._initialKeys[i] = true;
@@ -27,7 +29,7 @@ Config.prototype = {
 
   _copyConfigValues: function(sourceObject, destObject) {
     for (var i in sourceObject) {
-      if (this._initialKeys[i]) continue;
+      if (typeof this._initialKeys[i] !== 'undefined') continue;
 
       if (sourceObject[i] instanceof Date) {
         destObject[i] = new Date();
@@ -49,6 +51,10 @@ Config.prototype = {
   },
 
   _importValues: function(sourceObject) {
+    for (var i in this._initialKeys) {
+      if (typeof sourceObject[i] !== 'undefined') throw new Error('The key name already exists : ' + i);
+    }
+
     this._copyConfigValues(sourceObject, this);
   },
 
