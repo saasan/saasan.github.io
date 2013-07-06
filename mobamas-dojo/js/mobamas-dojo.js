@@ -9,22 +9,22 @@ Toast.prototype = {
   show: function(message, opt_class, opt_hide) {
     var self = this;
 
-    if ($('#alert-container').is(':hidden') || this._id === null) {
-      $('#alert-text').text(message);
+    if ($('#alertContainer').is(':hidden') || this._id === null) {
+      $('#alertText').text(message);
       var alert = $('#alert');
       alert.removeClass('alert-success alert-error alert-danger alert-info');
       if (arguments.length > 1) {
         alert.addClass(opt_class);
       }
-      $('#alert-container').show();
+      $('#alertContainer').show();
 
       if (arguments.length > 2 && typeof opt_hide === 'number') {
         var self = this;
-        this._id = setTimeout(function(){ $('#alert-container').hide(); self._id = null; }, opt_hide);
+        this._id = setTimeout(function(){ $('#alertContainer').hide(); self._id = null; }, opt_hide);
       }
     }
     else {
-      $('#alert-container').hide();
+      $('#alertContainer').hide();
       clearTimeout(this._id);
       this._id = setTimeout(function(){ self.show(message, opt_class, opt_hide); }, 300);
     }
@@ -91,7 +91,7 @@ MobamasDojo.prototype = {
     this.updateButtonState(id);
   },
 
-  onclickDojoHide: function(element) {
+  onclickHideDojo: function(element) {
     var id = element.data('id');
     this._config.hide[id] = true;
     this._config.save();
@@ -104,6 +104,7 @@ MobamasDojo.prototype = {
     this._config.visitedMax = $('#visitedMax').val();
     this._config.save();
     this.updateUI();
+    $('#sectionConfig').hide();
     this._toast.show('設定を保存しました。', 'alert-success', this._TOAST_TIME);
   },
 
@@ -135,11 +136,12 @@ MobamasDojo.prototype = {
   },
 
   onclickCloseAlert: function() {
-    $('#alert-container').hide();
+    $('#alertContainer').hide();
   },
 
-  onshownConfigTab: function() {
+  onclickOpenConfig: function() {
     this.updateConfigUI();
+    $('#sectionConfig').show();
   },
 
   getResetTime: function() {
