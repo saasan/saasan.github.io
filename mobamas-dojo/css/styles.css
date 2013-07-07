@@ -18,6 +18,7 @@ section {
   line-height: 30px;
   color: #333;
   text-align: center;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
   vertical-align: middle;
   cursor: pointer;
   background-color: #f5f5f5;
@@ -30,23 +31,24 @@ section {
 .btn-warning,
 .btn-danger {
   color: #fff;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
 }
 
 .btn-primary {
-  background-color: #0078E7;
+  background-color: #0078e7;
 }
 
 .btn-success {
-  background-color: #1cb841;
+  background-color: #00d46b;
 }
 
 .btn-warning {
-  background-color: #df7514;
+  background-color: #ffc100;
 }
 
 .btn-danger,
 .btn-error {
-  background-color: #ca3c3c;
+  background-color: #e70048;
 }
 
 .btn-block {
@@ -79,6 +81,7 @@ button.close {
   font-weight: bold;
   line-height: 20px;
   color: #000;
+  text-shadow: 0 1px 0 #ffffff;
   opacity: .2;
 }
 
@@ -92,7 +95,7 @@ button.close {
 
 .alert,
 .alert h4 {
-  color: #c09853;
+  color: #555;
 }
 
 .alert-block {
@@ -107,8 +110,9 @@ button.close {
 .alert-danger,
 .alert-error {
   color: #fff;
-  background-color: #ca3c3c;
-  border-color: #f00;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+  background-color: #e70048;
+  border-color: #e70048;
   font-weight: bold;
 }
 
@@ -186,6 +190,7 @@ iframe {
   left: 0;
   right: 40px;
   text-align: left;
+  font-weight: bold;
   overflow: hidden;
   white-space: nowrap;
 }
