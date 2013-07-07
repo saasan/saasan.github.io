@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>モバマス道場リスト</title>
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/mobamas-dojo.js"></script>
+  <script src="js/init.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+</head>
+<body>
+  <div id="adsense">
+    <script>
+      google_ad_client = "ca-pub-0141905477316976";
+      google_ad_slot = "7336848578";
+      google_ad_width = 320;
+      google_ad_height = 50;
+    </script>
+    <script src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
+  </div>
+
+  <div id="alertContainer">
+    <div class="alert alert-block" id="alert">
+      <button type="button" class="close" id="closeAlert"><i class="icon-remove"></i></button>
+      <p id="alertText">alert</p>
+    </div>
+  </div>
+
+  <section id="sectionInfo">
+    <div class="alert alert-block" id="info">
+      <button type="button" class="close" id="closeInfo"><i class="icon-remove"></i></button>
+      <h4>モバマス道場リストへようこそ！</h4>
+      <p>
+        ここは
+        <a href="http://sp.pf.mbga.jp/12008305/" target="_blank">アイドルマスターシンデレラガールズ</a>
+        の道場一覧サイトです。
+        スマートフォン用に作ってます。
+      </p>
+      <p>
+        <del>
+        リストは毎朝5時に
+        <a href="https://docs.google.com/spreadsheet/lv?key=0Aq6mv2GCHMGLdERhLURsdEZwdVFvREdiYjE4Sy1FUnc&type=view" target="_blank">アイマスCG 殴られ屋さん一覧</a>
+        から上位300件を取得して更新されます。
+        </del>
+        現状、手動更新です。
+      </p>
+      <p>
+        道場の訪問回数(正確には、ボタンをタッチした回数)によってボタンの色が変わります。
+        訪問回数は毎朝5時にリセットされます。
+        「設定」で訪問済の道場を非表示にする事もできます。
+      </p>
+       <p>
+        道場の右にある <i class="icon-remove"></i> ボタンを押すと、不要な道場を非表示にできます。
+        守発揮値が高すぎる道場等にご利用下さい。
+        非表示にした道場は「設定」で再表示できます。
+      </p>
+    </div>
+  </section>
+
+  <section id="sectionConfig">
+    <div id="sectionInnerConfig">
+      <button type="button" class="close" id="closeConfig"><i class="icon-remove"></i></button>
+      <h2>設定</h2>
+      <section>
+        <label>
+          <input type="checkbox" id="sameTab"> 道場を同じタブで開く
+        </label>
+        <label>
+          <input type="checkbox" id="autoHide"> 訪問済の道場を表示しない
+        </label>
+        <label>
+          <select class="input-mini" id="visitedMax">
+            <option value="1">1</option>
+            <option value="3">3</option>
+          </select>
+          回以上訪問した時、道場を訪問済とする
+        </label>
+        <button type="button" class="btn btn-block btn-primary" id="configOK"><i class="icon-ok"></i> 設定を保存</button>
+        <button type="button" class="btn btn-block" id="configResetVisited">訪問回数を初期化</button>
+        <button type="button" class="btn btn-block" id="configResetHide">道場の非表示設定を初期化</button>
+        <button type="button" class="btn btn-block" id="configReset"><i class="icon-repeat"></i> 全ての設定を初期化</button>
+        <button type="button" class="btn btn-block" id="configCancel"><i class="icon-remove"></i> キャンセル</button>
+      </section>
+
+      <h2>その他</h2>
+      <section>
+        <div class="well well-small">
+          最終更新 : {{ now|datetime }}
+        </div>
+        <div class="well well-small">
+          このサイトは
+          <a href="http://sp.pf.mbga.jp/12008305/?guid=ON&url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F59953092" target="_blank">カガミ</a>
+          が作りました。
+        </div>
+        <div class="well well-small">
+          <p>このサイトのQRコード</p>
+          <img src="img/qrcode.png" width="111" height="111" alt="QRコード">
+        </div>
+        <div class="well well-small">
+          <a href="https://twitter.com/share" class="twitter-share-button" data-size="large" data-hashtags="imas_cg">Tweet</a>
+          <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </div>
+      </section>
+    </div>
+  </section>
+
+  <section id="sectionDojoList">
+    <button type="button" class="btn btn-block" id="openConfig"><i class="icon-cog"></i> 設定</button>
+{% if dojos|length > 0 -%}
+{%- for dojo in dojos %}
+    <div class="dojo" id="did{{ dojo.id }}">
+      <a class="btn btn-primary dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F{{ dojo.id }}" target="_blank" id="id{{ dojo.id }}">{{ loop.index }}. {{ dojo.lv }} {{ dojo.rank }} {{ dojo.leader }}</a>
+      <button type="button" class="btn btn-primary hide-dojo" id="hid{{ dojo.id }}" data-id="id{{ dojo.id }}"><i class="icon-remove"></i></button>
+    </div>
+{% endfor -%}
+{%- endif %}
+  </section>
+</body>
+</html>
