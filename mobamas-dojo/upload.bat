@@ -1,4 +1,4 @@
-REM @ECHO OFF
+@ECHO OFF
 %~d0
 PUSHD %~dp0
 
@@ -9,4 +9,3 @@ git commit -m "mobamas-dojo auto update"
 git push
 
 POPD
-PAUSE
