@@ -2,6 +2,7 @@
 %~d0
 PUSHD %~dp0
 
+git config credential.helper store
 git pull
 python main.py
 git add .
