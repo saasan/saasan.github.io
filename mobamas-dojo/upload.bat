@@ -1,7 +1,11 @@
 %~d0
 PUSHD %~dp0
 
-bash --login -i upload.sh
+git pull
+python main.py
+git add .
+git commit -m "mobamas-dojo"
+git push
 
 POPD
 PAUSE
