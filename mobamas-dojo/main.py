@@ -11,6 +11,7 @@ APP_PATH = os.path.dirname(__file__)
 TEMPLATE = 'template.html'
 OUTPUT = 'index.html'
 OUTPUT_PATH = os.path.join(APP_PATH, OUTPUT)
+HEADER_ROWS = 1
 NUMBER_OF_DOJOS = 300
 
 class Dojo:
@@ -29,7 +30,7 @@ def unicode_csv_reader(utf8_csv_data, dialect=csv.excel, **kwargs):
 def format_datetime(value):
     return value.strftime('%Y-%m-%d %H:%M')
 
-url = 'https://spreadsheets.google.com/pub?key=0Aq6mv2GCHMGLdERhLURsdEZwdVFvREdiYjE4Sy1FUnc&output=csv&range=b9:h' + str(NUMBER_OF_DOJOS + 8)
+url = 'https://spreadsheets.google.com/pub?key=0Aq6mv2GCHMGLdERhLURsdEZwdVFvREdiYjE4Sy1FUnc&output=csv&range=b' + str(HEADER_ROWS + 1) + ':h' + str(HEADER_ROWS + NUMBER_OF_DOJOS)
 
 try:
     result = urllib2.urlopen(url)
