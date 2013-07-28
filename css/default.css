@@ -1,0 +1,42 @@
+body {
+  padding-top: 1em;
+}
+
+nav > ol {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+nav > ol > li {
+  display: inline;
+  text-transform: capitalize;
+}
+
+div#adsense {
+  margin: 0 auto;
+  width: 320px;
+}
+
+h1, h2, h3, h4, h5, h6, ul#contents > li {
+  text-transform: capitalize;
+}
+
+h1#home_title {
+  text-transform: none;
+}
+
+img {
+  max-width: 100%;
+}
+
+.info, footer {
+  text-align: right;
+}
+
+@media screen and (min-width: 480px) {
+  body {
+    padding-left: 1em;
+    padding-right: 1em;
+  }
+}
