@@ -1,5 +1,21 @@
+@import url(https://fonts.googleapis.com/css?family=Lato:300italic,700italic,300,700);
+
 body {
+  font-family: Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
   padding-top: 1em;
+}
+
+div#adsense {
+  margin: 0 auto;
+  width: 320px;
+}
+
+.tweet, .info, footer {
+  text-align: right;
+}
+
+.tweet {
+  float: right;
 }
 
 nav > ol {
@@ -13,9 +29,8 @@ nav > ol > li {
   text-transform: capitalize;
 }
 
-div#adsense {
-  margin: 0 auto;
-  width: 320px;
+header {
+  clear: both;
 }
 
 h1, h2, h3, h4, h5, h6, ul#contents > li {
@@ -28,10 +43,6 @@ h1#home_title {
 
 img {
   max-width: 100%;
-}
-
-.info, footer {
-  text-align: right;
 }
 
 @media screen and (min-width: 480px) {
