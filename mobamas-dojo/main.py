@@ -11,7 +11,7 @@ APP_PATH = os.path.dirname(__file__)
 TEMPLATE = 'template.html'
 OUTPUT = 'index.html'
 OUTPUT_PATH = os.path.join(APP_PATH, OUTPUT)
-HEADER_ROWS = 1
+HEADER_ROWS = 8
 NUMBER_OF_DOJOS = 300
 
 class Dojo:
