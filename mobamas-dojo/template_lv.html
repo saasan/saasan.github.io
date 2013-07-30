@@ -44,7 +44,7 @@
       <p>
         リストは毎朝5時ぐらいに
         <a href="https://docs.google.com/spreadsheet/lv?key=0Aq6mv2GCHMGLdERhLURsdEZwdVFvREdiYjE4Sy1FUnc&amp;type=view" target="_blank">アイマスCG 殴られ屋さん一覧</a>
-        から上位300件を取得して更新されます。
+        から上位{{dojos|length}}件を取得して更新されます。
       </p>
       <p>
         道場の訪問回数(正確には、ボタンをタッチした回数)によってボタンの色が変わります。
@@ -108,6 +108,7 @@
 
   <section id="sectionDojoList">
     <button type="button" class="btn btn-block" id="openConfig"><i class="icon-cog"></i> 設定</button>
+    <a class="btn btn-block" href="./">ランク順へ変更</a>
 {% if dojos|length > 0 -%}
 {%- for dojo in dojos %}
     <div class="dojo" id="did{{ dojo.id }}">
