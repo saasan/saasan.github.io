@@ -1,5 +1,34 @@
+@import "normalize";
+@import "font-awesome";
+
+$body-bg:               #fff !default;
+$text-color:            #333 !default;
+$link-color:            #08c !default;
+
+$brand-default-color:   #333 !default;
+$brand-default-bg:      #f5f5f5 !default;
+$brand-primary-color:   #fff !default;
+$brand-primary-bg:      #0078e7 !default;
+$brand-success-color:   #fff !default;
+$brand-success-bg:      #00d46b !default;
+$brand-warning-color:   #fff !default;
+$brand-warning-bg:      #ffc100 !default;
+$brand-danger-color:    #fff !default;
+$brand-danger-bg:       #e70048 !default;
+$brand-alert-color:     #555 !default;
+$brand-alert-bg:        #fcf8e3 !default;
+$brand-alert-border:    #fbeed5 !default;
+
+/*
+ * Google Colors
+ * $brand-primary-bg:      #4285f4 !default;
+ * $brand-success-bg:      #0f9d58 !default;
+ * $brand-warning-bg:      #f4b400 !default;
+ * $brand-danger-bg:       #db4437 !default;
+*/
+
 a {
-  color: #08c;
+  color: $link-color;
   text-decoration: none;
 }
 
@@ -16,12 +45,12 @@ section {
   padding: 4px 12px;
   margin-bottom: 0;
   line-height: 30px;
-  color: #333;
+  color: $brand-default-color;
   text-align: center;
   text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
   vertical-align: middle;
   cursor: pointer;
-  background-color: #f5f5f5;
+  background-color: $brand-default-bg;
   border: 1px solid #ccc;
   border-color: rgba(0,0,0,0.1) rgba(0,0,0,0.1) rgba(0,0,0,0.25);
 }
@@ -29,26 +58,30 @@ section {
 .btn-primary,
 .btn-success,
 .btn-warning,
-.btn-danger {
-  color: #fff;
+.btn-danger,
+.btn-error {
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
 }
 
 .btn-primary {
-  background-color: #0078e7;
+  color: $brand-primary-color;
+  background-color: $brand-primary-bg;
 }
 
 .btn-success {
-  background-color: #00d46b;
+  color: $brand-success-color;
+  background-color: $brand-success-bg;
 }
 
 .btn-warning {
-  background-color: #ffc100;
+  color: $brand-warning-color;
+  background-color: $brand-warning-bg;
 }
 
 .btn-danger,
 .btn-error {
-  background-color: #e70048;
+  color: $brand-danger-color;
+  background-color: $brand-danger-bg;
 }
 
 .btn-block {
@@ -89,13 +122,13 @@ button.close {
   padding: 8px 35px 8px 14px;
   margin-bottom: 20px;
   text-shadow: 0 1px 0 rgba(255,255,255,0.5);
-  background-color: #fcf8e3;
-  border: 1px solid #fbeed5;
+  background-color: $brand-alert-bg;
+  border: 1px solid $brand-alert-border;
 }
 
 .alert,
 .alert h4 {
-  color: #555;
+  color: $brand-alert-color;
 }
 
 .alert-block {
@@ -109,16 +142,16 @@ button.close {
 
 .alert-danger,
 .alert-error {
-  color: #fff;
+  color: $brand-danger-color;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-  background-color: #e70048;
-  border-color: #e70048;
+  background-color: $brand-danger-bg;
+  border-color: $brand-danger-bg;
   font-weight: bold;
 }
 
 .alert-danger .close,
 .alert-error .close {
-  color: #fff;
+  color: $brand-danger-color;
   opacity: 1;
 }
 
@@ -253,7 +286,7 @@ iframe {
   right: 0;
   width: auto;
   padding: 7px;
-  background-color: #fff;
+  background-color: $body-bg;
   border: 1px solid #e3e3e3;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -266,6 +299,6 @@ h2 {
   margin-top: 20px;
   padding-bottom: 7px;
   font-size: 21px;
-  color: #333;
+  color: $text-color;
   border-bottom: 1px solid #e5e5e5;
 }
