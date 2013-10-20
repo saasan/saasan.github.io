@@ -71,14 +71,17 @@
           <input type="checkbox" id="sameTab"> 道場を同じタブで開く
         </label>
         <label>
-          <input type="checkbox" id="autoHide"> 訪問済の道場を表示しない
-        </label>
-        <label>
           <select class="input-mini" id="visitedMax">
             <option value="1">1</option>
             <option value="3">3</option>
           </select>
           回以上訪問した時、道場を訪問済とする
+        </label>
+        <label>
+          <input type="checkbox" id="autoHide"> 訪問済の道場を表示しない
+        </label>
+        <label>
+          ┗ <input type="checkbox" id="keepLastVisited"> 最後に訪問した道場を残す
         </label>
         <button type="button" class="btn btn-block btn-primary" id="configOK"><i class="icon-ok"></i> 設定を保存</button>
         <button type="button" class="btn btn-block" id="configResetVisited">訪問回数を初期化</button>
@@ -87,10 +90,16 @@
         <button type="button" class="btn btn-block" id="configCancel"><i class="icon-remove"></i> キャンセル</button>
       </section>
 
+      <h2>データ入出力</h2>
+      <section>
+        <textarea id="dataOutput" onfocus="this.select();"></textarea>
+        <button type="button" class="btn btn-block" id="dataInput"><i class="icon-signin"></i> 入力</button>
+      </section>
+
       <h2>その他</h2>
       <section>
         <div class="well well-small">
-          最終更新 : 2013-10-20 05:00
+          最終更新 : 2013-10-20 10:05
         </div>
         <div class="well well-small">
           このサイトは
@@ -100,10 +109,6 @@
         <div class="well well-small">
           <p>このサイトのQRコード</p>
           <img src="img/qrcode.png" width="111" height="111" alt="QRコード">
-        </div>
-        <div class="well well-small">
-          <a href="https://twitter.com/share" class="twitter-share-button" data-size="large" data-hashtags="imas_cg" data-url="http://saasan.github.io/mobamas-dojo/">Tweet</a>
-          <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
         </div>
       </section>
     </div>

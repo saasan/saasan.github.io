@@ -1,3 +1,5 @@
+/* jshint indent: 2, globalstrict: true, jquery: true */
+/* global MobamasDojo */
 'use strict';
 
 $(function(){
@@ -15,6 +17,7 @@ $(function(){
     $('#openConfig').click(function(){ d.onclickOpenConfig(); });
     $('#closeConfig').click(function(){ $('#sectionConfig').hide(); });
     $('#configCancel').click(function(){ $('#sectionConfig').hide(); });
+    $('#dataInput').click(function(){ d.onclickDataInput(); });
 
     d.init();
   }

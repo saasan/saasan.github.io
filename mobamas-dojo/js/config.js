@@ -1,5 +1,15 @@
+/* jshint indent: 2, globalstrict: true */
+/* global Storage */
 'use strict';
 
+/**
+ * 設定クラス
+ * @param {object} [opt_defaultValues] 設定のデフォルト値
+ * @param {string} [opt_storageNamespace] Storageの名前空間
+ * @param {string} [opt_storageKey] Storageのキー
+ * @param {function} [opt_reviver] 設定値の特殊な変換を行う関数
+ * @constructor
+ */
 var Config = function(opt_defaultValues, opt_storageNamespace, opt_storageKey, opt_reviver) {
   for (var i in this) {
     this._initialKeys[i] = true;
@@ -63,8 +73,8 @@ Config.prototype = {
 
     for (var i in sourceObject) {
       if (sourceObject[i] instanceof Date) {
-          newObject[i] = new Date();
-          newObject[i].setTime(sourceObject[i].getTime());
+        newObject[i] = new Date();
+        newObject[i].setTime(sourceObject[i].getTime());
       }
       else if (sourceObject[i] instanceof Array) {
         newObject[i] = [];
@@ -83,28 +93,62 @@ Config.prototype = {
     return newObject;
   },
 
+  /**
+   * Storageのキー
+   * @type {string}
+   */
   storageKey: 'config',
 
+  /**
+   * 全ての設定を消去する
+   */
   clear: function() {
     for (var i in this) {
       if (!this._initialKeys[i]) delete this[i];
     }
   },
 
+  /**
+   * 全ての設定を消去し、デフォルト値にする
+   */
   reset: function() {
     this.clear();
     this._importValues(this._defaultValues);
   },
 
+  /**
+   * 設定を保存する
+   */
   save: function() {
     var newValues = {};
     this._copyConfigValues(this, newValues);
     this._storage.set(this.storageKey, newValues);
   },
 
+  /**
+   * 設定を読み込む
+   * @param {boolean} [opt_clear] true: 設定を初期化する
+   *                              false: 設定を初期化しない
+   */
   load: function(opt_clear) {
     var newValues = this._storage.get(this.storageKey, {}, this._reviver);
     if (opt_clear) this.clear();
     this._importValues(newValues);
+  },
+
+  /**
+   * 生データを取得する
+   * @return {string} 設定のJSON文字列
+   */
+  getRawData: function() {
+    return this._storage.getRawData(this.storageKey);
+  },
+
+  /**
+   * 生データを保存する
+   * @param {string} value 設定のJSON文字列
+   */
+  setRawData: function(value) {
+    this._storage.setRawData(this.storageKey, value);
   }
 };
