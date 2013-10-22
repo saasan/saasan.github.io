@@ -217,8 +217,15 @@ MobamasDojo.prototype = {
    * データ入力
    */
   onclickDataInput: function() {
+    var data = $('#dataOutput').val();
+
+    if (data.length === 0) {
+      this._toast.show('データが入力されていません。', 'alert-success', this._TOAST_TIME);
+      return;
+    }
+
     try {
-      this._config.setRawData($('#dataOutput').val());
+      this._config.setRawData(data);
     }
     catch (e) {
       this._toast.show(e.message, 'alert-error');
