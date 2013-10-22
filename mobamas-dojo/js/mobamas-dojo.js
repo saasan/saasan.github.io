@@ -101,7 +101,7 @@ MobamasDojo.prototype = {
     var resetTimePassed = this._config.lastTime < resetTime && resetTime <= now;
 
     if (moreThanOneDayAgo || resetTimePassed) {
-      this._config.visited = {};
+      this.resetVisited();
     }
 
     this._config.lastTime =  now;
@@ -162,8 +162,8 @@ MobamasDojo.prototype = {
    * 訪問回数を初期化
    */
   onclickConfigResetVisited: function(element) {
-    this._config.visited = {};
-    this._config.lastVisited = null;
+    this.resetVisited();
+
     this._config.save();
     this.updateUI();
     this._toast.show('訪問回数を初期化しました。', 'alert-success', this._TOAST_TIME);
@@ -226,6 +226,7 @@ MobamasDojo.prototype = {
     }
     this._config.load();
     this.updateUI();
+    $('#sectionConfig').hide();
     this._toast.show('データを入力しました。', 'alert-success', this._TOAST_TIME);
   },
 
@@ -240,6 +241,14 @@ MobamasDojo.prototype = {
     resetTime.setSeconds(0);
     resetTime.setMilliseconds(0);
     return resetTime;
+  },
+
+  /**
+   * 訪問回数をリセットする
+   */
+  resetVisited: function() {
+    this._config.visited = {};
+    this._config.lastVisited = null;
   },
 
   /**
