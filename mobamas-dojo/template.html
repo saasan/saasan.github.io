@@ -100,10 +100,12 @@
 
       <h2>データ入出力</h2>
       <section>
-        <input type="text" id="dataOutput" onfocus="this.select();">
-        <button type="button" class="btn btn-block" id="dataInput"><i class="icon-signin"></i> 入力</button>
-        <button type="button" class="btn btn-block" onclick="$('#dataOutput').select();">テキスト全選択</button>
-        <button type="button" class="btn btn-block" onclick="$('#dataOutput').val('');"><i class="icon-remove"></i> テキスト全消去</button>
+        <form id="dataInput">
+          <input type="text" id="dataOutput" onfocus="this.select();">
+          <button type="submit" class="btn btn-block"><i class="icon-signin"></i> 入力</button>
+          <button type="button" class="btn btn-block" onclick="$('#dataOutput').select();">テキスト全選択</button>
+          <button type="button" class="btn btn-block" onclick="$('#dataOutput').val('');"><i class="icon-remove"></i> テキスト全消去</button>
+        </form>
       </section>
 
       <h2>その他</h2>

@@ -216,7 +216,7 @@ MobamasDojo.prototype = {
   /**
    * データ入力
    */
-  onclickDataInput: function() {
+  onsubmitDataInput: function() {
     var data = $('#dataOutput').val();
 
     if (data.length === 0) {
