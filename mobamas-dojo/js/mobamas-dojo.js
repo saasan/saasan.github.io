@@ -1,5 +1,5 @@
 /* jshint indent: 2, globalstrict: true, jquery: true */
-/* global setTimeout, clearTimeout, Storage, Config */
+/* global setTimeout, clearTimeout, Storage, Config, Birthday */
 'use strict';
 
 /**
@@ -73,6 +73,8 @@ MobamasDojo.prototype = {
    * 初期化
    */
   init: function() {
+    var now = new Date();
+
     this._toast = new Toast();
     this._config = new Config(
       {
@@ -83,8 +85,9 @@ MobamasDojo.prototype = {
         autoHide: false,
         keepLastVisited: false,
         lastVisited: null,
+        hideBirthday: false,
         infoClosed: false,
-        lastTime: new Date()
+        lastTime: now
       },
       'mobamas-dojo',
       'config',
@@ -92,15 +95,7 @@ MobamasDojo.prototype = {
     );
     this._config.load();
 
-    var now = new Date();
-    var resetTime = this.getResetTime();
-    var oneDayAgo = new Date(now.getTime());
-    oneDayAgo.setDate(oneDayAgo.getDate() - 1);
-
-    var moreThanOneDayAgo = this._config.lastTime < oneDayAgo;
-    var resetTimePassed = this._config.lastTime < resetTime && resetTime <= now;
-
-    if (moreThanOneDayAgo || resetTimePassed) {
+    if (this.needReset()) {
       this.resetVisited();
     }
 
@@ -152,6 +147,7 @@ MobamasDojo.prototype = {
     this._config.visitedMax = $('#visitedMax').val();
     this._config.autoHide = $('#autoHide').is(':checked');
     this._config.keepLastVisited = $('#keepLastVisited').is(':checked');
+    this._config.hideBirthday = $('#hideBirthday').is(':checked');
     this._config.save();
     this.updateUI();
     $('#sectionConfig').hide();
@@ -199,6 +195,15 @@ MobamasDojo.prototype = {
   },
 
   /**
+   * 誕生日の×ボタン
+   */
+  onclickCloseBirthday: function() {
+    this._config.hideBirthday = true;
+    this._config.save();
+    $('#birthday').hide();
+  },
+
+  /**
    * アラートの×ボタン
    */
   onclickCloseAlert: function() {
@@ -224,6 +229,13 @@ MobamasDojo.prototype = {
       return;
     }
 
+    // JSONの前後に不要な文字列があれば削除
+    var f = data.indexOf('{');
+    var l = data.lastIndexOf('}');
+    if (f >= 0 && l >= 0) {
+      data = data.substring(f, l + 1);
+    }
+    
     try {
       this._config.setRawData(data);
     }
@@ -248,6 +260,22 @@ MobamasDojo.prototype = {
     resetTime.setSeconds(0);
     resetTime.setMilliseconds(0);
     return resetTime;
+  },
+
+  /**
+   * 訪問回数のリセットが必要か確認する
+   * @return {boolean} 必要性の有無
+   */
+  needReset: function() {
+    var now = new Date();
+    var resetTime = this.getResetTime();
+    var oneDayAgo = new Date(now.getTime());
+    oneDayAgo.setDate(oneDayAgo.getDate() - 1);
+
+    var moreThanOneDayAgo = this._config.lastTime < oneDayAgo;
+    var resetTimePassed = this._config.lastTime < resetTime && resetTime <= now;
+
+    return (moreThanOneDayAgo || resetTimePassed);
   },
 
   /**
@@ -313,6 +341,7 @@ MobamasDojo.prototype = {
     $('#visitedMax').val(this._config.visitedMax);
     $('#autoHide').prop('checked', this._config.autoHide);
     $('#keepLastVisited').prop('checked', this._config.keepLastVisited);
+    $('#hideBirthday').prop('checked', this._config.hideBirthday);
     
     $('#dataOutput').val(this._config.getRawData());
   },
@@ -332,12 +361,26 @@ MobamasDojo.prototype = {
     }
 
     this.updateConfigUI();
+    this.updateBirthday();
 
-    if (this._config.infoClosed) {
-      $('#info').hide();
+    $('#info').css('display', this._config.infoClosed ? 'none' : 'block');
+    $('#birthday').css('display', this._config.hideBirthday ? 'none' : 'block');
+  },
+
+  /**
+   * 誕生日を更新する
+   */
+  updateBirthday: function() {
+    var birthday = new Birthday();
+
+    var today = birthday.getToday();
+    if (today === null) {
+      $('#birthdayToday').html('本日誕生日のアイドルはいません');
     }
     else {
-      $('#info').show();
+      $('#birthdayToday').html('<a href="http://sp.pf.mbga.jp/12008305/?guid=ON&url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fbirthday" target="_blank">本日誕生日のアイドル：' + today + '</a>');
     }
+    
+    $('#birthdayNext').html('次の誕生日は' + birthday.getNext());
   }
 };

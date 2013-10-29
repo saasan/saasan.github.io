@@ -3,11 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <title>モバマス道場リスト(スマホ用)</title>
+  <link rel="apple-touch-icon" href="//saasan.github.io/mobamas-dojo/img/s2works_favicon.png">
   <link rel="stylesheet" href="css/mobamas-dojo-min.css">
 {%- if debug %}
   <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.js"></script>
   <script src="js/storage.js"></script>
   <script src="js/config.js"></script>
+  <script src="js/birthday.js"></script>
   <script src="js/mobamas-dojo.js"></script>
   <script src="js/init.js"></script>
 {%- else %}
@@ -42,32 +44,37 @@
     </div>
   </div>
 
-  <section id="sectionInfo">
-    <div class="alert alert-block" id="info">
-      <button type="button" class="close" id="closeInfo"><i class="icon-remove"></i></button>
-      <h4>モバマス道場リストへようこそ！</h4>
-      <p>
-        ここは
-        <a href="http://sp.pf.mbga.jp/12008305/" target="_blank">アイドルマスターシンデレラガールズ</a>
-        の道場一覧サイトです。
-        スマートフォン用に作ってます。
-      </p>
-      <p>
-        リストは毎朝5時ぐらいに
-        <a href="https://docs.google.com/spreadsheet/lv?key=0Aq6mv2GCHMGLdERhLURsdEZwdVFvREdiYjE4Sy1FUnc&amp;type=view" target="_blank">アイマスCG 殴られ屋さん一覧</a>
-        から上位{{dojos|length}}件を取得して更新されます。
-      </p>
-      <p>
-        道場の訪問回数(正確には、ボタンをタッチした回数)によってボタンの色が変わります。
-        訪問回数は毎朝5時にリセットされます。
-        「設定」で訪問済の道場を非表示にする事もできます。
-      </p>
-       <p>
-        道場の右にある <i class="icon-remove"></i> ボタンを押すと、不要な道場を非表示にできます。
-        守発揮値が高すぎる道場等にご利用下さい。
-        非表示にした道場は「設定」で再表示できます。
-      </p>
-    </div>
+  <section id="info" class="alert alert-block">
+    <button type="button" class="close" id="closeInfo"><i class="icon-remove"></i></button>
+    <h4>モバマス道場リストへようこそ！</h4>
+    <p>
+      ここは
+      <a href="http://sp.pf.mbga.jp/12008305/" target="_blank">アイドルマスターシンデレラガールズ</a>
+      の道場一覧サイトです。
+      スマートフォン用に作ってます。
+    </p>
+    <p>
+      リストは毎朝5時ぐらいに
+      <a href="https://docs.google.com/spreadsheet/lv?key=0Aq6mv2GCHMGLdERhLURsdEZwdVFvREdiYjE4Sy1FUnc&amp;type=view" target="_blank">アイマスCG 殴られ屋さん一覧</a>
+      から上位{{dojos|length}}件を取得して更新されます。
+    </p>
+    <p>
+      道場の訪問回数(正確には、ボタンをタッチした回数)によってボタンの色が変わります。
+      訪問回数は毎朝5時にリセットされます。
+      「設定」で訪問済の道場を非表示にする事もできます。
+    </p>
+     <p>
+      道場の右にある <i class="icon-remove"></i> ボタンを押すと、不要な道場を非表示にできます。
+      守発揮値が高すぎる道場等にご利用下さい。
+      非表示にした道場は「設定」で再表示できます。
+    </p>
+  </section>
+
+  <section id="birthday" class="alert alert-block">
+    <button type="button" class="close" id="closeBirthday"><i class="icon-remove"></i></button>
+    <h4>誕生日</h4>
+    <p id="birthdayToday"></p>
+    <p id="birthdayNext"></p>
   </section>
 
   <section id="sectionConfig">
@@ -90,6 +97,9 @@
         </label>
         <label>
           ┗ <input type="checkbox" id="keepLastVisited"> 最後に訪問した道場を残す
+        </label>
+        <label>
+          <input type="checkbox" id="hideBirthday"> 誕生日を表示しない
         </label>
         <button type="button" class="btn btn-block btn-primary" id="configOK"><i class="icon-ok"></i> 設定を保存</button>
         <button type="button" class="btn btn-block" id="configResetVisited">訪問回数を初期化</button>

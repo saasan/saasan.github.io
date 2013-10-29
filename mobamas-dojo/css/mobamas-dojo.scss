@@ -1,6 +1,8 @@
 @import "normalize";
 @import "font-awesome";
 
+$margin: 7px;
+
 $body-bg:               #fff !default;
 $text-color:            #333 !default;
 $link-color:            #08c !default;
@@ -33,11 +35,11 @@ a {
 }
 
 p {
-  margin: 0 0 7px;
+  margin: 0 0 $margin;
 }
 
 section {
-  margin: 7px;
+  margin: 0 $margin $margin;
 }
 
 .btn {
@@ -120,7 +122,6 @@ button.close {
 
 .alert {
   padding: 8px 35px 8px 14px;
-  margin-bottom: 20px;
   text-shadow: 0 1px 0 rgba(255,255,255,0.5);
   background-color: $brand-alert-bg;
   border: 1px solid $brand-alert-border;
@@ -168,7 +169,7 @@ button.close {
 
 label {
   display: block;
-  margin-bottom: 7px;
+  margin-bottom: $margin;
 }
 
 label,
@@ -200,7 +201,7 @@ div.alert,
 .btn-block + .btn-block,
 .dojo,
 .well {
-  margin-top: 7px;
+  margin-top: $margin;
 }
 
 .well {
@@ -242,7 +243,7 @@ iframe {
 }
 
 #adsense {
-  margin: 0 auto;
+  margin: 0 auto $margin;
   width: 320px;
 }
 
@@ -254,12 +255,12 @@ iframe {
 #alertContainer {
   position: fixed;
   z-index: 100;
-  bottom: 7px;
+  bottom: $margin;
   width:100%;
 }
 
 #alert {
-  margin: 0 7px;
+  margin: 0 $margin;
   -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
      -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
           box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
@@ -285,7 +286,7 @@ iframe {
   left: 0;
   right: 0;
   width: auto;
-  padding: 7px;
+  padding: $margin;
   background-color: $body-bg;
   border: 1px solid #e3e3e3;
   -webkit-box-sizing: border-box;
@@ -297,15 +298,19 @@ iframe {
 
 h2 {
   margin-top: 20px;
-  padding-bottom: 7px;
+  padding-bottom: $margin;
   font-size: 21px;
   color: $text-color;
   border-bottom: 1px solid #e5e5e5;
 }
 
+h4 {
+  margin:0 0 15px 0;
+}
+
 input[type="text"] {
   width: 100%;
-  margin-bottom: 7px;
+  margin-bottom: $margin;
   padding-right: 0;
   padding-left: 0;
   -webkit-box-sizing: border-box;

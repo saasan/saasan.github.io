@@ -13,6 +13,7 @@ $(function(){
     $('#configResetHide').click(function(){ d.onclickConfigResetHide($(this)); });
     $('#configReset').click(function(){ d.onclickConfigReset($(this)); });
     $('#closeInfo').click(function(){ d.onclickCloseInfo(); });
+    $('#closeBirthday').click(function(){ d.onclickCloseBirthday(); });
     $('#closeAlert').click(function(){ d.onclickCloseAlert(); });
     $('#openConfig').click(function(){ d.onclickOpenConfig(); });
     $('#closeConfig').click(function(){ $('#sectionConfig').hide(); });
