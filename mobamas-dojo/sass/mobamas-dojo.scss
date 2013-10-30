@@ -1,3 +1,5 @@
+@charset "UTF-8";
+@import "compass/css3/border-radius";
 @import "normalize";
 @import "font-awesome";
 
@@ -242,11 +244,6 @@ iframe {
   display: block;
 }
 
-#adsense {
-  margin: 0 auto $margin;
-  width: 320px;
-}
-
 #info,
 #alertContainer {
   display: none;
@@ -316,4 +313,33 @@ input[type="text"] {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
+}
+
+#associate {
+  position: relative;
+  margin: 0 auto $margin;
+  width: 320px;
+  height: 100px;
+}
+
+#associate a:after {
+  @include icon-FontAwesome();
+  content: "\f061";
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.5);
+  margin: $margin;
+  width: 38px;
+  height: 38px;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  z-index: 1;
+  @include border-radius(3px);
+  line-height: 38px;
+  text-align: center;
+  font-size: 1.5em;
+}
+
+a img {
+  border: 1px solid $brand-default-color;
 }

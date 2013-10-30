@@ -101,6 +101,7 @@ MobamasDojo.prototype = {
 
     this._config.lastTime =  now;
 
+    this.updateAssociate();
     this.updateUI();
 
     this._config.save();
@@ -382,5 +383,33 @@ MobamasDojo.prototype = {
     }
     
     $('#birthdayNext').html('次の誕生日は' + birthday.getNext());
+  },
+
+  /**
+   * Amazonアソシエイトを更新する
+   */
+  updateAssociate: function() {
+    var id = 'saasan-22';
+    var data =
+      [
+        { asin: 'B00G3XXJEC', format: '50' },
+        { asin: 'B00FDE78HG', format: '50' },
+        { asin: '4758007780', format: '120' },
+        { asin: 'B00DW2LIJU', format: '120' },
+        { asin: 'B00FB1W1UK', format: '10' },
+        { asin: 'B00FB1W1OQ', format: '55' },
+        { asin: 'B00FB1W1TQ', format: '30' },
+        { asin: 'B00FB1W1UA', format: '40' },
+        { asin: 'B00FB1W1O6', format: '30' }
+      ];
+    
+    var n = Math.floor(Math.random() * data.length);
+    var html = '<a href="http://www.amazon.co.jp/exec/obidos/ASIN/' +
+        data[n].asin + '/' + id +
+        '/" target="_blank"><img src="http://ws-fe.amazon-adsystem.com/widgets/q?ASIN=' +
+        data[n].asin + '&Format=_SX318_CR0,' + data[n].format +
+        ',318,98_&ID=AsinImage&ServiceVersion=20070822&WS=1&tag=' + id + '"></a>';
+
+    $('#associate').html(html);
   }
 };
