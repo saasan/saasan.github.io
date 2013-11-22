@@ -1,11 +1,14 @@
-/* jshint indent: 2, globalstrict: true, jquery: true */
-/* global MobamasDojo */
-'use strict';
+/* jshint indent: 2, jquery: true */
+/* global Toast, MobamasDojo */
 
 $(function(){
-  try {
-    var d = new MobamasDojo();
+  'use strict';
 
+  try {
+    var t = new Toast('#toast', '#toastMessage');
+    $('#closeToast').click(function(){ t.close(); });
+
+    var d = new MobamasDojo(t);
     $('a.dojo-link').click(function(){ d.onclickDojoLink($(this)); });
     $('button.hide-dojo').click(function(){ d.onclickHideDojo($(this)); });
     $('#configOK').click(function(){ d.onclickConfigOK($(this)); });
@@ -14,17 +17,22 @@ $(function(){
     $('#configReset').click(function(){ d.onclickConfigReset($(this)); });
     $('#closeInfo').click(function(){ d.onclickCloseInfo(); });
     $('#closeBirthday').click(function(){ d.onclickCloseBirthday(); });
-    $('#closeAlert').click(function(){ d.onclickCloseAlert(); });
     $('#openConfig').click(function(){ d.onclickOpenConfig(); });
-    $('#closeConfig').click(function(){ $('#sectionConfig').hide(); });
-    $('#configCancel').click(function(){ $('#sectionConfig').hide(); });
+    $('#closeConfig').click(function(){ d.onclickConfigCancel(); });
+    $('#configCancel').click(function(){ d.onclickConfigCancel(); });
     $('#dataInput').submit(function(){ d.onsubmitDataInput(); return false; });
 
     d.init();
+
+    $('.flexslider').flexslider({
+      animation: "slide"
+    });
   }
   catch (e) {
-    $('#alertText').text(e.message);
-    $('#alert').removeClass('alert-success alert-danger alert-info').addClass('alert-error');
-    $('#alertContainer').show();
+    var message = '<h3>' + e.message + '</h3>';
+    if (e.stack) {
+      message += '<p>' + e.stack + '</p>';
+    }
+    t.show(message, 'info error');
   }
 });

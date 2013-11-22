@@ -7,6 +7,8 @@
   <link rel="stylesheet" href="css/mobamas-dojo.css">
 {%- if debug %}
   <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.js"></script>
+  <script src="flexslider/jquery.flexslider.js"></script>
+  <script src="js/toast.js"></script>
   <script src="js/storage.js"></script>
   <script src="js/config.js"></script>
   <script src="js/birthday.js"></script>
@@ -15,7 +17,6 @@
 {%- else %}
   <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
   <script src="js/mobamas-dojo-min.js"></script>
-{%- endif %}
   <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
     (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -25,22 +26,13 @@
     ga('create', 'UA-42938817-1', 'saasan.github.io');
     ga('send', 'pageview');
   </script>
+{%- endif %}
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 </head>
 <body>
-  <section id="associate">
-  </section>
-
-  <div id="alertContainer">
-    <div class="alert alert-block" id="alert">
-      <button type="button" class="close" id="closeAlert"><i class="icon-remove"></i></button>
-      <p id="alertText">alert</p>
-    </div>
-  </div>
-
-  <section id="info" class="alert alert-block">
+  <section id="info" class="info">
     <button type="button" class="close" id="closeInfo"><i class="icon-remove"></i></button>
-    <h4>モバマス道場リストへようこそ！</h4>
+    <h3>モバマス道場リストへようこそ！</h3>
     <p>
       ここは
       <a href="http://sp.pf.mbga.jp/12008305/" target="_blank">アイドルマスターシンデレラガールズ</a>
@@ -64,84 +56,150 @@
     </p>
   </section>
 
-  <section id="birthday" class="alert alert-block">
+  <section id="birthday" class="info">
     <button type="button" class="close" id="closeBirthday"><i class="icon-remove"></i></button>
-    <h4>誕生日</h4>
+    <h3>誕生日</h3>
     <p id="birthdayToday"></p>
     <p id="birthdayNext"></p>
   </section>
 
-  <section id="sectionConfig">
-    <div id="sectionInnerConfig">
-      <button type="button" class="close" id="closeConfig"><i class="icon-remove"></i></button>
-      <h2>設定</h2>
-      <section>
-        <label>
-          <input type="checkbox" id="sameTab"> 道場を同じタブで開く
-        </label>
-        <label>
-          <select class="input-mini" id="visitedMax">
-            <option value="1">1</option>
-            <option value="3">3</option>
-          </select>
-          回以上訪問した時、道場を訪問済とする
-        </label>
-        <label>
-          <input type="checkbox" id="autoHide"> 訪問済の道場を表示しない
-        </label>
-        <label>
-          ┗ <input type="checkbox" id="keepLastVisited"> 最後に訪問した道場を残す
-        </label>
-        <label>
-          <input type="checkbox" id="hideBirthday"> 誕生日を表示しない
-        </label>
-        <button type="button" class="btn btn-block btn-primary" id="configOK"><i class="icon-ok"></i> 設定を保存</button>
-        <button type="button" class="btn btn-block" id="configResetVisited">訪問回数を初期化</button>
-        <button type="button" class="btn btn-block" id="configResetHide">道場の非表示設定を初期化</button>
-        <button type="button" class="btn btn-block" id="configReset"><i class="icon-repeat"></i> 全ての設定を初期化</button>
-        <button type="button" class="btn btn-block" id="configCancel"><i class="icon-remove"></i> キャンセル</button>
-      </section>
-
-      <h2>データ入出力</h2>
-      <section>
-        <form id="dataInput">
-          <input type="text" id="dataOutput" onfocus="this.select();">
-          <button type="submit" class="btn btn-block"><i class="icon-signin"></i> 入力</button>
-          <button type="button" class="btn btn-block" onclick="$('#dataOutput').select();">テキスト全選択</button>
-          <button type="button" class="btn btn-block" onclick="$('#dataOutput').val('');"><i class="icon-remove"></i> テキスト全消去</button>
-        </form>
-      </section>
-
-      <h2>その他</h2>
-      <section>
-        <div class="well well-small">
-          最終更新 : {{ now|datetime }}
-        </div>
-        <div class="well well-small">
-          このサイトは
-          <a href="http://sp.pf.mbga.jp/12008305/?guid=ON&amp;url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F59953092" target="_blank">カガミ</a>
-          が作りました。
-        </div>
-        <div class="well well-small">
-          <p>このサイトのQRコード</p>
-          <img src="img/qrcode.png" width="111" height="111" alt="QRコード">
-        </div>
-      </section>
-    </div>
+  <section id="toast" class="info">
+    <button type="button" class="close" id="closeToast"><i class="icon-remove"></i></button>
+    <div id="toastMessage"></div>
   </section>
 
-  <section id="sectionDojoList">
-    <button type="button" class="btn btn-block" id="openConfig"><i class="icon-cog"></i> 設定</button>
+  <section id="buttons">
+    <button type="button" class="btn block" id="openConfig"><i class="icon-cog"></i> 設定</button>
 {%- if type == 'rank' %}
-    <a class="btn btn-block" href="lv.html">レベル順へ変更</a>
+    <a class="btn block" href="lv.html">レベル順へ変更</a>
 {%- elif type == 'lv' %}
-    <a class="btn btn-block" href="./">ランク順へ変更</a>
+    <a class="btn block" href="./">ランク順へ変更</a>
 {%- endif %}
+  </section>
+
+  <section id="ad" class="flexslider">
+    <ul class="slides">
+      <li>
+        <a href="http://www.amazon.co.jp/exec/obidos/ASIN/B00FB1W1UA/saasan-22/" target="_blank">
+          <img src="http://ecx.images-amazon.com/images/I/61XNzSDvwIL._CR0,60,500,281_.jpg">
+          <p class="flex-caption">2013/11/13 THE IDOLM@STER CINDERELLA MASTER 021 佐久間まゆ</p>
+        </a>
+      </li>
+      <li>
+        <a href="http://www.amazon.co.jp/exec/obidos/ASIN/B00FB1W1OQ/saasan-22/" target="_blank">
+          <img src="http://ecx.images-amazon.com/images/I/61lWXcP49iL._CR0,85,500,281_.jpg">
+          <p class="flex-caption">2013/11/13 THE IDOLM@STER CINDERELLA MASTER 022 白坂小梅</p>
+        </a>
+      </li>
+      <li>
+        <a href="http://www.amazon.co.jp/exec/obidos/ASIN/B00FB1W1O6/saasan-22/" target="_blank">
+          <img src="http://ecx.images-amazon.com/images/I/61X7E11uJOL._CR0,50,500,281_.jpg">
+          <p class="flex-caption">2013/11/13 THE IDOLM@STER CINDERELLA MASTER 023 緒方智絵里</p>
+        </a>
+      </li>
+      <li>
+        <a href="http://www.amazon.co.jp/exec/obidos/ASIN/B00FB1W1UK/saasan-22/" target="_blank">
+          <img src="http://ecx.images-amazon.com/images/I/61QAChtmVUL._CR0,15,500,281_.jpg">
+          <p class="flex-caption">2013/11/13 THE IDOLM@STER CINDERELLA MASTER 024 アナスタシア</p>
+        </a>
+      </li>
+      <li>
+        <a href="http://www.amazon.co.jp/exec/obidos/ASIN/B00FB1W1TQ/saasan-22/" target="_blank">
+          <img src="http://ecx.images-amazon.com/images/I/61rGikCSjIL._CR0,50,500,281_.jpg">
+          <p class="flex-caption">2013/11/13 THE IDOLM@STER CINDERELLA MASTER 025 高森藍子</p>
+        </a>
+      </li>
+      <li>
+        <a href="http://www.amazon.co.jp/exec/obidos/ASIN/4758007667/saasan-22/" target="_blank">
+          <img src="http://ecx.images-amazon.com/images/I/51M0EZG0NdL._CR0,70,352,198_.jpg">
+          <p class="flex-caption">2013/8/31 アイドルマスター シンデレラガールズ コミックアンソロジー cool VOL.2 クールなドラマCD付</p>
+        </a>
+      </li>
+      <li>
+        <a href="http://www.amazon.co.jp/exec/obidos/ASIN/4758007772/saasan-22/" target="_blank">
+          <img src="http://ecx.images-amazon.com/images/I/51dUay4NeoL._CR0,40,344,193_.jpg">
+          <p class="flex-caption">2013/9/30 アイドルマスター シンデレラガールズ コミックアンソロジー cute VOL.2 キュートなドラマCD付</p>
+        </a>
+      </li>
+      <li>
+        <a href="http://www.amazon.co.jp/exec/obidos/ASIN/4758007780/saasan-22/" target="_blank">
+          <img src="http://ecx.images-amazon.com/images/I/61NbWZWKnGL._CR0,40,353,198_.jpg">
+          <p class="flex-caption">2013/10/31 アイドルマスター シンデレラガールズ コミックアンソロジー passion VOL.2 パッションなドラマCD付</p>
+        </a>
+      </li>
+      <li>
+        <a href="http://www.amazon.co.jp/exec/obidos/ASIN/B00DAP3R3Y/saasan-22/" target="_blank">
+          <img src="http://ecx.images-amazon.com/images/I/61AoUO6aI2L._SX640_CR0,60,640,360_.jpg">
+          <p class="flex-caption">2013/10/29 アイドルマスター シンデレラガールズ ねんどろいどぷち アイドルマスター シンデレラガールズ ステージ02</p>
+        </a>
+      </li>
+    </ul>
+  </section>
+
+  <section id="config">
+    <button type="button" class="close" id="closeConfig"><i class="icon-remove"></i></button>
+    <h2>設定</h2>
+    <section>
+      <label>
+        <input type="checkbox" id="sameTab"> 道場を同じタブで開く
+      </label>
+      <label>
+        <select class="input-mini" id="visitedMax">
+          <option value="1">1</option>
+          <option value="3">3</option>
+        </select>
+        回以上訪問した時、道場を訪問済とする
+      </label>
+      <label>
+        <input type="checkbox" id="autoHide"> 訪問済の道場を表示しない
+      </label>
+      <label>
+        ┗ <input type="checkbox" id="keepLastVisited"> 最後に訪問した道場を残す
+      </label>
+      <label>
+        <input type="checkbox" id="hideBirthday"> 誕生日を表示しない
+      </label>
+      <button type="button" class="btn block primary" id="configOK"><i class="icon-ok"></i> 設定を保存</button>
+      <button type="button" class="btn block" id="configResetVisited">訪問回数を初期化</button>
+      <button type="button" class="btn block" id="configResetHide">道場の非表示設定を初期化</button>
+      <button type="button" class="btn block" id="configReset"><i class="icon-repeat"></i> 全ての設定を初期化</button>
+      <button type="button" class="btn block" id="configCancel"><i class="icon-remove"></i> キャンセル</button>
+    </section>
+
+    <h2>データ入出力</h2>
+    <section>
+      <form id="dataInput">
+        <input type="text" id="dataOutput" onfocus="this.select();">
+        <button type="submit" class="btn block"><i class="icon-signin"></i> 入力</button>
+        <button type="button" class="btn block" onclick="$('#dataOutput').select();">テキスト全選択</button>
+        <button type="button" class="btn block" onclick="$('#dataOutput').val('');"><i class="icon-remove"></i> テキスト全消去</button>
+      </form>
+    </section>
+
+    <h2>その他</h2>
+    <section class="well">
+      <h3>最終更新日時</h3>
+      <p>{{ now|datetime }}</p>
+    </section>
+    <section class="well">
+      <h3>製作者</h3>
+      <p>
+        <a href="http://sp.pf.mbga.jp/12008305/?guid=ON&amp;url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F59953092" target="_blank">カガミ</a>
+        (<a href="https://twitter.com/saasan" target="_blank">@saasan</a>)
+      </p>
+    </section>
+    <section class="well">
+      <h3>このサイトのQRコード</h3>
+      <p><img src="img/qrcode.png" width="111" height="111" alt="QRコード"></p>
+    </section>
+  </section>
+
+  <section id="dojos">
 {% if dojos|length > 0 -%}
 {%- for dojo in dojos %}
     <div class="dojo" id="did{{ dojo.id }}">
-      <a class="btn btn-primary dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F{{ dojo.id }}" target="_blank" id="id{{ dojo.id }}">{{ loop.index }}. {{ dojo.lv }} {{ dojo.rank }} {{ dojo.leader }}</a>
-      <button type="button" class="btn btn-primary hide-dojo" id="hid{{ dojo.id }}" data-id="id{{ dojo.id }}"><i class="icon-remove"></i></button>
+      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F{{ dojo.id }}" target="_blank" id="id{{ dojo.id }}">{{ loop.index }}. {{ dojo.lv }} {{ dojo.rank }} {{ dojo.leader }}</a>
+      <button type="button" class="btn hide-dojo" id="hid{{ dojo.id }}" data-id="id{{ dojo.id }}"><i class="icon-remove"></i></button>
     </div>
 {% endfor -%}
 {%- endif %}
