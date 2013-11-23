@@ -118,6 +118,7 @@ img {
 #info,
 #birthday,
 #toast,
+#ad,
 #config {
   display: none;
 }
@@ -130,6 +131,34 @@ img {
   margin: $default-margin;
   z-index: 100;
   @include box-shadow(0 0 15px rgba(0, 0, 0, 0.5));
+}
+
+#ad {
+  margin: $default-margin;
+
+  a {
+    display: block;
+    position: relative;
+
+    img {
+      display: block;
+      width: 100%;
+    }
+
+    .caption {
+      display: block;
+      width: 96%;
+      padding: 2%;
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.5);
+      color: #fff;
+      text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.5);
+      font-size: 10px;
+      line-height: 12px;
+    }
+  }
 }
 
 #config {
@@ -271,157 +300,5 @@ img {
     position: absolute;
     top: 0;
     left: 50%;
-  }
-}
-
-/*********************************
- * FlexSlider
- *********************************/
-
-$nav-height: 60px;
-$direction-nav-height: 30px;
-$control-nav-height: 14px;
-
-.slides,
-.flex-control-nav,
-.flex-direction-nav {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.flexslider {
-  margin: $default-margin $default-margin $nav-height;
-  padding: 0;
-  position: relative;
-
-  .slides {
-    li {
-      display: none;
-    }
-
-    a {
-      display: block;
-      position: relative;
-    }
-
-    img {
-      width: 100%;
-      display: block;
-    }
-
-    &:after {
-      @include clearfix;
-    }
-  }
-
-  .flex-caption {
-    width: 96%;
-    padding: 2%;
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    color: #fff;
-    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.5);
-    font-size: 10px;
-    line-height: 12px;
-  }
-}
-
-.flex-viewport {
-  max-height: 2000px;
-}
-
-.loading .flex-viewport {
-  max-height: 300px;
-}
-
-.carousel li {
-  margin-right: 5px;
-}
-
-.flex-direction-nav {
-  a {
-    display: block;
-    width: $direction-nav-height;
-    height: $direction-nav-height;
-    position: absolute;
-    bottom: -(($nav-height / 2) + ($direction-nav-height / 2));
-    z-index: 10;
-    overflow: hidden;
-    cursor: pointer;
-    @include icon-FontAwesome();
-    font-size: $direction-nav-height;
-    line-height: $direction-nav-height;
-    color: transparent;
-
-    &.flex-prev {
-      left: 0;
-
-      &:before {
-        display: block;
-        position: absolute;
-        top: 15px;
-        left: $default-margin + 15px;
-        width: 15px;
-        height: 15px;
-        margin-top: -10px;
-        margin-left: -10px;
-        border-top: solid 5px rgba(0, 0, 0, 0.8);
-        border-left: solid 5px rgba(0, 0, 0, 0.8);
-        content: "\0020";
-        @include rotate(-45deg);
-      }
-    }
-
-    &.flex-next {
-      right: 0;
-
-      &:before {
-        display: block;
-        position: absolute;
-        top: 15px;
-        right: $default-margin + 15px;
-        width: 15px;
-        height: 15px;
-        margin-top: -10px;
-        margin-right: -10px;
-        border-top: solid 5px rgba(0, 0, 0, 0.8);
-        border-right: solid 5px rgba(0, 0, 0, 0.8);
-        content: "\0020";
-        @include rotate(45deg);
-      }
-    }
-  }
-}
-
-.flex-control-nav {
-  width: 100%;
-  height: $control-nav-height;
-  position: absolute;
-  bottom: -(($nav-height / 2) + ($control-nav-height / 2));
-  text-align: center;
-  vertical-align: middle;
-
-  li {
-    display: inline-block;
-    margin: 0 ($control-nav-height / 2);
-    padding: 0;
-
-    a {
-      display: inline-block;
-      width: $control-nav-height;
-      height: $control-nav-height;
-      background-color: rgba(0, 0, 0, 0.5);
-      cursor: pointer;
-      text-indent: -9999px;
-      @include border-radius($control-nav-height / 2);
-
-      &.flex-active {
-        background-color: rgba(0, 0, 0, 0.9);
-        cursor: default;
-      }
-    }
   }
 }
