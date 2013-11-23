@@ -71,6 +71,8 @@ $(function(){
     var t = new Toast('#toast', '#toastMessage');
     $('#closeToast').click(function(){ t.close(); });
 
+    updateAd();
+
     var d = new MobamasDojo(t);
     $('a.dojo-link').click(function(){ d.onclickDojoLink($(this)); });
     $('button.hide-dojo').click(function(){ d.onclickHideDojo($(this)); });
@@ -84,9 +86,10 @@ $(function(){
     $('#closeConfig').click(function(){ d.onclickConfigCancel(); });
     $('#configCancel').click(function(){ d.onclickConfigCancel(); });
     $('#dataInput').submit(function(){ d.onsubmitDataInput(); return false; });
-
     d.init();
-    updateAd();
+
+    $('#buttons').show();
+    $('#dojos').show();
   }
   catch (e) {
     var message = '<h3>' + e.message + '</h3>';
