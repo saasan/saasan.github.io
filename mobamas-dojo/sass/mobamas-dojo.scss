@@ -21,7 +21,7 @@ $error-color:   #fff;
 $error-bg:      #e70048;
 $info-color:    #555;
 $info-bg:       #fcf8e3;
-$info-border:   #fbeed5;
+$info-border:   darken($info-bg, 15%);
 
 h3 {
   margin: 0;
@@ -111,6 +111,18 @@ img {
     .close {
       color: $error-color;
       opacity: 1;
+    }
+  }
+
+  h4 {
+    margin: 0;
+    margin-bottom: $default-margin;
+    padding-bottom: 3px;
+    font-weight: normal;
+    border: {
+      color: $info-border;
+      style: solid;
+      width: 0 0 1px 0;
     }
   }
 }
@@ -278,6 +290,7 @@ img {
   }
 
   #info,
+  #versionedInfo,
   #birthday {
     width: 276px;
   }

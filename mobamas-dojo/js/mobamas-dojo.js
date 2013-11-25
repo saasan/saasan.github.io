@@ -152,26 +152,25 @@ var MobamasDojo;
     /**
      * キャンセル
      */
-    onclickConfigCancel: function() {
+    oncloseConfig: function(e) {
       this.closeConfig();
+      e.preventDefault();
     },
 
     /**
      * インフォメーションの×ボタン
      */
-    onclickCloseInfo: function() {
+    onclosedInfo: function() {
       this._config.infoClosed = true;
       this._config.save();
-      $('#info').hide();
     },
 
     /**
      * 誕生日の×ボタン
      */
-    onclickCloseBirthday: function() {
+    onclosedBirthday: function() {
       this._config.hideBirthday = true;
       this._config.save();
-      $('#birthday').hide();
     },
 
     /**

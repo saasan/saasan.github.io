@@ -10,6 +10,8 @@
   <script src="js/toast.js"></script>
   <script src="js/storage.js"></script>
   <script src="js/config.js"></script>
+  <script src="js/closebutton.js"></script>
+  <script src="js/versionedinfo.js"></script>
   <script src="js/birthday.js"></script>
   <script src="js/mobamas-dojo.js"></script>
   <script src="js/init.js"></script>
@@ -29,8 +31,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 </head>
 <body>
+  <noscript>
+    <p>JavaScriptを有効にして下さい。</p>
+  </noscript>
+
   <section id="info" class="info">
-    <button type="button" class="close" id="closeInfo"><i class="icon-remove"></i></button>
+    <button type="button" class="close" data-target="#info"><i class="icon-remove"></i></button>
     <h3>モバマス道場リストへようこそ！</h3>
     <p>
       ここは
@@ -55,15 +61,29 @@
     </p>
   </section>
 
+  <section id="versionedInfo" class="info" data-version="0">
+    <button type="button" class="close" data-target="#versionedInfo"><i class="icon-remove"></i></button>
+    <h3>広告欄</h3>
+    <h4>ﾍﾟﾛといっしょ【ゆきみﾌﾟﾛﾀﾞｸｼｮﾝ】</h4>
+    <p>
+      佐城雪美ちゃんプロです！<br>
+      ゆきみん好きなら誰でもどんと来い！<br>
+      ゆきみんの輪を広げましょう？<br>
+      ノルマ等は無し！<br>
+      ゆきみん好きな方なら是非！<br>
+      直接申請どうぞ♪【代表ID：<a href="http://sp.pf.mbga.jp/12008305/?guid=ON&url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F60175954" target="_blank">60175954</a>】
+    </p>
+  </section>
+
   <section id="birthday" class="info">
-    <button type="button" class="close" id="closeBirthday"><i class="icon-remove"></i></button>
+    <button type="button" class="close" data-target="#birthday"><i class="icon-remove"></i></button>
     <h3>誕生日</h3>
     <p id="birthdayToday"></p>
     <p id="birthdayNext"></p>
   </section>
 
   <section id="toast" class="info">
-    <button type="button" class="close" id="closeToast"><i class="icon-remove"></i></button>
+    <button type="button" class="close" data-target="#toast"><i class="icon-remove"></i></button>
     <div id="toastMessage"></div>
   </section>
 
@@ -80,7 +100,7 @@
   </section>
 
   <section id="config">
-    <button type="button" class="close" id="closeConfig"><i class="icon-remove"></i></button>
+    <button type="button" class="close" data-target="#config"><i class="icon-remove"></i></button>
     <h2>設定</h2>
     <section>
       <label>
@@ -106,7 +126,7 @@
       <button type="button" class="btn block" id="configResetVisited">訪問回数を初期化</button>
       <button type="button" class="btn block" id="configResetHide">道場の非表示設定を初期化</button>
       <button type="button" class="btn block" id="configReset"><i class="icon-repeat"></i> 全ての設定を初期化</button>
-      <button type="button" class="btn block" id="configCancel"><i class="icon-remove"></i> キャンセル</button>
+      <button type="button" class="btn block" id="configCancel" data-target="#config"><i class="icon-remove"></i> キャンセル</button>
     </section>
 
     <h2>データ入出力</h2>

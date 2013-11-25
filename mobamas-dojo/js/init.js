@@ -69,7 +69,6 @@ $(function(){
 
   try {
     var t = new Toast('#toast', '#toastMessage');
-    $('#closeToast').click(function(){ t.close(); });
 
     updateAd();
 
@@ -80,13 +79,16 @@ $(function(){
     $('#configResetVisited').click(function(){ d.onclickConfigResetVisited($(this)); });
     $('#configResetHide').click(function(){ d.onclickConfigResetHide($(this)); });
     $('#configReset').click(function(){ d.onclickConfigReset($(this)); });
-    $('#closeInfo').click(function(){ d.onclickCloseInfo(); });
-    $('#closeBirthday').click(function(){ d.onclickCloseBirthday(); });
+    $('#info').bind('closed', function(){ d.onclosedInfo(); });
+    $('#birthday').bind('closed', function(){ d.onclosedBirthday(); });
     $('#openConfig').click(function(){ d.onclickOpenConfig(); });
-    $('#closeConfig').click(function(){ d.onclickConfigCancel(); });
-    $('#configCancel').click(function(){ d.onclickConfigCancel(); });
+    $('#config').bind('close', function(e){ d.oncloseConfig(e); });
     $('#dataInput').submit(function(){ d.onsubmitDataInput(); return false; });
     d.init();
+
+    $('#versionedInfo').versionedInfo();
+    $('.close').closeButton();
+    $('#configCancel').closeButton();
 
     $('#buttons').show();
     $('#dojos').show();
