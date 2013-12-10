@@ -34,7 +34,7 @@ $(function(){
         {
           asin: 'B00F917ESG',
           img: 'http://ecx.images-amazon.com/images/I/91XgpaVZ78L._PU90_SY420_CR170,30,640,360.jpg',
-          caption: '2013/12/25 (仮) アイドルマスター シンデレラガールズ セレクション4 22個入 BOX'
+          caption: '2013/12/25 アイドルマスター シンデレラガールズセレクション4 22個入 BOX'
         },
         {
           asin: '4757541457',
@@ -55,6 +55,11 @@ $(function(){
           asin: '4757541465',
           img: 'http://ecx.images-amazon.com/images/I/51M45NuemBL._CR0,140,353,198_.jpg',
           caption: '2013/11/25 アイドルマスター シンデレラガールズ 本日のアイドルさん'
+        },
+        {
+          asin: '4758064202',
+          img: 'http://ecx.images-amazon.com/images/I/51Usia8VSwL._CR0,90,353,198_.jpg',
+          caption: '2013/12/27 【Amazon.co.jp限定】THE IDOLM@STER (2)イラストカード付き'
         }
       ];
 
