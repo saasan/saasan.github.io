@@ -1,3 +1,4 @@
+@ECHO OFF
 %~d0
 PUSHD %~dp0
 
