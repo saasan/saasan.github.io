@@ -140,6 +140,11 @@ $(function(){
           asin: 'B00DW2LIM2',
           img: 'http://ecx.images-amazon.com/images/I/61gWKkSU1NL._CR0,161,500,281_.jpg',
           caption: '2013/12/18 THE IDOLM@STER 765PRO ALLSTARS+GRE@TEST BEST! -LOVE&PEACE! -'
+        },
+        {
+          asin: 'B00GUABOYA',
+          img: 'http://ecx.images-amazon.com/images/I/51qHKItS8xL._AA500_CR0,142,500,281_.jpg',
+          caption: '2014/1/29 劇場版『THE IDOLM@STER MOVIE 輝きの向こう側へ! 』主題歌 M@STERPIECE(初回限定盤 CDシングル+Blu-ray Audio 2枚組)'
         }
       ];
 
