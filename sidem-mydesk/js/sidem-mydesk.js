@@ -685,6 +685,14 @@ var SideMMyDesk;
         this.images[frame].ratio = newRatio;
       }
       this.draw();
+    },
+
+    /**
+     * toDataURL
+     * @return {object} canvas.toDataURL()の結果を返す
+     */
+    toDataURL: function() {
+      return this.canvas.toDataURL();
     }
   };
 })();

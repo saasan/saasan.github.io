@@ -104,17 +104,15 @@
         <h4 class="panel-heading panel-title">遊び方</h4>
         <div class="panel-body">
           <ol>
+            <li>名前と台詞を入力します。</li>
             <li>
               <div>各コマに画像ファイルをドラッグアンドドロップで入れます。</div>
               <div><small>画像ファイルは、ブラウザーで表示中のファイルやパソコンに保存されているファイルが使えます。</small><div>
             </li>
             <li>各コマをドラッグして画像の位置を調整します。</li>
             <li>各コマの上でマウスホイールを動かして画像を拡大/縮小します。</li>
-            <li>名前と台詞を入力します。</li>
-            <li>
-              <div>完成した画像を右クリックして保存します。</div>
-              <div><small>※ドラッグアンドドロップで画像を入れた所が完成画像です。</small><div>
-            </li>
+            <li>完成したら「保存用画像を出力する」ボタンを押します。</li>
+            <li>出てきた画像を右クリックして保存します。</li>
             <li>画像とハッシュタグ「#SideM風会話」を付けてツイートすると作者が喜びます！</li>
           </ol>
         </div>
@@ -126,12 +124,9 @@
           <ul>
             <li>Internet Explorer 11、Mozilla Firefox 27、Google Chrome 33で動作する事を確認しています。</li>
             <li>Internet Explorer 9で動作しない事を確認しています。</li>
+            <li><ins>2014/03/09 0:19 Mozilla Firefox 以外で保存できない問題を修正<ins></li>
           </ul>
         </div>
-      </section>
-
-      <section class="well">
-        <canvas id="sidem-mydesk" width="640" height="586" class="center-block">canvasに対応したブラウザーでご覧下さい。</canvas>
       </section>
 
       <section>
@@ -158,6 +153,12 @@
             <input type="text" class="form-control line" data-number="1">
           </label>
         </fieldset>
+      </section>
+
+      <section class="well">
+        <p><canvas id="sidem-mydesk" width="640" height="586" class="center-block">canvasに対応したブラウザーでご覧下さい。</canvas></p>
+        <p><button id="output" class="btn btn-primary center-block">↓保存用画像を出力する↓</button></p>
+        <p id="result"></p>
       </section>
 
       <section>

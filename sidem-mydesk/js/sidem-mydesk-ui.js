@@ -195,6 +195,18 @@ var SideMMyDeskUI;
     },
 
     /**
+     * 画像として出力する
+     */
+    _onOutput: function(evt) {
+      var self = this;
+      return (function() {
+        var img = self.sidem.toDataURL();
+        document.getElementById("result").innerHTML = '<img id="result_img" class="center-block">';
+        document.getElementById("result_img").src = img;
+      });
+    },
+
+    /**
      * canvas内でのカーソル位置を取得する
      * @return {Object} x,y座標が入ったオブジェクト
      */
@@ -229,6 +241,10 @@ var SideMMyDeskUI;
       element.addEventListener('mousemove', this._onMouseMove(), false);
       element.addEventListener('mousewheel', this._onMouseWheel(), false);
       element.addEventListener('DOMMouseScroll', this._onMouseWheel(), false);
+
+      // 保存用画像作成
+      element = document.getElementById('output');
+      element.addEventListener('click', this._onOutput(), false);
 
       // 名前の設定
       element = document.querySelectorAll('input.name');
