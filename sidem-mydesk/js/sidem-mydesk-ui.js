@@ -37,6 +37,7 @@ var SideMMyDeskUI;
       // 選択されたファイルを取得
       var file = dt.files[0];
 
+/* URLを入れると保存できなくなる
       if (typeof file === 'undefined') {
         var regexp = /^https?:\/\/.+\.(png|jpg|jpeg|gif)(\?[^\?]+)?$/;
         var uri = dt.getData('text/uri-list');
@@ -50,6 +51,8 @@ var SideMMyDeskUI;
         }
       }
       else {
+*/
+      if (typeof file !== 'undefined') {
         // 画像ファイル以外は処理中止
         if (!file.type.match(/^image\/(png|jpeg|gif)$/)) return;
 
@@ -200,7 +203,14 @@ var SideMMyDeskUI;
     _onOutput: function(evt) {
       var self = this;
       return (function() {
-        var img = self.sidem.toDataURL();
+        var img;
+        try {
+          img = self.sidem.toDataURL();
+        }
+        catch (e) {
+          document.getElementById("result").innerHTML = 'エラーが発生しました：' + e.message;
+          return;
+        }
         document.getElementById("result").innerHTML = '<img id="result_img" class="center-block">';
         document.getElementById("result_img").src = img;
       });
