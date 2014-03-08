@@ -33,6 +33,6 @@ footer {
   text-align: right;
 }
 
-.ad {
+.ad, section {
   margin: 0 0 1em;
 }
