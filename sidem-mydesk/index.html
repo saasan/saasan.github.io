@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SideM風会話ジェネレータ</title>
+    <link rel="alternate" href="/atom.xml" type="application/atom+xml" title="Atom feed" />
+    <link rel="apple-touch-icon" href="http://saasan.github.io/img/s2works_favicon.png">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/default.css">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script src="//platform.twitter.com/widgets.js"></script>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-42938817-1', 'saasan.github.io');
+      ga('send', 'pageview');
+    </script>
+  </head>
+  <body>
+    <header class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a href="/" class="navbar-brand">saasan.github.io</a>
+        </div>
+        <nav class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="/mobamas-dojo/">モバマス道場リスト</a></li>
+
+
+
+
+
+            <li class="active"><a href="/sidem-mydesk/">SideM風会話ジェネレータ</a></li>
+
+
+
+
+
+            <li><a href="/software/">software</a></li>
+
+
+
+
+
+            <li><a href="/script/">script</a></li>
+
+
+
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+
+    <section class="jumbotron">
+
+        <time>2014-03-08 20:00</time>
+
+      <h1>
+        SideM風会話ジェネレータ
+      </h1>
+      <p>
+        <a href="https://twitter.com/share" class="twitter-share-button">Tweet</a>
+      </p>
+    </section>
+
+    <div class="container">
+    <section class="ad">
+      <ins class="adsbygoogle center-block"
+           style="display:block;width:320px;height:50px"
+           data-ad-client="ca-pub-0141905477316976"
+           data-ad-slot="7336848578"></ins>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+    </section>
+    <script src="js/sidem-mydesk.js"></script>
+    <script src="js/sidem-mydesk-ui.js"></script>
+    <script src="js/init.js"></script>
+    <div class="container">
+      <noscript>JavaScriptを有効にして下さい。</noscript>
+
+      <p>
+        <a href="http://side-m.idolmaster.jp/" target="_blank">アイドルマスター SideM</a>
+        にある、マイデスクでアイドル同士が会話するシステム。あれが
+        <a href="http://www.bandainamcogames.co.jp/cs/list/idolmaster/social_m/" target="_blank">シンデレラガールズ</a>
+        や
+        <a href="http://www.bandainamcogames.co.jp/cs/list/idolmaster/million_live/" target="_blank">ミリオンライブ！</a>
+        にもあったらなぁ…。ということで作ってみた。
+      </p>
+
+      <section class="panel panel-default">
+        <h4 class="panel-heading panel-title">遊び方</h4>
+        <div class="panel-body">
+          <ol>
+            <li>
+              <div>各コマに画像ファイルをドラッグアンドドロップで入れます。</div>
+              <div><small>画像ファイルは、ブラウザーで表示中のファイルやパソコンに保存されているファイルが使えます。</small><div>
+            </li>
+            <li>各コマをドラッグして画像の位置を調整します。</li>
+            <li>各コマの上でマウスホイールを動かして画像を拡大/縮小します。</li>
+            <li>名前と台詞を入力します。</li>
+            <li>完成した画像を右クリックして保存します。</li>
+            <li>
+              画像とハッシュタグ「#SideM風会話」を付けてツイートすると作者が喜びます。
+              <a href="https://twitter.com/share" class="twitter-share-button" data-hashtags="SideM風会話">Tweet</a>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="panel panel-default">
+        <h4 class="panel-heading panel-title">動作環境</h4>
+        <div class="panel-body">
+          <ul>
+            <li>Internet Explorer 11、Mozilla Firefox 27、Google Chrome 33で動作する事を確認しています。</li>
+            <li>Internet Explorer 9で動作しない事を確認しています。</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="well">
+        <canvas id="sidem-mydesk" width="640" height="586" class="center-block">canvasに対応したブラウザーでご覧下さい。</canvas>
+      </section>
+
+      <section>
+        <fieldset>
+          <legend>上の人</legend>
+          <label class="col-sm-4">
+            名前
+            <input type="text" class="form-control name" data-number="0">
+          </label>
+          <label class="col-sm-8">
+            台詞
+            <input type="text" class="form-control line" data-number="0">
+          </label>
+        </fieldset>
+
+        <fieldset>
+          <legend>下の人</legend>
+          <label class="col-sm-4">
+            名前
+            <input type="text" class="form-control name" data-number="1">
+          </label>
+          <label class="col-sm-8">
+            台詞
+            <input type="text" class="form-control line" data-number="1">
+          </label>
+        </fieldset>
+      </section>
+    </div>
+  </body>
+</html>
+
+    </div>
+    <footer class="container">
+      <address>&copy; <a href="http://twitter.com/saasan" target="_blank">saasan</a>.</address>
+    </footer>
+  </body>
+</html>

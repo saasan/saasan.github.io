@@ -3,7 +3,7 @@
   <title><![CDATA[saasan.github.io]]></title>
   <link href="http://saasan.github.io/atom.xml" rel="self"/>
   <link href="http://saasan.github.io/"/>
-  <updated>2014-01-29T02:38:14+09:00</updated>
+  <updated>2014-03-08T20:00:30+09:00</updated>
   <id>http://saasan.github.io/</id>
   <author>
     <name><![CDATA[saasan]]></name>
@@ -36,19 +36,19 @@
   <p>
     ブラウザーのウィンドウ幅が広ければ、開いた状態で左側に表示されます。
   </p>
-  <img src="/images/pixivtags1.jpg">
+  <img src="/img/pixivtags1.jpg">
   <p>
     ブラウザーのウィンドウ幅が狭ければ、閉じた状態で左上に表示されます。
   </p>
-  <img src="/images/pixivtags2.jpg">
+  <img src="/img/pixivtags2.jpg">
   <p>
     閉じた状態の時にカーソルを乗せると開きます。
   </p>
-  <img src="/images/pixivtags3.jpg">
+  <img src="/img/pixivtags3.jpg">
   <p>
     pixiv を表示した状態で、Greasemonkey のユーザースクリプトコマンドからタグの設定ができます。
   </p>
-  <img src="/images/pixivtags4.jpg">
+  <img src="/img/pixivtags4.jpg">
 </section>
 
 <section>

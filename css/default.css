@@ -1,51 +1,38 @@
+.icon-bar {
+  background-color: #428BCA;
+}
+
+.jumbotron {
+  color: #FFF;
+  text-shadow: 2px 2px 3px #000;
+  background-image: url(/img/yun_2132.jpg);
+  background-repeat:no-repeat;
+  background-position:100% 0;
+  background-size: cover;
+}
+
+.jumbotron time {
+  display: block;
+  text-align: right;
+  font-size: small;
+}
+
+iframe {
+  vertical-align: middle;
+}
+
+iframe.twitter-share-button {
+  width: 105px !important;
+}
+
 body {
-  font-family: Helvetica, Arial, sans-serif;
-  padding-top: 1em;
+  padding-top: 50px;
 }
 
-div#adsense {
-  margin: 0 auto;
-  width: 320px;
-}
-
-.tweet, .info, footer {
+footer {
   text-align: right;
 }
 
-.tweet {
-  float: right;
-}
-
-nav > ol {
-  margin: 0;
-  padding: 0;
-  list-style-type: none;
-}
-
-nav > ol > li {
-  display: inline;
-  text-transform: capitalize;
-}
-
-header {
-  clear: both;
-}
-
-h1, h2, h3, h4, h5, h6, ul#contents > li {
-  text-transform: capitalize;
-}
-
-h1#home_title {
-  text-transform: none;
-}
-
-img {
-  max-width: 100%;
-}
-
-@media screen and (min-width: 480px) {
-  body {
-    padding-left: 1em;
-    padding-right: 1em;
-  }
+.ad {
+  margin: 0 0 1em;
 }
