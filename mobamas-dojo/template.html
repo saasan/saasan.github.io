@@ -52,14 +52,15 @@
       から上位{{dojos|length}}件を取得して更新されます。
     </p>
     <p>
-      道場の訪問回数(正確には、ボタンをタッチした回数)によってボタンの色が変わります。
-      訪問回数は毎朝5時にリセットされます。
-      「設定」で訪問済の道場を非表示にする事もできます。
+      道場を訪問する(タッチして開く)と赤くなります。
+      赤くなった道場は、他の道場を訪問すると消えます。
+      訪問状態は毎朝5時にリセットされ、消えた道場が再表示されます。
+      「設定」で赤くなるまでの回数を変更したり、訪問済の道場を表示したままにする事もできます。
     </p>
      <p>
       道場の右にある <i class="icon-remove"></i> ボタンを押すと、不要な道場を非表示にできます。
+      非表示にした道場は「設定」でリセットするまで再表示されません。
       守発揮値が高すぎる道場等にご利用下さい。
-      非表示にした道場は「設定」で再表示できます。
     </p>
   </section>
 
@@ -132,8 +133,8 @@
         <input type="checkbox" id="hideBirthday"> 誕生日を表示しない
       </label>
       <button type="button" class="btn block primary" id="configOK"><i class="icon-ok"></i> 設定を保存</button>
-      <button type="button" class="btn block" id="configResetVisited">訪問回数を初期化</button>
-      <button type="button" class="btn block" id="configResetHide">道場の非表示設定を初期化</button>
+      <button type="button" class="btn block" id="configResetVisited">訪問状態を初期化</button>
+      <button type="button" class="btn block" id="configResetHide">非表示にした道場を再表示</button>
       <button type="button" class="btn block" id="configReset"><i class="icon-repeat"></i> 全ての設定を初期化</button>
       <button type="button" class="btn block" id="configCancel" data-target="#config"><i class="icon-remove"></i> キャンセル</button>
     </section>
