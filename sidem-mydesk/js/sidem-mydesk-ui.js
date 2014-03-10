@@ -37,21 +37,6 @@ var SideMMyDeskUI;
       // 選択されたファイルを取得
       var file = dt.files[0];
 
-/* URLを入れると保存できなくなる
-      if (typeof file === 'undefined') {
-        var regexp = /^https?:\/\/.+\.(png|jpg|jpeg|gif)(\?[^\?]+)?$/;
-        var uri = dt.getData('text/uri-list');
-        var plain = dt.getData('text/plain');
-
-        if (typeof uri === 'string' && regexp.test(uri)) {
-          image.src = uri;
-        }
-        else if (typeof plain === 'string' && regexp.test(plain)) {
-          image.src = plain;
-        }
-      }
-      else {
-*/
       if (typeof file !== 'undefined') {
         // 画像ファイル以外は処理中止
         if (!file.type.match(/^image\/(png|jpeg|gif)$/)) return;

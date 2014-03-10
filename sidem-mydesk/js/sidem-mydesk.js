@@ -692,7 +692,7 @@ var SideMMyDesk;
      * @return {object} canvas.toDataURL()の結果を返す
      */
     toDataURL: function() {
-      return this.canvas.toDataURL();
+      return this.canvas.toDataURL('image/jpeg');
     }
   };
 })();
