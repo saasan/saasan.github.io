@@ -64,7 +64,3 @@ section {
 .social-buttons {
 	*zoom: 1;
 }
-
-.social-buttons iframe.twitter-share-button {
-    width: 90px !important;
-}
