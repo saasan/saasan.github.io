@@ -34,3 +34,37 @@ section {
   vertical-align: top;
   margin: 0 20px 20px 0;
 }
+
+.social-buttons {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+.social-buttons li {
+	float: left;
+	margin: 0 5px 0 0;
+	padding: 0;
+}
+
+.social-buttons li div {
+	display: inline;
+}
+
+.social-buttons:before,
+.social-buttons:after {
+	content: " ";
+	display: table;
+}
+
+.social-buttons:after {
+	clear: both;
+}
+
+.social-buttons {
+	*zoom: 1;
+}
+
+.social-buttons iframe.twitter-share-button {
+    width: 90px !important;
+}
