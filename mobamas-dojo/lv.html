@@ -5,24 +5,26 @@
   <title>モバマス道場リスト(スマホ用)</title>
   <link rel="apple-touch-icon" href="//saasan.github.io/mobamas-dojo/img/s2works_favicon.png">
   <link rel="stylesheet" href="css/mobamas-dojo.css">
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
-  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-  <script src="js/mobamas-dojo-min.js"></script>
-  <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-    ga('create', 'UA-42938817-1', 'saasan.github.io');
-    ga('send', 'pageview');
-  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 </head>
 <body>
   <noscript>
     <p>JavaScriptを有効にして下さい。</p>
   </noscript>
+
+  <section id="ad">
+    <!-- 道場リスト 320x50 -->
+    <ins class="adsbygoogle"
+         style="display:inline-block;width:320px;height:50px"
+         data-ad-client="ca-pub-0141905477316976"
+         data-ad-slot="1779793778"></ins>
+
+    <!-- 道場リスト 300x250 -->
+    <ins class="adsbygoogle"
+         style="display:inline-block;width:300px;height:250px"
+         data-ad-client="ca-pub-0141905477316976"
+         data-ad-slot="3256526972"></ins>
+  </section>
 
   <section id="info" class="info">
     <button type="button" class="close" data-target="#info"><i class="icon-remove"></i></button>
@@ -42,27 +44,43 @@
       道場を訪問する(タッチして開く)と赤くなります。
       赤くなった道場は、他の道場を訪問すると消えます。
       訪問状態は毎朝5時にリセットされ、消えた道場が再表示されます。
-      「設定」で赤くなるまでの回数を変更したり、訪問済の道場を表示したままにする事もできます。
+      「道場リスト設定」で赤くなるまでの回数を変更したり、訪問済の道場を表示したままにする事もできます。
     </p>
      <p>
       道場の右にある <i class="icon-remove"></i> ボタンを押すと、不要な道場を非表示にできます。
-      非表示にした道場は「設定」でリセットするまで再表示されません。
+      非表示にした道場は「道場リスト設定」でリセットするまで再表示されません。
       守発揮値が高すぎる道場等にご利用下さい。
     </p>
   </section>
 
-  <section id="versionedInfo" class="info" data-version="0">
+  <section id="versionedInfo" class="info" data-version="1">
     <button type="button" class="close" data-target="#versionedInfo"><i class="icon-remove"></i></button>
-    <h3>広告欄</h3>
-    <h4>ﾍﾟﾛといっしょ【ゆきみﾌﾟﾛﾀﾞｸｼｮﾝ】</h4>
-    <p>
-      佐城雪美ちゃんプロです！<br>
-      ゆきみん好きなら誰でもどんと来い！<br>
-      ゆきみんの輪を広げましょう？<br>
-      ノルマ等は無し！<br>
-      ゆきみん好きな方なら是非！<br>
-      直接申請どうぞ♪【代表ID：<a href="http://sp.pf.mbga.jp/12008305/?guid=ON&url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F60175954" target="_blank">60175954</a>】
-    </p>
+    <h3>お知らせ</h3>
+
+    <h4>2014/08/02 変更点</h4>
+    <ul>
+      <li>
+        モバマスのメニューを追加。
+        「道場リスト設定」で表示する項目を選べます。
+        表示されない場合はブラウザで再読み込みを行って下さい。
+      </li>
+      <li>
+        広告周りの変更。
+      </li>
+    </ul>
+
+    <h4>プロダクションメンバー募集中！</h4>
+    <section>
+      <p><a href="http://sp.pf.mbga.jp/12008305/?guid=ON&url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fknights%2Fknights_top_for_other%3Fknights_id%3D474819" target="_blank">ﾍﾟﾛといっしょ【ゆきみﾌﾟﾛﾀﾞｸｼｮﾝ】</a></p>
+      <p>
+        佐城雪美ちゃんプロです！<br>
+        ゆきみん好きなら誰でもどんと来い！<br>
+        ゆきみんの輪を広げましょう？<br>
+        ノルマ等は無し！<br>
+        ゆきみん好きな方なら是非！<br>
+        直接申請どうぞ♪【代表ID：<a href="http://sp.pf.mbga.jp/12008305/?guid=ON&url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F60175954" target="_blank">60175954</a>】
+      </p>
+    </section>
   </section>
 
   <section id="birthday" class="info">
@@ -78,23 +96,43 @@
   </section>
 
   <section id="buttons">
-    <button type="button" class="btn block" id="openConfig"><i class="icon-cog"></i> 設定</button>
+    <button type="button" class="btn block" id="openConfig"><i class="icon-cog"></i> 道場リスト設定</button>
     <a class="btn block" href="./">ランク順へ変更</a>
   </section>
 
-  <section id="ad">
-    <ins class="adsbygoogle"
-         style="display:block;width:320px;height:50px"
-         data-ad-client="ca-pub-0141905477316976"
-         data-ad-slot="7336848578"></ins>
-    <script>
-      (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
+  <section id="mobamasMenu">
+    <a id="menuMyPage" class="btn mobamas-menu-item" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fmypage">ﾏｲｽﾀｼﾞｵ</a>
+    <a id="menuGacha" class="btn mobamas-menu-item" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fgacha">ｶﾞﾁｬ</a>
+    <a id="menuCardStr" class="btn mobamas-menu-item" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fcard_str">ﾚｯｽﾝ</a>
+    <a id="menuAuction" class="btn mobamas-menu-item" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fauction%2Fauction_top">ﾌﾘｰﾄﾚｰﾄﾞ</a>
+    <a id="menuQuests" class="btn mobamas-menu-item" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fquests">お仕事</a>
+    <a id="menuBattles" class="btn mobamas-menu-item" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fbattles">LIVEﾊﾞﾄﾙ</a>
+    <a id="menuCardUnion" class="btn mobamas-menu-item" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fcard_union">特訓</a>
+    <a id="menuShop" class="btn mobamas-menu-item" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fshop%2Findex">ｼｮｯﾌﾟ</a>
+    <a id="menuItem" class="btn mobamas-menu-item" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fitem%2Findex">ｱｲﾃﾑ</a>
+    <a id="menuPresent" class="btn mobamas-menu-item" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fpresent%2Frecieve%2F%3Fview_auth_type%3D1%26cache%3D1">贈り物</a>
+    <a id="menuCardList" class="btn mobamas-menu-item" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fcard_list%2Findex">ｱｲﾄﾞﾙ一覧</a>
+    <a id="menuTradeResponse" class="btn mobamas-menu-item" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Ftrade_response%2Ftrade_list_advance">ﾄﾚｰﾄﾞ</a>
+    <a id="menuDeck" class="btn mobamas-menu-item" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fdeck%2Findex">編成</a>
+    <a id="menuExchange" class="btn mobamas-menu-item" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fexchange%2Fmedal_list%2F999999">交換</a>
+    <a id="menuCardStorage" class="btn mobamas-menu-item" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fcard_storage%2Findex">女子寮</a>
+    <a id="menuRareParts" class="btn mobamas-menu-item" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Frareparts%2Findex">衣装</a>
+    <a id="menuFriend" class="btn mobamas-menu-item" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Ffriend%2Findex">お気に入り</a>
+    <a id="menuWish" class="btn mobamas-menu-item" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fwish%2Findex">ﾎｼｲﾓﾉ</a>
+    <a id="menuArchive" class="btn mobamas-menu-item" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Farchive%2Findex">ｱﾙﾊﾞﾑ</a>
+    <a id="menuPRankingAward" class="btn mobamas-menu-item" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fp_ranking_award">PRA</a>
+    <a id="menuResults" class="btn mobamas-menu-item" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fresults">ﾌﾟﾛﾌｨｰﾙ</a>
+    <a id="menuGallery" class="btn mobamas-menu-item" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fgallery">ｱｲﾄﾞﾙｷﾞｬﾗﾘｰ</a>
+    <a id="menuMemory" class="btn mobamas-menu-item" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fmemory">ｲﾍﾞﾝﾄﾒﾓﾘｰ</a>
+    <a id="menuSBooth" class="btn mobamas-menu-item" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fs_booth">ｻｳﾝﾄﾞﾌﾞｰｽ</a>
+    <a id="menuPersonalOption" class="btn mobamas-menu-item" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fpersonal_option">設定</a>
+    <a id="menuAdvise" class="btn mobamas-menu-item" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fadvise%2Findex%2Ftop">ﾍﾙﾌﾟ</a>
+    <a id="menuTop" class="btn mobamas-menu-item" href="http://sp.pf.mbga.jp/12008305/">ﾄｯﾌﾟ</a>
   </section>
 
   <section id="config">
     <button type="button" class="close" data-target="#config"><i class="icon-remove"></i></button>
-    <h2>設定</h2>
+    <h2>道場リスト設定</h2>
     <section>
       <label>
         <input type="checkbox" id="sameTab"> 道場を同じタブで開く
@@ -115,6 +153,38 @@
       <label>
         <input type="checkbox" id="hideBirthday"> 誕生日を表示しない
       </label>
+      <label>
+        <input type="checkbox" id="showMobamasMenu"> モバマスのメニューを表示する
+      </label>
+      <section class="config-mobamas-menu">
+        <label><input type="checkbox" id="showMenuMyPage"> ﾏｲｽﾀｼﾞｵ</label>
+        <label><input type="checkbox" id="showMenuGacha"> ｶﾞﾁｬ</label>
+        <label><input type="checkbox" id="showMenuCardStr"> ﾚｯｽﾝ</label>
+        <label><input type="checkbox" id="showMenuAuction"> ﾌﾘｰﾄﾚｰﾄﾞ</label>
+        <label><input type="checkbox" id="showMenuQuests"> お仕事</label>
+        <label><input type="checkbox" id="showMenuBattles"> LIVEﾊﾞﾄﾙ</label>
+        <label><input type="checkbox" id="showMenuCardUnion"> 特訓</label>
+        <label><input type="checkbox" id="showMenuShop"> ｼｮｯﾌﾟ</label>
+        <label><input type="checkbox" id="showMenuItem"> ｱｲﾃﾑ</label>
+        <label><input type="checkbox" id="showMenuPresent"> 贈り物</label>
+        <label><input type="checkbox" id="showMenuCardList"> ｱｲﾄﾞﾙ一覧</label>
+        <label><input type="checkbox" id="showMenuTradeResponse"> ﾄﾚｰﾄﾞ</label>
+        <label><input type="checkbox" id="showMenuDeck"> 編成</label>
+        <label><input type="checkbox" id="showMenuExchange"> 交換</label>
+        <label><input type="checkbox" id="showMenuCardStorage"> 女子寮</label>
+        <label><input type="checkbox" id="showMenuRareParts"> 衣装</label>
+        <label><input type="checkbox" id="showMenuFriend"> お気に入り</label>
+        <label><input type="checkbox" id="showMenuWish"> ﾎｼｲﾓﾉ</label>
+        <label><input type="checkbox" id="showMenuArchive"> ｱﾙﾊﾞﾑ</label>
+        <label><input type="checkbox" id="showMenuPRankingAward"> PRA</label>
+        <label><input type="checkbox" id="showMenuResults"> ﾌﾟﾛﾌｨｰﾙ</label>
+        <label><input type="checkbox" id="showMenuGallery"> ｱｲﾄﾞﾙｷﾞｬﾗﾘｰ</label>
+        <label><input type="checkbox" id="showMenuMemory"> ｲﾍﾞﾝﾄﾒﾓﾘｰ</label>
+        <label><input type="checkbox" id="showMenuSBooth"> ｻｳﾝﾄﾞﾌﾞｰｽ</label>
+        <label><input type="checkbox" id="showMenuPersonalOption"> 設定</label>
+        <label><input type="checkbox" id="showMenuAdvise"> ﾍﾙﾌﾟ</label>
+        <label><input type="checkbox" id="showMenuTop"> ﾄｯﾌﾟ</label>
+      </section>
       <button type="button" class="btn block primary" id="configOK"><i class="icon-ok"></i> 設定を保存</button>
       <button type="button" class="btn block" id="configResetVisited">訪問状態を初期化</button>
       <button type="button" class="btn block" id="configResetHide">非表示にした道場を再表示</button>
@@ -135,7 +205,7 @@
     <h2>その他</h2>
     <section class="well">
       <h3>最終更新日時</h3>
-      <p>2014-08-02 05:00</p>
+      <p>2014-08-02 17:48</p>
     </section>
     <section class="well">
       <h3>製作者</h3>
@@ -747,194 +817,194 @@
       <button type="button" class="btn hide-dojo" id="hid67220598" data-id="id67220598"><i class="icon-remove"></i></button>
     </div>
 
+    <div class="dojo" id="did64039148">
+      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F64039148" target="_blank" id="id64039148">119. 319 S3 本田未央</a>
+      <button type="button" class="btn hide-dojo" id="hid64039148" data-id="id64039148"><i class="icon-remove"></i></button>
+    </div>
+
     <div class="dojo" id="did72138956">
-      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F72138956" target="_blank" id="id72138956">119. 318 S4 大体ユッキ！</a>
+      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F72138956" target="_blank" id="id72138956">120. 318 S4 大体ユッキ！</a>
       <button type="button" class="btn hide-dojo" id="hid72138956" data-id="id72138956"><i class="icon-remove"></i></button>
     </div>
 
     <div class="dojo" id="did60686356">
-      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F60686356" target="_blank" id="id60686356">120. 318 S3 CDSR加蓮</a>
+      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F60686356" target="_blank" id="id60686356">121. 318 S3 CDSR加蓮</a>
       <button type="button" class="btn hide-dojo" id="hid60686356" data-id="id60686356"><i class="icon-remove"></i></button>
     </div>
 
     <div class="dojo" id="did59210851">
-      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F59210851" target="_blank" id="id59210851">121. 318 S3 あべななさん</a>
+      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F59210851" target="_blank" id="id59210851">122. 318 S3 あべななさん</a>
       <button type="button" class="btn hide-dojo" id="hid59210851" data-id="id59210851"><i class="icon-remove"></i></button>
     </div>
 
     <div class="dojo" id="did60329381">
-      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F60329381" target="_blank" id="id60329381">122. 317 S4 きまぐれん</a>
+      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F60329381" target="_blank" id="id60329381">123. 317 S4 きまぐれん</a>
       <button type="button" class="btn hide-dojo" id="hid60329381" data-id="id60329381"><i class="icon-remove"></i></button>
     </div>
 
     <div class="dojo" id="did72326136">
-      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F72326136" target="_blank" id="id72326136">123. 317 S4 日菜子</a>
+      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F72326136" target="_blank" id="id72326136">124. 317 S4 日菜子</a>
       <button type="button" class="btn hide-dojo" id="hid72326136" data-id="id72326136"><i class="icon-remove"></i></button>
     </div>
 
     <div class="dojo" id="did42011288">
-      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F42011288" target="_blank" id="id42011288">124. 317 S4 拓海</a>
+      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F42011288" target="_blank" id="id42011288">125. 317 S4 拓海</a>
       <button type="button" class="btn hide-dojo" id="hid42011288" data-id="id42011288"><i class="icon-remove"></i></button>
     </div>
 
     <div class="dojo" id="did77056830">
-      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F77056830" target="_blank" id="id77056830">125. 317 S3 森久保乃々</a>
+      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F77056830" target="_blank" id="id77056830">126. 317 S3 森久保乃々</a>
       <button type="button" class="btn hide-dojo" id="hid77056830" data-id="id77056830"><i class="icon-remove"></i></button>
     </div>
 
     <div class="dojo" id="did71974826">
-      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F71974826" target="_blank" id="id71974826">126. 317 SS 輝子.相葉.みお</a>
+      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F71974826" target="_blank" id="id71974826">127. 317 SS 輝子.相葉.みお</a>
       <button type="button" class="btn hide-dojo" id="hid71974826" data-id="id71974826"><i class="icon-remove"></i></button>
     </div>
 
     <div class="dojo" id="did2073287">
-      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F2073287" target="_blank" id="id2073287">127. 316 S4 のあさん</a>
+      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F2073287" target="_blank" id="id2073287">128. 316 S4 のあさん</a>
       <button type="button" class="btn hide-dojo" id="hid2073287" data-id="id2073287"><i class="icon-remove"></i></button>
     </div>
 
     <div class="dojo" id="did65855776">
-      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F65855776" target="_blank" id="id65855776">128. 316 S4 緒方智絵里</a>
+      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F65855776" target="_blank" id="id65855776">129. 316 S4 緒方智絵里</a>
       <button type="button" class="btn hide-dojo" id="hid65855776" data-id="id65855776"><i class="icon-remove"></i></button>
     </div>
 
     <div class="dojo" id="did77440455">
-      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F77440455" target="_blank" id="id77440455">129. 316 S3 安部菜々</a>
+      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F77440455" target="_blank" id="id77440455">130. 316 S3 安部菜々</a>
       <button type="button" class="btn hide-dojo" id="hid77440455" data-id="id77440455"><i class="icon-remove"></i></button>
     </div>
 
     <div class="dojo" id="did72741840">
-      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F72741840" target="_blank" id="id72741840">130. 316 SS CDとときん</a>
+      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F72741840" target="_blank" id="id72741840">131. 316 SS CDとときん</a>
       <button type="button" class="btn hide-dojo" id="hid72741840" data-id="id72741840"><i class="icon-remove"></i></button>
     </div>
 
     <div class="dojo" id="did61332207">
-      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F61332207" target="_blank" id="id61332207">131. 315 S4 榊原さん</a>
+      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F61332207" target="_blank" id="id61332207">132. 315 S4 榊原さん</a>
       <button type="button" class="btn hide-dojo" id="hid61332207" data-id="id61332207"><i class="icon-remove"></i></button>
     </div>
 
     <div class="dojo" id="did56545441">
-      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F56545441" target="_blank" id="id56545441">132. 315 S4 星花さん</a>
+      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F56545441" target="_blank" id="id56545441">133. 315 S4 星花さん</a>
       <button type="button" class="btn hide-dojo" id="hid56545441" data-id="id56545441"><i class="icon-remove"></i></button>
     </div>
 
     <div class="dojo" id="did66846298">
-      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F66846298" target="_blank" id="id66846298">133. 315 S3 菜々ちゃん！</a>
+      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F66846298" target="_blank" id="id66846298">134. 315 S3 菜々ちゃん！</a>
       <button type="button" class="btn hide-dojo" id="hid66846298" data-id="id66846298"><i class="icon-remove"></i></button>
     </div>
 
     <div class="dojo" id="did76745971">
-      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F76745971" target="_blank" id="id76745971">134. 315 S3 めあいーかわいー</a>
+      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F76745971" target="_blank" id="id76745971">135. 315 S3 めあいーかわいー</a>
       <button type="button" class="btn hide-dojo" id="hid76745971" data-id="id76745971"><i class="icon-remove"></i></button>
     </div>
 
     <div class="dojo" id="did58491193">
-      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F58491193" target="_blank" id="id58491193">135. 314 S5 小日向ちゃん</a>
+      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F58491193" target="_blank" id="id58491193">136. 314 S5 小日向ちゃん</a>
       <button type="button" class="btn hide-dojo" id="hid58491193" data-id="id58491193"><i class="icon-remove"></i></button>
     </div>
 
     <div class="dojo" id="did36802267">
-      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F36802267" target="_blank" id="id36802267">136. 314 S4 になちゃーん</a>
+      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F36802267" target="_blank" id="id36802267">137. 314 S4 になちゃーん</a>
       <button type="button" class="btn hide-dojo" id="hid36802267" data-id="id36802267"><i class="icon-remove"></i></button>
     </div>
 
     <div class="dojo" id="did4474540">
-      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F4474540" target="_blank" id="id4474540">137. 314 S4 楓さん</a>
+      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F4474540" target="_blank" id="id4474540">138. 314 S4 楓さん</a>
       <button type="button" class="btn hide-dojo" id="hid4474540" data-id="id4474540"><i class="icon-remove"></i></button>
     </div>
 
     <div class="dojo" id="did67641282">
-      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F67641282" target="_blank" id="id67641282">138. 314 SS 幸子</a>
+      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F67641282" target="_blank" id="id67641282">139. 314 SS 幸子</a>
       <button type="button" class="btn hide-dojo" id="hid67641282" data-id="id67641282"><i class="icon-remove"></i></button>
     </div>
 
     <div class="dojo" id="did70190898">
-      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F70190898" target="_blank" id="id70190898">139. 313 S4 三船さん　仁奈　他</a>
+      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F70190898" target="_blank" id="id70190898">140. 313 S4 三船さん　仁奈　他</a>
       <button type="button" class="btn hide-dojo" id="hid70190898" data-id="id70190898"><i class="icon-remove"></i></button>
     </div>
 
     <div class="dojo" id="did65087322">
-      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F65087322" target="_blank" id="id65087322">140. 311 S5 幸子のおぱんちゅｸﾝｶｸﾝｶ♪</a>
+      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F65087322" target="_blank" id="id65087322">141. 311 S5 幸子のおぱんちゅｸﾝｶｸﾝｶ♪</a>
       <button type="button" class="btn hide-dojo" id="hid65087322" data-id="id65087322"><i class="icon-remove"></i></button>
     </div>
 
     <div class="dojo" id="did59466093">
-      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F59466093" target="_blank" id="id59466093">141. 311 S4 ちえりん</a>
+      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F59466093" target="_blank" id="id59466093">142. 311 S4 ちえりん</a>
       <button type="button" class="btn hide-dojo" id="hid59466093" data-id="id59466093"><i class="icon-remove"></i></button>
     </div>
 
     <div class="dojo" id="did37543223">
-      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F37543223" target="_blank" id="id37543223">142. 311 S4 SRｱｲﾄﾞﾙ輿水たん</a>
+      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F37543223" target="_blank" id="id37543223">143. 311 S4 SRｱｲﾄﾞﾙ輿水たん</a>
       <button type="button" class="btn hide-dojo" id="hid37543223" data-id="id37543223"><i class="icon-remove"></i></button>
     </div>
 
     <div class="dojo" id="did68555267">
-      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F68555267" target="_blank" id="id68555267">143. 311 S4 バレンタイン十時</a>
+      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F68555267" target="_blank" id="id68555267">144. 311 S4 バレンタイン十時</a>
       <button type="button" class="btn hide-dojo" id="hid68555267" data-id="id68555267"><i class="icon-remove"></i></button>
     </div>
 
     <div class="dojo" id="did44015794">
-      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F44015794" target="_blank" id="id44015794">144. 311 S4 </a>
+      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F44015794" target="_blank" id="id44015794">145. 311 S4 </a>
       <button type="button" class="btn hide-dojo" id="hid44015794" data-id="id44015794"><i class="icon-remove"></i></button>
     </div>
 
     <div class="dojo" id="did60003042">
-      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F60003042" target="_blank" id="id60003042">145. 310 S4 西園寺琴歌</a>
+      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F60003042" target="_blank" id="id60003042">146. 310 S4 西園寺琴歌</a>
       <button type="button" class="btn hide-dojo" id="hid60003042" data-id="id60003042"><i class="icon-remove"></i></button>
     </div>
 
     <div class="dojo" id="did67654903">
-      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F67654903" target="_blank" id="id67654903">146. 310 S4 北条加蓮</a>
+      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F67654903" target="_blank" id="id67654903">147. 310 S4 北条加蓮</a>
       <button type="button" class="btn hide-dojo" id="hid67654903" data-id="id67654903"><i class="icon-remove"></i></button>
     </div>
 
     <div class="dojo" id="did3853017">
-      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F3853017" target="_blank" id="id3853017">147. 310 S4 由愛ちゃん</a>
+      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F3853017" target="_blank" id="id3853017">148. 310 S4 由愛ちゃん</a>
       <button type="button" class="btn hide-dojo" id="hid3853017" data-id="id3853017"><i class="icon-remove"></i></button>
     </div>
 
     <div class="dojo" id="did62392390">
-      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F62392390" target="_blank" id="id62392390">148. 310 S3 櫻井桃華</a>
+      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F62392390" target="_blank" id="id62392390">149. 310 S3 櫻井桃華</a>
       <button type="button" class="btn hide-dojo" id="hid62392390" data-id="id62392390"><i class="icon-remove"></i></button>
     </div>
 
     <div class="dojo" id="did73612402">
-      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F73612402" target="_blank" id="id73612402">149. 309 S3 桃華ちゃま</a>
+      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F73612402" target="_blank" id="id73612402">150. 309 S3 桃華ちゃま</a>
       <button type="button" class="btn hide-dojo" id="hid73612402" data-id="id73612402"><i class="icon-remove"></i></button>
     </div>
 
     <div class="dojo" id="did64701106">
-      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F64701106" target="_blank" id="id64701106">150. 308 S4 笑顔の子</a>
+      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F64701106" target="_blank" id="id64701106">151. 308 S4 笑顔の子</a>
       <button type="button" class="btn hide-dojo" id="hid64701106" data-id="id64701106"><i class="icon-remove"></i></button>
     </div>
 
     <div class="dojo" id="did68855726">
-      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F68855726" target="_blank" id="id68855726">151. 307 S4 雪美</a>
+      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F68855726" target="_blank" id="id68855726">152. 307 S4 雪美</a>
       <button type="button" class="btn hide-dojo" id="hid68855726" data-id="id68855726"><i class="icon-remove"></i></button>
     </div>
 
     <div class="dojo" id="did1876652">
-      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F1876652" target="_blank" id="id1876652">152. 307 S4 [ｱｲｵﾗｲﾄｺﾞｼｯｸ]渋谷凛+</a>
+      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F1876652" target="_blank" id="id1876652">153. 307 S4 [ｱｲｵﾗｲﾄｺﾞｼｯｸ]渋谷凛+</a>
       <button type="button" class="btn hide-dojo" id="hid1876652" data-id="id1876652"><i class="icon-remove"></i></button>
     </div>
 
     <div class="dojo" id="did58026385">
-      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F58026385" target="_blank" id="id58026385">153. 307 S4 高森藍子</a>
+      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F58026385" target="_blank" id="id58026385">154. 307 S4 高森藍子</a>
       <button type="button" class="btn hide-dojo" id="hid58026385" data-id="id58026385"><i class="icon-remove"></i></button>
     </div>
 
     <div class="dojo" id="did78532995">
-      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F78532995" target="_blank" id="id78532995">154. 307 S4 あんず</a>
+      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F78532995" target="_blank" id="id78532995">155. 307 S4 あんず</a>
       <button type="button" class="btn hide-dojo" id="hid78532995" data-id="id78532995"><i class="icon-remove"></i></button>
     </div>
 
     <div class="dojo" id="did63861917">
-      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F63861917" target="_blank" id="id63861917">155. 307 S3 貴音or川島さん</a>
+      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F63861917" target="_blank" id="id63861917">156. 307 S3 貴音or川島さん</a>
       <button type="button" class="btn hide-dojo" id="hid63861917" data-id="id63861917"><i class="icon-remove"></i></button>
-    </div>
-
-    <div class="dojo" id="did64039148">
-      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F64039148" target="_blank" id="id64039148">156. 307 S3 本田未央</a>
-      <button type="button" class="btn hide-dojo" id="hid64039148" data-id="id64039148"><i class="icon-remove"></i></button>
     </div>
 
     <div class="dojo" id="did64772093">
@@ -1217,94 +1287,94 @@
       <button type="button" class="btn hide-dojo" id="hid60749314" data-id="id60749314"><i class="icon-remove"></i></button>
     </div>
 
+    <div class="dojo" id="did74152943">
+      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F74152943" target="_blank" id="id74152943">213. 290 S3 島村さん</a>
+      <button type="button" class="btn hide-dojo" id="hid74152943" data-id="id74152943"><i class="icon-remove"></i></button>
+    </div>
+
     <div class="dojo" id="did66856893">
-      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F66856893" target="_blank" id="id66856893">213. 290 SS 及川雫ちゃん</a>
+      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F66856893" target="_blank" id="id66856893">214. 290 SS 及川雫ちゃん</a>
       <button type="button" class="btn hide-dojo" id="hid66856893" data-id="id66856893"><i class="icon-remove"></i></button>
     </div>
 
     <div class="dojo" id="did68648756">
-      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F68648756" target="_blank" id="id68648756">214. 290 SS [ﾃﾞﾋﾞﾘｯｼｭｺﾞｼｯｸ]棟方愛海</a>
+      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F68648756" target="_blank" id="id68648756">215. 290 SS [ﾃﾞﾋﾞﾘｯｼｭｺﾞｼｯｸ]棟方愛海</a>
       <button type="button" class="btn hide-dojo" id="hid68648756" data-id="id68648756"><i class="icon-remove"></i></button>
     </div>
 
     <div class="dojo" id="did66208144">
-      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F66208144" target="_blank" id="id66208144">215. 290 SS 唯</a>
+      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F66208144" target="_blank" id="id66208144">216. 290 SS 唯</a>
       <button type="button" class="btn hide-dojo" id="hid66208144" data-id="id66208144"><i class="icon-remove"></i></button>
     </div>
 
     <div class="dojo" id="did68998787">
-      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F68998787" target="_blank" id="id68998787">216. 289 S4 大体お姉ちゃん</a>
+      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F68998787" target="_blank" id="id68998787">217. 289 S4 大体お姉ちゃん</a>
       <button type="button" class="btn hide-dojo" id="hid68998787" data-id="id68998787"><i class="icon-remove"></i></button>
     </div>
 
     <div class="dojo" id="did3267187">
-      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F3267187" target="_blank" id="id3267187">217. 288 S4 だいたい桃華</a>
+      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F3267187" target="_blank" id="id3267187">218. 288 S4 だいたい桃華</a>
       <button type="button" class="btn hide-dojo" id="hid3267187" data-id="id3267187"><i class="icon-remove"></i></button>
     </div>
 
     <div class="dojo" id="did56824972">
-      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F56824972" target="_blank" id="id56824972">218. 288 S3 森久保乃々</a>
+      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F56824972" target="_blank" id="id56824972">219. 288 S3 森久保乃々</a>
       <button type="button" class="btn hide-dojo" id="hid56824972" data-id="id56824972"><i class="icon-remove"></i></button>
     </div>
 
     <div class="dojo" id="did73057115">
-      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F73057115" target="_blank" id="id73057115">219. 287 S5 桃華ですの！</a>
+      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F73057115" target="_blank" id="id73057115">220. 287 S5 桃華ですの！</a>
       <button type="button" class="btn hide-dojo" id="hid73057115" data-id="id73057115"><i class="icon-remove"></i></button>
     </div>
 
     <div class="dojo" id="did64058364">
-      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F64058364" target="_blank" id="id64058364">220. 287 S4 森久保乃々</a>
+      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F64058364" target="_blank" id="id64058364">221. 287 S4 森久保乃々</a>
       <button type="button" class="btn hide-dojo" id="hid64058364" data-id="id64058364"><i class="icon-remove"></i></button>
     </div>
 
     <div class="dojo" id="did76044033">
-      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F76044033" target="_blank" id="id76044033">221. 287 S4 小梅</a>
+      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F76044033" target="_blank" id="id76044033">222. 287 S4 小梅</a>
       <button type="button" class="btn hide-dojo" id="hid76044033" data-id="id76044033"><i class="icon-remove"></i></button>
     </div>
 
     <div class="dojo" id="did59695105">
-      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F59695105" target="_blank" id="id59695105">222. 287 S3 肇ちゃん</a>
+      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F59695105" target="_blank" id="id59695105">223. 287 S3 肇ちゃん</a>
       <button type="button" class="btn hide-dojo" id="hid59695105" data-id="id59695105"><i class="icon-remove"></i></button>
     </div>
 
     <div class="dojo" id="did62643096">
-      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F62643096" target="_blank" id="id62643096">223. 287 SS 八神ﾏｷﾉ</a>
+      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F62643096" target="_blank" id="id62643096">224. 287 SS 八神ﾏｷﾉ</a>
       <button type="button" class="btn hide-dojo" id="hid62643096" data-id="id62643096"><i class="icon-remove"></i></button>
     </div>
 
     <div class="dojo" id="did65649596">
-      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F65649596" target="_blank" id="id65649596">224. 286 S5 白坂小梅</a>
+      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F65649596" target="_blank" id="id65649596">225. 286 S5 白坂小梅</a>
       <button type="button" class="btn hide-dojo" id="hid65649596" data-id="id65649596"><i class="icon-remove"></i></button>
     </div>
 
     <div class="dojo" id="did70028268">
-      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F70028268" target="_blank" id="id70028268">225. 286 SS CDとときん</a>
+      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F70028268" target="_blank" id="id70028268">226. 286 SS CDとときん</a>
       <button type="button" class="btn hide-dojo" id="hid70028268" data-id="id70028268"><i class="icon-remove"></i></button>
     </div>
 
     <div class="dojo" id="did68641147">
-      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F68641147" target="_blank" id="id68641147">226. 286 SS 楓、奏ほか色白女神達</a>
+      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F68641147" target="_blank" id="id68641147">227. 286 SS 楓、奏ほか色白女神達</a>
       <button type="button" class="btn hide-dojo" id="hid68641147" data-id="id68641147"><i class="icon-remove"></i></button>
     </div>
 
     <div class="dojo" id="did60742919">
-      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F60742919" target="_blank" id="id60742919">227. 285 S4 新年しゅーこ+</a>
+      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F60742919" target="_blank" id="id60742919">228. 285 S4 新年しゅーこ+</a>
       <button type="button" class="btn hide-dojo" id="hid60742919" data-id="id60742919"><i class="icon-remove"></i></button>
     </div>
 
     <div class="dojo" id="did1835290">
-      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F1835290" target="_blank" id="id1835290">228. 285 S3 各種三船さん</a>
+      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F1835290" target="_blank" id="id1835290">229. 285 S3 各種三船さん</a>
       <button type="button" class="btn hide-dojo" id="hid1835290" data-id="id1835290"><i class="icon-remove"></i></button>
     </div>
 
     <div class="dojo" id="did63423580">
-      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F63423580" target="_blank" id="id63423580">229. 285 S3 智絵里</a>
+      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F63423580" target="_blank" id="id63423580">230. 285 S3 智絵里</a>
       <button type="button" class="btn hide-dojo" id="hid63423580" data-id="id63423580"><i class="icon-remove"></i></button>
-    </div>
-
-    <div class="dojo" id="did74152943">
-      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F74152943" target="_blank" id="id74152943">230. 284 S3 島村さん</a>
-      <button type="button" class="btn hide-dojo" id="hid74152943" data-id="id74152943"><i class="icon-remove"></i></button>
     </div>
 
     <div class="dojo" id="did66485140">
@@ -1422,19 +1492,19 @@
       <button type="button" class="btn hide-dojo" id="hid50350405" data-id="id50350405"><i class="icon-remove"></i></button>
     </div>
 
+    <div class="dojo" id="did72996539">
+      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F72996539" target="_blank" id="id72996539">254. 276 S4 ゆっこ</a>
+      <button type="button" class="btn hide-dojo" id="hid72996539" data-id="id72996539"><i class="icon-remove"></i></button>
+    </div>
+
     <div class="dojo" id="did62431467">
-      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F62431467" target="_blank" id="id62431467">254. 276 S3 女将葵ちゃん</a>
+      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F62431467" target="_blank" id="id62431467">255. 276 S3 女将葵ちゃん</a>
       <button type="button" class="btn hide-dojo" id="hid62431467" data-id="id62431467"><i class="icon-remove"></i></button>
     </div>
 
     <div class="dojo" id="did63589528">
-      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F63589528" target="_blank" id="id63589528">255. 275 S4 神谷奈緒、etc</a>
+      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F63589528" target="_blank" id="id63589528">256. 275 S4 神谷奈緒、etc</a>
       <button type="button" class="btn hide-dojo" id="hid63589528" data-id="id63589528"><i class="icon-remove"></i></button>
-    </div>
-
-    <div class="dojo" id="did72996539">
-      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F72996539" target="_blank" id="id72996539">256. 275 S4 ゆっこ</a>
-      <button type="button" class="btn hide-dojo" id="hid72996539" data-id="id72996539"><i class="icon-remove"></i></button>
     </div>
 
     <div class="dojo" id="did61533445">
@@ -1522,99 +1592,99 @@
       <button type="button" class="btn hide-dojo" id="hid67182922" data-id="id67182922"><i class="icon-remove"></i></button>
     </div>
 
+    <div class="dojo" id="did34391292">
+      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F34391292" target="_blank" id="id34391292">274. 269 SS 美穂ちゃん</a>
+      <button type="button" class="btn hide-dojo" id="hid34391292" data-id="id34391292"><i class="icon-remove"></i></button>
+    </div>
+
     <div class="dojo" id="did61262026">
-      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F61262026" target="_blank" id="id61262026">274. 267 S4 ζ*'ヮ')ζ</a>
+      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F61262026" target="_blank" id="id61262026">275. 267 S4 ζ*'ヮ')ζ</a>
       <button type="button" class="btn hide-dojo" id="hid61262026" data-id="id61262026"><i class="icon-remove"></i></button>
     </div>
 
     <div class="dojo" id="did61225991">
-      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F61225991" target="_blank" id="id61225991">275. 267 S4 神谷奈緒+</a>
+      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F61225991" target="_blank" id="id61225991">276. 267 S4 神谷奈緒+</a>
       <button type="button" class="btn hide-dojo" id="hid61225991" data-id="id61225991"><i class="icon-remove"></i></button>
     </div>
 
     <div class="dojo" id="did73089058">
-      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F73089058" target="_blank" id="id73089058">276. 267 S3 だらだら杏</a>
+      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F73089058" target="_blank" id="id73089058">277. 267 S3 だらだら杏</a>
       <button type="button" class="btn hide-dojo" id="hid73089058" data-id="id73089058"><i class="icon-remove"></i></button>
     </div>
 
     <div class="dojo" id="did71340886">
-      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F71340886" target="_blank" id="id71340886">277. 267 S3 ｱﾅｽﾀｼｱ</a>
+      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F71340886" target="_blank" id="id71340886">278. 267 S3 ｱﾅｽﾀｼｱ</a>
       <button type="button" class="btn hide-dojo" id="hid71340886" data-id="id71340886"><i class="icon-remove"></i></button>
     </div>
 
     <div class="dojo" id="did67011804">
-      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F67011804" target="_blank" id="id67011804">278. 266 S 雪歩</a>
+      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F67011804" target="_blank" id="id67011804">279. 266 S 雪歩</a>
       <button type="button" class="btn hide-dojo" id="hid67011804" data-id="id67011804"><i class="icon-remove"></i></button>
     </div>
 
     <div class="dojo" id="did66188575">
-      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F66188575" target="_blank" id="id66188575">279. 264 S3 晴にゃんor涼さん</a>
+      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F66188575" target="_blank" id="id66188575">280. 264 S3 晴にゃんor涼さん</a>
       <button type="button" class="btn hide-dojo" id="hid66188575" data-id="id66188575"><i class="icon-remove"></i></button>
     </div>
 
     <div class="dojo" id="did16064520">
-      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F16064520" target="_blank" id="id16064520">280. 264 S3 色々</a>
+      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F16064520" target="_blank" id="id16064520">281. 264 S3 色々</a>
       <button type="button" class="btn hide-dojo" id="hid16064520" data-id="id16064520"><i class="icon-remove"></i></button>
     </div>
 
     <div class="dojo" id="did55990330">
-      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F55990330" target="_blank" id="id55990330">281. 263 S3 ままゆ</a>
+      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F55990330" target="_blank" id="id55990330">282. 263 S3 ままゆ</a>
       <button type="button" class="btn hide-dojo" id="hid55990330" data-id="id55990330"><i class="icon-remove"></i></button>
     </div>
 
     <div class="dojo" id="did428798">
-      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F428798" target="_blank" id="id428798">282. 263 S3 美穂ちゃん</a>
+      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F428798" target="_blank" id="id428798">283. 263 S3 美穂ちゃん</a>
       <button type="button" class="btn hide-dojo" id="hid428798" data-id="id428798"><i class="icon-remove"></i></button>
     </div>
 
     <div class="dojo" id="did72270243">
-      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F72270243" target="_blank" id="id72270243">283. 262 S3 姫川ちゃん</a>
+      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F72270243" target="_blank" id="id72270243">284. 262 S3 姫川ちゃん</a>
       <button type="button" class="btn hide-dojo" id="hid72270243" data-id="id72270243"><i class="icon-remove"></i></button>
     </div>
 
     <div class="dojo" id="did66378944">
-      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F66378944" target="_blank" id="id66378944">284. 261 S5 北条加蓮</a>
+      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F66378944" target="_blank" id="id66378944">285. 261 S5 北条加蓮</a>
       <button type="button" class="btn hide-dojo" id="hid66378944" data-id="id66378944"><i class="icon-remove"></i></button>
     </div>
 
     <div class="dojo" id="did59881437">
-      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F59881437" target="_blank" id="id59881437">285. 261 S3 やよい</a>
+      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F59881437" target="_blank" id="id59881437">286. 261 S3 やよい</a>
       <button type="button" class="btn hide-dojo" id="hid59881437" data-id="id59881437"><i class="icon-remove"></i></button>
     </div>
 
     <div class="dojo" id="did59555980">
-      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F59555980" target="_blank" id="id59555980">286. 261 S3 桃華ちゃま</a>
+      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F59555980" target="_blank" id="id59555980">287. 261 S3 桃華ちゃま</a>
       <button type="button" class="btn hide-dojo" id="hid59555980" data-id="id59555980"><i class="icon-remove"></i></button>
     </div>
 
     <div class="dojo" id="did68377211">
-      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F68377211" target="_blank" id="id68377211">287. 261 S3 佐久間まゆ</a>
+      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F68377211" target="_blank" id="id68377211">288. 261 S3 佐久間まゆ</a>
       <button type="button" class="btn hide-dojo" id="hid68377211" data-id="id68377211"><i class="icon-remove"></i></button>
     </div>
 
     <div class="dojo" id="did74296265">
-      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F74296265" target="_blank" id="id74296265">288. 261 S3 原田美世</a>
+      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F74296265" target="_blank" id="id74296265">289. 261 S3 原田美世</a>
       <button type="button" class="btn hide-dojo" id="hid74296265" data-id="id74296265"><i class="icon-remove"></i></button>
     </div>
 
     <div class="dojo" id="did1464331">
-      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F1464331" target="_blank" id="id1464331">289. 260 S4 東郷あいちゃん</a>
+      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F1464331" target="_blank" id="id1464331">290. 260 S4 東郷あいちゃん</a>
       <button type="button" class="btn hide-dojo" id="hid1464331" data-id="id1464331"><i class="icon-remove"></i></button>
     </div>
 
     <div class="dojo" id="did61197898">
-      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F61197898" target="_blank" id="id61197898">290. 260 S3 未央</a>
+      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F61197898" target="_blank" id="id61197898">291. 260 S3 未央</a>
       <button type="button" class="btn hide-dojo" id="hid61197898" data-id="id61197898"><i class="icon-remove"></i></button>
     </div>
 
     <div class="dojo" id="did3826059">
-      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F3826059" target="_blank" id="id3826059">291. 260 S3  [制服ｳｻﾐﾝ]安部菜々 </a>
+      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F3826059" target="_blank" id="id3826059">292. 260 S3  [制服ｳｻﾐﾝ]安部菜々 </a>
       <button type="button" class="btn hide-dojo" id="hid3826059" data-id="id3826059"><i class="icon-remove"></i></button>
-    </div>
-
-    <div class="dojo" id="did34391292">
-      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F34391292" target="_blank" id="id34391292">292. 260 SS 美穂ちゃん</a>
-      <button type="button" class="btn hide-dojo" id="hid34391292" data-id="id34391292"><i class="icon-remove"></i></button>
     </div>
 
     <div class="dojo" id="did54252370">
@@ -2658,5 +2728,22 @@
     </div>
 
   </section>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script src="js/mobamas-dojo-min.js"></script>
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-42938817-1', 'saasan.github.io');
+    ga('send', 'pageview');
+
+    var i = document.getElementsByClassName('adsbygoogle').length;
+    while (i-- > 0) {
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    }
+  </script>
 </body>
 </html>

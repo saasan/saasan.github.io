@@ -21,6 +21,36 @@ var MobamasDojo;
     _TOAST_TIME: 3000,
     _toast: null,
     _config: null,
+    _configMobamasMenuItems: [
+      { configId: 'showMobamasMenu', menuId: 'mobamasMenu' },
+      { configId: 'showMenuMyPage', menuId: 'menuMyPage' },
+      { configId: 'showMenuGacha', menuId: 'menuGacha' },
+      { configId: 'showMenuCardStr', menuId: 'menuCardStr' },
+      { configId: 'showMenuAuction', menuId: 'menuAuction' },
+      { configId: 'showMenuQuests', menuId: 'menuQuests' },
+      { configId: 'showMenuBattles', menuId: 'menuBattles' },
+      { configId: 'showMenuCardUnion', menuId: 'menuCardUnion' },
+      { configId: 'showMenuShop', menuId: 'menuShop' },
+      { configId: 'showMenuItem', menuId: 'menuItem' },
+      { configId: 'showMenuPresent', menuId: 'menuPresent' },
+      { configId: 'showMenuCardList', menuId: 'menuCardList' },
+      { configId: 'showMenuTradeResponse', menuId: 'menuTradeResponse' },
+      { configId: 'showMenuDeck', menuId: 'menuDeck' },
+      { configId: 'showMenuExchange', menuId: 'menuExchange' },
+      { configId: 'showMenuCardStorage', menuId: 'menuCardStorage' },
+      { configId: 'showMenuRareParts', menuId: 'menuRareParts' },
+      { configId: 'showMenuFriend', menuId: 'menuFriend' },
+      { configId: 'showMenuWish', menuId: 'menuWish' },
+      { configId: 'showMenuArchive', menuId: 'menuArchive' },
+      { configId: 'showMenuPRankingAward', menuId: 'menuPRankingAward' },
+      { configId: 'showMenuResults', menuId: 'menuResults' },
+      { configId: 'showMenuGallery', menuId: 'menuGallery' },
+      { configId: 'showMenuMemory', menuId: 'menuMemory' },
+      { configId: 'showMenuSBooth', menuId: 'menuSBooth' },
+      { configId: 'showMenuPersonalOption', menuId: 'menuPersonalOption' },
+      { configId: 'showMenuAdvise', menuId: 'menuAdvise' },
+      { configId: 'showMenuTop', menuId: 'menuTop' }
+    ],
 
     _dateReviver: function(key, value) {
       var a;
@@ -38,20 +68,31 @@ var MobamasDojo;
      */
     init: function() {
       var now = new Date();
+      var defaultValues = {
+        visited: {},
+        hide: {},
+        sameTab: false,
+        visitedMax: 1,
+        autoHide: true,
+        keepLastVisited: true,
+        lastVisited: null,
+        hideBirthday: false,
+        infoClosed: false,
+        lastTime: now
+      };
+
+      // モバマスのメニュー
+      for (var i = 0; i < this._configMobamasMenuItems.length; i++) {
+        defaultValues[this._configMobamasMenuItems[i].configId] = false;
+      }
+      defaultValues.showMobamasMenu = true;       // モバマスのメニュー
+      defaultValues.showMenuMyPage = true;        // ﾏｲｽﾀｼﾞｵ
+      defaultValues.showMenuCardList = true;      // ｱｲﾄﾞﾙ一覧
+      defaultValues.showMenuCardStorage = true;   // 女子寮
+      defaultValues.showMenuPRankingAward = true; // PRA
 
       this._config = new Config(
-        {
-          visited: {},
-          hide: {},
-          sameTab: false,
-          visitedMax: 1,
-          autoHide: true,
-          keepLastVisited: true,
-          lastVisited: null,
-          hideBirthday: false,
-          infoClosed: false,
-          lastTime: now
-        },
+        defaultValues,
         'mobamas-dojo',
         'config',
         this._dateReviver
@@ -111,6 +152,11 @@ var MobamasDojo;
       this._config.autoHide = $('#autoHide').is(':checked');
       this._config.keepLastVisited = $('#keepLastVisited').is(':checked');
       this._config.hideBirthday = $('#hideBirthday').is(':checked');
+
+      for (var i = 0; i < this._configMobamasMenuItems.length; i++) {
+        this._config[this._configMobamasMenuItems[i].configId] = $('#' + this._configMobamasMenuItems[i].configId).is(':checked');
+      }
+
       this._config.save();
       this.updateUI();
       this.closeConfig();
@@ -316,6 +362,10 @@ var MobamasDojo;
       $('#keepLastVisited').prop('checked', this._config.keepLastVisited);
       $('#hideBirthday').prop('checked', this._config.hideBirthday);
 
+      for (var i = 0; i < this._configMobamasMenuItems.length; i++) {
+        $('#' + this._configMobamasMenuItems[i].configId).prop('checked', this._config[this._configMobamasMenuItems[i].configId]);
+      }
+
       $('#dataOutput').val(this._config.getRawData());
     },
 
@@ -340,6 +390,11 @@ var MobamasDojo;
 
       $('#info').css('display', this._config.infoClosed ? 'none' : 'block');
       $('#birthday').css('display', this._config.hideBirthday ? 'none' : 'block');
+
+      $('#' + this._configMobamasMenuItems[0].menuId).css('display', this._config[this._configMobamasMenuItems[0].configId] ? 'block' : 'none');
+      for (var i = 1; i < this._configMobamasMenuItems.length; i++) {
+        $('#' + this._configMobamasMenuItems[i].menuId).css('display', this._config[this._configMobamasMenuItems[i].configId] ? 'inline-block' : 'none');
+      }
     },
 
     /**
