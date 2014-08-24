@@ -53,19 +53,15 @@
     </p>
   </section>
 
-  <section id="versionedInfo" class="info" data-version="1">
+  <section id="versionedInfo" class="info" data-version="2">
     <button type="button" class="close" data-target="#versionedInfo"><i class="icon-remove"></i></button>
     <h3>お知らせ</h3>
 
-    <h4>2014/08/02 変更点</h4>
+    <h4>2014/08/25 変更点</h4>
     <ul>
       <li>
-        モバマスのメニューを追加。
-        「道場リスト設定」で表示する項目を選べます。
-        表示されない場合はブラウザで再読み込みを行って下さい。
-      </li>
-      <li>
-        広告周りの変更。
+        ご要望により、発揮値を追加＆道場数を1000件に増量。<br>
+        見づらかったらごめんね(´・ω・｀)
       </li>
     </ul>
 
@@ -233,7 +229,11 @@
 {% if dojos|length > 0 -%}
 {%- for dojo in dojos %}
     <div class="dojo" id="did{{ dojo.id }}">
+{%- if dojo.defense|length > 0 %}
+      <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F{{ dojo.id }}" target="_blank" id="id{{ dojo.id }}"><span class="detail">{{ loop.index }}. {{ dojo.lv }} {{ dojo.rank }} {{ dojo.leader }}</span><span class="defense">{{ dojo.defense }}</span></a>
+{%- else %}
       <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F{{ dojo.id }}" target="_blank" id="id{{ dojo.id }}">{{ loop.index }}. {{ dojo.lv }} {{ dojo.rank }} {{ dojo.leader }}</a>
+{%- endif %}
       <button type="button" class="btn hide-dojo" id="hid{{ dojo.id }}" data-id="id{{ dojo.id }}"><i class="icon-remove"></i></button>
     </div>
 {% endfor -%}

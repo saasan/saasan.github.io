@@ -15,15 +15,16 @@ OUTPUT_RANK = 'index.html'
 OUTPUT_RANK_PATH = os.path.join(APP_PATH, OUTPUT_RANK)
 OUTPUT_LV = 'lv.html'
 OUTPUT_LV_PATH = os.path.join(APP_PATH, OUTPUT_LV)
-NUMBER_OF_DOJOS = 500
+NUMBER_OF_DOJOS = 1000
 
 class Dojo:
-    def __init__(self, lv, rank, id, type, leader):
+    def __init__(self, lv, rank, id, type, leader, defense):
         self.lv = lv
         self.rank = rank
         self.id = id
         self.type = type
         self.leader = leader
+        self.defense = defense
 
 def unicode_csv_reader(utf8_csv_data, dialect=csv.excel, **kwargs):
     reader = csv.reader(utf8_csv_data, dialect=dialect, **kwargs)
@@ -72,7 +73,7 @@ reader = unicode_csv_reader(result)
 headers = reader.next()
 for unused, lv, rank, id, type, link, cheer, leader, defense, comment, no, lastUpdate, redundancy in reader:
     if lv != '' and rank != '' and id != '':
-        dojos.append(Dojo(int(lv), rank.replace('.', ''), id, type, leader))
+        dojos.append(Dojo(int(lv), rank.replace('.', ''), id, type, leader, defense))
 
 print '---- dojos_rank ----'
 
