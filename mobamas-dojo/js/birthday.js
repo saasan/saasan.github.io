@@ -32,6 +32,7 @@ var Birthday;
     this._data[2][17] = "北川真尋";
     this._data[2][19] = "遊佐こずえ";
     this._data[2][22] = "前川みく";
+    this._data[2][24] = "桐生つかさ";
     this._data[2][25] = "三船美優、如月千早";
     this._data[2][26] = "黒川千秋";
     this._data[3][3] = "今井加奈";
