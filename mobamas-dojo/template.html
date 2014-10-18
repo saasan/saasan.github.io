@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <title>モバマス道場リスト(スマホ用)</title>
   <link rel="apple-touch-icon" href="//saasan.github.io/mobamas-dojo/img/s2works_favicon.png">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="css/mobamas-dojo.css">
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 </head>
@@ -27,7 +28,7 @@
   </section>
 
   <section id="info" class="info">
-    <button type="button" class="close" data-target="#info"><i class="icon-remove"></i></button>
+    <button type="button" class="close" data-target="#info"><i class="fa fa-close"></i></button>
     <h3>モバマス道場リストへようこそ！</h3>
     <p>
       ここは
@@ -47,20 +48,20 @@
       「道場リスト設定」で赤くなるまでの回数を変更したり、訪問済の道場を表示したままにする事もできます。
     </p>
      <p>
-      道場の右にある <i class="icon-remove"></i> ボタンを押すと、不要な道場を非表示にできます。
+      道場の右にある <i class="fa fa-remove"></i> ボタンを押すと、不要な道場を非表示にできます。
       非表示にした道場は「道場リスト設定」でリセットするまで再表示されません。
       守発揮値が高すぎる道場等にご利用下さい。
     </p>
   </section>
 
-  <section id="versionedInfo" class="info" data-version="3">
-    <button type="button" class="close" data-target="#versionedInfo"><i class="icon-remove"></i></button>
+  <section id="versionedInfo" class="info" data-version="4">
+    <button type="button" class="close" data-target="#versionedInfo"><i class="fa fa-close"></i></button>
     <h3>お知らせ</h3>
 
-    <h4>2014/09/24 変更点</h4>
+    <h4>2014/10/19 変更点</h4>
     <ul>
       <li>
-        誕生日のデータに桐生つかさを追加。
+        同じモバゲーIDで複数登録されている道場を省くように変更。
       </li>
     </ul>
 
@@ -79,19 +80,19 @@
   </section>
 
   <section id="birthday" class="info">
-    <button type="button" class="close" data-target="#birthday"><i class="icon-remove"></i></button>
+    <button type="button" class="close" data-target="#birthday"><i class="fa fa-close"></i></button>
     <h3>誕生日</h3>
     <p id="birthdayToday"></p>
     <p id="birthdayNext"></p>
   </section>
 
   <section id="toast" class="info">
-    <button type="button" class="close" data-target="#toast"><i class="icon-remove"></i></button>
+    <button type="button" class="close" data-target="#toast"><i class="fa fa-close"></i></button>
     <div id="toastMessage"></div>
   </section>
 
   <section id="buttons">
-    <button type="button" class="btn block" id="openConfig"><i class="icon-cog"></i> 道場リスト設定</button>
+    <button type="button" class="btn block" id="openConfig"><i class="fa fa-cog"></i> 道場リスト設定</button>
 {%- if type == 'rank' %}
     <a class="btn block" href="lv.html">レベル順へ変更</a>
 {%- elif type == 'lv' %}
@@ -130,7 +131,7 @@
   </section>
 
   <section id="config">
-    <button type="button" class="close" data-target="#config"><i class="icon-remove"></i></button>
+    <button type="button" class="close" data-target="#config"><i class="fa fa-close"></i></button>
     <h2>道場リスト設定</h2>
     <section>
       <label>
@@ -184,20 +185,20 @@
         <label><input type="checkbox" id="showMenuAdvise"> ﾍﾙﾌﾟ</label>
         <label><input type="checkbox" id="showMenuTop"> ﾄｯﾌﾟ</label>
       </section>
-      <button type="button" class="btn block primary" id="configOK"><i class="icon-ok"></i> 設定を保存</button>
+      <button type="button" class="btn block primary" id="configOK"><i class="fa fa-check"></i> 設定を保存</button>
       <button type="button" class="btn block" id="configResetVisited">訪問状態を初期化</button>
       <button type="button" class="btn block" id="configResetHide">非表示にした道場を再表示</button>
-      <button type="button" class="btn block" id="configReset"><i class="icon-repeat"></i> 全ての設定を初期化</button>
-      <button type="button" class="btn block" id="configCancel" data-target="#config"><i class="icon-remove"></i> キャンセル</button>
+      <button type="button" class="btn block" id="configReset"><i class="fa fa-undo"></i> 全ての設定を初期化</button>
+      <button type="button" class="btn block" id="configCancel" data-target="#config"><i class="fa fa-close"></i> キャンセル</button>
     </section>
 
     <h2>データ入出力</h2>
     <section>
       <form id="dataInput">
         <input type="text" id="dataOutput" onfocus="this.select();">
-        <button type="submit" class="btn block"><i class="icon-signin"></i> 入力</button>
+        <button type="submit" class="btn block"><i class="fa fa-sign-in"></i> 入力</button>
         <button type="button" class="btn block" onclick="$('#dataOutput').select();">テキスト全選択</button>
-        <button type="button" class="btn block" onclick="$('#dataOutput').val('');"><i class="icon-remove"></i> テキスト全消去</button>
+        <button type="button" class="btn block" onclick="$('#dataOutput').val('');"><i class="fa fa-remove"></i> テキスト全消去</button>
       </form>
     </section>
 
@@ -233,7 +234,7 @@
 {%- else %}
       <a class="btn dojo-link" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F{{ dojo.id }}" target="_blank" id="id{{ dojo.id }}">{{ loop.index }}. {{ dojo.lv }} {{ dojo.rank }} {{ dojo.leader }}</a>
 {%- endif %}
-      <button type="button" class="btn hide-dojo" id="hid{{ dojo.id }}" data-id="id{{ dojo.id }}"><i class="icon-remove"></i></button>
+      <button type="button" class="btn hide-dojo" id="hid{{ dojo.id }}" data-id="id{{ dojo.id }}"><i class="fa fa-remove"></i></button>
     </div>
 {% endfor -%}
 {%- endif %}

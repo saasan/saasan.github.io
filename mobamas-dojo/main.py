@@ -18,11 +18,10 @@ OUTPUT_LV_PATH = os.path.join(APP_PATH, OUTPUT_LV)
 NUMBER_OF_DOJOS = 1000
 
 class Dojo:
-    def __init__(self, lv, rank, id, type, leader, defense):
+    def __init__(self, lv, rank, id, leader, defense):
         self.lv = lv
         self.rank = rank
         self.id = id
-        self.type = type
         self.leader = leader
         self.defense = defense
 
@@ -71,16 +70,16 @@ print '---- unicode_csv_reader ----'
 
 reader = unicode_csv_reader(result)
 headers = reader.next()
-for unused, lv, rank, id, type, link, cheer, leader, defense, comment, no, lastUpdate, redundancy in reader:
-    if lv != '' and rank != '' and id != '':
-        dojos.append(Dojo(int(lv), rank.replace('.', ''), id, type, leader, defense))
+for unused, lv, rank, id, type, link, cheer, leader, defense, comment, no, lastUpdate, repeated in reader:
+    if lv != '' and rank != '' and id != '' and repeated != u'重複':
+        dojos.append(Dojo(int(lv), rank.replace('.', ''), id, leader, defense))
 
 print '---- dojos_rank ----'
 
 dojos_rank = dojos[:NUMBER_OF_DOJOS]
 
 for i, dojo in enumerate(dojos_rank):
-    print str(i) + ': ' + str(dojo.lv) + ', ' + dojo.rank + ', ' + dojo.id + ', ' + dojo.type + ', ' + dojo.leader
+    print str(i) + ': ' + str(dojo.lv) + ', ' + dojo.rank + ', ' + dojo.id + ', ' + dojo.leader
 
 template_values = {
     'dojos': dojos_rank,
@@ -97,7 +96,7 @@ dojos.sort(key=operator.attrgetter('lv'), reverse=True)
 dojos_lv = dojos[:NUMBER_OF_DOJOS]
 
 for i, dojo in enumerate(dojos_lv):
-    print str(i) + ': ' + str(dojo.lv) + ', ' + dojo.rank + ', ' + dojo.id + ', ' + dojo.type + ', ' + dojo.leader
+    print str(i) + ': ' + str(dojo.lv) + ', ' + dojo.rank + ', ' + dojo.id + ', ' + dojo.leader
 
 template_values = {
     'dojos': dojos_lv,
