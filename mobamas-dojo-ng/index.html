@@ -38,28 +38,34 @@
       <a href="https://docs.google.com/spreadsheet/lv?key=0Aq6mv2GCHMGLdERhLURsdEZwdVFvREdiYjE4Sy1FUnc&amp;type=view" target="_blank">アイマスCG 殴られ屋さん一覧</a>
       から取得して更新されます。
     </p>
-    <p>
-      道場を訪問する(タッチして開く)と赤くなります。
-      赤くなった道場は、他の道場を訪問すると消えます。
-      訪問状態は毎朝5時にリセットされ、消えた道場が再表示されます。
-      「道場リスト設定」で赤くなるまでの回数を変更したり、訪問済の道場を表示したままにする事もできます。
-    </p>
-     <p>
-      道場の右にある <i class="fa fa-remove"></i> ボタンを押すと、不要な道場を非表示にできます。
-      非表示にした道場は「道場リスト設定」でリセットするまで再表示されません。
-      守発揮値が高すぎる道場等にご利用下さい。
-    </p>
+
+    <h4>使い方</h4>
+    <section>
+      <p>
+        道場を訪問する(タッチして開く)と赤くなります。
+        赤くなった道場は、他の道場を訪問すると消えます。
+        訪問状態は毎朝5時にリセットされ、消えた道場が再表示されます。
+        「道場リスト設定」で赤くなるまでの回数を変更したり、訪問済の道場を表示したままにする事もできます。
+      </p>
+       <p>
+        道場の右にある <i class="fa fa-remove"></i> ボタンを押すと、不要な道場を非表示にできます。
+        非表示にした道場は「道場リスト設定」でリセットするまで再表示されません。
+        守発揮値が高すぎる道場等にご利用下さい。
+      </p>
+    </section>
   </section>
 
   <section id="versionedInfo" class="info" ng-init="infoVersion = 5" ng-show="infoVersion > $storage.infoVersion">
     <button type="button" class="close" ng-click="$storage.infoVersion = infoVersion"><i class="fa fa-close"></i></button>
     <h3>お知らせ</h3>
 
-    <h4>2014/10/19 変更点</h4>
+    <h4>2014/11/23 変更点</h4>
     <ul>
-      <li>
-        同じモバゲーIDで複数登録されている道場を省くように変更。
-      </li>
+      <li>根本的に作り直しました</li>
+      <li>道場の絞り込み機能を追加</li>
+      <li>元に戻す機能を追加</li>
+      <li>リンク先の設定を追加</li>
+      <li>ランク順とレベル順のページを統合</li>
     </ul>
 
     <h4>プロダクションメンバー募集中！</h4>
@@ -166,8 +172,8 @@
       <section>
         表示順:
         <select ng-model="$storage.view.orderBy">
-          <option value="0">ランク順</option>
-          <option value="1">レベル順</option>
+          <option value="rankNo">ランク順</option>
+          <option value="lvNo">レベル順</option>
         </select>
       </section>
       <section>
@@ -273,15 +279,15 @@
   </section>
 
   <section id="dojos" ng-init="init()">
-    <div class="dojo" ng-class="dojoClass(dojo)" ng-repeat="dojo in dojos | orderBy: ORDER_BY[$storage.view.orderBy] | filter: dojoFilter | limitTo : $storage.view.limitTo">
+    <div class="dojo" ng-class="dojoClass(dojo)" ng-repeat="dojo in dojos | orderBy: $storage.view.orderBy | filter: dojoFilter | limitTo : $storage.view.limitTo">
       <a ng-if="dojo.defense.length > 0"
         ng-click="onClickDojoLink(dojo)" class="btn dojo-link"
         href="{{ $storage.dojoLinkUrl }}{{ dojo.id }}"
-        target="{{ $storage.dojoLinkTarget }}"><span class="detail">{{$index + 1}}. {{ dojo.lv }} {{ RANK[dojo.rank] }} {{ dojo.leader }}</span><span class="defense">{{ dojo.defense }}</span></a>
+        target="{{ $storage.dojoLinkTarget }}"><span class="detail">{{ dojo[$storage.view.orderBy] }}. {{ dojo.lv }} {{ RANK[dojo.rank] }} {{ dojo.leader }}</span><span class="defense">{{ dojo.defense }}</span></a>
       <a ng-if="dojo.defense == null || dojo.defense.length <= 0"
         ng-click="onClickDojoLink(dojo)" class="btn dojo-link"
         href="{{ $storage.dojoLinkUrl }}{{ dojo.id }}"
-        target="{{ $storage.dojoLinkTarget }}">{{$index + 1}}. {{ dojo.lv }} {{ RANK[dojo.rank] }} {{ dojo.leader }}</a>
+        target="{{ $storage.dojoLinkTarget }}">{{ dojo[$storage.view.orderBy] }}. {{ dojo.lv }} {{ RANK[dojo.rank] }} {{ dojo.leader }}</a>
       <button ng-click="onClickHideDojo(dojo)" type="button" class="btn hide-dojo"><i class="fa fa-remove"></i></button>
     </div>
   </section>
