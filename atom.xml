@@ -3,7 +3,7 @@
   <title><![CDATA[saasan.github.io]]></title>
   <link href="http://saasan.github.io/atom.xml" rel="self"/>
   <link href="http://saasan.github.io/"/>
-  <updated>2014-11-22T23:53:45+09:00</updated>
+  <updated>2014-11-26T20:42:30+09:00</updated>
   <id>http://saasan.github.io/</id>
   <author>
     <name><![CDATA[saasan]]></name>
@@ -14,7 +14,7 @@
   <entry>
     <title type="html"><![CDATA[pixiv Tags]]></title>
     <link href="http://saasan.github.io/script/pixiv-tags.html"/>
-    <updated>2014-04-09T06:32:25+09:00</updated>
+    <updated>2014-11-26T20:24:20+09:00</updated>
     <content type="html"><![CDATA[<section>
   <h2>概要</h2>
   <p>
@@ -48,6 +48,14 @@
     pixiv を表示した状態で、Greasemonkey のユーザースクリプトコマンドからタグの設定ができます。
   </p>
   <img src="/img/pixivtags4.jpg">
+</section>
+
+<section>
+  <h2>更新履歴</h2>
+  <section>
+    <h3>2014/11/26 ver.1.04</h3>
+    <p>@grantを記述し、Greasemonkey 2.xに対応(したはず)。</p>
+  </section>
 </section>
 ]]></content>
   </entry>
