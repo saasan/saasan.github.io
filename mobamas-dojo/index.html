@@ -55,18 +55,13 @@
     </section>
   </section>
 
-  <section id="versionedInfo" class="info" ng-init="infoVersion = 5" ng-show="infoVersion > $storage.infoVersion">
+  <section id="versionedInfo" class="info" ng-init="infoVersion = 6" ng-show="infoVersion > $storage.infoVersion">
     <button type="button" class="close" ng-click="$storage.infoVersion = infoVersion"><i class="fa fa-close"></i></button>
     <h3>お知らせ</h3>
 
-    <h4>2014/11/23 変更点</h4>
+    <h4>2014/12/13 変更点</h4>
     <ul>
-      <li>根本的に作り直しました</li>
-      <li>「アイマスCG 殴られ屋さん一覧」に登録されているほぼ全ての道場(1400件くらい)を表示できるよう変更</li>
-      <li>道場の絞り込み機能を追加</li>
-      <li>元に戻す機能を追加</li>
-      <li>リンク先の設定を追加</li>
-      <li>ランク順とレベル順のページを統合</li>
+      <li>サーバーから道場リストを取得できなかった場合の処理を追加</li>
     </ul>
 
     <h4>プロダクションメンバー募集中！</h4>
