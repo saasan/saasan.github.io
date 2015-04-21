@@ -3,7 +3,7 @@
   <title><![CDATA[saasan.github.io]]></title>
   <link href="http://saasan.github.io/atom.xml" rel="self"/>
   <link href="http://saasan.github.io/"/>
-  <updated>2015-04-21T21:25:19+09:00</updated>
+  <updated>2015-04-21T21:31:41+09:00</updated>
   <id>http://saasan.github.io/</id>
   <author>
     <name><![CDATA[saasan]]></name>
@@ -26,7 +26,7 @@
 <section>
   <h2>ダウンロード</h2>
   <p>
-    <a href="https://github.com/saasan/Greasemonkey/raw/master/pixiv_tags.user.js">pixiv_tags.user.js</a>
+    <a href="https://github.com/saasan/Greasemonkey/raw/master/pixiv_tags.user.js" target="_blank">pixiv_tags.user.js</a>
   </p>
 </section>
 
@@ -54,7 +54,7 @@
   <h2>更新履歴</h2>
   <section>
     <h3>2015/04/21 ver.1.05</h3>
-    <p><a href="https://github.com/saasan/Greasemonkey/pull/1">短縮表示、常に展開表示できるように by monsier-oui · Pull Request #1 · saasan/Greasemonkey</a></p>
+    <p><a href="https://github.com/saasan/Greasemonkey/pull/1" target="_blank">短縮表示、常に展開表示できるように by monsier-oui · Pull Request #1 · saasan/Greasemonkey</a></p>
     <p>
       <ul>
         <li>字数を設定して短縮表示できるように</li>
