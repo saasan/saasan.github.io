@@ -3,7 +3,7 @@
   <title><![CDATA[saasan.github.io]]></title>
   <link href="http://saasan.github.io/atom.xml" rel="self"/>
   <link href="http://saasan.github.io/"/>
-  <updated>2015-04-25T21:36:52+09:00</updated>
+  <updated>2015-04-25T21:48:52+09:00</updated>
   <id>http://saasan.github.io/</id>
   <author>
     <name><![CDATA[saasan]]></name>
@@ -19,7 +19,7 @@
   <h2>概要</h2>
   <p>
     <a href="https://addons.mozilla.org/ja/firefox/addon/greasemonkey/" target="_blank">Greasemonkey</a> 用スクリプト。
-    設定したタグを <a href="http://www.pixiv.net/" target="_blank">pixiv</a> 内に常時表示します。
+    設定したタグを <a href="http://www.pixiv.net/" target="_blank">pixiv</a> 内に常時表示し、タグ巡回を快適にします。
   </p>
 </section>
 
