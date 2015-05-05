@@ -6,7 +6,6 @@
   <link rel="apple-touch-icon" href="//saasan.github.io/img/s2works_favicon.png">
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="css/mobamas-dojo.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular.min.js"></script>
   <script src="js/mobamas-dojo.min.js"></script>
   <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
@@ -96,6 +95,18 @@
       <label><input type="checkbox" ng-model="$storage.showMobamasMenuItem.personalOption"> 設定</label>
       <label><input type="checkbox" ng-model="$storage.showMobamasMenuItem.advise"> ﾍﾙﾌﾟ</label>
       <label><input type="checkbox" ng-model="$storage.showMobamasMenuItem.top"> ﾄｯﾌﾟ</label>
+    </section>
+    <section>
+      「元に戻す」を
+      <select ng-model="$storage.undoTimeout">
+        <option value="5000">5秒で消す</option>
+        <option value="10000">10秒で消す</option>
+        <option value="15000">15秒で消す</option>
+        <option value="20000">20秒で消す</option>
+        <option value="25000">25秒で消す</option>
+        <option value="30000">30秒で消す</option>
+        <option value="0">自動で消さない</option>
+      </select>
     </section>
     <a class="btn block" href="./"><i class="fa fa-undo"></i> 戻る</a>
   </section>
