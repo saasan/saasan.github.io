@@ -66,9 +66,18 @@
     </section>
   </section>
 
-  <section id="versionedInfo" class="info" ng-init="infoVersion = 10" ng-show="infoVersion > $storage.infoVersion">
+  <section id="versionedInfo" class="info" ng-init="infoVersion = 11" ng-show="infoVersion > $storage.infoVersion">
     <button type="button" class="close" ng-click="$storage.infoVersion = infoVersion"><i class="fa fa-close"></i></button>
     <h3>お知らせ</h3>
+
+    <h4>2015/05/06 変更点</h4>
+    <section>
+      <p>ツッコミを受けたので</p>
+    </section>
+    <ul>
+      <li>守発揮値を以前と同じ計算方法に変更。</li>
+      <li>守発揮値の絞り込みに使える値を変更。</li>
+    </ul>
 
     <h4>2015/05/05 変更点</h4>
     <ul>
@@ -267,41 +276,29 @@
       <section>
         守発揮値:
         <select ng-model="$storage.view.defenseRange.min">
-          <option value="15000">15000</option>
-          <option value="14000">14000</option>
-          <option value="13000">13000</option>
-          <option value="12000">12000</option>
-          <option value="11000">11000</option>
-          <option value="10000">10000</option>
-          <option value="9000">9000</option>
-          <option value="8000">8000</option>
           <option value="7000">7000</option>
           <option value="6000">6000</option>
           <option value="5000">5000</option>
           <option value="4000">4000</option>
           <option value="3000">3000</option>
           <option value="2000">2000</option>
-          <option value="1000">1000</option>
+          <option value="1700">1700</option>
+          <option value="1600">1600</option>
+          <option value="1500">1500</option>
           <option value="0">無制限</option>
         </select>
         ～
         <select ng-model="$storage.view.defenseRange.max">
           <option value="-1">無制限</option>
-          <option value="15000">15000</option>
-          <option value="14000">14000</option>
-          <option value="13000">13000</option>
-          <option value="12000">12000</option>
-          <option value="11000">11000</option>
-          <option value="10000">10000</option>
-          <option value="9000">9000</option>
-          <option value="8000">8000</option>
           <option value="7000">7000</option>
           <option value="6000">6000</option>
           <option value="5000">5000</option>
           <option value="4000">4000</option>
           <option value="3000">3000</option>
           <option value="2000">2000</option>
-          <option value="1000">1000</option>
+          <option value="1700">1700</option>
+          <option value="1600">1600</option>
+          <option value="1500">1500</option>
         </select>
       </section>
       <section>
