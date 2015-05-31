@@ -67,43 +67,23 @@
     </section>
   </section>
 
-  <section id="versionedInfo" class="info" ng-init="infoVersion = 12" ng-show="infoVersion > $storage.infoVersion">
+  <section id="versionedInfo" class="info" ng-init="infoVersion = 13" ng-show="infoVersion > $storage.infoVersion">
     <button type="button" class="close" ng-click="$storage.infoVersion = infoVersion"><i class="fa fa-close"></i></button>
     <h3>お知らせ</h3>
 
-    <h4>2015/05/07 変更点</h4>
+    <h4>2015/06/01 変更点</h4>
     <ul>
-      <li>訪問状態の自動リセットが行われなくなっていた問題を修正。</li>
-    </ul>
-
-    <h4>2015/05/06 変更点</h4>
-    <section>
-      <p>ツッコミを受けたので</p>
-    </section>
-    <ul>
-      <li>守発揮値を以前と同じ計算方法に変更。</li>
-      <li>守発揮値の絞り込みに使える値を変更。</li>
-    </ul>
-
-    <h4>2015/05/05 変更点</h4>
-    <ul>
-      <li>
-        <a href="http://momoka-sakurai.com/docs/dojolist_api_v2.html" target="_blank">DojoList API v2</a>
-        を使用し、ゲーム内のユニット名、リーダー、コメントを表示するよう変更。
-        <p><small>※ この変更に伴い、道場の表示順がおかしくなる場合があります。再度「表示順」の設定をお願いします。</small></p>
-      </li>
-      <li>
-        「作業中や発揮値っぽい物を強調する」設定を追加。
-      </li>
-      <li>
-        「その他の設定」に「元に戻す」を消す時間の設定を追加。
-      </li>
+      <li>訪問済道場数を追加。</li>
     </ul>
     <section>
       <p>
         なにかあれば
         <a href="https://twitter.com/saasan" target="_blank">カガミ (@saasan)</a>
         へどうぞ。
+      </p>
+      <p>
+        <a href="https://twitter.com/saasan/status/604240792559869952" target="_blank">うまかっちゃん</a>、<a href="https://twitter.com/saasan/status/604981984444612611" target="_blank">アベックラーメン</a>
+        を送って下さった方、ありがとうございますっ！おいしく頂きました。
       </p>
     </section>
 
@@ -323,6 +303,10 @@
     </section>
   </section>
 
+  <section class="well">
+    <p><small>全道場数: {{ dojos.length }} 件 / 表示中: {{ $storage.view.limitTo }} 件 / 訪問済: {{ $storage.visited | keylength }} 件</small></p>
+  </section>
+
   <section>
     <!-- 道場リスト レスポンシブ -->
     <ins class="adsbygoogle"
@@ -358,10 +342,6 @@
 
   <section>
     <a class="btn block" href="about.html">このサイトについて</a>
-  </section>
-
-  <section class="well">
-    <p><small>登録道場数: {{ dojos.length }}件</small></p>
   </section>
 
   <script>
