@@ -1,172 +1,240 @@
 <!DOCTYPE html>
 <html lang="ja">
+
   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>SideM風会話ジェネレータ</title>
-    <link rel="alternate" href="/atom.xml" type="application/atom+xml" title="Atom feed" />
-    <link rel="apple-touch-icon" href="http://saasan.github.io/img/s2works_favicon.png">
-    <link rel="stylesheet" href="/css/default.css">
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <script async src="//platform.twitter.com/widgets.js"></script>
-    <script async src="//connect.facebook.net/ja_JP/all.js#xfbml=1"></script>
-    <script async src="http://b.st-hatena.com/js/bookmark_button.js"></script>
-    <script async src="https://apis.google.com/js/platform.js"></script>
-    <script async src="https://widgets.getpocket.com/v1/j/btn.js?v=1"></script>
-    <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-      ga('create', 'UA-42938817-1', 'saasan.github.io');
-      ga('send', 'pageview');
-    </script>
-  </head>
+  <title>SideM風会話ジェネレータ - saasan.github.io</title>
+
+  <link href='http://fonts.googleapis.com/css?family=Orbitron:500' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://localhost/sidem-mydesk/">
+  <link rel="alternate" type="application/rss+xml" title="saasan.github.io" href="http://localhost/feed.xml" />
+  <link rel="apple-touch-icon" href="http://localhost/img/s2works_favicon.png">
+
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+
+
   <body>
-    <header>
-      <h1>SideM風会話ジェネレータ</h1>
-    </header>
 
-    <article>
-    <script src="js/sidem-mydesk.js"></script>
-    <script src="js/sidem-mydesk-ui.js"></script>
-    <script src="js/init.js"></script>
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/">saasan.github.io</a>
+
+    <nav class="site-nav">
+      <a href="#" class="menu-icon">
+        <svg viewBox="0 0 24 20">
+          <path fill="#424242" d="m 0,0 24,0 0,4 -24,0 z"/>
+          <path fill="#424242" d="m 0,8 24,0 0,4 -24,0 z"/>
+          <path fill="#424242" d="m 0,16 24,0 0,4 -24,0 z"/>
+        </svg>
+      </a>
+
+      <div class="trigger">
+        <a class="page-link" href="/mobamas-dojo/">モバマス道場リスト</a>
+        
+          
+        
+          
+        
+          
+        <a class="page-link" href="/sidem-mydesk/">SideM風会話ジェネレータ</a>
+          
+        
+          
+        
+          
+        <a class="page-link" href="/script/pixiv-tags.html">pixiv Tags</a>
+          
+        
+          
+        <a class="page-link" href="/software/pso2utility.html">PSO2Utility</a>
+          
+        
+      </div>
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <div class="wrapper">
+  <!-- saasan.github.io レスポンシブ -->
+  <ins class="adsbygoogle"
+       style="display:block"
+       data-ad-client="ca-pub-0141905477316976"
+       data-ad-slot="5633684976"
+       data-ad-format="auto"></ins>
+</div>
+
+
+    <div class="page-content">
+      <div class="wrapper">
+        <div class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">SideM風会話ジェネレータ</h1>
+  </header>
+
+  <article class="post-content">
     <noscript>JavaScriptを有効にして下さい。</noscript>
 
-    <p>
-      <a href="http://side-m.idolmaster.jp/" target="_blank">アイドルマスター SideM</a>
-      にある、マイデスクでアイドル同士が会話するシステム。あれが
-      <a href="http://www.bandainamcogames.co.jp/cs/list/idolmaster/social_m/" target="_blank">シンデレラガールズ</a>
-      や
-      <a href="http://www.bandainamcogames.co.jp/cs/list/idolmaster/million_live/" target="_blank">ミリオンライブ！</a>
-      にもあったらなぁ…。ということで作ってみた。
-    </p>
+<p>
+  <a href="http://side-m.idolmaster.jp/" target="_blank">アイドルマスター SideM</a>
+  にある、マイデスクでアイドル同士が会話するシステム。あれが
+  <a href="http://www.bandainamcogames.co.jp/cs/list/idolmaster/social_m/" target="_blank">シンデレラガールズ</a>
+  や
+  <a href="http://www.bandainamcogames.co.jp/cs/list/idolmaster/million_live/" target="_blank">ミリオンライブ！</a>
+  にもあったらなぁ…。ということで作ってみた。
+</p>
 
-    <section>
-      <h4>遊び方</h4>
-      <ol>
-        <li>名前と台詞を入力します。</li>
-        <li>
-          <div>各コマに画像ファイルをドラッグアンドドロップで入れます。</div>
-          <div><small>画像ファイルは、パソコンに保存されているものが使えます。</small></div>
-        </li>
-        <li>各コマをドラッグして画像の位置を調整します。</li>
-        <li>各コマの上でマウスホイールを動かして画像を拡大/縮小します。</li>
-        <li>完成したら「保存用画像を出力する」ボタンを押します。</li>
-        <li>出てきた画像を右クリックして保存します。</li>
-        <li>画像とハッシュタグ「#SideM風会話」を付けてツイートすると<a href="http://twitter.com/saasan" target="_blank">作者</a>が喜びます！</li>
-      </ol>
-    </section>
+<section>
+  <h4>遊び方</h4>
+  <ol>
+    <li>名前と台詞を入力します。</li>
+    <li>
+      <div>各コマに画像ファイルをドラッグアンドドロップで入れます。</div>
+      <div><small>画像ファイルは、パソコンに保存されているものが使えます。</small></div>
+    </li>
+    <li>各コマをドラッグして画像の位置を調整します。</li>
+    <li>各コマの上でマウスホイールを動かして画像を拡大/縮小します。</li>
+    <li>完成したら「保存用画像を出力する」ボタンを押します。</li>
+    <li>出てきた画像を右クリックして保存します。</li>
+    <li>画像とハッシュタグ「#SideM風会話」を付けてツイートすると<a href="http://twitter.com/saasan" target="_blank">作者</a>が喜びます！</li>
+  </ol>
+</section>
 
-    <section>
-      <h4>動作環境</h4>
-      <ul>
-        <li>パソコン用です。</li>
-        <li>Internet Explorer 11、Mozilla Firefox 27、Google Chrome 33で動作する事を確認しています。</li>
-        <li>Internet Explorer 9で動作しない事を確認しています。</li>
-      </ul>
-    </section>
+<section>
+  <h4>動作環境</h4>
+  <ul>
+    <li>パソコン用です。</li>
+    <li>Internet Explorer 11、Mozilla Firefox 27、Google Chrome 33で動作する事を確認しています。</li>
+    <li>Internet Explorer 9で動作しない事を確認しています。</li>
+  </ul>
+</section>
 
-    <section>
-      <fieldset>
-        <legend>上の人</legend>
-        <label>
-          名前
-          <input type="text" class="name" data-number="0">
-        </label>
-        <label>
-          台詞
-          <input type="text" class="line" data-number="0">
-        </label>
-      </fieldset>
+<section>
+  <fieldset>
+    <legend>上の人</legend>
+    <label>
+      名前
+      <input type="text" class="name" data-number="0">
+    </label>
+    <label>
+      台詞
+      <input type="text" class="line" data-number="0">
+    </label>
+  </fieldset>
 
-      <fieldset>
-        <legend>下の人</legend>
-        <label>
-          名前
-          <input type="text" class="name" data-number="1">
-        </label>
-        <label>
-          台詞
-          <input type="text" class="line" data-number="1">
-        </label>
-      </fieldset>
-    </section>
+  <fieldset>
+    <legend>下の人</legend>
+    <label>
+      名前
+      <input type="text" class="name" data-number="1">
+    </label>
+    <label>
+      台詞
+      <input type="text" class="line" data-number="1">
+    </label>
+  </fieldset>
+</section>
 
-    <section class="well">
-      <p><canvas id="sidem-mydesk" width="640" height="586" class="center-block">canvasに対応したブラウザーでご覧下さい。</canvas></p>
-      <p><button id="output" class="center-block">↓保存用画像を出力する↓</button></p>
-      <p id="result"></p>
-    </section>
+<section class="well">
+  <p><canvas id="sidem-mydesk" width="640" height="586" class="center-block">canvasに対応したブラウザーでご覧下さい。</canvas></p>
+  <p><button id="output" class="center-block">↓保存用画像を出力する↓</button></p>
+  <p id="result"></p>
+</section>
 
-    <section>
-      <a class="twitter-timeline" data-dnt="true" href="https://twitter.com/search?q=%23SideM%E9%A2%A8%E4%BC%9A%E8%A9%B1"  data-widget-id="442248991078490114">Tweets about "#SideM風会話"</a>
-    </section>
-  </body>
-</html>
+<section>
+  <a class="twitter-timeline" data-dnt="true" href="https://twitter.com/search?q=%23SideM%E9%A2%A8%E4%BC%9A%E8%A9%B1"  data-widget-id="442248991078490114">Tweets about "#SideM風会話"</a>
+</section>
 
-    </article>
+<script src="js/sidem-mydesk.js"></script>
+<script src="js/sidem-mydesk-ui.js"></script>
+<script src="js/init.js"></script>
+<script async src="//platform.twitter.com/widgets.js"></script>
 
-    <div class="side-contents">
-      <nav>
-        <ul>
-          <li><a href="/">saasan.github.io</a></li>
-          <li><a href="/mobamas-dojo/">モバマス道場リスト</a></li>
+  </article>
 
+</div>
 
-          <li><a href="/script/pixiv-tags.html">pixiv Tags</a></li>
-
-
-
-          <li><a href="/sidem-mydesk/">SideM風会話ジェネレータ</a></li>
-
-
-
-          <li><a href="/software/pso2utility.html">PSO2Utility</a></li>
-
-
-
-
-        </ul>
-      </nav>
-
-      <aside class="social-buttons">
-        <ul>
-          <li><a href="http://b.hatena.ne.jp/entry/" class="hatena-bookmark-button" data-hatena-bookmark-layout="simple-balloon"><img src="http://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a></li>
-          <li><div class="fb-like" data-layout="button_count"></div></li>
-          <li><a href="https://twitter.com/share" class="twitter-share-button"></a></li>
-          <li><div class="g-plusone" data-size="medium"></div></li>
-          <li><a data-pocket-label="pocket" data-pocket-count="horizontal" class="pocket-btn"></a></li>
-        </ul>
-      </aside>
-
-      <aside class="ad ad320x50">
-<ins class="adsbygoogle center-block"
-     style="display:block;width:320px;height:50px"
-     data-ad-client="ca-pub-0141905477316976"
-     data-ad-slot="7336848578"></ins>
-<script>
-  (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-      </aside>
-
-      <aside class="ad ad300x250">
-<ins class="adsbygoogle center-block"
-     style="display:block;width:300px;height:250px"
-     data-ad-client="ca-pub-0141905477316976"
-     data-ad-slot="9457742976"></ins>
-<script>
-  (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-      </aside>
+      </div>
     </div>
 
-    <footer>
+    <div class="wrapper">
+  <!-- saasan.github.io レスポンシブ -->
+  <ins class="adsbygoogle"
+       style="display:block"
+       data-ad-client="ca-pub-0141905477316976"
+       data-ad-slot="5633684976"
+       data-ad-format="auto"></ins>
+</div>
 
-      <time>最終更新日時 : 2014-03-08 20:00</time>
 
-      <address>&copy; <a href="http://twitter.com/saasan" target="_blank">saasan</a>.</address>
-    </footer>
+    <footer class="site-footer">
+  <div class="wrapper">
+    <nav>
+      <a href="/mobamas-dojo/">モバマス道場リスト</a>
+      
+        
+      
+        
+      
+        
+          | <a class="page-link" href="/sidem-mydesk/">SideM風会話ジェネレータ</a>
+        
+      
+        
+      
+        
+          | <a class="page-link" href="/script/pixiv-tags.html">pixiv Tags</a>
+        
+      
+        
+          | <a class="page-link" href="/software/pso2utility.html">PSO2Utility</a>
+        
+      
+
+      
+      |
+      <a href="https://twitter.com/saasan" target="_blank">
+        <span class="icon  icon--twitter">
+          <svg viewBox="0 0 16 16">
+            <path fill="#828282" d="M15.969,3.058c-0.586,0.26-1.217,0.436-1.878,0.515c0.675-0.405,1.194-1.045,1.438-1.809
+                                    c-0.632,0.375-1.332,0.647-2.076,0.793c-0.596-0.636-1.446-1.033-2.387-1.033c-1.806,0-3.27,1.464-3.27,3.27 c0,0.256,0.029,0.506,0.085,0.745C5.163,5.404,2.753,4.102,1.14,2.124C0.859,2.607,0.698,3.168,0.698,3.767 c0,1.134,0.577,2.135,1.455,2.722C1.616,6.472,1.112,6.325,0.671,6.08c0,0.014,0,0.027,0,0.041c0,1.584,1.127,2.906,2.623,3.206 C3.02,9.402,2.731,9.442,2.433,9.442c-0.211,0-0.416-0.021-0.615-0.059c0.416,1.299,1.624,2.245,3.055,2.271 c-1.119,0.877-2.529,1.4-4.061,1.4c-0.264,0-0.524-0.015-0.78-0.046c1.447,0.928,3.166,1.469,5.013,1.469 c6.015,0,9.304-4.983,9.304-9.304c0-0.142-0.003-0.283-0.009-0.423C14.976,4.29,15.531,3.714,15.969,3.058z"/>
+          </svg>
+        </span>
+
+        <span class="username">saasan</span>
+      </a>
+      
+      | <a href="/feed.xml" target="_blank">RSS</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-42938817-1', 'saasan.github.io');
+  ga('send', 'pageview');
+
+  var i = document.getElementsByClassName('adsbygoogle').length;
+  while (i-- > 0) {
+    (adsbygoogle = window.adsbygoogle || []).push({});
+  }
+</script>
+
+
   </body>
+
 </html>
