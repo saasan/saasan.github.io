@@ -52,6 +52,11 @@ a {
   margin-left: auto;
   padding-right: 20px;
   padding-left: 20px; }
+  @media screen and (max-width: 768px) {
+    .wrapper {
+      max-width: 946px;
+      padding-right: 7px;
+      padding-left: 7px; } }
 
 .wrapper:after {
   content: "";
@@ -186,7 +191,7 @@ a {
   line-height: 1; }
   @media screen and (max-width: 768px) {
     .post-title {
-      font-size: 36px; } }
+      font-size: 28px; } }
 
 .post-content {
   margin-bottom: 20px; }
@@ -194,29 +199,97 @@ a {
     font-size: 32px; }
     @media screen and (max-width: 768px) {
       .post-content h2 {
-        font-size: 28px; } }
+        font-size: 22px; } }
   .post-content h3 {
     font-size: 26px; }
     @media screen and (max-width: 768px) {
       .post-content h3 {
-        font-size: 22px; } }
+        font-size: 18px; } }
   .post-content h4 {
     font-size: 20px; }
     @media screen and (max-width: 768px) {
       .post-content h4 {
-        font-size: 18px; } }
+        font-size: 14px; } }
+
+.info, .info-small {
+  color: #555;
+  background-color: #fcf8e3;
+  border: 1px solid #f5e79e; }
+
+.info {
+  padding: 20px;
+  line-height: 1.3em; }
+  .info :first-child {
+    margin-top: 0; }
+  @media screen and (max-width: 768px) {
+    .info {
+      padding: 7px; } }
+  .info.error {
+    color: #fff;
+    background-color: #e70048;
+    border-color: #e70048;
+    font-weight: bold; }
+    .info.error .close {
+      color: #fff;
+      opacity: 1; }
+  .info h4 {
+    margin: 20px 0;
+    padding-bottom: 3px;
+    font-weight: normal;
+    border-color: #f5e79e;
+    border-style: solid;
+    border-width: 0 0 1px 0; }
+  .info section {
+    margin: 0 0 0 1em; }
+  .info ul {
+    margin: 7px 0;
+    padding-left: 2em; }
+  .info p {
+    margin-top: 7px;
+    margin-bottom: 0; }
+
+.info-small {
+  padding: 4px 12px; }
 
 .well {
   padding: 20px;
-  background-color: #F5F5F5;
-  border: 1px solid #E3E3E3;
-  border-radius: 4px;
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05) inset; }
+  background-color: #f5faff;
+  border: 1px solid #a9d4ff; }
+  @media screen and (max-width: 768px) {
+    .well {
+      padding: 7px; } }
+  .well :first-child {
+    margin-top: 0; }
 
 .center-block {
   display: block;
   margin-left: auto;
   margin-right: auto; }
+
+/*
+* モバマス振り分けpt計算機用スタイル
+*/
+div[ng-app="mobamasStatusPt"] input {
+  display: inline-block;
+  margin: 0;
+  font-size: 120%;
+  line-height: 30px;
+  width: 3em;
+  text-align: right; }
+div[ng-app="mobamasStatusPt"] button {
+  display: inline-block;
+  margin: 0;
+  font-size: 120%;
+  padding: 4px 12px;
+  line-height: 40px; }
+div[ng-app="mobamasStatusPt"] dt {
+  margin: 7px 0;
+  border-bottom: solid 1px #a9d4ff; }
+div[ng-app="mobamasStatusPt"] dd {
+  margin-left: 7px; }
+div[ng-app="mobamasStatusPt"] p.em, div[ng-app="mobamasStatusPt"] em {
+  font-size: 150%;
+  font-style: normal; }
 
 /*
  * トップページ用スタイル
