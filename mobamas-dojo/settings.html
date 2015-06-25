@@ -24,9 +24,9 @@
          data-ad-format="auto"></ins>
   </section>
 
-  <section id="toast" class="info {{ class }}" ng-controller="ToastController" ng-show="message">
+  <section id="toast" class="info {{ class }}" ng-controller="ToastController" ng-show="visible">
     <button type="button" class="close" ng-click="close()"><i class="fa fa-close"></i></button>
-    <div ng-class="{ undo: callback }" ng-click="onclick()">{{ message }}</div>
+    <div ng-class="{ undo: callback }" ng-click="onclick()" ng-bind-html="message"></div>
   </section>
 
   <section class="form">
@@ -68,34 +68,9 @@
       </label>
     </section>
     <section class="settings-mobamas-menu" ng-show="$storage.showMobamasMenu">
-      <label><input type="checkbox" ng-model="$storage.showMobamasMenuItem.myPage"> ﾏｲｽﾀｼﾞｵ</label>
-      <label><input type="checkbox" ng-model="$storage.showMobamasMenuItem.petitCg"> ぷちﾃﾞﾚﾗ</label>
-      <label><input type="checkbox" ng-model="$storage.showMobamasMenuItem.gacha"> ｶﾞﾁｬ</label>
-      <label><input type="checkbox" ng-model="$storage.showMobamasMenuItem.cardStr"> ﾚｯｽﾝ</label>
-      <label><input type="checkbox" ng-model="$storage.showMobamasMenuItem.auction"> ﾌﾘｰﾄﾚｰﾄﾞ</label>
-      <label><input type="checkbox" ng-model="$storage.showMobamasMenuItem.quests"> お仕事</label>
-      <label><input type="checkbox" ng-model="$storage.showMobamasMenuItem.battles"> LIVEﾊﾞﾄﾙ</label>
-      <label><input type="checkbox" ng-model="$storage.showMobamasMenuItem.cardUnion"> 特訓</label>
-      <label><input type="checkbox" ng-model="$storage.showMobamasMenuItem.shop"> ｼｮｯﾌﾟ</label>
-      <label><input type="checkbox" ng-model="$storage.showMobamasMenuItem.item"> ｱｲﾃﾑ</label>
-      <label><input type="checkbox" ng-model="$storage.showMobamasMenuItem.present"> 贈り物</label>
-      <label><input type="checkbox" ng-model="$storage.showMobamasMenuItem.cardList"> ｱｲﾄﾞﾙ一覧</label>
-      <label><input type="checkbox" ng-model="$storage.showMobamasMenuItem.tradeResponse"> ﾄﾚｰﾄﾞ</label>
-      <label><input type="checkbox" ng-model="$storage.showMobamasMenuItem.deck"> 編成</label>
-      <label><input type="checkbox" ng-model="$storage.showMobamasMenuItem.exchange"> 交換</label>
-      <label><input type="checkbox" ng-model="$storage.showMobamasMenuItem.cardStorage"> 女子寮</label>
-      <label><input type="checkbox" ng-model="$storage.showMobamasMenuItem.rareParts"> 衣装</label>
-      <label><input type="checkbox" ng-model="$storage.showMobamasMenuItem.friend"> お気に入り</label>
-      <label><input type="checkbox" ng-model="$storage.showMobamasMenuItem.wish"> ﾎｼｲﾓﾉ</label>
-      <label><input type="checkbox" ng-model="$storage.showMobamasMenuItem.archive"> ｱﾙﾊﾞﾑ</label>
-      <label><input type="checkbox" ng-model="$storage.showMobamasMenuItem.pRankingAward"> PRA</label>
-      <label><input type="checkbox" ng-model="$storage.showMobamasMenuItem.results"> ﾌﾟﾛﾌｨｰﾙ</label>
-      <label><input type="checkbox" ng-model="$storage.showMobamasMenuItem.gallery"> ｱｲﾄﾞﾙｷﾞｬﾗﾘｰ</label>
-      <label><input type="checkbox" ng-model="$storage.showMobamasMenuItem.memory"> ｲﾍﾞﾝﾄﾒﾓﾘｰ</label>
-      <label><input type="checkbox" ng-model="$storage.showMobamasMenuItem.sBooth"> ｻｳﾝﾄﾞﾌﾞｰｽ</label>
-      <label><input type="checkbox" ng-model="$storage.showMobamasMenuItem.personalOption"> 設定</label>
-      <label><input type="checkbox" ng-model="$storage.showMobamasMenuItem.advise"> ﾍﾙﾌﾟ</label>
-      <label><input type="checkbox" ng-model="$storage.showMobamasMenuItem.top"> ﾄｯﾌﾟ</label>
+      <label ng-repeat="item in ui.mobamasMenu">
+        <input type="checkbox" ng-model="$storage.showMobamasMenuItem[item.key]"> {{ item.label }}
+      </label>
     </section>
     <section>
       「元に戻す」を

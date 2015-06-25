@@ -67,14 +67,16 @@
     </section>
   </section>
 
-  <section id="versionedInfo" class="info" ng-init="infoVersion = 14" ng-show="infoVersion > $storage.infoVersion">
+  <section id="versionedInfo" class="info" ng-init="infoVersion = 15" ng-show="infoVersion > $storage.infoVersion">
     <button type="button" class="close" ng-click="$storage.infoVersion = infoVersion"><i class="fa fa-close"></i></button>
     <h3>お知らせ</h3>
 
-    <h4>2015/06/15 変更点</h4>
+    <h4>2015/06/25 変更点</h4>
     <ul>
-      <li>発揮値の強調判定を強化。</li>
-      <li>道場データ取得時のエラー処理を強化。</li>
+      <li>ユニット名の数値を守発揮値として扱うように変更。</li>
+      <li>「休業中っぽい道場を表示しない」設定を追加。</li>
+      <li>「表示中の道場数」を実際に表示されている数へ変更。</li>
+      <li>プログラムを大幅に変更したので、動作がおかしくなってるかも。</li>
     </ul>
     <section>
       <p>
@@ -122,40 +124,16 @@
     <p>次の誕生日は{{ birthdayNext }}</p>
   </section>
 
-  <section id="toast" class="info {{ class }}" ng-controller="ToastController" ng-show="message">
+  <section id="toast" class="info {{ class }}" ng-controller="ToastController" ng-show="visible">
     <button type="button" class="close" ng-click="close()"><i class="fa fa-close"></i></button>
     <div ng-class="{ undo: callback }" ng-click="onclick()" ng-bind-html="message"></div>
   </section>
 
   <section id="mobamasMenu" ng-show="$storage.showMobamasMenu">
-    <a ng-show="$storage.showMobamasMenuItem.myPage" class="btn" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fmypage">ﾏｲｽﾀｼﾞｵ</a>
-    <a ng-show="$storage.showMobamasMenuItem.petitCg" class="btn" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fpetit_cg">ぷちﾃﾞﾚﾗ</a>
-    <a ng-show="$storage.showMobamasMenuItem.gacha" class="btn" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fgacha">ｶﾞﾁｬ</a>
-    <a ng-show="$storage.showMobamasMenuItem.cardStr" class="btn" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fcard_str">ﾚｯｽﾝ</a>
-    <a ng-show="$storage.showMobamasMenuItem.auction" class="btn" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fauction%2Fauction_top">ﾌﾘｰﾄﾚｰﾄﾞ</a>
-    <a ng-show="$storage.showMobamasMenuItem.quests" class="btn" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fquests">お仕事</a>
-    <a ng-show="$storage.showMobamasMenuItem.battles" class="btn" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fbattles">LIVEﾊﾞﾄﾙ</a>
-    <a ng-show="$storage.showMobamasMenuItem.cardUnion" class="btn" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fcard_union">特訓</a>
-    <a ng-show="$storage.showMobamasMenuItem.shop" class="btn" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fshop%2Findex">ｼｮｯﾌﾟ</a>
-    <a ng-show="$storage.showMobamasMenuItem.item" class="btn" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fitem%2Findex">ｱｲﾃﾑ</a>
-    <a ng-show="$storage.showMobamasMenuItem.present" class="btn" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fpresent%2Frecieve%2F%3Fview_auth_type%3D1%26cache%3D1">贈り物</a>
-    <a ng-show="$storage.showMobamasMenuItem.cardList" class="btn" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fcard_list%2Findex">ｱｲﾄﾞﾙ一覧</a>
-    <a ng-show="$storage.showMobamasMenuItem.tradeResponse" class="btn" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Ftrade_response%2Ftrade_list_advance">ﾄﾚｰﾄﾞ</a>
-    <a ng-show="$storage.showMobamasMenuItem.deck" class="btn" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fdeck%2Findex">編成</a>
-    <a ng-show="$storage.showMobamasMenuItem.exchange" class="btn" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fexchange%2Fmedal_list%2F999999">交換</a>
-    <a ng-show="$storage.showMobamasMenuItem.cardStorage" class="btn" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fcard_storage%2Findex">女子寮</a>
-    <a ng-show="$storage.showMobamasMenuItem.rareParts" class="btn" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Frareparts%2Findex">衣装</a>
-    <a ng-show="$storage.showMobamasMenuItem.friend" class="btn" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Ffriend%2Findex">お気に入り</a>
-    <a ng-show="$storage.showMobamasMenuItem.wish" class="btn" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fwish%2Findex">ﾎｼｲﾓﾉ</a>
-    <a ng-show="$storage.showMobamasMenuItem.archive" class="btn" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Farchive%2Findex">ｱﾙﾊﾞﾑ</a>
-    <a ng-show="$storage.showMobamasMenuItem.pRankingAward" class="btn" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fp_ranking_award">PRA</a>
-    <a ng-show="$storage.showMobamasMenuItem.results" class="btn" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fresults">ﾌﾟﾛﾌｨｰﾙ</a>
-    <a ng-show="$storage.showMobamasMenuItem.gallery" class="btn" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fgallery">ｱｲﾄﾞﾙｷﾞｬﾗﾘｰ</a>
-    <a ng-show="$storage.showMobamasMenuItem.memory" class="btn" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fmemory">ｲﾍﾞﾝﾄﾒﾓﾘｰ</a>
-    <a ng-show="$storage.showMobamasMenuItem.sBooth" class="btn" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fs_booth">ｻｳﾝﾄﾞﾌﾞｰｽ</a>
-    <a ng-show="$storage.showMobamasMenuItem.personalOption" class="btn" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fpersonal_option">設定</a>
-    <a ng-show="$storage.showMobamasMenuItem.advise" class="btn" href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fadvise%2Findex%2Ftop">ﾍﾙﾌﾟ</a>
-    <a ng-show="$storage.showMobamasMenuItem.top" class="btn" href="http://sp.pf.mbga.jp/12008305/">ﾄｯﾌﾟ</a>
+    <a ng-repeat="item in ui.mobamasMenu"
+       ng-show="$storage.showMobamasMenuItem[item.key]"
+       ng-bind-html="item.label" class="btn"
+       href="http://sp.pf.mbga.jp/12008305/{{ item.url }}"></a>
   </section>
 
   <section id="viewSettings">
@@ -182,23 +160,7 @@
       </section>
       <section>
         一度に表示する道場数: 最大
-        <select ng-model="$storage.view.limitTo">
-          <option value="5">5</option>
-          <option value="10">10</option>
-          <option value="20">20</option>
-          <option value="30">30</option>
-          <option value="40">40</option>
-          <option value="50">50</option>
-          <option value="60">60</option>
-          <option value="70">70</option>
-          <option value="80">80</option>
-          <option value="90">90</option>
-          <option value="100">100</option>
-          <option value="200">200</option>
-          <option value="300">300</option>
-          <option value="400">400</option>
-          <option value="500">500</option>
-        </select>
+        <select ng-model="$storage.view.limitTo" ng-options="item for item in ui.limitTo"></select>
         件
       </section>
       <section>
@@ -210,87 +172,21 @@
       </section>
       <section>
         ランク:
-        <select ng-model="$storage.view.rankRange.min">
-          <option value="10">S5</option>
-          <option value="9">S4</option>
-          <option value="8">S3</option>
-          <option value="7">SS</option>
-          <option value="6">S</option>
-          <option value="5">A</option>
-          <option value="4">B</option>
-          <option value="3">C</option>
-          <option value="2">D</option>
-          <option value="1">E</option>
-          <option value="0">無制限</option>
-        </select>
+        <select ng-model="$storage.view.rankRange.min" ng-options="item.value as item.label for item in ui.rankRangeMin"></select>
         ～
-        <select ng-model="$storage.view.rankRange.max">
-          <option value="-1">無制限</option>
-          <option value="10">S5</option>
-          <option value="9">S4</option>
-          <option value="8">S3</option>
-          <option value="7">SS</option>
-          <option value="6">S</option>
-          <option value="5">A</option>
-          <option value="4">B</option>
-          <option value="3">C</option>
-          <option value="2">D</option>
-          <option value="1">E</option>
-          <option value="0">F</option>
-        </select>
+        <select ng-model="$storage.view.rankRange.max" ng-options="item.value as item.label for item in ui.rankRangeMax"></select>
       </section>
       <section>
         レベル:
-        <select ng-model="$storage.view.levelRange.min">
-          <option value="350">350</option>
-          <option value="300">300</option>
-          <option value="250">250</option>
-          <option value="200">200</option>
-          <option value="150">150</option>
-          <option value="100">100</option>
-          <option value="50">50</option>
-          <option value="0">無制限</option>
-        </select>
+        <select ng-model="$storage.view.levelRange.min" ng-options="item.value as item.label for item in ui.levelRangeMin"></select>
         ～
-        <select ng-model="$storage.view.levelRange.max">
-          <option value="-1">無制限</option>
-          <option value="350">350</option>
-          <option value="300">300</option>
-          <option value="250">250</option>
-          <option value="200">200</option>
-          <option value="150">150</option>
-          <option value="100">100</option>
-          <option value="50">50</option>
-          <option value="0">0</option>
-        </select>
+        <select ng-model="$storage.view.levelRange.max" ng-options="item.value as item.label for item in ui.levelRangeMax"></select>
       </section>
       <section>
         守発揮値:
-        <select ng-model="$storage.view.defenseRange.min">
-          <option value="7000">7000</option>
-          <option value="6000">6000</option>
-          <option value="5000">5000</option>
-          <option value="4000">4000</option>
-          <option value="3000">3000</option>
-          <option value="2000">2000</option>
-          <option value="1700">1700</option>
-          <option value="1600">1600</option>
-          <option value="1500">1500</option>
-          <option value="0">無制限</option>
-        </select>
+        <select ng-model="$storage.view.defenseRange.min" ng-options="item.value as item.label for item in ui.defenseRangeMin"></select>
         ～
-        <select ng-model="$storage.view.defenseRange.max">
-          <option value="-1">無制限</option>
-          <option value="7000">7000</option>
-          <option value="6000">6000</option>
-          <option value="5000">5000</option>
-          <option value="4000">4000</option>
-          <option value="3000">3000</option>
-          <option value="2000">2000</option>
-          <option value="1700">1700</option>
-          <option value="1600">1600</option>
-          <option value="1500">1500</option>
-        </select>
+        <select ng-model="$storage.view.defenseRange.max" ng-options="item.value as item.label for item in ui.defenseRangeMax"></select>
       </section>
       <section>
         <label>
@@ -299,8 +195,16 @@
       </section>
       <section>
         <label>
-          <input type="checkbox" ng-model="$storage.emphasizedView"> 作業中や発揮値っぽい物を強調する
+          <input type="checkbox" ng-model="$storage.emphasizedView"> 休業中や発揮値っぽい物を強調する
         </label>
+      </section>
+      <section>
+        <label>
+          <input type="checkbox" ng-model="$storage.hidePausedDojo"> 休業中っぽい道場を表示しない
+        </label>
+        <small>
+          ※ ユニット名に「休業」等が入っている道場
+        </small>
       </section>
       <section>
         <a class="btn" href="settings.html"><i class="fa fa-cog"></i> その他の設定</a>
@@ -309,7 +213,7 @@
   </section>
 
   <section class="info-small">
-    <p><small>全道場数: {{ dojos.length }} 件 / 表示中: {{ $storage.view.limitTo }} 件 / 訪問済: {{ $storage.visited | keylength }} 件</small></p>
+    <p><small>全道場数: {{ dojos.length }} 件 / 表示中: {{ filtered.length }} 件 / 訪問済: {{ $storage.visited | keyLength }} 件</small></p>
   </section>
 
   <section>
@@ -321,12 +225,12 @@
          data-ad-format="auto"></ins>
   </section>
 
-  <section id="dojos" ng-init="init()" ng-class="{ extendedView: $storage.extendedView, emphasizedView: $storage.emphasizedView }">
-    <div class="btn block dojo" ng-class="dojoClass(dojo)" ng-repeat="dojo in dojos | orderBy: ORDER_BY[$storage.view.orderBy] | filter: dojoFilter | limitTo : $storage.view.limitTo">
+  <section id="dojos" ng-class="{ extendedView: $storage.extendedView, emphasizedView: $storage.emphasizedView }">
+    <div class="btn block dojo" ng-class="dojoClass(dojo)" ng-repeat="dojo in filtered = (dojos | orderBy: ORDER_BY[$storage.view.orderBy] | filter: dojoFilter | limitTo : $storage.view.limitTo)">
       <a ng-click="onClickDojoLink(dojo)" class="dojo-link"
          href="{{ $storage.dojoLinkUrl }}{{ dojo.id }}"
          target="{{ $storage.dojoLinkTarget }}"><span class="detail">{{ dojo.lv }} {{ RANK[dojo.rank] }} <span class="unit" ng-bind-html="dojo.htmlUnit"></span></span><span class="defense">{{ dojo.defense }}</span>
-        <div class="extraInfo" ng-show="$storage.extendedView">
+        <div class="extraInfo">
           <div>ﾘｰﾀﾞｰ：<span ng-bind-html="dojo.leader"></span></div>
           <div>ｺﾒﾝﾄ：<span ng-bind-html="dojo.comment"></span></div>
           <div>最終取得：<span am-time-ago="dojo.lastUpdate" am-preprocess="unix"></span></div>
