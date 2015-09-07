@@ -251,15 +251,21 @@ a {
 .info-small {
   padding: 4px 12px; }
 
-.well {
+.well,
+blockquote {
   padding: 20px;
   background-color: #f5faff;
   border: 1px solid #a9d4ff; }
   @media screen and (max-width: 768px) {
-    .well {
+    .well,
+    blockquote {
       padding: 7px; } }
-  .well :first-child {
+  .well :first-child,
+  blockquote :first-child {
     margin-top: 0; }
+  .well :last-child,
+  blockquote :last-child {
+    margin-bottom: 0; }
 
 .center-block {
   display: block;
