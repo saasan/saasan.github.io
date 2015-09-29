@@ -67,31 +67,20 @@
     </section>
   </section>
 
-  <section id="versionedInfo" class="info" ng-init="infoVersion = 15" ng-show="infoVersion > $storage.infoVersion">
+  <section id="versionedInfo" class="info" ng-init="infoVersion = 16" ng-show="infoVersion > $storage.infoVersion">
     <button type="button" class="close" ng-click="$storage.infoVersion = infoVersion"><i class="fa fa-close"></i></button>
     <h3>お知らせ</h3>
 
-    <h4>2015/06/25 変更点</h4>
-    <ul>
-      <li>ユニット名の数値を守発揮値として扱うように変更。</li>
-      <li>「休業中っぽい道場を表示しない」設定を追加。</li>
-      <li>「表示中の道場数」を実際に表示されている数へ変更。</li>
-      <li>プログラムを大幅に変更したので、動作がおかしくなってるかも。</li>
-    </ul>
+    <h4>今日のトレチケタイム</h4>
     <section>
       <p>
-        なにかあれば
-        <a href="https://twitter.com/saasan" target="_blank">カガミ (@saasan)</a>
-        へどうぞ。
+        今日のトレチケタイムを表示するだけのページを作りました。
       </p>
-    </section>
-
-    <h4>振り分けpt計算機</h4>
-    <section>
+      <p><a class="btn block" href="/imas/trainer-ticket-time/" target="_blank"><i class="fa fa-arrow-right"></i> 今日のトレチケタイム</a></p>
       <p>
-        振り分けpt計算機作りました。「振り分けptリセット券」による振り直しを試せます。
+        Twitterにて「トレチケタイムお知らせbot」も稼働中です。
       </p>
-      <p><a class="btn block" href="/mobamas-status-pt/" target="_blank"><i class="fa fa-arrow-right"></i> モバマス振り分けpt計算機</a></p>
+      <p><a class="btn block" href="https://twitter.com/TrainerTicket" target="_blank"><i class="fa fa-arrow-right"></i> トレチケタイムお知らせbot</a></p>
     </section>
 
     <h4>招待IDキャンペーンで水野翠GET!!</h4>
