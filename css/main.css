@@ -46,6 +46,24 @@ a {
   a:hover {
     text-decoration: underline; }
 
+table.border {
+  border-collapse: collapse; }
+  table.border th, table.border td {
+    border: 1px solid #828282;
+    padding: 5px; }
+
+/* trainer-ticket-time */
+.ttt th, .ttt td {
+  text-align: center; }
+.ttt .group-a {
+  background-color: #fce4ec; }
+.ttt .group-b {
+  background-color: #e3f2fd; }
+.ttt .group-c {
+  background-color: #fffde7; }
+.ttt .group-d {
+  background-color: #e8f5e9; }
+
 .wrapper {
   max-width: 920px;
   margin-right: auto;
