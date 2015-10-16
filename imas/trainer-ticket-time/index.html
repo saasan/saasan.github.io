@@ -114,8 +114,36 @@
   </p>
 </section>
 
+<section id="sunday" style="display: none;">
+  <p>ススメオトメ：全タイプ</p>
+  <p>ボーナスデー：共通アイテム &amp; マニー2倍</p>
+</section>
+<section id="monday" style="display: none;">
+  <p>ススメオトメ：全タイプ</p>
+  <p>ボーナスデー：全属性アイテム</p>
+</section>
+<section id="tuesday" style="display: none;">
+  <p>ススメオトメ：全タイプ</p>
+  <p>ボーナスデー：共通アイテム(ドレス、靴)</p>
+</section>
+<section id="wednesday" style="display: none;">
+  <p>ススメオトメ：キュート</p>
+  <p>ボーナスデー：キュートアイテム</p>
+</section>
+<section id="thursday" style="display: none;">
+  <p>ススメオトメ：クール</p>
+  <p>ボーナスデー：クールアイテム</p>
+</section>
+<section id="friday" style="display: none;">
+  <p>ススメオトメ：パッション</p>
+  <p>ボーナスデー：パッションアイテム</p>
+</section>
+<section id="saturday" style="display: none;">
+  <p>ススメオトメ：全タイプ</p>
+  <p>ボーナスデー：全属性アイテム &amp; マニー2倍</p>
+</section>
+
 <section id="pattern-a" class="ttt" style="display: none;">
-  <h3>パターンA</h3>
   <table class="border">
     <tr><th>時</th><th>グループ</th></tr>
     <tr><td>8</td><td class="group-a">A、E</td></tr>
@@ -134,7 +162,6 @@
 </section>
 
 <section id="pattern-b" class="ttt" style="display: none;">
-  <h3>パターンB</h3>
   <table class="border">
     <tr><th>時</th><th>グループ</th></tr>
     <tr><td>8</td><td class="group-d">D、H</td></tr>
@@ -153,7 +180,6 @@
 </section>
 
 <section id="pattern-c" class="ttt" style="display: none;">
-  <h3>パターンC</h3>
   <table class="border">
     <tr><th>時</th><th>グループ</th></tr>
     <tr><td>8</td><td class="group-c">C、G</td></tr>
@@ -172,7 +198,6 @@
 </section>
 
 <section id="pattern-d" class="ttt" style="display: none;">
-  <h3>パターンD</h3>
   <table class="border">
     <tr><th>時</th><th>グループ</th></tr>
     <tr><td>8</td><td class="group-b">B、F</td></tr>
@@ -195,6 +220,15 @@
       MS_SEPTEMBER7 = (new Date(2015, SEPTEMBER, 7)).getTime(),
       MS_ONE_DAY = 24 * 60 * 60 * 1000,
       ID = ['pattern-a', 'pattern-b', 'pattern-c', 'pattern-d'];
+  var WEEKDAY = [
+    'sunday',
+    'monday',
+    'tuesday',
+    'wednesday',
+    'thursday',
+    'friday',
+    'saturday'
+  ];
 
   function getPattern(date) {
     var msDate = date.getTime();
@@ -204,8 +238,13 @@
     return pattern;
   }
 
-  var pattern = getPattern(new Date());
-  var section = document.getElementById(ID[pattern]);
+  var section, now = new Date();
+
+  var pattern = getPattern(now);
+  section = document.getElementById(ID[pattern]);
+  section.style.display = '';
+
+  section = document.getElementById(WEEKDAY[now.getDay()]);
   section.style.display = '';
 </script>
 
