@@ -9,11 +9,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
   
 
-  <title>SideM風会話ジェネレータ</title>
+  <title>デレステ楽曲検索</title>
 
   <link href='http://fonts.googleapis.com/css?family=Orbitron:500' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="http://saasan.github.io/css/main.css">
-  <link rel="canonical" href="http://saasan.github.io/sidem-mydesk/">
+  <link rel="canonical" href="http://saasan.github.io/imas/sl-stage-songs-search/">
   <link rel="alternate" type="application/rss+xml" title="saasan.github.io" href="http://saasan.github.io/feed.xml" />
   <link rel="apple-touch-icon" href="http://saasan.github.io/img/s2works_favicon.png">
 
@@ -93,86 +93,116 @@
         <div class="post">
 
   <header class="post-header">
-    <h1 class="post-title">SideM風会話ジェネレータ</h1>
+    <h1 class="post-title">デレステ楽曲検索</h1>
   </header>
 
   <article class="post-content">
-    <noscript>JavaScriptを有効にして下さい。</noscript>
+    <div ng-app="slStageSongsSearch" ng-controller="MainController">
+  <p>
+    <a href="http://cinderella.idolmaster.jp/sl-stage/" target="_blank">アイドルマスター シンデレラガールズ スターライトステージ</a>
+    (デレステ) の楽曲を、消費スタミナ、獲得経験値、親愛度などから探せます。
+    「レベルアップに必要なスタミナが知りたい」「親愛度MAXに必要なスタミナが知りたい」「残っているスタミナを使い切れる曲を探したい」
+    といった用途にどうぞ。
+  </p>
 
-<p>
-  <a href="http://side-m.idolmaster.jp/" target="_blank">アイドルマスター SideM</a>
-  にある、マイデスクでアイドル同士が会話するシステム。あれが
-  <a href="http://www.bandainamcogames.co.jp/cs/list/idolmaster/social_m/" target="_blank">シンデレラガールズ</a>
-  や
-  <a href="http://www.bandainamcogames.co.jp/cs/list/idolmaster/million_live/" target="_blank">ミリオンライブ！</a>
-  にもあったらなぁ…。ということで作ってみた。
-</p>
-
-<section>
-  <h4>遊び方</h4>
-  <ol>
-    <li>名前と台詞を入力します。</li>
-    <li>
-      <div>各コマに画像ファイルをドラッグアンドドロップで入れます。</div>
-      <div><small>画像ファイルは、パソコンに保存されているものが使えます。</small></div>
-    </li>
-    <li>各コマをドラッグして画像の位置を調整します。</li>
-    <li>各コマの上でマウスホイールを動かして画像を拡大/縮小します。</li>
-    <li>完成したら「保存用画像を出力する」ボタンを押します。</li>
-    <li>出てきた画像を右クリックして保存します。</li>
-    <li>画像とハッシュタグ「#SideM風会話」を付けてツイートすると<a href="http://twitter.com/saasan" target="_blank">作者</a>が喜びます！</li>
-  </ol>
-</section>
-
-<section>
-  <h4>動作環境</h4>
-  <ul>
-    <li>パソコン用です。</li>
-    <li>Internet Explorer 11、Mozilla Firefox 27、Google Chrome 33で動作する事を確認しています。</li>
-    <li>Internet Explorer 9で動作しない事を確認しています。</li>
-  </ul>
-</section>
-
-<section>
   <fieldset>
-    <legend>上の人</legend>
+    <legend>検索</legend>
+
     <label>
-      名前
-      <input type="text" class="name" data-number="0">
+      難易度：
+      <select ng-model="$storage.songFilterDifficulty" ng-options="hash.value as hash.label for hash in songDifficultyList">
+        <option value="">-</option>
+      </select>
     </label>
+
     <label>
-      台詞
-      <input type="text" class="line" data-number="0">
+      タイプ：
+      <select ng-model="$storage.songFilterType" ng-options="hash.value as hash.label for hash in songTypeList">
+        <option value="">-</option>
+      </select>
+    </label>
+
+    <label>
+      楽曲Lv：
+      <select ng-model="$storage.songFilterLevel" ng-options="value for value in songLvList">
+        <option value="">-</option>
+      </select>
+    </label>
+
+    <label>
+      スタミナ：
+      <select ng-model="$storage.songFilterStamina" ng-options="value for value in songStaminaList">
+        <option value="">-</option>
+      </select>
+    </label>
+
+    <label>
+      経験値：
+      <select ng-model="$storage.songFilterExp" ng-options="value for value in songExpList">
+        <option value="">-</option>
+      </select>
+    </label>
+
+    <label>
+      親愛度：
+      <select ng-model="$storage.songFilterAffection" ng-options="value for value in songAffectionList">
+        <option value="">-</option>
+      </select>
     </label>
   </fieldset>
 
   <fieldset>
-    <legend>下の人</legend>
+    <legend>表示</legend>
+
     <label>
-      名前
-      <input type="text" class="name" data-number="1">
+      <input type="checkbox" ng-model="$storage.showSongDifficulty"> 難易度
     </label>
     <label>
-      台詞
-      <input type="text" class="line" data-number="1">
+      <input type="checkbox" ng-model="$storage.showSongType"> タイプ
+    </label>
+    <label>
+      <input type="checkbox" ng-model="$storage.showSongLevel"> 楽曲Lv
+    </label>
+    <label>
+      <input type="checkbox" ng-model="$storage.showSongStamina"> スタミナ
+    </label>
+    <label>
+      <input type="checkbox" ng-model="$storage.showSongExp"> 経験値
+    </label>
+    <label>
+      <input type="checkbox" ng-model="$storage.showSongAffection"> 親愛度
     </label>
   </fieldset>
-</section>
 
-<section class="well">
-  <p><canvas id="sidem-mydesk" width="640" height="586" class="center-block">canvasに対応したブラウザーでご覧下さい。</canvas></p>
-  <p><button id="output" class="center-block">↓保存用画像を出力する↓</button></p>
-  <p id="result"></p>
-</section>
+  <table>
+    <thead>
+      <tr>
+        <th>タイトル</th>
+        <th ng-show="$storage.showSongDifficulty">難易度</th>
+        <th ng-show="$storage.showSongType">タイプ</th>
+        <th ng-show="$storage.showSongLevel">楽曲Lv</th>
+        <th ng-show="$storage.showSongStamina">スタミナ</th>
+        <th ng-show="$storage.showSongExp">経験値</th>
+        <th ng-show="$storage.showSongAffection">親愛度</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="song in songs | filter: songFilter">
+        <td data-label="タイトル" ng-bind="song.title"></td>
+        <td data-label="難易度" ng-show="$storage.showSongDifficulty" ng-bind="songDifficulty[song.difficulty]"></td>
+        <td data-label="タイプ" ng-show="$storage.showSongType" ng-bind="songType[song.type]"></td>
+        <td data-label="楽曲Lv" ng-show="$storage.showSongLevel" ng-bind="song.lv"></td>
+        <td data-label="スタミナ" ng-show="$storage.showSongStamina" ng-bind="songLv[song.lv].stamina"></td>
+        <td data-label="経験値" ng-show="$storage.showSongExp" ng-bind="songLv[song.lv].exp"></td>
+        <td data-label="親愛度" ng-show="$storage.showSongAffection" ng-bind="songLv[song.lv].affection"></td>
+      </tr>
+    </tbody>
+  </table>
 
-<section>
-  <a class="twitter-timeline" data-dnt="true" href="https://twitter.com/search?q=%23SideM%E9%A2%A8%E4%BC%9A%E8%A9%B1"  data-widget-id="442248991078490114">Tweets about "#SideM風会話"</a>
-</section>
-
-<script src="js/sidem-mydesk.js"></script>
-<script src="js/sidem-mydesk-ui.js"></script>
-<script src="js/init.js"></script>
-<script async src="//platform.twitter.com/widgets.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
+  <script src="/js/ngStorage.min.js"></script>
+  <script src="./sl-stage-songs-search.js"></script>
+</div>
 
   </article>
 

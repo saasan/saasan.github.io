@@ -316,6 +316,53 @@ div[ng-app="mobamasStatusPt"] p.em, div[ng-app="mobamasStatusPt"] em {
   font-style: normal; }
 
 /*
+* デレステ楽曲検索用スタイル
+*/
+div[ng-app="slStageSongsSearch"] {
+  /* 偶数行の背景に色を付ける */ }
+  div[ng-app="slStageSongsSearch"] label {
+    margin-right: 10px;
+    /* ラベルとフォーム要素の途中で改行しない */
+    white-space: nowrap; }
+  div[ng-app="slStageSongsSearch"] tr:nth-child(even) {
+    background-color: aliceblue; }
+  div[ng-app="slStageSongsSearch"] table {
+    box-sizing: border-box;
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #e8e8e8;
+    padding: 0;
+    margin: 0; }
+    div[ng-app="slStageSongsSearch"] table tr {
+      border: 1px solid #ddd; }
+    div[ng-app="slStageSongsSearch"] table th, div[ng-app="slStageSongsSearch"] table td {
+      padding: 7px;
+      text-align: center; }
+  @media screen and (max-width: 768px) {
+    div[ng-app="slStageSongsSearch"] table {
+      border: 0;
+      /* 偶数行の背景色を消す */ }
+      div[ng-app="slStageSongsSearch"] table thead {
+        display: none; }
+      div[ng-app="slStageSongsSearch"] table tr {
+        margin-bottom: 14px;
+        padding: 5px;
+        display: block;
+        border-bottom: 2px solid #ddd; }
+      div[ng-app="slStageSongsSearch"] table tr:nth-child(even) {
+        background-color: inherit; }
+      div[ng-app="slStageSongsSearch"] table td {
+        display: block;
+        text-align: right;
+        border-bottom: 1px dotted #e8e8e8; }
+        div[ng-app="slStageSongsSearch"] table td:last-child {
+          border-bottom: 0; }
+        div[ng-app="slStageSongsSearch"] table td:before {
+          content: attr(data-label);
+          float: left;
+          font-weight: bold; } }
+
+/*
  * トップページ用スタイル
  */
 .top-page, .top-page body {
