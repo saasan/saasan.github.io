@@ -5,9 +5,27 @@
     <description></description>
     <link>http://saasan.github.io/</link>
     <atom:link href="http://saasan.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 16 Nov 2015 20:50:02 +0900</pubDate>
-    <lastBuildDate>Mon, 16 Nov 2015 20:50:02 +0900</lastBuildDate>
+    <pubDate>Tue, 17 Nov 2015 18:39:45 +0900</pubDate>
+    <lastBuildDate>Tue, 17 Nov 2015 18:39:45 +0900</lastBuildDate>
     <generator>Jekyll v2.5.3</generator>
+    
+      <item>
+        <title>「デレステ楽曲検索」更新</title>
+        <description>&lt;p&gt;「&lt;a href=&quot;/imas/sl-stage-songs-search/&quot;&gt;デレステ楽曲検索&lt;/a&gt;」
+を更新しました。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;「Trancing Pulse」追加&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Tue, 17 Nov 2015 18:36:21 +0900</pubDate>
+        <link>http://saasan.github.io/update/2015/11/17/update-sl-stage-songs-search.html</link>
+        <guid isPermaLink="true">http://saasan.github.io/update/2015/11/17/update-sl-stage-songs-search.html</guid>
+        
+        
+        <category>update</category>
+        
+      </item>
     
       <item>
         <title>「デレステ楽曲検索」更新</title>
