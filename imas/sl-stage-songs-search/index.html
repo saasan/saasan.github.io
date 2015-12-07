@@ -1,313 +1,192 @@
 <!DOCTYPE html>
 <html lang="ja">
-
   <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
-  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-  
-
-  <title>デレステ楽曲検索</title>
-
-  <link href='http://fonts.googleapis.com/css?family=Orbitron:500' rel='stylesheet' type='text/css'>
-  <link rel="stylesheet" href="http://saasan.github.io/css/main.css">
-  <link rel="canonical" href="http://saasan.github.io/imas/sl-stage-songs-search/">
-  <link rel="alternate" type="application/rss+xml" title="saasan.github.io" href="http://saasan.github.io/feed.xml" />
-  <link rel="apple-touch-icon" href="http://saasan.github.io/img/s2works_favicon.png">
-
-  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-</head>
-
-
+    <title>デレステ楽曲検索</title>
+    <link href='http://fonts.googleapis.com/css?family=Orbitron:500' rel='stylesheet' type='text/css'>
+    <link type="text/css" rel="stylesheet" href="/assets/main-206ddb3503187305cc6c64394f189e456d02cea91a6b6869dda59cb163d08862.css">
+    <link rel="canonical" href="http://saasan.github.io/imas/sl-stage-songs-search/">
+    <link rel="alternate" type="application/rss+xml" title="saasan.github.io" href="http://saasan.github.io/feed.xml" />
+    <link rel="apple-touch-icon" href="http://saasan.github.io/img/s2works_favicon.png">
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script async src="/js/init.js"></script>
+  </head>
   <body>
-
     <header class="site-header">
-
-  <div class="wrapper">
-
-    <a class="site-title" href="/">saasan.github.io</a>
-
-    <nav class="site-nav">
-      <a href="#" class="menu-icon">
-        <svg viewBox="0 0 24 20">
-          <path fill="#424242" d="m 0,0 24,0 0,4 -24,0 z"/>
-          <path fill="#424242" d="m 0,8 24,0 0,4 -24,0 z"/>
-          <path fill="#424242" d="m 0,16 24,0 0,4 -24,0 z"/>
-        </svg>
-      </a>
-
-      <div class="trigger">
-        
-          
-        
-          
-            <a class="page-link" href="/imas/">アイマス関連</a>
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-            <a class="page-link" href="/logs.html">Logs</a>
-          
-        
-          
-        
-          
-            <a class="page-link" href="/script/pixiv-tags.html">pixiv Tags</a>
-          
-        
-          
-            <a class="page-link" href="/software/pso2utility.html">PSO2Utility</a>
-          
-        
-          
-        
+      <div class="wrapper">
+        <a class="site-title" href="/">saasan.github.io</a>
+        <nav class="site-nav">
+          <div class="site-nav-contents">
+            <ul>
+              <li><a href="/blog/">Blog</a></li>
+              <li><a href="/imas/">アイマス</a></li>
+              <li><a href="/script/pixiv-tags.html">pixiv Tags</a></li>
+              <li><a href="/software/pso2utility.html">PSO2Utility</a></li>
+            </ul>
+          </div>
+        </nav>
       </div>
-    </nav>
-
-  </div>
-
-</header>
-
-
+    </header>
     <div class="wrapper">
-  <!-- saasan.github.io レスポンシブ -->
-  <ins class="adsbygoogle"
+      <!-- saasan.github.io レスポンシブ -->
+      <ins class="adsbygoogle"
        style="display:block"
        data-ad-client="ca-pub-0141905477316976"
        data-ad-slot="5633684976"
        data-ad-format="auto"></ins>
-</div>
-
-
+    </div>
     <div class="page-content">
       <div class="wrapper">
         <div class="post">
-
-  <header class="post-header">
-    <h1 class="post-title">デレステ楽曲検索</h1>
-  </header>
-
-  <article class="post-content">
-    <div ng-app="slStageSongsSearch" ng-controller="MainController">
-  <section class="info">
-    <p>
-      <a href="http://cinderella.idolmaster.jp/sl-stage/" target="_blank">アイドルマスター シンデレラガールズ スターライトステージ</a>
-      (デレステ) の楽曲一覧から、消費スタミナ、獲得経験値、親愛度などで曲を探せます。
+          <header class="post-header">
+            <h1 class="post-title">デレステ楽曲検索</h1>
+            <div class="post-meta">2015/11/16</div>
+          </header>
+          <article class="post-content">
+            <div ng-app="slStageSongsSearch" ng-controller="MainController">
+              <section class="info">
+                <p>
+                  <a href="http://cinderella.idolmaster.jp/sl-stage/" target="_blank">アイドルマスター シンデレラガールズ スターライトステージ</a>
+                  (デレステ) の楽曲一覧から、消費スタミナ、獲得経験値、親愛度などで曲を探せます。
     </p>
-    <p>
-      「レベルアップに必要なスタミナが知りたい」「親愛度MAXに必要なスタミナが知りたい」「残っているスタミナを使い切れる曲を探したい」
+                <p>
+                  「レベルアップに必要なスタミナが知りたい」「親愛度MAXに必要なスタミナが知りたい」「残っているスタミナを使い切れる曲を探したい」
       といった用途にどうぞ。
     </p>
-
-    <h4>2015/11/17 更新</h4>
-    <ul>
-      <li>「Trancing Pulse」追加</li>
-    </ul>
-
-    <h4>2015/11/16 更新</h4>
-    <ul>
-      <li>「ヴィーナスシンドローム」、「Romantic Now」が抜けていたので修正</li>
-      <li>楽曲データの読み込み方法を変更</li>
-    </ul>
-  </section>
-
-  <section class="error" ng-show="errorMessage">
-    <p ng-bind="errorMessage"></p>
-  </section>
-
-  <fieldset>
-    <legend>検索</legend>
-
-    <label>
-      難易度：
-      <select ng-model="$storage.songFilterDifficulty" ng-options="hash.value as hash.label for hash in songDifficultyList">
-        <option value="">-</option>
-      </select>
-    </label>
-
-    <label>
-      タイプ：
-      <select ng-model="$storage.songFilterType" ng-options="hash.value as hash.label for hash in songTypeList">
-        <option value="">-</option>
-      </select>
-    </label>
-
-    <label>
-      楽曲Lv：
-      <select ng-model="$storage.songFilterLevel" ng-options="value for value in songLvList">
-        <option value="">-</option>
-      </select>
-    </label>
-
-    <label>
-      スタミナ：
-      <select ng-model="$storage.songFilterStamina" ng-options="value for value in songStaminaList">
-        <option value="">-</option>
-      </select>
-    </label>
-
-    <label>
-      経験値：
-      <select ng-model="$storage.songFilterExp" ng-options="value for value in songExpList">
-        <option value="">-</option>
-      </select>
-    </label>
-
-    <label>
-      親愛度：
-      <select ng-model="$storage.songFilterAffection" ng-options="value for value in songAffectionList">
-        <option value="">-</option>
-      </select>
-    </label>
-  </fieldset>
-
-  <fieldset>
-    <legend>表示</legend>
-
-    <label>
-      <input type="checkbox" ng-model="$storage.showSongDifficulty"> 難易度
-    </label>
-    <label>
-      <input type="checkbox" ng-model="$storage.showSongType"> タイプ
-    </label>
-    <label>
-      <input type="checkbox" ng-model="$storage.showSongLevel"> 楽曲Lv
-    </label>
-    <label>
-      <input type="checkbox" ng-model="$storage.showSongStamina"> スタミナ
-    </label>
-    <label>
-      <input type="checkbox" ng-model="$storage.showSongExp"> 経験値
-    </label>
-    <label>
-      <input type="checkbox" ng-model="$storage.showSongAffection"> 親愛度
-    </label>
-  </fieldset>
-
-  <table>
-    <thead>
-      <tr>
-        <th>タイトル</th>
-        <th ng-show="$storage.showSongDifficulty">難易度</th>
-        <th ng-show="$storage.showSongType">タイプ</th>
-        <th ng-show="$storage.showSongLevel">楽曲Lv</th>
-        <th ng-show="$storage.showSongStamina">スタミナ</th>
-        <th ng-show="$storage.showSongExp">経験値</th>
-        <th ng-show="$storage.showSongAffection">親愛度</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr ng-repeat="song in songs | filter: songFilter">
-        <td data-label="タイトル" ng-bind="song.title"></td>
-        <td data-label="難易度" ng-show="$storage.showSongDifficulty" ng-bind="songDifficulty[song.difficulty]"></td>
-        <td data-label="タイプ" ng-show="$storage.showSongType" ng-bind="songType[song.type]"></td>
-        <td data-label="楽曲Lv" ng-show="$storage.showSongLevel" ng-bind="song.lv"></td>
-        <td data-label="スタミナ" ng-show="$storage.showSongStamina" ng-bind="songLv[song.lv].stamina"></td>
-        <td data-label="経験値" ng-show="$storage.showSongExp" ng-bind="songLv[song.lv].exp"></td>
-        <td data-label="親愛度" ng-show="$storage.showSongAffection" ng-bind="songLv[song.lv].affection"></td>
-      </tr>
-    </tbody>
-  </table>
-
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
-  <script src="/js/ngStorage.min.js"></script>
-  <script src="./sl-stage-songs-search.js"></script>
-</div>
-
-  </article>
-
-</div>
-
+                <h4>2015/11/17 更新</h4>
+                <ul>
+                  <li>「Trancing Pulse」追加</li>
+                </ul>
+                <h4>2015/11/16 更新</h4>
+                <ul>
+                  <li>「ヴィーナスシンドローム」、「Romantic Now」が抜けていたので修正</li>
+                  <li>楽曲データの読み込み方法を変更</li>
+                </ul>
+              </section>
+              <section class="error" ng-show="errorMessage">
+                <p ng-bind="errorMessage"></p>
+              </section>
+              <section>
+                <fieldset>
+                  <legend>検索</legend>
+                  <label>
+                    難易度：
+        <select ng-model="$storage.songFilterDifficulty" ng-options="hash.value as hash.label for hash in songDifficultyList">
+                      <option value="">-</option>
+                    </select>
+                  </label>
+                  <label>
+                    タイプ：
+        <select ng-model="$storage.songFilterType" ng-options="hash.value as hash.label for hash in songTypeList">
+                      <option value="">-</option>
+                    </select>
+                  </label>
+                  <label>
+                    楽曲Lv：
+        <select ng-model="$storage.songFilterLevel" ng-options="value for value in songLvList">
+                      <option value="">-</option>
+                    </select>
+                  </label>
+                  <label>
+                    スタミナ：
+        <select ng-model="$storage.songFilterStamina" ng-options="value for value in songStaminaList">
+                      <option value="">-</option>
+                    </select>
+                  </label>
+                  <label>
+                    経験値：
+        <select ng-model="$storage.songFilterExp" ng-options="value for value in songExpList">
+                      <option value="">-</option>
+                    </select>
+                  </label>
+                  <label>
+                    親愛度：
+        <select ng-model="$storage.songFilterAffection" ng-options="value for value in songAffectionList">
+                      <option value="">-</option>
+                    </select>
+                  </label>
+                </fieldset>
+                <fieldset>
+                  <legend>表示</legend>
+                  <label>
+                    <input type="checkbox" ng-model="$storage.showSongDifficulty"> 難易度
+      </label>
+                  <label>
+                    <input type="checkbox" ng-model="$storage.showSongType"> タイプ
+      </label>
+                  <label>
+                    <input type="checkbox" ng-model="$storage.showSongLevel"> 楽曲Lv
+      </label>
+                  <label>
+                    <input type="checkbox" ng-model="$storage.showSongStamina"> スタミナ
+      </label>
+                  <label>
+                    <input type="checkbox" ng-model="$storage.showSongExp"> 経験値
+      </label>
+                  <label>
+                    <input type="checkbox" ng-model="$storage.showSongAffection"> 親愛度
+      </label>
+                </fieldset>
+              </section>
+              <section>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>タイトル</th>
+                      <th ng-show="$storage.showSongDifficulty">難易度</th>
+                      <th ng-show="$storage.showSongType">タイプ</th>
+                      <th ng-show="$storage.showSongLevel">楽曲Lv</th>
+                      <th ng-show="$storage.showSongStamina">スタミナ</th>
+                      <th ng-show="$storage.showSongExp">経験値</th>
+                      <th ng-show="$storage.showSongAffection">親愛度</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr ng-repeat="song in songs | filter: songFilter">
+                      <td data-label="タイトル" ng-bind="song.title"></td>
+                      <td data-label="難易度" ng-show="$storage.showSongDifficulty" ng-bind="songDifficulty[song.difficulty]"></td>
+                      <td data-label="タイプ" ng-show="$storage.showSongType" ng-bind="songType[song.type]"></td>
+                      <td data-label="楽曲Lv" ng-show="$storage.showSongLevel" ng-bind="song.lv"></td>
+                      <td data-label="スタミナ" ng-show="$storage.showSongStamina" ng-bind="songLv[song.lv].stamina"></td>
+                      <td data-label="経験値" ng-show="$storage.showSongExp" ng-bind="songLv[song.lv].exp"></td>
+                      <td data-label="親愛度" ng-show="$storage.showSongAffection" ng-bind="songLv[song.lv].affection"></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+              <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
+              <script src="/js/ngStorage.min.js"></script>
+              <script src="./sl-stage-songs-search.js"></script>
+            </div>
+          </article>
+        </div>
       </div>
     </div>
-
     <div class="wrapper">
-  <!-- saasan.github.io レスポンシブ -->
-  <ins class="adsbygoogle"
+      <!-- saasan.github.io レスポンシブ -->
+      <ins class="adsbygoogle"
        style="display:block"
        data-ad-client="ca-pub-0141905477316976"
        data-ad-slot="5633684976"
        data-ad-format="auto"></ins>
-</div>
-
-
+    </div>
     <footer class="site-footer">
-  <div class="wrapper">
-    <nav>
-      
-        
-      
-        
-          <a class="page-link" href="/imas/">アイマス関連</a> |
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-          <a class="page-link" href="/logs.html">Logs</a> |
-        
-      
-        
-      
-        
-          <a class="page-link" href="/script/pixiv-tags.html">pixiv Tags</a> |
-        
-      
-        
-          <a class="page-link" href="/software/pso2utility.html">PSO2Utility</a> |
-        
-      
-        
-      
-
-      
-      <a href="https://twitter.com/saasan" target="_blank">
-        <span class="icon  icon--twitter">
-          <svg viewBox="0 0 16 16">
-            <path fill="#828282" d="M15.969,3.058c-0.586,0.26-1.217,0.436-1.878,0.515c0.675-0.405,1.194-1.045,1.438-1.809
-                                    c-0.632,0.375-1.332,0.647-2.076,0.793c-0.596-0.636-1.446-1.033-2.387-1.033c-1.806,0-3.27,1.464-3.27,3.27 c0,0.256,0.029,0.506,0.085,0.745C5.163,5.404,2.753,4.102,1.14,2.124C0.859,2.607,0.698,3.168,0.698,3.767 c0,1.134,0.577,2.135,1.455,2.722C1.616,6.472,1.112,6.325,0.671,6.08c0,0.014,0,0.027,0,0.041c0,1.584,1.127,2.906,2.623,3.206 C3.02,9.402,2.731,9.442,2.433,9.442c-0.211,0-0.416-0.021-0.615-0.059c0.416,1.299,1.624,2.245,3.055,2.271 c-1.119,0.877-2.529,1.4-4.061,1.4c-0.264,0-0.524-0.015-0.78-0.046c1.447,0.928,3.166,1.469,5.013,1.469 c6.015,0,9.304-4.983,9.304-9.304c0-0.142-0.003-0.283-0.009-0.423C14.976,4.29,15.531,3.714,15.969,3.058z"/>
-          </svg>
-        </span>
-
-        <span class="username">saasan</span>
-      </a>
-      
-      | <a href="/feed.xml" target="_blank">RSS</a>
-    </nav>
-  </div>
-</footer>
-
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-42938817-1', 'saasan.github.io');
-  ga('send', 'pageview');
-
-  var i = document.getElementsByClassName('adsbygoogle').length;
-  while (i-- > 0) {
-    (adsbygoogle = window.adsbygoogle || []).push({});
-  }
-</script>
-
-
+      <div class="wrapper">
+        <nav>
+          <ul>
+            <li><a href="/blog/">Blog</a></li>
+            <li><a href="/imas/">アイマス</a></li>
+            <li><a href="/script/pixiv-tags.html">pixiv Tags</a></li>
+            <li><a href="/software/pso2utility.html">PSO2Utility</a></li>
+          </ul>
+          <a href="https://twitter.com/saasan" target="_blank" class="twitter-username">
+            saasan
+  </a>
+          <a href="/feed.xml" target="_blank" class="rss">RSS</a>
+        </nav>
+      </div>
+    </footer>
   </body>
-
 </html>
