@@ -5,9 +5,27 @@
     <description></description>
     <link>http://saasan.github.io/</link>
     <atom:link href="http://saasan.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 07 Dec 2015 22:07:25 +0900</pubDate>
-    <lastBuildDate>Mon, 07 Dec 2015 22:07:25 +0900</lastBuildDate>
+    <pubDate>Mon, 14 Dec 2015 21:15:27 +0900</pubDate>
+    <lastBuildDate>Mon, 14 Dec 2015 21:15:27 +0900</lastBuildDate>
     <generator>Jekyll v3.0.1</generator>
+    
+      <item>
+        <title>「デレステ楽曲検索」更新</title>
+        <description>&lt;p&gt;「&lt;a href=&quot;/imas/sl-stage-songs-search/&quot;&gt;デレステ楽曲検索&lt;/a&gt;」
+を更新しました。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;「TOKIMEKIエスカレート」、「流れ星キセキ」追加&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Mon, 14 Dec 2015 21:01:00 +0900</pubDate>
+        <link>http://saasan.github.io/blog/2015/12/14/update-sl-stage-songs-search.html</link>
+        <guid isPermaLink="true">http://saasan.github.io/blog/2015/12/14/update-sl-stage-songs-search.html</guid>
+        
+        
+        <category>blog</category>
+        
+      </item>
     
       <item>
         <title>「デレステ楽曲検索」更新</title>
