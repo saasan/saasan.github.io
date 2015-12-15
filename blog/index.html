@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Blog</title>
     <link href='http://fonts.googleapis.com/css?family=Orbitron:500' rel='stylesheet' type='text/css'>
-    <link type="text/css" rel="stylesheet" href="/assets/main-206ddb3503187305cc6c64394f189e456d02cea91a6b6869dda59cb163d08862.css">
+    <link rel="stylesheet" href="/css/main.css">
     <link rel="canonical" href="http://saasan.github.io/blog/">
     <link rel="alternate" type="application/rss+xml" title="saasan.github.io" href="http://saasan.github.io/feed.xml" />
     <link rel="apple-touch-icon" href="http://saasan.github.io/img/s2works_favicon.png">
@@ -77,6 +77,39 @@
           </header>
           <article class="post-content">
             <section>
+              <h2><a class="post-link" href="/blog/2015/12/15/jekyll-html-beautifier-plugin.html">JekyllのHTMLを読みやすいように整形するプラグイン</a></h2>
+              <div class="post-meta">2015-12-15</div>
+              <section>
+                <p>Jekyll で include を多用してると、include されたファイルの中に
+include があってまたそのファイルの中に include が……なんてことになって
+HTML の構造が分からなくなるときがあります。
+できあがった HTML をみてもインデントがメチャクチャでわけがわからない…！</p>
+                <p>そこで、HTML を整形して出力するプラグインを作ってみました。
+いわゆるbeautifierとかpretty printとかいわれる機能ですね。</p>
+                <noscript>
+                  <pre>require &#39;rubygems&#39;
+require &#39;htmlbeautifier&#39;
+
+Jekyll::Hooks.register :documents, :post_render do |page|
+  next if page.output_ext != &#39;.html&#39;
+  page.output = HtmlBeautifier.beautify(page.output)
+end
+
+Jekyll::Hooks.register :pages, :post_render do |page|
+  next if page.ext != &#39;.html&#39;
+  page.output = HtmlBeautifier.beautify(page.output)
+end
+</pre>
+                </noscript>
+                <script src="https://gist.github.com/saasan/7c92d15e7ebb4870f581.js"></script>
+                <p><code class="highlighter-rouge">gem install htmlbeautifier</code> などで htmlbeautifier をインストールしたあと、
+このファイルを _plugins フォルダに入れれば
+Jekyll でのビルド時に HTML が整形されます。</p>
+                <p>プラグインなので、プラグインが使えない GitHub Pages 上でのビルドには使えません。
+あらかじめローカルの環境でビルドして生成されたファイルをアップロードしてください。</p>
+              </section>
+            </section>
+            <section>
               <h2><a class="post-link" href="/blog/2015/12/14/update-sl-stage-songs-search.html">「デレステ楽曲検索」更新</a></h2>
               <div class="post-meta">2015-12-14</div>
               <section>
@@ -116,14 +149,6 @@
               <section>
                 <p>「<a href="/imas/sl-stage-songs-search/">デレステ楽曲検索</a>」
 を追加しました。</p>
-              </section>
-            </section>
-            <section>
-              <h2><a class="post-link" href="/blog/2015/11/05/update-trainer-ticket-time-bot.html">今日のトレチケタイム更新</a></h2>
-              <div class="post-meta">2015-11-05</div>
-              <section>
-                <p><a href="/imas/trainer-ticket-time/">今日のトレチケタイム</a>
-                  をアタシポンコツアンドロイドに対応させました。</p>
               </section>
             </section>
             <div class="pagination">

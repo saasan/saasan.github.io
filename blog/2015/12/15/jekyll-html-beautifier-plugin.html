@@ -4,19 +4,19 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>作り直しました</title>
+    <title>JekyllのHTMLを読みやすいように整形するプラグイン</title>
     <link href='http://fonts.googleapis.com/css?family=Orbitron:500' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="/css/main.css">
-    <link rel="canonical" href="http://saasan.github.io/blog/2015/06/08/renew.html">
+    <link rel="canonical" href="http://saasan.github.io/blog/2015/12/15/jekyll-html-beautifier-plugin.html">
     <link rel="alternate" type="application/rss+xml" title="saasan.github.io" href="http://saasan.github.io/feed.xml" />
     <link rel="apple-touch-icon" href="http://saasan.github.io/img/s2works_favicon.png">
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     <script async src="/js/init.js"></script>
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="@saasan">
-    <meta property="og:url" content="http://saasan.github.io/blog/2015/06/08/renew.html">
-    <meta property="og:title" content="作り直しました">
-    <meta property="og:description" content="ホームページ作り直しました。">
+    <meta property="og:url" content="http://saasan.github.io/blog/2015/12/15/jekyll-html-beautifier-plugin.html">
+    <meta property="og:title" content="JekyllのHTMLを読みやすいように整形するプラグイン">
+    <meta property="og:description" content="beautifierとかpretty printとかいわれる機能をJekyllでのビルド時に実行します。">
     <meta property="og:image" content="http://saasan.github.io/img/s2works_favicon.png">
     <script type="application/ld+json">
       {
@@ -33,11 +33,11 @@
       {
           "@context": "http://schema.org",
           "@type": "Article",
-          "name": "作り直しました",
-          "datePublished": "2015-06-08T04:21:48+09:00",
-          "headline": "ホームページ作り直しました。",
+          "name": "JekyllのHTMLを読みやすいように整形するプラグイン",
+          "datePublished": "2015-12-15T18:59:07+09:00",
+          "headline": "beautifierとかpretty printとかいわれる機能をJekyllでのビルド時に実行します。",
           "image": "http://saasan.github.io/img/s2works_favicon.png",
-          "url": "http://saasan.github.io/blog/2015/06/08/renew.html",
+          "url": "http://saasan.github.io/blog/2015/12/15/jekyll-html-beautifier-plugin.html",
           "publisher" : {
             "@type": "Person",
             "name": "saasan"
@@ -73,13 +73,39 @@
       <div class="wrapper">
         <div class="post" itemprop="mainContentOfPage" itemscope itemtype="http://schema.org/WebPageElement">
           <header class="post-header">
-            <h1 class="post-title">作り直しました</h1>
+            <h1 class="post-title">JekyllのHTMLを読みやすいように整形するプラグイン</h1>
             <div class="post-meta">
-              <time datetime="2015-06-08T04:21:48+09:00" itemprop="dateModified">2015/06/08</time>
+              <time datetime="2015-12-15T18:59:07+09:00" itemprop="dateModified">2015/12/15</time>
             </div>
           </header>
           <article class="post-content">
-            <p>ホームページ作り直しました。</p>
+            <p>Jekyll で include を多用してると、include されたファイルの中に
+include があってまたそのファイルの中に include が……なんてことになって
+HTML の構造が分からなくなるときがあります。
+できあがった HTML をみてもインデントがメチャクチャでわけがわからない…！</p>
+            <p>そこで、HTML を整形して出力するプラグインを作ってみました。
+いわゆるbeautifierとかpretty printとかいわれる機能ですね。</p>
+            <noscript>
+              <pre>require &#39;rubygems&#39;
+require &#39;htmlbeautifier&#39;
+
+Jekyll::Hooks.register :documents, :post_render do |page|
+  next if page.output_ext != &#39;.html&#39;
+  page.output = HtmlBeautifier.beautify(page.output)
+end
+
+Jekyll::Hooks.register :pages, :post_render do |page|
+  next if page.ext != &#39;.html&#39;
+  page.output = HtmlBeautifier.beautify(page.output)
+end
+</pre>
+            </noscript>
+            <script src="https://gist.github.com/saasan/7c92d15e7ebb4870f581.js"></script>
+            <p><code class="highlighter-rouge">gem install htmlbeautifier</code> などで htmlbeautifier をインストールしたあと、
+このファイルを _plugins フォルダに入れれば
+Jekyll でのビルド時に HTML が整形されます。</p>
+            <p>プラグインなので、プラグインが使えない GitHub Pages 上でのビルドには使えません。
+あらかじめローカルの環境でビルドして生成されたファイルをアップロードしてください。</p>
           </article>
         </div>
       </div>

@@ -5,9 +5,52 @@
     <description></description>
     <link>http://saasan.github.io/</link>
     <atom:link href="http://saasan.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 14 Dec 2015 21:15:27 +0900</pubDate>
-    <lastBuildDate>Mon, 14 Dec 2015 21:15:27 +0900</lastBuildDate>
+    <pubDate>Tue, 15 Dec 2015 19:02:21 +0900</pubDate>
+    <lastBuildDate>Tue, 15 Dec 2015 19:02:21 +0900</lastBuildDate>
     <generator>Jekyll v3.0.1</generator>
+    
+      <item>
+        <title>JekyllのHTMLを読みやすいように整形するプラグイン</title>
+        <description>&lt;p&gt;Jekyll で include を多用してると、include されたファイルの中に
+include があってまたそのファイルの中に include が……なんてことになって
+HTML の構造が分からなくなるときがあります。
+できあがった HTML をみてもインデントがメチャクチャでわけがわからない…！&lt;/p&gt;
+
+&lt;p&gt;そこで、HTML を整形して出力するプラグインを作ってみました。
+いわゆるbeautifierとかpretty printとかいわれる機能ですね。&lt;/p&gt;
+
+&lt;noscript&gt;&lt;pre&gt;require &amp;#39;rubygems&amp;#39;
+require &amp;#39;htmlbeautifier&amp;#39;
+
+Jekyll::Hooks.register :documents, :post_render do |page|
+  next if page.output_ext != &amp;#39;.html&amp;#39;
+  page.output = HtmlBeautifier.beautify(page.output)
+end
+
+Jekyll::Hooks.register :pages, :post_render do |page|
+  next if page.ext != &amp;#39;.html&amp;#39;
+  page.output = HtmlBeautifier.beautify(page.output)
+end
+&lt;/pre&gt;&lt;/noscript&gt;
+&lt;script src=&quot;https://gist.github.com/saasan/7c92d15e7ebb4870f581.js&quot;&gt; &lt;/script&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;gem install htmlbeautifier&lt;/code&gt; などで htmlbeautifier をインストールしたあと、
+このファイルを _plugins フォルダに入れれば
+Jekyll でのビルド時に HTML が整形されます。&lt;/p&gt;
+
+&lt;p&gt;プラグインなので、プラグインが使えない GitHub Pages 上でのビルドには使えません。
+あらかじめローカルの環境でビルドして生成されたファイルをアップロードしてください。&lt;/p&gt;
+</description>
+        <pubDate>Tue, 15 Dec 2015 18:59:07 +0900</pubDate>
+        <link>http://saasan.github.io/blog/2015/12/15/jekyll-html-beautifier-plugin.html</link>
+        <guid isPermaLink="true">http://saasan.github.io/blog/2015/12/15/jekyll-html-beautifier-plugin.html</guid>
+        
+        <category>Jekyll</category>
+        
+        
+        <category>blog</category>
+        
+      </item>
     
       <item>
         <title>「デレステ楽曲検索」更新</title>
