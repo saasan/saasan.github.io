@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>JekyllでLiquidのタグをエスケープする方法</title>
+    <link href='http://fonts.googleapis.com/css?family=Orbitron:500' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="canonical" href="http://saasan.github.io/blog/2015/12/15/jekyll-escape-liquid-tags.html">
+    <link rel="alternate" type="application/rss+xml" title="saasan.github.io" href="http://saasan.github.io/feed.xml" />
+    <link rel="apple-touch-icon" href="http://saasan.github.io/img/s2works_favicon.png">
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script async src="/js/init.js"></script>
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@saasan">
+    <meta property="og:url" content="http://saasan.github.io/blog/2015/12/15/jekyll-escape-liquid-tags.html">
+    <meta property="og:title" content="JekyllでLiquidのタグをエスケープする方法">
+    <meta property="og:description" content="{% raw %} と {% endraw %} で囲むと Liquidのタグもそのまま出力されます。">
+    <meta property="og:image" content="http://saasan.github.io/img/s2works_favicon.png">
+    <script type="application/ld+json">
+      {
+          "@context": "http://schema.org/",
+          "@type": "Person",
+          "name": "saasan",
+          "sameAs": [
+            "https://twitter.com/saasan",
+            "https://github.com/saasan"
+          ]
+        }
+    </script>
+    <script type="application/ld+json">
+      {
+          "@context": "http://schema.org",
+          "@type": "Article",
+          "name": "JekyllでLiquidのタグをエスケープする方法",
+          "datePublished": "2015-12-15T19:13:07+09:00",
+          "headline": "{% raw %} と {% endraw %} で囲むと Liquidのタグもそのまま出力されます。",
+          "image": "http://saasan.github.io/img/s2works_favicon.png",
+          "url": "http://saasan.github.io/blog/2015/12/15/jekyll-escape-liquid-tags.html",
+          "publisher" : {
+            "@type": "Person",
+            "name": "saasan"
+          }
+        }
+    </script>
+  </head>
+  <body itemscope itemtype="http://schema.org/WebPage">
+    <header class="site-header">
+      <div class="wrapper">
+        <a class="site-title" href="/">saasan.github.io</a>
+        <nav class="site-nav">
+          <div class="site-nav-contents">
+            <ul>
+              <li><a href="/blog/">Blog</a></li>
+              <li><a href="/imas/">アイマス</a></li>
+              <li><a href="/script/pixiv-tags.html">pixiv Tags</a></li>
+              <li><a href="/software/pso2utility.html">PSO2Utility</a></li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+    </header>
+    <div class="wrapper">
+      <!-- saasan.github.io レスポンシブ -->
+      <ins class="adsbygoogle"
+       style="display:block"
+       data-ad-client="ca-pub-0141905477316976"
+       data-ad-slot="5633684976"
+       data-ad-format="auto"></ins>
+    </div>
+    <div class="page-content">
+      <div class="wrapper">
+        <div class="post" itemprop="mainContentOfPage" itemscope itemtype="http://schema.org/WebPageElement">
+          <header class="post-header">
+            <h1 class="post-title">JekyllでLiquidのタグをエスケープする方法</h1>
+            <div class="post-meta">
+              <time datetime="2015-12-15T19:13:07+09:00" itemprop="dateModified">2015/12/15</time>
+            </div>
+          </header>
+          <article class="post-content">
+            <p><code class="highlighter-rouge"><span class="p">{</span><span class="err">%</span><span class="w"> </span><span class="err">raw</span><span class="w"> </span><span class="err">%</span><span class="p">}</span></code> と <code class="highlighter-rouge"><span class="p">{</span><span class="err">%</span><span class="w"> </span><span class="err">endraw</span><span class="w"> </span><span class="err">%</span><span class="p">}</span></code> で囲むと
+Liquidのタグもそのまま出力されます。</p>
+            <p>例えば</p>
+            <figure class="highlight">
+              <pre><code class="language-html" data-lang="html">{% raw %}
+<span class="nt">&lt;ul&gt;</span>
+  {% for post in site.posts %}
+    <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">"{{ post.url }}"</span><span class="nt">&gt;</span>{{ post.title }}<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+  {% endfor %}
+<span class="nt">&lt;/ul&gt;</span>
+{% endraw %}</code></pre>
+            </figure>
+            <p>と書いた場合の出力は以下のようになります。</p>
+            <figure class="highlight">
+              <pre><code class="language-html" data-lang="html"><span class="nt">&lt;ul&gt;</span>
+  {% for post in site.posts %}
+    <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">"{{ post.url }}"</span><span class="nt">&gt;</span>{{ post.title }}<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+  {% endfor %}
+<span class="nt">&lt;/ul&gt;</span></code></pre>
+            </figure>
+          </article>
+        </div>
+      </div>
+    </div>
+    <div class="wrapper">
+      <!-- saasan.github.io レスポンシブ -->
+      <ins class="adsbygoogle"
+       style="display:block"
+       data-ad-client="ca-pub-0141905477316976"
+       data-ad-slot="5633684976"
+       data-ad-format="auto"></ins>
+    </div>
+    <footer class="site-footer">
+      <div class="wrapper">
+        <nav>
+          <ul>
+            <li><a href="/blog/">Blog</a></li>
+            <li><a href="/imas/">アイマス</a></li>
+            <li><a href="/script/pixiv-tags.html">pixiv Tags</a></li>
+            <li><a href="/software/pso2utility.html">PSO2Utility</a></li>
+          </ul>
+          <a href="https://twitter.com/saasan" target="_blank" class="twitter-username">
+            saasan
+  </a>
+          <a href="/feed.xml" target="_blank" class="rss">RSS</a>
+        </nav>
+      </div>
+    </footer>
+  </body>
+</html>
