@@ -161,36 +161,16 @@ var SideMMyDeskUI;
     },
 
     /**
-     * 吹き出しの表示状態が変更された時の処理を行う
+     * 吹き出しの表示状態、名前、台詞が変更された時の処理を行う関数を返す
+     * @param {string} method 実際に処理を行うSideMMyDeskクラスのメソッド名
+     * @param {number} frame コマの番号(zero-based)
+     * @param {string} property methodに渡す値が入っているプロパティ名
+     * @return {function} 関数
      */
-    _onChangeBalloonVisible: function() {
+    _onChange: function(method, frame, property) {
       var self = this;
       return (function() {
-        var frame = parseInt(this.dataset.number, 10);
-        console.log('_onChangeBalloonVisible: ' + frame + ', ' + this.checked);
-        self.sidem.setBalloonVisible(frame, this.checked);
-      });
-    },
-
-    /**
-     * 名前が変更された時の処理を行う
-     */
-    _onChangeName: function() {
-      var self = this;
-      return (function() {
-        var frame = parseInt(this.dataset.number, 10);
-        self.sidem.setName(frame, this.value);
-      });
-    },
-
-    /**
-     * 台詞が変更された時の処理を行う
-     */
-    _onChangeLine: function(evt) {
-      var self = this;
-      return (function() {
-        var frame = parseInt(this.dataset.number, 10);
-        self.sidem.setLine(frame, this.value);
+        self.sidem[method](frame, this[property]);
       });
     },
 
@@ -229,46 +209,64 @@ var SideMMyDeskUI;
      * ロード時の処理を行う
      */
     onLoad: function() {
-      var i, element, self = this;
-
+      var i, j, element, frame, self = this;
       this.sidem = new SideMMyDesk();
 
       // キャンバスを初期化
       element = document.getElementById('sidem-mydesk');
       this.sidem.setCanvas(element).drawBase();
 
-      // ファイルのD&D用イベント
-      element.addEventListener('dragenter', this._doNothing, false);
-      element.addEventListener('dragover', this._doNothing, false);
-      element.addEventListener('drop', this._onDrop(), false);
-
-      // マウス系イベント
-      element.addEventListener('mousedown', this._onMouseDown(), false);
-      element.addEventListener('mouseup', this._onMouseUp(), false);
-      element.addEventListener('mousemove', this._onMouseMove(), false);
-      element.addEventListener('mousewheel', this._onMouseWheel(), false);
-      element.addEventListener('DOMMouseScroll', this._onMouseWheel(), false);
+      // canvasのイベントリスナーを設定
+      var canvasEvents = [
+        // ファイルのD&D用イベント
+        { event: 'dragenter', listener: this._doNothing },
+        { event: 'dragover', listener: this._doNothing },
+        { event: 'drop', listener: this._onDrop() },
+        // マウス系イベント
+        { event: 'mousedown', listener: this._onMouseDown() },
+        { event: 'mouseup', listener: this._onMouseUp() },
+        { event: 'mousemove', listener: this._onMouseMove() },
+        { event: 'mousewheel', listener: this._onMouseWheel() },
+        { event: 'DOMMouseScroll', listener: this._onMouseWheel() }
+      ];
+      for (i = 0; i < canvasEvents.length; i++) {
+        element.addEventListener(canvasEvents[i].event, canvasEvents[i].listener, false);
+      }
 
       // 保存用画像作成
       element = document.getElementById('output');
       element.addEventListener('click', this._onOutput(), false);
 
-      // 吹き出しの表示状態の設定
-      element = document.querySelectorAll('input.balloonVisible');
-      for (i = 0; i < element.length; i++) {
-        element[i].addEventListener('change', this._onChangeBalloonVisible(), false);
-      }
-
-      // 名前の設定
-      element = document.querySelectorAll('input.name');
-      for (i = 0; i < element.length; i++) {
-        element[i].addEventListener('input', this._onChangeName(), false);
-      }
-
-      // 台詞の設定
-      element = document.querySelectorAll('input.line');
-      for (i = 0; i < element.length; i++) {
-        element[i].addEventListener('input', this._onChangeLine(), false);
+      // UIのイベントリスナーを設定
+      var uiEvents = [
+        // 吹き出しの表示
+        {
+          query: 'input.balloonVisible',
+          event: 'change',
+          method: 'setBalloonVisible',
+          property: 'checked'
+        },
+        // 名前
+        {
+          query: 'input.name',
+          event: 'input',
+          method: 'setName',
+          property: 'value'
+        },
+        // 台詞
+        {
+          query: 'input.line',
+          event: 'input',
+          method: 'setLine',
+          property: 'value'
+        }
+      ];
+      for (i = 0; i < uiEvents.length; i++) {
+        element = document.querySelectorAll(uiEvents[i].query);
+        for (j = 0; j < element.length; j++) {
+          frame = parseInt(element[j].dataset.number, 10);
+          element[j].addEventListener(uiEvents[i].event, this._onChange(uiEvents[i].method, frame, uiEvents[i].property), false);
+        }
       }
     }
   };
