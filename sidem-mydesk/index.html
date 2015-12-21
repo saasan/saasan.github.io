@@ -17,7 +17,7 @@
     <meta property="og:url" content="http://saasan.github.io/sidem-mydesk/">
     <meta property="og:title" content="SideM風会話ジェネレータ">
     <meta property="og:description" content="アイドルマスター SideM にある、マイデスクでアイドル同士が会話するシステム。あれが シンデレラガールズ や ミリオンライブ！ にもあったらなぁ…。ということで作ってみた。">
-    <meta property="og:image" content="http://saasan.github.io/img/s2works_favicon.png">
+    <meta property="og:image" content="http://saasan.github.io/img/sidem-mydesk.png">
     <script type="application/ld+json">
       {
           "@context": "http://schema.org/",
@@ -36,7 +36,7 @@
           "name": "SideM風会話ジェネレータ",
           "datePublished": "2014-03-08T20:00:00+09:00",
           "headline": "アイドルマスター SideM にある、マイデスクでアイドル同士が会話するシステム。あれが シンデレラガールズ や ミリオンライブ！ にもあったらなぁ…。ということで作ってみた。",
-          "image": "http://saasan.github.io/img/s2works_favicon.png",
+          "image": "http://saasan.github.io/img/sidem-mydesk.png",
           "url": "http://saasan.github.io/sidem-mydesk/",
           "publisher" : {
             "@type": "Person",
@@ -87,10 +87,16 @@
   <a href="http://www.bandainamcogames.co.jp/cs/list/idolmaster/million_live/" target="_blank">ミリオンライブ！</a>
               にもあったらなぁ…。ということで作ってみた。
             </p>
-            <section>
+            <section class="info">
+              <h4>2015/12/21 更新</h4>
+              <ul>
+                <li>吹き出しの表示設定を追加</li>
+              </ul>
               <noscript>
                 <p>JavaScriptを有効にして下さい。</p>
               </noscript>
+            </section>
+            <section>
               <h4>遊び方</h4>
               <ol>
                 <li>名前と台詞を入力します。</li>
@@ -113,35 +119,37 @@
                 <li>Internet Explorer 9で動作しない事を確認しています。</li>
               </ul>
             </section>
-            <section>
+            <section class="sidem-mydesk-form">
               <fieldset>
                 <legend>上の人</legend>
-                <label>
-                  名前
-      <input type="text" class="name" data-number="0">
-                </label>
-                <label>
-                  台詞
-      <input type="text" class="line" data-number="0">
-                </label>
+                <label class="block">
+                  <input type="checkbox" class="balloonVisible" data-number="0" checked> 吹き出しを表示する
+    </label>
+                <div class="flex">
+                  <label for="name0">名前：</label>
+                  <input type="text" class="name" data-number="0" id="name0">
+                  <label for="line0">台詞：</label>
+                  <input type="text" class="line" data-number="0" id="line0">
+                </div>
               </fieldset>
               <fieldset>
                 <legend>下の人</legend>
                 <label>
-                  名前
-      <input type="text" class="name" data-number="1">
-                </label>
-                <label>
-                  台詞
-      <input type="text" class="line" data-number="1">
-                </label>
+                  <input type="checkbox" class="balloonVisible" data-number="1" checked> 吹き出しを表示する
+    </label>
+                <div class="flex">
+                  <label for="name1">名前：</label>
+                  <input type="text" class="name" data-number="1" id="name1">
+                  <label for="line1">台詞：</label>
+                  <input type="text" class="line" data-number="1" id="line1">
+                </div>
               </fieldset>
             </section>
-            <section class="well">
+            <section class="well center">
               <p>
-                <canvas id="sidem-mydesk" width="640" height="586" class="center-block">canvasに対応したブラウザーでご覧下さい。</canvas>
+                <canvas id="sidem-mydesk" width="640" height="586">canvasに対応したブラウザーでご覧下さい。</canvas>
               </p>
-              <p><button id="output" class="center-block">↓保存用画像を出力する↓</button></p>
+              <p><button id="output">↓保存用画像を出力する↓</button></p>
               <p id="result"></p>
             </section>
             <section>

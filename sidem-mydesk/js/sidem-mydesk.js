@@ -6,7 +6,7 @@ var SideMMyDesk;
   'use strict';
 
   /**
-   * SideMマイデスク風ジェネレータ
+   * SideM風会話ジェネレータ
    * @constructor
    */
   SideMMyDesk = function() {
@@ -229,6 +229,8 @@ var SideMMyDesk;
       }
     ],
 
+    /** 吹き出しの表示状態 */
+    balloonVisible: [true, true],
     /** 名前 */
     names: ["", ""],
     /** 台詞 */
@@ -437,6 +439,8 @@ var SideMMyDesk;
      * 上の吹き出しを描く
      */
     _drawTopBalloon: function() {
+      if (!this.balloonVisible[0]) return;
+
       this._drawBalloon(this.TOP_BALLOON.LEFT, this.TOP_BALLOON.TOP, this.TOP_BALLOON.ARROW.LEFT, this.TOP_BALLOON.ARROW.TOP, this.TOP_BALLOON.COLOR);
       this._drawName(this.TOP_BALLOON.LEFT, this.TOP_BALLOON.TOP, this.names[0], this.TOP_BALLOON.COLOR);
       this._drawLine(this.TOP_BALLOON.LEFT, this.TOP_BALLOON.TOP + this.BALLOON.HEIGHT, this.lines[0], 'black');
@@ -446,6 +450,8 @@ var SideMMyDesk;
      * 下の吹き出しを描く
      */
     _drawBottomBalloon: function() {
+      if (!this.balloonVisible[1]) return;
+
       this._drawBalloon(this.BOTTOM_BALLOON.LEFT, this.BOTTOM_BALLOON.TOP, this.BOTTOM_BALLOON.ARROW.LEFT, this.BOTTOM_BALLOON.ARROW.TOP, this.BOTTOM_BALLOON.COLOR);
       this._drawName(this.BOTTOM_BALLOON.LEFT, this.BOTTOM_BALLOON.TOP, this.names[1], this.BOTTOM_BALLOON.COLOR);
       this._drawLine(this.BOTTOM_BALLOON.LEFT, this.BOTTOM_BALLOON.TOP + this.BALLOON.HEIGHT, this.lines[1], 'black');
@@ -587,6 +593,18 @@ var SideMMyDesk;
       this.images[frame].x = this.FRAMES[frame].IMAGE_CENTER[0];
       this.images[frame].y = this.FRAMES[frame].IMAGE_CENTER[1];
 
+      this.draw();
+
+      return this;
+    },
+
+    /**
+     * 吹き出しの表示状態を設定する
+     * @param {number} frame 設定するコマの番号(zero-based)
+     * @param {boolean} value 表示するならtrue。しないならfalse。
+     */
+    setBalloonVisible: function(frame, value) {
+      this.balloonVisible[frame] = value;
       this.draw();
 
       return this;

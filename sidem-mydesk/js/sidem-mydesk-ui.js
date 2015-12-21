@@ -6,7 +6,7 @@ var SideMMyDeskUI;
   'use strict';
 
   /**
-   * SideMマイデスク風ジェネレータのUI
+   * SideM風会話ジェネレータのUI
    * @constructor
    */
   SideMMyDeskUI = function() {
@@ -15,7 +15,7 @@ var SideMMyDeskUI;
   SideMMyDeskUI.prototype = {
     /** SideMMyDesk */
     sidem: null,
-    /** ドラッグ中か */
+    /** ドラッグ中のコマ番号。ドラッグ中でなければnull。 */
     dragging: null,
     /** 以前のカーソルX座標 */
     prevX: 0,
@@ -161,6 +161,18 @@ var SideMMyDeskUI;
     },
 
     /**
+     * 吹き出しの表示状態が変更された時の処理を行う
+     */
+    _onChangeBalloonVisible: function() {
+      var self = this;
+      return (function() {
+        var frame = parseInt(this.dataset.number, 10);
+        console.log('_onChangeBalloonVisible: ' + frame + ', ' + this.checked);
+        self.sidem.setBalloonVisible(frame, this.checked);
+      });
+    },
+
+    /**
      * 名前が変更された時の処理を行う
      */
     _onChangeName: function() {
@@ -240,6 +252,12 @@ var SideMMyDeskUI;
       // 保存用画像作成
       element = document.getElementById('output');
       element.addEventListener('click', this._onOutput(), false);
+
+      // 吹き出しの表示状態の設定
+      element = document.querySelectorAll('input.balloonVisible');
+      for (i = 0; i < element.length; i++) {
+        element[i].addEventListener('change', this._onChangeBalloonVisible(), false);
+      }
 
       // 名前の設定
       element = document.querySelectorAll('input.name');

@@ -5,9 +5,27 @@
     <description></description>
     <link>http://saasan.github.io/</link>
     <atom:link href="http://saasan.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 15 Dec 2015 19:35:32 +0900</pubDate>
-    <lastBuildDate>Tue, 15 Dec 2015 19:35:32 +0900</lastBuildDate>
+    <pubDate>Mon, 21 Dec 2015 18:56:27 +0900</pubDate>
+    <lastBuildDate>Mon, 21 Dec 2015 18:56:27 +0900</lastBuildDate>
     <generator>Jekyll v3.0.1</generator>
+    
+      <item>
+        <title>「SideM風会話ジェネレータ」更新</title>
+        <description>&lt;p&gt;「&lt;a href=&quot;/sidem-mydesk/&quot;&gt;SideM風会話ジェネレータ&lt;/a&gt;」
+を更新。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;吹き出しの表示設定を追加&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Mon, 21 Dec 2015 18:16:10 +0900</pubDate>
+        <link>http://saasan.github.io/blog/2015/12/21/update-sidem-mydesk.html</link>
+        <guid isPermaLink="true">http://saasan.github.io/blog/2015/12/21/update-sidem-mydesk.html</guid>
+        
+        
+        <category>blog</category>
+        
+      </item>
     
       <item>
         <title>JekyllでLiquidのタグをエスケープする方法</title>
@@ -214,20 +232,6 @@ PSO2は少額の課金でもマグの追加やスキルツリーの追加等、�
         <pubDate>Mon, 15 Jun 2015 15:32:25 +0900</pubDate>
         <link>http://saasan.github.io/blog/2015/06/15/mobamas-status-pt.html</link>
         <guid isPermaLink="true">http://saasan.github.io/blog/2015/06/15/mobamas-status-pt.html</guid>
-        
-        
-        <category>blog</category>
-        
-      </item>
-    
-      <item>
-        <title>作り直しました</title>
-        <description>&lt;p&gt;ホームページ作り直しました。&lt;/p&gt;
-
-</description>
-        <pubDate>Mon, 08 Jun 2015 04:21:48 +0900</pubDate>
-        <link>http://saasan.github.io/blog/2015/06/08/renew.html</link>
-        <guid isPermaLink="true">http://saasan.github.io/blog/2015/06/08/renew.html</guid>
         
         
         <category>blog</category>
