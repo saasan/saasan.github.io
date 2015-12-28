@@ -5,9 +5,28 @@
     <description></description>
     <link>http://saasan.github.io/</link>
     <atom:link href="http://saasan.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 28 Dec 2015 17:28:40 +0900</pubDate>
-    <lastBuildDate>Mon, 28 Dec 2015 17:28:40 +0900</lastBuildDate>
+    <pubDate>Tue, 29 Dec 2015 02:34:50 +0900</pubDate>
+    <lastBuildDate>Tue, 29 Dec 2015 02:34:50 +0900</lastBuildDate>
     <generator>Jekyll v3.0.1</generator>
+    
+      <item>
+        <title>アイマス関連更新</title>
+        <description>&lt;p&gt;&lt;a href=&quot;/imas/sl-stage-songs-search/&quot;&gt;デレステ楽曲検索&lt;/a&gt;、
+&lt;a href=&quot;/imas/trainer-ticket-time/&quot;&gt;今日のトレチケタイム&lt;/a&gt;
+を更新。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;「Naked Romance」、「M@GIC☆」、「Orange Sapphire」追加&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Tue, 29 Dec 2015 02:28:18 +0900</pubDate>
+        <link>http://saasan.github.io/blog/2015/12/29/update-imas.html</link>
+        <guid isPermaLink="true">http://saasan.github.io/blog/2015/12/29/update-imas.html</guid>
+        
+        
+        <category>blog</category>
+        
+      </item>
     
       <item>
         <title>「SideM風会話ジェネレータ」更新</title>
@@ -218,20 +237,6 @@ PSO2は少額の課金でもマグの追加やスキルツリーの追加等、�
         <pubDate>Mon, 07 Sep 2015 14:57:48 +0900</pubDate>
         <link>http://saasan.github.io/blog/2015/09/07/google-opinion-rewards.html</link>
         <guid isPermaLink="true">http://saasan.github.io/blog/2015/09/07/google-opinion-rewards.html</guid>
-        
-        
-        <category>blog</category>
-        
-      </item>
-    
-      <item>
-        <title>モバマス振り分けpt計算機追加</title>
-        <description>&lt;p&gt;&lt;a href=&quot;/mobamas-status-pt/&quot;&gt;モバマス振り分けpt計算機&lt;/a&gt;
-追加。&lt;/p&gt;
-</description>
-        <pubDate>Mon, 15 Jun 2015 15:32:25 +0900</pubDate>
-        <link>http://saasan.github.io/blog/2015/06/15/mobamas-status-pt.html</link>
-        <guid isPermaLink="true">http://saasan.github.io/blog/2015/06/15/mobamas-status-pt.html</guid>
         
         
         <category>blog</category>
