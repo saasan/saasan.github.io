@@ -5,9 +5,22 @@
     <description></description>
     <link>http://saasan.github.io/</link>
     <atom:link href="http://saasan.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 30 Jan 2016 19:24:09 +0900</pubDate>
-    <lastBuildDate>Sat, 30 Jan 2016 19:24:09 +0900</lastBuildDate>
+    <pubDate>Mon, 15 Feb 2016 18:50:05 +0900</pubDate>
+    <lastBuildDate>Mon, 15 Feb 2016 18:50:05 +0900</lastBuildDate>
     <generator>Jekyll v3.0.1</generator>
+    
+      <item>
+        <title>日本語テスト</title>
+        <description>&lt;p&gt;日本語テスト&lt;/p&gt;
+</description>
+        <pubDate>Sun, 14 Feb 2016 18:02:29 +0900</pubDate>
+        <link>http://saasan.github.io/blog/2016/02/14/%E6%97%A5%E6%9C%AC%E8%AA%9E%E3%83%86%E3%82%B9%E3%83%88.html</link>
+        <guid isPermaLink="true">http://saasan.github.io/blog/2016/02/14/%E6%97%A5%E6%9C%AC%E8%AA%9E%E3%83%86%E3%82%B9%E3%83%88.html</guid>
+        
+        
+        <category>blog</category>
+        
+      </item>
     
       <item>
         <title>アイマス関連更新</title>
@@ -201,42 +214,6 @@ Jekyll でのビルド時に HTML が整形されます。&lt;/p&gt;
         <pubDate>Thu, 05 Nov 2015 00:24:02 +0900</pubDate>
         <link>http://saasan.github.io/blog/2015/11/05/update-trainer-ticket-time-bot.html</link>
         <guid isPermaLink="true">http://saasan.github.io/blog/2015/11/05/update-trainer-ticket-time-bot.html</guid>
-        
-        
-        <category>blog</category>
-        
-      </item>
-    
-      <item>
-        <title>デレステ、PSO2プレイヤーにおすすめ。無料でGoogle Playのクレジットがもらえる「Google アンケート モニター」</title>
-        <description>&lt;p&gt;&lt;a href=&quot;https://play.google.com/store/apps/details?id=com.google.android.apps.paidtasks&amp;amp;hl=ja&quot; target=&quot;_blank&quot;&gt;Google アンケート モニター - Google Play の Android アプリ&lt;/a&gt;&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;「Google アンケート モニター」は Google 消費者アンケート チームが作成したアプリです。
-簡単なアンケートに答えるだけで Google Play で使えるクレジットがもらえます。&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;デレステ、PSO2esにちょっとだけ課金したい人におすすめのアプリです。
-無料でGoogle Playのクレジットがもらえるので、少額の課金ならこれだけで済みます。&lt;/p&gt;
-
-&lt;p&gt;Android版のPSO2esでACをチャージすればPC版&amp;amp;Vita版PSO2にも当然反映されるので、esは遊ばないというPSO2プレイヤーでも使えます。
-PSO2は少額の課金でもマグの追加やスキルツリーの追加等、かなり役に立つものが多いので特におすすめです。&lt;/p&gt;
-
-&lt;p&gt;以下、自分が数ヶ月使用してみた感想&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;アンケートの頻度は1～2週間に1度くらい。&lt;/li&gt;
-  &lt;li&gt;アンケートは1セット5問程度。1セット答え終わるとPlayクレジットが数十円分もらえる。&lt;/li&gt;
-  &lt;li&gt;Google製なので、よくあるポイント系サイトと比べて安心。&lt;/li&gt;
-  &lt;li&gt;アンケートの内容は「最近利用した動画サイトを選んでください」「次もAndroidのスマホを購入したいか」といった、Googleが運営しているサービスに関連したものが多い印象。&lt;/li&gt;
-  &lt;li&gt;まれに「今年は何年ですか」のような、アンケートの必要性が分からないものもある。
-回答は選択式の為「とりあえず全部一番上」のように投げやりに選ぶこともできてしまうし、
-利用者がきちんと内容を理解して回答しているか確認しているのかもしれない。&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        <pubDate>Mon, 07 Sep 2015 14:57:48 +0900</pubDate>
-        <link>http://saasan.github.io/blog/2015/09/07/google-opinion-rewards.html</link>
-        <guid isPermaLink="true">http://saasan.github.io/blog/2015/09/07/google-opinion-rewards.html</guid>
         
         
         <category>blog</category>

@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://saasan.github.io/blog/2016/02/14/%E6%97%A5%E6%9C%AC%E8%AA%9E%E3%83%86%E3%82%B9%E3%83%88.html</loc>
+    <lastmod>2016-02-14T18:02:29+09:00</lastmod>
+  </url>
+  <url>
     <loc>http://saasan.github.io/blog/2015/12/29/update-imas.html</loc>
     <lastmod>2015-12-29T02:28:18+09:00</lastmod>
   </url>
@@ -78,12 +82,6 @@
   <url>
     <loc>http://saasan.github.io/software/pso2utility.html</loc>
   </url>
-  <url>
-    <loc>http://saasan.github.io/blog/page2/</loc>
-  </url>
-  <url>
-    <loc>http://saasan.github.io/blog/page3/</loc>
-  </url>
     <url>
       <loc>http://saasan.github.io/blog/2015/06/08/renew.html</loc>
     </url>
@@ -119,5 +117,8 @@
     </url>
     <url>
       <loc>http://saasan.github.io/blog/2015/12/29/update-imas.html</loc>
+    </url>
+    <url>
+      <loc>http://saasan.github.io/blog/2016/02/14/%E6%97%A5%E6%9C%AC%E8%AA%9E%E3%83%86%E3%82%B9%E3%83%88.html</loc>
     </url>
 </urlset>
