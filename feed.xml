@@ -5,9 +5,68 @@
     <description></description>
     <link>http://saasan.github.io/</link>
     <atom:link href="http://saasan.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 19 Feb 2016 14:48:50 +0900</pubDate>
-    <lastBuildDate>Fri, 19 Feb 2016 14:48:50 +0900</lastBuildDate>
+    <pubDate>Fri, 19 Feb 2016 18:11:16 +0900</pubDate>
+    <lastBuildDate>Fri, 19 Feb 2016 18:11:16 +0900</lastBuildDate>
     <generator>Jekyll v3.0.1</generator>
+    
+      <item>
+        <title>Google AdSenseの確定申告</title>
+        <description>&lt;p&gt;Google AdSenseでの収入が年間20万円を超えると、サラリーマンやアルバイトなど本業で源泉徴収されている人でも確定申告しなきゃいけないらしい。&lt;/p&gt;
+
+&lt;p&gt;参考 :
+&lt;a href=&quot;https://www.nta.go.jp/taxanswer/shotoku/1900.htm&quot; target=&quot;_blank&quot;&gt;No.1900 給与所得者で確定申告が必要な人｜所得税｜国税庁&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;ありがたいことに、うちも売上が20万円を超えて確定申告することになったのでメモ。&lt;/p&gt;
+
+&lt;h3 id=&quot;section&quot;&gt;確定申告に必要なもの&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;生命保険料控除証明書など (いつも年末調整で提出してるやつ)&lt;/li&gt;
+  &lt;li&gt;本業の会社からもらった源泉徴収票&lt;/li&gt;
+  &lt;li&gt;パソコン&lt;/li&gt;
+  &lt;li&gt;プリンター
+または &lt;a href=&quot;https://www.printing.ne.jp/&quot; target=&quot;_blank&quot;&gt;ネットプリント&lt;/a&gt; などのコンビニで印刷できるサービス&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;申告書を作る&lt;/h3&gt;
+
+&lt;p&gt;国税庁のホームページに
+&lt;a href=&quot;https://www.keisan.nta.go.jp/h27/ta_top.htm&quot; target=&quot;_blank&quot;&gt;確定申告書等作成コーナー&lt;/a&gt;
+があるのでそこで作る。&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;「書面提出」 &amp;gt; 「所得税コーナー」 &amp;gt; 「左記以外の所得のある方(全ての所得対応)」&lt;/li&gt;
+  &lt;li&gt;「給与所得」に源泉徴収票通り入力&lt;/li&gt;
+  &lt;li&gt;「雑所得」の「その他」に以下の通り入力
+    &lt;ul&gt;
+      &lt;li&gt;種目 : 広告収入&lt;/li&gt;
+      &lt;li&gt;報酬などの支払者の氏名・名称 : グーグル株式会社&lt;/li&gt;
+      &lt;li&gt;所得の生ずる場所 : 東京都港区六本木 6-10-1&lt;/li&gt;
+      &lt;li&gt;収入金額 : AdSenseでの収入金額&lt;br /&gt;
+(&lt;a href=&quot;https://www.google.com/adsense/app#main/home&quot; target=&quot;_blank&quot;&gt;AdSenseのサイト&lt;/a&gt;
+&amp;gt; 「前回のお支払い」 &amp;gt; 期間を「前年」にして金額を合計する)&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;あとは控除など必要がある場合は入力&lt;/li&gt;
+  &lt;li&gt;最後にPDFファイルがダウンロードできるので、これをプリンターかネットプリントなどで印刷&lt;/li&gt;
+  &lt;li&gt;捺印や署名、添付書類を貼り付けたあと、最後のページにある提出先税務署へ送る&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;section-2&quot;&gt;その他&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;AdSenseでの収入を証明する書類は必要はない&lt;/strong&gt; そうな (申告内容が不審で税務調査されない限りは)。&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;所得税の確定申告をすれば自動で各市町村に連絡が行き住民税に反映される&lt;/strong&gt; ので住民税の申告は必要ない。&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Fri, 19 Feb 2016 18:08:47 +0900</pubDate>
+        <link>http://saasan.github.io/blog/2016/02/19/Google-AdSense%E3%81%AE%E7%A2%BA%E5%AE%9A%E7%94%B3%E5%91%8A.html</link>
+        <guid isPermaLink="true">http://saasan.github.io/blog/2016/02/19/Google-AdSense%E3%81%AE%E7%A2%BA%E5%AE%9A%E7%94%B3%E5%91%8A.html</guid>
+        
+        
+        <category>blog</category>
+        
+      </item>
     
       <item>
         <title>アイマス関連更新</title>
@@ -201,42 +260,6 @@ Jekyll でのビルド時に HTML が整形されます。&lt;/p&gt;
         <pubDate>Thu, 05 Nov 2015 00:24:02 +0900</pubDate>
         <link>http://saasan.github.io/blog/2015/11/05/update-trainer-ticket-time-bot.html</link>
         <guid isPermaLink="true">http://saasan.github.io/blog/2015/11/05/update-trainer-ticket-time-bot.html</guid>
-        
-        
-        <category>blog</category>
-        
-      </item>
-    
-      <item>
-        <title>デレステ、PSO2プレイヤーにおすすめ。無料でGoogle Playのクレジットがもらえる「Google アンケート モニター」</title>
-        <description>&lt;p&gt;&lt;a href=&quot;https://play.google.com/store/apps/details?id=com.google.android.apps.paidtasks&amp;amp;hl=ja&quot; target=&quot;_blank&quot;&gt;Google アンケート モニター - Google Play の Android アプリ&lt;/a&gt;&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;「Google アンケート モニター」は Google 消費者アンケート チームが作成したアプリです。
-簡単なアンケートに答えるだけで Google Play で使えるクレジットがもらえます。&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;デレステ、PSO2esにちょっとだけ課金したい人におすすめのアプリです。
-無料でGoogle Playのクレジットがもらえるので、少額の課金ならこれだけで済みます。&lt;/p&gt;
-
-&lt;p&gt;Android版のPSO2esでACをチャージすればPC版&amp;amp;Vita版PSO2にも当然反映されるので、esは遊ばないというPSO2プレイヤーでも使えます。
-PSO2は少額の課金でもマグの追加やスキルツリーの追加等、かなり役に立つものが多いので特におすすめです。&lt;/p&gt;
-
-&lt;p&gt;以下、自分が数ヶ月使用してみた感想&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;アンケートの頻度は1～2週間に1度くらい。&lt;/li&gt;
-  &lt;li&gt;アンケートは1セット5問程度。1セット答え終わるとPlayクレジットが数十円分もらえる。&lt;/li&gt;
-  &lt;li&gt;Google製なので、よくあるポイント系サイトと比べて安心。&lt;/li&gt;
-  &lt;li&gt;アンケートの内容は「最近利用した動画サイトを選んでください」「次もAndroidのスマホを購入したいか」といった、Googleが運営しているサービスに関連したものが多い印象。&lt;/li&gt;
-  &lt;li&gt;まれに「今年は何年ですか」のような、アンケートの必要性が分からないものもある。
-回答は選択式の為「とりあえず全部一番上」のように投げやりに選ぶこともできてしまうし、
-利用者がきちんと内容を理解して回答しているか確認しているのかもしれない。&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        <pubDate>Mon, 07 Sep 2015 14:57:48 +0900</pubDate>
-        <link>http://saasan.github.io/blog/2015/09/07/google-opinion-rewards.html</link>
-        <guid isPermaLink="true">http://saasan.github.io/blog/2015/09/07/google-opinion-rewards.html</guid>
         
         
         <category>blog</category>
