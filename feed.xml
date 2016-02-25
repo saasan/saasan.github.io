@@ -5,8 +5,8 @@
     <description></description>
     <link>http://saasan.github.io/</link>
     <atom:link href="http://saasan.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 25 Feb 2016 18:37:08 +0900</pubDate>
-    <lastBuildDate>Thu, 25 Feb 2016 18:37:08 +0900</lastBuildDate>
+    <pubDate>Thu, 25 Feb 2016 20:53:24 +0900</pubDate>
+    <lastBuildDate>Thu, 25 Feb 2016 20:53:24 +0900</lastBuildDate>
     <generator>Jekyll v3.0.1</generator>
     
       <item>
@@ -50,7 +50,12 @@
   &lt;li&gt;あとは控除など必要がある場合は入力&lt;/li&gt;
   &lt;li&gt;最後にPDFファイルがダウンロードできるので、これをプリンターかネットプリントなどで印刷&lt;/li&gt;
   &lt;li&gt;印刷した申告書に捺印と署名を行い、添付書類を貼り付ける&lt;/li&gt;
-  &lt;li&gt;印刷した紙に書かれている提出先税務署へ &lt;strong&gt;簡易書留&lt;/strong&gt; で送る&lt;/li&gt;
+  &lt;li&gt;印刷した紙に書かれている提出先税務署へ郵送する&lt;br /&gt;
+(普通郵便でもいいが送った記録が残らないので、万全を期すなら
+&lt;a href=&quot;https://www.post.japanpost.jp/service/fuka_service/tokutei_kiroku/&quot; target=&quot;_blank&quot;&gt;特定記録&lt;/a&gt;
+や
+&lt;a href=&quot;https://www.post.japanpost.jp/service/fuka_service/kakitome/&quot; target=&quot;_blank&quot;&gt;書留&lt;/a&gt;
+で)&lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;h3 id=&quot;section-2&quot;&gt;その他&lt;/h3&gt;
