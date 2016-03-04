@@ -5,9 +5,62 @@
     <description></description>
     <link>http://saasan.github.io/</link>
     <atom:link href="http://saasan.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 27 Feb 2016 01:42:57 +0900</pubDate>
-    <lastBuildDate>Sat, 27 Feb 2016 01:42:57 +0900</lastBuildDate>
+    <pubDate>Fri, 04 Mar 2016 19:20:35 +0900</pubDate>
+    <lastBuildDate>Fri, 04 Mar 2016 19:20:35 +0900</lastBuildDate>
     <generator>Jekyll v3.0.1</generator>
+    
+      <item>
+        <title>[Jekyll] ビルドするときにだけSass(SCSS)を圧縮する</title>
+        <description>&lt;p&gt;_config.yml に Sass(SCSS) を圧縮する設定を書くと、常時圧縮がかかってしまう。
+これでは、ブラウザで表示を確認しながら CSS をいじるとき困る。
+ということで、製作中は圧縮せずにビルド時だけ圧縮する方法。&lt;/p&gt;
+
+&lt;p&gt;&lt;small&gt;※ 2016/3/4現在、 Jekyll では Sourcemap が出力できないっぽい。&lt;/small&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;section&quot;&gt;1. ビルド用設定ファイルを作る&lt;/h3&gt;
+
+&lt;p&gt;_config.yml と同じフォルダに
+_config-production.yml という名前のファイルを作成し、以下の通り書く&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sass:
+  style: compressed
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;参考: 
+&lt;a href=&quot;https://jekyllrb.com/docs/assets/#sassscss&quot; target=&quot;_blank&quot;&gt;Assets - Jekyll • Simple, blog-aware, static sites&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;2. 製作時のコマンド&lt;/h3&gt;
+
+&lt;p&gt;製作中はいつも通り。&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;jekyll serve
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;section-2&quot;&gt;3. ビルド時のコマンド&lt;/h3&gt;
+
+&lt;p&gt;ビルドするときは –config オプションで _config.yml と _config-production.yml の2つを読み込む。
+両方のファイルに同じ設定項目がある場合は、後ろに書いた方の設定で上書きされる。
+カンマとファイル名の間にスペースを入れないこと。&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;jekyll build --config _config.yml,_config-production.yml
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;参考: 
+&lt;a href=&quot;https://jekyllrb.com/docs/configuration/#build-command-options&quot; target=&quot;_blank&quot;&gt;Configuration - Jekyll • Simple, blog-aware, static sites&lt;/a&gt;&lt;/p&gt;
+</description>
+        <pubDate>Fri, 04 Mar 2016 19:19:37 +0900</pubDate>
+        <link>http://saasan.github.io/blog/2016/03/04/jekyll-%E3%83%93%E3%83%AB%E3%83%89%E3%81%99%E3%82%8B%E3%81%A8%E3%81%8D%E3%81%AB%E3%81%A0%E3%81%91sass-scss-%E3%82%92%E5%9C%A7%E7%B8%AE%E3%81%99%E3%82%8B.html</link>
+        <guid isPermaLink="true">http://saasan.github.io/blog/2016/03/04/jekyll-%E3%83%93%E3%83%AB%E3%83%89%E3%81%99%E3%82%8B%E3%81%A8%E3%81%8D%E3%81%AB%E3%81%A0%E3%81%91sass-scss-%E3%82%92%E5%9C%A7%E7%B8%AE%E3%81%99%E3%82%8B.html</guid>
+        
+        <category>Jekyll</category>
+        
+        
+        <category>blog</category>
+        
+      </item>
     
       <item>
         <title>Google AdSenseの確定申告</title>
@@ -75,44 +128,7 @@
       </item>
     
       <item>
-        <title>アイマス関連更新</title>
-        <description>&lt;p&gt;&lt;a href=&quot;/imas/sl-stage-songs-search/&quot;&gt;デレステ楽曲検索&lt;/a&gt;、
-&lt;a href=&quot;/imas/trainer-ticket-time/&quot;&gt;今日のトレチケタイム&lt;/a&gt;
-を更新。&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;「Naked Romance」、「M@GIC☆」、「Orange Sapphire」追加&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        <pubDate>Tue, 29 Dec 2015 02:28:18 +0900</pubDate>
-        <link>http://saasan.github.io/blog/2015/12/29/update-imas.html</link>
-        <guid isPermaLink="true">http://saasan.github.io/blog/2015/12/29/update-imas.html</guid>
-        
-        
-        <category>blog</category>
-        
-      </item>
-    
-      <item>
-        <title>「SideM風会話ジェネレータ」更新</title>
-        <description>&lt;p&gt;「&lt;a href=&quot;/sidem-mydesk/&quot;&gt;SideM風会話ジェネレータ&lt;/a&gt;」
-を更新。&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;吹き出しの表示設定を追加&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        <pubDate>Mon, 21 Dec 2015 18:16:10 +0900</pubDate>
-        <link>http://saasan.github.io/blog/2015/12/21/update-sidem-mydesk.html</link>
-        <guid isPermaLink="true">http://saasan.github.io/blog/2015/12/21/update-sidem-mydesk.html</guid>
-        
-        
-        <category>blog</category>
-        
-      </item>
-    
-      <item>
-        <title>JekyllでLiquidのタグをエスケープする方法</title>
+        <title>[Jekyll] Liquidのタグをエスケープする方法</title>
         <description>&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;raw&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt; と &lt;code class=&quot;highlighter-rouge&quot;&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;endraw&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt; で囲むと
 Liquidのタグもそのまま出力されます。&lt;/p&gt;
 
@@ -147,7 +163,7 @@ Liquidのタグもそのまま出力されます。&lt;/p&gt;
       </item>
     
       <item>
-        <title>JekyllのHTMLを読みやすいように整形するプラグイン</title>
+        <title>[Jekyll] HTMLを読みやすいように整形するプラグイン</title>
         <description>&lt;p&gt;Jekyll で include を多用してると、include されたファイルの中に
 include があってまたそのファイルの中に include が……なんてことになって
 HTML の構造が分からなくなるときがあります。
@@ -190,82 +206,35 @@ Jekyll でのビルド時に HTML が整形されます。&lt;/p&gt;
       </item>
     
       <item>
-        <title>「デレステ楽曲検索」更新</title>
-        <description>&lt;p&gt;「&lt;a href=&quot;/imas/sl-stage-songs-search/&quot;&gt;デレステ楽曲検索&lt;/a&gt;」
-を更新しました。&lt;/p&gt;
+        <title>デレステ、PSO2プレイヤーにおすすめ。無料でGoogle Playのクレジットがもらえる「Google アンケート モニター」</title>
+        <description>&lt;p&gt;&lt;a href=&quot;https://play.google.com/store/apps/details?id=com.google.android.apps.paidtasks&amp;amp;hl=ja&quot; target=&quot;_blank&quot;&gt;Google アンケート モニター - Google Play の Android アプリ&lt;/a&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;「Google アンケート モニター」は Google 消費者アンケート チームが作成したアプリです。
+簡単なアンケートに答えるだけで Google Play で使えるクレジットがもらえます。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;デレステ、PSO2esにちょっとだけ課金したい人におすすめのアプリです。
+無料でGoogle Playのクレジットがもらえるので、少額の課金ならこれだけで済みます。&lt;/p&gt;
+
+&lt;p&gt;Android版のPSO2esでACをチャージすればPC版&amp;amp;Vita版PSO2にも当然反映されるので、esは遊ばないというPSO2プレイヤーでも使えます。
+PSO2は少額の課金でもマグの追加やスキルツリーの追加等、かなり役に立つものが多いので特におすすめです。&lt;/p&gt;
+
+&lt;p&gt;以下、自分が数ヶ月使用してみた感想&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;「TOKIMEKIエスカレート」、「流れ星キセキ」追加&lt;/li&gt;
+  &lt;li&gt;アンケートの頻度は1～2週間に1度くらい。&lt;/li&gt;
+  &lt;li&gt;アンケートは1セット5問程度。1セット答え終わるとPlayクレジットが数十円分もらえる。&lt;/li&gt;
+  &lt;li&gt;Google製なので、よくあるポイント系サイトと比べて安心。&lt;/li&gt;
+  &lt;li&gt;アンケートの内容は「最近利用した動画サイトを選んでください」「次もAndroidのスマホを購入したいか」といった、Googleが運営しているサービスに関連したものが多い印象。&lt;/li&gt;
+  &lt;li&gt;まれに「今年は何年ですか」のような、アンケートの必要性が分からないものもある。
+回答は選択式の為「とりあえず全部一番上」のように投げやりに選ぶこともできてしまうし、
+利用者がきちんと内容を理解して回答しているか確認しているのかもしれない。&lt;/li&gt;
 &lt;/ul&gt;
 </description>
-        <pubDate>Mon, 14 Dec 2015 21:01:00 +0900</pubDate>
-        <link>http://saasan.github.io/blog/2015/12/14/update-sl-stage-songs-search.html</link>
-        <guid isPermaLink="true">http://saasan.github.io/blog/2015/12/14/update-sl-stage-songs-search.html</guid>
-        
-        
-        <category>blog</category>
-        
-      </item>
-    
-      <item>
-        <title>「デレステ楽曲検索」更新</title>
-        <description>&lt;p&gt;「&lt;a href=&quot;/imas/sl-stage-songs-search/&quot;&gt;デレステ楽曲検索&lt;/a&gt;」
-を更新しました。&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;「Trancing Pulse」追加&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        <pubDate>Tue, 17 Nov 2015 18:36:21 +0900</pubDate>
-        <link>http://saasan.github.io/blog/2015/11/17/update-sl-stage-songs-search.html</link>
-        <guid isPermaLink="true">http://saasan.github.io/blog/2015/11/17/update-sl-stage-songs-search.html</guid>
-        
-        
-        <category>blog</category>
-        
-      </item>
-    
-      <item>
-        <title>「デレステ楽曲検索」更新</title>
-        <description>&lt;p&gt;「&lt;a href=&quot;/imas/sl-stage-songs-search/&quot;&gt;デレステ楽曲検索&lt;/a&gt;」
-を更新しました。&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;「ヴィーナスシンドローム」、「Romantic Now」が抜けていたので修正&lt;/li&gt;
-  &lt;li&gt;楽曲データの読み込み方法を変更&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        <pubDate>Mon, 16 Nov 2015 20:47:38 +0900</pubDate>
-        <link>http://saasan.github.io/blog/2015/11/16/update-sl-stage-songs-search.html</link>
-        <guid isPermaLink="true">http://saasan.github.io/blog/2015/11/16/update-sl-stage-songs-search.html</guid>
-        
-        
-        <category>blog</category>
-        
-      </item>
-    
-      <item>
-        <title>「デレステ楽曲検索」追加</title>
-        <description>&lt;p&gt;「&lt;a href=&quot;/imas/sl-stage-songs-search/&quot;&gt;デレステ楽曲検索&lt;/a&gt;」
-を追加しました。&lt;/p&gt;
-</description>
-        <pubDate>Fri, 13 Nov 2015 23:52:53 +0900</pubDate>
-        <link>http://saasan.github.io/blog/2015/11/13/sl-stage-songs-search.html</link>
-        <guid isPermaLink="true">http://saasan.github.io/blog/2015/11/13/sl-stage-songs-search.html</guid>
-        
-        
-        <category>blog</category>
-        
-      </item>
-    
-      <item>
-        <title>今日のトレチケタイム更新</title>
-        <description>&lt;p&gt;&lt;a href=&quot;/imas/trainer-ticket-time/&quot;&gt;今日のトレチケタイム&lt;/a&gt;
-をアタシポンコツアンドロイドに対応させました。&lt;/p&gt;
-</description>
-        <pubDate>Thu, 05 Nov 2015 00:24:02 +0900</pubDate>
-        <link>http://saasan.github.io/blog/2015/11/05/update-trainer-ticket-time-bot.html</link>
-        <guid isPermaLink="true">http://saasan.github.io/blog/2015/11/05/update-trainer-ticket-time-bot.html</guid>
+        <pubDate>Mon, 07 Sep 2015 14:57:48 +0900</pubDate>
+        <link>http://saasan.github.io/blog/2015/09/07/google-opinion-rewards.html</link>
+        <guid isPermaLink="true">http://saasan.github.io/blog/2015/09/07/google-opinion-rewards.html</guid>
         
         
         <category>blog</category>

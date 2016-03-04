@@ -4,18 +4,18 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>「SideM風会話ジェネレータ」更新</title>
+    <title>[Jekyll] ビルドするときにだけSass(SCSS)を圧縮する</title>
     <link href='http://fonts.googleapis.com/css?family=Orbitron:500' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="/css/main.css">
-    <link rel="canonical" href="http://saasan.github.io/blog/2015/12/21/update-sidem-mydesk.html">
+    <link rel="canonical" href="http://saasan.github.io/blog/2016/03/04/jekyll-%E3%83%93%E3%83%AB%E3%83%89%E3%81%99%E3%82%8B%E3%81%A8%E3%81%8D%E3%81%AB%E3%81%A0%E3%81%91sass-scss-%E3%82%92%E5%9C%A7%E7%B8%AE%E3%81%99%E3%82%8B.html">
     <link rel="alternate" type="application/rss+xml" title="saasan.github.io" href="http://saasan.github.io/feed.xml" />
     <link rel="apple-touch-icon" href="http://saasan.github.io/img/s2works_favicon.png">
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="@saasan">
-    <meta property="og:url" content="http://saasan.github.io/blog/2015/12/21/update-sidem-mydesk.html">
-    <meta property="og:title" content="「SideM風会話ジェネレータ」更新">
-    <meta property="og:description" content="「SideM風会話ジェネレータ」 を更新。">
+    <meta property="og:url" content="http://saasan.github.io/blog/2016/03/04/jekyll-%E3%83%93%E3%83%AB%E3%83%89%E3%81%99%E3%82%8B%E3%81%A8%E3%81%8D%E3%81%AB%E3%81%A0%E3%81%91sass-scss-%E3%82%92%E5%9C%A7%E7%B8%AE%E3%81%99%E3%82%8B.html">
+    <meta property="og:title" content="[Jekyll] ビルドするときにだけSass(SCSS)を圧縮する">
+    <meta property="og:description" content="_config.yml に Sass(SCSS) を圧縮する設定を書くと、常時圧縮がかかってしまう。 これでは、ブラウザで表示を確認しながら CSS をいじるとき困る。 ということで、製作中は圧縮せずにビルド時だけ圧縮する方法。">
     <meta property="og:image" content="http://saasan.github.io/img/s2works_favicon.png">
     <script type="application/ld+json">
       {
@@ -32,11 +32,11 @@
       {
           "@context": "http://schema.org",
           "@type": "Article",
-          "name": "「SideM風会話ジェネレータ」更新",
-          "datePublished": "2015-12-21T18:16:10+09:00",
-          "headline": "「SideM風会話ジェネレータ」 を更新。",
+          "name": "[Jekyll] ビルドするときにだけSass(SCSS)を圧縮する",
+          "datePublished": "2016-03-04T19:19:37+09:00",
+          "headline": "_config.yml に Sass(SCSS) を圧縮する設定を書くと、常時圧縮がかかってしまう。 これでは、ブラウザで表示を確認しながら CSS をいじるとき困る。 ということで、製作中は圧縮せずにビルド時だけ圧縮する方法。",
           "image": "http://saasan.github.io/img/s2works_favicon.png",
-          "url": "http://saasan.github.io/blog/2015/12/21/update-sidem-mydesk.html",
+          "url": "http://saasan.github.io/blog/2016/03/04/jekyll-%E3%83%93%E3%83%AB%E3%83%89%E3%81%99%E3%82%8B%E3%81%A8%E3%81%8D%E3%81%AB%E3%81%A0%E3%81%91sass-scss-%E3%82%92%E5%9C%A7%E7%B8%AE%E3%81%99%E3%82%8B.html",
           "publisher" : {
             "@type": "Person",
             "name": "saasan"
@@ -72,17 +72,42 @@
       <div class="wrapper">
         <div class="post" itemprop="mainContentOfPage" itemscope itemtype="http://schema.org/WebPageElement">
           <header class="post-header">
-            <h1 class="post-title">「SideM風会話ジェネレータ」更新</h1>
+            <h1 class="post-title">[Jekyll] ビルドするときにだけSass(SCSS)を圧縮する</h1>
             <div class="post-meta">
-              <time datetime="2015-12-21T18:16:10+09:00" itemprop="dateModified">2015/12/21</time>
+              <time datetime="2016-03-04T19:19:37+09:00" itemprop="dateModified">2016/03/04</time>
             </div>
           </header>
           <article class="post-content">
-            <p>「<a href="/sidem-mydesk/">SideM風会話ジェネレータ</a>」
-を更新。</p>
-            <ul>
-              <li>吹き出しの表示設定を追加</li>
-            </ul>
+            <p>_config.yml に Sass(SCSS) を圧縮する設定を書くと、常時圧縮がかかってしまう。
+これでは、ブラウザで表示を確認しながら CSS をいじるとき困る。
+ということで、製作中は圧縮せずにビルド時だけ圧縮する方法。</p>
+            <p><small>※ 2016/3/4現在、 Jekyll では Sourcemap が出力できないっぽい。</small></p>
+            <h3 id="section">1. ビルド用設定ファイルを作る</h3>
+            <p>_config.yml と同じフォルダに
+_config-production.yml という名前のファイルを作成し、以下の通り書く</p>
+            <div class="highlighter-rouge">
+              <pre class="highlight"><code>sass:
+  style: compressed
+</code></pre>
+            </div>
+            <p>参考: 
+              <a href="https://jekyllrb.com/docs/assets/#sassscss" target="_blank">Assets - Jekyll • Simple, blog-aware, static sites</a></p>
+            <h3 id="section-1">2. 製作時のコマンド</h3>
+            <p>製作中はいつも通り。</p>
+            <div class="highlighter-rouge">
+              <pre class="highlight"><code>jekyll serve
+</code></pre>
+            </div>
+            <h3 id="section-2">3. ビルド時のコマンド</h3>
+            <p>ビルドするときは –config オプションで _config.yml と _config-production.yml の2つを読み込む。
+両方のファイルに同じ設定項目がある場合は、後ろに書いた方の設定で上書きされる。
+カンマとファイル名の間にスペースを入れないこと。</p>
+            <div class="highlighter-rouge">
+              <pre class="highlight"><code>jekyll build --config _config.yml,_config-production.yml
+</code></pre>
+            </div>
+            <p>参考: 
+              <a href="https://jekyllrb.com/docs/configuration/#build-command-options" target="_blank">Configuration - Jekyll • Simple, blog-aware, static sites</a></p>
           </article>
         </div>
       </div>
