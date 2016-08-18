@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>モバマス道場リスト(スマホ用)</title>
   <link rel="apple-touch-icon" href="//saasan.github.io/img/s2works_favicon.png">
-  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
   <link rel="stylesheet" href="css/mobamas-dojo.css">
   <script src="js/mobamas-dojo.min.js"></script>
   <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
@@ -17,7 +17,7 @@
   <meta property="og:description" content="アイドルマスターシンデレラガールズの道場一覧サイトです。道場とは、わざとLIVEバトルで負けて、親愛度、ファン数、マニーを稼がせてくれる有志の方々の事です。">
   <meta property="og:image" content="http://saasan.github.io/mobamas-dojo/img/site_thumbnail.png">
 </head>
-<body>
+<body class="mobamas-dojo">
   <noscript>
     <p>JavaScriptを有効にして下さい。</p>
   </noscript>
@@ -133,10 +133,7 @@
     </h3>
     <section class="form" ng-show="$storage.showViewSettings">
       <section>
-        <select ng-model="$storage.visitedMax">
-          <option value="1">1</option>
-          <option value="3">3</option>
-        </select>
+        <select ng-model="$storage.visitedMax" ng-options="item for item in ui.visitedMax"></select>
         回以上訪問した時、道場を訪問済とする
       </section>
       <section>
@@ -154,10 +151,7 @@
       </section>
       <section>
         表示順:
-        <select ng-model="$storage.view.orderBy">
-          <option value="0">ランク順</option>
-          <option value="1">レベル順</option>
-        </select>
+        <select ng-model="$storage.view.orderBy" ng-options="num as name for (name, num) in ui.orderBy"></select>
       </section>
       <section>
         ランク:
@@ -218,11 +212,11 @@
     <div class="btn block dojo" ng-class="dojoClass(dojo)" ng-repeat="dojo in filtered = (dojos | orderBy: ORDER_BY[$storage.view.orderBy] | filter: dojoFilter | limitTo : $storage.view.limitTo)">
       <a ng-click="onClickDojoLink(dojo)" class="dojo-link"
          href="{{ $storage.dojoLinkUrl }}{{ dojo.id }}"
-         target="{{ $storage.dojoLinkTarget }}"><span class="detail">{{ dojo.lv }} {{ RANK[dojo.rank] }} <span class="unit" ng-bind-html="dojo.htmlUnit"></span></span><span class="defense">{{ dojo.defense }}</span>
+         target="{{ $storage.dojoLinkTarget }}"><span class="detail">{{ dojo.lv }} {{ ui.rank[dojo.rank] }} <span class="unit" ng-bind-html="dojo.htmlUnit"></span></span><span class="defense">{{ dojo.defense }}</span>
         <div class="extraInfo">
           <div>ﾘｰﾀﾞｰ：<span ng-bind-html="dojo.leader"></span></div>
           <div>ｺﾒﾝﾄ：<span ng-bind-html="dojo.comment"></span></div>
-          <div>最終取得：<span am-time-ago="dojo.lastUpdate" am-preprocess="unix"></span></div>
+          <div>最終取得：<span am-time-ago="dojo.lastUpdate | amFromUnix"></span></div>
         </div>
       </a>
       <button ng-click="onClickHideDojo(dojo)" type="button" class="hide-dojo"><i class="fa fa-remove"></i></button>
