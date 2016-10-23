@@ -74,15 +74,7 @@
     </section>
     <section>
       「元に戻す」を
-      <select ng-model="$storage.undoTimeout">
-        <option value="5000">5秒で消す</option>
-        <option value="10000">10秒で消す</option>
-        <option value="15000">15秒で消す</option>
-        <option value="20000">20秒で消す</option>
-        <option value="25000">25秒で消す</option>
-        <option value="30000">30秒で消す</option>
-        <option value="0">自動で消さない</option>
-      </select>
+      <select ng-model="$storage.undoTimeout" ng-options="item.value as item.label for item in ui.undoTimeout"></select>
     </section>
     <a class="btn block" href="./"><i class="fa fa-undo"></i> 戻る</a>
   </section>
