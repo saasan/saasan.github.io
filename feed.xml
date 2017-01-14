@@ -5,9 +5,64 @@
     <description></description>
     <link>http://saasan.github.io/</link>
     <atom:link href="http://saasan.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 18 Sep 2016 15:35:42 +0900</pubDate>
-    <lastBuildDate>Sun, 18 Sep 2016 15:35:42 +0900</lastBuildDate>
+    <pubDate>Sat, 14 Jan 2017 22:22:51 +0900</pubDate>
+    <lastBuildDate>Sat, 14 Jan 2017 22:22:51 +0900</lastBuildDate>
     <generator>Jekyll v3.1.6</generator>
+    
+      <item>
+        <title>Visual Studio Code で Markdown のプレビューを保存する</title>
+        <description>&lt;h2 id=&quot;section&quot;&gt;概要&lt;/h2&gt;
+
+&lt;p&gt;Visual Studio Code の Markdown プレビューは
+なかなか見栄えが良くて気に入ってる。
+そのまま保存してドキュメントとして使いたいが、
+今のところ (2017/01/14、バージョン1.8.1) プレビューを保存する機能は
+ないようなので、同等のものを生成するスクリプトを作成した。&lt;/p&gt;
+
+&lt;p&gt;ネットを検索するといくつか同様のことを行うものが見つかったが、
+Markdown エンジンの違いにより VSCode と出力結果が異なる
+(リスト内のテーブルなど)
+ものばかりだった。
+このスクリプトは VSCode と同じ
+&lt;a href=&quot;https://github.com/markdown-it/markdown-it&quot;&gt;markdown-it&lt;/a&gt;
+を使用し、出力結果が同じになるようにしている。&lt;/p&gt;
+
+&lt;h2 id=&quot;section-1&quot;&gt;動作に必要なもの&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://nodejs.org/ja/&quot;&gt;Node.js&lt;/a&gt; が必要&lt;/p&gt;
+
+&lt;h2 id=&quot;section-2&quot;&gt;使い方&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;このリポジトリをローカルにクローンする&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;npm install&lt;/code&gt; する&lt;/li&gt;
+  &lt;li&gt;同じフォルダにHTML化したい Markdown ファイルを入れる&lt;/li&gt;
+  &lt;li&gt;フォルダを Visual Studio Code で開く&lt;/li&gt;
+  &lt;li&gt;gulpfile.js を編集し、HTML のタイトルなどを設定する&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Ctrl + Shift + B&lt;/code&gt; を押してビルドする&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;ビルドが終わるとできる dest フォルダに markdown.css を入れる&lt;/p&gt;
+
+    &lt;p&gt;※ markdown.css は
+VS Codeをインストールしたフォルダの
+resources\app\extensions\markdown\media\markdown.css
+にあります。&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;section-3&quot;&gt;ダウンロード&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/saasan/save-vscode-markdown-preview&quot;&gt;GitHub&lt;/a&gt;
+からダウンロードできます。&lt;/p&gt;
+</description>
+        <pubDate>Sat, 14 Jan 2017 22:15:58 +0900</pubDate>
+        <link>http://saasan.github.io/blog/2017/01/14/visual-studio-code-%E3%81%A7-markdown-%E3%81%AE%E3%83%97%E3%83%AC%E3%83%93%E3%83%A5%E3%83%BC%E3%82%92%E4%BF%9D%E5%AD%98%E3%81%99%E3%82%8B.html</link>
+        <guid isPermaLink="true">http://saasan.github.io/blog/2017/01/14/visual-studio-code-%E3%81%A7-markdown-%E3%81%AE%E3%83%97%E3%83%AC%E3%83%93%E3%83%A5%E3%83%BC%E3%82%92%E4%BF%9D%E5%AD%98%E3%81%99%E3%82%8B.html</guid>
+        
+        
+        <category>blog</category>
+        
+      </item>
     
       <item>
         <title>バッチファイルでミリ秒単位のSleepを行う</title>
