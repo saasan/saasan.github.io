@@ -5,8 +5,8 @@
     <description></description>
     <link>http://saasan.github.io/</link>
     <atom:link href="http://saasan.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 14 Jan 2017 22:28:54 +0900</pubDate>
-    <lastBuildDate>Sat, 14 Jan 2017 22:28:54 +0900</lastBuildDate>
+    <pubDate>Mon, 27 Feb 2017 20:41:50 +0900</pubDate>
+    <lastBuildDate>Mon, 27 Feb 2017 20:41:50 +0900</lastBuildDate>
     <generator>Jekyll v3.1.6</generator>
     
       <item>
@@ -179,7 +179,7 @@ _config-production.yml という名前のファイルを作成し、以下の通
       &lt;li&gt;所得の生ずる場所 : 東京都港区六本木 6-10-1&lt;/li&gt;
       &lt;li&gt;収入金額 : AdSenseでの収入金額&lt;br /&gt;
 (&lt;a href=&quot;https://www.google.com/adsense/app#main/home&quot; target=&quot;_blank&quot;&gt;AdSenseのサイト&lt;/a&gt;
-&amp;gt; 「前回のお支払い」 &amp;gt; 期間を「前年」にして金額を合計する)&lt;/li&gt;
+&amp;gt; 「残高」右上の「…」 &amp;gt; 「お支払いページを表示」 &amp;gt; 「取引」右下の「取引を表示する」 &amp;gt; 上部のフィルターを「詳細取引表示」、「お支払い」、「前年」にして金額を合計する)&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
   &lt;li&gt;あとは控除など必要がある場合は入力&lt;/li&gt;
