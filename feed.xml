@@ -5,9 +5,125 @@
     <description></description>
     <link>http://saasan.github.io/</link>
     <atom:link href="http://saasan.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 27 Feb 2017 20:41:50 +0900</pubDate>
-    <lastBuildDate>Mon, 27 Feb 2017 20:41:50 +0900</lastBuildDate>
+    <pubDate>Wed, 03 May 2017 01:01:54 +0900</pubDate>
+    <lastBuildDate>Wed, 03 May 2017 01:01:54 +0900</lastBuildDate>
     <generator>Jekyll v3.1.6</generator>
+    
+      <item>
+        <title>コマンドライン(CLI)でFortiGateを設定する</title>
+        <description>&lt;h2 id=&quot;section&quot;&gt;概要&lt;/h2&gt;
+
+&lt;p&gt;FortiGateはブラウザーでアクセスすることでWeb上からGUIで設定できる。
+しかし、諸事情によりコマンドラインから設定することになったので、設定方法をメモしておく。&lt;/p&gt;
+
+&lt;h2 id=&quot;section-1&quot;&gt;ログインする&lt;/h2&gt;
+
+&lt;p&gt;sshで接続することでコマンドラインから設定ができる。&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ ssh admin@192.168.0.1
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;section-2&quot;&gt;ヘルプを表示する&lt;/h2&gt;
+
+&lt;p&gt;「?」を入力すると現在使えるコマンドが表示される。&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# ? ←「?」を入力しても表示されない
+config      config object
+get         get dynamic and system information
+show        show configuration
+diagnose    diagnose facility
+execute     execute static commands
+exit        exit CLI
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;コマンドの入力途中に「?」を入力するとコマンドが補完される。
+例えば、sh?と入力するとshowに補完される。&lt;/p&gt;
+
+&lt;p&gt;また、引数が必要なコマンドを入力した後に「?」を入力すると引数の候補が表示される。&lt;/p&gt;
+
+&lt;h2 id=&quot;section-3&quot;&gt;バージョンを確認する&lt;/h2&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# get system status
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;section-4&quot;&gt;設定を確認する&lt;/h2&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# show
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;section-5&quot;&gt;デフォルト値を含むすべての設定を確認する&lt;/h2&gt;
+
+&lt;p&gt;数メガバイトある設定が出力される為、かなり時間がかかるので注意。&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# show full-configuration
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h1 id=&quot;more&quot;&gt;moreを使用しない&lt;/h1&gt;
+
+&lt;p&gt;コンソールへ設定を出力してバックアップを取りたいような場合は、
+下記のコマンドでmoreを表示しないようにすることができる。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;moreを使用しないように変更&lt;/p&gt;
+
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# config system console
+# set output standard
+# end
+&lt;/code&gt;&lt;/pre&gt;
+    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;moreを使用するように戻す&lt;/p&gt;
+
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# config system console
+# set output more
+# end
+&lt;/code&gt;&lt;/pre&gt;
+    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;section-6&quot;&gt;設定を変更する&lt;/h2&gt;
+
+&lt;p&gt;上記「設定を確認する」や「デフォルト値を含むすべての設定を確認する」で
+表示されたものを見れば分かるが、設定はディレクトリのように階層化されている。
+また、表示されたものがほぼそのまま設定用のコマンドになっている。&lt;/p&gt;
+
+&lt;p&gt;基本的に、&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;コマンド「config ○○○」で設定を行いたい階層に移動&lt;/li&gt;
+  &lt;li&gt;コマンド「set △△△ ×××」で値を設定&lt;/li&gt;
+  &lt;li&gt;コマンド「end」で設定を完了&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;という流れで設定する。上記「moreを使用しない」を参照。&lt;/p&gt;
+
+&lt;h2 id=&quot;section-7&quot;&gt;設定を保存する&lt;/h2&gt;
+
+&lt;p&gt;設定は自動的に保存される。
+Cisco製品のように「write memory」などで明示的に保存する必要はない。&lt;/p&gt;
+
+&lt;h2 id=&quot;section-8&quot;&gt;設定を終了し切断する&lt;/h2&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# exit
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+</description>
+        <pubDate>Wed, 03 May 2017 00:18:36 +0900</pubDate>
+        <link>http://saasan.github.io/blog/2017/05/03/%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%83%A9%E3%82%A4%E3%83%B3-CLI-%E3%81%A7FortiGate%E3%82%92%E8%A8%AD%E5%AE%9A%E3%81%99%E3%82%8B.html</link>
+        <guid isPermaLink="true">http://saasan.github.io/blog/2017/05/03/%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%83%A9%E3%82%A4%E3%83%B3-CLI-%E3%81%A7FortiGate%E3%82%92%E8%A8%AD%E5%AE%9A%E3%81%99%E3%82%8B.html</guid>
+        
+        
+        <category>blog</category>
+        
+      </item>
     
       <item>
         <title>Visual Studio Code で Markdown のプレビューを保存する</title>
