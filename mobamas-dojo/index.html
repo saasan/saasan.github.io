@@ -67,11 +67,21 @@
     </section>
   </section>
 
-  <section id="versionedInfo" class="info" ng-init="infoVersion = 20" ng-show="infoVersion > $storage.infoVersion">
+  <section id="versionedInfo" class="info" ng-init="infoVersion = 21" ng-show="infoVersion > $storage.infoVersion">
     <button type="button" class="close" ng-click="$storage.infoVersion = infoVersion"><i class="fa fa-close"></i></button>
     <h3>お知らせ</h3>
 
-    <h4>2017/06/26</h4>
+    <h4>2017/06/26 23時頃</h4>
+    <ul>
+      <li>
+        当モバマス道場リスト自体はプロデューサーランクS10に対応したつもりですが、
+        元データである
+        「<a href="http://momoka-sakurai.com/docs/dojolist_api_v2.html" target="_blank">DojoList API v2</a>」が
+        S10に対応していない為、今のところS6以上が表示できません。
+      </li>
+    </ul>
+
+    <h4>2017/06/26 0時頃</h4>
     <ul>
       <li>
         現在、道場リストにおけるコメントの表示がおかしくなっています。
@@ -81,13 +91,6 @@
         コメント部分を避けてタッチして頂くか、
         「道場リスト設定」の「リーダー等を表示する」のチェックをはずすことで通常通り利用することができます。
       </li>
-    </ul>
-
-    <h4>2016/10/23 変更点</h4>
-    <ul>
-      <li>休業中の道場の背景色を灰色へ変更。</li>
-      <li>休業中の強調対象に「強リーダー」などを追加。</li>
-      <li>発揮値の強調ルールを調整。</li>
     </ul>
 
     <h4>プロダクションメンバー募集中！</h4>
