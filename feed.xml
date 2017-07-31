@@ -5,12 +5,12 @@
     <description></description>
     <link>http://saasan.github.io/</link>
     <atom:link href="http://saasan.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 31 Jul 2017 20:10:54 +0900</pubDate>
-    <lastBuildDate>Mon, 31 Jul 2017 20:10:54 +0900</lastBuildDate>
+    <pubDate>Mon, 31 Jul 2017 20:15:06 +0900</pubDate>
+    <lastBuildDate>Mon, 31 Jul 2017 20:15:06 +0900</lastBuildDate>
     <generator>Jekyll v3.1.6</generator>
     
       <item>
-        <title>RetHat5.7からCentOS5.7へ移行する</title>
+        <title>RedHat5.7からCentOS5.7へ移行する</title>
         <description>&lt;p&gt;RHEL 5.7 の物理サーバをクローンして仮想化する際、ライセンス的に問題がありそうなので CentOS 5.7 へ移行した話。&lt;/p&gt;
 
 &lt;h2 id=&quot;section&quot;&gt;公式ドキュメント&lt;/h2&gt;
@@ -49,8 +49,8 @@ Error: Cannot retrieve repository metadata (repomd.xml) for repository: base. Pl
 &lt;p&gt;再度 yum update したら完了。&lt;/p&gt;
 </description>
         <pubDate>Mon, 31 Jul 2017 19:47:52 +0900</pubDate>
-        <link>http://saasan.github.io/blog/2017/07/31/rethat5.7%E3%81%8B%E3%82%89centos5.7%E3%81%B8%E7%A7%BB%E8%A1%8C%E3%81%99%E3%82%8B.html</link>
-        <guid isPermaLink="true">http://saasan.github.io/blog/2017/07/31/rethat5.7%E3%81%8B%E3%82%89centos5.7%E3%81%B8%E7%A7%BB%E8%A1%8C%E3%81%99%E3%82%8B.html</guid>
+        <link>http://saasan.github.io/blog/2017/07/31/redhat5.7%E3%81%8B%E3%82%89centos5.7%E3%81%B8%E7%A7%BB%E8%A1%8C%E3%81%99%E3%82%8B.html</link>
+        <guid isPermaLink="true">http://saasan.github.io/blog/2017/07/31/redhat5.7%E3%81%8B%E3%82%89centos5.7%E3%81%B8%E7%A7%BB%E8%A1%8C%E3%81%99%E3%82%8B.html</guid>
         
         
         <category>blog</category>
