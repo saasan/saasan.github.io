@@ -67,9 +67,19 @@
     </section>
   </section>
 
-  <section id="versionedInfo" class="info" ng-init="infoVersion = 21" ng-show="infoVersion > $storage.infoVersion">
+  <section id="versionedInfo" class="info" ng-init="infoVersion = 22" ng-show="infoVersion > $storage.infoVersion">
     <button type="button" class="close" ng-click="$storage.infoVersion = infoVersion"><i class="fa fa-close"></i></button>
     <h3>お知らせ</h3>
+
+    <h4>2017/10/22 23時頃</h4>
+    <ul>
+      <li>
+        当モバマス道場リストで元データとして使用させて頂いている
+        「<a href="http://momoka-sakurai.com/docs/dojolist_api_v2.html" target="_blank">DojoList API v2</a>」が最近不安定なようです。
+        データを取得しようとしても「502 Bad Gateway」が返され、道場データを取得できない場合があります。
+        こちらではどうすることもできませんので、DojoList APIの管理人さんへお問い合わせください。
+      </li>
+    </ul>
 
     <h4>2017/06/26 23時頃</h4>
     <ul>
