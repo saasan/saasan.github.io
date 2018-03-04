@@ -5,8 +5,8 @@
     <description></description>
     <link>https://saasan.github.io/</link>
     <atom:link href="https://saasan.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 04 Nov 2017 09:51:15 +0900</pubDate>
-    <lastBuildDate>Sat, 04 Nov 2017 09:51:15 +0900</lastBuildDate>
+    <pubDate>Sun, 04 Mar 2018 20:25:03 +0900</pubDate>
+    <lastBuildDate>Sun, 04 Mar 2018 20:25:03 +0900</lastBuildDate>
     <generator>Jekyll v3.1.6</generator>
     
       <item>
@@ -339,8 +339,8 @@ _config-production.yml という名前のファイルを作成し、以下の通
   &lt;li&gt;「雑所得」の「その他」に以下の通り入力
     &lt;ul&gt;
       &lt;li&gt;種目 : 広告収入&lt;/li&gt;
-      &lt;li&gt;報酬などの支払者の氏名・名称 : グーグル株式会社&lt;/li&gt;
-      &lt;li&gt;所得の生ずる場所 : 東京都港区六本木 6-10-1&lt;/li&gt;
+      &lt;li&gt;報酬などの支払者の氏名・名称 : &lt;del&gt;グーグル株式会社&lt;/del&gt; グーグル合同会社 (2018/03/04 修正)&lt;/li&gt;
+      &lt;li&gt;所得の生ずる場所 : 東京都港区六本木６丁目１０－１ 六本木ヒルズ森タワー&lt;/li&gt;
       &lt;li&gt;収入金額 : AdSenseでの収入金額&lt;br /&gt;
 (&lt;a href=&quot;https://www.google.com/adsense/app#main/home&quot; target=&quot;_blank&quot;&gt;AdSenseのサイト&lt;/a&gt;
 &amp;gt; 「残高」右上の「…」 &amp;gt; 「お支払いページを表示」 &amp;gt; 「取引」右下の「取引を表示する」 &amp;gt; 上部のフィルターを「詳細取引表示」、「お支払い」、「前年」にして金額を合計する)&lt;/li&gt;
