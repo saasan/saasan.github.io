@@ -67,54 +67,19 @@
     </section>
   </section>
 
-  <section id="versionedInfo" class="info" ng-init="infoVersion = 22" ng-show="infoVersion > $storage.infoVersion">
+  <section id="versionedInfo" class="info" ng-init="infoVersion = 23" ng-show="infoVersion > $storage.infoVersion">
     <button type="button" class="close" ng-click="$storage.infoVersion = infoVersion"><i class="fa fa-close"></i></button>
     <h3>お知らせ</h3>
 
-    <h4>2017/10/22 23時頃</h4>
+    <h4>2018/11/10 5時頃</h4>
     <ul>
       <li>
         当モバマス道場リストで元データとして使用させて頂いている
-        「<a href="http://momoka-sakurai.com/docs/dojolist_api_v2.html" target="_blank">DojoList API v2</a>」が最近不安定なようです。
-        データを取得しようとしても「502 Bad Gateway」が返され、道場データを取得できない場合があります。
+        「<a href="http://momoka-sakurai.com/docs/dojolist_api_v2.html" target="_blank">DojoList API v2</a>」から
+        道場データを取得しようとしても空のファイルが返される状態となっており、データが取得できないようです。
         こちらではどうすることもできませんので、DojoList APIの管理人さんへお問い合わせください。
       </li>
     </ul>
-
-    <h4>2017/06/26 23時頃</h4>
-    <ul>
-      <li>
-        当モバマス道場リスト自体はプロデューサーランクS10に対応したつもりですが、
-        元データである
-        「<a href="http://momoka-sakurai.com/docs/dojolist_api_v2.html" target="_blank">DojoList API v2</a>」が
-        S10に対応していない為、今のところS6以上が表示できません。
-      </li>
-    </ul>
-
-    <h4>2017/06/26 0時頃</h4>
-    <ul>
-      <li>
-        現在、道場リストにおけるコメントの表示がおかしくなっています。
-        これは、当モバマス道場リストで利用している
-        「<a href="http://momoka-sakurai.com/docs/dojolist_api_v2.html" target="_blank">DojoList API v2</a>」が
-        モバマスの画面変更に対応していない為と思われます。
-        コメント部分を避けてタッチして頂くか、
-        「道場リスト設定」の「リーダー等を表示する」のチェックをはずすことで通常通り利用することができます。
-      </li>
-    </ul>
-
-    <h4>プロダクションメンバー募集中！</h4>
-    <section>
-      <p><a href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fknights%2Fknights_top_for_other%3Fknights_id%3D474819" target="_blank">ﾍﾟﾛといっしょ【ゆきみﾌﾟﾛﾀﾞｸｼｮﾝ】</a></p>
-      <p>
-        佐城雪美ちゃんプロです！<br>
-        ゆきみん好きなら誰でもどんと来い！<br>
-        ゆきみんの輪を広げましょう？<br>
-        ノルマ等は無し！<br>
-        ゆきみん好きな方なら是非！<br>
-        直接申請どうぞ♪【代表ID：<a href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fprofile%2Fshow%2F60175954" target="_blank">60175954</a>】
-      </p>
-    </section>
   </section>
 
   <section id="birthday" class="info" ng-show="$storage.showBirthday">
