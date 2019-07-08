@@ -19,29 +19,29 @@
     <meta property="og:image" content="https://saasan.github.io/img/s2works_favicon.png">
     <script type="application/ld+json">
       {
-          "@context": "http://schema.org/",
-          "@type": "Person",
-          "name": "saasan",
-          "sameAs": [
-            "https://twitter.com/saasan",
-            "https://github.com/saasan"
-          ]
-        }
+        "@context": "http://schema.org/",
+        "@type": "Person",
+        "name": "saasan",
+        "sameAs": [
+          "https://twitter.com/saasan",
+          "https://github.com/saasan"
+        ]
+      }
     </script>
     <script type="application/ld+json">
       {
-          "@context": "http://schema.org",
-          "@type": "Article",
-          "name": "コマンドライン(CLI)でFortiGateを設定する",
-          "datePublished": "2017-05-03T00:18:36+09:00",
-          "headline": "FortiGateはブラウザーでアクセスすることでWeb上からGUIで設定できる。 しかし、諸事情によりコマンドラインから設定することになったので、設定方法をメモしておく。",
-          "image": "https://saasan.github.io/img/s2works_favicon.png",
-          "url": "https://saasan.github.io/blog/2017/05/03/%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%83%A9%E3%82%A4%E3%83%B3-CLI-%E3%81%A7FortiGate%E3%82%92%E8%A8%AD%E5%AE%9A%E3%81%99%E3%82%8B.html",
-          "publisher" : {
-            "@type": "Person",
-            "name": "saasan"
-          }
+        "@context": "http://schema.org",
+        "@type": "Article",
+        "name": "コマンドライン(CLI)でFortiGateを設定する",
+        "datePublished": "2017-05-03T00:18:36+09:00",
+        "headline": "FortiGateはブラウザーでアクセスすることでWeb上からGUIで設定できる。 しかし、諸事情によりコマンドラインから設定することになったので、設定方法をメモしておく。",
+        "image": "https://saasan.github.io/img/s2works_favicon.png",
+        "url": "https://saasan.github.io/blog/2017/05/03/%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%83%A9%E3%82%A4%E3%83%B3-CLI-%E3%81%A7FortiGate%E3%82%92%E8%A8%AD%E5%AE%9A%E3%81%99%E3%82%8B.html",
+        "publisher" : {
+          "@type": "Person",
+          "name": "saasan"
         }
+      }
     </script>
   </head>
   <body itemscope itemtype="http://schema.org/WebPage">
@@ -78,19 +78,22 @@
             </div>
           </header>
           <article class="post-content">
-            <h2 id="section">概要</h2>
+            <h2 id="概要">概要</h2>
             <p>FortiGateはブラウザーでアクセスすることでWeb上からGUIで設定できる。
-しかし、諸事情によりコマンドラインから設定することになったので、設定方法をメモしておく。</p>
-            <h2 id="section-1">ログインする</h2>
+              しかし、諸事情によりコマンドラインから設定することになったので、設定方法をメモしておく。</p>
+            <h2 id="ログインする">ログインする</h2>
             <p>sshで接続することでコマンドラインから設定ができる。</p>
             <div class="highlighter-rouge">
-              <pre class="highlight"><code>$ ssh admin@192.168.0.1
+              <div class="highlight">
+                <pre class="highlight"><code>$ ssh admin@192.168.0.1
 </code></pre>
+              </div>
             </div>
-            <h2 id="section-2">ヘルプを表示する</h2>
+            <h2 id="ヘルプを表示する">ヘルプを表示する</h2>
             <p>「?」を入力すると現在使えるコマンドが表示される。</p>
             <div class="highlighter-rouge">
-              <pre class="highlight"><code># ? ←「?」を入力しても表示されない
+              <div class="highlight">
+                <pre class="highlight"><code># ? ←「?」を入力しても表示されない
 config      config object
 get         get dynamic and system information
 show        show configuration
@@ -98,53 +101,64 @@ diagnose    diagnose facility
 execute     execute static commands
 exit        exit CLI
 </code></pre>
+              </div>
             </div>
             <p>コマンドの入力途中に「?」を入力するとコマンドが補完される。
-例えば、sh?と入力するとshowに補完される。</p>
+              例えば、sh?と入力するとshowに補完される。</p>
             <p>また、引数が必要なコマンドを入力した後に「?」を入力すると引数の候補が表示される。</p>
-            <h2 id="section-3">バージョンを確認する</h2>
+            <h2 id="バージョンを確認する">バージョンを確認する</h2>
             <div class="highlighter-rouge">
-              <pre class="highlight"><code># get system status
+              <div class="highlight">
+                <pre class="highlight"><code># get system status
 </code></pre>
+              </div>
             </div>
-            <h2 id="section-4">設定を確認する</h2>
+            <h2 id="設定を確認する">設定を確認する</h2>
             <div class="highlighter-rouge">
-              <pre class="highlight"><code># show
+              <div class="highlight">
+                <pre class="highlight"><code># show
 </code></pre>
+              </div>
             </div>
-            <h2 id="section-5">デフォルト値を含むすべての設定を確認する</h2>
+            <h2 id="デフォルト値を含むすべての設定を確認する">デフォルト値を含むすべての設定を確認する</h2>
             <p>数メガバイトある設定が出力される為、かなり時間がかかるので注意。</p>
             <div class="highlighter-rouge">
-              <pre class="highlight"><code># show full-configuration
+              <div class="highlight">
+                <pre class="highlight"><code># show full-configuration
 </code></pre>
+              </div>
             </div>
-            <h1 id="more">moreを使用しない</h1>
+            <h1 id="moreを使用しない">moreを使用しない</h1>
             <p>コンソールへ設定を出力してバックアップを取りたいような場合は、
-下記のコマンドでmoreを表示しないようにすることができる。</p>
+              下記のコマンドでmoreを表示しないようにすることができる。</p>
             <ul>
               <li>
                 <p>moreを使用しないように変更</p>
                 <div class="highlighter-rouge">
-                  <pre class="highlight"><code># config system console
+                  <div class="highlight">
+                    <pre class="highlight"><code># config system console
 # set output standard
 # end
 </code></pre>
-                </div>
+                  </div>
+                      </div>
               </li>
               <li>
                 <p>moreを使用するように戻す</p>
                 <div class="highlighter-rouge">
-                  <pre class="highlight"><code># config system console
+                  <div class="highlight">
+                    <pre class="highlight"><code># config system console
 # set output more
 # end
 </code></pre>
-                </div>
+                  </div>
+                      </div>
               </li>
             </ul>
-            <h2 id="section-6">設定を変更する</h2>
+            <h2 id="設定を変更する">設定を変更する</h2>
             <p>上記「設定を確認する」や「デフォルト値を含むすべての設定を確認する」で
-表示されたものを見れば分かるが、設定はディレクトリのように階層化されている。
-また、表示されたものがほぼそのまま設定用のコマンドになっている。</p>
+              表示されたものを見れば分かるが、設定はディレクトリのように階層化されている。
+              また、表示されたものがほぼそのまま設定用のコマンドになっている。</p>
             <p>基本的に、</p>
             <ol>
               <li>コマンド「config ○○○」で設定を行いたい階層に移動</li>
@@ -152,13 +166,15 @@ exit        exit CLI
               <li>コマンド「end」で設定を完了</li>
             </ol>
             <p>という流れで設定する。上記「moreを使用しない」を参照。</p>
-            <h2 id="section-7">設定を保存する</h2>
+            <h2 id="設定を保存する">設定を保存する</h2>
             <p>設定は自動的に保存される。
-Cisco製品のように「write memory」などで明示的に保存する必要はない。</p>
-            <h2 id="section-8">設定を終了し切断する</h2>
+              Cisco製品のように「write memory」などで明示的に保存する必要はない。</p>
+            <h2 id="設定を終了し切断する">設定を終了し切断する</h2>
             <div class="highlighter-rouge">
-              <pre class="highlight"><code># exit
+              <div class="highlight">
+                <pre class="highlight"><code># exit
 </code></pre>
+              </div>
             </div>
           </article>
         </div>
@@ -183,28 +199,28 @@ Cisco製品のように「write memory」などで明示的に保存する必要
           </ul>
           <a href="https://twitter.com/saasan" target="_blank" class="twitter-username">
             saasan
-  </a>
+          </a>
           <a href="/feed.xml" target="_blank" class="rss">RSS</a>
         </nav>
       </div>
     </footer>
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
       
-        ga('create', 'UA-42938817-1', 'auto');
-        ga('send', 'pageview');
+      ga('create', 'UA-42938817-1', 'auto');
+      ga('send', 'pageview');
       
-        var i = document.getElementsByClassName('adsbygoogle').length;
-        while (i-- > 0) {
-          (adsbygoogle = window.adsbygoogle || []).push({});
-        }
-        (adsbygoogle = window.adsbygoogle || []).push({
-          google_ad_client: "ca-pub-0141905477316976",
-          enable_page_level_ads: true
-        });
+      var i = document.getElementsByClassName('adsbygoogle').length;
+      while (i-- > 0) {
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      }
+      (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-0141905477316976",
+        enable_page_level_ads: true
+      });
     </script>
   </body>
 </html>

@@ -19,29 +19,29 @@
     <meta property="og:image" content="https://saasan.github.io/img/s2works_favicon.png">
     <script type="application/ld+json">
       {
-          "@context": "http://schema.org/",
-          "@type": "Person",
-          "name": "saasan",
-          "sameAs": [
-            "https://twitter.com/saasan",
-            "https://github.com/saasan"
-          ]
-        }
+        "@context": "http://schema.org/",
+        "@type": "Person",
+        "name": "saasan",
+        "sameAs": [
+          "https://twitter.com/saasan",
+          "https://github.com/saasan"
+        ]
+      }
     </script>
     <script type="application/ld+json">
       {
-          "@context": "http://schema.org",
-          "@type": "Article",
-          "name": "Visual Studio Code で Markdown のプレビューを保存する",
-          "datePublished": "2017-01-14T22:15:58+09:00",
-          "headline": "Visual Studio Code の Markdown プレビューは なかなか見栄えが良くて気に入ってる。 そのまま保存してドキュメントとして使いたいが、 今のところ (2017/01/14、バージョン1.8.1) プレビューを保存する機能は ないようなので、同等のものを生成するスクリプトを作成した。",
-          "image": "https://saasan.github.io/img/s2works_favicon.png",
-          "url": "https://saasan.github.io/blog/2017/01/14/save-vscode-markdown-preview.html",
-          "publisher" : {
-            "@type": "Person",
-            "name": "saasan"
-          }
+        "@context": "http://schema.org",
+        "@type": "Article",
+        "name": "Visual Studio Code で Markdown のプレビューを保存する",
+        "datePublished": "2017-01-14T22:15:58+09:00",
+        "headline": "Visual Studio Code の Markdown プレビューは なかなか見栄えが良くて気に入ってる。 そのまま保存してドキュメントとして使いたいが、 今のところ (2017/01/14、バージョン1.8.1) プレビューを保存する機能は ないようなので、同等のものを生成するスクリプトを作成した。",
+        "image": "https://saasan.github.io/img/s2works_favicon.png",
+        "url": "https://saasan.github.io/blog/2017/01/14/save-vscode-markdown-preview.html",
+        "publisher" : {
+          "@type": "Person",
+          "name": "saasan"
         }
+      }
     </script>
   </head>
   <body itemscope itemtype="http://schema.org/WebPage">
@@ -78,22 +78,22 @@
             </div>
           </header>
           <article class="post-content">
-            <h2 id="section">概要</h2>
+            <h2 id="概要">概要</h2>
             <p>Visual Studio Code の Markdown プレビューは
-なかなか見栄えが良くて気に入ってる。
-そのまま保存してドキュメントとして使いたいが、
-今のところ (2017/01/14、バージョン1.8.1) プレビューを保存する機能は
-ないようなので、同等のものを生成するスクリプトを作成した。</p>
+              なかなか見栄えが良くて気に入ってる。
+              そのまま保存してドキュメントとして使いたいが、
+              今のところ (2017/01/14、バージョン1.8.1) プレビューを保存する機能は
+              ないようなので、同等のものを生成するスクリプトを作成した。</p>
             <p>ネットを検索するといくつか同様のことを行うものが見つかったが、
-Markdown エンジンの違いにより VSCode と出力結果が異なる
-(リスト内のテーブルなど)
-ものばかりだった。
-このスクリプトは VSCode と同じ
+              Markdown エンジンの違いにより VSCode と出力結果が異なる
+              (リスト内のテーブルなど)
+              ものばかりだった。
+              このスクリプトは VSCode と同じ
               <a href="https://github.com/markdown-it/markdown-it">markdown-it</a>
               を使用し、出力結果が同じになるようにしている。</p>
-            <h2 id="section-1">動作に必要なもの</h2>
+            <h2 id="動作に必要なもの">動作に必要なもの</h2>
             <p><a href="https://nodejs.org/ja/">Node.js</a> が必要</p>
-            <h2 id="section-2">使い方</h2>
+            <h2 id="使い方">使い方</h2>
             <ol>
               <li>このリポジトリをローカルにクローンする</li>
               <li><code class="highlighter-rouge">npm install</code> する</li>
@@ -104,12 +104,12 @@ Markdown エンジンの違いにより VSCode と出力結果が異なる
               <li>
                 <p>ビルドが終わるとできる dest フォルダに markdown.css を入れる</p>
                 <p>※ markdown.css は
-VS Codeをインストールしたフォルダの
-resources\app\extensions\markdown\media\markdown.css
-にあります。</p>
+                  VS Codeをインストールしたフォルダの
+                  resources\app\extensions\markdown\media\markdown.css
+                  にあります。</p>
               </li>
             </ol>
-            <h2 id="section-3">ダウンロード</h2>
+            <h2 id="ダウンロード">ダウンロード</h2>
             <p><a href="https://github.com/saasan/save-vscode-markdown-preview">GitHub</a>
               からダウンロードできます。</p>
           </article>
@@ -135,28 +135,28 @@ resources\app\extensions\markdown\media\markdown.css
           </ul>
           <a href="https://twitter.com/saasan" target="_blank" class="twitter-username">
             saasan
-  </a>
+          </a>
           <a href="/feed.xml" target="_blank" class="rss">RSS</a>
         </nav>
       </div>
     </footer>
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
       
-        ga('create', 'UA-42938817-1', 'auto');
-        ga('send', 'pageview');
+      ga('create', 'UA-42938817-1', 'auto');
+      ga('send', 'pageview');
       
-        var i = document.getElementsByClassName('adsbygoogle').length;
-        while (i-- > 0) {
-          (adsbygoogle = window.adsbygoogle || []).push({});
-        }
-        (adsbygoogle = window.adsbygoogle || []).push({
-          google_ad_client: "ca-pub-0141905477316976",
-          enable_page_level_ads: true
-        });
+      var i = document.getElementsByClassName('adsbygoogle').length;
+      while (i-- > 0) {
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      }
+      (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-0141905477316976",
+        enable_page_level_ads: true
+      });
     </script>
   </body>
 </html>

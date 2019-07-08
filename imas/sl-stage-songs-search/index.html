@@ -19,29 +19,29 @@
     <meta property="og:image" content="https://saasan.github.io/img/s2works_favicon.png">
     <script type="application/ld+json">
       {
-          "@context": "http://schema.org/",
-          "@type": "Person",
-          "name": "saasan",
-          "sameAs": [
-            "https://twitter.com/saasan",
-            "https://github.com/saasan"
-          ]
-        }
+        "@context": "http://schema.org/",
+        "@type": "Person",
+        "name": "saasan",
+        "sameAs": [
+          "https://twitter.com/saasan",
+          "https://github.com/saasan"
+        ]
+      }
     </script>
     <script type="application/ld+json">
       {
-          "@context": "http://schema.org",
-          "@type": "Article",
-          "name": "デレステ楽曲検索",
-          "datePublished": "2016-05-28T21:55:55+09:00",
-          "headline": "アイドルマスター シンデレラガールズ スターライトステージ (デレステ) の楽曲一覧から、消費スタミナ、獲得経験値、親愛度などで曲を探せます。",
-          "image": "https://saasan.github.io/img/s2works_favicon.png",
-          "url": "https://saasan.github.io/imas/sl-stage-songs-search/",
-          "publisher" : {
-            "@type": "Person",
-            "name": "saasan"
-          }
+        "@context": "http://schema.org",
+        "@type": "Article",
+        "name": "デレステ楽曲検索",
+        "datePublished": "2016-05-28T21:55:55+09:00",
+        "headline": "アイドルマスター シンデレラガールズ スターライトステージ (デレステ) の楽曲一覧から、消費スタミナ、獲得経験値、親愛度などで曲を探せます。",
+        "image": "https://saasan.github.io/img/s2works_favicon.png",
+        "url": "https://saasan.github.io/imas/sl-stage-songs-search/",
+        "publisher" : {
+          "@type": "Person",
+          "name": "saasan"
         }
+      }
     </script>
   </head>
   <body itemscope itemtype="http://schema.org/WebPage">
@@ -83,11 +83,11 @@
                 <p>
                   <a href="http://cinderella.idolmaster.jp/sl-stage/" target="_blank">アイドルマスター シンデレラガールズ スターライトステージ</a>
                   (デレステ) の楽曲一覧から、消費スタミナ、獲得経験値、親愛度などで曲を探せます。
-    </p>
+                </p>
                 <p>
                   「レベルアップに必要なスタミナが知りたい」「親愛度MAXに必要なスタミナが知りたい」「残っているスタミナを使い切れる曲を探したい」
-      といった用途にどうぞ。
-    </p>
+                  といった用途にどうぞ。
+                </p>
                 <h4>2016/05/28 更新</h4>
                 <ul>
                   <li>「つぼみ」ほか追加</li>
@@ -104,37 +104,37 @@
                   <legend>検索</legend>
                   <label>
                     難易度：
-        <select ng-model="$storage.songFilterDifficulty" ng-options="hash.value as hash.label for hash in songDifficultyList">
+                    <select ng-model="$storage.songFilterDifficulty" ng-options="hash.value as hash.label for hash in songDifficultyList">
                       <option value="">-</option>
                     </select>
                   </label>
                   <label>
                     タイプ：
-        <select ng-model="$storage.songFilterType" ng-options="hash.value as hash.label for hash in songTypeList">
+                    <select ng-model="$storage.songFilterType" ng-options="hash.value as hash.label for hash in songTypeList">
                       <option value="">-</option>
                     </select>
                   </label>
                   <label>
                     楽曲Lv：
-        <select ng-model="$storage.songFilterLevel" ng-options="value for value in songLvList">
+                    <select ng-model="$storage.songFilterLevel" ng-options="value for value in songLvList">
                       <option value="">-</option>
                     </select>
                   </label>
                   <label>
                     スタミナ：
-        <select ng-model="$storage.songFilterStamina" ng-options="value for value in songStaminaList">
+                    <select ng-model="$storage.songFilterStamina" ng-options="value for value in songStaminaList">
                       <option value="">-</option>
                     </select>
                   </label>
                   <label>
                     経験値：
-        <select ng-model="$storage.songFilterExp" ng-options="value for value in songExpList">
+                    <select ng-model="$storage.songFilterExp" ng-options="value for value in songExpList">
                       <option value="">-</option>
                     </select>
                   </label>
                   <label>
                     親愛度：
-        <select ng-model="$storage.songFilterAffection" ng-options="value for value in songAffectionList">
+                    <select ng-model="$storage.songFilterAffection" ng-options="value for value in songAffectionList">
                       <option value="">-</option>
                     </select>
                   </label>
@@ -143,22 +143,22 @@
                   <legend>表示</legend>
                   <label>
                     <input type="checkbox" ng-model="$storage.showSongDifficulty"> 難易度
-      </label>
+                  </label>
                   <label>
                     <input type="checkbox" ng-model="$storage.showSongType"> タイプ
-      </label>
+                  </label>
                   <label>
                     <input type="checkbox" ng-model="$storage.showSongLevel"> 楽曲Lv
-      </label>
+                  </label>
                   <label>
                     <input type="checkbox" ng-model="$storage.showSongStamina"> スタミナ
-      </label>
+                  </label>
                   <label>
                     <input type="checkbox" ng-model="$storage.showSongExp"> 経験値
-      </label>
+                  </label>
                   <label>
                     <input type="checkbox" ng-model="$storage.showSongAffection"> 親愛度
-      </label>
+                  </label>
                 </fieldset>
               </section>
               <section>
@@ -214,28 +214,28 @@
           </ul>
           <a href="https://twitter.com/saasan" target="_blank" class="twitter-username">
             saasan
-  </a>
+          </a>
           <a href="/feed.xml" target="_blank" class="rss">RSS</a>
         </nav>
       </div>
     </footer>
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
       
-        ga('create', 'UA-42938817-1', 'auto');
-        ga('send', 'pageview');
+      ga('create', 'UA-42938817-1', 'auto');
+      ga('send', 'pageview');
       
-        var i = document.getElementsByClassName('adsbygoogle').length;
-        while (i-- > 0) {
-          (adsbygoogle = window.adsbygoogle || []).push({});
-        }
-        (adsbygoogle = window.adsbygoogle || []).push({
-          google_ad_client: "ca-pub-0141905477316976",
-          enable_page_level_ads: true
-        });
+      var i = document.getElementsByClassName('adsbygoogle').length;
+      while (i-- > 0) {
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      }
+      (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-0141905477316976",
+        enable_page_level_ads: true
+      });
     </script>
   </body>
 </html>

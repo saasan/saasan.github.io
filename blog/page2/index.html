@@ -19,29 +19,29 @@
     <meta property="og:image" content="https://saasan.github.io/img/s2works_favicon.png">
     <script type="application/ld+json">
       {
-          "@context": "http://schema.org/",
-          "@type": "Person",
-          "name": "saasan",
-          "sameAs": [
-            "https://twitter.com/saasan",
-            "https://github.com/saasan"
-          ]
-        }
+        "@context": "http://schema.org/",
+        "@type": "Person",
+        "name": "saasan",
+        "sameAs": [
+          "https://twitter.com/saasan",
+          "https://github.com/saasan"
+        ]
+      }
     </script>
     <script type="application/ld+json">
       {
-          "@context": "http://schema.org",
-          "@type": "Article",
-          "name": "ブログ",
+        "@context": "http://schema.org",
+        "@type": "Article",
+        "name": "ブログ",
       
-          "headline": "雑記、覚え書き、更新情報など",
-          "image": "https://saasan.github.io/img/s2works_favicon.png",
-          "url": "https://saasan.github.io/blog/page2/",
-          "publisher" : {
-            "@type": "Person",
-            "name": "saasan"
-          }
+        "headline": "雑記、覚え書き、更新情報など",
+        "image": "https://saasan.github.io/img/s2works_favicon.png",
+        "url": "https://saasan.github.io/blog/page2/",
+        "publisher" : {
+          "@type": "Person",
+          "name": "saasan"
         }
+      }
     </script>
   </head>
   <body itemscope itemtype="http://schema.org/WebPage">
@@ -83,15 +83,15 @@
                 <p>参考 :
                   <a href="https://www.nta.go.jp/taxanswer/shotoku/1900.htm" target="_blank">No.1900 給与所得者で確定申告が必要な人｜所得税｜国税庁</a></p>
                 <p>ありがたいことに、うちも売上が20万円を超えて確定申告することになったのでメモ。</p>
-                <h3 id="section">確定申告に必要なもの</h3>
+                <h3 id="確定申告に必要なもの">確定申告に必要なもの</h3>
                 <ul>
                   <li>生命保険料控除証明書など (いつも年末調整で提出してるやつ)</li>
                   <li>本業の会社からもらった源泉徴収票</li>
                   <li>パソコン</li>
                   <li>プリンター
-または <a href="https://www.printing.ne.jp/" target="_blank">ネットプリント</a> などのコンビニで印刷できるサービス</li>
+                    または <a href="https://www.printing.ne.jp/" target="_blank">ネットプリント</a> などのコンビニで印刷できるサービス</li>
                 </ul>
-                <h3 id="section-1">申告書を作る</h3>
+                <h3 id="申告書を作る">申告書を作る</h3>
                 <p>国税庁のホームページに
                   <a href="https://www.keisan.nta.go.jp/h27/ta_top.htm" target="_blank">確定申告書等作成コーナー</a>
                   があるのでそこで作る。</p>
@@ -99,14 +99,16 @@
                   <li>「書面提出」 &gt; 「所得税コーナー」 &gt; 「左記以外の所得のある方(全ての所得対応)」</li>
                   <li>「給与所得」に源泉徴収票通り入力</li>
                   <li>「雑所得」の「その他」に以下の通り入力
-    
                     <ul>
                       <li>種目 : 広告収入</li>
                       <li>報酬などの支払者の氏名・名称 : <del>グーグル株式会社</del> グーグル合同会社 (2018/03/04 修正)</li>
                       <li>所得の生ずる場所 : 東京都港区六本木６丁目１０－１ 六本木ヒルズ森タワー</li>
                       <li>収入金額 : AdSenseでの収入金額<br />
                         (<a href="https://www.google.com/adsense/app#main/home" target="_blank">AdSenseのサイト</a>
-                        &gt; 「残高」右上の「…」 &gt; 「お支払いページを表示」 &gt; 「取引」右下の「取引を表示する」 &gt; 上部のフィルターを「詳細取引表示」、「お支払い」、「前年」にして金額を合計する)</li>
+                        <blockquote>
+                          <p>「残高」右上の「…」 &gt; 「お支払いページを表示」 &gt; 「取引」右下の「取引を表示する」 &gt; 上部のフィルターを「詳細取引表示」、「お支払い」、「前年」にして金額を合計する)</p>
+                        </blockquote>
+                      </li>
                     </ul>
                   </li>
                   <li>あとは控除など必要がある場合は入力</li>
@@ -119,7 +121,7 @@
                     <a href="https://www.post.japanpost.jp/service/fuka_service/kakitome/" target="_blank">書留</a>
                     で)</li>
                 </ol>
-                <h3 id="section-2">その他</h3>
+                <h3 id="その他">その他</h3>
                 <ul>
                   <li><strong>AdSenseでの収入を証明する書類は必要はない</strong> そうな (申告内容が不審で税務調査されない限りは)。</li>
                   <li><strong>所得税の確定申告をすれば自動で各市町村に連絡が行き住民税に反映される</strong> ので住民税の申告は必要ない。</li>
@@ -130,8 +132,8 @@
               <h2><a class="post-link" href="/blog/2015/12/15/jekyll-escape-liquid-tags.html">[Jekyll] Liquidのタグをエスケープする方法</a></h2>
               <div class="post-meta">2015-12-15</div>
               <section>
-                <p><code class="highlighter-rouge"><span class="p">{</span><span class="err">%</span><span class="w"> </span><span class="err">raw</span><span class="w"> </span><span class="err">%</span><span class="p">}</span></code> と <code class="highlighter-rouge"><span class="p">{</span><span class="err">%</span><span class="w"> </span><span class="err">endraw</span><span class="w"> </span><span class="err">%</span><span class="p">}</span></code> で囲むと
-Liquidのタグもそのまま出力されます。</p>
+                <p><code class="highlighter-rouge">{% raw %}</code> と <code class="highlighter-rouge">{% endraw %}</code> で囲むと
+                  Liquidのタグもそのまま出力されます。</p>
                 <p>例えば</p>
                 <figure class="highlight">
                   <pre><code class="language-html" data-lang="html">{% raw %}
@@ -157,32 +159,21 @@ Liquidのタグもそのまま出力されます。</p>
               <div class="post-meta">2015-12-15</div>
               <section>
                 <p>Jekyll で include を多用してると、include されたファイルの中に
-include があってまたそのファイルの中に include が……なんてことになって
-HTML の構造が分からなくなるときがあります。
-できあがった HTML をみてもインデントがメチャクチャでわけがわからない…！</p>
+                  include があってまたそのファイルの中に include が……なんてことになって
+                  HTML の構造が分からなくなるときがあります。
+                  できあがった HTML をみてもインデントがメチャクチャでわけがわからない…！</p>
                 <p>そこで、HTML を整形して出力するプラグインを作ってみました。
-いわゆるbeautifierとかpretty printとかいわれる機能ですね。</p>
+                  いわゆるbeautifierとかpretty printとかいわれる機能ですね。</p>
                 <noscript>
-                  <pre>require &#39;rubygems&#39;
-require &#39;htmlbeautifier&#39;
-
-Jekyll::Hooks.register :documents, :post_render do |page|
-  next if page.output_ext != &#39;.html&#39;
-  page.output = HtmlBeautifier.beautify(page.output)
-end
-
-Jekyll::Hooks.register :pages, :post_render do |page|
-  next if page.ext != &#39;.html&#39;
-  page.output = HtmlBeautifier.beautify(page.output)
-end
+                  <pre>400: Invalid request
 </pre>
                 </noscript>
-                <script src="https://gist.github.com/saasan/7c92d15e7ebb4870f581.js"></script>
+                <script src="https://gist.github.com/7c92d15e7ebb4870f581.js"></script>
                 <p><code class="highlighter-rouge">gem install htmlbeautifier</code> などで htmlbeautifier をインストールしたあと、
-このファイルを _plugins フォルダに入れれば
-Jekyll でのビルド時に HTML が整形されます。</p>
+                  このファイルを _plugins フォルダに入れれば
+                  Jekyll でのビルド時に HTML が整形されます。</p>
                 <p>プラグインなので、プラグインが使えない GitHub Pages 上でのビルドには使えません。
-あらかじめローカルの環境でビルドして生成されたファイルをアップロードしてください。</p>
+                  あらかじめローカルの環境でビルドして生成されたファイルをアップロードしてください。</p>
               </section>
             </section>
             <section>
@@ -192,12 +183,12 @@ Jekyll でのビルド時に HTML が整形されます。</p>
                 <p><a href="https://play.google.com/store/apps/details?id=com.google.android.apps.paidtasks&amp;hl=ja" target="_blank">Google アンケート モニター - Google Play の Android アプリ</a></p>
                 <blockquote>
                   <p>「Google アンケート モニター」は Google 消費者アンケート チームが作成したアプリです。
-簡単なアンケートに答えるだけで Google Play で使えるクレジットがもらえます。</p>
+                    簡単なアンケートに答えるだけで Google Play で使えるクレジットがもらえます。</p>
                 </blockquote>
                 <p>デレステ、PSO2esにちょっとだけ課金したい人におすすめのアプリです。
-無料でGoogle Playのクレジットがもらえるので、少額の課金ならこれだけで済みます。</p>
+                  無料でGoogle Playのクレジットがもらえるので、少額の課金ならこれだけで済みます。</p>
                 <p>Android版のPSO2esでACをチャージすればPC版&amp;Vita版PSO2にも当然反映されるので、esは遊ばないというPSO2プレイヤーでも使えます。
-PSO2は少額の課金でもマグの追加やスキルツリーの追加等、かなり役に立つものが多いので特におすすめです。</p>
+                  PSO2は少額の課金でもマグの追加やスキルツリーの追加等、かなり役に立つものが多いので特におすすめです。</p>
                 <p>以下、自分が数ヶ月使用してみた感想</p>
                 <ul>
                   <li>アンケートの頻度は1～2週間に1度くらい。</li>
@@ -205,8 +196,8 @@ PSO2は少額の課金でもマグの追加やスキルツリーの追加等、�
                   <li>Google製なので、よくあるポイント系サイトと比べて安心。</li>
                   <li>アンケートの内容は「最近利用した動画サイトを選んでください」「次もAndroidのスマホを購入したいか」といった、Googleが運営しているサービスに関連したものが多い印象。</li>
                   <li>まれに「今年は何年ですか」のような、アンケートの必要性が分からないものもある。
-回答は選択式の為「とりあえず全部一番上」のように投げやりに選ぶこともできてしまうし、
-利用者がきちんと内容を理解して回答しているか確認しているのかもしれない。</li>
+                    回答は選択式の為「とりあえず全部一番上」のように投げやりに選ぶこともできてしまうし、
+                    利用者がきちんと内容を理解して回答しているか確認しているのかもしれない。</li>
                 </ul>
               </section>
             </section>
@@ -239,28 +230,28 @@ PSO2は少額の課金でもマグの追加やスキルツリーの追加等、�
           </ul>
           <a href="https://twitter.com/saasan" target="_blank" class="twitter-username">
             saasan
-  </a>
+          </a>
           <a href="/feed.xml" target="_blank" class="rss">RSS</a>
         </nav>
       </div>
     </footer>
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
       
-        ga('create', 'UA-42938817-1', 'auto');
-        ga('send', 'pageview');
+      ga('create', 'UA-42938817-1', 'auto');
+      ga('send', 'pageview');
       
-        var i = document.getElementsByClassName('adsbygoogle').length;
-        while (i-- > 0) {
-          (adsbygoogle = window.adsbygoogle || []).push({});
-        }
-        (adsbygoogle = window.adsbygoogle || []).push({
-          google_ad_client: "ca-pub-0141905477316976",
-          enable_page_level_ads: true
-        });
+      var i = document.getElementsByClassName('adsbygoogle').length;
+      while (i-- > 0) {
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      }
+      (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-0141905477316976",
+        enable_page_level_ads: true
+      });
     </script>
   </body>
 </html>

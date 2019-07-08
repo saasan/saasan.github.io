@@ -19,29 +19,29 @@
     <meta property="og:image" content="https://saasan.github.io/img/s2works_favicon.png">
     <script type="application/ld+json">
       {
-          "@context": "http://schema.org/",
-          "@type": "Person",
-          "name": "saasan",
-          "sameAs": [
-            "https://twitter.com/saasan",
-            "https://github.com/saasan"
-          ]
-        }
+        "@context": "http://schema.org/",
+        "@type": "Person",
+        "name": "saasan",
+        "sameAs": [
+          "https://twitter.com/saasan",
+          "https://github.com/saasan"
+        ]
+      }
     </script>
     <script type="application/ld+json">
       {
-          "@context": "http://schema.org",
-          "@type": "Article",
-          "name": "[Jekyll] HTMLを読みやすいように整形するプラグイン",
-          "datePublished": "2015-12-15T18:59:07+09:00",
-          "headline": "beautifierとかpretty printとかいわれる機能をJekyllでのビルド時に実行します。",
-          "image": "https://saasan.github.io/img/s2works_favicon.png",
-          "url": "https://saasan.github.io/blog/2015/12/15/jekyll-html-beautifier-plugin.html",
-          "publisher" : {
-            "@type": "Person",
-            "name": "saasan"
-          }
+        "@context": "http://schema.org",
+        "@type": "Article",
+        "name": "[Jekyll] HTMLを読みやすいように整形するプラグイン",
+        "datePublished": "2015-12-15T18:59:07+09:00",
+        "headline": "beautifierとかpretty printとかいわれる機能をJekyllでのビルド時に実行します。",
+        "image": "https://saasan.github.io/img/s2works_favicon.png",
+        "url": "https://saasan.github.io/blog/2015/12/15/jekyll-html-beautifier-plugin.html",
+        "publisher" : {
+          "@type": "Person",
+          "name": "saasan"
         }
+      }
     </script>
   </head>
   <body itemscope itemtype="http://schema.org/WebPage">
@@ -79,32 +79,21 @@
           </header>
           <article class="post-content">
             <p>Jekyll で include を多用してると、include されたファイルの中に
-include があってまたそのファイルの中に include が……なんてことになって
-HTML の構造が分からなくなるときがあります。
-できあがった HTML をみてもインデントがメチャクチャでわけがわからない…！</p>
+              include があってまたそのファイルの中に include が……なんてことになって
+              HTML の構造が分からなくなるときがあります。
+              できあがった HTML をみてもインデントがメチャクチャでわけがわからない…！</p>
             <p>そこで、HTML を整形して出力するプラグインを作ってみました。
-いわゆるbeautifierとかpretty printとかいわれる機能ですね。</p>
+              いわゆるbeautifierとかpretty printとかいわれる機能ですね。</p>
             <noscript>
-              <pre>require &#39;rubygems&#39;
-require &#39;htmlbeautifier&#39;
-
-Jekyll::Hooks.register :documents, :post_render do |page|
-  next if page.output_ext != &#39;.html&#39;
-  page.output = HtmlBeautifier.beautify(page.output)
-end
-
-Jekyll::Hooks.register :pages, :post_render do |page|
-  next if page.ext != &#39;.html&#39;
-  page.output = HtmlBeautifier.beautify(page.output)
-end
+              <pre>400: Invalid request
 </pre>
             </noscript>
-            <script src="https://gist.github.com/saasan/7c92d15e7ebb4870f581.js"></script>
+            <script src="https://gist.github.com/7c92d15e7ebb4870f581.js"></script>
             <p><code class="highlighter-rouge">gem install htmlbeautifier</code> などで htmlbeautifier をインストールしたあと、
-このファイルを _plugins フォルダに入れれば
-Jekyll でのビルド時に HTML が整形されます。</p>
+              このファイルを _plugins フォルダに入れれば
+              Jekyll でのビルド時に HTML が整形されます。</p>
             <p>プラグインなので、プラグインが使えない GitHub Pages 上でのビルドには使えません。
-あらかじめローカルの環境でビルドして生成されたファイルをアップロードしてください。</p>
+              あらかじめローカルの環境でビルドして生成されたファイルをアップロードしてください。</p>
           </article>
         </div>
       </div>
@@ -128,28 +117,28 @@ Jekyll でのビルド時に HTML が整形されます。</p>
           </ul>
           <a href="https://twitter.com/saasan" target="_blank" class="twitter-username">
             saasan
-  </a>
+          </a>
           <a href="/feed.xml" target="_blank" class="rss">RSS</a>
         </nav>
       </div>
     </footer>
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
       
-        ga('create', 'UA-42938817-1', 'auto');
-        ga('send', 'pageview');
+      ga('create', 'UA-42938817-1', 'auto');
+      ga('send', 'pageview');
       
-        var i = document.getElementsByClassName('adsbygoogle').length;
-        while (i-- > 0) {
-          (adsbygoogle = window.adsbygoogle || []).push({});
-        }
-        (adsbygoogle = window.adsbygoogle || []).push({
-          google_ad_client: "ca-pub-0141905477316976",
-          enable_page_level_ads: true
-        });
+      var i = document.getElementsByClassName('adsbygoogle').length;
+      while (i-- > 0) {
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      }
+      (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-0141905477316976",
+        enable_page_level_ads: true
+      });
     </script>
   </body>
 </html>

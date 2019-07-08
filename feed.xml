@@ -5,24 +5,24 @@
     <description></description>
     <link>https://saasan.github.io/</link>
     <atom:link href="https://saasan.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 08 Jul 2019 19:30:19 +0900</pubDate>
-    <lastBuildDate>Mon, 08 Jul 2019 19:30:19 +0900</lastBuildDate>
-    <generator>Jekyll v3.1.6</generator>
+    <pubDate>Mon, 08 Jul 2019 21:08:23 +0900</pubDate>
+    <lastBuildDate>Mon, 08 Jul 2019 21:08:23 +0900</lastBuildDate>
+    <generator>Jekyll v3.8.6</generator>
     
       <item>
         <title>RedHat5.7からCentOS5.7へ移行する</title>
         <description>&lt;p&gt;RHEL 5.7 の物理サーバをクローンして仮想化する際、ライセンス的に問題がありそうなので CentOS 5.7 へ移行した話。&lt;/p&gt;
 
-&lt;h2 id=&quot;section&quot;&gt;公式ドキュメント&lt;/h2&gt;
+&lt;h2 id=&quot;公式ドキュメント&quot;&gt;公式ドキュメント&lt;/h2&gt;
 
 &lt;p&gt;&lt;a href=&quot;https://wiki.centos.org/HowTos/MigrationGuide#head-c31a6a29f59a74d75074d1b110f563ffc15cb86a&quot;&gt;Migration an existing system from RHEL5 to CentOS 5&lt;/a&gt;&lt;/p&gt;
 
-&lt;h2 id=&quot;section-1&quot;&gt;実際の作業&lt;/h2&gt;
+&lt;h2 id=&quot;実際の作業&quot;&gt;実際の作業&lt;/h2&gt;
 
 &lt;p&gt;基本的に上記公式ドキュメントのコマンド通り。
 パッケージのダウンロード元サーバが変更になっているのと、OS のバージョン、CPU アーキテクチャが違うので手直ししている。CPU アーキテクチャは uname -a で確認できる。&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ curl -O http://vault.centos.org/5.7/os/x86_64/CentOS/centos-release-5-7.el5.centos.x86_64.rpm
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ curl -O http://vault.centos.org/5.7/os/x86_64/CentOS/centos-release-5-7.el5.centos.x86_64.rpm
 $ curl -O http://vault.centos.org/5.7/os/x86_64/CentOS/centos-release-notes-5.7-0.x86_64.rpm
 $ curl -O http://vault.centos.org/5.7/os/x86_64/CentOS/redhat-logos-4.9.99-11.el5.centos.noarch.rpm
 $ su
@@ -36,8 +36,7 @@ YumRepo Error: All mirror URLs are not using ftp, http[s] or file.
 Eg. Invalid release/
 removing mirrorlist with no valid mirrors: /var/cache/yum/base/mirrorlist.txt
 Error: Cannot retrieve repository metadata (repomd.xml) for repository: base. Please verify its path and try again
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;yum update でエラーが出るので /etc/yum.repos.d/CentOS-Base.repo を編集。&lt;/p&gt;
 
@@ -59,59 +58,54 @@ Error: Cannot retrieve repository metadata (repomd.xml) for repository: base. Pl
     
       <item>
         <title>コマンドライン(CLI)でFortiGateを設定する</title>
-        <description>&lt;h2 id=&quot;section&quot;&gt;概要&lt;/h2&gt;
+        <description>&lt;h2 id=&quot;概要&quot;&gt;概要&lt;/h2&gt;
 
 &lt;p&gt;FortiGateはブラウザーでアクセスすることでWeb上からGUIで設定できる。
 しかし、諸事情によりコマンドラインから設定することになったので、設定方法をメモしておく。&lt;/p&gt;
 
-&lt;h2 id=&quot;section-1&quot;&gt;ログインする&lt;/h2&gt;
+&lt;h2 id=&quot;ログインする&quot;&gt;ログインする&lt;/h2&gt;
 
 &lt;p&gt;sshで接続することでコマンドラインから設定ができる。&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ ssh admin@192.168.0.1
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ ssh admin@192.168.0.1
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h2 id=&quot;section-2&quot;&gt;ヘルプを表示する&lt;/h2&gt;
+&lt;h2 id=&quot;ヘルプを表示する&quot;&gt;ヘルプを表示する&lt;/h2&gt;
 
 &lt;p&gt;「?」を入力すると現在使えるコマンドが表示される。&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# ? ←「?」を入力しても表示されない
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# ? ←「?」を入力しても表示されない
 config      config object
 get         get dynamic and system information
 show        show configuration
 diagnose    diagnose facility
 execute     execute static commands
 exit        exit CLI
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;コマンドの入力途中に「?」を入力するとコマンドが補完される。
 例えば、sh?と入力するとshowに補完される。&lt;/p&gt;
 
 &lt;p&gt;また、引数が必要なコマンドを入力した後に「?」を入力すると引数の候補が表示される。&lt;/p&gt;
 
-&lt;h2 id=&quot;section-3&quot;&gt;バージョンを確認する&lt;/h2&gt;
+&lt;h2 id=&quot;バージョンを確認する&quot;&gt;バージョンを確認する&lt;/h2&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# get system status
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# get system status
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h2 id=&quot;section-4&quot;&gt;設定を確認する&lt;/h2&gt;
+&lt;h2 id=&quot;設定を確認する&quot;&gt;設定を確認する&lt;/h2&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# show
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# show
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h2 id=&quot;section-5&quot;&gt;デフォルト値を含むすべての設定を確認する&lt;/h2&gt;
+&lt;h2 id=&quot;デフォルト値を含むすべての設定を確認する&quot;&gt;デフォルト値を含むすべての設定を確認する&lt;/h2&gt;
 
 &lt;p&gt;数メガバイトある設定が出力される為、かなり時間がかかるので注意。&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# show full-configuration
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# show full-configuration
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h1 id=&quot;more&quot;&gt;moreを使用しない&lt;/h1&gt;
+&lt;h1 id=&quot;moreを使用しない&quot;&gt;moreを使用しない&lt;/h1&gt;
 
 &lt;p&gt;コンソールへ設定を出力してバックアップを取りたいような場合は、
 下記のコマンドでmoreを表示しないようにすることができる。&lt;/p&gt;
@@ -120,24 +114,22 @@ exit        exit CLI
   &lt;li&gt;
     &lt;p&gt;moreを使用しないように変更&lt;/p&gt;
 
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# config system console
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# config system console
 # set output standard
 # end
-&lt;/code&gt;&lt;/pre&gt;
-    &lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;moreを使用するように戻す&lt;/p&gt;
 
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# config system console
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# config system console
 # set output more
 # end
-&lt;/code&gt;&lt;/pre&gt;
-    &lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&quot;section-6&quot;&gt;設定を変更する&lt;/h2&gt;
+&lt;h2 id=&quot;設定を変更する&quot;&gt;設定を変更する&lt;/h2&gt;
 
 &lt;p&gt;上記「設定を確認する」や「デフォルト値を含むすべての設定を確認する」で
 表示されたものを見れば分かるが、設定はディレクトリのように階層化されている。
@@ -153,16 +145,15 @@ exit        exit CLI
 
 &lt;p&gt;という流れで設定する。上記「moreを使用しない」を参照。&lt;/p&gt;
 
-&lt;h2 id=&quot;section-7&quot;&gt;設定を保存する&lt;/h2&gt;
+&lt;h2 id=&quot;設定を保存する&quot;&gt;設定を保存する&lt;/h2&gt;
 
 &lt;p&gt;設定は自動的に保存される。
 Cisco製品のように「write memory」などで明示的に保存する必要はない。&lt;/p&gt;
 
-&lt;h2 id=&quot;section-8&quot;&gt;設定を終了し切断する&lt;/h2&gt;
+&lt;h2 id=&quot;設定を終了し切断する&quot;&gt;設定を終了し切断する&lt;/h2&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# exit
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# exit
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 </description>
         <pubDate>Wed, 03 May 2017 00:18:36 +0900</pubDate>
         <link>https://saasan.github.io/blog/2017/05/03/%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%83%A9%E3%82%A4%E3%83%B3-CLI-%E3%81%A7FortiGate%E3%82%92%E8%A8%AD%E5%AE%9A%E3%81%99%E3%82%8B.html</link>
@@ -175,7 +166,7 @@ Cisco製品のように「write memory」などで明示的に保存する必要
     
       <item>
         <title>Visual Studio Code で Markdown のプレビューを保存する</title>
-        <description>&lt;h2 id=&quot;section&quot;&gt;概要&lt;/h2&gt;
+        <description>&lt;h2 id=&quot;概要&quot;&gt;概要&lt;/h2&gt;
 
 &lt;p&gt;Visual Studio Code の Markdown プレビューは
 なかなか見栄えが良くて気に入ってる。
@@ -191,11 +182,11 @@ Markdown エンジンの違いにより VSCode と出力結果が異なる
 &lt;a href=&quot;https://github.com/markdown-it/markdown-it&quot;&gt;markdown-it&lt;/a&gt;
 を使用し、出力結果が同じになるようにしている。&lt;/p&gt;
 
-&lt;h2 id=&quot;section-1&quot;&gt;動作に必要なもの&lt;/h2&gt;
+&lt;h2 id=&quot;動作に必要なもの&quot;&gt;動作に必要なもの&lt;/h2&gt;
 
 &lt;p&gt;&lt;a href=&quot;https://nodejs.org/ja/&quot;&gt;Node.js&lt;/a&gt; が必要&lt;/p&gt;
 
-&lt;h2 id=&quot;section-2&quot;&gt;使い方&lt;/h2&gt;
+&lt;h2 id=&quot;使い方&quot;&gt;使い方&lt;/h2&gt;
 
 &lt;ol&gt;
   &lt;li&gt;このリポジトリをローカルにクローンする&lt;/li&gt;
@@ -214,7 +205,7 @@ resources\app\extensions\markdown\media\markdown.css
   &lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h2 id=&quot;section-3&quot;&gt;ダウンロード&lt;/h2&gt;
+&lt;h2 id=&quot;ダウンロード&quot;&gt;ダウンロード&lt;/h2&gt;
 
 &lt;p&gt;&lt;a href=&quot;https://github.com/saasan/save-vscode-markdown-preview&quot;&gt;GitHub&lt;/a&gt;
 からダウンロードできます。&lt;/p&gt;
@@ -263,36 +254,33 @@ PAUSE
 
 &lt;p&gt;&lt;small&gt;※ 2016/3/4現在、 Jekyll では Sourcemap が出力できないっぽい。&lt;/small&gt;&lt;/p&gt;
 
-&lt;h3 id=&quot;section&quot;&gt;1. ビルド用設定ファイルを作る&lt;/h3&gt;
+&lt;h3 id=&quot;1-ビルド用設定ファイルを作る&quot;&gt;1. ビルド用設定ファイルを作る&lt;/h3&gt;
 
 &lt;p&gt;_config.yml と同じフォルダに
 _config-production.yml という名前のファイルを作成し、以下の通り書く&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sass:
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sass:
   style: compressed
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;参考: 
 &lt;a href=&quot;https://jekyllrb.com/docs/assets/#sassscss&quot; target=&quot;_blank&quot;&gt;Assets - Jekyll • Simple, blog-aware, static sites&lt;/a&gt;&lt;/p&gt;
 
-&lt;h3 id=&quot;section-1&quot;&gt;2. 製作時のコマンド&lt;/h3&gt;
+&lt;h3 id=&quot;2-製作時のコマンド&quot;&gt;2. 製作時のコマンド&lt;/h3&gt;
 
 &lt;p&gt;製作中はいつも通り。&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;jekyll serve
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;jekyll serve
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h3 id=&quot;section-2&quot;&gt;3. ビルド時のコマンド&lt;/h3&gt;
+&lt;h3 id=&quot;3-ビルド時のコマンド&quot;&gt;3. ビルド時のコマンド&lt;/h3&gt;
 
 &lt;p&gt;ビルドするときは –config オプションで _config.yml と _config-production.yml の2つを読み込む。
 両方のファイルに同じ設定項目がある場合は、後ろに書いた方の設定で上書きされる。
 カンマとファイル名の間にスペースを入れないこと。&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;jekyll build --config _config.yml,_config-production.yml
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;jekyll build --config _config.yml,_config-production.yml
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;参考: 
 &lt;a href=&quot;https://jekyllrb.com/docs/configuration/#build-command-options&quot; target=&quot;_blank&quot;&gt;Configuration - Jekyll • Simple, blog-aware, static sites&lt;/a&gt;&lt;/p&gt;
@@ -317,7 +305,7 @@ _config-production.yml という名前のファイルを作成し、以下の通
 
 &lt;p&gt;ありがたいことに、うちも売上が20万円を超えて確定申告することになったのでメモ。&lt;/p&gt;
 
-&lt;h3 id=&quot;section&quot;&gt;確定申告に必要なもの&lt;/h3&gt;
+&lt;h3 id=&quot;確定申告に必要なもの&quot;&gt;確定申告に必要なもの&lt;/h3&gt;
 
 &lt;ul&gt;
   &lt;li&gt;生命保険料控除証明書など (いつも年末調整で提出してるやつ)&lt;/li&gt;
@@ -327,7 +315,7 @@ _config-production.yml という名前のファイルを作成し、以下の通
 または &lt;a href=&quot;https://www.printing.ne.jp/&quot; target=&quot;_blank&quot;&gt;ネットプリント&lt;/a&gt; などのコンビニで印刷できるサービス&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h3 id=&quot;section-1&quot;&gt;申告書を作る&lt;/h3&gt;
+&lt;h3 id=&quot;申告書を作る&quot;&gt;申告書を作る&lt;/h3&gt;
 
 &lt;p&gt;国税庁のホームページに
 &lt;a href=&quot;https://www.keisan.nta.go.jp/h27/ta_top.htm&quot; target=&quot;_blank&quot;&gt;確定申告書等作成コーナー&lt;/a&gt;
@@ -343,7 +331,10 @@ _config-production.yml という名前のファイルを作成し、以下の通
       &lt;li&gt;所得の生ずる場所 : 東京都港区六本木６丁目１０－１ 六本木ヒルズ森タワー&lt;/li&gt;
       &lt;li&gt;収入金額 : AdSenseでの収入金額&lt;br /&gt;
 (&lt;a href=&quot;https://www.google.com/adsense/app#main/home&quot; target=&quot;_blank&quot;&gt;AdSenseのサイト&lt;/a&gt;
-&amp;gt; 「残高」右上の「…」 &amp;gt; 「お支払いページを表示」 &amp;gt; 「取引」右下の「取引を表示する」 &amp;gt; 上部のフィルターを「詳細取引表示」、「お支払い」、「前年」にして金額を合計する)&lt;/li&gt;
+        &lt;blockquote&gt;
+          &lt;p&gt;「残高」右上の「…」 &amp;gt; 「お支払いページを表示」 &amp;gt; 「取引」右下の「取引を表示する」 &amp;gt; 上部のフィルターを「詳細取引表示」、「お支払い」、「前年」にして金額を合計する)&lt;/p&gt;
+        &lt;/blockquote&gt;
+      &lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
   &lt;li&gt;あとは控除など必要がある場合は入力&lt;/li&gt;
@@ -357,7 +348,7 @@ _config-production.yml という名前のファイルを作成し、以下の通
 で)&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h3 id=&quot;section-2&quot;&gt;その他&lt;/h3&gt;
+&lt;h3 id=&quot;その他&quot;&gt;その他&lt;/h3&gt;
 
 &lt;ul&gt;
   &lt;li&gt;&lt;strong&gt;AdSenseでの収入を証明する書類は必要はない&lt;/strong&gt; そうな (申告内容が不審で税務調査されない限りは)。&lt;/li&gt;
@@ -375,7 +366,7 @@ _config-production.yml という名前のファイルを作成し、以下の通
     
       <item>
         <title>[Jekyll] Liquidのタグをエスケープする方法</title>
-        <description>&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;raw&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt; と &lt;code class=&quot;highlighter-rouge&quot;&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;endraw&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt; で囲むと
+        <description>&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;{% raw %}&lt;/code&gt; と &lt;code class=&quot;highlighter-rouge&quot;&gt;{% endraw %}&lt;/code&gt; で囲むと
 Liquidのタグもそのまま出力されます。&lt;/p&gt;
 
 &lt;p&gt;例えば&lt;/p&gt;
@@ -418,20 +409,9 @@ HTML の構造が分からなくなるときがあります。
 &lt;p&gt;そこで、HTML を整形して出力するプラグインを作ってみました。
 いわゆるbeautifierとかpretty printとかいわれる機能ですね。&lt;/p&gt;
 
-&lt;noscript&gt;&lt;pre&gt;require &amp;#39;rubygems&amp;#39;
-require &amp;#39;htmlbeautifier&amp;#39;
-
-Jekyll::Hooks.register :documents, :post_render do |page|
-  next if page.output_ext != &amp;#39;.html&amp;#39;
-  page.output = HtmlBeautifier.beautify(page.output)
-end
-
-Jekyll::Hooks.register :pages, :post_render do |page|
-  next if page.ext != &amp;#39;.html&amp;#39;
-  page.output = HtmlBeautifier.beautify(page.output)
-end
+&lt;noscript&gt;&lt;pre&gt;400: Invalid request
 &lt;/pre&gt;&lt;/noscript&gt;
-&lt;script src=&quot;https://gist.github.com/saasan/7c92d15e7ebb4870f581.js&quot;&gt; &lt;/script&gt;
+&lt;script src=&quot;https://gist.github.com/7c92d15e7ebb4870f581.js&quot;&gt; &lt;/script&gt;
 
 &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;gem install htmlbeautifier&lt;/code&gt; などで htmlbeautifier をインストールしたあと、
 このファイルを _plugins フォルダに入れれば
