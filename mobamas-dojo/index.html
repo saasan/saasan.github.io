@@ -38,8 +38,6 @@
       ここは
       <a href="http://sp.pf.mbga.jp/12008305/" target="_blank">アイドルマスターシンデレラガールズ</a>
       (モバマス、デレマス)の道場一覧サイトです。
-      <a href="http://momoka-sakurai.com/docs/dojolist_api_v2.html" target="_blank">DojoList API v2</a>
-      を利用しています。
     </p>
 
     <h4>道場とは？</h4>
@@ -67,17 +65,20 @@
     </section>
   </section>
 
-  <section id="versionedInfo" class="info" ng-init="infoVersion = 23" ng-show="infoVersion > $storage.infoVersion">
+  <section id="versionedInfo" class="info" ng-init="infoVersion = 24" ng-show="infoVersion > $storage.infoVersion">
     <button type="button" class="close" ng-click="$storage.infoVersion = infoVersion"><i class="fa fa-close"></i></button>
     <h3>お知らせ</h3>
 
-    <h4>2018/11/10 5時頃</h4>
+    <h4>2019/12/01</h4>
     <ul>
       <li>
-        当モバマス道場リストで元データとして使用させて頂いている
-        「<a href="http://momoka-sakurai.com/docs/dojolist_api_v2.html" target="_blank">DojoList API v2</a>」から
-        道場データを取得しようとしても空のファイルが返される状態となっており、データが取得できないようです。
-        こちらではどうすることもできませんので、DojoList APIの管理人さんへお問い合わせください。
+        デレマスボーダーbot (@imcgborder)さんのAPIへ対応しました。
+      </li>
+      <li>
+        以前のAPIとはランクの値が異なるため、ランクの表示制限を行っている場合は再設定をお願い致します。
+      </li>
+      <li>
+        雪美にボイスが実装されました。ありがとうございます。今後とも佐城雪美をよろしくお願い致します。
       </li>
     </ul>
   </section>
@@ -176,15 +177,6 @@
     <p><small>全道場数: {{ dojos.length }} 件 / 表示中: {{ filtered.length }} 件 / 訪問済: {{ $storage.visited | keyLength }} 件</small></p>
   </section>
 
-  <section>
-    <!-- 道場リスト レスポンシブ -->
-    <ins class="adsbygoogle"
-         style="display:block"
-         data-ad-client="ca-pub-0141905477316976"
-         data-ad-slot="3289892971"
-         data-ad-format="auto"></ins>
-  </section>
-
   <section id="dojos" ng-class="{ extendedView: $storage.extendedView, emphasizedView: $storage.emphasizedView }">
     <div class="btn block dojo" ng-class="dojoClass(dojo)" ng-repeat="dojo in filtered = (dojos | orderBy: ORDER_BY[$storage.view.orderBy] | filter: dojoFilter | limitTo : $storage.view.limitTo)">
       <a ng-click="onClickDojoLink(dojo)" class="dojo-link"
@@ -193,11 +185,16 @@
         <div class="extraInfo">
           <div>ﾘｰﾀﾞｰ：<span ng-bind-html="dojo.leader"></span></div>
           <div>ｺﾒﾝﾄ：<span ng-bind-html="dojo.comment"></span></div>
-          <div>最終取得：<span am-time-ago="dojo.lastUpdate | amFromUnix"></span></div>
+          <div>最終取得：<span am-time-ago="dojo.lastUpdate"></span></div>
         </div>
       </a>
       <button ng-click="onClickHideDojo(dojo)" type="button" class="hide-dojo"><i class="fa fa-remove"></i></button>
     </div>
+  </section>
+
+  <section>
+    <a class="btn block" href="about.html">このサイトについて</a>
+    <a class="btn block" href="/imas/">「アイマス関連」に戻る</a>
   </section>
 
   <section>
@@ -207,11 +204,6 @@
          data-ad-client="ca-pub-0141905477316976"
          data-ad-slot="3289892971"
          data-ad-format="auto"></ins>
-  </section>
-
-  <section>
-    <a class="btn block" href="about.html">このサイトについて</a>
-    <a class="btn block" href="/imas/">「アイマス関連」に戻る</a>
   </section>
 
   <script>
