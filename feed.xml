@@ -5,8 +5,8 @@
     <description></description>
     <link>https://saasan.github.io/</link>
     <atom:link href="https://saasan.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 17 Jun 2020 22:57:43 +0900</pubDate>
-    <lastBuildDate>Wed, 17 Jun 2020 22:57:43 +0900</lastBuildDate>
+    <pubDate>Wed, 17 Jun 2020 23:46:42 +0900</pubDate>
+    <lastBuildDate>Wed, 17 Jun 2020 23:46:42 +0900</lastBuildDate>
     <generator>Jekyll v3.8.6</generator>
     
       <item>
@@ -237,11 +237,22 @@ void loop() {
 &lt;/pre&gt;&lt;/noscript&gt;
 &lt;script src=&quot;https://gist.github.com/saasan/b6d9cb8fc8786d9c0407560f6206af22.js&quot;&gt; &lt;/script&gt;
 
+&lt;h2 id=&quot;自力での-wav-ファイル再生との比較&quot;&gt;自力での WAV ファイル再生との比較&lt;/h2&gt;
+
+&lt;p&gt;前回行った自力での WAV ファイル再生では 8bit, 8000Hz 限定だったこともあり、
+比較すると音質はかなり改善しましたが、
+再生の前後にプチプチとノイズが入るようになりました。
+また、コンパイルにかかる時間もかなり長くなっています。&lt;/p&gt;
+
+&lt;p&gt;コンパイル時間はどうしようもないと思いますが、
+再生前後のプチプチは下記参考サイトのクリックノイズ対策を行えば消せるかもしれません。&lt;/p&gt;
+
 &lt;h2 id=&quot;参考サイト&quot;&gt;参考サイト&lt;/h2&gt;
 
 &lt;ul&gt;
   &lt;li&gt;&lt;a href=&quot;https://github.com/earlephilhower/ESP8266Audio&quot;&gt;earlephilhower/ESP8266Audio: Arduino library to play MOD, WAV, FLAC, MIDI, RTTTL, MP3, and AAC files on I2S DACs or with a software emulated delta-sigma DAC on the ESP8266 and ESP32&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://qiita.com/odetarou/items/0f37ed2eeeb9bd051c0c&quot;&gt;ESP32でGoogle Play Musicを再生する - Qiita&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://blog-yama.a-quest.com/?eid=970190&quot;&gt;ESP32でサウンド出力時のクリックノイズ対策（I2S+内蔵DAC） | N.Yamazaki’s blog&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
         <pubDate>Wed, 17 Jun 2020 19:59:34 +0900</pubDate>
