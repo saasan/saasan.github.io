@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <title>M5StickC + Speaker Hat で ESP8266Audio ライブラリを使用して MP3 ファイルを再生する</title>
+    <link href='//fonts.googleapis.com/css?family=Orbitron:500' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="canonical" href="https://saasan.github.io/blog/2020/06/17/m5stickc-speaker-hat%E3%81%A7esp8266audio%E3%83%A9%E3%82%A4%E3%83%96%E3%83%A9%E3%83%AA%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%97%E3%81%A6mp3%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%92%E5%86%8D%E7%94%9F%E3%81%99%E3%82%8B.html">
+    <link rel="alternate" type="application/rss+xml" title="saasan.github.io" href="https://saasan.github.io/feed.xml" />
+    <link rel="apple-touch-icon" href="https://saasan.github.io/img/s2works_favicon.png">
+    <script data-ad-client="ca-pub-0141905477316976" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@saasan">
+    <meta property="og:url" content="https://saasan.github.io/blog/2020/06/17/m5stickc-speaker-hat%E3%81%A7esp8266audio%E3%83%A9%E3%82%A4%E3%83%96%E3%83%A9%E3%83%AA%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%97%E3%81%A6mp3%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%92%E5%86%8D%E7%94%9F%E3%81%99%E3%82%8B.html">
+    <meta property="og:title" content="M5StickC + Speaker Hat で ESP8266Audio ライブラリを使用して MP3 ファイルを再生する">
+    <meta property="og:description" content="前回の M5StickC + Speaker Hat で SPIFFS から読み込んだ WAV ファイルを再生する では自力で WAV ファイルを読み込んでいましたが、 ESP8266Audio というライブラリを用いることで ESP32-PICO 搭載の M5StickC でも MP3 が再生できることを教えて頂きました。 ということで、今回は事前に SPIFFS へ保存した MP3 ファ...">
+    <meta property="og:image" content="https://saasan.github.io/img/s2works_favicon.png">
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org/",
+        "@type": "Person",
+        "name": "saasan",
+        "sameAs": [
+          "https://twitter.com/saasan",
+          "https://github.com/saasan"
+        ]
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "Article",
+        "name": "M5StickC + Speaker Hat で ESP8266Audio ライブラリを使用して MP3 ファイルを再生する",
+        "datePublished": "2020-06-17T19:59:34+09:00",
+        "headline": "前回の M5StickC + Speaker Hat で SPIFFS から読み込んだ WAV ファイルを再生する では自力で WAV ファイルを読み込んでいましたが、 ESP8266Audio というライブラリを用いることで ESP32-PICO 搭載の M5StickC でも MP3 が再生できることを教えて頂きました。 ということで、今回は事前に SPIFFS へ保存した MP3 ファ...",
+        "image": "https://saasan.github.io/img/s2works_favicon.png",
+        "url": "https://saasan.github.io/blog/2020/06/17/m5stickc-speaker-hat%E3%81%A7esp8266audio%E3%83%A9%E3%82%A4%E3%83%96%E3%83%A9%E3%83%AA%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%97%E3%81%A6mp3%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%92%E5%86%8D%E7%94%9F%E3%81%99%E3%82%8B.html",
+        "publisher" : {
+          "@type": "Person",
+          "name": "saasan"
+        }
+      }
+    </script>
+  </head>
+  <body itemscope itemtype="http://schema.org/WebPage">
+    <header class="site-header">
+      <div class="wrapper">
+        <a class="site-title" href="/">saasan.github.io</a>
+        <nav class="site-nav">
+          <div class="site-nav-contents">
+            <ul>
+              <li><a href="/blog/">ブログ</a></li>
+              <li><a href="/imas/">アイマス</a></li>
+              <li><a href="/software/">ソフトウェア</a></li>
+              <li><a href="/script/">スクリプト</a></li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+    </header>
+    <div class="page-content">
+      <div class="wrapper">
+        <div class="post" itemprop="mainContentOfPage" itemscope itemtype="http://schema.org/WebPageElement">
+          <header class="post-header">
+            <h1 class="post-title">M5StickC + Speaker Hat で ESP8266Audio ライブラリを使用して MP3 ファイルを再生する</h1>
+            <div class="post-meta">
+              <time datetime="2020-06-17T19:59:34+09:00" itemprop="dateModified">2020/06/17</time>
+            </div>
+          </header>
+          <article class="post-content">
+            <p>前回の
+              <a href="/blog/2020/06/07/m5stickc-speaker-hat%E3%81%A7spiffs%E3%81%8B%E3%82%89%E8%AA%AD%E3%81%BF%E8%BE%BC%E3%82%93%E3%81%A0wav%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%92%E5%86%8D%E7%94%9F%E3%81%99%E3%82%8B.html">M5StickC + Speaker Hat で SPIFFS から読み込んだ WAV ファイルを再生する</a>
+              では自力で WAV ファイルを読み込んでいましたが、
+              <a href="https://github.com/earlephilhower/ESP8266Audio">ESP8266Audio</a>
+              というライブラリを用いることで ESP32-PICO 搭載の M5StickC でも MP3 が再生できることを教えて頂きました。
+              ということで、今回は事前に SPIFFS へ保存した MP3 ファイルを ESP8266Audio で読み込んで再生します。</p>
+            <h2 id="スケッチ">スケッチ</h2>
+            <p>以下は A ボタン(正面の「M5」ボタン)を押すと MP3 ファイルが再生されるスケッチです。</p>
+            <noscript>
+              <pre>#include &lt;M5StickC.h&gt;
+#include &quot;FS.h&quot;
+#include &quot;SPIFFS.h&quot;
+#include &quot;AudioFileSourceSPIFFS.h&quot;
+#include &quot;AudioGeneratorMP3.h&quot;
+#include &quot;AudioOutputI2S.h&quot;
+
+// オーディオファイル名
+const char AUDIO_FILE_NAME[] = &quot;/hoge.mp3&quot;;
+
+const int I2S_NUM_0 = 0;
+// 電源ボタンが1秒未満押された
+const uint8_t AXP_WAS_PRESSED = 2;
+
+AudioGeneratorMP3 *generator = NULL;
+AudioFileSourceSPIFFS *source = NULL;
+AudioOutputI2S *output = NULL;
+
+// メッセージ出力
+void showMessage(const char *message) {
+    M5.Lcd.fillScreen(WHITE);
+    M5.Lcd.setCursor(5, 35);
+    M5.Lcd.setTextFont(2);
+    M5.Lcd.setTextColor(BLACK);
+    M5.Lcd.print(message);
+}
+
+void playAudio() {
+    Serial.println(&quot;playAudio&quot;);
+
+    stopAudio();
+    if (!source-&gt;isOpen()) {
+        source-&gt;open(AUDIO_FILE_NAME);
+    }
+    generator-&gt;begin(source, output);
+}
+
+void stopAudio() {
+    Serial.println(&quot;stopAudio&quot;);
+
+    if (generator-&gt;isRunning()) {
+        generator-&gt;stop();
+    }
+}
+
+void setup() {
+    M5.begin();
+    M5.Lcd.setRotation(1);
+    showMessage(&quot;ESP8266Audio&quot;);
+
+    // シリアルモニターの設定
+    Serial.begin(115200);
+    audioLogger = &amp;Serial;
+
+    // SPIFFSの設定
+    if (!SPIFFS.begin()) {
+        Serial.println(&quot;SPIFFS Mount Failed&quot;);
+        return;
+    }
+
+    source = new AudioFileSourceSPIFFS(AUDIO_FILE_NAME);
+    output = new AudioOutputI2S(I2S_NUM_0, AudioOutputI2S::INTERNAL_DAC);
+    generator = new AudioGeneratorMP3();
+}
+
+void loop() {
+    delay(10);
+
+    if (generator-&gt;isRunning()) {
+        if (!generator-&gt;loop()) {
+            stopAudio();
+        }
+    }
+    else {
+        // ボタンの状態を更新
+        M5.update();
+
+        // Aボタンが押されたら音声データ再生
+        if (M5.BtnA.wasPressed()) {
+            playAudio();
+        }
+
+        // 電源ボタンが押されたらリセット
+        if (M5.Axp.GetBtnPress() == AXP_WAS_PRESSED) {
+            esp_restart();
+        }
+    }
+}
+</pre>
+            </noscript>
+            <script src="https://gist.github.com/saasan/ed2ee155ed1a16865015c1967cf875c3.js"></script>
+            <p>SPIFFS からファイルを読み込む AudioFileSourceSPIFFS クラス、
+              MP3 を再生する AudioGeneratorMP3 クラス、
+              I2S で出力する AudioOutputI2S クラスを使用しています。
+              ESP8266Audio は MP3 以外にも WAV, FLAC, MIDI, AAC などのファイル形式を読み込めるようになっており、
+              それぞれのファイル形式に対応した generator クラスを使用する必要があります。</p>
+            <p>generator-&gt;isRunning() で再生中か確認し、再生中でない場合にボタンが押されたら MP3 ファイルを再生しています。
+              一度再生が終わり generator-&gt;stop() を呼び出すとファイルが閉じられます。
+              そのため、2回目以降の再生時はファイルを再び開く必要があります。
+              source-&gt;isOpen() でファイルが開かれているかを確認し、
+              開かれていない場合は source-&gt;open() でファイルを開いています。</p>
+            <p>AudioFileSourceSPIFFS クラスでは再生する度にファイルを読み込むため、
+              ESP32-PICO のメモリ (520KB) に収まるサイズのファイルを何度も再生するのであれば、
+              以下のように setup() 内でファイルを読み込み
+              AudioFileSourcePROGMEM クラスを使用した方がよいかと思います。</p>
+            <noscript>
+              <pre>#include &lt;M5StickC.h&gt;
+#include &quot;FS.h&quot;
+#include &quot;SPIFFS.h&quot;
+#include &quot;AudioFileSourcePROGMEM.h&quot;
+#include &quot;AudioGeneratorMP3.h&quot;
+#include &quot;AudioOutputI2S.h&quot;
+
+// オーディオファイル名
+const char AUDIO_FILE_NAME[] = &quot;/hoge.mp3&quot;;
+
+const int I2S_NUM_0 = 0;
+// 電源ボタンが1秒未満押された
+const uint8_t AXP_WAS_PRESSED = 2;
+
+AudioGeneratorMP3 *generator = NULL;
+AudioFileSourcePROGMEM *source = NULL;
+AudioOutputI2S *output = NULL;
+uint8_t *audioData = NULL;
+size_t audioDataSize = 0;
+
+// メッセージ出力
+void showMessage(const char *message) {
+    M5.Lcd.fillScreen(WHITE);
+    M5.Lcd.setCursor(5, 35);
+    M5.Lcd.setTextFont(2);
+    M5.Lcd.setTextColor(BLACK);
+    M5.Lcd.print(message);
+}
+
+void readAudioFile(fs::FS&amp; fs, const char* path) {
+    File file = fs.open(path);
+    if (!file || file.isDirectory()) {
+        Serial.println(&quot;- failed to open file for reading&quot;);
+        return;
+    }
+
+    audioDataSize = file.size();
+    audioData = new uint8_t[audioDataSize];
+    file.read(audioData, audioDataSize);
+}
+
+void playAudio() {
+    Serial.println(&quot;playAudio&quot;);
+
+    stopAudio();
+    if (!source-&gt;isOpen()) {
+        source-&gt;open(audioData, audioDataSize);
+    }
+    generator-&gt;begin(source, output);
+}
+
+void stopAudio() {
+    Serial.println(&quot;stopAudio&quot;);
+
+    if (generator-&gt;isRunning()) {
+        generator-&gt;stop();
+    }
+}
+
+void setup() {
+    M5.begin();
+    M5.Lcd.setRotation(1);
+    showMessage(&quot;ESP8266Audio&quot;);
+
+    // シリアルモニターの設定
+    Serial.begin(115200);
+    audioLogger = &amp;Serial;
+
+    // SPIFFSの設定
+    if (!SPIFFS.begin()) {
+        Serial.println(&quot;SPIFFS Mount Failed&quot;);
+        return;
+    }
+
+    readAudioFile(SPIFFS, AUDIO_FILE_NAME);
+
+    source = new AudioFileSourcePROGMEM(audioData, audioDataSize);
+    output = new AudioOutputI2S(I2S_NUM_0, AudioOutputI2S::INTERNAL_DAC);
+    generator = new AudioGeneratorMP3();
+}
+
+void loop() {
+    delay(10);
+
+    if (generator-&gt;isRunning()) {
+        if (!generator-&gt;loop()) {
+            stopAudio();
+        }
+    }
+    else {
+        // ボタンの状態を更新
+        M5.update();
+
+        // Aボタンが押されたら音声データ再生
+        if (M5.BtnA.wasPressed()) {
+            playAudio();
+        }
+
+        // 電源ボタンが押されたらリセット
+        if (M5.Axp.GetBtnPress() == AXP_WAS_PRESSED) {
+            esp_restart();
+        }
+    }
+}
+</pre>
+            </noscript>
+            <script src="https://gist.github.com/saasan/b6d9cb8fc8786d9c0407560f6206af22.js"></script>
+            <h2 id="参考サイト">参考サイト</h2>
+            <ul>
+              <li><a href="https://github.com/earlephilhower/ESP8266Audio">earlephilhower/ESP8266Audio: Arduino library to play MOD, WAV, FLAC, MIDI, RTTTL, MP3, and AAC files on I2S DACs or with a software emulated delta-sigma DAC on the ESP8266 and ESP32</a></li>
+              <li><a href="https://qiita.com/odetarou/items/0f37ed2eeeb9bd051c0c">ESP32でGoogle Play Musicを再生する - Qiita</a></li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </div>
+    <footer class="site-footer">
+      <div class="wrapper">
+        <nav>
+          <ul>
+            <li><a href="/blog/">ブログ</a></li>
+            <li><a href="/imas/">アイマス</a></li>
+            <li><a href="/software/">ソフトウェア</a></li>
+            <li><a href="/script/">スクリプト</a></li>
+          </ul>
+          <a href="https://twitter.com/saasan" target="_blank" class="twitter-username">
+            saasan
+          </a>
+          <a href="/feed.xml" target="_blank" class="rss">RSS</a>
+        </nav>
+      </div>
+    </footer>
+  </body>
+</html>

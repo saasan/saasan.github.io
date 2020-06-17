@@ -5,9 +5,259 @@
     <description></description>
     <link>https://saasan.github.io/</link>
     <atom:link href="https://saasan.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 07 Jun 2020 20:25:16 +0900</pubDate>
-    <lastBuildDate>Sun, 07 Jun 2020 20:25:16 +0900</lastBuildDate>
+    <pubDate>Wed, 17 Jun 2020 22:57:43 +0900</pubDate>
+    <lastBuildDate>Wed, 17 Jun 2020 22:57:43 +0900</lastBuildDate>
     <generator>Jekyll v3.8.6</generator>
+    
+      <item>
+        <title>M5StickC + Speaker Hat で ESP8266Audio ライブラリを使用して MP3 ファイルを再生する</title>
+        <description>&lt;p&gt;前回の
+&lt;a href=&quot;/blog/2020/06/07/m5stickc-speaker-hat%E3%81%A7spiffs%E3%81%8B%E3%82%89%E8%AA%AD%E3%81%BF%E8%BE%BC%E3%82%93%E3%81%A0wav%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%92%E5%86%8D%E7%94%9F%E3%81%99%E3%82%8B.html&quot;&gt;M5StickC + Speaker Hat で SPIFFS から読み込んだ WAV ファイルを再生する&lt;/a&gt;
+では自力で WAV ファイルを読み込んでいましたが、
+&lt;a href=&quot;https://github.com/earlephilhower/ESP8266Audio&quot;&gt;ESP8266Audio&lt;/a&gt;
+というライブラリを用いることで ESP32-PICO 搭載の M5StickC でも MP3 が再生できることを教えて頂きました。
+ということで、今回は事前に SPIFFS へ保存した MP3 ファイルを ESP8266Audio で読み込んで再生します。&lt;/p&gt;
+
+&lt;h2 id=&quot;スケッチ&quot;&gt;スケッチ&lt;/h2&gt;
+
+&lt;p&gt;以下は A ボタン(正面の「M5」ボタン)を押すと MP3 ファイルが再生されるスケッチです。&lt;/p&gt;
+
+&lt;noscript&gt;&lt;pre&gt;#include &amp;lt;M5StickC.h&amp;gt;
+#include &amp;quot;FS.h&amp;quot;
+#include &amp;quot;SPIFFS.h&amp;quot;
+#include &amp;quot;AudioFileSourceSPIFFS.h&amp;quot;
+#include &amp;quot;AudioGeneratorMP3.h&amp;quot;
+#include &amp;quot;AudioOutputI2S.h&amp;quot;
+
+// オーディオファイル名
+const char AUDIO_FILE_NAME[] = &amp;quot;/hoge.mp3&amp;quot;;
+
+const int I2S_NUM_0 = 0;
+// 電源ボタンが1秒未満押された
+const uint8_t AXP_WAS_PRESSED = 2;
+
+AudioGeneratorMP3 *generator = NULL;
+AudioFileSourceSPIFFS *source = NULL;
+AudioOutputI2S *output = NULL;
+
+// メッセージ出力
+void showMessage(const char *message) {
+    M5.Lcd.fillScreen(WHITE);
+    M5.Lcd.setCursor(5, 35);
+    M5.Lcd.setTextFont(2);
+    M5.Lcd.setTextColor(BLACK);
+    M5.Lcd.print(message);
+}
+
+void playAudio() {
+    Serial.println(&amp;quot;playAudio&amp;quot;);
+
+    stopAudio();
+    if (!source-&amp;gt;isOpen()) {
+        source-&amp;gt;open(AUDIO_FILE_NAME);
+    }
+    generator-&amp;gt;begin(source, output);
+}
+
+void stopAudio() {
+    Serial.println(&amp;quot;stopAudio&amp;quot;);
+
+    if (generator-&amp;gt;isRunning()) {
+        generator-&amp;gt;stop();
+    }
+}
+
+void setup() {
+    M5.begin();
+    M5.Lcd.setRotation(1);
+    showMessage(&amp;quot;ESP8266Audio&amp;quot;);
+
+    // シリアルモニターの設定
+    Serial.begin(115200);
+    audioLogger = &amp;amp;Serial;
+
+    // SPIFFSの設定
+    if (!SPIFFS.begin()) {
+        Serial.println(&amp;quot;SPIFFS Mount Failed&amp;quot;);
+        return;
+    }
+
+    source = new AudioFileSourceSPIFFS(AUDIO_FILE_NAME);
+    output = new AudioOutputI2S(I2S_NUM_0, AudioOutputI2S::INTERNAL_DAC);
+    generator = new AudioGeneratorMP3();
+}
+
+void loop() {
+    delay(10);
+
+    if (generator-&amp;gt;isRunning()) {
+        if (!generator-&amp;gt;loop()) {
+            stopAudio();
+        }
+    }
+    else {
+        // ボタンの状態を更新
+        M5.update();
+
+        // Aボタンが押されたら音声データ再生
+        if (M5.BtnA.wasPressed()) {
+            playAudio();
+        }
+
+        // 電源ボタンが押されたらリセット
+        if (M5.Axp.GetBtnPress() == AXP_WAS_PRESSED) {
+            esp_restart();
+        }
+    }
+}
+&lt;/pre&gt;&lt;/noscript&gt;
+&lt;script src=&quot;https://gist.github.com/saasan/ed2ee155ed1a16865015c1967cf875c3.js&quot;&gt; &lt;/script&gt;
+
+&lt;p&gt;SPIFFS からファイルを読み込む AudioFileSourceSPIFFS クラス、
+MP3 を再生する AudioGeneratorMP3 クラス、
+I2S で出力する AudioOutputI2S クラスを使用しています。
+ESP8266Audio は MP3 以外にも WAV, FLAC, MIDI, AAC などのファイル形式を読み込めるようになっており、
+それぞれのファイル形式に対応した generator クラスを使用する必要があります。&lt;/p&gt;
+
+&lt;p&gt;generator-&amp;gt;isRunning() で再生中か確認し、再生中でない場合にボタンが押されたら MP3 ファイルを再生しています。
+一度再生が終わり generator-&amp;gt;stop() を呼び出すとファイルが閉じられます。
+そのため、2回目以降の再生時はファイルを再び開く必要があります。
+source-&amp;gt;isOpen() でファイルが開かれているかを確認し、
+開かれていない場合は source-&amp;gt;open() でファイルを開いています。&lt;/p&gt;
+
+&lt;p&gt;AudioFileSourceSPIFFS クラスでは再生する度にファイルを読み込むため、
+ESP32-PICO のメモリ (520KB) に収まるサイズのファイルを何度も再生するのであれば、
+以下のように setup() 内でファイルを読み込み
+AudioFileSourcePROGMEM クラスを使用した方がよいかと思います。&lt;/p&gt;
+
+&lt;noscript&gt;&lt;pre&gt;#include &amp;lt;M5StickC.h&amp;gt;
+#include &amp;quot;FS.h&amp;quot;
+#include &amp;quot;SPIFFS.h&amp;quot;
+#include &amp;quot;AudioFileSourcePROGMEM.h&amp;quot;
+#include &amp;quot;AudioGeneratorMP3.h&amp;quot;
+#include &amp;quot;AudioOutputI2S.h&amp;quot;
+
+// オーディオファイル名
+const char AUDIO_FILE_NAME[] = &amp;quot;/hoge.mp3&amp;quot;;
+
+const int I2S_NUM_0 = 0;
+// 電源ボタンが1秒未満押された
+const uint8_t AXP_WAS_PRESSED = 2;
+
+AudioGeneratorMP3 *generator = NULL;
+AudioFileSourcePROGMEM *source = NULL;
+AudioOutputI2S *output = NULL;
+uint8_t *audioData = NULL;
+size_t audioDataSize = 0;
+
+// メッセージ出力
+void showMessage(const char *message) {
+    M5.Lcd.fillScreen(WHITE);
+    M5.Lcd.setCursor(5, 35);
+    M5.Lcd.setTextFont(2);
+    M5.Lcd.setTextColor(BLACK);
+    M5.Lcd.print(message);
+}
+
+void readAudioFile(fs::FS&amp;amp; fs, const char* path) {
+    File file = fs.open(path);
+    if (!file || file.isDirectory()) {
+        Serial.println(&amp;quot;- failed to open file for reading&amp;quot;);
+        return;
+    }
+
+    audioDataSize = file.size();
+    audioData = new uint8_t[audioDataSize];
+    file.read(audioData, audioDataSize);
+}
+
+void playAudio() {
+    Serial.println(&amp;quot;playAudio&amp;quot;);
+
+    stopAudio();
+    if (!source-&amp;gt;isOpen()) {
+        source-&amp;gt;open(audioData, audioDataSize);
+    }
+    generator-&amp;gt;begin(source, output);
+}
+
+void stopAudio() {
+    Serial.println(&amp;quot;stopAudio&amp;quot;);
+
+    if (generator-&amp;gt;isRunning()) {
+        generator-&amp;gt;stop();
+    }
+}
+
+void setup() {
+    M5.begin();
+    M5.Lcd.setRotation(1);
+    showMessage(&amp;quot;ESP8266Audio&amp;quot;);
+
+    // シリアルモニターの設定
+    Serial.begin(115200);
+    audioLogger = &amp;amp;Serial;
+
+    // SPIFFSの設定
+    if (!SPIFFS.begin()) {
+        Serial.println(&amp;quot;SPIFFS Mount Failed&amp;quot;);
+        return;
+    }
+
+    readAudioFile(SPIFFS, AUDIO_FILE_NAME);
+
+    source = new AudioFileSourcePROGMEM(audioData, audioDataSize);
+    output = new AudioOutputI2S(I2S_NUM_0, AudioOutputI2S::INTERNAL_DAC);
+    generator = new AudioGeneratorMP3();
+}
+
+void loop() {
+    delay(10);
+
+    if (generator-&amp;gt;isRunning()) {
+        if (!generator-&amp;gt;loop()) {
+            stopAudio();
+        }
+    }
+    else {
+        // ボタンの状態を更新
+        M5.update();
+
+        // Aボタンが押されたら音声データ再生
+        if (M5.BtnA.wasPressed()) {
+            playAudio();
+        }
+
+        // 電源ボタンが押されたらリセット
+        if (M5.Axp.GetBtnPress() == AXP_WAS_PRESSED) {
+            esp_restart();
+        }
+    }
+}
+&lt;/pre&gt;&lt;/noscript&gt;
+&lt;script src=&quot;https://gist.github.com/saasan/b6d9cb8fc8786d9c0407560f6206af22.js&quot;&gt; &lt;/script&gt;
+
+&lt;h2 id=&quot;参考サイト&quot;&gt;参考サイト&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/earlephilhower/ESP8266Audio&quot;&gt;earlephilhower/ESP8266Audio: Arduino library to play MOD, WAV, FLAC, MIDI, RTTTL, MP3, and AAC files on I2S DACs or with a software emulated delta-sigma DAC on the ESP8266 and ESP32&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://qiita.com/odetarou/items/0f37ed2eeeb9bd051c0c&quot;&gt;ESP32でGoogle Play Musicを再生する - Qiita&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Wed, 17 Jun 2020 19:59:34 +0900</pubDate>
+        <link>https://saasan.github.io/blog/2020/06/17/m5stickc-speaker-hat%E3%81%A7esp8266audio%E3%83%A9%E3%82%A4%E3%83%96%E3%83%A9%E3%83%AA%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%97%E3%81%A6mp3%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%92%E5%86%8D%E7%94%9F%E3%81%99%E3%82%8B.html</link>
+        <guid isPermaLink="true">https://saasan.github.io/blog/2020/06/17/m5stickc-speaker-hat%E3%81%A7esp8266audio%E3%83%A9%E3%82%A4%E3%83%96%E3%83%A9%E3%83%AA%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%97%E3%81%A6mp3%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%92%E5%86%8D%E7%94%9F%E3%81%99%E3%82%8B.html</guid>
+        
+        <category>M5StickC,</category>
+        
+        <category>M5Stack,</category>
+        
+        <category>ESP32</category>
+        
+        
+        <category>blog</category>
+        
+      </item>
     
       <item>
         <title>M5StickC + Speaker Hat で SPIFFS から読み込んだ WAV ファイルを再生する</title>
@@ -73,7 +323,7 @@ const uint8_t SPEAKER_PIN = GPIO_NUM_26;
 const uint8_t LED_ON = LOW;
 const uint8_t LED_OFF = HIGH;
 // 電源ボタンが1秒未満押された
-const uint8_t APX_WAS_PRESSED = 2;
+const uint8_t AXP_WAS_PRESSED = 2;
 
 // PWM出力のチャンネル
 const uint8_t PWM_CHANNEL = 0;
@@ -244,7 +494,7 @@ void loop() {
     }
 
     // 電源ボタンが押されたらリセット
-    if (M5.Axp.GetBtnPress() == APX_WAS_PRESSED) {
+    if (M5.Axp.GetBtnPress() == AXP_WAS_PRESSED) {
         esp_restart();
     }
 }
@@ -800,49 +1050,6 @@ Liquidのタグもそのまま出力されます。&lt;/p&gt;
         <pubDate>Tue, 15 Dec 2015 19:13:07 +0900</pubDate>
         <link>https://saasan.github.io/blog/2015/12/15/jekyll-escape-liquid-tags.html</link>
         <guid isPermaLink="true">https://saasan.github.io/blog/2015/12/15/jekyll-escape-liquid-tags.html</guid>
-        
-        <category>Jekyll</category>
-        
-        
-        <category>blog</category>
-        
-      </item>
-    
-      <item>
-        <title>[Jekyll] HTMLを読みやすいように整形するプラグイン</title>
-        <description>&lt;p&gt;Jekyll で include を多用してると、include されたファイルの中に
-include があってまたそのファイルの中に include が……なんてことになって
-HTML の構造が分からなくなるときがあります。
-できあがった HTML をみてもインデントがメチャクチャでわけがわからない…！&lt;/p&gt;
-
-&lt;p&gt;そこで、HTML を整形して出力するプラグインを作ってみました。
-いわゆるbeautifierとかpretty printとかいわれる機能ですね。&lt;/p&gt;
-
-&lt;noscript&gt;&lt;pre&gt;require &amp;#39;rubygems&amp;#39;
-require &amp;#39;htmlbeautifier&amp;#39;
-
-Jekyll::Hooks.register :documents, :post_render do |page|
-  next if page.output_ext != &amp;#39;.html&amp;#39;
-  page.output = HtmlBeautifier.beautify(page.output)
-end
-
-Jekyll::Hooks.register :pages, :post_render do |page|
-  next if page.ext != &amp;#39;.html&amp;#39;
-  page.output = HtmlBeautifier.beautify(page.output)
-end
-&lt;/pre&gt;&lt;/noscript&gt;
-&lt;script src=&quot;https://gist.github.com/saasan/7c92d15e7ebb4870f581.js&quot;&gt; &lt;/script&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;gem install htmlbeautifier&lt;/code&gt; などで htmlbeautifier をインストールしたあと、
-このファイルを _plugins フォルダに入れれば
-Jekyll でのビルド時に HTML が整形されます。&lt;/p&gt;
-
-&lt;p&gt;プラグインなので、プラグインが使えない GitHub Pages 上でのビルドには使えません。
-あらかじめローカルの環境でビルドして生成されたファイルをアップロードしてください。&lt;/p&gt;
-</description>
-        <pubDate>Tue, 15 Dec 2015 18:59:07 +0900</pubDate>
-        <link>https://saasan.github.io/blog/2015/12/15/jekyll-html-beautifier-plugin.html</link>
-        <guid isPermaLink="true">https://saasan.github.io/blog/2015/12/15/jekyll-html-beautifier-plugin.html</guid>
         
         <category>Jekyll</category>
         

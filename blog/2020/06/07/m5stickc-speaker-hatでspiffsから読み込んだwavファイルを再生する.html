@@ -125,7 +125,7 @@ const uint8_t SPEAKER_PIN = GPIO_NUM_26;
 const uint8_t LED_ON = LOW;
 const uint8_t LED_OFF = HIGH;
 // 電源ボタンが1秒未満押された
-const uint8_t APX_WAS_PRESSED = 2;
+const uint8_t AXP_WAS_PRESSED = 2;
 
 // PWM出力のチャンネル
 const uint8_t PWM_CHANNEL = 0;
@@ -296,7 +296,7 @@ void loop() {
     }
 
     // 電源ボタンが押されたらリセット
-    if (M5.Axp.GetBtnPress() == APX_WAS_PRESSED) {
+    if (M5.Axp.GetBtnPress() == AXP_WAS_PRESSED) {
         esp_restart();
     }
 }
