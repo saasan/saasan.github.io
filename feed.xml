@@ -5,9 +5,153 @@
     <description></description>
     <link>https://saasan.github.io/</link>
     <atom:link href="https://saasan.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 17 Jun 2020 23:46:42 +0900</pubDate>
-    <lastBuildDate>Wed, 17 Jun 2020 23:46:42 +0900</lastBuildDate>
+    <pubDate>Sun, 19 Jul 2020 08:35:04 +0900</pubDate>
+    <lastBuildDate>Sun, 19 Jul 2020 08:35:04 +0900</lastBuildDate>
     <generator>Jekyll v3.8.6</generator>
+    
+      <item>
+        <title>USB CABLE CHECKER 2 で USB Type-C ケーブルの性能を確認する</title>
+        <description>&lt;p&gt;先日 RAVPower 製 90W USB PD 充電器 RP-PC128 を買いました。
+同じく RAVPower 製の 61W USB PD 充電器 PR-PC112 を持っていたのですが、
+65W を要求する Dell 製ノート PC に給電しながら電源を入れると
+途中で電力が足りない旨メッセージが表示されて起動が一時停止したり、
+Windows 10 起動後も電力不足の通知が表示されるという状態で煩わしかったためです。&lt;/p&gt;
+
+&lt;p&gt;eMarker 付きのケーブルを持っていなかったので
+RAMPOW という謎のメーカーの PD 3.0 / USB 3.1 Gen2 対応を謳う USB Type-C ケーブルと
+Bit Trade One の
+&lt;a href=&quot;https://bit-trade-one.co.jp/adusbcim/&quot;&gt;USB CABLE CHECKER 2 (ADUSBCIM)&lt;/a&gt;
+もついでに購入しました。&lt;/p&gt;
+
+&lt;p&gt;RAMPOW は &lt;a href=&quot;https://rampow.com/&quot;&gt;Web サイト&lt;/a&gt; を見ても本社所在地や電話番号等が一切書かれておらず怪しげなメーカーという印象だったため、
+ケーブルを使用する前に念の為 USB CABLE CHECKER 2 で確認しようという寸法です。
+(※購入後に気付いたのですが、RAMPOW の
+&lt;a href=&quot;https://www.amazon.co.jp/sp?_encoding=UTF8&amp;amp;seller=A2RPIWYAIJTBUL&quot;&gt;Amazon出品者プロフィール&lt;/a&gt;
+に住所と電話番号が書かれていました。中国深センの会社のようです。)&lt;/p&gt;
+
+&lt;iframe style=&quot;width:120px;height:240px;&quot; marginwidth=&quot;0&quot; marginheight=&quot;0&quot; scrolling=&quot;no&quot; frameborder=&quot;0&quot; src=&quot;https://rcm-fe.amazon-adsystem.com/e/cm?ref=tf_til&amp;amp;t=saasan-22&amp;amp;m=amazon&amp;amp;o=9&amp;amp;p=8&amp;amp;l=as1&amp;amp;IS2=1&amp;amp;detail=1&amp;amp;asins=B0872MGDR2&amp;amp;linkId=fac28b4b22c51e4280bc86287fd8dd0a&amp;amp;bc1=000000&amp;amp;lt1=_blank&amp;amp;fc1=333333&amp;amp;lc1=0066c0&amp;amp;bg1=ffffff&amp;amp;f=ifr&quot;&gt;&lt;/iframe&gt;
+
+&lt;iframe style=&quot;width:120px;height:240px;&quot; marginwidth=&quot;0&quot; marginheight=&quot;0&quot; scrolling=&quot;no&quot; frameborder=&quot;0&quot; src=&quot;https://rcm-fe.amazon-adsystem.com/e/cm?ref=tf_til&amp;amp;t=saasan-22&amp;amp;m=amazon&amp;amp;o=9&amp;amp;p=8&amp;amp;l=as1&amp;amp;IS2=1&amp;amp;detail=1&amp;amp;asins=B0827NDHBQ&amp;amp;linkId=bc50d175b4811fb8739a0a5d77f6be35&amp;amp;bc1=000000&amp;amp;lt1=_blank&amp;amp;fc1=333333&amp;amp;lc1=0066c0&amp;amp;bg1=ffffff&amp;amp;f=ifr&quot;&gt;&lt;/iframe&gt;
+
+&lt;iframe style=&quot;width:120px;height:240px;&quot; marginwidth=&quot;0&quot; marginheight=&quot;0&quot; scrolling=&quot;no&quot; frameborder=&quot;0&quot; src=&quot;https://rcm-fe.amazon-adsystem.com/e/cm?ref=tf_til&amp;amp;t=saasan-22&amp;amp;m=amazon&amp;amp;o=9&amp;amp;p=8&amp;amp;l=as1&amp;amp;IS2=1&amp;amp;detail=1&amp;amp;asins=B07Y8BPVV4&amp;amp;linkId=b4348a77ed22af3503ea6572a01d34e9&amp;amp;bc1=000000&amp;amp;lt1=_blank&amp;amp;fc1=333333&amp;amp;lc1=0066c0&amp;amp;bg1=ffffff&amp;amp;f=ifr&quot;&gt;&lt;/iframe&gt;
+
+&lt;h2 id=&quot;rampow-製ケーブル-rad03&quot;&gt;RAMPOW 製ケーブル RAD03&lt;/h2&gt;
+
+&lt;p&gt;さっそく RAMPOW 製ケーブルを確認してみます。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/img/blog/2020-07-19/rampow.jpg&quot;&gt;&lt;img src=&quot;/img/blog/2020-07-19/rampow.jpg&quot; alt=&quot;RAMPOW 製ケーブル RAD03&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;USB CABLE CHECKER 2 の表示は以下の通り。&lt;/p&gt;
+
+&lt;pre&gt;GND+VBUS=188mΩ
+CC:DOWN1K/E-MARKED
+SHELL-GND SHORT(A&amp;amp;B)&lt;/pre&gt;
+
+&lt;p&gt;表示の意味については
+&lt;a href=&quot;https://github.com/bit-trade-one/USBCableChecker2/blob/master/README.md&quot;&gt;取扱説明書&lt;/a&gt;
+に記載されています。&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;[DOWN1K/E-MARKED]&lt;/p&gt;
+
+  &lt;p&gt;Cプラグ内にGND-VCONN間に接続された1kΩの抵抗器を持ちます。&lt;/p&gt;
+
+  &lt;p&gt;これにより接続先USB機器にEマーカーIC内蔵ケーブルということを通知します。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;[SHELL-GND SHORT(SIDE)]&lt;/p&gt;
+
+  &lt;p&gt;プラグシェルがGNDと導通している場合表示されます。()内は導通している側のコネクタがA,Bどちらかを表します。&lt;/p&gt;
+
+  &lt;p&gt;両側のコネクタが導通している場合はA&amp;amp;Bと表示されます。&lt;/p&gt;
+
+  &lt;p&gt;なお、タイプC-Cケーブルでは規格でGNDとシェルが接続されることが定められています。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;samp&gt;CC:DOWN1K/E-MARKED&lt;/samp&gt; は eMarker 内蔵、
+&lt;samp&gt;SHELL-GND SHORT(A&amp;amp;B)&lt;/samp&gt; は両側のプラグシェルが GND と導通していることを示しています。&lt;/p&gt;
+
+&lt;p&gt;eMarker が内蔵されているため 3A を超える電流が流せます。
+connection のランプも全点灯しており、PD 3.0 / USB 3.1 Gen2 対応を謳うケーブルとして特に問題なさそうです。&lt;/p&gt;
+
+&lt;h2 id=&quot;ravpower-製充電器-rp-pc128-付属ケーブル&quot;&gt;RAVPower 製充電器 RP-PC128 付属ケーブル&lt;/h2&gt;
+
+&lt;p&gt;購入時に気付いてなかったのですが、
+RP-PC128 にも 1.5m の Type-C ケーブルが付属していたためこれも確認してみます。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/img/blog/2020-07-19/ravpower.jpg&quot;&gt;&lt;img src=&quot;/img/blog/2020-07-19/ravpower.jpg&quot; alt=&quot;RAVPower 製 90W USB PD 充電器 RP-PC128 付属ケーブル&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;pre&gt;GND+VBUS=170mΩ
+CC:DOWN1K/E-MARKED
+SHELL-GND SHORT(A&amp;amp;B)&lt;/pre&gt;
+
+&lt;p&gt;eMarker が内蔵されているため 3A を超える電流が流せます。
+connection のランプは USB 2.0 の部分と
+&lt;a href=&quot;https://lab.fujiele.co.jp/articles/8968/&quot;&gt;CC (Configuration Channel)&lt;/a&gt; が点灯しています。
+USB 2.0 対応の PD ケーブルとして使えるようです。&lt;/p&gt;
+
+&lt;p&gt;電源ケーブルとして使うならこれで十分ですね。
+&lt;del&gt;RAMPOW のケーブルいらなかったのでは？&lt;/del&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;lenovo-yoga-book-c930-付属ケーブル&quot;&gt;Lenovo Yoga Book C930 付属ケーブル&lt;/h2&gt;
+
+&lt;p&gt;手元にあったほかの USB Type-C ケーブルも確認してみます。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/img/blog/2020-07-19/lenovo.jpg&quot;&gt;&lt;img src=&quot;/img/blog/2020-07-19/lenovo.jpg&quot; alt=&quot;Lenovo Yoga Book C930 付属ケーブル&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;pre&gt;GND+VBUS=212mΩ
+SHELL-GND SHORT(A&amp;amp;B)&lt;/pre&gt;
+
+&lt;p&gt;eMarker が内蔵されていないため 3A までの電流しか流せません。
+connection のランプは USB 3.2 が一部点灯しています。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://ascii.jp/elem/000/001/848/1848727/index-2.html&quot;&gt;USB 3.0, 3,1 では TX1/RX1 と TX2/RX2 のどちらかが繋がっていれば良い&lt;/a&gt;
+ようです。
+USB 3.2 では TX1/RX1 と TX2/RX2 の2レーンを使用して高速な通信を行う USB 3.2 Gen 2x2 というモードがありますが、このケーブルでは利用できません。&lt;/p&gt;
+
+&lt;p&gt;USB 3.1 対応の PD ケーブルとして使えそう。&lt;/p&gt;
+
+&lt;h2 id=&quot;one-netbook-onemix3s-付属ケーブル&quot;&gt;One-Netbook OneMix3S 付属ケーブル&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;/img/blog/2020-07-19/onemix3s.jpg&quot;&gt;&lt;img src=&quot;/img/blog/2020-07-19/onemix3s.jpg&quot; alt=&quot;One-Netbook OneMix3S 付属ケーブル&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;pre&gt;GND+VBUS=225mΩ&lt;/pre&gt;
+
+&lt;p&gt;&lt;samp&gt;SHELL-GND SHORT(A&amp;amp;B)&lt;/samp&gt; の表示がない……。
+規格に従ってないケーブルのようです。
+これは使わないほうがよさそう。&lt;/p&gt;
+
+&lt;h2 id=&quot;まとめ&quot;&gt;まとめ&lt;/h2&gt;
+
+&lt;p&gt;RAVPower 製 90W USB PD 充電器 RP-PC128 と RAMPOW 製ケーブル RAD03 の組み合わせで、
+65W を要求する Dell 製ノート PC が問題なく充電できました。&lt;/p&gt;
+
+&lt;p&gt;RP-PC128 は MacBook 付属の 61W USB-C 充電器と比べて
+サイズがひと回り小さい (65 x 65 x 32 mm) ため持ち運びやすく、
+90W の大出力により充電できる機器の幅が広がります。&lt;/p&gt;
+
+&lt;p&gt;また、電力に余裕があるため、BUFFALO の
+5-in-1 ドッキングステーション LUD-U3-CGD/N
+を間にはさんでも安定して動作しています
+(61W 出力の PR-PC112 を使用したときは有線 LAN の通信がブツブツ切れていた)。
+ケーブル1本で電源、ディスプレイ、有線 LAN、キーボードが繋がるのは便利です。&lt;/p&gt;
+
+&lt;iframe style=&quot;width:120px;height:240px;&quot; marginwidth=&quot;0&quot; marginheight=&quot;0&quot; scrolling=&quot;no&quot; frameborder=&quot;0&quot; src=&quot;https://rcm-fe.amazon-adsystem.com/e/cm?ref=tf_til&amp;amp;t=saasan-22&amp;amp;m=amazon&amp;amp;o=9&amp;amp;p=8&amp;amp;l=as1&amp;amp;IS2=1&amp;amp;detail=1&amp;amp;asins=B081ZZGWR7&amp;amp;linkId=9a6e62087527f859adc8ac8b19af537f&amp;amp;bc1=000000&amp;amp;lt1=_blank&amp;amp;fc1=333333&amp;amp;lc1=0066c0&amp;amp;bg1=ffffff&amp;amp;f=ifr&quot;&gt;&lt;/iframe&gt;
+
+&lt;p&gt;今回購入した RAMPOW 製ケーブルは問題ありませんでしたが、
+手持ちの OneMix3S 付属ケーブルが規格違反だったのは意外でした。
+USB Power Delivery では高電圧、大電流が流れるため、
+ケーブル購入の際は信頼できるメーカーのものを選んだほうがよさそうです。&lt;/p&gt;
+</description>
+        <pubDate>Sun, 19 Jul 2020 08:30:00 +0900</pubDate>
+        <link>https://saasan.github.io/blog/2020/07/19/usb-cable-checker-2%E3%81%A7usb-type-c%E3%82%B1%E3%83%BC%E3%83%96%E3%83%AB%E3%81%AE%E6%80%A7%E8%83%BD%E3%82%92%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B.html</link>
+        <guid isPermaLink="true">https://saasan.github.io/blog/2020/07/19/usb-cable-checker-2%E3%81%A7usb-type-c%E3%82%B1%E3%83%BC%E3%83%96%E3%83%AB%E3%81%AE%E6%80%A7%E8%83%BD%E3%82%92%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B.html</guid>
+        
+        
+        <category>blog</category>
+        
+      </item>
     
       <item>
         <title>M5StickC + Speaker Hat で ESP8266Audio ライブラリを使用して MP3 ファイルを再生する</title>
@@ -1028,41 +1172,6 @@ _config-production.yml という名前のファイルを作成し、以下の通
         <pubDate>Fri, 19 Feb 2016 18:08:47 +0900</pubDate>
         <link>https://saasan.github.io/blog/2016/02/19/Google-AdSense%E3%81%AE%E7%A2%BA%E5%AE%9A%E7%94%B3%E5%91%8A.html</link>
         <guid isPermaLink="true">https://saasan.github.io/blog/2016/02/19/Google-AdSense%E3%81%AE%E7%A2%BA%E5%AE%9A%E7%94%B3%E5%91%8A.html</guid>
-        
-        
-        <category>blog</category>
-        
-      </item>
-    
-      <item>
-        <title>[Jekyll] Liquidのタグをエスケープする方法</title>
-        <description>&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;{% raw %}&lt;/code&gt; と &lt;code class=&quot;highlighter-rouge&quot;&gt;{% endraw %}&lt;/code&gt; で囲むと
-Liquidのタグもそのまま出力されます。&lt;/p&gt;
-
-&lt;p&gt;例えば&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;{% raw %}
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;ul&amp;gt;&lt;/span&gt;
-  {% for post in site.posts %}
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;li&amp;gt;&amp;lt;a&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;{{ post.url }}&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;{{ post.title }}&lt;span class=&quot;nt&quot;&gt;&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;&lt;/span&gt;
-  {% endfor %}
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/ul&amp;gt;&lt;/span&gt;
-{% endraw %}&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;と書いた場合の出力は以下のようになります。&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;ul&amp;gt;&lt;/span&gt;
-  {% for post in site.posts %}
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;li&amp;gt;&amp;lt;a&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;{{ post.url }}&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;{{ post.title }}&lt;span class=&quot;nt&quot;&gt;&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;&lt;/span&gt;
-  {% endfor %}
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/ul&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-</description>
-        <pubDate>Tue, 15 Dec 2015 19:13:07 +0900</pubDate>
-        <link>https://saasan.github.io/blog/2015/12/15/jekyll-escape-liquid-tags.html</link>
-        <guid isPermaLink="true">https://saasan.github.io/blog/2015/12/15/jekyll-escape-liquid-tags.html</guid>
-        
-        <category>Jekyll</category>
         
         
         <category>blog</category>
