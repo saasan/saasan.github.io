@@ -5,8 +5,8 @@
     <description></description>
     <link>https://saasan.github.io/</link>
     <atom:link href="https://saasan.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 19 Jul 2020 08:40:46 +0900</pubDate>
-    <lastBuildDate>Sun, 19 Jul 2020 08:40:46 +0900</lastBuildDate>
+    <pubDate>Sun, 19 Jul 2020 09:10:54 +0900</pubDate>
+    <lastBuildDate>Sun, 19 Jul 2020 09:10:54 +0900</lastBuildDate>
     <generator>Jekyll v3.8.6</generator>
     
       <item>
@@ -87,8 +87,7 @@ CC:DOWN1K/E-MARKED
 SHELL-GND SHORT(A&amp;amp;B)&lt;/pre&gt;
 
 &lt;p&gt;eMarker が内蔵されているため 3A を超える電流が流せます。
-connection のランプは USB 2.0 の部分と
-&lt;a href=&quot;https://lab.fujiele.co.jp/articles/8968/&quot;&gt;CC (Configuration Channel)&lt;/a&gt; が点灯しています。
+connection のランプは USB 2.0 の部分と CC (Configuration Channel) が点灯しています。
 USB 2.0 対応の PD ケーブルとして使えるようです。&lt;/p&gt;
 
 &lt;p&gt;電源ケーブルとして使うならこれで十分ですね。
@@ -106,11 +105,13 @@ SHELL-GND SHORT(A&amp;amp;B)&lt;/pre&gt;
 &lt;p&gt;eMarker が内蔵されていないため 3A までの電流しか流せません。
 connection のランプは USB 3.2 が一部点灯しています。&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&quot;https://ascii.jp/elem/000/001/848/1848727/index-2.html&quot;&gt;USB 3.0, 3.1 では TX1/RX1 と TX2/RX2 のどちらかが繋がっていれば良い&lt;/a&gt;
-ようです。
-USB 3.2 では TX1/RX1 と TX2/RX2 の2レーンを使用して高速な通信を行う USB 3.2 Gen 2x2 というモードがありますが、このケーブルでは利用できません。&lt;/p&gt;
+&lt;p&gt;USB 3.0, 3.1 では TX1/RX1 と TX2/RX2 のどちらかが繋がっていれば良いようです。
+USB 3.2 Gen 2x2 では TX1, TX2, RX1, RX2 のすべてを使用してより高速な通信を行うため、このケーブルは利用できません。&lt;/p&gt;
 
-&lt;p&gt;USB 3.1 対応の PD ケーブルとして使えそう。&lt;/p&gt;
+&lt;p&gt;SBU (Sideband Use) は USB では使用されず、
+DisplayPort 出力や Thunderbolt などの Alternate Mode に使われる信号線のようです。&lt;/p&gt;
+
+&lt;p&gt;USB 3.1 対応の PD ケーブルとしては使えそう。&lt;/p&gt;
 
 &lt;h2 id=&quot;one-netbook-onemix3s-付属ケーブル&quot;&gt;One-Netbook OneMix3S 付属ケーブル&lt;/h2&gt;
 
@@ -143,8 +144,17 @@ USB 3.2 では TX1/RX1 と TX2/RX2 の2レーンを使用して高速な通信�
 手持ちの OneMix3S 付属ケーブルが規格違反だったのは意外でした。
 USB Power Delivery では高電圧、大電流が流れるため、
 ケーブル購入の際は信頼できるメーカーのものを選んだほうがよさそうです。&lt;/p&gt;
+
+&lt;h2 id=&quot;参考サイト&quot;&gt;参考サイト&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/bit-trade-one/USBCableChecker2/blob/master/README.md&quot;&gt;USBCableChecker2/README.md at master · bit-trade-one/USBCableChecker2&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://ascii.jp/elem/000/001/848/1848727/&quot;&gt;ASCII.jp：USB 4の発表で、USB 3.2はどうなった？ (1/5)&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.4gamer.net/games/999/G999902/20190403022/&quot;&gt;USB 3.2とUSB4は従来のUSB規格から何が変わるのか？ 混乱しがちなUSBの最新事情を説明しよう - 4Gamer.net&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://lab.fujiele.co.jp/articles/8968/&quot;&gt;USB Type-Cに置き換える方法 第1話 Type-Cの原理を知る | 組込み技術ラボ&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
 </description>
-        <pubDate>Sun, 19 Jul 2020 08:30:00 +0900</pubDate>
+        <pubDate>Sun, 19 Jul 2020 09:00:00 +0900</pubDate>
         <link>https://saasan.github.io/blog/2020/07/19/usb-cable-checker-2%E3%81%A7usb-type-c%E3%82%B1%E3%83%BC%E3%83%96%E3%83%AB%E3%81%AE%E6%80%A7%E8%83%BD%E3%82%92%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B.html</link>
         <guid isPermaLink="true">https://saasan.github.io/blog/2020/07/19/usb-cable-checker-2%E3%81%A7usb-type-c%E3%82%B1%E3%83%BC%E3%83%96%E3%83%AB%E3%81%AE%E6%80%A7%E8%83%BD%E3%82%92%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B.html</guid>
         
