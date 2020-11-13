@@ -5,9 +5,47 @@
     <description></description>
     <link>https://saasan.github.io/</link>
     <atom:link href="https://saasan.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 19 Jul 2020 09:10:54 +0900</pubDate>
-    <lastBuildDate>Sun, 19 Jul 2020 09:10:54 +0900</lastBuildDate>
+    <pubDate>Sat, 14 Nov 2020 00:48:03 +0900</pubDate>
+    <lastBuildDate>Sat, 14 Nov 2020 00:48:03 +0900</lastBuildDate>
     <generator>Jekyll v3.8.6</generator>
+    
+      <item>
+        <title>スタートメニューから消えた Dell Command | Update を復活させる</title>
+        <description>&lt;p&gt;Dell Command | Update を実行したあとにスタートメニューから Dell Command | Update が消えることがある。&lt;/p&gt;
+
+&lt;p&gt;しばらく待っていれば自動で復活することもあれば復活しないこともある。
+復活しないときは一度アンインストールして
+&lt;a href=&quot;https://www.dell.com/support/article/ja-jp/sln311129/dell-command-update?lang=ja&quot;&gt;Dell のサイトからダウンロード&lt;/a&gt;
+したものを入れ直していたが、けっこう手間がかかって面倒だった。
+そもそもアプリの一覧に残ってるならもっと簡単に復活できるんじゃないか？&lt;/p&gt;
+
+&lt;p&gt;そう思ってスタートメニューだけ復活させる方法がないか調べたら以下の方法で復活できた。&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;管理者権限で PowerShell を起動する。&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;以下のコマンドを実行する。&lt;/p&gt;
+
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ManifestPath = (Get-AppxPackage -AllUsers -Name &quot;DellInc.DellCommandUpdate&quot;).InstallLocation + &quot;\Appxmanifest.xml&quot;
+Add-AppxPackage -Path $ManifestPath -Register -DisableDevelopmentMode
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;※Get-AppxPackage に -AllUsers オプションを付けて実行するのに管理者権限が必要。&lt;/p&gt;
+
+&lt;p&gt;参考 : &lt;a href=&quot;https://docs.microsoft.com/ja-jp/powershell/module/appx/add-appxpackage?view=winserver2012r2-ps#example-2&quot;&gt;Add-AppxPackage (AppX) | Microsoft Docs&lt;/a&gt;&lt;/p&gt;
+</description>
+        <pubDate>Sat, 14 Nov 2020 00:46:11 +0900</pubDate>
+        <link>https://saasan.github.io/blog/2020/11/14/%E3%82%B9%E3%82%BF%E3%83%BC%E3%83%88%E3%83%A1%E3%83%8B%E3%83%A5%E3%83%BC%E3%81%8B%E3%82%89%E6%B6%88%E3%81%88%E3%81%9F-dell-command-update-%E3%82%92%E5%BE%A9%E6%B4%BB%E3%81%95%E3%81%9B%E3%82%8B.html</link>
+        <guid isPermaLink="true">https://saasan.github.io/blog/2020/11/14/%E3%82%B9%E3%82%BF%E3%83%BC%E3%83%88%E3%83%A1%E3%83%8B%E3%83%A5%E3%83%BC%E3%81%8B%E3%82%89%E6%B6%88%E3%81%88%E3%81%9F-dell-command-update-%E3%82%92%E5%BE%A9%E6%B4%BB%E3%81%95%E3%81%9B%E3%82%8B.html</guid>
+        
+        <category>PC</category>
+        
+        
+        <category>blog</category>
+        
+      </item>
     
       <item>
         <title>USB CABLE CHECKER 2 で USB Type-C ケーブルの性能を確認する</title>
@@ -1114,74 +1152,6 @@ _config-production.yml という名前のファイルを作成し、以下の通
         <guid isPermaLink="true">https://saasan.github.io/blog/2016/03/04/jekyll-%E3%83%93%E3%83%AB%E3%83%89%E3%81%99%E3%82%8B%E3%81%A8%E3%81%8D%E3%81%AB%E3%81%A0%E3%81%91sass-scss-%E3%82%92%E5%9C%A7%E7%B8%AE%E3%81%99%E3%82%8B.html</guid>
         
         <category>Jekyll</category>
-        
-        
-        <category>blog</category>
-        
-      </item>
-    
-      <item>
-        <title>Google AdSenseの確定申告</title>
-        <description>&lt;p&gt;Google AdSenseでの収入が年間20万円を超えると、サラリーマンやアルバイトなど本業で源泉徴収されている人でも確定申告しなきゃいけないらしい。&lt;/p&gt;
-
-&lt;p&gt;参考 :
-&lt;a href=&quot;https://www.nta.go.jp/taxanswer/shotoku/1900.htm&quot; target=&quot;_blank&quot;&gt;No.1900 給与所得者で確定申告が必要な人｜所得税｜国税庁&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;ありがたいことに、うちも売上が20万円を超えて確定申告することになったのでメモ。&lt;/p&gt;
-
-&lt;h3 id=&quot;確定申告に必要なもの&quot;&gt;確定申告に必要なもの&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;生命保険料控除証明書など (いつも年末調整で提出してるやつ)&lt;/li&gt;
-  &lt;li&gt;本業の会社からもらった源泉徴収票&lt;/li&gt;
-  &lt;li&gt;パソコン&lt;/li&gt;
-  &lt;li&gt;プリンター
-または &lt;a href=&quot;https://www.printing.ne.jp/&quot; target=&quot;_blank&quot;&gt;ネットプリント&lt;/a&gt; などのコンビニで印刷できるサービス&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;申告書を作る&quot;&gt;申告書を作る&lt;/h3&gt;
-
-&lt;p&gt;国税庁のホームページに
-&lt;a href=&quot;https://www.keisan.nta.go.jp/h27/ta_top.htm&quot; target=&quot;_blank&quot;&gt;確定申告書等作成コーナー&lt;/a&gt;
-があるのでそこで作る。&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;「書面提出」 &amp;gt; 「所得税コーナー」 &amp;gt; 「左記以外の所得のある方(全ての所得対応)」&lt;/li&gt;
-  &lt;li&gt;「給与所得」に源泉徴収票通り入力&lt;/li&gt;
-  &lt;li&gt;「雑所得」の「その他」に以下の通り入力
-    &lt;ul&gt;
-      &lt;li&gt;種目 : 広告収入&lt;/li&gt;
-      &lt;li&gt;報酬などの支払者の氏名・名称 : &lt;del&gt;グーグル株式会社&lt;/del&gt; グーグル合同会社 (2018/03/04 修正)&lt;/li&gt;
-      &lt;li&gt;所得の生ずる場所 : 東京都港区六本木６丁目１０－１ 六本木ヒルズ森タワー&lt;/li&gt;
-      &lt;li&gt;収入金額 : AdSenseでの収入金額&lt;br /&gt;
-(&lt;a href=&quot;https://www.google.com/adsense/app#main/home&quot; target=&quot;_blank&quot;&gt;AdSenseのサイト&lt;/a&gt;
-        &lt;blockquote&gt;
-          &lt;p&gt;「残高」右上の「…」 &amp;gt; 「お支払いページを表示」 &amp;gt; 「取引」右下の「取引を表示する」 &amp;gt; 上部のフィルターを「詳細取引表示」、「お支払い」、「前年」にして金額を合計する)&lt;/p&gt;
-        &lt;/blockquote&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;あとは控除など必要がある場合は入力&lt;/li&gt;
-  &lt;li&gt;最後にPDFファイルがダウンロードできるので、これをプリンターかネットプリントなどで印刷&lt;/li&gt;
-  &lt;li&gt;印刷した申告書に捺印と署名を行い、添付書類を貼り付ける&lt;/li&gt;
-  &lt;li&gt;印刷した紙に書かれている提出先税務署へ郵送する&lt;br /&gt;
-(普通郵便でもいいが送った記録が残らないので、万全を期すなら
-&lt;a href=&quot;https://www.post.japanpost.jp/service/fuka_service/tokutei_kiroku/&quot; target=&quot;_blank&quot;&gt;特定記録&lt;/a&gt;
-や
-&lt;a href=&quot;https://www.post.japanpost.jp/service/fuka_service/kakitome/&quot; target=&quot;_blank&quot;&gt;書留&lt;/a&gt;
-で)&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h3 id=&quot;その他&quot;&gt;その他&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;AdSenseでの収入を証明する書類は必要はない&lt;/strong&gt; そうな (申告内容が不審で税務調査されない限りは)。&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;所得税の確定申告をすれば自動で各市町村に連絡が行き住民税に反映される&lt;/strong&gt; ので住民税の申告は必要ない。&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        <pubDate>Fri, 19 Feb 2016 18:08:47 +0900</pubDate>
-        <link>https://saasan.github.io/blog/2016/02/19/Google-AdSense%E3%81%AE%E7%A2%BA%E5%AE%9A%E7%94%B3%E5%91%8A.html</link>
-        <guid isPermaLink="true">https://saasan.github.io/blog/2016/02/19/Google-AdSense%E3%81%AE%E7%A2%BA%E5%AE%9A%E7%94%B3%E5%91%8A.html</guid>
         
         
         <category>blog</category>
