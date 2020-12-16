@@ -5,9 +5,36 @@
     <description></description>
     <link>https://saasan.github.io/</link>
     <atom:link href="https://saasan.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 14 Nov 2020 00:48:03 +0900</pubDate>
-    <lastBuildDate>Sat, 14 Nov 2020 00:48:03 +0900</lastBuildDate>
+    <pubDate>Wed, 16 Dec 2020 23:58:29 +0900</pubDate>
+    <lastBuildDate>Wed, 16 Dec 2020 23:58:29 +0900</lastBuildDate>
     <generator>Jekyll v3.8.6</generator>
+    
+      <item>
+        <title>最近知ったBashの便利機能</title>
+        <description>&lt;h2 id=&quot;cd--&quot;&gt;cd -&lt;/h2&gt;
+
+&lt;p&gt;一つ前のディレクトリへ戻る。&lt;/p&gt;
+
+&lt;p&gt;pushd / popd で2つのディレクトリを往復することがあったけどこっちのほうが速い。&lt;/p&gt;
+
+&lt;h1 id=&quot;ctrl--u-ctrl--y&quot;&gt;Ctrl + u, Ctrl + y&lt;/h1&gt;
+
+&lt;p&gt;&lt;kbd&gt;Ctrl + u&lt;/kbd&gt; でカーソル位置から行頭まで切り取る。
+&lt;kbd&gt;Ctrl + y&lt;/kbd&gt; で切り取ったものを貼り付ける。&lt;/p&gt;
+
+&lt;p&gt;&lt;kbd&gt;git commit -m &quot;hoge&quot;&lt;/kbd&gt; とか書いたところで &lt;kbd&gt;git add&lt;/kbd&gt; してないことに気付いたりとか、
+コマンド入力中に別のコマンドを先に実行したくなったときに便利。&lt;/p&gt;
+
+&lt;p&gt;ちなみに &lt;kbd&gt;Ctrl + k&lt;/kbd&gt; ならカーソル位置から行末まで切り取れる。&lt;/p&gt;
+</description>
+        <pubDate>Wed, 16 Dec 2020 23:25:18 +0900</pubDate>
+        <link>https://saasan.github.io/blog/2020/12/16/%E6%9C%80%E8%BF%91%E7%9F%A5%E3%81%A3%E3%81%9Fbash%E3%81%AE%E4%BE%BF%E5%88%A9%E6%A9%9F%E8%83%BD.html</link>
+        <guid isPermaLink="true">https://saasan.github.io/blog/2020/12/16/%E6%9C%80%E8%BF%91%E7%9F%A5%E3%81%A3%E3%81%9Fbash%E3%81%AE%E4%BE%BF%E5%88%A9%E6%A9%9F%E8%83%BD.html</guid>
+        
+        
+        <category>blog</category>
+        
+      </item>
     
       <item>
         <title>スタートメニューから消えた Dell Command | Update を復活させる</title>
@@ -1102,56 +1129,6 @@ PAUSE
         <guid isPermaLink="true">https://saasan.github.io/blog/2016/08/02/%E3%83%90%E3%83%83%E3%83%81%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%A7%E3%83%9F%E3%83%AA%E7%A7%92%E5%8D%98%E4%BD%8D%E3%81%AEsleep%E3%82%92%E8%A1%8C%E3%81%86.html</guid>
         
         <category>バッチファイル</category>
-        
-        
-        <category>blog</category>
-        
-      </item>
-    
-      <item>
-        <title>[Jekyll] ビルドするときにだけSass(SCSS)を圧縮する</title>
-        <description>&lt;p&gt;_config.yml に Sass(SCSS) を圧縮する設定を書くと、常時圧縮がかかってしまう。
-これでは、ブラウザで表示を確認しながら CSS をいじるとき困る。
-ということで、製作中は圧縮せずにビルド時だけ圧縮する方法。&lt;/p&gt;
-
-&lt;p&gt;&lt;small&gt;※ 2016/3/4現在、 Jekyll では Sourcemap が出力できないっぽい。&lt;/small&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;1-ビルド用設定ファイルを作る&quot;&gt;1. ビルド用設定ファイルを作る&lt;/h3&gt;
-
-&lt;p&gt;_config.yml と同じフォルダに
-_config-production.yml という名前のファイルを作成し、以下の通り書く&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sass:
-  style: compressed
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;参考: 
-&lt;a href=&quot;https://jekyllrb.com/docs/assets/#sassscss&quot; target=&quot;_blank&quot;&gt;Assets - Jekyll • Simple, blog-aware, static sites&lt;/a&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;2-製作時のコマンド&quot;&gt;2. 製作時のコマンド&lt;/h3&gt;
-
-&lt;p&gt;製作中はいつも通り。&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;jekyll serve
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;3-ビルド時のコマンド&quot;&gt;3. ビルド時のコマンド&lt;/h3&gt;
-
-&lt;p&gt;ビルドするときは –config オプションで _config.yml と _config-production.yml の2つを読み込む。
-両方のファイルに同じ設定項目がある場合は、後ろに書いた方の設定で上書きされる。
-カンマとファイル名の間にスペースを入れないこと。&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;jekyll build --config _config.yml,_config-production.yml
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;参考: 
-&lt;a href=&quot;https://jekyllrb.com/docs/configuration/#build-command-options&quot; target=&quot;_blank&quot;&gt;Configuration - Jekyll • Simple, blog-aware, static sites&lt;/a&gt;&lt;/p&gt;
-</description>
-        <pubDate>Fri, 04 Mar 2016 19:19:37 +0900</pubDate>
-        <link>https://saasan.github.io/blog/2016/03/04/jekyll-%E3%83%93%E3%83%AB%E3%83%89%E3%81%99%E3%82%8B%E3%81%A8%E3%81%8D%E3%81%AB%E3%81%A0%E3%81%91sass-scss-%E3%82%92%E5%9C%A7%E7%B8%AE%E3%81%99%E3%82%8B.html</link>
-        <guid isPermaLink="true">https://saasan.github.io/blog/2016/03/04/jekyll-%E3%83%93%E3%83%AB%E3%83%89%E3%81%99%E3%82%8B%E3%81%A8%E3%81%8D%E3%81%AB%E3%81%A0%E3%81%91sass-scss-%E3%82%92%E5%9C%A7%E7%B8%AE%E3%81%99%E3%82%8B.html</guid>
-        
-        <category>Jekyll</category>
         
         
         <category>blog</category>
