@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <title>M5StickC で毎朝照明を自動で点灯する</title>
+    <link href='//fonts.googleapis.com/css?family=Orbitron:500' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="canonical" href="https://saasan.github.io/blog/2021/01/03/m5stickc%E3%81%A7%E6%AF%8E%E6%9C%9D%E7%85%A7%E6%98%8E%E3%82%92%E8%87%AA%E5%8B%95%E3%81%A7%E7%82%B9%E7%81%AF%E3%81%99%E3%82%8B.html">
+    <link rel="alternate" type="application/rss+xml" title="saasan.github.io" href="https://saasan.github.io/feed.xml" />
+    <link rel="apple-touch-icon" href="https://saasan.github.io/img/s2works_favicon.png">
+    <script data-ad-client="ca-pub-0141905477316976" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@saasan">
+    <meta property="og:url" content="https://saasan.github.io/blog/2021/01/03/m5stickc%E3%81%A7%E6%AF%8E%E6%9C%9D%E7%85%A7%E6%98%8E%E3%82%92%E8%87%AA%E5%8B%95%E3%81%A7%E7%82%B9%E7%81%AF%E3%81%99%E3%82%8B.html">
+    <meta property="og:title" content="M5StickC で毎朝照明を自動で点灯する">
+    <meta property="og:description" content="遮光カーテンに変えたら朝になっても部屋が真っ暗なので自動で照明が点灯するようにしたい">
+    <meta property="og:image" content="https://saasan.github.io/img/s2works_favicon.png">
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org/",
+        "@type": "Person",
+        "name": "saasan",
+        "sameAs": [
+          "https://twitter.com/saasan",
+          "https://github.com/saasan"
+        ]
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "Article",
+        "name": "M5StickC で毎朝照明を自動で点灯する",
+        "datePublished": "2021-01-03T10:05:33+09:00",
+        "headline": "遮光カーテンに変えたら朝になっても部屋が真っ暗なので自動で照明が点灯するようにしたい",
+        "image": "https://saasan.github.io/img/s2works_favicon.png",
+        "url": "https://saasan.github.io/blog/2021/01/03/m5stickc%E3%81%A7%E6%AF%8E%E6%9C%9D%E7%85%A7%E6%98%8E%E3%82%92%E8%87%AA%E5%8B%95%E3%81%A7%E7%82%B9%E7%81%AF%E3%81%99%E3%82%8B.html",
+        "publisher" : {
+          "@type": "Person",
+          "name": "saasan"
+        }
+      }
+    </script>
+  </head>
+  <body itemscope itemtype="http://schema.org/WebPage">
+    <header class="site-header">
+      <div class="wrapper">
+        <a class="site-title" href="/">saasan.github.io</a>
+        <nav class="site-nav">
+          <div class="site-nav-contents">
+            <ul>
+              <li><a href="/blog/">ブログ</a></li>
+              <li><a href="/imas/">アイマス</a></li>
+              <li><a href="/software/">ソフトウェア</a></li>
+              <li><a href="/script/">スクリプト</a></li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+    </header>
+    <div class="page-content">
+      <div class="wrapper">
+        <div class="post" itemprop="mainContentOfPage" itemscope itemtype="http://schema.org/WebPageElement">
+          <header class="post-header">
+            <h1 class="post-title">M5StickC で毎朝照明を自動で点灯する</h1>
+            <div class="post-meta">
+              <time datetime="2021-01-03T10:05:33+09:00" itemprop="dateModified">2021/01/03</time>
+            </div>
+          </header>
+          <article class="post-content">
+            <p>最近寒いのでカーテンを遮光・遮熱のものに変えた。
+              遮熱のほうはあまり実感がないが遮光のほうはばっちりで、
+              昼間でもカーテンを閉めれば部屋がかなり暗くなる。</p>
+            <p>寝てる間は暗くてよいのだが、
+              朝になっても明るさで自然に目が覚めるということがなくなった。
+              時計を見ないと大まかな時間すら分からないのは思いの外不便だ。
+              そこで、以前購入した M5StickC を使って
+              毎朝自動で照明を点灯させることを思いついた。</p>
+            <h2 id="使用する照明器具とリモコン">使用する照明器具とリモコン</h2>
+            <p>私の部屋の照明はNECライティング(現ホタルクス)の
+              <a href="https://www.amazon.co.jp/gp/product/B07SS94YPN/saasan-22">LEDシーリングライトHLDX0801</a>
+              を使用している。
+              昨年買い換えたのだが、
+              これはシーリングライトとしてはかなりの薄型で、
+              引掛シーリングと合わせても高さ6cmくらいしかない。
+              以前使用していたものは高さ15cmほどあったため、
+              圧迫感がなくなり気に入っている。
+              唯一の不満点はリモコンが付属していないことで、別途
+              <a href="https://www.amazon.co.jp/dp/B075FBKZBT/saasan-22">RE0206</a>
+              を購入し使用している。</p>
+            <h2 id="リモコンの信号解析">リモコンの信号解析</h2>
+            <p>まずは点灯時に RE0206 から発信される赤外線信号を調べるため
+              <a href="https://www.amazon.co.jp/dp/B07Z621FQC/saasan-22">Grove 接続の IR ユニット</a>
+              を購入した。
+              M5StickC 単体でも赤外線の発信はできるが、受信はできないため、
+              リモコンの信号を調べる場合は別途購入する必要がある。</p>
+            <p><a href="https://siroitori.hatenablog.com/entry/2020/04/25/114250">M5StickC／M5Stack Fireで赤外線リモコンを作ろうと四苦八苦したのでメモ - カワリモノ息子の技術メモ的な〜</a>
+              を参考に Arduino IDE から
+              IRremoteESP8266 をインストールし、スケッチ例の IRvecvDumpV3 を開く。
+              kRecvPin を 33 に変更して M5StickC へ書き込んだあと、
+              IR ユニットへ向けてリモコンのボタンを押すと
+              シリアルモニタへ信号が表示された。</p>
+            <p>赤外線リモコンの信号にはいくつか種類があるらしいが、
+              NEC製品なので当然NECフォーマットだった。</p>
+            <h2 id="スケッチの作成">スケッチの作成</h2>
+            <p>M5StickC で設定時刻に赤外線信号を送信するスケッチを作成した。</p>
+            <p><a href="https://github.com/saasan/m5stickc-ir-timer">saasan/m5stickc-ir-timer: M5StickCで設定時刻に赤外線信号を送信する</a></p>
+            <script src="http://gist-it.appspot.com/github/saasan/m5stickc-ir-timer/raw/master/m5stickc-ir-timer.ino"></script>
+            <p>IR_SEND_DATA の 0x41B6659A が上記で解析した点灯するための信号で、
+              これを IRsend クラスの sendNEC メソッドで送信している。</p>
+            <p>タイマーの時刻は
+              ボタンA(正面の「M5」ボタン)で時、
+              ボタンB(側面の小さいボタン)で分を変更できるようにした。</p>
+            <p>送信するリモコンの信号を変えればいろいろと応用できそう。</p>
+          </article>
+        </div>
+      </div>
+    </div>
+    <footer class="site-footer">
+      <div class="wrapper">
+        <nav>
+          <ul>
+            <li><a href="/blog/">ブログ</a></li>
+            <li><a href="/imas/">アイマス</a></li>
+            <li><a href="/software/">ソフトウェア</a></li>
+            <li><a href="/script/">スクリプト</a></li>
+          </ul>
+          <a href="https://twitter.com/saasan" target="_blank" class="twitter-username">
+            saasan
+          </a>
+          <a href="/feed.xml" target="_blank" class="rss">RSS</a>
+        </nav>
+      </div>
+    </footer>
+  </body>
+</html>

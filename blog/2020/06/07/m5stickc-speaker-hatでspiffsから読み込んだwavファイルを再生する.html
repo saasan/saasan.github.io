@@ -95,7 +95,7 @@
               FFmpeg で変換すると「Lavf58.29.100」(数字部分はバージョンによる)
               というメタデータが標準で追加されるので、
               オプション <kbd>-fflags +bitexact</kbd> を付けてこの動作を抑制します。</p>
-            <div class="highlighter-rouge">
+            <div class="language-plaintext highlighter-rouge">
               <div class="highlight">
                 <pre class="highlight"><code>ffmpeg -i input.wav -ac 1 -ar 8000 -acodec pcm_u8 -fflags +bitexact output.wav
 </code></pre>

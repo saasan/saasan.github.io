@@ -77,7 +77,7 @@
             <h3 id="1-ビルド用設定ファイルを作る">1. ビルド用設定ファイルを作る</h3>
             <p>_config.yml と同じフォルダに
               _config-production.yml という名前のファイルを作成し、以下の通り書く</p>
-            <div class="highlighter-rouge">
+            <div class="language-plaintext highlighter-rouge">
               <div class="highlight">
                 <pre class="highlight"><code>sass:
   style: compressed
@@ -88,7 +88,7 @@
               <a href="https://jekyllrb.com/docs/assets/#sassscss" target="_blank">Assets - Jekyll • Simple, blog-aware, static sites</a></p>
             <h3 id="2-製作時のコマンド">2. 製作時のコマンド</h3>
             <p>製作中はいつも通り。</p>
-            <div class="highlighter-rouge">
+            <div class="language-plaintext highlighter-rouge">
               <div class="highlight">
                 <pre class="highlight"><code>jekyll serve
 </code></pre>
@@ -98,7 +98,7 @@
             <p>ビルドするときは –config オプションで _config.yml と _config-production.yml の2つを読み込む。
               両方のファイルに同じ設定項目がある場合は、後ろに書いた方の設定で上書きされる。
               カンマとファイル名の間にスペースを入れないこと。</p>
-            <div class="highlighter-rouge">
+            <div class="language-plaintext highlighter-rouge">
               <div class="highlight">
                 <pre class="highlight"><code>jekyll build --config _config.yml,_config-production.yml
 </code></pre>

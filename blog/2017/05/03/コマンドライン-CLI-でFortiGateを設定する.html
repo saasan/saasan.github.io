@@ -75,7 +75,7 @@
               しかし、諸事情によりコマンドラインから設定することになったので、設定方法をメモしておく。</p>
             <h2 id="ログインする">ログインする</h2>
             <p>sshで接続することでコマンドラインから設定ができる。</p>
-            <div class="highlighter-rouge">
+            <div class="language-plaintext highlighter-rouge">
               <div class="highlight">
                 <pre class="highlight"><code>$ ssh admin@192.168.0.1
 </code></pre>
@@ -83,7 +83,7 @@
             </div>
             <h2 id="ヘルプを表示する">ヘルプを表示する</h2>
             <p>「?」を入力すると現在使えるコマンドが表示される。</p>
-            <div class="highlighter-rouge">
+            <div class="language-plaintext highlighter-rouge">
               <div class="highlight">
                 <pre class="highlight"><code># ? ←「?」を入力しても表示されない
 config      config object
@@ -99,14 +99,14 @@ exit        exit CLI
               例えば、sh?と入力するとshowに補完される。</p>
             <p>また、引数が必要なコマンドを入力した後に「?」を入力すると引数の候補が表示される。</p>
             <h2 id="バージョンを確認する">バージョンを確認する</h2>
-            <div class="highlighter-rouge">
+            <div class="language-plaintext highlighter-rouge">
               <div class="highlight">
                 <pre class="highlight"><code># get system status
 </code></pre>
               </div>
             </div>
             <h2 id="設定を確認する">設定を確認する</h2>
-            <div class="highlighter-rouge">
+            <div class="language-plaintext highlighter-rouge">
               <div class="highlight">
                 <pre class="highlight"><code># show
 </code></pre>
@@ -114,7 +114,7 @@ exit        exit CLI
             </div>
             <h2 id="デフォルト値を含むすべての設定を確認する">デフォルト値を含むすべての設定を確認する</h2>
             <p>数メガバイトある設定が出力される為、かなり時間がかかるので注意。</p>
-            <div class="highlighter-rouge">
+            <div class="language-plaintext highlighter-rouge">
               <div class="highlight">
                 <pre class="highlight"><code># show full-configuration
 </code></pre>
@@ -126,7 +126,7 @@ exit        exit CLI
             <ul>
               <li>
                 <p>moreを使用しないように変更</p>
-                <div class="highlighter-rouge">
+                <div class="language-plaintext highlighter-rouge">
                   <div class="highlight">
                     <pre class="highlight"><code># config system console
 # set output standard
@@ -137,7 +137,7 @@ exit        exit CLI
               </li>
               <li>
                 <p>moreを使用するように戻す</p>
-                <div class="highlighter-rouge">
+                <div class="language-plaintext highlighter-rouge">
                   <div class="highlight">
                     <pre class="highlight"><code># config system console
 # set output more
@@ -162,7 +162,7 @@ exit        exit CLI
             <p>設定は自動的に保存される。
               Cisco製品のように「write memory」などで明示的に保存する必要はない。</p>
             <h2 id="設定を終了し切断する">設定を終了し切断する</h2>
-            <div class="highlighter-rouge">
+            <div class="language-plaintext highlighter-rouge">
               <div class="highlight">
                 <pre class="highlight"><code># exit
 </code></pre>

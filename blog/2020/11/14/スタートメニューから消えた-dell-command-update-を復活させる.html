@@ -81,7 +81,7 @@
               <li>管理者権限で PowerShell を起動する。</li>
               <li>
                 <p>以下のコマンドを実行する。</p>
-                <div class="highlighter-rouge">
+                <div class="language-plaintext highlighter-rouge">
                   <div class="highlight">
                     <pre class="highlight"><code>$ManifestPath = (Get-AppxPackage -AllUsers -Name "DellInc.DellCommandUpdate").InstallLocation + "\Appxmanifest.xml"
 Add-AppxPackage -Path $ManifestPath -Register -DisableDevelopmentMode

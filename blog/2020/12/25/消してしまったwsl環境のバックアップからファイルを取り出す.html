@@ -70,7 +70,6 @@
             </div>
           </header>
           <article class="post-content">
-            <h2 id="概要">概要</h2>
             <p>PC を新しいものへ移行する際に WSL 環境の中身を移行するのを忘れていた。
               というか、別の環境に最新のファイルがあると思い込んでいたので敢えて移行しなかったのだ。
               実際は自分の旧 PC の WSL 環境にあったものが最新のファイルで、
@@ -106,7 +105,7 @@
             <p>WSL のサービスが起動したままだとファイルがロックされていて置き換えられない。
               コマンドプロンプトか PowerShell を管理者権限で起動し、
               以下のコマンドで WSL のサービスを止める。</p>
-            <div class="highlighter-rouge">
+            <div class="language-plaintext highlighter-rouge">
               <div class="highlight">
                 <pre class="highlight"><code>net stop LxssManager
 </code></pre>
@@ -118,7 +117,7 @@
               <p>\Users\ユーザー名\AppData\Local\Packages\36828agowa338.AlpineWSL_my43bytk1c4nr\LocalState\ext4.vhdx</p>
             </blockquote>
             <p>最後に以下のコマンドで WSL のサービスを起動する。</p>
-            <div class="highlighter-rouge">
+            <div class="language-plaintext highlighter-rouge">
               <div class="highlight">
                 <pre class="highlight"><code>net start LxssManager
 </code></pre>

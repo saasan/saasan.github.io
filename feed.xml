@@ -5,15 +5,83 @@
     <description></description>
     <link>https://saasan.github.io/</link>
     <atom:link href="https://saasan.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 25 Dec 2020 22:57:48 +0900</pubDate>
-    <lastBuildDate>Fri, 25 Dec 2020 22:57:48 +0900</lastBuildDate>
-    <generator>Jekyll v3.8.6</generator>
+    <pubDate>Sun, 03 Jan 2021 10:12:30 +0900</pubDate>
+    <lastBuildDate>Sun, 03 Jan 2021 10:12:30 +0900</lastBuildDate>
+    <generator>Jekyll v4.2.0</generator>
+    
+      <item>
+        <title>M5StickC で毎朝照明を自動で点灯する</title>
+        <description>&lt;p&gt;最近寒いのでカーテンを遮光・遮熱のものに変えた。
+遮熱のほうはあまり実感がないが遮光のほうはばっちりで、
+昼間でもカーテンを閉めれば部屋がかなり暗くなる。&lt;/p&gt;
+
+&lt;p&gt;寝てる間は暗くてよいのだが、
+朝になっても明るさで自然に目が覚めるということがなくなった。
+時計を見ないと大まかな時間すら分からないのは思いの外不便だ。
+そこで、以前購入した M5StickC を使って
+毎朝自動で照明を点灯させることを思いついた。&lt;/p&gt;
+
+&lt;h2 id=&quot;使用する照明器具とリモコン&quot;&gt;使用する照明器具とリモコン&lt;/h2&gt;
+
+&lt;p&gt;私の部屋の照明はNECライティング(現ホタルクス)の
+&lt;a href=&quot;https://www.amazon.co.jp/gp/product/B07SS94YPN/saasan-22&quot;&gt;LEDシーリングライトHLDX0801&lt;/a&gt;
+を使用している。
+昨年買い換えたのだが、
+これはシーリングライトとしてはかなりの薄型で、
+引掛シーリングと合わせても高さ6cmくらいしかない。
+以前使用していたものは高さ15cmほどあったため、
+圧迫感がなくなり気に入っている。
+唯一の不満点はリモコンが付属していないことで、別途
+&lt;a href=&quot;https://www.amazon.co.jp/dp/B075FBKZBT/saasan-22&quot;&gt;RE0206&lt;/a&gt;
+を購入し使用している。&lt;/p&gt;
+
+&lt;h2 id=&quot;リモコンの信号解析&quot;&gt;リモコンの信号解析&lt;/h2&gt;
+
+&lt;p&gt;まずは点灯時に RE0206 から発信される赤外線信号を調べるため
+&lt;a href=&quot;https://www.amazon.co.jp/dp/B07Z621FQC/saasan-22&quot;&gt;Grove 接続の IR ユニット&lt;/a&gt;
+を購入した。
+M5StickC 単体でも赤外線の発信はできるが、受信はできないため、
+リモコンの信号を調べる場合は別途購入する必要がある。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://siroitori.hatenablog.com/entry/2020/04/25/114250&quot;&gt;M5StickC／M5Stack Fireで赤外線リモコンを作ろうと四苦八苦したのでメモ - カワリモノ息子の技術メモ的な〜&lt;/a&gt;
+を参考に Arduino IDE から
+IRremoteESP8266 をインストールし、スケッチ例の IRvecvDumpV3 を開く。
+kRecvPin を 33 に変更して M5StickC へ書き込んだあと、
+IR ユニットへ向けてリモコンのボタンを押すと
+シリアルモニタへ信号が表示された。&lt;/p&gt;
+
+&lt;p&gt;赤外線リモコンの信号にはいくつか種類があるらしいが、
+NEC製品なので当然NECフォーマットだった。&lt;/p&gt;
+
+&lt;h2 id=&quot;スケッチの作成&quot;&gt;スケッチの作成&lt;/h2&gt;
+
+&lt;p&gt;M5StickC で設定時刻に赤外線信号を送信するスケッチを作成した。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/saasan/m5stickc-ir-timer&quot;&gt;saasan/m5stickc-ir-timer: M5StickCで設定時刻に赤外線信号を送信する&lt;/a&gt;&lt;/p&gt;
+
+&lt;script src=&quot;http://gist-it.appspot.com/github/saasan/m5stickc-ir-timer/raw/master/m5stickc-ir-timer.ino&quot;&gt;&lt;/script&gt;
+
+&lt;p&gt;IR_SEND_DATA の 0x41B6659A が上記で解析した点灯するための信号で、
+これを IRsend クラスの sendNEC メソッドで送信している。&lt;/p&gt;
+
+&lt;p&gt;タイマーの時刻は
+ボタンA(正面の「M5」ボタン)で時、
+ボタンB(側面の小さいボタン)で分を変更できるようにした。&lt;/p&gt;
+
+&lt;p&gt;送信するリモコンの信号を変えればいろいろと応用できそう。&lt;/p&gt;
+</description>
+        <pubDate>Sun, 03 Jan 2021 10:05:33 +0900</pubDate>
+        <link>https://saasan.github.io/blog/2021/01/03/m5stickc%E3%81%A7%E6%AF%8E%E6%9C%9D%E7%85%A7%E6%98%8E%E3%82%92%E8%87%AA%E5%8B%95%E3%81%A7%E7%82%B9%E7%81%AF%E3%81%99%E3%82%8B.html</link>
+        <guid isPermaLink="true">https://saasan.github.io/blog/2021/01/03/m5stickc%E3%81%A7%E6%AF%8E%E6%9C%9D%E7%85%A7%E6%98%8E%E3%82%92%E8%87%AA%E5%8B%95%E3%81%A7%E7%82%B9%E7%81%AF%E3%81%99%E3%82%8B.html</guid>
+        
+        
+        <category>blog</category>
+        
+      </item>
     
       <item>
         <title>消してしまった WSL 環境のバックアップからファイルを取り出す</title>
-        <description>&lt;h2 id=&quot;概要&quot;&gt;概要&lt;/h2&gt;
-
-&lt;p&gt;PC を新しいものへ移行する際に WSL 環境の中身を移行するのを忘れていた。
+        <description>&lt;p&gt;PC を新しいものへ移行する際に WSL 環境の中身を移行するのを忘れていた。
 というか、別の環境に最新のファイルがあると思い込んでいたので敢えて移行しなかったのだ。
 実際は自分の旧 PC の WSL 環境にあったものが最新のファイルで、
 それに気付いたときにはディスクの初期化が済んでいた。&lt;/p&gt;
@@ -60,7 +128,7 @@ ext4.vhdx を置き換えることにする。&lt;/p&gt;
 コマンドプロンプトか PowerShell を管理者権限で起動し、
 以下のコマンドで WSL のサービスを止める。&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;net stop LxssManager
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;net stop LxssManager
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;次に以下のパスにある Alpine WSL の ext4.vhdx
@@ -72,7 +140,7 @@ ext4.vhdx を置き換えることにする。&lt;/p&gt;
 
 &lt;p&gt;最後に以下のコマンドで WSL のサービスを起動する。&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;net start LxssManager
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;net start LxssManager
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h2 id=&quot;必要なファイルを取り出す&quot;&gt;必要なファイルを取り出す&lt;/h2&gt;
@@ -137,7 +205,7 @@ Ubuntu 環境へ入ってファイルを取り出すことができた。&lt;/p&
   &lt;li&gt;
     &lt;p&gt;以下のコマンドを実行する。&lt;/p&gt;
 
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ManifestPath = (Get-AppxPackage -AllUsers -Name &quot;DellInc.DellCommandUpdate&quot;).InstallLocation + &quot;\Appxmanifest.xml&quot;
+    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ManifestPath = (Get-AppxPackage -AllUsers -Name &quot;DellInc.DellCommandUpdate&quot;).InstallLocation + &quot;\Appxmanifest.xml&quot;
 Add-AppxPackage -Path $ManifestPath -Register -DisableDevelopmentMode
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
   &lt;/li&gt;
@@ -607,7 +675,7 @@ FFmpeg で変換すると「Lavf58.29.100」(数字部分はバージョンに�
 というメタデータが標準で追加されるので、
 オプション &lt;kbd&gt;-fflags +bitexact&lt;/kbd&gt; を付けてこの動作を抑制します。&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ffmpeg -i input.wav -ac 1 -ar 8000 -acodec pcm_u8 -fflags +bitexact output.wav
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ffmpeg -i input.wav -ac 1 -ar 8000 -acodec pcm_u8 -fflags +bitexact output.wav
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h2 id=&quot;wav-ファイルを-spiffs-へ保存する&quot;&gt;WAV ファイルを SPIFFS へ保存する&lt;/h2&gt;
@@ -995,7 +1063,7 @@ ledcWriteTone から ledcWrite へ変更しています。
 &lt;p&gt;基本的に上記公式ドキュメントのコマンド通り。
 パッケージのダウンロード元サーバが変更になっているのと、OS のバージョン、CPU アーキテクチャが違うので手直ししている。CPU アーキテクチャは uname -a で確認できる。&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ curl -O http://vault.centos.org/5.7/os/x86_64/CentOS/centos-release-5-7.el5.centos.x86_64.rpm
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ curl -O http://vault.centos.org/5.7/os/x86_64/CentOS/centos-release-5-7.el5.centos.x86_64.rpm
 $ curl -O http://vault.centos.org/5.7/os/x86_64/CentOS/centos-release-notes-5.7-0.x86_64.rpm
 $ curl -O http://vault.centos.org/5.7/os/x86_64/CentOS/redhat-logos-4.9.99-11.el5.centos.noarch.rpm
 $ su
@@ -1040,14 +1108,14 @@ Error: Cannot retrieve repository metadata (repomd.xml) for repository: base. Pl
 
 &lt;p&gt;sshで接続することでコマンドラインから設定ができる。&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ ssh admin@192.168.0.1
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ ssh admin@192.168.0.1
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h2 id=&quot;ヘルプを表示する&quot;&gt;ヘルプを表示する&lt;/h2&gt;
 
 &lt;p&gt;「?」を入力すると現在使えるコマンドが表示される。&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# ? ←「?」を入力しても表示されない
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# ? ←「?」を入力しても表示されない
 config      config object
 get         get dynamic and system information
 show        show configuration
@@ -1063,19 +1131,19 @@ exit        exit CLI
 
 &lt;h2 id=&quot;バージョンを確認する&quot;&gt;バージョンを確認する&lt;/h2&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# get system status
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# get system status
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h2 id=&quot;設定を確認する&quot;&gt;設定を確認する&lt;/h2&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# show
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# show
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h2 id=&quot;デフォルト値を含むすべての設定を確認する&quot;&gt;デフォルト値を含むすべての設定を確認する&lt;/h2&gt;
 
 &lt;p&gt;数メガバイトある設定が出力される為、かなり時間がかかるので注意。&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# show full-configuration
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# show full-configuration
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h1 id=&quot;moreを使用しない&quot;&gt;moreを使用しない&lt;/h1&gt;
@@ -1087,7 +1155,7 @@ exit        exit CLI
   &lt;li&gt;
     &lt;p&gt;moreを使用しないように変更&lt;/p&gt;
 
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# config system console
+    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# config system console
 # set output standard
 # end
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
@@ -1095,7 +1163,7 @@ exit        exit CLI
   &lt;li&gt;
     &lt;p&gt;moreを使用するように戻す&lt;/p&gt;
 
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# config system console
+    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# config system console
 # set output more
 # end
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
@@ -1125,67 +1193,12 @@ Cisco製品のように「write memory」などで明示的に保存する必要
 
 &lt;h2 id=&quot;設定を終了し切断する&quot;&gt;設定を終了し切断する&lt;/h2&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# exit
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# exit
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 </description>
         <pubDate>Wed, 03 May 2017 00:18:36 +0900</pubDate>
         <link>https://saasan.github.io/blog/2017/05/03/%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%83%A9%E3%82%A4%E3%83%B3-CLI-%E3%81%A7FortiGate%E3%82%92%E8%A8%AD%E5%AE%9A%E3%81%99%E3%82%8B.html</link>
         <guid isPermaLink="true">https://saasan.github.io/blog/2017/05/03/%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%83%A9%E3%82%A4%E3%83%B3-CLI-%E3%81%A7FortiGate%E3%82%92%E8%A8%AD%E5%AE%9A%E3%81%99%E3%82%8B.html</guid>
-        
-        
-        <category>blog</category>
-        
-      </item>
-    
-      <item>
-        <title>Visual Studio Code で Markdown のプレビューを保存する</title>
-        <description>&lt;h2 id=&quot;概要&quot;&gt;概要&lt;/h2&gt;
-
-&lt;p&gt;Visual Studio Code の Markdown プレビューは
-なかなか見栄えが良くて気に入ってる。
-そのまま保存してドキュメントとして使いたいが、
-今のところ (2017/01/14、バージョン1.8.1) プレビューを保存する機能は
-ないようなので、同等のものを生成するスクリプトを作成した。&lt;/p&gt;
-
-&lt;p&gt;ネットを検索するといくつか同様のことを行うものが見つかったが、
-Markdown エンジンの違いにより VSCode と出力結果が異なる
-(リスト内のテーブルなど)
-ものばかりだった。
-このスクリプトは VSCode と同じ
-&lt;a href=&quot;https://github.com/markdown-it/markdown-it&quot;&gt;markdown-it&lt;/a&gt;
-を使用し、出力結果が同じになるようにしている。&lt;/p&gt;
-
-&lt;h2 id=&quot;動作に必要なもの&quot;&gt;動作に必要なもの&lt;/h2&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://nodejs.org/ja/&quot;&gt;Node.js&lt;/a&gt; が必要&lt;/p&gt;
-
-&lt;h2 id=&quot;使い方&quot;&gt;使い方&lt;/h2&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;このリポジトリをローカルにクローンする&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;npm install&lt;/code&gt; する&lt;/li&gt;
-  &lt;li&gt;同じフォルダにHTML化したい Markdown ファイルを入れる&lt;/li&gt;
-  &lt;li&gt;フォルダを Visual Studio Code で開く&lt;/li&gt;
-  &lt;li&gt;gulpfile.js を編集し、HTML のタイトルなどを設定する&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Ctrl + Shift + B&lt;/code&gt; を押してビルドする&lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;ビルドが終わるとできる dest フォルダに markdown.css を入れる&lt;/p&gt;
-
-    &lt;p&gt;※ markdown.css は
-VS Codeをインストールしたフォルダの
-resources\app\extensions\markdown\media\markdown.css
-にあります。&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;ダウンロード&quot;&gt;ダウンロード&lt;/h2&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://github.com/saasan/save-vscode-markdown-preview&quot;&gt;GitHub&lt;/a&gt;
-からダウンロードできます。&lt;/p&gt;
-</description>
-        <pubDate>Sat, 14 Jan 2017 22:15:58 +0900</pubDate>
-        <link>https://saasan.github.io/blog/2017/01/14/save-vscode-markdown-preview.html</link>
-        <guid isPermaLink="true">https://saasan.github.io/blog/2017/01/14/save-vscode-markdown-preview.html</guid>
         
         
         <category>blog</category>
