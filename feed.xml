@@ -5,8 +5,8 @@
     <description></description>
     <link>https://saasan.github.io/</link>
     <atom:link href="https://saasan.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 03 Jan 2021 10:12:30 +0900</pubDate>
-    <lastBuildDate>Sun, 03 Jan 2021 10:12:30 +0900</lastBuildDate>
+    <pubDate>Sun, 03 Jan 2021 10:56:02 +0900</pubDate>
+    <lastBuildDate>Sun, 03 Jan 2021 10:56:02 +0900</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
     
       <item>
@@ -59,7 +59,7 @@ NEC製品なので当然NECフォーマットだった。&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&quot;https://github.com/saasan/m5stickc-ir-timer&quot;&gt;saasan/m5stickc-ir-timer: M5StickCで設定時刻に赤外線信号を送信する&lt;/a&gt;&lt;/p&gt;
 
-&lt;script src=&quot;http://gist-it.appspot.com/github/saasan/m5stickc-ir-timer/raw/master/m5stickc-ir-timer.ino&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;https://gist-it.appspot.com/github/saasan/m5stickc-ir-timer/raw/master/m5stickc-ir-timer.ino&quot;&gt;&lt;/script&gt;
 
 &lt;p&gt;IR_SEND_DATA の 0x41B6659A が上記で解析した点灯するための信号で、
 これを IRsend クラスの sendNEC メソッドで送信している。&lt;/p&gt;
