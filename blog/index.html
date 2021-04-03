@@ -68,6 +68,167 @@
           </header>
           <article class="post-content">
             <section>
+              <h2><a class="post-link" href="/blog/2021/04/04/m5stickc%E3%81%A7%E3%82%AD%E3%83%BC%E3%83%9C%E3%83%BC%E3%83%89%E6%93%8D%E4%BD%9C%E3%82%92%E8%87%AA%E5%8B%95%E5%8C%96%E3%81%99%E3%82%8B.html">M5StickC でキーボード操作を自動化する</a></h2>
+              <div class="post-meta">2021-04-04</div>
+              <section>
+                <p>某ゲームでアイテムを交換する作業が面倒になってきたので
+                  キーボード操作を自動化したいと思った。
+                  手元にあった
+                  <a href="https://www.amazon.co.jp/dp/B004INFZEG/saasan-22">サンワサプライ製のプログラマブルテンキー NT-19UH2BK</a>
+                  でいけるかと思ったが、これは
+                  <kbd>Ctrl + C</kbd> のような同時押しには対応しているが、
+                  ウェイトをはさみながら複数のキーを順次入力する用途には対応していなかった。</p>
+                <p>先日 <a href="https://booth.pm/ja/items/2655838">AZ-Macro</a>
+                  というマクロ機能のある自作 Bluetooth キーボードキットが
+                  ESP32 で作られていることを知った。
+                  手持ちの M5StickC なら同じ ESP32 が内蔵されており
+                  Bluetooth にも対応しているため、目的を実現できるのではないか？</p>
+                <p>ということで、M5StickC を Bluetooth キーボードとして PC へ接続し操作を自動化する。</p>
+                <h2 id="arduino-ide-へ-esp32-ble-keyboard-をインストール">Arduino IDE へ ESP32-BLE-Keyboard をインストール</h2>
+                <p>まずは M5StickC を Bluetooth キーボードとして使うためのライブラリを
+                  Arduino IDE へインストールする。</p>
+                <ol>
+                  <li><a href="https://github.com/T-vK/ESP32-BLE-Keyboard/releases">Releases · T-vK/ESP32-BLE-Keyboard</a>
+                    から ESP32-BLE-Keyboard.zip をダウンロード</li>
+                  <li>Arduino IDE のメニューで [スケッチ] - [ライブラリをインクルード] - [.ZIP形式のライブラリをインストール…] をクリック</li>
+                  <li>さきほどダウンロードした ESP32-BLE-Keyboard.zip を選択</li>
+                </ol>
+                <h2 id="esp32-ble-keyboard-の使い方">ESP32-BLE-Keyboard の使い方</h2>
+                <p><a href="https://github.com/T-vK/ESP32-BLE-Keyboard/blob/master/examples/SendKeyStrokes/SendKeyStrokes.ino">公式のサンプル</a></p>
+                <p>BleKeyboard クラスの以下のメソッドでキーを操作できる。</p>
+                <ul>
+                  <li>print: 文字列を入力</li>
+                  <li>write: キーを押してすぐに離す</li>
+                  <li>press: キーを押す (release するまで押したままにする)</li>
+                  <li>release: キーを離す</li>
+                  <li>releaseAll: すべてのキーを離す</li>
+                </ul>
+                <p>キーの指定は、英数記号の場合、文字をそのまま渡す。
+                  大文字を渡すと自動でシフトキーが補完され大文字での入力になる。</p>
+                <div class="language-plaintext highlighter-rouge">
+                  <div class="highlight">
+                    <pre class="highlight"><code>bleKeyboard.write('a');
+</code></pre>
+                  </div>
+                </div>
+                <p>ファンクションキー、修飾キーなどの場合は
+                  <a href="https://github.com/T-vK/ESP32-BLE-Keyboard/blob/master/BleKeyboard.h">BleKeyboard.h</a>
+                  で定義されている定数を渡す。</p>
+                <h2 id="スケッチの作成">スケッチの作成</h2>
+                <p>M5StickC のボタンA (正面の「M5」ボタン) を押すと
+                  500ms 間隔で順番に B, L, E, Enterキーを押すサンプルスケッチを作成した。
+                  今回は同時押しが不要だったため
+                  keystroke に書かれたキーを順に write で出力するだけとなっている。</p>
+                <noscript>
+                  <pre>#include &lt;vector&gt;
+#include &lt;M5StickC.h&gt;
+#include &lt;BleKeyboard.h&gt;
+
+// -----------------------------------------------------------------------------
+// 定数
+// -----------------------------------------------------------------------------
+// 電源ボタンが1秒未満押された
+const uint8_t AXP_WAS_PRESSED = 2;
+// キーと待ち時間の構造体
+struct Key {
+  uint8_t key;
+  uint32_t delay;
+};
+// 送信するキーストローク
+const std::vector&lt;Key&gt; keystroke = {
+    { &#39;B&#39;       , 500 },
+    { &#39;L&#39;       , 500 },
+    { &#39;E&#39;       , 500 },
+    { KEY_RETURN, 0 }
+};
+
+// -----------------------------------------------------------------------------
+// 変数
+// -----------------------------------------------------------------------------
+// ESP32-BLE-Keyboard
+BleKeyboard bleKeyboard;
+
+// -----------------------------------------------------------------------------
+// 関数
+// -----------------------------------------------------------------------------
+// 画面を消去する
+void clearScreen() {
+    M5.Lcd.fillScreen(TFT_BLACK);
+    M5.Lcd.setCursor(0, 0);
+}
+
+// キーストロークを送信する
+void sendKeystroke() {
+    clearScreen();
+    M5.Lcd.println(&quot;Sending...&quot;);
+
+    for (const auto&amp; n : keystroke) {
+        bleKeyboard.write(n.key);
+        delay(n.delay);
+    }
+
+    M5.Lcd.println(&quot;Complete!&quot;);
+}
+
+void setup() {
+    M5.begin();
+
+    // 画面の表示設定
+    M5.Lcd.setRotation(1);
+    M5.Lcd.setTextFont(2);
+    clearScreen();
+    M5.Lcd.println(&quot;pso2-excube2grinder&quot;);
+
+    // Bluetooth接続
+    bleKeyboard.begin();
+}
+
+void loop() {
+    M5.update();
+
+    // 電源ボタンが押されたらリセット
+    if (M5.Axp.GetBtnPress() == AXP_WAS_PRESSED) {
+        esp_restart();
+    }
+
+    if (bleKeyboard.isConnected()) {
+        // Bluetooth接続済みの場合
+        // ボタンAが押されたらキーを送信
+        if (M5.BtnA.wasPressed()) {
+            sendKeystroke();
+        }
+
+        delay(10);
+    }
+    else {
+        // Bluetooth未接続の場合は5秒待つ
+        M5.Lcd.println(&quot;Waiting 5 seconds...&quot;);
+        delay(5000);
+    }
+}
+</pre>
+                </noscript>
+                <script src="https://gist.github.com/saasan/95c34469ebd1186c12398fbeb8266d17.js"></script>
+                <h2 id="動作確認">動作確認</h2>
+                <p>以下の手順で動作を確認できる。</p>
+                <ol>
+                  <li>M5StickC にスケッチを書き込む</li>
+                  <li>M5StickC の画面に “Waiting 5 seconds…” と表示されていることを確認</li>
+                  <li>PC で Bluetooth デバイスを検索し “ESP32 BLE Keyboard” へ接続</li>
+                  <li>メモ帳などのアプリを開く</li>
+                  <li>M5StickC のボタンA (正面の「M5」ボタン) を押す</li>
+                </ol>
+                <p>これで複雑なキーボードマクロでも思い通りに実行できるようになった。
+                  キーボードでできることなら何でもボタン一発で実行できるため、
+                  思っていた以上に利便性が高い。</p>
+                <h2 id="参考サイト">参考サイト</h2>
+                <ul>
+                  <li><a href="https://neocat.hatenablog.com/entry/2019/09/28/151947">ESP32をBluetoothキーボードやマウスにする - Okiraku Programming</a></li>
+                  <li><a href="https://github.com/T-vK/ESP32-BLE-Keyboard">T-vK/ESP32-BLE-Keyboard: Bluetooth LE Keyboard library for the ESP32 (Arduino IDE compatible)</a></li>
+                </ul>
+              </section>
+            </section>
+            <section>
               <h2><a class="post-link" href="/blog/2021/01/03/m5stickc%E3%81%A7%E6%AF%8E%E6%9C%9D%E7%85%A7%E6%98%8E%E3%82%92%E8%87%AA%E5%8B%95%E3%81%A7%E7%82%B9%E7%81%AF%E3%81%99%E3%82%8B.html">M5StickC で毎朝照明を自動で点灯する</a></h2>
               <div class="post-meta">2021-01-03</div>
               <section>
@@ -220,108 +381,6 @@ Add-AppxPackage -Path $ManifestPath -Register -DisableDevelopmentMode
                 </ol>
                 <p>※Get-AppxPackage に -AllUsers オプションを付けて実行するのに管理者権限が必要。</p>
                 <p>参考 : <a href="https://docs.microsoft.com/ja-jp/powershell/module/appx/add-appxpackage?view=winserver2012r2-ps#example-2">Add-AppxPackage (AppX) | Microsoft Docs</a></p>
-              </section>
-            </section>
-            <section>
-              <h2><a class="post-link" href="/blog/2020/07/19/usb-cable-checker-2%E3%81%A7usb-type-c%E3%82%B1%E3%83%BC%E3%83%96%E3%83%AB%E3%81%AE%E6%80%A7%E8%83%BD%E3%82%92%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B.html">USB CABLE CHECKER 2 で USB Type-C ケーブルの性能を確認する</a></h2>
-              <div class="post-meta">2020-07-19</div>
-              <section>
-                <p>先日 RAVPower 製 90W USB PD 充電器 RP-PC128 を買いました。
-                  同じく RAVPower 製の 61W USB PD 充電器 PR-PC112 を持っていたのですが、
-                  65W を要求する Dell 製ノート PC に給電しながら電源を入れると
-                  途中で電力が足りない旨メッセージが表示されて起動が一時停止したり、
-                  Windows 10 起動後も電力不足の通知が表示されるという状態で煩わしかったためです。</p>
-                <p>eMarker 付きのケーブルを持っていなかったので
-                  RAMPOW という謎のメーカーの PD 3.0 / USB 3.1 Gen2 対応を謳う USB Type-C ケーブルと
-                  Bit Trade One の
-                  <a href="https://bit-trade-one.co.jp/adusbcim/">USB CABLE CHECKER 2 (ADUSBCIM)</a>
-                  もついでに購入しました。</p>
-                <p>RAMPOW は <a href="https://rampow.com/">Web サイト</a> を見ても本社所在地や電話番号等が一切書かれておらず怪しげなメーカーという印象だったため、
-                  ケーブルを使用する前に念の為 USB CABLE CHECKER 2 で確認しようという寸法です。
-                  (※購入後に気付いたのですが、RAMPOW の
-                  <a href="https://www.amazon.co.jp/sp?_encoding=UTF8&amp;seller=A2RPIWYAIJTBUL">Amazon出品者プロフィール</a>
-                  に住所と電話番号が書かれていました。中国深センの会社のようです。)</p>
-                <iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=tf_til&amp;t=saasan-22&amp;m=amazon&amp;o=9&amp;p=8&amp;l=as1&amp;IS2=1&amp;detail=1&amp;asins=B0872MGDR2&amp;linkId=fac28b4b22c51e4280bc86287fd8dd0a&amp;bc1=000000&amp;lt1=_blank&amp;fc1=333333&amp;lc1=0066c0&amp;bg1=ffffff&amp;f=ifr"></iframe>
-                <iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=tf_til&amp;t=saasan-22&amp;m=amazon&amp;o=9&amp;p=8&amp;l=as1&amp;IS2=1&amp;detail=1&amp;asins=B0827NDHBQ&amp;linkId=bc50d175b4811fb8739a0a5d77f6be35&amp;bc1=000000&amp;lt1=_blank&amp;fc1=333333&amp;lc1=0066c0&amp;bg1=ffffff&amp;f=ifr"></iframe>
-                <iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=tf_til&amp;t=saasan-22&amp;m=amazon&amp;o=9&amp;p=8&amp;l=as1&amp;IS2=1&amp;detail=1&amp;asins=B07Y8BPVV4&amp;linkId=b4348a77ed22af3503ea6572a01d34e9&amp;bc1=000000&amp;lt1=_blank&amp;fc1=333333&amp;lc1=0066c0&amp;bg1=ffffff&amp;f=ifr"></iframe>
-                <h2 id="rampow-製ケーブル-rad03">RAMPOW 製ケーブル RAD03</h2>
-                <p>さっそく RAMPOW 製ケーブルを確認してみます。</p>
-                <p><a href="/img/blog/2020-07-19/rampow.jpg"><img src="/img/blog/2020-07-19/rampow.jpg" alt="RAMPOW 製ケーブル RAD03" /></a></p>
-                <p>USB CABLE CHECKER 2 の表示は以下の通り。</p>
-                <pre>GND+VBUS=188mΩ
-CC:DOWN1K/E-MARKED
-SHELL-GND SHORT(A&amp;B)</pre>
-                <p>表示の意味については
-                  <a href="https://github.com/bit-trade-one/USBCableChecker2/blob/master/README.md">取扱説明書</a>
-                  に記載されています。</p>
-                <blockquote>
-                  <p>[DOWN1K/E-MARKED]</p>
-                  <p>Cプラグ内にGND-VCONN間に接続された1kΩの抵抗器を持ちます。</p>
-                  <p>これにより接続先USB機器にEマーカーIC内蔵ケーブルということを通知します。</p>
-                </blockquote>
-                <blockquote>
-                  <p>[SHELL-GND SHORT(SIDE)]</p>
-                  <p>プラグシェルがGNDと導通している場合表示されます。()内は導通している側のコネクタがA,Bどちらかを表します。</p>
-                  <p>両側のコネクタが導通している場合はA&amp;Bと表示されます。</p>
-                  <p>なお、タイプC-Cケーブルでは規格でGNDとシェルが接続されることが定められています。</p>
-                </blockquote>
-                <p><samp>CC:DOWN1K/E-MARKED</samp> は eMarker 内蔵、
-                  <samp>SHELL-GND SHORT(A&amp;B)</samp> は両側のプラグシェルが GND と導通していることを示しています。</p>
-                <p>eMarker が内蔵されているため 3A を超える電流が流せます。
-                  connection のランプも全点灯しており、PD 3.0 / USB 3.1 Gen2 対応を謳うケーブルとして特に問題なさそうです。</p>
-                <h2 id="ravpower-製充電器-rp-pc128-付属ケーブル">RAVPower 製充電器 RP-PC128 付属ケーブル</h2>
-                <p>購入時に気付いてなかったのですが、
-                  RP-PC128 にも 1.5m の Type-C ケーブルが付属していたためこれも確認してみます。</p>
-                <p><a href="/img/blog/2020-07-19/ravpower.jpg"><img src="/img/blog/2020-07-19/ravpower.jpg" alt="RAVPower 製 90W USB PD 充電器 RP-PC128 付属ケーブル" /></a></p>
-                <pre>GND+VBUS=170mΩ
-CC:DOWN1K/E-MARKED
-SHELL-GND SHORT(A&amp;B)</pre>
-                <p>eMarker が内蔵されているため 3A を超える電流が流せます。
-                  connection のランプは USB 2.0 の部分と CC (Configuration Channel) が点灯しています。
-                  USB 2.0 対応の PD ケーブルとして使えるようです。</p>
-                <p>電源ケーブルとして使うならこれで十分ですね。
-                  <del>RAMPOW のケーブルいらなかったのでは？</del></p>
-                <h2 id="lenovo-yoga-book-c930-付属ケーブル">Lenovo Yoga Book C930 付属ケーブル</h2>
-                <p>手元にあったほかの USB Type-C ケーブルも確認してみます。</p>
-                <p><a href="/img/blog/2020-07-19/lenovo.jpg"><img src="/img/blog/2020-07-19/lenovo.jpg" alt="Lenovo Yoga Book C930 付属ケーブル" /></a></p>
-                <pre>GND+VBUS=212mΩ
-SHELL-GND SHORT(A&amp;B)</pre>
-                <p>eMarker が内蔵されていないため 3A までの電流しか流せません。
-                  connection のランプは USB 3.2 が一部点灯しています。</p>
-                <p>USB 3.0, 3.1 では TX1/RX1 と TX2/RX2 のどちらかが繋がっていれば良いようです。
-                  USB 3.2 Gen 2x2 では TX1, TX2, RX1, RX2 のすべてを使用してより高速な通信を行うため、このケーブルは利用できません。</p>
-                <p>SBU (Sideband Use) は USB では使用されず、
-                  DisplayPort 出力や Thunderbolt などの Alternate Mode に使われる信号線のようです。</p>
-                <p>USB 3.1 対応の PD ケーブルとしては使えそう。</p>
-                <h2 id="one-netbook-onemix3s-付属ケーブル">One-Netbook OneMix3S 付属ケーブル</h2>
-                <p><a href="/img/blog/2020-07-19/onemix3s.jpg"><img src="/img/blog/2020-07-19/onemix3s.jpg" alt="One-Netbook OneMix3S 付属ケーブル" /></a></p>
-                <pre>GND+VBUS=225mΩ</pre>
-                <p><samp>SHELL-GND SHORT(A&amp;B)</samp> の表示がない……。
-                  規格に従ってないケーブルのようです。
-                  これは使わないほうがよさそう。</p>
-                <h2 id="まとめ">まとめ</h2>
-                <p>RAVPower 製 90W USB PD 充電器 RP-PC128 と RAMPOW 製ケーブル RAD03 の組み合わせで、
-                  65W を要求する Dell 製ノート PC が問題なく充電できました。</p>
-                <p>RP-PC128 は MacBook 付属の 61W USB-C 充電器と比べて
-                  サイズがひと回り小さい (65 x 65 x 32 mm) ため持ち運びやすく、
-                  90W の大出力により充電できる機器の幅が広がります。</p>
-                <p>また、電力に余裕があるため、BUFFALO の
-                  5-in-1 ドッキングステーション LUD-U3-CGD/N
-                  を間にはさんでも安定して動作しています
-                  (61W 出力の PR-PC112 を使用したときは有線 LAN の通信がブツブツ切れていた)。
-                  ケーブル1本で電源、ディスプレイ、有線 LAN、キーボードが繋がるのは便利です。</p>
-                <iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=tf_til&amp;t=saasan-22&amp;m=amazon&amp;o=9&amp;p=8&amp;l=as1&amp;IS2=1&amp;detail=1&amp;asins=B081ZZGWR7&amp;linkId=9a6e62087527f859adc8ac8b19af537f&amp;bc1=000000&amp;lt1=_blank&amp;fc1=333333&amp;lc1=0066c0&amp;bg1=ffffff&amp;f=ifr"></iframe>
-                <p>今回購入した RAMPOW 製ケーブルは問題ありませんでしたが、
-                  手持ちの OneMix3S 付属ケーブルが規格違反だったのは意外でした。
-                  USB Power Delivery では高電圧、大電流が流れるため、
-                  ケーブル購入の際は信頼できるメーカーのものを選んだほうがよさそうです。</p>
-                <h2 id="参考サイト">参考サイト</h2>
-                <ul>
-                  <li><a href="https://github.com/bit-trade-one/USBCableChecker2/blob/master/README.md">USBCableChecker2/README.md at master · bit-trade-one/USBCableChecker2</a></li>
-                  <li><a href="https://ascii.jp/elem/000/001/848/1848727/">ASCII.jp：USB 4の発表で、USB 3.2はどうなった？ (1/5)</a></li>
-                  <li><a href="https://www.4gamer.net/games/999/G999902/20190403022/">USB 3.2とUSB4は従来のUSB規格から何が変わるのか？ 混乱しがちなUSBの最新事情を説明しよう - 4Gamer.net</a></li>
-                  <li><a href="https://lab.fujiele.co.jp/articles/8968/">USB Type-Cに置き換える方法 第1話 Type-Cの原理を知る | 組込み技術ラボ</a></li>
-                </ul>
               </section>
             </section>
             <div class="pagination">

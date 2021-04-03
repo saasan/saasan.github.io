@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <title>M5StickC でキーボード操作を自動化する</title>
+    <link href='//fonts.googleapis.com/css?family=Orbitron:500' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="canonical" href="https://saasan.github.io/blog/2021/04/04/m5stickc%E3%81%A7%E3%82%AD%E3%83%BC%E3%83%9C%E3%83%BC%E3%83%89%E6%93%8D%E4%BD%9C%E3%82%92%E8%87%AA%E5%8B%95%E5%8C%96%E3%81%99%E3%82%8B.html">
+    <link rel="alternate" type="application/rss+xml" title="saasan.github.io" href="https://saasan.github.io/feed.xml" />
+    <link rel="apple-touch-icon" href="https://saasan.github.io/img/s2works_favicon.png">
+    <script data-ad-client="ca-pub-0141905477316976" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@saasan">
+    <meta property="og:url" content="https://saasan.github.io/blog/2021/04/04/m5stickc%E3%81%A7%E3%82%AD%E3%83%BC%E3%83%9C%E3%83%BC%E3%83%89%E6%93%8D%E4%BD%9C%E3%82%92%E8%87%AA%E5%8B%95%E5%8C%96%E3%81%99%E3%82%8B.html">
+    <meta property="og:title" content="M5StickC でキーボード操作を自動化する">
+    <meta property="og:description" content="M5StickC を Bluetooth キーボードとして PC へ接続し操作を自動化する">
+    <meta property="og:image" content="https://saasan.github.io/img/s2works_favicon.png">
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org/",
+        "@type": "Person",
+        "name": "saasan",
+        "sameAs": [
+          "https://twitter.com/saasan",
+          "https://github.com/saasan"
+        ]
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "Article",
+        "name": "M5StickC でキーボード操作を自動化する",
+        "datePublished": "2021-04-04T05:50:17+09:00",
+        "headline": "M5StickC を Bluetooth キーボードとして PC へ接続し操作を自動化する",
+        "image": "https://saasan.github.io/img/s2works_favicon.png",
+        "url": "https://saasan.github.io/blog/2021/04/04/m5stickc%E3%81%A7%E3%82%AD%E3%83%BC%E3%83%9C%E3%83%BC%E3%83%89%E6%93%8D%E4%BD%9C%E3%82%92%E8%87%AA%E5%8B%95%E5%8C%96%E3%81%99%E3%82%8B.html",
+        "publisher" : {
+          "@type": "Person",
+          "name": "saasan"
+        }
+      }
+    </script>
+  </head>
+  <body itemscope itemtype="http://schema.org/WebPage">
+    <header class="site-header">
+      <div class="wrapper">
+        <a class="site-title" href="/">saasan.github.io</a>
+        <nav class="site-nav">
+          <div class="site-nav-contents">
+            <ul>
+              <li><a href="/blog/">ブログ</a></li>
+              <li><a href="/imas/">アイマス</a></li>
+              <li><a href="/software/">ソフトウェア</a></li>
+              <li><a href="/script/">スクリプト</a></li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+    </header>
+    <div class="page-content">
+      <div class="wrapper">
+        <div class="post" itemprop="mainContentOfPage" itemscope itemtype="http://schema.org/WebPageElement">
+          <header class="post-header">
+            <h1 class="post-title">M5StickC でキーボード操作を自動化する</h1>
+            <div class="post-meta">
+              <time datetime="2021-04-04T05:50:17+09:00" itemprop="dateModified">2021/04/04</time>
+            </div>
+          </header>
+          <article class="post-content">
+            <p>某ゲームでアイテムを交換する作業が面倒になってきたので
+              キーボード操作を自動化したいと思った。
+              手元にあった
+              <a href="https://www.amazon.co.jp/dp/B004INFZEG/saasan-22">サンワサプライ製のプログラマブルテンキー NT-19UH2BK</a>
+              でいけるかと思ったが、これは
+              <kbd>Ctrl + C</kbd> のような同時押しには対応しているが、
+              ウェイトをはさみながら複数のキーを順次入力する用途には対応していなかった。</p>
+            <p>先日 <a href="https://booth.pm/ja/items/2655838">AZ-Macro</a>
+              というマクロ機能のある自作 Bluetooth キーボードキットが
+              ESP32 で作られていることを知った。
+              手持ちの M5StickC なら同じ ESP32 が内蔵されており
+              Bluetooth にも対応しているため、目的を実現できるのではないか？</p>
+            <p>ということで、M5StickC を Bluetooth キーボードとして PC へ接続し操作を自動化する。</p>
+            <h2 id="arduino-ide-へ-esp32-ble-keyboard-をインストール">Arduino IDE へ ESP32-BLE-Keyboard をインストール</h2>
+            <p>まずは M5StickC を Bluetooth キーボードとして使うためのライブラリを
+              Arduino IDE へインストールする。</p>
+            <ol>
+              <li><a href="https://github.com/T-vK/ESP32-BLE-Keyboard/releases">Releases · T-vK/ESP32-BLE-Keyboard</a>
+                から ESP32-BLE-Keyboard.zip をダウンロード</li>
+              <li>Arduino IDE のメニューで [スケッチ] - [ライブラリをインクルード] - [.ZIP形式のライブラリをインストール…] をクリック</li>
+              <li>さきほどダウンロードした ESP32-BLE-Keyboard.zip を選択</li>
+            </ol>
+            <h2 id="esp32-ble-keyboard-の使い方">ESP32-BLE-Keyboard の使い方</h2>
+            <p><a href="https://github.com/T-vK/ESP32-BLE-Keyboard/blob/master/examples/SendKeyStrokes/SendKeyStrokes.ino">公式のサンプル</a></p>
+            <p>BleKeyboard クラスの以下のメソッドでキーを操作できる。</p>
+            <ul>
+              <li>print: 文字列を入力</li>
+              <li>write: キーを押してすぐに離す</li>
+              <li>press: キーを押す (release するまで押したままにする)</li>
+              <li>release: キーを離す</li>
+              <li>releaseAll: すべてのキーを離す</li>
+            </ul>
+            <p>キーの指定は、英数記号の場合、文字をそのまま渡す。
+              大文字を渡すと自動でシフトキーが補完され大文字での入力になる。</p>
+            <div class="language-plaintext highlighter-rouge">
+              <div class="highlight">
+                <pre class="highlight"><code>bleKeyboard.write('a');
+</code></pre>
+              </div>
+            </div>
+            <p>ファンクションキー、修飾キーなどの場合は
+              <a href="https://github.com/T-vK/ESP32-BLE-Keyboard/blob/master/BleKeyboard.h">BleKeyboard.h</a>
+              で定義されている定数を渡す。</p>
+            <h2 id="スケッチの作成">スケッチの作成</h2>
+            <p>M5StickC のボタンA (正面の「M5」ボタン) を押すと
+              500ms 間隔で順番に B, L, E, Enterキーを押すサンプルスケッチを作成した。
+              今回は同時押しが不要だったため
+              keystroke に書かれたキーを順に write で出力するだけとなっている。</p>
+            <noscript>
+              <pre>#include &lt;vector&gt;
+#include &lt;M5StickC.h&gt;
+#include &lt;BleKeyboard.h&gt;
+
+// -----------------------------------------------------------------------------
+// 定数
+// -----------------------------------------------------------------------------
+// 電源ボタンが1秒未満押された
+const uint8_t AXP_WAS_PRESSED = 2;
+// キーと待ち時間の構造体
+struct Key {
+  uint8_t key;
+  uint32_t delay;
+};
+// 送信するキーストローク
+const std::vector&lt;Key&gt; keystroke = {
+    { &#39;B&#39;       , 500 },
+    { &#39;L&#39;       , 500 },
+    { &#39;E&#39;       , 500 },
+    { KEY_RETURN, 0 }
+};
+
+// -----------------------------------------------------------------------------
+// 変数
+// -----------------------------------------------------------------------------
+// ESP32-BLE-Keyboard
+BleKeyboard bleKeyboard;
+
+// -----------------------------------------------------------------------------
+// 関数
+// -----------------------------------------------------------------------------
+// 画面を消去する
+void clearScreen() {
+    M5.Lcd.fillScreen(TFT_BLACK);
+    M5.Lcd.setCursor(0, 0);
+}
+
+// キーストロークを送信する
+void sendKeystroke() {
+    clearScreen();
+    M5.Lcd.println(&quot;Sending...&quot;);
+
+    for (const auto&amp; n : keystroke) {
+        bleKeyboard.write(n.key);
+        delay(n.delay);
+    }
+
+    M5.Lcd.println(&quot;Complete!&quot;);
+}
+
+void setup() {
+    M5.begin();
+
+    // 画面の表示設定
+    M5.Lcd.setRotation(1);
+    M5.Lcd.setTextFont(2);
+    clearScreen();
+    M5.Lcd.println(&quot;pso2-excube2grinder&quot;);
+
+    // Bluetooth接続
+    bleKeyboard.begin();
+}
+
+void loop() {
+    M5.update();
+
+    // 電源ボタンが押されたらリセット
+    if (M5.Axp.GetBtnPress() == AXP_WAS_PRESSED) {
+        esp_restart();
+    }
+
+    if (bleKeyboard.isConnected()) {
+        // Bluetooth接続済みの場合
+        // ボタンAが押されたらキーを送信
+        if (M5.BtnA.wasPressed()) {
+            sendKeystroke();
+        }
+
+        delay(10);
+    }
+    else {
+        // Bluetooth未接続の場合は5秒待つ
+        M5.Lcd.println(&quot;Waiting 5 seconds...&quot;);
+        delay(5000);
+    }
+}
+</pre>
+            </noscript>
+            <script src="https://gist.github.com/saasan/95c34469ebd1186c12398fbeb8266d17.js"></script>
+            <h2 id="動作確認">動作確認</h2>
+            <p>以下の手順で動作を確認できる。</p>
+            <ol>
+              <li>M5StickC にスケッチを書き込む</li>
+              <li>M5StickC の画面に “Waiting 5 seconds…” と表示されていることを確認</li>
+              <li>PC で Bluetooth デバイスを検索し “ESP32 BLE Keyboard” へ接続</li>
+              <li>メモ帳などのアプリを開く</li>
+              <li>M5StickC のボタンA (正面の「M5」ボタン) を押す</li>
+            </ol>
+            <p>これで複雑なキーボードマクロでも思い通りに実行できるようになった。
+              キーボードでできることなら何でもボタン一発で実行できるため、
+              思っていた以上に利便性が高い。</p>
+            <h2 id="参考サイト">参考サイト</h2>
+            <ul>
+              <li><a href="https://neocat.hatenablog.com/entry/2019/09/28/151947">ESP32をBluetoothキーボードやマウスにする - Okiraku Programming</a></li>
+              <li><a href="https://github.com/T-vK/ESP32-BLE-Keyboard">T-vK/ESP32-BLE-Keyboard: Bluetooth LE Keyboard library for the ESP32 (Arduino IDE compatible)</a></li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </div>
+    <footer class="site-footer">
+      <div class="wrapper">
+        <nav>
+          <ul>
+            <li><a href="/blog/">ブログ</a></li>
+            <li><a href="/imas/">アイマス</a></li>
+            <li><a href="/software/">ソフトウェア</a></li>
+            <li><a href="/script/">スクリプト</a></li>
+          </ul>
+          <a href="https://twitter.com/saasan" target="_blank" class="twitter-username">
+            saasan
+          </a>
+          <a href="/feed.xml" target="_blank" class="rss">RSS</a>
+        </nav>
+      </div>
+    </footer>
+  </body>
+</html>

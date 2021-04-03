@@ -5,9 +5,199 @@
     <description></description>
     <link>https://saasan.github.io/</link>
     <atom:link href="https://saasan.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 03 Jan 2021 10:56:02 +0900</pubDate>
-    <lastBuildDate>Sun, 03 Jan 2021 10:56:02 +0900</lastBuildDate>
+    <pubDate>Sun, 04 Apr 2021 05:51:34 +0900</pubDate>
+    <lastBuildDate>Sun, 04 Apr 2021 05:51:34 +0900</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
+    
+      <item>
+        <title>M5StickC でキーボード操作を自動化する</title>
+        <description>&lt;p&gt;某ゲームでアイテムを交換する作業が面倒になってきたので
+キーボード操作を自動化したいと思った。
+手元にあった
+&lt;a href=&quot;https://www.amazon.co.jp/dp/B004INFZEG/saasan-22&quot;&gt;サンワサプライ製のプログラマブルテンキー NT-19UH2BK&lt;/a&gt;
+でいけるかと思ったが、これは
+&lt;kbd&gt;Ctrl + C&lt;/kbd&gt; のような同時押しには対応しているが、
+ウェイトをはさみながら複数のキーを順次入力する用途には対応していなかった。&lt;/p&gt;
+
+&lt;p&gt;先日 &lt;a href=&quot;https://booth.pm/ja/items/2655838&quot;&gt;AZ-Macro&lt;/a&gt;
+というマクロ機能のある自作 Bluetooth キーボードキットが
+ESP32 で作られていることを知った。
+手持ちの M5StickC なら同じ ESP32 が内蔵されており
+Bluetooth にも対応しているため、目的を実現できるのではないか？&lt;/p&gt;
+
+&lt;p&gt;ということで、M5StickC を Bluetooth キーボードとして PC へ接続し操作を自動化する。&lt;/p&gt;
+
+&lt;h2 id=&quot;arduino-ide-へ-esp32-ble-keyboard-をインストール&quot;&gt;Arduino IDE へ ESP32-BLE-Keyboard をインストール&lt;/h2&gt;
+
+&lt;p&gt;まずは M5StickC を Bluetooth キーボードとして使うためのライブラリを
+Arduino IDE へインストールする。&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/T-vK/ESP32-BLE-Keyboard/releases&quot;&gt;Releases · T-vK/ESP32-BLE-Keyboard&lt;/a&gt;
+から ESP32-BLE-Keyboard.zip をダウンロード&lt;/li&gt;
+  &lt;li&gt;Arduino IDE のメニューで [スケッチ] - [ライブラリをインクルード] - [.ZIP形式のライブラリをインストール…] をクリック&lt;/li&gt;
+  &lt;li&gt;さきほどダウンロードした ESP32-BLE-Keyboard.zip を選択&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;esp32-ble-keyboard-の使い方&quot;&gt;ESP32-BLE-Keyboard の使い方&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/T-vK/ESP32-BLE-Keyboard/blob/master/examples/SendKeyStrokes/SendKeyStrokes.ino&quot;&gt;公式のサンプル&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;BleKeyboard クラスの以下のメソッドでキーを操作できる。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;print: 文字列を入力&lt;/li&gt;
+  &lt;li&gt;write: キーを押してすぐに離す&lt;/li&gt;
+  &lt;li&gt;press: キーを押す (release するまで押したままにする)&lt;/li&gt;
+  &lt;li&gt;release: キーを離す&lt;/li&gt;
+  &lt;li&gt;releaseAll: すべてのキーを離す&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;キーの指定は、英数記号の場合、文字をそのまま渡す。
+大文字を渡すと自動でシフトキーが補完され大文字での入力になる。&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;bleKeyboard.write('a');
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;ファンクションキー、修飾キーなどの場合は
+&lt;a href=&quot;https://github.com/T-vK/ESP32-BLE-Keyboard/blob/master/BleKeyboard.h&quot;&gt;BleKeyboard.h&lt;/a&gt;
+で定義されている定数を渡す。&lt;/p&gt;
+
+&lt;h2 id=&quot;スケッチの作成&quot;&gt;スケッチの作成&lt;/h2&gt;
+
+&lt;p&gt;M5StickC のボタンA (正面の「M5」ボタン) を押すと
+500ms 間隔で順番に B, L, E, Enterキーを押すサンプルスケッチを作成した。
+今回は同時押しが不要だったため
+keystroke に書かれたキーを順に write で出力するだけとなっている。&lt;/p&gt;
+
+&lt;noscript&gt;&lt;pre&gt;#include &amp;lt;vector&amp;gt;
+#include &amp;lt;M5StickC.h&amp;gt;
+#include &amp;lt;BleKeyboard.h&amp;gt;
+
+// -----------------------------------------------------------------------------
+// 定数
+// -----------------------------------------------------------------------------
+// 電源ボタンが1秒未満押された
+const uint8_t AXP_WAS_PRESSED = 2;
+// キーと待ち時間の構造体
+struct Key {
+  uint8_t key;
+  uint32_t delay;
+};
+// 送信するキーストローク
+const std::vector&amp;lt;Key&amp;gt; keystroke = {
+    { &amp;#39;B&amp;#39;       , 500 },
+    { &amp;#39;L&amp;#39;       , 500 },
+    { &amp;#39;E&amp;#39;       , 500 },
+    { KEY_RETURN, 0 }
+};
+
+// -----------------------------------------------------------------------------
+// 変数
+// -----------------------------------------------------------------------------
+// ESP32-BLE-Keyboard
+BleKeyboard bleKeyboard;
+
+// -----------------------------------------------------------------------------
+// 関数
+// -----------------------------------------------------------------------------
+// 画面を消去する
+void clearScreen() {
+    M5.Lcd.fillScreen(TFT_BLACK);
+    M5.Lcd.setCursor(0, 0);
+}
+
+// キーストロークを送信する
+void sendKeystroke() {
+    clearScreen();
+    M5.Lcd.println(&amp;quot;Sending...&amp;quot;);
+
+    for (const auto&amp;amp; n : keystroke) {
+        bleKeyboard.write(n.key);
+        delay(n.delay);
+    }
+
+    M5.Lcd.println(&amp;quot;Complete!&amp;quot;);
+}
+
+void setup() {
+    M5.begin();
+
+    // 画面の表示設定
+    M5.Lcd.setRotation(1);
+    M5.Lcd.setTextFont(2);
+    clearScreen();
+    M5.Lcd.println(&amp;quot;pso2-excube2grinder&amp;quot;);
+
+    // Bluetooth接続
+    bleKeyboard.begin();
+}
+
+void loop() {
+    M5.update();
+
+    // 電源ボタンが押されたらリセット
+    if (M5.Axp.GetBtnPress() == AXP_WAS_PRESSED) {
+        esp_restart();
+    }
+
+    if (bleKeyboard.isConnected()) {
+        // Bluetooth接続済みの場合
+        // ボタンAが押されたらキーを送信
+        if (M5.BtnA.wasPressed()) {
+            sendKeystroke();
+        }
+
+        delay(10);
+    }
+    else {
+        // Bluetooth未接続の場合は5秒待つ
+        M5.Lcd.println(&amp;quot;Waiting 5 seconds...&amp;quot;);
+        delay(5000);
+    }
+}
+&lt;/pre&gt;&lt;/noscript&gt;
+&lt;script src=&quot;https://gist.github.com/saasan/95c34469ebd1186c12398fbeb8266d17.js&quot;&gt; &lt;/script&gt;
+
+&lt;h2 id=&quot;動作確認&quot;&gt;動作確認&lt;/h2&gt;
+
+&lt;p&gt;以下の手順で動作を確認できる。&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;M5StickC にスケッチを書き込む&lt;/li&gt;
+  &lt;li&gt;M5StickC の画面に “Waiting 5 seconds…” と表示されていることを確認&lt;/li&gt;
+  &lt;li&gt;PC で Bluetooth デバイスを検索し “ESP32 BLE Keyboard” へ接続&lt;/li&gt;
+  &lt;li&gt;メモ帳などのアプリを開く&lt;/li&gt;
+  &lt;li&gt;M5StickC のボタンA (正面の「M5」ボタン) を押す&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;これで複雑なキーボードマクロでも思い通りに実行できるようになった。
+キーボードでできることなら何でもボタン一発で実行できるため、
+思っていた以上に利便性が高い。&lt;/p&gt;
+
+&lt;h2 id=&quot;参考サイト&quot;&gt;参考サイト&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://neocat.hatenablog.com/entry/2019/09/28/151947&quot;&gt;ESP32をBluetoothキーボードやマウスにする - Okiraku Programming&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/T-vK/ESP32-BLE-Keyboard&quot;&gt;T-vK/ESP32-BLE-Keyboard: Bluetooth LE Keyboard library for the ESP32 (Arduino IDE compatible)&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Sun, 04 Apr 2021 05:50:17 +0900</pubDate>
+        <link>https://saasan.github.io/blog/2021/04/04/m5stickc%E3%81%A7%E3%82%AD%E3%83%BC%E3%83%9C%E3%83%BC%E3%83%89%E6%93%8D%E4%BD%9C%E3%82%92%E8%87%AA%E5%8B%95%E5%8C%96%E3%81%99%E3%82%8B.html</link>
+        <guid isPermaLink="true">https://saasan.github.io/blog/2021/04/04/m5stickc%E3%81%A7%E3%82%AD%E3%83%BC%E3%83%9C%E3%83%BC%E3%83%89%E6%93%8D%E4%BD%9C%E3%82%92%E8%87%AA%E5%8B%95%E5%8C%96%E3%81%99%E3%82%8B.html</guid>
+        
+        <category>M5StickC,</category>
+        
+        <category>M5Stack,</category>
+        
+        <category>ESP32,</category>
+        
+        <category>ESP32-BLE-Keyboard</category>
+        
+        
+        <category>blog</category>
+        
+      </item>
     
       <item>
         <title>M5StickC で毎朝照明を自動で点灯する</title>
@@ -73,6 +263,14 @@ NEC製品なので当然NECフォーマットだった。&lt;/p&gt;
         <pubDate>Sun, 03 Jan 2021 10:05:33 +0900</pubDate>
         <link>https://saasan.github.io/blog/2021/01/03/m5stickc%E3%81%A7%E6%AF%8E%E6%9C%9D%E7%85%A7%E6%98%8E%E3%82%92%E8%87%AA%E5%8B%95%E3%81%A7%E7%82%B9%E7%81%AF%E3%81%99%E3%82%8B.html</link>
         <guid isPermaLink="true">https://saasan.github.io/blog/2021/01/03/m5stickc%E3%81%A7%E6%AF%8E%E6%9C%9D%E7%85%A7%E6%98%8E%E3%82%92%E8%87%AA%E5%8B%95%E3%81%A7%E7%82%B9%E7%81%AF%E3%81%99%E3%82%8B.html</guid>
+        
+        <category>M5StickC,</category>
+        
+        <category>M5Stack,</category>
+        
+        <category>ESP32,</category>
+        
+        <category>IRremoteESP8266</category>
         
         
         <category>blog</category>
@@ -634,7 +832,9 @@ void loop() {
         
         <category>M5Stack,</category>
         
-        <category>ESP32</category>
+        <category>ESP32,</category>
+        
+        <category>ESP8266Audio</category>
         
         
         <category>blog</category>
@@ -1091,114 +1291,6 @@ Error: Cannot retrieve repository metadata (repomd.xml) for repository: base. Pl
         <pubDate>Mon, 31 Jul 2017 19:47:52 +0900</pubDate>
         <link>https://saasan.github.io/blog/2017/07/31/redhat5.7%E3%81%8B%E3%82%89centos5.7%E3%81%B8%E7%A7%BB%E8%A1%8C%E3%81%99%E3%82%8B.html</link>
         <guid isPermaLink="true">https://saasan.github.io/blog/2017/07/31/redhat5.7%E3%81%8B%E3%82%89centos5.7%E3%81%B8%E7%A7%BB%E8%A1%8C%E3%81%99%E3%82%8B.html</guid>
-        
-        
-        <category>blog</category>
-        
-      </item>
-    
-      <item>
-        <title>コマンドライン(CLI)でFortiGateを設定する</title>
-        <description>&lt;h2 id=&quot;概要&quot;&gt;概要&lt;/h2&gt;
-
-&lt;p&gt;FortiGateはブラウザーでアクセスすることでWeb上からGUIで設定できる。
-しかし、諸事情によりコマンドラインから設定することになったので、設定方法をメモしておく。&lt;/p&gt;
-
-&lt;h2 id=&quot;ログインする&quot;&gt;ログインする&lt;/h2&gt;
-
-&lt;p&gt;sshで接続することでコマンドラインから設定ができる。&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ ssh admin@192.168.0.1
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;ヘルプを表示する&quot;&gt;ヘルプを表示する&lt;/h2&gt;
-
-&lt;p&gt;「?」を入力すると現在使えるコマンドが表示される。&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# ? ←「?」を入力しても表示されない
-config      config object
-get         get dynamic and system information
-show        show configuration
-diagnose    diagnose facility
-execute     execute static commands
-exit        exit CLI
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;コマンドの入力途中に「?」を入力するとコマンドが補完される。
-例えば、sh?と入力するとshowに補完される。&lt;/p&gt;
-
-&lt;p&gt;また、引数が必要なコマンドを入力した後に「?」を入力すると引数の候補が表示される。&lt;/p&gt;
-
-&lt;h2 id=&quot;バージョンを確認する&quot;&gt;バージョンを確認する&lt;/h2&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# get system status
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;設定を確認する&quot;&gt;設定を確認する&lt;/h2&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# show
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;デフォルト値を含むすべての設定を確認する&quot;&gt;デフォルト値を含むすべての設定を確認する&lt;/h2&gt;
-
-&lt;p&gt;数メガバイトある設定が出力される為、かなり時間がかかるので注意。&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# show full-configuration
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h1 id=&quot;moreを使用しない&quot;&gt;moreを使用しない&lt;/h1&gt;
-
-&lt;p&gt;コンソールへ設定を出力してバックアップを取りたいような場合は、
-下記のコマンドでmoreを表示しないようにすることができる。&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;moreを使用しないように変更&lt;/p&gt;
-
-    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# config system console
-# set output standard
-# end
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;moreを使用するように戻す&lt;/p&gt;
-
-    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# config system console
-# set output more
-# end
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;設定を変更する&quot;&gt;設定を変更する&lt;/h2&gt;
-
-&lt;p&gt;上記「設定を確認する」や「デフォルト値を含むすべての設定を確認する」で
-表示されたものを見れば分かるが、設定はディレクトリのように階層化されている。
-また、表示されたものがほぼそのまま設定用のコマンドになっている。&lt;/p&gt;
-
-&lt;p&gt;基本的に、&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;コマンド「config ○○○」で設定を行いたい階層に移動&lt;/li&gt;
-  &lt;li&gt;コマンド「set △△△ ×××」で値を設定&lt;/li&gt;
-  &lt;li&gt;コマンド「end」で設定を完了&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;という流れで設定する。上記「moreを使用しない」を参照。&lt;/p&gt;
-
-&lt;h2 id=&quot;設定を保存する&quot;&gt;設定を保存する&lt;/h2&gt;
-
-&lt;p&gt;設定は自動的に保存される。
-Cisco製品のように「write memory」などで明示的に保存する必要はない。&lt;/p&gt;
-
-&lt;h2 id=&quot;設定を終了し切断する&quot;&gt;設定を終了し切断する&lt;/h2&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# exit
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-</description>
-        <pubDate>Wed, 03 May 2017 00:18:36 +0900</pubDate>
-        <link>https://saasan.github.io/blog/2017/05/03/%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%83%A9%E3%82%A4%E3%83%B3-CLI-%E3%81%A7FortiGate%E3%82%92%E8%A8%AD%E5%AE%9A%E3%81%99%E3%82%8B.html</link>
-        <guid isPermaLink="true">https://saasan.github.io/blog/2017/05/03/%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%83%A9%E3%82%A4%E3%83%B3-CLI-%E3%81%A7FortiGate%E3%82%92%E8%A8%AD%E5%AE%9A%E3%81%99%E3%82%8B.html</guid>
         
         
         <category>blog</category>
