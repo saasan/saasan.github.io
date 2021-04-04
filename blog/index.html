@@ -72,15 +72,16 @@
               <div class="post-meta">2021-04-04</div>
               <section>
                 <p>某ゲームでアイテムを交換する作業が面倒になってきたので
-                  キーボード操作を自動化したいと思った。
-                  手元にあった
-                  <a href="https://www.amazon.co.jp/dp/B004INFZEG/saasan-22">サンワサプライ製のプログラマブルテンキー NT-19UH2BK</a>
-                  でいけるかと思ったが、これは
-                  <kbd>Ctrl + C</kbd> のような同時押しには対応しているが、
+                  キーボード操作を自動化したいと思った。</p>
+                <p>まず思いついたのは、手元にあった
+                  <a href="https://www.amazon.co.jp/dp/B004INFZEG/saasan-22">サンワサプライ製のプログラマブルテンキー NT-19UH2BK</a>。
+                  久しぶりに引っぱりだして確認したところ、これは <kbd>Ctrl + C</kbd> のような同時押しには対応しているが、
                   ウェイトをはさみながら複数のキーを順次入力する用途には対応していなかった。</p>
-                <p>先日 <a href="https://booth.pm/ja/items/2655838">AZ-Macro</a>
-                  というマクロ機能のある自作 Bluetooth キーボードキットが
-                  ESP32 で作られていることを知った。
+                <p>次に <a href="https://booth.pm/ja/items/2655838">AZ-Macro</a>
+                  というマクロ機能のある自作 Bluetooth キーボードキットがあることを思い出した。
+                  これは ESP32 で作られていて、
+                  <a href="https://github.com/palette-system/az-macro">ファームウェアのソースコードも公開</a>
+                  されている。
                   手持ちの M5StickC なら同じ ESP32 が内蔵されており
                   Bluetooth にも対応しているため、目的を実現できるのではないか？</p>
                 <p>ということで、M5StickC を Bluetooth キーボードとして PC へ接続し操作を自動化する。</p>
@@ -94,7 +95,8 @@
                   <li>さきほどダウンロードした ESP32-BLE-Keyboard.zip を選択</li>
                 </ol>
                 <h2 id="esp32-ble-keyboard-の使い方">ESP32-BLE-Keyboard の使い方</h2>
-                <p><a href="https://github.com/T-vK/ESP32-BLE-Keyboard/blob/master/examples/SendKeyStrokes/SendKeyStrokes.ino">公式のサンプル</a></p>
+                <p><a href="https://github.com/T-vK/ESP32-BLE-Keyboard/blob/master/examples/SendKeyStrokes/SendKeyStrokes.ino">公式のサンプル</a>
+                  を見れば大まかな使い方はわかると思うが、メソッドの説明がないので補足しておく。</p>
                 <p>BleKeyboard クラスの以下のメソッドでキーを操作できる。</p>
                 <ul>
                   <li>print: 文字列を入力</li>
@@ -177,7 +179,7 @@ void setup() {
     M5.Lcd.setRotation(1);
     M5.Lcd.setTextFont(2);
     clearScreen();
-    M5.Lcd.println(&quot;pso2-excube2grinder&quot;);
+    M5.Lcd.println(&quot;ESP32-BLE-Keyboard&quot;);
 
     // Bluetooth接続
     bleKeyboard.begin();

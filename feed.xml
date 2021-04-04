@@ -5,23 +5,25 @@
     <description></description>
     <link>https://saasan.github.io/</link>
     <atom:link href="https://saasan.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 04 Apr 2021 05:51:34 +0900</pubDate>
-    <lastBuildDate>Sun, 04 Apr 2021 05:51:34 +0900</lastBuildDate>
+    <pubDate>Sun, 04 Apr 2021 17:25:33 +0900</pubDate>
+    <lastBuildDate>Sun, 04 Apr 2021 17:25:33 +0900</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
     
       <item>
         <title>M5StickC でキーボード操作を自動化する</title>
         <description>&lt;p&gt;某ゲームでアイテムを交換する作業が面倒になってきたので
-キーボード操作を自動化したいと思った。
-手元にあった
-&lt;a href=&quot;https://www.amazon.co.jp/dp/B004INFZEG/saasan-22&quot;&gt;サンワサプライ製のプログラマブルテンキー NT-19UH2BK&lt;/a&gt;
-でいけるかと思ったが、これは
-&lt;kbd&gt;Ctrl + C&lt;/kbd&gt; のような同時押しには対応しているが、
+キーボード操作を自動化したいと思った。&lt;/p&gt;
+
+&lt;p&gt;まず思いついたのは、手元にあった
+&lt;a href=&quot;https://www.amazon.co.jp/dp/B004INFZEG/saasan-22&quot;&gt;サンワサプライ製のプログラマブルテンキー NT-19UH2BK&lt;/a&gt;。
+久しぶりに引っぱりだして確認したところ、これは &lt;kbd&gt;Ctrl + C&lt;/kbd&gt; のような同時押しには対応しているが、
 ウェイトをはさみながら複数のキーを順次入力する用途には対応していなかった。&lt;/p&gt;
 
-&lt;p&gt;先日 &lt;a href=&quot;https://booth.pm/ja/items/2655838&quot;&gt;AZ-Macro&lt;/a&gt;
-というマクロ機能のある自作 Bluetooth キーボードキットが
-ESP32 で作られていることを知った。
+&lt;p&gt;次に &lt;a href=&quot;https://booth.pm/ja/items/2655838&quot;&gt;AZ-Macro&lt;/a&gt;
+というマクロ機能のある自作 Bluetooth キーボードキットがあることを思い出した。
+これは ESP32 で作られていて、
+&lt;a href=&quot;https://github.com/palette-system/az-macro&quot;&gt;ファームウェアのソースコードも公開&lt;/a&gt;
+されている。
 手持ちの M5StickC なら同じ ESP32 が内蔵されており
 Bluetooth にも対応しているため、目的を実現できるのではないか？&lt;/p&gt;
 
@@ -41,7 +43,8 @@ Arduino IDE へインストールする。&lt;/p&gt;
 
 &lt;h2 id=&quot;esp32-ble-keyboard-の使い方&quot;&gt;ESP32-BLE-Keyboard の使い方&lt;/h2&gt;
 
-&lt;p&gt;&lt;a href=&quot;https://github.com/T-vK/ESP32-BLE-Keyboard/blob/master/examples/SendKeyStrokes/SendKeyStrokes.ino&quot;&gt;公式のサンプル&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/T-vK/ESP32-BLE-Keyboard/blob/master/examples/SendKeyStrokes/SendKeyStrokes.ino&quot;&gt;公式のサンプル&lt;/a&gt;
+を見れば大まかな使い方はわかると思うが、メソッドの説明がないので補足しておく。&lt;/p&gt;
 
 &lt;p&gt;BleKeyboard クラスの以下のメソッドでキーを操作できる。&lt;/p&gt;
 
@@ -127,7 +130,7 @@ void setup() {
     M5.Lcd.setRotation(1);
     M5.Lcd.setTextFont(2);
     clearScreen();
-    M5.Lcd.println(&amp;quot;pso2-excube2grinder&amp;quot;);
+    M5.Lcd.println(&amp;quot;ESP32-BLE-Keyboard&amp;quot;);
 
     // Bluetooth接続
     bleKeyboard.begin();
