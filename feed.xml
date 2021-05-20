@@ -5,9 +5,56 @@
     <description></description>
     <link>https://saasan.github.io/</link>
     <atom:link href="https://saasan.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 16 May 2021 17:21:32 +0900</pubDate>
-    <lastBuildDate>Sun, 16 May 2021 17:21:32 +0900</lastBuildDate>
+    <pubDate>Fri, 21 May 2021 00:31:18 +0900</pubDate>
+    <lastBuildDate>Fri, 21 May 2021 00:31:18 +0900</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
+    
+      <item>
+        <title>Slack へ通知するシェルスクリプト</title>
+        <description>&lt;p&gt;&lt;a href=&quot;https://qiita.com/piroor/items/77233173707a0baa6360&quot;&gt;プログラマーの君！ 騙されるな！ シェルスクリプトはそう書いちゃ駄目だ！！ という話 - Qiita&lt;/a&gt;
+を読み、シェルスクリプトで関数へ値を渡す際は
+引数よりも標準入出力を使ったほうがシンプルに書けるようだったので、
+以前書いた Slack へ通知メッセージを送るスクリプトを書き直してみた。&lt;/p&gt;
+
+&lt;noscript&gt;&lt;pre&gt;#!/bin/bash
+
+WEBHOOK_URL=https://hooks.slack.com/services/xxxxxxxxxxx/xxxxxxxxxxx/xxxxxxxxxxxxxxxxxxxxxxxx
+
+post_slack() {
+    echo &amp;quot;payload={\&amp;quot;text\&amp;quot;: \&amp;quot;$(cat)\&amp;quot;}&amp;quot; | curl -s -S -X POST -d @- ${WEBHOOK_URL}
+}
+
+echo &amp;quot;&amp;lt;!here&amp;gt;\nhoge\nfuga&amp;quot; | post_slack
+&lt;/pre&gt;&lt;/noscript&gt;
+&lt;script src=&quot;https://gist.github.com/saasan/cbca2f81a3d39ea6dfa85ada5460cf33.js&quot;&gt; &lt;/script&gt;
+
+&lt;p&gt;post_slack では以下のかたちで処理している。&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;cat で標準入力から取り込んだ文字列を echo で結合し JSON を作成する。&lt;/li&gt;
+  &lt;li&gt;それをパイプで curl へ渡す。&lt;/li&gt;
+  &lt;li&gt;curl では &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-d @-&lt;/code&gt; で標準入力から取り込んだ文字列を POST する。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;標準入出力をパイプで繋ぐかたちとすることで、
+以前は10行あった post_slack が3行に短縮された。&lt;/p&gt;
+</description>
+        <pubDate>Thu, 20 May 2021 23:59:43 +0900</pubDate>
+        <link>https://saasan.github.io/blog/2021/05/20/slack%E3%81%B8%E9%80%9A%E7%9F%A5%E3%81%99%E3%82%8B%E3%82%B7%E3%82%A7%E3%83%AB%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88.html</link>
+        <guid isPermaLink="true">https://saasan.github.io/blog/2021/05/20/slack%E3%81%B8%E9%80%9A%E7%9F%A5%E3%81%99%E3%82%8B%E3%82%B7%E3%82%A7%E3%83%AB%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88.html</guid>
+        
+        <category>Linux</category>
+        
+        <category>Bash</category>
+        
+        <category>シェルスクリプト</category>
+        
+        <category>Slack</category>
+        
+        
+        <category>blog</category>
+        
+      </item>
     
       <item>
         <title>M5StickC でキーボード操作を自動化する</title>
@@ -1251,59 +1298,6 @@ ledcWriteTone から ledcWrite へ変更しています。
         <category>M5Stack</category>
         
         <category>ESP32</category>
-        
-        
-        <category>blog</category>
-        
-      </item>
-    
-      <item>
-        <title>RedHat5.7からCentOS5.7へ移行する</title>
-        <description>&lt;p&gt;RHEL 5.7 の物理サーバをクローンして仮想化する際、ライセンス的に問題がありそうなので CentOS 5.7 へ移行した話。&lt;/p&gt;
-
-&lt;h2 id=&quot;公式ドキュメント&quot;&gt;公式ドキュメント&lt;/h2&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://wiki.centos.org/HowTos/MigrationGuide#head-c31a6a29f59a74d75074d1b110f563ffc15cb86a&quot;&gt;Migration an existing system from RHEL5 to CentOS 5&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;実際の作業&quot;&gt;実際の作業&lt;/h2&gt;
-
-&lt;p&gt;基本的に上記公式ドキュメントのコマンド通り。
-パッケージのダウンロード元サーバが変更になっているのと、OS のバージョン、CPU アーキテクチャが違うので手直ししている。CPU アーキテクチャは uname -a で確認できる。&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ curl -O http://vault.centos.org/5.7/os/x86_64/CentOS/centos-release-5-7.el5.centos.x86_64.rpm
-$ curl -O http://vault.centos.org/5.7/os/x86_64/CentOS/centos-release-notes-5.7-0.x86_64.rpm
-$ curl -O http://vault.centos.org/5.7/os/x86_64/CentOS/redhat-logos-4.9.99-11.el5.centos.noarch.rpm
-$ su
-# cp /etc/redhat-release /etc/redhat-release-saved
-# rpm -e --nodeps redhat-release-notes redhat-release yum-rhn-plugin redhat-logos
-# rpm -ivh centos-release-5-7.el5.centos.x86_64.rpm centos-release-notes-5.7-0.x86_64.rpm redhat-logos-4.9.99-11.el5.centos.noarch.rpm
-# yum update
-Loaded plugins: product-id, security, subscription-manager
-Updating Red Hat repositories.
-YumRepo Error: All mirror URLs are not using ftp, http[s] or file.
-Eg. Invalid release/
-removing mirrorlist with no valid mirrors: /var/cache/yum/base/mirrorlist.txt
-Error: Cannot retrieve repository metadata (repomd.xml) for repository: base. Please verify its path and try again
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;yum update でエラーが出るので /etc/yum.repos.d/CentOS-Base.repo を編集。&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;mirrorlistをコメントアウト&lt;/li&gt;
-  &lt;li&gt;#baseurl=http://mirror.centos.org/centos/$releasever/ を baseurl=http://vault.centos.org/5.7/ へ変更&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;再度 yum update したら完了。&lt;/p&gt;
-</description>
-        <pubDate>Mon, 31 Jul 2017 19:47:52 +0900</pubDate>
-        <link>https://saasan.github.io/blog/2017/07/31/redhat5.7%E3%81%8B%E3%82%89centos5.7%E3%81%B8%E7%A7%BB%E8%A1%8C%E3%81%99%E3%82%8B.html</link>
-        <guid isPermaLink="true">https://saasan.github.io/blog/2017/07/31/redhat5.7%E3%81%8B%E3%82%89centos5.7%E3%81%B8%E7%A7%BB%E8%A1%8C%E3%81%99%E3%82%8B.html</guid>
-        
-        <category>Linux</category>
-        
-        <category>RHEL</category>
-        
-        <category>CentOS</category>
         
         
         <category>blog</category>
