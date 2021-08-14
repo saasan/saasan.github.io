@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <title>M5Stack ATOM Lite 用の開発環境構築</title>
+    <link href='//fonts.googleapis.com/css?family=Orbitron:500' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="canonical" href="https://saasan.github.io/blog/2021/08/14/m5stack-atom-lite%E7%94%A8%E3%81%AE%E9%96%8B%E7%99%BA%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89.html">
+    <link rel="alternate" type="application/rss+xml" title="saasan.github.io" href="https://saasan.github.io/feed.xml" />
+    <link rel="apple-touch-icon" href="https://saasan.github.io/img/s2works_favicon.png">
+    <script data-ad-client="ca-pub-0141905477316976" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@saasan">
+    <meta property="og:url" content="https://saasan.github.io/blog/2021/08/14/m5stack-atom-lite%E7%94%A8%E3%81%AE%E9%96%8B%E7%99%BA%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89.html">
+    <meta property="og:title" content="M5Stack ATOM Lite 用の開発環境構築">
+    <meta property="og:description" content="M5StickC 1台だけだと用途ごとにプログラムを転送し直す必要があり手間がかかるので ATOM Lite を購入してみた。">
+    <meta property="og:image" content="https://saasan.github.io/img/s2works_favicon.png">
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org/",
+        "@type": "Person",
+        "name": "saasan",
+        "sameAs": [
+          "https://twitter.com/saasan",
+          "https://github.com/saasan"
+        ]
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "Article",
+        "name": "M5Stack ATOM Lite 用の開発環境構築",
+        "datePublished": "2021-08-14T16:33:22+09:00",
+        "headline": "M5StickC 1台だけだと用途ごとにプログラムを転送し直す必要があり手間がかかるので ATOM Lite を購入してみた。",
+        "image": "https://saasan.github.io/img/s2works_favicon.png",
+        "url": "https://saasan.github.io/blog/2021/08/14/m5stack-atom-lite%E7%94%A8%E3%81%AE%E9%96%8B%E7%99%BA%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89.html",
+        "publisher" : {
+          "@type": "Person",
+          "name": "saasan"
+        }
+      }
+    </script>
+  </head>
+  <body itemscope itemtype="http://schema.org/WebPage">
+    <header class="site-header">
+      <div class="wrapper">
+        <a class="site-title" href="/">saasan.github.io</a>
+        <nav class="site-nav">
+          <div class="site-nav-contents">
+            <ul>
+              <li><a href="/blog/">ブログ</a></li>
+              <li><a href="/imas/">アイマス</a></li>
+              <li><a href="/software/">ソフトウェア</a></li>
+              <li><a href="/script/">スクリプト</a></li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+    </header>
+    <div class="page-content">
+      <div class="wrapper">
+        <div class="post" itemprop="mainContentOfPage" itemscope itemtype="http://schema.org/WebPageElement">
+          <header class="post-header">
+            <h1 class="post-title">M5Stack ATOM Lite 用の開発環境構築</h1>
+            <div class="post-meta">
+              <time datetime="2021-08-14T16:33:22+09:00" itemprop="dateModified">2021/08/14</time>
+            </div>
+          </header>
+          <article class="post-content">
+            <p>M5StickC 1台だけだと用途ごとにプログラムを転送し直す必要があり手間がかかるので
+              ATOM Lite を購入してみた。</p>
+            <p>先日 PC を変えたこともあり
+              再度 Arduino IDE での開発環境を構築する必要があったため
+              手順を備忘録として残しておく。</p>
+            <p>内容は基本的に
+              <a href="https://docs.m5stack.com/en/arduino/arduino_development">m5-docs</a>
+              と同じ。
+              PC は Windows 10。</p>
+            <h2 id="ドライバーと-arduino-ide-のインストール">ドライバーと Arduino IDE のインストール</h2>
+            <ol>
+              <li>
+                <p>ATOM Lite を PC へ接続し、デバイスマネージャーで “USB Serial Port” が追加されているか確認。<br />
+                  “M5Stack” という名前のデバイスに黄色い “！” が付いていたらドライバーがインストールされていない。</p>
+              </li>
+              <li>
+                <p>ドライバーが自動でインストールされない場合は
+                  <a href="https://ftdichip.com/drivers/vcp-drivers/">VCP Drivers - FTDI</a>
+                  からダウンロードしてインストール。</p>
+              </li>
+              <li>
+                <p>“USB Serial Port” が表示されたら COM の番号を覚えておく。</p>
+              </li>
+              <li>
+                <p><a href="https://www.arduino.cc/en/software">Arduino IDE</a> をダウンロードしてインストール。</p>
+              </li>
+            </ol>
+            <h2 id="ボードの設定">ボードの設定</h2>
+            <ol>
+              <li>
+                <p>Arduino IDE を起動。</p>
+              </li>
+              <li>
+                <p>メニューの [ファイル] &gt; [環境設定] をクリック。</p>
+              </li>
+              <li>
+                <p>[追加のボードマネージャのURL] に以下を入力。</p>
+                <div class="language-plaintext highlighter-rouge">
+                  <div class="highlight">
+                    <pre class="highlight"><code>https://m5stack.oss-cn-shenzhen.aliyuncs.com/resource/arduino/package_m5stack_index.json
+</code></pre>
+                  </div>
+                      </div>
+              </li>
+              <li>
+                <p>[OK] をクリック。</p>
+              </li>
+              <li>
+                <p>メニューの [ツール] &gt; [ボード] &gt; [ボードマネージャ…] をクリック。</p>
+              </li>
+              <li>
+                <p>“M5Stack” で検索。</p>
+              </li>
+              <li>
+                <p>表示された “M5Stack” を [インストール]。</p>
+              </li>
+              <li>
+                <p>インストールが完了したらボードマネージャを閉じる。</p>
+              </li>
+              <li>
+                <p>メニューの [ツール] &gt; [ボード] &gt; [M5Stack Arduino] &gt;[M5Stack-ATOM] をクリック。</p>
+              </li>
+              <li>
+                <p>ウィンドウ下部に [M5Stack-ATOM] と表示されていることを確認。</p>
+              </li>
+            </ol>
+            <h2 id="ライブラリのインクルード">ライブラリのインクルード</h2>
+            <ol>
+              <li>
+                <p>メニューの [スケッチ] &gt; [ライブラリをインクルード] &gt; [ライブラリを管理…] をクリック。</p>
+              </li>
+              <li>
+                <p>“M5Atom” で検索。</p>
+              </li>
+              <li>
+                <p>表示された “M5Atom” を [インストール]。</p>
+              </li>
+              <li>
+                <p>“Dependencies for library M5Atom” というウィンドウが表示されたら [Install all] をクリック。</p>
+              </li>
+              <li>
+                <p>インストールが完了したらライブラリマネージャを閉じる。</p>
+              </li>
+            </ol>
+            <h2 id="スケッチの書き込みと動作確認">スケッチの書き込みと動作確認</h2>
+            <ol>
+              <li>
+                <p>メニューの [ツール] &gt; [シリアルポート] で ATOM Lite の COM 番号をクリック。</p>
+              </li>
+              <li>
+                <p>ウィンドウ下部に選択した COM 番号が表示されていることを確認。</p>
+              </li>
+              <li>
+                <p>メニューの [ファイル] &gt;  [スケッチ例] &gt; [M5Atom] &gt; [Basics] &gt; [Button] をクリック。</p>
+              </li>
+              <li>
+                <p>ツールバーの左から2番目にある右矢印か、メニューの [スケッチ] &gt;  [マイコンボードに書き込む] をクリック。 (<code class="language-plaintext highlighter-rouge">Ctrl + U</code> でも可)</p>
+              </li>
+              <li>
+                <p>“ボードへの書き込みが完了しました。” が表示されるまで待つ。</p>
+              </li>
+              <li>
+                <p>書き込みが完了したら ATOM Lite のボタンを押し LED の色が変わることを確認。</p>
+              </li>
+            </ol>
+            <p>以上で ATOM Lite を使う準備が整った。</p>
+            <h2 id="リビルドが遅い場合の設定">リビルドが遅い場合の設定</h2>
+            <p>同じスケッチで2回目以降のビルドが遅い場合は、以下のサイトを参考に設定すると良い。</p>
+            <p><a href="https://hangstuck.com/arduino-buildpath-fix/">Arduino IDEのビルドを速くする｜オブジェクトファイルの出力先を固定する | ハングスタック</a></p>
+          </article>
+        </div>
+        <div>
+          <h2>タグ「M5Stack」記事一覧</h2>
+          <ul class="tagged-post-list">
+            <li><a href="/blog/2021/08/14/m5stack-atom-lite%E7%94%A8%E3%81%AE%E9%96%8B%E7%99%BA%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89.html">M5Stack ATOM Lite 用の開発環境構築</a></li>
+            <li><a href="/blog/2021/04/04/m5stickc%E3%81%A7%E3%82%AD%E3%83%BC%E3%83%9C%E3%83%BC%E3%83%89%E6%93%8D%E4%BD%9C%E3%82%92%E8%87%AA%E5%8B%95%E5%8C%96%E3%81%99%E3%82%8B.html">M5StickC でキーボード操作を自動化する</a></li>
+            <li><a href="/blog/2021/01/03/m5stickc%E3%81%A7%E6%AF%8E%E6%9C%9D%E7%85%A7%E6%98%8E%E3%82%92%E8%87%AA%E5%8B%95%E3%81%A7%E7%82%B9%E7%81%AF%E3%81%99%E3%82%8B.html">M5StickC で毎朝照明を自動で点灯する</a></li>
+            <li><a href="/blog/2020/06/17/m5stickc-speaker-hat%E3%81%A7esp8266audio%E3%83%A9%E3%82%A4%E3%83%96%E3%83%A9%E3%83%AA%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%97%E3%81%A6mp3%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%92%E5%86%8D%E7%94%9F%E3%81%99%E3%82%8B.html">M5StickC + Speaker Hat で ESP8266Audio ライブラリを使用して MP3 ファイルを再生する</a></li>
+            <li><a href="/blog/2020/06/07/m5stickc-speaker-hat%E3%81%A7spiffs%E3%81%8B%E3%82%89%E8%AA%AD%E3%81%BF%E8%BE%BC%E3%82%93%E3%81%A0wav%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%92%E5%86%8D%E7%94%9F%E3%81%99%E3%82%8B.html">M5StickC + Speaker Hat で SPIFFS から読み込んだ WAV ファイルを再生する</a></li>
+            <li><a href="/blog/2020/05/25/m5stickc-speaker-hat%E3%81%A7%E9%9F%B3%E5%A3%B0%E3%83%87%E3%83%BC%E3%82%BF%E3%82%92%E5%86%8D%E7%94%9F%E3%81%99%E3%82%8B.html">M5StickC + Speaker Hat で音声データを再生する</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <footer class="site-footer">
+      <div class="wrapper">
+        <nav>
+          <ul>
+            <li><a href="/blog/">ブログ</a></li>
+            <li><a href="/imas/">アイマス</a></li>
+            <li><a href="/software/">ソフトウェア</a></li>
+            <li><a href="/script/">スクリプト</a></li>
+          </ul>
+          <a href="https://twitter.com/saasan" target="_blank" class="twitter-username">
+            saasan
+          </a>
+          <a href="/feed.xml" target="_blank" class="rss">RSS</a>
+        </nav>
+      </div>
+    </footer>
+  </body>
+</html>

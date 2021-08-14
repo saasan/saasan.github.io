@@ -5,9 +5,147 @@
     <description></description>
     <link>https://saasan.github.io/</link>
     <atom:link href="https://saasan.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 09 Jun 2021 00:43:31 +0900</pubDate>
-    <lastBuildDate>Wed, 09 Jun 2021 00:43:31 +0900</lastBuildDate>
+    <pubDate>Sat, 14 Aug 2021 16:39:04 +0900</pubDate>
+    <lastBuildDate>Sat, 14 Aug 2021 16:39:04 +0900</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
+    
+      <item>
+        <title>M5Stack ATOM Lite 用の開発環境構築</title>
+        <description>&lt;p&gt;M5StickC 1台だけだと用途ごとにプログラムを転送し直す必要があり手間がかかるので
+ATOM Lite を購入してみた。&lt;/p&gt;
+
+&lt;p&gt;先日 PC を変えたこともあり
+再度 Arduino IDE での開発環境を構築する必要があったため
+手順を備忘録として残しておく。&lt;/p&gt;
+
+&lt;p&gt;内容は基本的に
+&lt;a href=&quot;https://docs.m5stack.com/en/arduino/arduino_development&quot;&gt;m5-docs&lt;/a&gt;
+と同じ。
+PC は Windows 10。&lt;/p&gt;
+
+&lt;h2 id=&quot;ドライバーと-arduino-ide-のインストール&quot;&gt;ドライバーと Arduino IDE のインストール&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;ATOM Lite を PC へ接続し、デバイスマネージャーで “USB Serial Port” が追加されているか確認。&lt;br /&gt;
+“M5Stack” という名前のデバイスに黄色い “！” が付いていたらドライバーがインストールされていない。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;ドライバーが自動でインストールされない場合は
+&lt;a href=&quot;https://ftdichip.com/drivers/vcp-drivers/&quot;&gt;VCP Drivers - FTDI&lt;/a&gt;
+からダウンロードしてインストール。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;“USB Serial Port” が表示されたら COM の番号を覚えておく。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;https://www.arduino.cc/en/software&quot;&gt;Arduino IDE&lt;/a&gt; をダウンロードしてインストール。&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;ボードの設定&quot;&gt;ボードの設定&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;Arduino IDE を起動。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;メニューの [ファイル] &amp;gt; [環境設定] をクリック。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;[追加のボードマネージャのURL] に以下を入力。&lt;/p&gt;
+
+    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;https://m5stack.oss-cn-shenzhen.aliyuncs.com/resource/arduino/package_m5stack_index.json
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;[OK] をクリック。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;メニューの [ツール] &amp;gt; [ボード] &amp;gt; [ボードマネージャ…] をクリック。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;“M5Stack” で検索。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;表示された “M5Stack” を [インストール]。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;インストールが完了したらボードマネージャを閉じる。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;メニューの [ツール] &amp;gt; [ボード] &amp;gt; [M5Stack Arduino] &amp;gt;[M5Stack-ATOM] をクリック。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;ウィンドウ下部に [M5Stack-ATOM] と表示されていることを確認。&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;ライブラリのインクルード&quot;&gt;ライブラリのインクルード&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;メニューの [スケッチ] &amp;gt; [ライブラリをインクルード] &amp;gt; [ライブラリを管理…] をクリック。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;“M5Atom” で検索。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;表示された “M5Atom” を [インストール]。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;“Dependencies for library M5Atom” というウィンドウが表示されたら [Install all] をクリック。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;インストールが完了したらライブラリマネージャを閉じる。&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;スケッチの書き込みと動作確認&quot;&gt;スケッチの書き込みと動作確認&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;メニューの [ツール] &amp;gt; [シリアルポート] で ATOM Lite の COM 番号をクリック。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;ウィンドウ下部に選択した COM 番号が表示されていることを確認。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;メニューの [ファイル] &amp;gt;  [スケッチ例] &amp;gt; [M5Atom] &amp;gt; [Basics] &amp;gt; [Button] をクリック。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;ツールバーの左から2番目にある右矢印か、メニューの [スケッチ] &amp;gt;  [マイコンボードに書き込む] をクリック。 (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Ctrl + U&lt;/code&gt; でも可)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;“ボードへの書き込みが完了しました。” が表示されるまで待つ。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;書き込みが完了したら ATOM Lite のボタンを押し LED の色が変わることを確認。&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;以上で ATOM Lite を使う準備が整った。&lt;/p&gt;
+
+&lt;h2 id=&quot;リビルドが遅い場合の設定&quot;&gt;リビルドが遅い場合の設定&lt;/h2&gt;
+
+&lt;p&gt;同じスケッチで2回目以降のビルドが遅い場合は、以下のサイトを参考に設定すると良い。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://hangstuck.com/arduino-buildpath-fix/&quot;&gt;Arduino IDEのビルドを速くする｜オブジェクトファイルの出力先を固定する | ハングスタック&lt;/a&gt;&lt;/p&gt;
+</description>
+        <pubDate>Sat, 14 Aug 2021 16:33:22 +0900</pubDate>
+        <link>https://saasan.github.io/blog/2021/08/14/m5stack-atom-lite%E7%94%A8%E3%81%AE%E9%96%8B%E7%99%BA%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89.html</link>
+        <guid isPermaLink="true">https://saasan.github.io/blog/2021/08/14/m5stack-atom-lite%E7%94%A8%E3%81%AE%E9%96%8B%E7%99%BA%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89.html</guid>
+        
+        <category>M5Stack</category>
+        
+        <category>ATOM-Lite</category>
+        
+        <category>ESP32</category>
+        
+        
+        <category>blog</category>
+        
+      </item>
     
       <item>
         <title>Slack へ通知するシェルスクリプト</title>
@@ -236,9 +374,9 @@ void loop() {
         <link>https://saasan.github.io/blog/2021/04/04/m5stickc%E3%81%A7%E3%82%AD%E3%83%BC%E3%83%9C%E3%83%BC%E3%83%89%E6%93%8D%E4%BD%9C%E3%82%92%E8%87%AA%E5%8B%95%E5%8C%96%E3%81%99%E3%82%8B.html</link>
         <guid isPermaLink="true">https://saasan.github.io/blog/2021/04/04/m5stickc%E3%81%A7%E3%82%AD%E3%83%BC%E3%83%9C%E3%83%BC%E3%83%89%E6%93%8D%E4%BD%9C%E3%82%92%E8%87%AA%E5%8B%95%E5%8C%96%E3%81%99%E3%82%8B.html</guid>
         
-        <category>M5StickC</category>
-        
         <category>M5Stack</category>
+        
+        <category>M5StickC</category>
         
         <category>ESP32</category>
         
@@ -314,9 +452,9 @@ NEC製品なので当然NECフォーマットだった。&lt;/p&gt;
         <link>https://saasan.github.io/blog/2021/01/03/m5stickc%E3%81%A7%E6%AF%8E%E6%9C%9D%E7%85%A7%E6%98%8E%E3%82%92%E8%87%AA%E5%8B%95%E3%81%A7%E7%82%B9%E7%81%AF%E3%81%99%E3%82%8B.html</link>
         <guid isPermaLink="true">https://saasan.github.io/blog/2021/01/03/m5stickc%E3%81%A7%E6%AF%8E%E6%9C%9D%E7%85%A7%E6%98%8E%E3%82%92%E8%87%AA%E5%8B%95%E3%81%A7%E7%82%B9%E7%81%AF%E3%81%99%E3%82%8B.html</guid>
         
-        <category>M5StickC</category>
-        
         <category>M5Stack</category>
+        
+        <category>M5StickC</category>
         
         <category>ESP32</category>
         
@@ -882,9 +1020,9 @@ void loop() {
         <link>https://saasan.github.io/blog/2020/06/17/m5stickc-speaker-hat%E3%81%A7esp8266audio%E3%83%A9%E3%82%A4%E3%83%96%E3%83%A9%E3%83%AA%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%97%E3%81%A6mp3%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%92%E5%86%8D%E7%94%9F%E3%81%99%E3%82%8B.html</link>
         <guid isPermaLink="true">https://saasan.github.io/blog/2020/06/17/m5stickc-speaker-hat%E3%81%A7esp8266audio%E3%83%A9%E3%82%A4%E3%83%96%E3%83%A9%E3%83%AA%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%97%E3%81%A6mp3%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%92%E5%86%8D%E7%94%9F%E3%81%99%E3%82%8B.html</guid>
         
-        <category>M5StickC</category>
-        
         <category>M5Stack</category>
+        
+        <category>M5StickC</category>
         
         <category>ESP32</category>
         
@@ -1150,152 +1288,9 @@ void loop() {
         <link>https://saasan.github.io/blog/2020/06/07/m5stickc-speaker-hat%E3%81%A7spiffs%E3%81%8B%E3%82%89%E8%AA%AD%E3%81%BF%E8%BE%BC%E3%82%93%E3%81%A0wav%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%92%E5%86%8D%E7%94%9F%E3%81%99%E3%82%8B.html</link>
         <guid isPermaLink="true">https://saasan.github.io/blog/2020/06/07/m5stickc-speaker-hat%E3%81%A7spiffs%E3%81%8B%E3%82%89%E8%AA%AD%E3%81%BF%E8%BE%BC%E3%82%93%E3%81%A0wav%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%92%E5%86%8D%E7%94%9F%E3%81%99%E3%82%8B.html</guid>
         
-        <category>M5StickC</category>
-        
         <category>M5Stack</category>
         
-        <category>ESP32</category>
-        
-        
-        <category>blog</category>
-        
-      </item>
-    
-      <item>
-        <title>M5StickC + Speaker Hat で音声データを再生する</title>
-        <description>&lt;p&gt;M5StickC + Speaker Hat で音声や音楽を再生しようと思ったら
-意外と情報が見つからなかったので再生方法をメモしておきます。&lt;/p&gt;
-
-&lt;h2 id=&quot;音声データの変換&quot;&gt;音声データの変換&lt;/h2&gt;
-
-&lt;p&gt;まずは WAV や MP3 など再生したい音声データを
-&lt;a href=&quot;http://nn-hokuson.hatenablog.com/entry/2017/09/01/092945&quot;&gt;【Arduino】WAVまたはMP3ファイルを再生する - おもちゃラボ&lt;/a&gt;
-に書かれている方法で以下の形式へ変換します。&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;モノラル&lt;/li&gt;
-  &lt;li&gt;サンプリング周波数8000Hz&lt;/li&gt;
-  &lt;li&gt;Unsigned 8-bit PCM&lt;/li&gt;
-  &lt;li&gt;ヘッダなし&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;配列化&quot;&gt;配列化&lt;/h2&gt;
-
-&lt;p&gt;その後C言語の配列に変換する必要がありますが、
-Windows 環境では xxd コマンドがないため
-&lt;a href=&quot;https://hello-world.blog.ss-blog.jp/2016-10-16&quot;&gt;バイナリファイルをC言語のデータ配列に変換する：放課後マイコンクラブ：SSブログ&lt;/a&gt;
-の「PROGMEM作蔵さん」を使用して変換しました。&lt;/p&gt;
-
-&lt;h2 id=&quot;スケッチへ貼り付けて書き込み&quot;&gt;スケッチへ貼り付けて書き込み&lt;/h2&gt;
-
-&lt;p&gt;配列ができたら以下のスケッチの SOUND_DATA 部分に貼り付け、M5StickC へ書き込みます。
-Aボタン(正面の「M5」ボタン)を押すと音声データが再生されます。&lt;/p&gt;
-
-&lt;noscript&gt;&lt;pre&gt;#include &amp;lt;M5StickC.h&amp;gt;
-
-// スピーカー出力ピンの番号
-const uint8_t SPEAKER_PIN = GPIO_NUM_26;
-// LOWでLED点灯、HIGHでLED消灯
-const uint8_t LED_ON = LOW;
-const uint8_t LED_OFF = HIGH;
-
-// PWM出力のチャンネル
-const uint8_t PWM_CHANNEL = 0;
-// PWM出力の分解能
-const uint8_t PWM_RESOLUTION = 8;
-// PWM出力の周波数
-const uint32_t PWM_FREQUENCY = getApbFrequency() / (1U &amp;lt;&amp;lt; PWM_RESOLUTION);
-// 音声データのサンプリング周波数(Hz)
-const uint32_t SOUND_SAMPLING_RATE = 8000U;
-
-// 音声データ
-const uint8_t SOUND_DATA[] PROGMEM = {
-    0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, …
-};
-
-// メッセージ出力
-void showMessage(char *message) {
-    M5.Lcd.fillScreen(TFT_BLACK);
-    M5.Lcd.setCursor(5, 30);
-    M5.Lcd.setTextFont(4);
-    M5.Lcd.print(message);
-}
-
-void setup() {
-    M5.begin();
-    M5.Lcd.setRotation(1);
-    showMessage(&amp;quot;Sound&amp;quot;);
-
-    // スピーカーの設定
-    ledcSetup(PWM_CHANNEL, PWM_FREQUENCY, PWM_RESOLUTION);
-    ledcAttachPin(SPEAKER_PIN, PWM_CHANNEL);
-    ledcWrite(PWM_CHANNEL, 0);
-
-    // LEDの設定
-    pinMode(M5_LED, OUTPUT);
-    digitalWrite(M5_LED, LED_OFF);
-}
-
-void playMusic(const uint8_t* music_data, uint32_t sample_rate) {
-    uint32_t length = strlen((char*)music_data);
-    uint32_t delay_interval = ((uint32_t)1000000U / sample_rate);
-    for (int i = 0; i &amp;lt; length; i++) {
-        ledcWrite(PWM_CHANNEL, music_data[i]);
-        delayMicroseconds(delay_interval);
-    }
-    ledcWrite(PWM_CHANNEL, 0);
-}
-
-void loop() {
-    delay(10U);
-
-    // ボタンの状態を更新
-    M5.update();
-
-    // ボタンが押された場合の処理
-    if (M5.BtnA.wasPressed())
-    {
-        // LED点灯
-        digitalWrite(M5_LED, LED_ON);
-        // 音声データ再生
-        playMusic(SOUND_DATA, SOUND_SAMPLING_RATE);
-        // LED消灯
-        digitalWrite(M5_LED, LED_OFF);
-    }
-}
-&lt;/pre&gt;&lt;/noscript&gt;
-&lt;script src=&quot;https://gist.github.com/saasan/5ae9fc7ede308cd513e9769c4335c94f.js&quot;&gt; &lt;/script&gt;
-
-&lt;p&gt;playMusic 関数は公式の
-&lt;a href=&quot;https://github.com/m5stack/M5StickC/blob/master/examples/Hat/SPEAKER/SPEAKER.ino&quot;&gt;サンプルスケッチ&lt;/a&gt;
-のものですが、
-そのままでは音声が正常に再生されなかったため
-ledcWriteTone から ledcWrite へ変更しています。
-(公式のサンプルスケッチが間違ってるとは思わなかったのでここでハマった。)&lt;/p&gt;
-
-&lt;p&gt;今回は短い音声の再生だったためスケッチにそのまま配列として書きましたが、
-音声データ部分だけで500行を超えましたし、
-配列への変換も面倒なのでファイルから読み込むようにしたいですね。
-&lt;a href=&quot;https://lang-ship.com/reference/unofficial/M5StickC/Storage/SPIFFS/&quot;&gt;SPIFFS&lt;/a&gt;
-を使えば実現できそう。&lt;/p&gt;
-
-&lt;h2 id=&quot;参考サイト&quot;&gt;参考サイト&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/m5stack/M5StickC/blob/master/examples/Hat/SPEAKER/SPEAKER.ino&quot;&gt;M5StickC/SPEAKER.ino at master · m5stack/M5StickC&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://nn-hokuson.hatenablog.com/entry/2017/09/01/092945&quot;&gt;【Arduino】WAVまたはMP3ファイルを再生する - おもちゃラボ&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://hello-world.blog.ss-blog.jp/2016-10-16&quot;&gt;バイナリファイルをC言語のデータ配列に変換する：放課後マイコンクラブ：SSブログ&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://lang-ship.com/blog/work/esp32-pwm-max/&quot;&gt;ESP32のPWM出力は255が最大じゃなかった – Lang-ship&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://wisdom.sakura.ne.jp/system/winapi/media/mm5.html&quot;&gt;PCM の基本&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        <pubDate>Mon, 25 May 2020 10:59:30 +0900</pubDate>
-        <link>https://saasan.github.io/blog/2020/05/25/m5stickc-speaker-hat%E3%81%A7%E9%9F%B3%E5%A3%B0%E3%83%87%E3%83%BC%E3%82%BF%E3%82%92%E5%86%8D%E7%94%9F%E3%81%99%E3%82%8B.html</link>
-        <guid isPermaLink="true">https://saasan.github.io/blog/2020/05/25/m5stickc-speaker-hat%E3%81%A7%E9%9F%B3%E5%A3%B0%E3%83%87%E3%83%BC%E3%82%BF%E3%82%92%E5%86%8D%E7%94%9F%E3%81%99%E3%82%8B.html</guid>
-        
         <category>M5StickC</category>
-        
-        <category>M5Stack</category>
         
         <category>ESP32</category>
         
