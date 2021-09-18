@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <title>Lenovo ThinkCentre M600 Tiny に PCI Express を無理やり増設する</title>
+    <link href='//fonts.googleapis.com/css?family=Orbitron:500' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="canonical" href="https://saasan.github.io/blog/2021/09/18/lenovo-thinkcentre-m600-tiny%E3%81%ABpci-express%E3%82%92%E7%84%A1%E7%90%86%E3%82%84%E3%82%8A%E5%A2%97%E8%A8%AD%E3%81%99%E3%82%8B.html">
+    <link rel="alternate" type="application/rss+xml" title="saasan.github.io" href="https://saasan.github.io/feed.xml" />
+    <link rel="apple-touch-icon" href="https://saasan.github.io/img/s2works_favicon.png">
+    <script data-ad-client="ca-pub-0141905477316976" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@saasan">
+    <meta property="og:url" content="https://saasan.github.io/blog/2021/09/18/lenovo-thinkcentre-m600-tiny%E3%81%ABpci-express%E3%82%92%E7%84%A1%E7%90%86%E3%82%84%E3%82%8A%E5%A2%97%E8%A8%AD%E3%81%99%E3%82%8B.html">
+    <meta property="og:title" content="Lenovo ThinkCentre M600 Tiny に PCI Express を無理やり増設する">
+    <meta property="og:description" content="超小型デスクトップPCで無理やりTVチューナーボードを使う">
+    <meta property="og:image" content="https://saasan.github.io/img/s2works_favicon.png">
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org/",
+        "@type": "Person",
+        "name": "saasan",
+        "sameAs": [
+          "https://twitter.com/saasan",
+          "https://github.com/saasan"
+        ]
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "Article",
+        "name": "Lenovo ThinkCentre M600 Tiny に PCI Express を無理やり増設する",
+        "datePublished": "2021-09-18T13:04:35+09:00",
+        "headline": "超小型デスクトップPCで無理やりTVチューナーボードを使う",
+        "image": "https://saasan.github.io/img/s2works_favicon.png",
+        "url": "https://saasan.github.io/blog/2021/09/18/lenovo-thinkcentre-m600-tiny%E3%81%ABpci-express%E3%82%92%E7%84%A1%E7%90%86%E3%82%84%E3%82%8A%E5%A2%97%E8%A8%AD%E3%81%99%E3%82%8B.html",
+        "publisher" : {
+          "@type": "Person",
+          "name": "saasan"
+        }
+      }
+    </script>
+  </head>
+  <body itemscope itemtype="http://schema.org/WebPage">
+    <header class="site-header">
+      <div class="wrapper">
+        <a class="site-title" href="/">saasan.github.io</a>
+        <nav class="site-nav">
+          <div class="site-nav-contents">
+            <ul>
+              <li><a href="/blog/">ブログ</a></li>
+              <li><a href="/imas/">アイマス</a></li>
+              <li><a href="/software/">ソフトウェア</a></li>
+              <li><a href="/script/">スクリプト</a></li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+    </header>
+    <div class="page-content">
+      <div class="wrapper">
+        <div class="post" itemprop="mainContentOfPage" itemscope itemtype="http://schema.org/WebPageElement">
+          <header class="post-header">
+            <h1 class="post-title">Lenovo ThinkCentre M600 Tiny に PCI Express を無理やり増設する</h1>
+            <div class="post-meta">
+              <time datetime="2021-09-18T13:04:35+09:00" itemprop="dateModified">2021/09/18</time>
+            </div>
+          </header>
+          <article class="post-content">
+            <p>5年ほど前に組んだ自作 PC がスペック的につらくなってきたため
+              新しいものを組むことにしました。
+              PC 入れ替えにあたり、これまで1台で
+              ゲーム、開発、TV 録画などすべて行っていた状態から録画機能を切り離し、
+              録画専用 PC として分けることにしました。</p>
+            <p>目的は以下のとおりです。</p>
+            <ul>
+              <li>PC 交換時の録画への影響を最小限にする</li>
+              <li>ゲームなどの高負荷による録画への影響を避ける</li>
+              <li>電力消費の少ない録画用 PC を常時起動しておき、メインの PC はいつでも電源を切れるようにする</li>
+            </ul>
+            <h2 id="使用-pc">使用 PC</h2>
+            <p>録画用 PC には、ほとんど使わないまま放置していた
+              Lenovo ThinkCentre M600 Tiny
+              を使用することにしました。
+              昨年メルカリで 15,000 円で購入したやつです。</p>
+            <p>これは容積1リットルを謳う超小型デスクトップ PC で、
+              CPU は
+              <a href="https://ark.intel.com/content/www/jp/ja/ark/products/91534/intel-celeron-processor-j3060-2m-cache-up-to-2-48-ghz.html">Intel Celeron J3060</a>
+              1.6GHz 2コア、TDP 6 W となっています。</p>
+            <h2 id="usb-接続の-tv-チューナーを購入したが">USB 接続の TV チューナーを購入したが…</h2>
+            <p>M600 Tiny は前述の通り超小型デスクトップ PC のため、
+              今まで使用していた PCI Express (以下 PCI-E) 接続の TV チューナーボードが利用できません。
+              また、しばらくはメイン PC での録画と平行運用して様子をみたかったため、別途 USB 接続の TV チューナーを購入しました。</p>
+            <p>購入後1週間ほど使用してみましたが、
+              信号がドロップしているのか
+              時々ひどいブロックノイズが入り使い物になりません。
+              これは困りました。
+              PC を変えるか USB 接続でも安定する別のチューナーが必要です。</p>
+            <h2 id="pci-e-の-tv-チューナーを無理やり増設">PCI-E の TV チューナーを無理やり増設</h2>
+            <p>もう1つ思いついたのが
+              今まで使用していた PCI-E 接続の TV チューナーボードを
+              無理やり M600 Tiny に取り付けるというものです。</p>
+            <p>最初は PCI-E を USB に変換するものがないか探していましたが、
+              M.2 の A &amp; E キーに対応した以下の
+              M.2 → PCI-E x1 変換アダプタを見つけました。</p>
+            <iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="//rcm-fe.amazon-adsystem.com/e/cm?lt1=_blank&amp;bc1=000000&amp;IS2=1&amp;bg1=FFFFFF&amp;fc1=000000&amp;lc1=0000FF&amp;t=saasan-22&amp;language=ja_JP&amp;o=9&amp;p=8&amp;l=as4&amp;m=amazon&amp;f=ifr&amp;ref=as_ss_li_til&amp;asins=B07L9RFVBZ&amp;linkId=31ddd9c90c3fbc07e3d46e34298fdb14"></iframe>
+            <p><a href="https://ja.wikipedia.org/wiki/M.2">M.2</a>
+              は物理的な接続方法が異なるだけで
+              PCI-E の信号をそのまま送ることができます。
+              M600 Tiny には Wi-Fi の増設用と思われる
+              E キーに対応した M.2 スロットがあるため、
+              そこにこの変換アダプタを接続すれば問題なく使用できるはずです。</p>
+            <p>変換アダプタには 5 V と 12 V の電源を
+              FDD 4ピンコネクタで供給する必要があります。
+              光学ドライブなどに使用される4ピンペリフェラルコネクタから
+              FDD 4ピンコネクタへ変換するケーブルが付属していますが、
+              M600 Tiny にはどちらもありません。
+              そこで以下の変換ケーブルを購入し SATA から電源を取ることにしました。</p>
+            <iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="//rcm-fe.amazon-adsystem.com/e/cm?lt1=_blank&amp;bc1=000000&amp;IS2=1&amp;bg1=FFFFFF&amp;fc1=000000&amp;lc1=0000FF&amp;t=saasan-22&amp;language=ja_JP&amp;o=9&amp;p=8&amp;l=as4&amp;m=amazon&amp;f=ifr&amp;ref=as_ss_li_til&amp;asins=B0028WIES8&amp;linkId=237de3b0f34f25bc2d854c0df081beac"></iframe>
+            <p>SATA が使えなくなるため、ストレージはもともと付属していた SATA 接続の HDD をはずして M.2 の SSD にします。
+              (上記の Wi-Fi 用 M.2 とは別にもうひとつストレージ用の M.2 があります。)</p>
+            <h2 id="完成">完成</h2>
+            <p>変換アダプタを購入して実際に接続してみました。
+              内部は以下のようになっています。</p>
+            <p><a href="/img/blog/2021-09-18/thinkcentre-tiny-pci-express1.jpg" target="_blank"><img src="/img/blog/2021-09-18/thinkcentre-tiny-pci-express1.jpg" alt="PC 内部" /></a></p>
+            <p>背面の VGA (D-Sub 15 ピン) 端子が増設できる場所の板をはずして
+              ケーブルを外に出しています。</p>
+            <p><a href="/img/blog/2021-09-18/thinkcentre-tiny-pci-express2.jpg" target="_blank"><img src="/img/blog/2021-09-18/thinkcentre-tiny-pci-express2.jpg" alt="ケーブルの外出し1" /></a></p>
+            <p><a href="/img/blog/2021-09-18/thinkcentre-tiny-pci-express3.jpg" target="_blank"><img src="/img/blog/2021-09-18/thinkcentre-tiny-pci-express3.jpg" alt="ケーブルの外出し2" /></a></p>
+            <p>最後に TV チューナーボードを取り付けて以下のようになりました。
+              PC を起動して確認しましたが問題なく認識され使用できました！</p>
+            <p><a href="/img/blog/2021-09-18/thinkcentre-tiny-pci-express4.jpg" target="_blank"><img src="/img/blog/2021-09-18/thinkcentre-tiny-pci-express4.jpg" alt="TV チューナーボードの取り付け" /></a></p>
+            <h2 id="まとめ">まとめ</h2>
+            <p>以上のように超小型デスクトップ PC で
+              PCI-E 接続の TV チューナーボードを利用できました。</p>
+            <p>Dell の Optiplex Micro も中身は似たような作りのため
+              おそらく同様に PCI-E のボードを増設できると思います。
+              HP の ProDesk DM や EliteDesk DM は中を見たことがないためわかりません。</p>
+            <p>基板がむき出しのため今後ホコリへの対策を考えます。</p>
+          </article>
+        </div>
+        <div>
+          <h2>タグ「PC」記事一覧</h2>
+          <ul class="tagged-post-list">
+            <li><a href="/blog/2021/09/18/lenovo-thinkcentre-m600-tiny%E3%81%ABpci-express%E3%82%92%E7%84%A1%E7%90%86%E3%82%84%E3%82%8A%E5%A2%97%E8%A8%AD%E3%81%99%E3%82%8B.html">Lenovo ThinkCentre M600 Tiny に PCI Express を無理やり増設する</a></li>
+            <li><a href="/blog/2020/11/14/%E3%82%B9%E3%82%BF%E3%83%BC%E3%83%88%E3%83%A1%E3%83%8B%E3%83%A5%E3%83%BC%E3%81%8B%E3%82%89%E6%B6%88%E3%81%88%E3%81%9F-dell-command-update-%E3%82%92%E5%BE%A9%E6%B4%BB%E3%81%95%E3%81%9B%E3%82%8B.html">スタートメニューから消えた Dell Command | Update を復活させる</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <footer class="site-footer">
+      <div class="wrapper">
+        <nav>
+          <ul>
+            <li><a href="/blog/">ブログ</a></li>
+            <li><a href="/imas/">アイマス</a></li>
+            <li><a href="/software/">ソフトウェア</a></li>
+            <li><a href="/script/">スクリプト</a></li>
+          </ul>
+          <a href="https://twitter.com/saasan" target="_blank" class="twitter-username">
+            saasan
+          </a>
+          <a href="/feed.xml" target="_blank" class="rss">RSS</a>
+        </nav>
+      </div>
+    </footer>
+  </body>
+</html>
