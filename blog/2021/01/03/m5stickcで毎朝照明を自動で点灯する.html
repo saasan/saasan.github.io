@@ -107,7 +107,160 @@
             <h2 id="スケッチの作成">スケッチの作成</h2>
             <p>M5StickC で設定時刻に赤外線信号を送信するスケッチを作成した。</p>
             <p><a href="https://github.com/saasan/m5stickc-ir-timer">saasan/m5stickc-ir-timer: M5StickCで設定時刻に赤外線信号を送信する</a></p>
-            <script src="https://gist-it.appspot.com/github/saasan/m5stickc-ir-timer/raw/master/m5stickc-ir-timer.ino"></script>
+            <figure class="highlight">
+              <pre><code class="language-cpp" data-lang="cpp"><span class="cp">#include &lt;M5StickC.h&gt;
+#include &lt;WiFi.h&gt;
+#include &lt;IRremoteESP8266.h&gt;
+#include &lt;IRsend.h&gt;
+#include "wifi-ssid.h"
+</span>
+<span class="c1">// -----------------------------------------------------------------------------</span>
+<span class="c1">// 定数</span>
+<span class="c1">// -----------------------------------------------------------------------------</span>
+<span class="c1">// 赤外線LEDのピン番号</span>
+<span class="c1">// M5StickC内蔵の赤外線LEDを使用する場合は9</span>
+<span class="c1">// Grove接続のIRユニットを使用する場合は32</span>
+<span class="k">const</span> <span class="kt">uint8_t</span> <span class="n">IR_SEND_PIN</span> <span class="o">=</span> <span class="mi">9</span><span class="p">;</span>
+<span class="c1">// 赤外線送信するデータ</span>
+<span class="k">const</span> <span class="kt">uint64_t</span> <span class="n">IR_SEND_DATA</span> <span class="o">=</span> <span class="mh">0x41B6659A</span><span class="p">;</span>
+<span class="c1">// GMTからの時間差(秒)</span>
+<span class="k">const</span> <span class="kt">long</span> <span class="n">JST</span> <span class="o">=</span> <span class="mi">9</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">60</span><span class="p">;</span>
+<span class="c1">// NTPサーバ</span>
+<span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">NTP_SERVER</span> <span class="o">=</span> <span class="s">"ntp.nict.jp"</span><span class="p">;</span>
+<span class="c1">// 電源ボタンが1秒未満押された</span>
+<span class="k">const</span> <span class="kt">uint8_t</span> <span class="n">AXP_WAS_PRESSED</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+<span class="c1">// ボタンが長押しされたと判定する時間(ms)</span>
+<span class="k">const</span> <span class="kt">uint32_t</span> <span class="n">BUTTON_PRESSED_MS</span> <span class="o">=</span> <span class="mi">500</span><span class="p">;</span>
+<span class="c1">// 最後にボタンを押してから画面を省電力にするまでの時間(ms)</span>
+<span class="k">const</span> <span class="kt">unsigned</span> <span class="kt">long</span> <span class="n">SCREEN_OFF_MS</span> <span class="o">=</span> <span class="mi">3000</span><span class="p">;</span>
+<span class="c1">// 通常時の画面輝度</span>
+<span class="k">const</span> <span class="kt">uint8_t</span> <span class="n">SCREEN_ON_BRIGHTNESS</span> <span class="o">=</span> <span class="mi">12</span><span class="p">;</span>
+<span class="c1">// 省電力時の画面輝度</span>
+<span class="k">const</span> <span class="kt">uint8_t</span> <span class="n">SCREEN_OFF_BRIGHTNESS</span> <span class="o">=</span> <span class="mi">8</span><span class="p">;</span>
+
+<span class="c1">// -----------------------------------------------------------------------------</span>
+<span class="c1">// 変数</span>
+<span class="c1">// -----------------------------------------------------------------------------</span>
+<span class="c1">// IRremoteESP8266のIRsendクラス</span>
+<span class="n">IRsend</span> <span class="nf">irsend</span><span class="p">(</span><span class="n">IR_SEND_PIN</span><span class="p">);</span>
+<span class="c1">// 現在時刻</span>
+<span class="k">struct</span> <span class="nc">tm</span> <span class="n">now</span><span class="p">;</span>
+<span class="c1">// 赤外線送信する時刻の時間</span>
+<span class="kt">int</span> <span class="n">timer_hour</span> <span class="o">=</span> <span class="mi">7</span><span class="p">;</span>
+<span class="c1">// 赤外線送信する時刻の分</span>
+<span class="kt">int</span> <span class="n">timer_min</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="c1">// 赤外線送信済みならtrue</span>
+<span class="kt">bool</span> <span class="n">ir_sent</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+<span class="c1">// 最後にボタンが押された時間</span>
+<span class="kt">unsigned</span> <span class="kt">long</span> <span class="n">button_pressed_millis</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+<span class="c1">// -----------------------------------------------------------------------------</span>
+<span class="c1">// 関数</span>
+<span class="c1">// -----------------------------------------------------------------------------</span>
+<span class="c1">// 現在時刻を表示</span>
+<span class="kt">void</span> <span class="nf">showCurrentTime</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kt">char</span> <span class="n">message</span><span class="p">[</span><span class="mi">50</span><span class="p">];</span>
+
+    <span class="n">sprintf</span><span class="p">(</span>
+        <span class="n">message</span><span class="p">,</span>
+        <span class="s">" now:</span><span class="se">\n</span><span class="s">  %04d/%02d/%02d %02d:%02d:%02d</span><span class="se">\n</span><span class="s"> timer:</span><span class="se">\n</span><span class="s">  %02d:%02d"</span><span class="p">,</span>
+        <span class="n">now</span><span class="p">.</span><span class="n">tm_year</span> <span class="o">+</span> <span class="mi">1900</span><span class="p">,</span>
+        <span class="n">now</span><span class="p">.</span><span class="n">tm_mon</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="n">now</span><span class="p">.</span><span class="n">tm_mday</span><span class="p">,</span>
+        <span class="n">now</span><span class="p">.</span><span class="n">tm_hour</span><span class="p">,</span>
+        <span class="n">now</span><span class="p">.</span><span class="n">tm_min</span><span class="p">,</span>
+        <span class="n">now</span><span class="p">.</span><span class="n">tm_sec</span><span class="p">,</span>
+        <span class="n">timer_hour</span><span class="p">,</span>
+        <span class="n">timer_min</span><span class="p">);</span>
+
+    <span class="n">M5</span><span class="p">.</span><span class="n">Lcd</span><span class="p">.</span><span class="n">setCursor</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="n">M5</span><span class="p">.</span><span class="n">Lcd</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">message</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// 無線LAN接続</span>
+<span class="kt">void</span> <span class="nf">connectWiFi</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">ssid</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">passphrase</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">M5</span><span class="p">.</span><span class="n">Lcd</span><span class="p">.</span><span class="n">printf</span><span class="p">(</span><span class="s">"Connecting to %s"</span><span class="p">,</span> <span class="n">ssid</span><span class="p">);</span>
+    <span class="n">WiFi</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="n">ssid</span><span class="p">,</span> <span class="n">passphrase</span><span class="p">);</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">WiFi</span><span class="p">.</span><span class="n">status</span><span class="p">()</span> <span class="o">!=</span> <span class="n">WL_CONNECTED</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">delay</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span>
+        <span class="n">M5</span><span class="p">.</span><span class="n">Lcd</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">"."</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="n">M5</span><span class="p">.</span><span class="n">Lcd</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">connected!"</span><span class="p">);</span>
+    <span class="n">delay</span><span class="p">(</span><span class="mi">500</span><span class="p">);</span>
+    <span class="n">M5</span><span class="p">.</span><span class="n">Lcd</span><span class="p">.</span><span class="n">fillScreen</span><span class="p">(</span><span class="n">BLACK</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// 画面の輝度を上げる</span>
+<span class="kt">void</span> <span class="nf">screenOn</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">M5</span><span class="p">.</span><span class="n">Axp</span><span class="p">.</span><span class="n">ScreenBreath</span><span class="p">(</span><span class="n">SCREEN_ON_BRIGHTNESS</span><span class="p">);</span>
+    <span class="n">button_pressed_millis</span> <span class="o">=</span> <span class="n">millis</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="c1">// 画面の輝度を下げる</span>
+<span class="kt">void</span> <span class="nf">screenOff</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">M5</span><span class="p">.</span><span class="n">Axp</span><span class="p">.</span><span class="n">ScreenBreath</span><span class="p">(</span><span class="n">SCREEN_OFF_BRIGHTNESS</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">setup</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">M5</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span>
+
+    <span class="c1">// 画面の表示設定</span>
+    <span class="n">M5</span><span class="p">.</span><span class="n">Lcd</span><span class="p">.</span><span class="n">setRotation</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+    <span class="n">M5</span><span class="p">.</span><span class="n">Lcd</span><span class="p">.</span><span class="n">setTextFont</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+    <span class="c1">// ピンモードの設定</span>
+    <span class="n">pinMode</span><span class="p">(</span><span class="n">IR_SEND_PIN</span><span class="p">,</span> <span class="n">OUTPUT</span><span class="p">);</span>
+    <span class="c1">// 無線LANへ接続</span>
+    <span class="n">connectWiFi</span><span class="p">(</span><span class="n">WIFI_SSID</span><span class="p">,</span> <span class="n">WIFI_PASSPHRASE</span><span class="p">);</span>
+    <span class="c1">// NTPの設定</span>
+    <span class="n">configTime</span><span class="p">(</span><span class="n">JST</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">NTP_SERVER</span><span class="p">);</span>
+
+    <span class="n">button_pressed_millis</span> <span class="o">=</span> <span class="n">millis</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">loop</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">M5</span><span class="p">.</span><span class="n">update</span><span class="p">();</span>
+
+    <span class="c1">// ボタンAが押されたらアラーム時刻の時間を変更</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">M5</span><span class="p">.</span><span class="n">BtnA</span><span class="p">.</span><span class="n">wasPressed</span><span class="p">()</span> <span class="o">||</span> <span class="n">M5</span><span class="p">.</span><span class="n">BtnA</span><span class="p">.</span><span class="n">pressedFor</span><span class="p">(</span><span class="n">BUTTON_PRESSED_MS</span><span class="p">))</span> <span class="p">{</span>
+        <span class="n">timer_hour</span><span class="o">++</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">timer_hour</span> <span class="o">&gt;</span> <span class="mi">23</span><span class="p">)</span> <span class="n">timer_hour</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+        <span class="n">screenOn</span><span class="p">();</span>
+    <span class="p">}</span>
+    <span class="c1">// ボタンBが押されたらアラーム時刻の分を変更</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">M5</span><span class="p">.</span><span class="n">BtnB</span><span class="p">.</span><span class="n">wasPressed</span><span class="p">()</span> <span class="o">||</span> <span class="n">M5</span><span class="p">.</span><span class="n">BtnB</span><span class="p">.</span><span class="n">pressedFor</span><span class="p">(</span><span class="n">BUTTON_PRESSED_MS</span><span class="p">))</span> <span class="p">{</span>
+        <span class="n">timer_min</span><span class="o">++</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">timer_min</span> <span class="o">&gt;</span> <span class="mi">59</span><span class="p">)</span> <span class="n">timer_min</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+        <span class="n">screenOn</span><span class="p">();</span>
+    <span class="p">}</span>
+    <span class="c1">// 電源ボタンが押されたらリセット</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">M5</span><span class="p">.</span><span class="n">Axp</span><span class="p">.</span><span class="n">GetBtnPress</span><span class="p">()</span> <span class="o">==</span> <span class="n">AXP_WAS_PRESSED</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">esp_restart</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="c1">// 現在時刻を取得</span>
+    <span class="n">getLocalTime</span><span class="p">(</span><span class="o">&amp;</span><span class="n">now</span><span class="p">);</span>
+    <span class="n">showCurrentTime</span><span class="p">();</span>
+
+    <span class="c1">// 最後にボタンを押してから時間が経過している場合は画面を省電力化</span>
+    <span class="k">if</span> <span class="p">((</span><span class="n">millis</span><span class="p">()</span> <span class="o">-</span> <span class="n">button_pressed_millis</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">SCREEN_OFF_MS</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">screenOff</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">now</span><span class="p">.</span><span class="n">tm_hour</span> <span class="o">==</span> <span class="n">timer_hour</span> <span class="o">&amp;&amp;</span> <span class="n">now</span><span class="p">.</span><span class="n">tm_min</span> <span class="o">==</span> <span class="n">timer_min</span> <span class="o">&amp;&amp;</span> <span class="n">now</span><span class="p">.</span><span class="n">tm_sec</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// 赤外線送信していなければ電源ON信号を送信</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">ir_sent</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">irsend</span><span class="p">.</span><span class="n">sendNEC</span><span class="p">(</span><span class="n">IR_SEND_DATA</span><span class="p">);</span>
+            <span class="n">ir_sent</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="n">ir_sent</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="n">delay</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
+<span class="p">}</span></code></pre>
+            </figure>
             <p>IR_SEND_DATA の 0x41B6659A が上記で解析した点灯するための信号で、
               これを IRsend クラスの sendNEC メソッドで送信している。</p>
             <p>タイマーの時刻は
