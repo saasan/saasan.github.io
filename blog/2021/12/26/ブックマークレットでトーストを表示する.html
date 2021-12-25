@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <title>ブックマークレットでトーストを表示する</title>
+    <link href='//fonts.googleapis.com/css?family=Orbitron:500' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="canonical" href="https://saasan.github.io/blog/2021/12/26/%E3%83%96%E3%83%83%E3%82%AF%E3%83%9E%E3%83%BC%E3%82%AF%E3%83%AC%E3%83%83%E3%83%88%E3%81%A7%E3%83%88%E3%83%BC%E3%82%B9%E3%83%88%E3%82%92%E8%A1%A8%E7%A4%BA%E3%81%99%E3%82%8B.html">
+    <link rel="alternate" type="application/rss+xml" title="saasan.github.io" href="https://saasan.github.io/feed.xml" />
+    <link rel="apple-touch-icon" href="https://saasan.github.io/img/s2works_favicon.png">
+    <script data-ad-client="ca-pub-0141905477316976" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@saasan">
+    <meta property="og:url" content="https://saasan.github.io/blog/2021/12/26/%E3%83%96%E3%83%83%E3%82%AF%E3%83%9E%E3%83%BC%E3%82%AF%E3%83%AC%E3%83%83%E3%83%88%E3%81%A7%E3%83%88%E3%83%BC%E3%82%B9%E3%83%88%E3%82%92%E8%A1%A8%E7%A4%BA%E3%81%99%E3%82%8B.html">
+    <meta property="og:title" content="ブックマークレットでトーストを表示する">
+    <meta property="og:description" content="ブックマークレット(Vanilla JS)でトーストを表示する">
+    <meta property="og:image" content="https://saasan.github.io/img/s2works_favicon.png">
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org/",
+        "@type": "Person",
+        "name": "saasan",
+        "sameAs": [
+          "https://twitter.com/saasan",
+          "https://github.com/saasan"
+        ]
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "Article",
+        "name": "ブックマークレットでトーストを表示する",
+        "datePublished": "2021-12-26T01:07:30+09:00",
+        "headline": "ブックマークレット(Vanilla JS)でトーストを表示する",
+        "image": "https://saasan.github.io/img/s2works_favicon.png",
+        "url": "https://saasan.github.io/blog/2021/12/26/%E3%83%96%E3%83%83%E3%82%AF%E3%83%9E%E3%83%BC%E3%82%AF%E3%83%AC%E3%83%83%E3%83%88%E3%81%A7%E3%83%88%E3%83%BC%E3%82%B9%E3%83%88%E3%82%92%E8%A1%A8%E7%A4%BA%E3%81%99%E3%82%8B.html",
+        "publisher" : {
+          "@type": "Person",
+          "name": "saasan"
+        }
+      }
+    </script>
+  </head>
+  <body itemscope itemtype="http://schema.org/WebPage">
+    <header class="site-header">
+      <div class="wrapper">
+        <a class="site-title" href="/">saasan.github.io</a>
+        <nav class="site-nav">
+          <div class="site-nav-contents">
+            <ul>
+              <li><a href="/blog/">ブログ</a></li>
+              <li><a href="/imas/">アイマス</a></li>
+              <li><a href="/software/">ソフトウェア</a></li>
+              <li><a href="/script/">スクリプト</a></li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+    </header>
+    <div class="page-content">
+      <div class="wrapper">
+        <div class="post" itemprop="mainContentOfPage" itemscope itemtype="http://schema.org/WebPageElement">
+          <header class="post-header">
+            <h1 class="post-title">ブックマークレットでトーストを表示する</h1>
+            <div class="post-meta">
+              <time datetime="2021-12-26T01:07:30+09:00" itemprop="dateModified">2021/12/26</time>
+            </div>
+          </header>
+          <article class="post-content">
+            <p>ブックマークレットでクリップボードへコピーするスクリプトをいくつか使ってるけど、
+              コピー後に何も表示されないかたちだったんでコピーされたか分からないし
+              alertでメッセージを表示するのも野暮ったいんでトーストを表示することにした。</p>
+            <noscript>
+              <pre>function generateToastHTML(message) {
+    return `
+        &lt;div class=&quot;_toast&quot;&gt;
+            &lt;style scoped&gt;
+                ._toast
+                {
+                    position: fixed;
+                    right: 2rem;
+                    bottom: 0;
+                    padding: 1rem;
+                    width: 350px;
+                    max-width: 100%;
+                    opacity: 0;
+                    color: #000;
+                    background-color: rgba(255,255,255,.85);
+                    border: 1px solid rgba(0,0,0,.1);
+                    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
+                    border-radius: .25rem;
+                    transition: opacity .3s, bottom .3s;
+                }
+            &lt;/style&gt;
+
+            ${message}
+        &lt;/div&gt;
+    `;
+}
+
+function showToast(message) {
+    const html = generateToastHTML(message);
+    document.body.insertAdjacentHTML(&#39;beforeend&#39;, html);
+    const toast = document.body.lastElementChild;
+    setTimeout(() =&gt; {
+        toast.style.bottom = &#39;2rem&#39;;
+        toast.style.opacity = 1;
+
+        setTimeout(() =&gt; {
+            toast.style.bottom = &#39;0&#39;;
+            toast.style.opacity = 0;
+            setTimeout(() =&gt; toast.remove(), 1000);
+        }, 3000);
+    }, 1);
+}
+
+showToast(&#39;トーストのメッセージ&#39;);
+</pre>
+            </noscript>
+            <script src="https://gist.github.com/saasan/f0d41060f5be49d8aa2e3b636ea41e15.js"></script>
+            <p>ブックマークレットなので
+              ライブラリ等なしの素のJavaScript (いわゆるVanilla JS) で書いたけど
+              意外とシンプルに実装できた。</p>
+          </article>
+        </div>
+        <div>
+          <h2>タグ「JavaScript」記事一覧</h2>
+          <ul class="tagged-post-list">
+            <li><a href="/blog/2021/12/26/%E3%83%96%E3%83%83%E3%82%AF%E3%83%9E%E3%83%BC%E3%82%AF%E3%83%AC%E3%83%83%E3%83%88%E3%81%A7%E3%83%88%E3%83%BC%E3%82%B9%E3%83%88%E3%82%92%E8%A1%A8%E7%A4%BA%E3%81%99%E3%82%8B.html">ブックマークレットでトーストを表示する</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <footer class="site-footer">
+      <div class="wrapper">
+        <nav>
+          <ul>
+            <li><a href="/blog/">ブログ</a></li>
+            <li><a href="/imas/">アイマス</a></li>
+            <li><a href="/software/">ソフトウェア</a></li>
+            <li><a href="/script/">スクリプト</a></li>
+          </ul>
+          <a href="https://twitter.com/saasan" target="_blank" class="twitter-username">
+            saasan
+          </a>
+          <a href="/feed.xml" target="_blank" class="rss">RSS</a>
+        </nav>
+      </div>
+    </footer>
+  </body>
+</html>
