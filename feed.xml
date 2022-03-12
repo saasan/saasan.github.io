@@ -5,9 +5,142 @@
     <description></description>
     <link>https://saasan.github.io/</link>
     <atom:link href="https://saasan.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 26 Dec 2021 01:11:28 +0900</pubDate>
-    <lastBuildDate>Sun, 26 Dec 2021 01:11:28 +0900</lastBuildDate>
+    <pubDate>Sun, 13 Mar 2022 07:07:14 +0900</pubDate>
+    <lastBuildDate>Sun, 13 Mar 2022 07:07:14 +0900</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
+    
+      <item>
+        <title>Kindle Paperwhite を買って1ヶ月で売り払った</title>
+        <description>&lt;p&gt;Kindle Paperwhite を買ってから1ヶ月で売り払ってしまったので
+良かった点と悪かった点をメモしておく。&lt;/p&gt;
+
+&lt;blockquote class=&quot;twitter-tweet&quot;&gt;&lt;p lang=&quot;ja&quot; dir=&quot;ltr&quot;&gt;Kindle Paperwhite買ったら無駄にでかい箱で送られてきたｗ &lt;a href=&quot;https://t.co/XZ0IkAhQ3v&quot;&gt;pic.twitter.com/XZ0IkAhQ3v&lt;/a&gt;&lt;/p&gt;&amp;mdash; カガミ (@saasan) &lt;a href=&quot;https://twitter.com/saasan/status/1490296551885148160?ref_src=twsrc%5Etfw&quot;&gt;February 6, 2022&lt;/a&gt;&lt;/blockquote&gt;
+&lt;script async=&quot;&quot; src=&quot;https://platform.twitter.com/widgets.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
+
+&lt;h2 id=&quot;購入した機種と動機&quot;&gt;購入した機種と動機&lt;/h2&gt;
+
+&lt;p&gt;購入した機種は昨年発売された
+第11世代の Kindle Paperwhite シグニチャー エディション。&lt;/p&gt;
+
+&lt;iframe style=&quot;width:120px;height:240px;&quot; marginwidth=&quot;0&quot; marginheight=&quot;0&quot; scrolling=&quot;no&quot; frameborder=&quot;0&quot; src=&quot;//rcm-fe.amazon-adsystem.com/e/cm?lt1=_blank&amp;amp;bc1=000000&amp;amp;IS2=1&amp;amp;bg1=FFFFFF&amp;amp;fc1=000000&amp;amp;lc1=0000FF&amp;amp;t=saasan-22&amp;amp;language=ja_JP&amp;amp;o=9&amp;amp;p=8&amp;amp;l=as4&amp;amp;m=amazon&amp;amp;f=ifr&amp;amp;ref=as_ss_li_til&amp;amp;asins=B08N2ZL7PS&amp;amp;linkId=4da80f0733fdb2460f18831f27810717&quot;&gt;&lt;/iframe&gt;
+
+&lt;p&gt;一昨年までどの電子書籍サービスを使うか迷ってたんだけど、
+昨年 Kindle に一本化すると決めてから吹っ切れて
+1年で200冊くらい Kindle 本を買った。&lt;/p&gt;
+
+&lt;p&gt;電子書籍を読む端末は軽量でコンパクトな
+Xperia Z3 Tablet Compact を使ってたんだけど
+6月に踏んで割ってしまい、
+それ以降重たくて大きい Galaxy Tab S4 で読むかたちに。&lt;/p&gt;
+
+&lt;blockquote class=&quot;twitter-tweet&quot;&gt;&lt;p lang=&quot;ja&quot; dir=&quot;ltr&quot;&gt;仕事の電話でたたき起こされて寝ぼけてたせいで枕元に置いてたタブレット踏んでしまった…さよならXperia Z3 Tablet Compact… &lt;a href=&quot;https://t.co/ZiXxpe3isL&quot;&gt;pic.twitter.com/ZiXxpe3isL&lt;/a&gt;&lt;/p&gt;&amp;mdash; カガミ (@saasan) &lt;a href=&quot;https://twitter.com/saasan/status/1407072065677512705?ref_src=twsrc%5Etfw&quot;&gt;June 21, 2021&lt;/a&gt;&lt;/blockquote&gt;
+&lt;script async=&quot;&quot; src=&quot;https://platform.twitter.com/widgets.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
+
+&lt;p&gt;その後第11世代の Kindle Paperwhite が発売され
+小型軽量で良さそうだったのと
+電子ペーパーにも興味があったんで購入した。&lt;/p&gt;
+
+&lt;p&gt;シグニチャーエディションにした理由は、
+主に漫画を読むので下位モデルでは容量が足りないと判断したため。&lt;/p&gt;
+
+&lt;p&gt;下位モデルの容量は 8GB だけど Galaxy Tab S4 で使ってる Kindle アプリの使用容量は 8GB を超えてた。
+読み終わった本を消せば下位モデルでも入らないことはないけど
+管理が面倒かな、と。&lt;/p&gt;
+
+&lt;h2 id=&quot;悪かった点&quot;&gt;悪かった点&lt;/h2&gt;
+
+&lt;h3 id=&quot;見開き表示切り替えのボタンが邪魔&quot;&gt;見開き表示切り替えのボタンが邪魔&lt;/h3&gt;
+
+&lt;p&gt;Kindle Paperwhite では漫画の見開きページで
+見開き表示へ切り替えるボタンが
+下部中央に表示される。
+これをタップすることで
+1画面1ページ表示の状態から1画面2ページ表示に切り替わるわけだ。&lt;/p&gt;
+
+&lt;p&gt;ただしこれは切り替えボタンが
+漫画本文にかぶさって表示されるという問題がある。
+しかも、一部の漫画では全ページにこれが表示されるので
+漫画を読むときかなり邪魔。
+一応ボタン右上の×をタップすれば消えるが、
+全ページに表示されるのと電子ペーパー特有の反応の遅さが合わさり
+イライラすることになる。&lt;/p&gt;
+
+&lt;p&gt;おそらく電子書籍を作っている出版社が
+その仕様を知らずに全ページ見開きとして
+データを作っているのが原因なんだろうけど、
+Kindle 端末側でも表示しない設定にできたらいいんだが…。&lt;/p&gt;
+
+&lt;p&gt;前述の通り主に漫画を読むこともあり、
+この仕様に耐えられなかったのが売り払った主な原因。&lt;/p&gt;
+
+&lt;h3 id=&quot;次の巻を開くボタンが自動で表示されない&quot;&gt;次の巻を開くボタンが自動で表示されない&lt;/h3&gt;
+
+&lt;p&gt;Android の Kindle アプリだと、
+複数巻ある漫画を1冊読み終わったあと次の巻を開くボタンが自動で表示されるけど
+Kindle 端末ではそれが表示されない。&lt;/p&gt;
+
+&lt;p&gt;最終ページで画面の上部をタップするか
+一度ライブラリに戻らないと次の巻を開けないのが
+UIの反応の遅さと合わさって地味に面倒。&lt;/p&gt;
+
+&lt;h3 id=&quot;ダウンロードが遅い&quot;&gt;ダウンロードが遅い&lt;/h3&gt;
+
+&lt;p&gt;Wi-Fi は IEEE 802.11n まで対応してるけど明らかにダウンロード速度が遅い。&lt;/p&gt;
+
+&lt;p&gt;ストレージが 32GB あっても容量いっぱいにダウンロードするには忍耐が必要。&lt;/p&gt;
+
+&lt;h3 id=&quot;ページ送りボタンがない&quot;&gt;ページ送りボタンがない&lt;/h3&gt;
+
+&lt;p&gt;これは購入前から分かってたことだけど、
+ページ送りの際タップする必要があるので操作を片手で完結できない。
+端末が片手で持てる重さと画面サイズでも意味がない。&lt;/p&gt;
+
+&lt;h2 id=&quot;良かった点&quot;&gt;良かった点&lt;/h2&gt;
+
+&lt;h3 id=&quot;最後に読んだ本の表紙をスリープ中に表示する機能&quot;&gt;最後に読んだ本の表紙をスリープ中に表示する機能&lt;/h3&gt;
+
+&lt;p&gt;画面を書き換えなければ電力を消費しない
+電子ペーパーだからできる機能。&lt;/p&gt;
+
+&lt;p&gt;モノクロとはいえ、好きな漫画の表紙を常時表示できるのはうれしい。&lt;/p&gt;
+
+&lt;h3 id=&quot;片手で持てる重さと画面サイズ&quot;&gt;片手で持てる重さと画面サイズ&lt;/h3&gt;
+
+&lt;p&gt;軽量で片手で持っていても疲れにくい。
+ただし、前述の通りページを送るときは両手を使うことになる。&lt;/p&gt;
+
+&lt;p&gt;画面サイズはほとんど漫画を読むのに困らなかった。
+普通の漫画なら拡大せずにスラスラ読める。
+セリフにルビが多い星界の紋章を読むときはさすがに拡大したけど。&lt;/p&gt;
+
+&lt;h3 id=&quot;e-ink-電子ペーパー&quot;&gt;E Ink 電子ペーパー&lt;/h3&gt;
+
+&lt;p&gt;液晶画面より目が疲れない気がする。&lt;/p&gt;
+
+&lt;p&gt;ページ送り速度は耐えられるレベルだけど、
+UI の表示が遅いのはタップに反応してるのかしてないのかわからず困る。&lt;/p&gt;
+
+&lt;h3 id=&quot;明るさ自動調節機能&quot;&gt;明るさ自動調節機能&lt;/h3&gt;
+
+&lt;p&gt;明るい部屋で読むときも、寝る前に暗くした部屋で読むときも
+バックライトの明るさを調整しなくて済むのは良い。&lt;/p&gt;
+
+&lt;h3 id=&quot;usb-type-c-での充電&quot;&gt;USB Type-C での充電&lt;/h3&gt;
+
+&lt;p&gt;第11世代から充電が USB Type-C になったそうで、
+他の機器と充電器を共用できるのはやはり便利。&lt;/p&gt;
+
+&lt;h2 id=&quot;そして売却へ&quot;&gt;そして売却へ&lt;/h2&gt;
+
+</description>
+        <pubDate>Sun, 13 Mar 2022 07:05:19 +0900</pubDate>
+        <link>https://saasan.github.io/blog/2022/03/13/kindle-paperwhite%E3%82%92%E8%B2%B7%E3%81%A3%E3%81%A61%E3%83%B6%E6%9C%88%E3%81%A7%E5%A3%B2%E3%82%8A%E6%89%95%E3%81%A3%E3%81%9F.html</link>
+        <guid isPermaLink="true">https://saasan.github.io/blog/2022/03/13/kindle-paperwhite%E3%82%92%E8%B2%B7%E3%81%A3%E3%81%A61%E3%83%B6%E6%9C%88%E3%81%A7%E5%A3%B2%E3%82%8A%E6%89%95%E3%81%A3%E3%81%9F.html</guid>
+        
+        
+        <category>blog</category>
+        
+      </item>
     
       <item>
         <title>ブックマークレットでトーストを表示する</title>
@@ -1058,44 +1191,6 @@ Ubuntu 環境へ入ってファイルを取り出すことができた。&lt;/p&
         <category>Linux</category>
         
         <category>Bash</category>
-        
-        
-        <category>blog</category>
-        
-      </item>
-    
-      <item>
-        <title>スタートメニューから消えた Dell Command | Update を復活させる</title>
-        <description>&lt;p&gt;Dell Command | Update を実行したあとにスタートメニューから Dell Command | Update が消えることがある。&lt;/p&gt;
-
-&lt;p&gt;しばらく待っていれば自動で復活することもあれば復活しないこともある。
-復活しないときは一度アンインストールして
-&lt;a href=&quot;https://www.dell.com/support/article/ja-jp/sln311129/dell-command-update?lang=ja&quot;&gt;Dell のサイトからダウンロード&lt;/a&gt;
-したものを入れ直していたが、けっこう手間がかかって面倒だった。
-そもそもアプリの一覧に残ってるならもっと簡単に復活できるんじゃないか？&lt;/p&gt;
-
-&lt;p&gt;そう思ってスタートメニューだけ復活させる方法がないか調べたら以下の方法で復活できた。&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;管理者権限で PowerShell を起動する。&lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;以下のコマンドを実行する。&lt;/p&gt;
-
-    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ManifestPath = (Get-AppxPackage -AllUsers -Name &quot;DellInc.DellCommandUpdate&quot;).InstallLocation + &quot;\Appxmanifest.xml&quot;
-Add-AppxPackage -Path $ManifestPath -Register -DisableDevelopmentMode
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;※Get-AppxPackage に -AllUsers オプションを付けて実行するのに管理者権限が必要。&lt;/p&gt;
-
-&lt;p&gt;参考 : &lt;a href=&quot;https://docs.microsoft.com/ja-jp/powershell/module/appx/add-appxpackage?view=winserver2012r2-ps#example-2&quot;&gt;Add-AppxPackage (AppX) | Microsoft Docs&lt;/a&gt;&lt;/p&gt;
-</description>
-        <pubDate>Sat, 14 Nov 2020 00:46:11 +0900</pubDate>
-        <link>https://saasan.github.io/blog/2020/11/14/%E3%82%B9%E3%82%BF%E3%83%BC%E3%83%88%E3%83%A1%E3%83%8B%E3%83%A5%E3%83%BC%E3%81%8B%E3%82%89%E6%B6%88%E3%81%88%E3%81%9F-dell-command-update-%E3%82%92%E5%BE%A9%E6%B4%BB%E3%81%95%E3%81%9B%E3%82%8B.html</link>
-        <guid isPermaLink="true">https://saasan.github.io/blog/2020/11/14/%E3%82%B9%E3%82%BF%E3%83%BC%E3%83%88%E3%83%A1%E3%83%8B%E3%83%A5%E3%83%BC%E3%81%8B%E3%82%89%E6%B6%88%E3%81%88%E3%81%9F-dell-command-update-%E3%82%92%E5%BE%A9%E6%B4%BB%E3%81%95%E3%81%9B%E3%82%8B.html</guid>
-        
-        <category>PC</category>
         
         
         <category>blog</category>
