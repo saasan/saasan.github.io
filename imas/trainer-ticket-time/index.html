@@ -19,28 +19,28 @@
     <meta property="og:image" content="https://saasan.github.io/img/s2works_favicon.png">
     <script type="application/ld+json">
       {
-        "@context": "http://schema.org/",
-        "@type": "Person",
-        "name": "saasan",
-        "sameAs": [
-          "https://twitter.com/saasan",
-          "https://github.com/saasan"
-        ]
+          "@context": "http://schema.org/",
+          "@type": "Person",
+          "name": "saasan",
+          "sameAs": [
+              "https://twitter.com/saasan",
+              "https://github.com/saasan"
+          ]
       }
     </script>
     <script type="application/ld+json">
       {
-        "@context": "http://schema.org",
-        "@type": "Article",
-        "name": "今日のトレチケタイム",
-        "datePublished": "2016-03-29T21:11:16+09:00",
-        "headline": "アイドルマスター シンデレラガールズ スターライトステージ (デレステ)の、今日のトレチケタイム時間割を表示します。",
-        "image": "https://saasan.github.io/img/s2works_favicon.png",
-        "url": "https://saasan.github.io/imas/trainer-ticket-time/",
-        "publisher" : {
-          "@type": "Person",
-          "name": "saasan"
-        }
+          "@context": "http://schema.org",
+          "@type": "Article",
+          "name": "今日のトレチケタイム",
+          "datePublished": "2016-03-29T21:11:16+09:00",
+          "headline": "アイドルマスター シンデレラガールズ スターライトステージ (デレステ)の、今日のトレチケタイム時間割を表示します。",
+          "image": "https://saasan.github.io/img/s2works_favicon.png",
+          "url": "https://saasan.github.io/imas/trainer-ticket-time/",
+          "publisher" : {
+              "@type": "Person",
+              "name": "saasan"
+          }
       }
     </script>
   </head>
@@ -92,8 +92,8 @@
                 <p>JavaScriptを有効にして下さい。</p>
               </noscript>
             </section>
+            <!-- 日 -->
             <section id="sunday" style="display: none;">
-              <!-- 日 -->
               <dl>
                 <dt>限定曲</dt>
                 <dd>ススメ☆オトメ ～jewel parade～ (全タイプ)</dd>
@@ -417,21 +417,21 @@
                   MS_ONE_DAY = 24 * 60 * 60 * 1000,
                   ID = ['pattern-a', 'pattern-b', 'pattern-c', 'pattern-d'];
               var WEEKDAY = [
-                'sunday',
-                'monday',
-                'tuesday',
-                'wednesday',
-                'thursday',
-                'friday',
-                'saturday'
+                  'sunday',
+                  'monday',
+                  'tuesday',
+                  'wednesday',
+                  'thursday',
+                  'friday',
+                  'saturday'
               ];
               
               function getPattern(date) {
-                var msDate = date.getTime();
-                var daysElapsed = Math.floor((msDate - MS_SEPTEMBER7) / MS_ONE_DAY);
-                var pattern = (daysElapsed + 1) % 4;
+                  var msDate = date.getTime();
+                  var daysElapsed = Math.floor((msDate - MS_SEPTEMBER7) / MS_ONE_DAY);
+                  var pattern = (daysElapsed + 1) % 4;
               
-                return pattern;
+                  return pattern;
               }
               
               var section, now = new Date();

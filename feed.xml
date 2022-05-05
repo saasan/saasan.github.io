@@ -1,17 +1,128 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>saasan.github.io</title>
-    <description></description>
-    <link>https://saasan.github.io/</link>
-    <atom:link href="https://saasan.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 21 Mar 2022 07:28:38 +0900</pubDate>
-    <lastBuildDate>Mon, 21 Mar 2022 07:28:38 +0900</lastBuildDate>
-    <generator>Jekyll v4.2.0</generator>
-    
-      <item>
-        <title>Kindle Paperwhite (第11世代) を買って1ヶ月で売り払った話</title>
-        <description>&lt;p&gt;Kindle Paperwhite を買ってから1ヶ月で売り払ってしまったので
+    <channel>
+        <title>saasan.github.io</title>
+        <description></description>
+        <link>https://saasan.github.io/</link>
+        <atom:link href="https://saasan.github.io/feed.xml" rel="self" type="application/rss+xml"/>
+        <pubDate>Fri, 06 May 2022 01:39:30 +0900</pubDate>
+        <lastBuildDate>Fri, 06 May 2022 01:39:30 +0900</lastBuildDate>
+        <generator>Jekyll v4.2.0</generator>
+        
+            <item>
+                <title>dtab Compact d-42A から不要なアプリを削除する方法</title>
+                <description>&lt;p&gt;昨年踏んで割ってしまった Xperia Z3 Tablet Compact の後継として
+&lt;a href=&quot;https://www.docomo.ne.jp/product/d42a/&quot;&gt;dtab Compact d-42A&lt;/a&gt; を買った。&lt;/p&gt;
+
+&lt;p&gt;スペック的にはミドルレンジの Snapdragon 665 なので最新のゲームは動かないけど、
+Z3 Tablet Compact と同じ8インチサイズだし電子書籍を読むにはいいんじゃないかと。
+そもそも Android の8インチタブレットは不作で、
+他は低スペックな激安タブレットしか選択肢がない。&lt;/p&gt;
+
+&lt;p&gt;d-42A はドコモ製なのでキャリア製端末の例に漏れず
+削除できない不要なアプリが大量に入っていた。
+まずはこれを削除したので手順を残しておく。
+なお、Android 11 へアップデート後にアプリを削除したが
+以前と同じ手順で特に問題なかった。&lt;/p&gt;
+
+&lt;h2 id=&quot;削除手順&quot;&gt;削除手順&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;アプリを削除すると最悪の場合端末が起動しなくなったり
+動作が不安定になる可能性があります。&lt;br /&gt;
+リスクを承知の上、自己責任で行ってください。&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;d-42A で 設定 &amp;gt; タブレット情報 を開く&lt;/li&gt;
+  &lt;li&gt;ビルド番号を7回タップし開発者向けオプションを表示する&lt;/li&gt;
+  &lt;li&gt;設定 &amp;gt; システム &amp;gt; 詳細設定 &amp;gt; 開発者向けオプション を開く&lt;/li&gt;
+  &lt;li&gt;USBデバッグをオンにする&lt;/li&gt;
+  &lt;li&gt;PC で
+&lt;a href=&quot;https://developer.android.com/studio/releases/platform-tools&quot;&gt;Android SDK Platform-Tools&lt;/a&gt;
+をダウンロードし展開する&lt;/li&gt;
+  &lt;li&gt;Platform-Tools を展開したフォルダをコマンドプロンプトで開く&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;adb devices&lt;/code&gt; を実行し接続している端末を確認する&lt;/li&gt;
+  &lt;li&gt;d-42A に「USBデバッグを許可しますか?」と表示されるので「OK」を押して許可する&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;adb shell pm list packages -s&lt;/code&gt; を実行しパッケージ名の一覧を表示する&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;adb shell&lt;/code&gt; を実行しシェルを起動する&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;pm uninstall -k --user 0 パッケージ名&lt;/code&gt; を実行し不要アプリを削除する&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;exit&lt;/code&gt; を実行しシェルを終了する&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;adb kill-server&lt;/code&gt; を実行し adb サーバーを停止する&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;削除したパッケージ&quot;&gt;削除したパッケージ&lt;/h2&gt;
+
+&lt;p&gt;パッケージ名に &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nttdocomo&lt;/code&gt; が含まれるもの+αを削除した。&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;jp.co.omronsoft.iwnnime.ml_lenovo&lt;/code&gt; は標準のキーボードアプリのため
+Gboard など他のキーボードアプリをインスールする前に消すと
+文字が入力できなくなって死ぬので注意。&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;com.android.contacts (ドコモ電話帳)
+com.google.android.apps.photos (Google フォト)
+com.google.android.apps.tachyon (Google Duo)
+com.google.android.apps.wellbeing (Digital Wellbeing)
+com.google.android.apps.youtube.music (YouTube Music)
+com.google.android.projection.gearhead (Android Auto)
+com.google.android.videos (Google Play ムービー＆ TV)
+com.iii.app.kidsgallery
+com.iii.app.safebrowser
+com.lenovo.d42a.manual
+com.lenovo.docomosettings
+com.lenovo.homescreenshot (マイホームスクリーン)
+com.lenovo.simplemenu
+com.nttdocomo.android.accountauthenticator
+com.nttdocomo.android.accountwipe
+com.nttdocomo.android.anmane2
+com.nttdocomo.android.apnsw
+com.nttdocomo.android.applicationmanager
+com.nttdocomo.android.cloudset
+com.nttdocomo.android.databackup
+com.nttdocomo.android.devicehelp
+com.nttdocomo.android.dmenu2
+com.nttdocomo.android.docomoset
+com.nttdocomo.android.homezozo
+com.nttdocomo.android.idmanager
+com.nttdocomo.android.initialization
+com.nttdocomo.android.lpa
+com.nttdocomo.android.mascot
+com.nttdocomo.android.msg
+com.nttdocomo.android.mymagazine
+com.nttdocomo.android.pf.dcmippushaggregator
+com.nttdocomo.android.pf.dcmwappush
+com.nttdocomo.android.remotelock
+com.nttdocomo.android.schedulememo
+com.nttdocomo.android.sdcardbackup
+com.nttdocomo.android.sha2.kids
+com.nttdocomo.android.store
+com.nttdocomo.android.wipe
+com.tblenovo.kidslauncher
+com.tblenovo.kidsmodewebview
+com.tblenovo.lewea
+jp.co.nttdocomo.anshinmode
+jp.co.nttdocomo.bridgelauncher
+jp.co.nttdocomo.carriermail
+jp.co.nttdocomo.lcsapp
+jp.co.nttdocomo.saigaiban
+jp.co.omronsoft.android.decoemojimanager_docomo
+jp.co.omronsoft.iwnnime.ml_lenovo
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</description>
+                <pubDate>Fri, 06 May 2022 01:31:47 +0900</pubDate>
+                <link>https://saasan.github.io/blog/2022/05/06/dtab-compact-d-42a%E3%81%8B%E3%82%89%E4%B8%8D%E8%A6%81%E3%81%AA%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E5%89%8A%E9%99%A4%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95.html</link>
+                <guid isPermaLink="true">https://saasan.github.io/blog/2022/05/06/dtab-compact-d-42a%E3%81%8B%E3%82%89%E4%B8%8D%E8%A6%81%E3%81%AA%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E5%89%8A%E9%99%A4%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95.html</guid>
+                
+                <category>ガジェット</category>
+                
+                <category>Android</category>
+                
+                
+                <category>blog</category>
+                
+            </item>
+        
+            <item>
+                <title>Kindle Paperwhite (第11世代) を買って1ヶ月で売り払った話</title>
+                <description>&lt;p&gt;Kindle Paperwhite を買ってから1ヶ月で売り払ってしまったので
 良かった点と悪かった点をメモしておく。&lt;/p&gt;
 
 &lt;blockquote class=&quot;twitter-tweet&quot;&gt;&lt;p lang=&quot;ja&quot; dir=&quot;ltr&quot;&gt;Kindle Paperwhite買ったら無駄にでかい箱で送られてきたｗ &lt;a href=&quot;https://t.co/XZ0IkAhQ3v&quot;&gt;pic.twitter.com/XZ0IkAhQ3v&lt;/a&gt;&lt;/p&gt;&amp;mdash; カガミ (@saasan) &lt;a href=&quot;https://twitter.com/saasan/status/1490296551885148160?ref_src=twsrc%5Etfw&quot;&gt;February 6, 2022&lt;/a&gt;&lt;/blockquote&gt;
@@ -130,18 +241,20 @@ UI の表示が遅いのはタップに反応してるのかしてないのか�
 &lt;p&gt;第11世代から充電が USB Type-C になったそうで、
 他の機器と充電器を共用できるのはやはり便利。&lt;/p&gt;
 </description>
-        <pubDate>Sun, 13 Mar 2022 07:05:19 +0900</pubDate>
-        <link>https://saasan.github.io/blog/2022/03/13/kindle-paperwhite%E3%82%92%E8%B2%B7%E3%81%A3%E3%81%A61%E3%83%B6%E6%9C%88%E3%81%A7%E5%A3%B2%E3%82%8A%E6%89%95%E3%81%A3%E3%81%9F.html</link>
-        <guid isPermaLink="true">https://saasan.github.io/blog/2022/03/13/kindle-paperwhite%E3%82%92%E8%B2%B7%E3%81%A3%E3%81%A61%E3%83%B6%E6%9C%88%E3%81%A7%E5%A3%B2%E3%82%8A%E6%89%95%E3%81%A3%E3%81%9F.html</guid>
+                <pubDate>Sun, 13 Mar 2022 07:05:19 +0900</pubDate>
+                <link>https://saasan.github.io/blog/2022/03/13/kindle-paperwhite%E3%82%92%E8%B2%B7%E3%81%A3%E3%81%A61%E3%83%B6%E6%9C%88%E3%81%A7%E5%A3%B2%E3%82%8A%E6%89%95%E3%81%A3%E3%81%9F.html</link>
+                <guid isPermaLink="true">https://saasan.github.io/blog/2022/03/13/kindle-paperwhite%E3%82%92%E8%B2%B7%E3%81%A3%E3%81%A61%E3%83%B6%E6%9C%88%E3%81%A7%E5%A3%B2%E3%82%8A%E6%89%95%E3%81%A3%E3%81%9F.html</guid>
+                
+                <category>ガジェット</category>
+                
+                
+                <category>blog</category>
+                
+            </item>
         
-        
-        <category>blog</category>
-        
-      </item>
-    
-      <item>
-        <title>ブックマークレットでトーストを表示する</title>
-        <description>&lt;p&gt;ブックマークレットでクリップボードへコピーするスクリプトをいくつか使ってるけど、
+            <item>
+                <title>ブックマークレットでトーストを表示する</title>
+                <description>&lt;p&gt;ブックマークレットでクリップボードへコピーするスクリプトをいくつか使ってるけど、
 コピー後に何も表示されないかたちだったんでコピーされたか分からないし
 alertでメッセージを表示するのも野暮ったいんでトーストを表示することにした。&lt;/p&gt;
 
@@ -196,22 +309,22 @@ showToast(&amp;#39;トーストのメッセージ&amp;#39;);
 ライブラリ等なしの素のJavaScript (いわゆるVanilla JS) で書いたけど
 意外とシンプルに実装できた。&lt;/p&gt;
 </description>
-        <pubDate>Sun, 26 Dec 2021 01:07:30 +0900</pubDate>
-        <link>https://saasan.github.io/blog/2021/12/26/%E3%83%96%E3%83%83%E3%82%AF%E3%83%9E%E3%83%BC%E3%82%AF%E3%83%AC%E3%83%83%E3%83%88%E3%81%A7%E3%83%88%E3%83%BC%E3%82%B9%E3%83%88%E3%82%92%E8%A1%A8%E7%A4%BA%E3%81%99%E3%82%8B.html</link>
-        <guid isPermaLink="true">https://saasan.github.io/blog/2021/12/26/%E3%83%96%E3%83%83%E3%82%AF%E3%83%9E%E3%83%BC%E3%82%AF%E3%83%AC%E3%83%83%E3%83%88%E3%81%A7%E3%83%88%E3%83%BC%E3%82%B9%E3%83%88%E3%82%92%E8%A1%A8%E7%A4%BA%E3%81%99%E3%82%8B.html</guid>
+                <pubDate>Sun, 26 Dec 2021 01:07:30 +0900</pubDate>
+                <link>https://saasan.github.io/blog/2021/12/26/%E3%83%96%E3%83%83%E3%82%AF%E3%83%9E%E3%83%BC%E3%82%AF%E3%83%AC%E3%83%83%E3%83%88%E3%81%A7%E3%83%88%E3%83%BC%E3%82%B9%E3%83%88%E3%82%92%E8%A1%A8%E7%A4%BA%E3%81%99%E3%82%8B.html</link>
+                <guid isPermaLink="true">https://saasan.github.io/blog/2021/12/26/%E3%83%96%E3%83%83%E3%82%AF%E3%83%9E%E3%83%BC%E3%82%AF%E3%83%AC%E3%83%83%E3%83%88%E3%81%A7%E3%83%88%E3%83%BC%E3%82%B9%E3%83%88%E3%82%92%E8%A1%A8%E7%A4%BA%E3%81%99%E3%82%8B.html</guid>
+                
+                <category>JavaScript</category>
+                
+                <category>Bookmarklet</category>
+                
+                
+                <category>blog</category>
+                
+            </item>
         
-        <category>JavaScript</category>
-        
-        <category>Bookmarklet</category>
-        
-        
-        <category>blog</category>
-        
-      </item>
-    
-      <item>
-        <title>わたゆり「カフェ・リーベ女学園」の間取り図を作ってみた</title>
-        <description>&lt;p&gt;最近「私の百合はお仕事です！」(わたゆり) にハマってます。
+            <item>
+                <title>わたゆり「カフェ・リーベ女学園」の間取り図を作ってみた</title>
+                <description>&lt;p&gt;最近「私の百合はお仕事です！」(わたゆり) にハマってます。
 &lt;a href=&quot;https://www.ichijinsha.co.jp/yurihime/title/%e6%9c%aa%e5%b9%a1/%e7%a7%81%e3%81%ae%e7%99%be%e5%90%88%e3%81%af%e3%81%8a%e4%bb%95%e4%ba%8b%e3%81%a7%e3%81%99%ef%bc%81/&quot;&gt;公式サイトの紹介&lt;/a&gt;
 を読めば分かる通り、
 &lt;ruby&gt;姉妹&lt;rp&gt;(&lt;/rp&gt;&lt;rt&gt;シュヴェスター&lt;/rt&gt;&lt;rp&gt;)&lt;/rp&gt;&lt;/ruby&gt;
@@ -347,24 +460,24 @@ Web受付の状況も確認しながら対応していると考えると
 5巻88ページで舞が美月へ「ブルーメ選挙の投票箱を出すから見に来て」と言っています。
 BYで「見に来て」と言っていることからBY外にあると思われます。&lt;/p&gt;
 </description>
-        <pubDate>Sun, 19 Dec 2021 16:50:36 +0900</pubDate>
-        <link>https://saasan.github.io/blog/2021/12/19/%E3%82%8F%E3%81%9F%E3%82%86%E3%82%8A-%E3%82%AB%E3%83%95%E3%82%A7-%E3%83%AA%E3%83%BC%E3%83%99%E5%A5%B3%E5%AD%A6%E5%9C%92-%E3%81%AE%E9%96%93%E5%8F%96%E3%82%8A%E5%9B%B3%E3%82%92%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%BF%E3%81%9F.html</link>
-        <guid isPermaLink="true">https://saasan.github.io/blog/2021/12/19/%E3%82%8F%E3%81%9F%E3%82%86%E3%82%8A-%E3%82%AB%E3%83%95%E3%82%A7-%E3%83%AA%E3%83%BC%E3%83%99%E5%A5%B3%E5%AD%A6%E5%9C%92-%E3%81%AE%E9%96%93%E5%8F%96%E3%82%8A%E5%9B%B3%E3%82%92%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%BF%E3%81%9F.html</guid>
+                <pubDate>Sun, 19 Dec 2021 16:50:36 +0900</pubDate>
+                <link>https://saasan.github.io/blog/2021/12/19/%E3%82%8F%E3%81%9F%E3%82%86%E3%82%8A-%E3%82%AB%E3%83%95%E3%82%A7-%E3%83%AA%E3%83%BC%E3%83%99%E5%A5%B3%E5%AD%A6%E5%9C%92-%E3%81%AE%E9%96%93%E5%8F%96%E3%82%8A%E5%9B%B3%E3%82%92%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%BF%E3%81%9F.html</link>
+                <guid isPermaLink="true">https://saasan.github.io/blog/2021/12/19/%E3%82%8F%E3%81%9F%E3%82%86%E3%82%8A-%E3%82%AB%E3%83%95%E3%82%A7-%E3%83%AA%E3%83%BC%E3%83%99%E5%A5%B3%E5%AD%A6%E5%9C%92-%E3%81%AE%E9%96%93%E5%8F%96%E3%82%8A%E5%9B%B3%E3%82%92%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%BF%E3%81%9F.html</guid>
+                
+                <category>本</category>
+                
+                <category>私の百合はお仕事です！</category>
+                
+                <category>わたゆり</category>
+                
+                
+                <category>blog</category>
+                
+            </item>
         
-        <category>本</category>
-        
-        <category>私の百合はお仕事です！</category>
-        
-        <category>わたゆり</category>
-        
-        
-        <category>blog</category>
-        
-      </item>
-    
-      <item>
-        <title>Lenovo ThinkCentre M600 Tiny に PCI Express を無理やり増設する</title>
-        <description>&lt;p&gt;5年ほど前に組んだ自作 PC がスペック的につらくなってきたため
+            <item>
+                <title>Lenovo ThinkCentre M600 Tiny に PCI Express を無理やり増設する</title>
+                <description>&lt;p&gt;5年ほど前に組んだ自作 PC がスペック的につらくなってきたため
 新しいものを組むことにしました。
 PC 入れ替えにあたり、これまで1台で
 ゲーム、開発、TV 録画などすべて行っていた状態から録画機能を切り離し、
@@ -463,20 +576,20 @@ HP の ProDesk DM や EliteDesk DM は中を見たことがないためわかり
 
 &lt;p&gt;基板がむき出しのため今後ホコリへの対策を考えます。&lt;/p&gt;
 </description>
-        <pubDate>Sat, 18 Sep 2021 13:04:35 +0900</pubDate>
-        <link>https://saasan.github.io/blog/2021/09/18/lenovo-thinkcentre-m600-tiny%E3%81%ABpci-express%E3%82%92%E7%84%A1%E7%90%86%E3%82%84%E3%82%8A%E5%A2%97%E8%A8%AD%E3%81%99%E3%82%8B.html</link>
-        <guid isPermaLink="true">https://saasan.github.io/blog/2021/09/18/lenovo-thinkcentre-m600-tiny%E3%81%ABpci-express%E3%82%92%E7%84%A1%E7%90%86%E3%82%84%E3%82%8A%E5%A2%97%E8%A8%AD%E3%81%99%E3%82%8B.html</guid>
+                <pubDate>Sat, 18 Sep 2021 13:04:35 +0900</pubDate>
+                <link>https://saasan.github.io/blog/2021/09/18/lenovo-thinkcentre-m600-tiny%E3%81%ABpci-express%E3%82%92%E7%84%A1%E7%90%86%E3%82%84%E3%82%8A%E5%A2%97%E8%A8%AD%E3%81%99%E3%82%8B.html</link>
+                <guid isPermaLink="true">https://saasan.github.io/blog/2021/09/18/lenovo-thinkcentre-m600-tiny%E3%81%ABpci-express%E3%82%92%E7%84%A1%E7%90%86%E3%82%84%E3%82%8A%E5%A2%97%E8%A8%AD%E3%81%99%E3%82%8B.html</guid>
+                
+                <category>PC</category>
+                
+                
+                <category>blog</category>
+                
+            </item>
         
-        <category>PC</category>
-        
-        
-        <category>blog</category>
-        
-      </item>
-    
-      <item>
-        <title>M5Stack ATOM Lite 用の開発環境構築</title>
-        <description>&lt;p&gt;M5StickC 1台だけだと用途ごとにプログラムを転送し直す必要があり手間がかかるので
+            <item>
+                <title>M5Stack ATOM Lite 用の開発環境構築</title>
+                <description>&lt;p&gt;M5StickC 1台だけだと用途ごとにプログラムを転送し直す必要があり手間がかかるので
 ATOM Lite を購入してみた。&lt;/p&gt;
 
 &lt;p&gt;先日 PC を変えたこともあり
@@ -597,24 +710,24 @@ PC は Windows 10。&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&quot;https://hangstuck.com/arduino-buildpath-fix/&quot;&gt;Arduino IDEのビルドを速くする｜オブジェクトファイルの出力先を固定する | ハングスタック&lt;/a&gt;&lt;/p&gt;
 </description>
-        <pubDate>Sat, 14 Aug 2021 16:33:22 +0900</pubDate>
-        <link>https://saasan.github.io/blog/2021/08/14/m5stack-atom-lite%E7%94%A8%E3%81%AE%E9%96%8B%E7%99%BA%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89.html</link>
-        <guid isPermaLink="true">https://saasan.github.io/blog/2021/08/14/m5stack-atom-lite%E7%94%A8%E3%81%AE%E9%96%8B%E7%99%BA%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89.html</guid>
+                <pubDate>Sat, 14 Aug 2021 16:33:22 +0900</pubDate>
+                <link>https://saasan.github.io/blog/2021/08/14/m5stack-atom-lite%E7%94%A8%E3%81%AE%E9%96%8B%E7%99%BA%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89.html</link>
+                <guid isPermaLink="true">https://saasan.github.io/blog/2021/08/14/m5stack-atom-lite%E7%94%A8%E3%81%AE%E9%96%8B%E7%99%BA%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89.html</guid>
+                
+                <category>M5Stack</category>
+                
+                <category>ATOM-Lite</category>
+                
+                <category>ESP32</category>
+                
+                
+                <category>blog</category>
+                
+            </item>
         
-        <category>M5Stack</category>
-        
-        <category>ATOM-Lite</category>
-        
-        <category>ESP32</category>
-        
-        
-        <category>blog</category>
-        
-      </item>
-    
-      <item>
-        <title>Slack へ通知するシェルスクリプト</title>
-        <description>&lt;p&gt;&lt;a href=&quot;https://qiita.com/piroor/items/77233173707a0baa6360&quot;&gt;プログラマーの君！ 騙されるな！ シェルスクリプトはそう書いちゃ駄目だ！！ という話 - Qiita&lt;/a&gt;
+            <item>
+                <title>Slack へ通知するシェルスクリプト</title>
+                <description>&lt;p&gt;&lt;a href=&quot;https://qiita.com/piroor/items/77233173707a0baa6360&quot;&gt;プログラマーの君！ 騙されるな！ シェルスクリプトはそう書いちゃ駄目だ！！ という話 - Qiita&lt;/a&gt;
 を読み、シェルスクリプトで関数へ値を渡す際は
 引数よりも標準入出力を使ったほうがシンプルに書けるようだったので、
 以前書いた Slack へ通知メッセージを送るスクリプトを書き直してみた。&lt;/p&gt;
@@ -642,26 +755,26 @@ echo &amp;quot;&amp;lt;!here&amp;gt;\nhoge\nfuga&amp;quot; | post_slack
 &lt;p&gt;標準入出力をパイプで繋ぐかたちとすることで、
 以前は10行あった post_slack が3行に短縮された。&lt;/p&gt;
 </description>
-        <pubDate>Thu, 20 May 2021 23:59:43 +0900</pubDate>
-        <link>https://saasan.github.io/blog/2021/05/20/slack%E3%81%B8%E9%80%9A%E7%9F%A5%E3%81%99%E3%82%8B%E3%82%B7%E3%82%A7%E3%83%AB%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88.html</link>
-        <guid isPermaLink="true">https://saasan.github.io/blog/2021/05/20/slack%E3%81%B8%E9%80%9A%E7%9F%A5%E3%81%99%E3%82%8B%E3%82%B7%E3%82%A7%E3%83%AB%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88.html</guid>
+                <pubDate>Thu, 20 May 2021 23:59:43 +0900</pubDate>
+                <link>https://saasan.github.io/blog/2021/05/20/slack%E3%81%B8%E9%80%9A%E7%9F%A5%E3%81%99%E3%82%8B%E3%82%B7%E3%82%A7%E3%83%AB%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88.html</link>
+                <guid isPermaLink="true">https://saasan.github.io/blog/2021/05/20/slack%E3%81%B8%E9%80%9A%E7%9F%A5%E3%81%99%E3%82%8B%E3%82%B7%E3%82%A7%E3%83%AB%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88.html</guid>
+                
+                <category>Linux</category>
+                
+                <category>Bash</category>
+                
+                <category>シェルスクリプト</category>
+                
+                <category>Slack</category>
+                
+                
+                <category>blog</category>
+                
+            </item>
         
-        <category>Linux</category>
-        
-        <category>Bash</category>
-        
-        <category>シェルスクリプト</category>
-        
-        <category>Slack</category>
-        
-        
-        <category>blog</category>
-        
-      </item>
-    
-      <item>
-        <title>M5StickC でキーボード操作を自動化する</title>
-        <description>&lt;p&gt;某ゲームでアイテムを交換する作業が面倒になってきたので
+            <item>
+                <title>M5StickC でキーボード操作を自動化する</title>
+                <description>&lt;p&gt;某ゲームでアイテムを交換する作業が面倒になってきたので
 キーボード操作を自動化したいと思った。&lt;/p&gt;
 
 &lt;p&gt;まず思いついたのは、手元にあった
@@ -835,26 +948,26 @@ void loop() {
   &lt;li&gt;&lt;a href=&quot;https://github.com/T-vK/ESP32-BLE-Keyboard&quot;&gt;T-vK/ESP32-BLE-Keyboard: Bluetooth LE Keyboard library for the ESP32 (Arduino IDE compatible)&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
-        <pubDate>Sun, 04 Apr 2021 05:50:17 +0900</pubDate>
-        <link>https://saasan.github.io/blog/2021/04/04/m5stickc%E3%81%A7%E3%82%AD%E3%83%BC%E3%83%9C%E3%83%BC%E3%83%89%E6%93%8D%E4%BD%9C%E3%82%92%E8%87%AA%E5%8B%95%E5%8C%96%E3%81%99%E3%82%8B.html</link>
-        <guid isPermaLink="true">https://saasan.github.io/blog/2021/04/04/m5stickc%E3%81%A7%E3%82%AD%E3%83%BC%E3%83%9C%E3%83%BC%E3%83%89%E6%93%8D%E4%BD%9C%E3%82%92%E8%87%AA%E5%8B%95%E5%8C%96%E3%81%99%E3%82%8B.html</guid>
+                <pubDate>Sun, 04 Apr 2021 05:50:17 +0900</pubDate>
+                <link>https://saasan.github.io/blog/2021/04/04/m5stickc%E3%81%A7%E3%82%AD%E3%83%BC%E3%83%9C%E3%83%BC%E3%83%89%E6%93%8D%E4%BD%9C%E3%82%92%E8%87%AA%E5%8B%95%E5%8C%96%E3%81%99%E3%82%8B.html</link>
+                <guid isPermaLink="true">https://saasan.github.io/blog/2021/04/04/m5stickc%E3%81%A7%E3%82%AD%E3%83%BC%E3%83%9C%E3%83%BC%E3%83%89%E6%93%8D%E4%BD%9C%E3%82%92%E8%87%AA%E5%8B%95%E5%8C%96%E3%81%99%E3%82%8B.html</guid>
+                
+                <category>M5Stack</category>
+                
+                <category>M5StickC</category>
+                
+                <category>ESP32</category>
+                
+                <category>ESP32-BLE-Keyboard</category>
+                
+                
+                <category>blog</category>
+                
+            </item>
         
-        <category>M5Stack</category>
-        
-        <category>M5StickC</category>
-        
-        <category>ESP32</category>
-        
-        <category>ESP32-BLE-Keyboard</category>
-        
-        
-        <category>blog</category>
-        
-      </item>
-    
-      <item>
-        <title>M5StickC で毎朝照明を自動で点灯する</title>
-        <description>&lt;p&gt;最近寒いのでカーテンを遮光・遮熱のものに変えた。
+            <item>
+                <title>M5StickC で毎朝照明を自動で点灯する</title>
+                <description>&lt;p&gt;最近寒いのでカーテンを遮光・遮熱のものに変えた。
 遮熱のほうはあまり実感がないが遮光のほうはばっちりで、
 昼間でもカーテンを閉めれば部屋がかなり暗くなる。&lt;/p&gt;
 
@@ -1064,26 +1177,26 @@ NEC製品なので当然NECフォーマットだった。&lt;/p&gt;
 
 &lt;p&gt;送信するリモコンの信号を変えればいろいろと応用できそう。&lt;/p&gt;
 </description>
-        <pubDate>Sun, 03 Jan 2021 10:05:33 +0900</pubDate>
-        <link>https://saasan.github.io/blog/2021/01/03/m5stickc%E3%81%A7%E6%AF%8E%E6%9C%9D%E7%85%A7%E6%98%8E%E3%82%92%E8%87%AA%E5%8B%95%E3%81%A7%E7%82%B9%E7%81%AF%E3%81%99%E3%82%8B.html</link>
-        <guid isPermaLink="true">https://saasan.github.io/blog/2021/01/03/m5stickc%E3%81%A7%E6%AF%8E%E6%9C%9D%E7%85%A7%E6%98%8E%E3%82%92%E8%87%AA%E5%8B%95%E3%81%A7%E7%82%B9%E7%81%AF%E3%81%99%E3%82%8B.html</guid>
+                <pubDate>Sun, 03 Jan 2021 10:05:33 +0900</pubDate>
+                <link>https://saasan.github.io/blog/2021/01/03/m5stickc%E3%81%A7%E6%AF%8E%E6%9C%9D%E7%85%A7%E6%98%8E%E3%82%92%E8%87%AA%E5%8B%95%E3%81%A7%E7%82%B9%E7%81%AF%E3%81%99%E3%82%8B.html</link>
+                <guid isPermaLink="true">https://saasan.github.io/blog/2021/01/03/m5stickc%E3%81%A7%E6%AF%8E%E6%9C%9D%E7%85%A7%E6%98%8E%E3%82%92%E8%87%AA%E5%8B%95%E3%81%A7%E7%82%B9%E7%81%AF%E3%81%99%E3%82%8B.html</guid>
+                
+                <category>M5Stack</category>
+                
+                <category>M5StickC</category>
+                
+                <category>ESP32</category>
+                
+                <category>IRremoteESP8266</category>
+                
+                
+                <category>blog</category>
+                
+            </item>
         
-        <category>M5Stack</category>
-        
-        <category>M5StickC</category>
-        
-        <category>ESP32</category>
-        
-        <category>IRremoteESP8266</category>
-        
-        
-        <category>blog</category>
-        
-      </item>
-    
-      <item>
-        <title>消してしまった WSL 環境のバックアップからファイルを取り出す</title>
-        <description>&lt;p&gt;PC を新しいものへ移行する際に WSL 環境の中身を移行するのを忘れていた。
+            <item>
+                <title>消してしまった WSL 環境のバックアップからファイルを取り出す</title>
+                <description>&lt;p&gt;PC を新しいものへ移行する際に WSL 環境の中身を移行するのを忘れていた。
 というか、別の環境に最新のファイルがあると思い込んでいたので敢えて移行しなかったのだ。
 実際は自分の旧 PC の WSL 環境にあったものが最新のファイルで、
 それに気付いたときにはディスクの初期化が済んでいた。&lt;/p&gt;
@@ -1150,49 +1263,18 @@ ext4.vhdx を置き換えることにする。&lt;/p&gt;
 &lt;p&gt;あとは alpine コマンドで起動し旧 PC の
 Ubuntu 環境へ入ってファイルを取り出すことができた。&lt;/p&gt;
 </description>
-        <pubDate>Fri, 25 Dec 2020 22:44:17 +0900</pubDate>
-        <link>https://saasan.github.io/blog/2020/12/25/%E6%B6%88%E3%81%97%E3%81%A6%E3%81%97%E3%81%BE%E3%81%A3%E3%81%9Fwsl%E7%92%B0%E5%A2%83%E3%81%AE%E3%83%90%E3%83%83%E3%82%AF%E3%82%A2%E3%83%83%E3%83%97%E3%81%8B%E3%82%89%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%92%E5%8F%96%E3%82%8A%E5%87%BA%E3%81%99.html</link>
-        <guid isPermaLink="true">https://saasan.github.io/blog/2020/12/25/%E6%B6%88%E3%81%97%E3%81%A6%E3%81%97%E3%81%BE%E3%81%A3%E3%81%9Fwsl%E7%92%B0%E5%A2%83%E3%81%AE%E3%83%90%E3%83%83%E3%82%AF%E3%82%A2%E3%83%83%E3%83%97%E3%81%8B%E3%82%89%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%92%E5%8F%96%E3%82%8A%E5%87%BA%E3%81%99.html</guid>
+                <pubDate>Fri, 25 Dec 2020 22:44:17 +0900</pubDate>
+                <link>https://saasan.github.io/blog/2020/12/25/%E6%B6%88%E3%81%97%E3%81%A6%E3%81%97%E3%81%BE%E3%81%A3%E3%81%9Fwsl%E7%92%B0%E5%A2%83%E3%81%AE%E3%83%90%E3%83%83%E3%82%AF%E3%82%A2%E3%83%83%E3%83%97%E3%81%8B%E3%82%89%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%92%E5%8F%96%E3%82%8A%E5%87%BA%E3%81%99.html</link>
+                <guid isPermaLink="true">https://saasan.github.io/blog/2020/12/25/%E6%B6%88%E3%81%97%E3%81%A6%E3%81%97%E3%81%BE%E3%81%A3%E3%81%9Fwsl%E7%92%B0%E5%A2%83%E3%81%AE%E3%83%90%E3%83%83%E3%82%AF%E3%82%A2%E3%83%83%E3%83%97%E3%81%8B%E3%82%89%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%92%E5%8F%96%E3%82%8A%E5%87%BA%E3%81%99.html</guid>
+                
+                <category>Windows</category>
+                
+                <category>WSL</category>
+                
+                
+                <category>blog</category>
+                
+            </item>
         
-        <category>Windows</category>
-        
-        <category>WSL</category>
-        
-        
-        <category>blog</category>
-        
-      </item>
-    
-      <item>
-        <title>最近知った Bash の便利機能</title>
-        <description>&lt;h2 id=&quot;cd--&quot;&gt;cd -&lt;/h2&gt;
-
-&lt;p&gt;一つ前のディレクトリへ戻る。&lt;/p&gt;
-
-&lt;p&gt;pushd / popd で2つのディレクトリを往復することがあったけどこっちのほうが速い。&lt;/p&gt;
-
-&lt;h1 id=&quot;ctrl--u-ctrl--y&quot;&gt;Ctrl + u, Ctrl + y&lt;/h1&gt;
-
-&lt;p&gt;&lt;kbd&gt;Ctrl + u&lt;/kbd&gt; でカーソル位置から行頭まで切り取る。
-&lt;kbd&gt;Ctrl + y&lt;/kbd&gt; で切り取ったものを貼り付ける。&lt;/p&gt;
-
-&lt;p&gt;&lt;kbd&gt;git commit -m &quot;hoge&quot;&lt;/kbd&gt; とか書いたところで &lt;kbd&gt;git add&lt;/kbd&gt; してないことに気付いたりとか、
-コマンド入力中に別のコマンドを先に実行したくなったときに便利。&lt;/p&gt;
-
-&lt;p&gt;ちなみに &lt;kbd&gt;Ctrl + k&lt;/kbd&gt; ならカーソル位置から行末まで切り取れる。&lt;/p&gt;
-</description>
-        <pubDate>Wed, 16 Dec 2020 23:25:18 +0900</pubDate>
-        <link>https://saasan.github.io/blog/2020/12/16/%E6%9C%80%E8%BF%91%E7%9F%A5%E3%81%A3%E3%81%9Fbash%E3%81%AE%E4%BE%BF%E5%88%A9%E6%A9%9F%E8%83%BD.html</link>
-        <guid isPermaLink="true">https://saasan.github.io/blog/2020/12/16/%E6%9C%80%E8%BF%91%E7%9F%A5%E3%81%A3%E3%81%9Fbash%E3%81%AE%E4%BE%BF%E5%88%A9%E6%A9%9F%E8%83%BD.html</guid>
-        
-        <category>Linux</category>
-        
-        <category>Bash</category>
-        
-        
-        <category>blog</category>
-        
-      </item>
-    
-  </channel>
+    </channel>
 </rss>

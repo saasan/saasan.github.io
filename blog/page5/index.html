@@ -19,28 +19,28 @@
     <meta property="og:image" content="https://saasan.github.io/img/s2works_favicon.png">
     <script type="application/ld+json">
       {
-        "@context": "http://schema.org/",
-        "@type": "Person",
-        "name": "saasan",
-        "sameAs": [
-          "https://twitter.com/saasan",
-          "https://github.com/saasan"
-        ]
+          "@context": "http://schema.org/",
+          "@type": "Person",
+          "name": "saasan",
+          "sameAs": [
+              "https://twitter.com/saasan",
+              "https://github.com/saasan"
+          ]
       }
     </script>
     <script type="application/ld+json">
       {
-        "@context": "http://schema.org",
-        "@type": "Article",
-        "name": "ブログ",
+          "@context": "http://schema.org",
+          "@type": "Article",
+          "name": "ブログ",
       
-        "headline": "雑記、覚え書き、更新情報など",
-        "image": "https://saasan.github.io/img/s2works_favicon.png",
-        "url": "https://saasan.github.io/blog/page5/",
-        "publisher" : {
-          "@type": "Person",
-          "name": "saasan"
-        }
+          "headline": "雑記、覚え書き、更新情報など",
+          "image": "https://saasan.github.io/img/s2works_favicon.png",
+          "url": "https://saasan.github.io/blog/page5/",
+          "publisher" : {
+              "@type": "Person",
+              "name": "saasan"
+          }
       }
     </script>
   </head>
@@ -67,6 +67,48 @@
             <h1 class="post-title">ブログ</h1>
           </header>
           <article class="post-content">
+            <section>
+              <h2><a class="post-link" href="/blog/2016/03/04/jekyll-%E3%83%93%E3%83%AB%E3%83%89%E3%81%99%E3%82%8B%E3%81%A8%E3%81%8D%E3%81%AB%E3%81%A0%E3%81%91sass-scss-%E3%82%92%E5%9C%A7%E7%B8%AE%E3%81%99%E3%82%8B.html">[Jekyll] ビルドするときにだけSass(SCSS)を圧縮する</a></h2>
+              <div class="post-meta">2016-03-04</div>
+              <section>
+                <p>_config.yml に Sass(SCSS) を圧縮する設定を書くと、常時圧縮がかかってしまう。
+                  これでは、ブラウザで表示を確認しながら CSS をいじるとき困る。
+                  ということで、製作中は圧縮せずにビルド時だけ圧縮する方法。</p>
+                <p><small>※ 2016/3/4現在、 Jekyll では Sourcemap が出力できないっぽい。</small></p>
+                <h3 id="1-ビルド用設定ファイルを作る">1. ビルド用設定ファイルを作る</h3>
+                <p>_config.yml と同じフォルダに
+                  _config-production.yml という名前のファイルを作成し、以下の通り書く</p>
+                <div class="language-plaintext highlighter-rouge">
+                  <div class="highlight">
+                    <pre class="highlight"><code>sass:
+  style: compressed
+</code></pre>
+                  </div>
+                </div>
+                <p>参考: 
+                  <a href="https://jekyllrb.com/docs/assets/#sassscss" target="_blank">Assets - Jekyll • Simple, blog-aware, static sites</a></p>
+                <h3 id="2-製作時のコマンド">2. 製作時のコマンド</h3>
+                <p>製作中はいつも通り。</p>
+                <div class="language-plaintext highlighter-rouge">
+                  <div class="highlight">
+                    <pre class="highlight"><code>jekyll serve
+</code></pre>
+                  </div>
+                </div>
+                <h3 id="3-ビルド時のコマンド">3. ビルド時のコマンド</h3>
+                <p>ビルドするときは –config オプションで _config.yml と _config-production.yml の2つを読み込む。
+                  両方のファイルに同じ設定項目がある場合は、後ろに書いた方の設定で上書きされる。
+                  カンマとファイル名の間にスペースを入れないこと。</p>
+                <div class="language-plaintext highlighter-rouge">
+                  <div class="highlight">
+                    <pre class="highlight"><code>jekyll build --config _config.yml,_config-production.yml
+</code></pre>
+                  </div>
+                </div>
+                <p>参考: 
+                  <a href="https://jekyllrb.com/docs/configuration/#build-command-options" target="_blank">Configuration - Jekyll • Simple, blog-aware, static sites</a></p>
+              </section>
+            </section>
             <section>
               <h2><a class="post-link" href="/blog/2016/02/19/Google-AdSense%E3%81%AE%E7%A2%BA%E5%AE%9A%E7%94%B3%E5%91%8A.html">Google AdSenseの確定申告</a></h2>
               <div class="post-meta">2016-02-19</div>
