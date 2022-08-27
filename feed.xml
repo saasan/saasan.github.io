@@ -5,8 +5,8 @@
         <description></description>
         <link>https://saasan.github.io/</link>
         <atom:link href="https://saasan.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-        <pubDate>Fri, 06 May 2022 01:39:30 +0900</pubDate>
-        <lastBuildDate>Fri, 06 May 2022 01:39:30 +0900</lastBuildDate>
+        <pubDate>Sat, 27 Aug 2022 21:55:51 +0900</pubDate>
+        <lastBuildDate>Sat, 27 Aug 2022 21:55:51 +0900</lastBuildDate>
         <generator>Jekyll v4.2.0</generator>
         
             <item>
@@ -1224,6 +1224,13 @@ Windows ではマウントできなかった。&lt;/p&gt;
 
 &lt;p&gt;しかたないので新 PC の WSL へ新しいディストリビューションを入れて
 ext4.vhdx を置き換えることにする。&lt;/p&gt;
+
+&lt;h2 id=&quot;20220827-追記&quot;&gt;2022/08/27 追記&lt;/h2&gt;
+
+&lt;p&gt;2021/12/26 にリリースされた 21.07 から
+&lt;a href=&quot;https://sevenzip.osdn.jp/&quot;&gt;7-Zip&lt;/a&gt; が VHDX ファイルへ対応しています。
+ファイルシステムが ext4 でも
+7-Zip で開いてファイルを取り出せることを確認済みです。&lt;/p&gt;
 
 &lt;h2 id=&quot;alpine-wsl-をインストールする&quot;&gt;Alpine WSL をインストールする&lt;/h2&gt;
 
