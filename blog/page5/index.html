@@ -68,6 +68,25 @@
           </header>
           <article class="post-content">
             <section>
+              <h2><a class="post-link" href="/blog/2016/08/02/%E3%83%90%E3%83%83%E3%83%81%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%A7%E3%83%9F%E3%83%AA%E7%A7%92%E5%8D%98%E4%BD%8D%E3%81%AEsleep%E3%82%92%E8%A1%8C%E3%81%86.html">バッチファイルでミリ秒単位のSleepを行う</a></h2>
+              <div class="post-meta">2016-08-02</div>
+              <section>
+                <p>最近の Windows だと timeout コマンドを使えば秒単位で Sleep (Wait) できるがミリ秒単位ではできない。
+                  そこで Windows PowerShell を使って以下のようにミリ秒単位で Sleep する。</p>
+                <noscript>
+                  <pre>@ECHO OFF
+
+ECHO &quot;500ミリ秒寝ます&quot;
+powershell -Command &quot;sleep -m 500&quot;
+ECHO &quot;起きました&quot;
+
+PAUSE
+</pre>
+                </noscript>
+                <script src="https://gist.github.com/saasan/a7e7368a7450ed4dd0a9e5e73bd77060.js"></script>
+              </section>
+            </section>
+            <section>
               <h2><a class="post-link" href="/blog/2016/03/04/jekyll-%E3%83%93%E3%83%AB%E3%83%89%E3%81%99%E3%82%8B%E3%81%A8%E3%81%8D%E3%81%AB%E3%81%A0%E3%81%91sass-scss-%E3%82%92%E5%9C%A7%E7%B8%AE%E3%81%99%E3%82%8B.html">[Jekyll] ビルドするときにだけSass(SCSS)を圧縮する</a></h2>
               <div class="post-meta">2016-03-04</div>
               <section>
@@ -221,31 +240,6 @@ end
                   あらかじめローカルの環境でビルドして生成されたファイルをアップロードしてください。</p>
               </section>
             </section>
-            <section>
-              <h2><a class="post-link" href="/blog/2015/09/07/google-opinion-rewards.html">デレステ、PSO2プレイヤーにおすすめ。無料でGoogle Playのクレジットがもらえる「Google アンケート モニター」</a></h2>
-              <div class="post-meta">2015-09-07</div>
-              <section>
-                <p><a href="https://play.google.com/store/apps/details?id=com.google.android.apps.paidtasks&amp;hl=ja" target="_blank">Google アンケート モニター - Google Play の Android アプリ</a></p>
-                <blockquote>
-                  <p>「Google アンケート モニター」は Google 消費者アンケート チームが作成したアプリです。
-                    簡単なアンケートに答えるだけで Google Play で使えるクレジットがもらえます。</p>
-                </blockquote>
-                <p>デレステ、PSO2esにちょっとだけ課金したい人におすすめのアプリです。
-                  無料でGoogle Playのクレジットがもらえるので、少額の課金ならこれだけで済みます。</p>
-                <p>Android版のPSO2esでACをチャージすればPC版&amp;Vita版PSO2にも当然反映されるので、esは遊ばないというPSO2プレイヤーでも使えます。
-                  PSO2は少額の課金でもマグの追加やスキルツリーの追加等、かなり役に立つものが多いので特におすすめです。</p>
-                <p>以下、自分が数ヶ月使用してみた感想</p>
-                <ul>
-                  <li>アンケートの頻度は1～2週間に1度くらい。</li>
-                  <li>アンケートは1セット5問程度。1セット答え終わるとPlayクレジットが数十円分もらえる。</li>
-                  <li>Google製なので、よくあるポイント系サイトと比べて安心。</li>
-                  <li>アンケートの内容は「最近利用した動画サイトを選んでください」「次もAndroidのスマホを購入したいか」といった、Googleが運営しているサービスに関連したものが多い印象。</li>
-                  <li>まれに「今年は何年ですか」のような、アンケートの必要性が分からないものもある。
-                    回答は選択式の為「とりあえず全部一番上」のように投げやりに選ぶこともできてしまうし、
-                    利用者がきちんと内容を理解して回答しているか確認しているのかもしれない。</li>
-                </ul>
-              </section>
-            </section>
             <div class="pagination">
               <a href="/blog/page4/">&laquo; 前のページ</a>
               <a href="/blog/page4/">1</a>
@@ -253,7 +247,8 @@ end
               <a href="/blog/page3/">3</a>
               <a href="/blog/page4/">4</a>
               <em>5</em>
-              <span>次のページ &raquo;</span>
+              <a href="/blog/page6/">6</a>
+              <a href="/blog/page6/">次のページ &raquo;</a>
             </div>
           </article>
         </div>

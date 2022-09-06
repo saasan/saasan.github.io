@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <title>Mozilla Firefox で Web サイトのダークモードを無効化する</title>
+    <link href='//fonts.googleapis.com/css?family=Orbitron:500' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="canonical" href="https://saasan.github.io/blog/2022/09/07/mozilla-firefox%E3%81%A7web%E3%82%B5%E3%82%A4%E3%83%88%E3%81%AE%E3%83%80%E3%83%BC%E3%82%AF%E3%83%A2%E3%83%BC%E3%83%89%E3%82%92%E7%84%A1%E5%8A%B9%E5%8C%96%E3%81%99%E3%82%8B.html">
+    <link rel="alternate" type="application/rss+xml" title="saasan.github.io" href="https://saasan.github.io/feed.xml" />
+    <link rel="apple-touch-icon" href="https://saasan.github.io/img/s2works_favicon.png">
+    <script data-ad-client="ca-pub-0141905477316976" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@saasan">
+    <meta property="og:url" content="https://saasan.github.io/blog/2022/09/07/mozilla-firefox%E3%81%A7web%E3%82%B5%E3%82%A4%E3%83%88%E3%81%AE%E3%83%80%E3%83%BC%E3%82%AF%E3%83%A2%E3%83%BC%E3%83%89%E3%82%92%E7%84%A1%E5%8A%B9%E5%8C%96%E3%81%99%E3%82%8B.html">
+    <meta property="og:title" content="Mozilla Firefox で Web サイトのダークモードを無効化する">
+    <meta property="og:description" content="Firefox 本体はダークテーマを使いたいけど Web サイトまでダークモードになると文字が読みづらい。">
+    <meta property="og:image" content="https://saasan.github.io/img/s2works_favicon.png">
+    <script type="application/ld+json">
+      {
+          "@context": "http://schema.org/",
+          "@type": "Person",
+          "name": "saasan",
+          "sameAs": [
+              "https://twitter.com/saasan",
+              "https://github.com/saasan"
+          ]
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+          "@context": "http://schema.org",
+          "@type": "Article",
+          "name": "Mozilla Firefox で Web サイトのダークモードを無効化する",
+          "datePublished": "2022-09-07T00:16:02+09:00",
+          "headline": "Firefox 本体はダークテーマを使いたいけど Web サイトまでダークモードになると文字が読みづらい。",
+          "image": "https://saasan.github.io/img/s2works_favicon.png",
+          "url": "https://saasan.github.io/blog/2022/09/07/mozilla-firefox%E3%81%A7web%E3%82%B5%E3%82%A4%E3%83%88%E3%81%AE%E3%83%80%E3%83%BC%E3%82%AF%E3%83%A2%E3%83%BC%E3%83%89%E3%82%92%E7%84%A1%E5%8A%B9%E5%8C%96%E3%81%99%E3%82%8B.html",
+          "publisher" : {
+              "@type": "Person",
+              "name": "saasan"
+          }
+      }
+    </script>
+  </head>
+  <body itemscope itemtype="http://schema.org/WebPage">
+    <header class="site-header">
+      <div class="wrapper">
+        <a class="site-title" href="/">saasan.github.io</a>
+        <nav class="site-nav">
+          <div class="site-nav-contents">
+            <ul>
+              <li><a href="/blog/">ブログ</a></li>
+              <li><a href="/imas/">アイマス</a></li>
+              <li><a href="/software/">ソフトウェア</a></li>
+              <li><a href="/script/">スクリプト</a></li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+    </header>
+    <div class="page-content">
+      <div class="wrapper">
+        <div class="post" itemprop="mainContentOfPage" itemscope itemtype="http://schema.org/WebPageElement">
+          <header class="post-header">
+            <h1 class="post-title">Mozilla Firefox で Web サイトのダークモードを無効化する</h1>
+            <div class="post-meta">
+              <time datetime="2022-09-07T00:16:02+09:00" itemprop="dateModified">2022/09/07</time>
+            </div>
+          </header>
+          <article class="post-content">
+            <p>Firefox 本体はダークテーマを使いたいけど
+              Web サイトまでダークモードになると文字が読みづらい。</p>
+            <p>そんな私みたいにわがままな人向けなのかは分からないが
+              Firefox には Web サイトだけライトモードにする方法があった。</p>
+            <p><code class="language-plaintext highlighter-rouge">about:config</code> で
+              <code class="language-plaintext highlighter-rouge">layout.css.prefers-color-scheme.content-override</code>
+              を変更すればいいらしい。</p>
+            <ul>
+              <li>0: ダーク固定</li>
+              <li>1: ライト固定</li>
+              <li>2: OS の設定に従う</li>
+              <li>3: Firefox のテーマに従う</li>
+            </ul>
+            <p>デフォルト値は 3。</p>
+            <p>当然だがこれを 0 にしても対応していないサイトはダークモードにならない。</p>
+          </article>
+        </div>
+      </div>
+    </div>
+    <footer class="site-footer">
+      <div class="wrapper">
+        <nav>
+          <ul>
+            <li><a href="/blog/">ブログ</a></li>
+            <li><a href="/imas/">アイマス</a></li>
+            <li><a href="/software/">ソフトウェア</a></li>
+            <li><a href="/script/">スクリプト</a></li>
+          </ul>
+          <a href="https://twitter.com/saasan" target="_blank" class="twitter-username">
+            saasan
+          </a>
+          <a href="/feed.xml" target="_blank" class="rss">RSS</a>
+        </nav>
+      </div>
+    </footer>
+  </body>
+</html>
