@@ -33,7 +33,7 @@
           "@context": "http://schema.org",
           "@type": "Article",
           "name": "ブログ",
-      
+
           "headline": "雑記、覚え書き、更新情報など",
           "image": "https://saasan.github.io/img/s2works_favicon.png",
           "url": "https://saasan.github.io/blog/",
@@ -67,6 +67,34 @@
             <h1 class="post-title">ブログ</h1>
           </header>
           <article class="post-content">
+            <section>
+              <h2><a class="post-link" href="/blog/2022/10/03/zoneid-zone.identifier%E3%82%92%E4%B8%80%E6%8B%AC%E3%81%A7%E5%89%8A%E9%99%A4%E3%81%99%E3%82%8B.html">ZoneID (Zone.Identifier) を一括で削除する</a></h2>
+              <div class="post-meta">2022-10-03</div>
+              <section>
+                <p>ネットからダウンロードしたファイルを WSL の Linux 環境にコピーすると
+                  <code class="language-plaintext highlighter-rouge">〇〇:Zone.Identifier</code> というファイルが一緒にコピーされて煩わしい。</p>
+                <p>ファイルが1つだけならコピー前にファイルのプロパティから解除するかコピー後に削除すればいいが、
+                  サブディレクトリ内なども含め複数まとめて処理したい場合は PowerShell を使う。</p>
+                <p>PowerShell で削除したいファイルがあるディレクトリに移動後に
+                  以下のコマンドで Zone.Identifier があることを確認。</p>
+                <div class="language-plaintext highlighter-rouge">
+                  <div class="highlight">
+                    <pre class="highlight"><code>Get-ChildItem -Recurse -File | Get-Item -Stream Zone.Identifier -ErrorAction SilentlyContinue
+</code></pre>
+                  </div>
+                </div>
+                <p><a href="https://learn.microsoft.com/ja-jp/powershell/module/microsoft.powershell.utility/unblock-file">Unblock-File</a>
+                  で削除できる。</p>
+                <div class="language-plaintext highlighter-rouge">
+                  <div class="highlight">
+                    <pre class="highlight"><code>Get-ChildItem -Recurse -File | Get-Item -Stream Zone.Identifier -ErrorAction SilentlyContinue | Unblock-File
+</code></pre>
+                  </div>
+                </div>
+                <p><a href="https://learn.microsoft.com/ja-jp/powershell/module/microsoft.powershell.management/remove-item#7">Remove-Item -Stream Zone.Identifier</a>
+                  でもいい。</p>
+              </section>
+            </section>
             <section>
               <h2><a class="post-link" href="/blog/2022/09/07/mozilla-firefox%E3%81%A7web%E3%82%B5%E3%82%A4%E3%83%88%E3%81%AE%E3%83%80%E3%83%BC%E3%82%AF%E3%83%A2%E3%83%BC%E3%83%89%E3%82%92%E7%84%A1%E5%8A%B9%E5%8C%96%E3%81%99%E3%82%8B.html">Mozilla Firefox で Web サイトのダークモードを無効化する</a></h2>
               <div class="post-meta">2022-09-07</div>
@@ -332,104 +360,6 @@ showToast(&#39;トーストのメッセージ&#39;);
                 <p>ブックマークレットなので
                   ライブラリ等なしの素のJavaScript (いわゆるVanilla JS) で書いたけど
                   意外とシンプルに実装できた。</p>
-              </section>
-            </section>
-            <section>
-              <h2><a class="post-link" href="/blog/2021/12/19/%E3%82%8F%E3%81%9F%E3%82%86%E3%82%8A-%E3%82%AB%E3%83%95%E3%82%A7-%E3%83%AA%E3%83%BC%E3%83%99%E5%A5%B3%E5%AD%A6%E5%9C%92-%E3%81%AE%E9%96%93%E5%8F%96%E3%82%8A%E5%9B%B3%E3%82%92%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%BF%E3%81%9F.html">わたゆり「カフェ・リーベ女学園」の間取り図を作ってみた</a></h2>
-              <div class="post-meta">2021-12-19</div>
-              <section>
-                <p>最近「私の百合はお仕事です！」(わたゆり) にハマってます。
-                  <a href="https://www.ichijinsha.co.jp/yurihime/title/%e6%9c%aa%e5%b9%a1/%e7%a7%81%e3%81%ae%e7%99%be%e5%90%88%e3%81%af%e3%81%8a%e4%bb%95%e4%ba%8b%e3%81%a7%e3%81%99%ef%bc%81/">公式サイトの紹介</a>
-                  を読めば分かる通り、
-                  <ruby>姉妹<rp>(</rp><rt>シュヴェスター</rt><rp>)</rp></ruby>
-                  制度のある
-                  <ruby>お嬢様学校<rp>(</rp><rt>ミッションスクール</rt><rp>)</rp></ruby>
-                  「リーベ女学園」という設定で運営されている
-                  コンセプトカフェを舞台とした作品です。</p>
-                <p>ストーリーが良くて泣ける作品なのでぜひ読んでみてください。
-                  今なら Amazon Prime で1、2巻が読み放題になっています。</p>
-                <iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="//rcm-fe.amazon-adsystem.com/e/cm?lt1=_blank&amp;bc1=000000&amp;IS2=1&amp;bg1=FFFFFF&amp;fc1=000000&amp;lc1=0000FF&amp;t=saasan-22&amp;language=ja_JP&amp;o=9&amp;p=8&amp;l=as4&amp;m=amazon&amp;f=ifr&amp;ref=as_ss_li_til&amp;asins=B072KH2H5V&amp;linkId=6f19c25541d8022627fc2e8a66573385"></iframe>
-                <iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="//rcm-fe.amazon-adsystem.com/e/cm?lt1=_blank&amp;bc1=000000&amp;IS2=1&amp;bg1=FFFFFF&amp;fc1=000000&amp;lc1=0000FF&amp;t=saasan-22&amp;language=ja_JP&amp;o=9&amp;p=8&amp;l=as4&amp;m=amazon&amp;f=ifr&amp;ref=as_ss_li_til&amp;asins=B076F2DRBL&amp;linkId=de5dc53d2d5358c2fc09428e9729c389"></iframe>
-                <p>わたゆりは上記の通り「カフェ・リーベ女学園」が舞台となっており
-                  多くのシーンがその中で展開されるため、
-                  その間取りが分かればさらに理解が深まるかと思い間取り図を作成してみました。</p>
-                <h2 id="出典について">出典について</h2>
-                <p>以下の間取り図は
-                  <a href="https://www.amazon.co.jp/dp/B07878H4D9/?tag=saasan-22">Amazon Kindle の電子書籍「私の百合はお仕事です！」</a>
-                  1～9巻を参考に
-                  <a href="https://twitter.com/saasan">カガミ</a>
-                  が作成したものです。
-                  公式な情報ではありませんので、間取り図について未幡先生や一迅社へ問い合わせないでください。</p>
-                <p>ページ番号については、物理書籍と合わせるためページ内記載のものとしています。
-                  Kindle の Android 版アプリで表示されるロケーションは、これに1を足した数値となります。</p>
-                <h2 id="間取り図">間取り図</h2>
-                <p>以下が作成した間取り図です。
-                  <a href="https://myhome-cloud.net/">マイホームクラウド</a>
-                  で間取り図を作成したあと別のアプリで文字の追加など加工を行っています。</p>
-                <p>リーベの背景は手で描かれているため、シーンによって物の大きさが異なることがあります。
-                  間取り図の作成にあたっては複数のシーンを確認した上で、
-                  大きな破綻がないよう一部調整しています。</p>
-                <p>※2021/12/21追記: 背景は <a href="https://twitter.com/n28miman/status/1473186141684002821">途中から3Dに変更された</a> とのことです。</p>
-                <p><a href="/img/blog/2021-12-19/liebe-layout.png"><img src="/img/blog/2021-12-19/liebe-layout.png" alt="「カフェ・リーベ女学園」間取り図" /></a></p>
-                <h2 id="by-バックヤード">BY (バックヤード)</h2>
-                <p>サロンと並び頻繁に登場する場所のため
-                  大まかな配置について特に異論はないかと思います。</p>
-                <h3 id="by-内の小部屋">BY 内の小部屋</h3>
-                <p>BY 内にある小部屋 (※1) は作中で使用されておらず用途が分かりません。
-                  壁には扉と手洗器、消毒液と思われるものが付いています。
-                  扉に小窓が付いていることや (9巻120ページなど)、
-                  手洗器と一緒に水周りとしてまとめられていると考えると
-                  従業員用トイレでしょうか？</p>
-                <h3 id="タイムレコーダー">タイムレコーダー</h3>
-                <p>間取り図に入っていない要素としてタイムレコーダー (打刻機) があります。
-                  時計の下にあるキャビネットの上に置かれています (2巻99ページ)。
-                  また、右にある柱にタイムカード入れがあります (3巻32ページ)。
-                  作中では描かれていませんが、出退勤時にここで打刻していると思われます。</p>
-                <h2 id="サロン">サロン</h2>
-                <p>客席は5巻3ページに描かれている引きの絵を参考に、
-                  対面2席のテーブルが左右に6つずつ、計24席としました。</p>
-                <p>窓側に近い客席後ろの壁に鳩時計があります。 (1巻30ページ、2巻132ページ、9巻77ページなど)</p>
-                <h2 id="キッチン">キッチン</h2>
-                <p>キッチン内部やデシャップから繋がる部分は
-                  作中であまり描かれていないため間違っているかもしれません。</p>
-                <p>BY出入口右側にコンロとシンク (5巻77～78ページ)、左側に冷蔵庫があります (3巻34ページなど)。</p>
-                <p>デシャップ側から入って右側にもシンクがあります。 (1巻107ページ、5巻78ページ)</p>
-                <p>冷蔵庫と横にある作業台の中間、天井から吊られている棚にモニターが付いています。 (9巻120ページ)</p>
-                <h2 id="デシャップの右側にある扉">デシャップの右側にある扉</h2>
-                <p>デシャップの右側にある扉 (※2) は作中で使用されておらず用途が分かりません。
-                  以下の理由からお客様用トイレでしょうか？</p>
-                <ul>
-                  <li>飲食店のためお客様用トイレが必要</li>
-                  <li>客席から近い</li>
-                  <li>店の一番奥</li>
-                </ul>
-                <h2 id="レジ">レジ</h2>
-                <p>レジはBYへ入ってすぐ左側に置かれています。
-                  雰囲気を損ねないため普段見えない場所に置かれているのだと思われますが、
-                  客席か受付でお客様からお金を預かってBYへ持ち込み精算するかたちでしょうか？</p>
-                <p>受付で精算の場合はお金を預かってBYへ持ち込むと
-                  位置的にゲストからBY内が丸見えになってしまうため、
-                  客席での精算のほうが有力かも？</p>
-                <h2 id="ピアノ左のテーブル">ピアノ左のテーブル</h2>
-                <p>ピアノ左にあるブルーメ選挙の投票箱が置かれていたテーブルは
-                  選挙後も度々描かれており常設されているようです。
-                  (9巻102ページなど)</p>
-                <h2 id="受付">受付</h2>
-                <p>受付にはレトロ風電話機が置かれています。
-                  電話予約の対応は舞が行っていると7巻シフト36.2に書かれており、
-                  Web受付の状況も確認しながら対応していると考えると
-                  必然的にBYで受付を行う必要があります。
-                  よってレトロ風電話機は雰囲気を出すための飾りと思われます。</p>
-                <p><del>実際に使えるとしても舞さん以外かけ方が分からなそう。「21世紀少女たちめ…」</del></p>
-                <h2 id="出入口">出入口</h2>
-                <p>出入口の扉は内側に開きます。 (5巻71ページ)</p>
-                <h2 id="作中で言及されているが場所不明のもの">作中で言及されているが場所不明のもの</h2>
-                <h3 id="貴重品ロッカー">貴重品ロッカー</h3>
-                <p>3巻で果乃子のスマホが入れられた貴重品ロッカー。</p>
-                <h3 id="物置">物置</h3>
-                <p>ブルーメ選挙の投票箱が置かれている物置。
-                  5巻88ページで舞が美月へ「ブルーメ選挙の投票箱を出すから見に来て」と言っています。
-                  BYで「見に来て」と言っていることからBY外にあると思われます。</p>
               </section>
             </section>
             <div class="pagination">

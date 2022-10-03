@@ -108,11 +108,11 @@
             <p>M5StickC で設定時刻に赤外線信号を送信するスケッチを作成した。</p>
             <p><a href="https://github.com/saasan/m5stickc-ir-timer">saasan/m5stickc-ir-timer: M5StickCで設定時刻に赤外線信号を送信する</a></p>
             <figure class="highlight">
-              <pre><code class="language-cpp" data-lang="cpp"><span class="cp">#include &lt;M5StickC.h&gt;
-#include &lt;WiFi.h&gt;
-#include &lt;IRremoteESP8266.h&gt;
-#include &lt;IRsend.h&gt;
-#include "wifi-ssid.h"
+              <pre><code class="language-cpp" data-lang="cpp"><span class="cp">#include</span> <span class="cpf">&lt;M5StickC.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;WiFi.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;IRremoteESP8266.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;IRsend.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">"wifi-ssid.h"</span><span class="cp">
 </span>
 <span class="c1">// -----------------------------------------------------------------------------</span>
 <span class="c1">// 定数</span>
@@ -178,7 +178,7 @@
 <span class="p">}</span>
 
 <span class="c1">// 無線LAN接続</span>
-<span class="kt">void</span> <span class="nf">connectWiFi</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">ssid</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">passphrase</span><span class="p">)</span> <span class="p">{</span>
+<span class="kt">void</span> <span class="n">connectWiFi</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">ssid</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">passphrase</span><span class="p">)</span> <span class="p">{</span>
     <span class="n">M5</span><span class="p">.</span><span class="n">Lcd</span><span class="p">.</span><span class="n">printf</span><span class="p">(</span><span class="s">"Connecting to %s"</span><span class="p">,</span> <span class="n">ssid</span><span class="p">);</span>
     <span class="n">WiFi</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="n">ssid</span><span class="p">,</span> <span class="n">passphrase</span><span class="p">);</span>
     <span class="k">while</span> <span class="p">(</span><span class="n">WiFi</span><span class="p">.</span><span class="n">status</span><span class="p">()</span> <span class="o">!=</span> <span class="n">WL_CONNECTED</span><span class="p">)</span> <span class="p">{</span>
@@ -191,17 +191,17 @@
 <span class="p">}</span>
 
 <span class="c1">// 画面の輝度を上げる</span>
-<span class="kt">void</span> <span class="nf">screenOn</span><span class="p">()</span> <span class="p">{</span>
+<span class="kt">void</span> <span class="n">screenOn</span><span class="p">()</span> <span class="p">{</span>
     <span class="n">M5</span><span class="p">.</span><span class="n">Axp</span><span class="p">.</span><span class="n">ScreenBreath</span><span class="p">(</span><span class="n">SCREEN_ON_BRIGHTNESS</span><span class="p">);</span>
     <span class="n">button_pressed_millis</span> <span class="o">=</span> <span class="n">millis</span><span class="p">();</span>
 <span class="p">}</span>
 
 <span class="c1">// 画面の輝度を下げる</span>
-<span class="kt">void</span> <span class="nf">screenOff</span><span class="p">()</span> <span class="p">{</span>
+<span class="kt">void</span> <span class="n">screenOff</span><span class="p">()</span> <span class="p">{</span>
     <span class="n">M5</span><span class="p">.</span><span class="n">Axp</span><span class="p">.</span><span class="n">ScreenBreath</span><span class="p">(</span><span class="n">SCREEN_OFF_BRIGHTNESS</span><span class="p">);</span>
 <span class="p">}</span>
 
-<span class="kt">void</span> <span class="nf">setup</span><span class="p">()</span> <span class="p">{</span>
+<span class="kt">void</span> <span class="n">setup</span><span class="p">()</span> <span class="p">{</span>
     <span class="n">M5</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span>
 
     <span class="c1">// 画面の表示設定</span>
@@ -217,7 +217,7 @@
     <span class="n">button_pressed_millis</span> <span class="o">=</span> <span class="n">millis</span><span class="p">();</span>
 <span class="p">}</span>
 
-<span class="kt">void</span> <span class="nf">loop</span><span class="p">()</span> <span class="p">{</span>
+<span class="kt">void</span> <span class="n">loop</span><span class="p">()</span> <span class="p">{</span>
     <span class="n">M5</span><span class="p">.</span><span class="n">update</span><span class="p">();</span>
 
     <span class="c1">// ボタンAが押されたらアラーム時刻の時間を変更</span>

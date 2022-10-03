@@ -425,21 +425,21 @@
                   'friday',
                   'saturday'
               ];
-              
+
               function getPattern(date) {
                   var msDate = date.getTime();
                   var daysElapsed = Math.floor((msDate - MS_SEPTEMBER7) / MS_ONE_DAY);
                   var pattern = (daysElapsed + 1) % 4;
-              
+
                   return pattern;
               }
-              
+
               var section, now = new Date();
-              
+
               var pattern = getPattern(now);
               section = document.getElementById(ID[pattern]);
               section.style.display = '';
-              
+
               section = document.getElementById(WEEKDAY[now.getDay()]);
               section.style.display = '';
             </script>

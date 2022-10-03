@@ -33,7 +33,7 @@
           "@context": "http://schema.org",
           "@type": "Article",
           "name": "ブログ",
-      
+
           "headline": "雑記、覚え書き、更新情報など",
           "image": "https://saasan.github.io/img/s2works_favicon.png",
           "url": "https://saasan.github.io/blog/page6/",
@@ -67,6 +67,39 @@
             <h1 class="post-title">ブログ</h1>
           </header>
           <article class="post-content">
+            <section>
+              <h2><a class="post-link" href="/blog/2015/12/15/jekyll-html-beautifier-plugin.html">[Jekyll] HTMLを読みやすいように整形するプラグイン</a></h2>
+              <div class="post-meta">2015-12-15</div>
+              <section>
+                <p>Jekyll で include を多用してると、include されたファイルの中に
+                  include があってまたそのファイルの中に include が……なんてことになって
+                  HTML の構造が分からなくなるときがあります。
+                  できあがった HTML をみてもインデントがメチャクチャでわけがわからない…！</p>
+                <p>そこで、HTML を整形して出力するプラグインを作ってみました。
+                  いわゆるbeautifierとかpretty printとかいわれる機能ですね。</p>
+                <noscript>
+                  <pre>require &#39;rubygems&#39;
+require &#39;htmlbeautifier&#39;
+
+Jekyll::Hooks.register :documents, :post_render do |page|
+  next if page.output_ext != &#39;.html&#39;
+  page.output = HtmlBeautifier.beautify(page.output)
+end
+
+Jekyll::Hooks.register :pages, :post_render do |page|
+  next if page.ext != &#39;.html&#39;
+  page.output = HtmlBeautifier.beautify(page.output)
+end
+</pre>
+                </noscript>
+                <script src="https://gist.github.com/saasan/7c92d15e7ebb4870f581.js"></script>
+                <p><code class="language-plaintext highlighter-rouge">gem install htmlbeautifier</code> などで htmlbeautifier をインストールしたあと、
+                  このファイルを _plugins フォルダに入れれば
+                  Jekyll でのビルド時に HTML が整形されます。</p>
+                <p>プラグインなので、プラグインが使えない GitHub Pages 上でのビルドには使えません。
+                  あらかじめローカルの環境でビルドして生成されたファイルをアップロードしてください。</p>
+              </section>
+            </section>
             <section>
               <h2><a class="post-link" href="/blog/2015/09/07/google-opinion-rewards.html">デレステ、PSO2プレイヤーにおすすめ。無料でGoogle Playのクレジットがもらえる「Google アンケート モニター」</a></h2>
               <div class="post-meta">2015-09-07</div>
