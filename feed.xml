@@ -5,8 +5,8 @@
         <description></description>
         <link>https://saasan.github.io/</link>
         <atom:link href="https://saasan.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-        <pubDate>Mon, 03 Oct 2022 18:37:49 +0900</pubDate>
-        <lastBuildDate>Mon, 03 Oct 2022 18:37:49 +0900</lastBuildDate>
+        <pubDate>Sun, 23 Oct 2022 15:13:09 +0900</pubDate>
+        <lastBuildDate>Sun, 23 Oct 2022 15:13:09 +0900</lastBuildDate>
         <generator>Jekyll v4.2.2</generator>
         
             <item>
@@ -26,7 +26,7 @@
 &lt;p&gt;&lt;a href=&quot;https://learn.microsoft.com/ja-jp/powershell/module/microsoft.powershell.utility/unblock-file&quot;&gt;Unblock-File&lt;/a&gt;
 で削除できる。&lt;/p&gt;
 
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Get-ChildItem -Recurse -File | Get-Item -Stream Zone.Identifier -ErrorAction SilentlyContinue | Unblock-File
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Get-ChildItem -Recurse -File | Unblock-File
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;&lt;a href=&quot;https://learn.microsoft.com/ja-jp/powershell/module/microsoft.powershell.management/remove-item#7&quot;&gt;Remove-Item -Stream Zone.Identifier&lt;/a&gt;
