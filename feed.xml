@@ -5,9 +5,89 @@
         <description></description>
         <link>https://saasan.github.io/</link>
         <atom:link href="https://saasan.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-        <pubDate>Sun, 23 Oct 2022 15:13:09 +0900</pubDate>
-        <lastBuildDate>Sun, 23 Oct 2022 15:13:09 +0900</lastBuildDate>
+        <pubDate>Mon, 24 Oct 2022 16:28:29 +0900</pubDate>
+        <lastBuildDate>Mon, 24 Oct 2022 16:28:29 +0900</lastBuildDate>
         <generator>Jekyll v4.2.2</generator>
+        
+            <item>
+                <title>Ubuntu 22.04 で apt-key add したあと apt-update で Key is stored in legacy trusted.gpg keyring というメッセージが表示される場合の対応方法</title>
+                <description>&lt;p&gt;結論から言うと、以下のコマンドで鍵を追加すれば良い。&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo curl -fsSL https://myrepo.example/myrepo.asc -o /etc/apt/keyrings/myrepo.asc
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;鍵がテキスト形式の場合は拡張子を &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.asc&lt;/code&gt;、バイナリ形式の場合は &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.gpg&lt;/code&gt; にすること。&lt;/p&gt;
+
+&lt;p&gt;既に公開鍵を追加済みの場合は &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;apt-key list&lt;/code&gt; で下8桁を確認し &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;apt-key del XXXXXXXX&lt;/code&gt; で削除する。&lt;/p&gt;
+
+&lt;h2 id=&quot;解説&quot;&gt;解説&lt;/h2&gt;
+
+&lt;p&gt;Ubuntu 22.04 で &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;apt-key add&lt;/code&gt; したあと &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;apt-update&lt;/code&gt; すると以下のメッセージが表示される。&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Key is stored in legacy trusted.gpg keyring (/etc/apt/trusted.gpg), see the DEPRECATION section in apt-key(8) for details.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;man apt-key&lt;/code&gt; によると&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;apt-key(8) will last be available in Debian 11 and Ubuntu 22.04.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;apt-key は Debian 11 と Ubuntu 22.04 を最後に廃止となるので変える必要があるらしい。&lt;/p&gt;
+
+&lt;p&gt;メッセージ通り DEPRECATION セクションを見ると次のように書かれている。&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;DEPRECATION&lt;/p&gt;
+
+  &lt;p&gt;Except for using apt-key del in maintainer scripts, the use of apt-key is deprecated. This section shows how to replace existing use of apt-key.&lt;/p&gt;
+
+  &lt;p&gt;If your existing use of apt-key add looks like this:&lt;/p&gt;
+
+  &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;wget -qO- https://myrepo.example/myrepo.asc | sudo apt-key add -
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;  &lt;/div&gt;
+
+  &lt;p&gt;Then you can directly replace this with (though note the recommendation below):&lt;/p&gt;
+
+  &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;wget -qO- https://myrepo.example/myrepo.asc | sudo tee /etc/apt/trusted.gpg.d/myrepo.asc
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;  &lt;/div&gt;
+
+  &lt;p&gt;Make sure to use the “asc” extension for ASCII armored keys and the “gpg” extension for the binary OpenPGP format (also known as “GPG key public ring”). The binary OpenPGP format works for all apt versions, while the ASCII armored format works for apt version &amp;gt;= 1.4.&lt;/p&gt;
+
+  &lt;p&gt;Recommended: Instead of placing keys into the /etc/apt/trusted.gpg.d directory, you can place them anywhere on your filesystem by using the Signed-By option in your sources.list and pointing to the filename of the key. See sources.list(5) for details. Since APT 2.4, /etc/apt/keyrings is provided as the recommended location for keys not managed by packages. When using a deb822-style sources.list, and with apt version &amp;gt;= 2.4, the Signed-By option can also be used to include the full ASCII armored keyring directly in the sources.list without an additional file.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;以下のような形式で使用している場合は&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;wget -qO- https://myrepo.example/myrepo.asc | sudo apt-key add -
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;次のように書き換えればよい。&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;wget -qO- https://myrepo.example/myrepo.asc | sudo tee /etc/apt/trusted.gpg.d/myrepo.asc
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;拡張子が &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.asc&lt;/code&gt; のファイルを置けば ASCII armored 形式 (テキスト形式)、
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.gpg&lt;/code&gt; のファイルを置けばバイナリ形式として処理される。
+Ubuntu 22.04 の場合 ASCII armored 形式からバイナリ形式への変換 (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;gpg --dearmor&lt;/code&gt;) は不要らしい。&lt;/p&gt;
+
+&lt;p&gt;また、パッケージで管理されていない鍵は &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/etc/apt/keyrings&lt;/code&gt; に置くことが推奨されている。
+よって冒頭のコマンドとなる。&lt;/p&gt;
+</description>
+                <pubDate>Mon, 24 Oct 2022 16:25:04 +0900</pubDate>
+                <link>https://saasan.github.io/blog/2022/10/24/ubuntu-22.04%E3%81%A7apt-key-add%E3%81%97%E3%81%9F%E3%81%82%E3%81%A8apt-update%E3%81%A7key-is-stored-in-legacy-trusted.gpg-keyring%E3%81%A8%E3%81%84%E3%81%86%E3%83%A1%E3%83%83%E3%82%BB%E3%83%BC%E3%82%B8%E3%81%8C%E8%A1%A8%E7%A4%BA%E3%81%95%E3%82%8C%E3%82%8B%E5%A0%B4%E5%90%88%E3%81%AE%E5%AF%BE%E5%BF%9C%E6%96%B9%E6%B3%95.html</link>
+                <guid isPermaLink="true">https://saasan.github.io/blog/2022/10/24/ubuntu-22.04%E3%81%A7apt-key-add%E3%81%97%E3%81%9F%E3%81%82%E3%81%A8apt-update%E3%81%A7key-is-stored-in-legacy-trusted.gpg-keyring%E3%81%A8%E3%81%84%E3%81%86%E3%83%A1%E3%83%83%E3%82%BB%E3%83%BC%E3%82%B8%E3%81%8C%E8%A1%A8%E7%A4%BA%E3%81%95%E3%82%8C%E3%82%8B%E5%A0%B4%E5%90%88%E3%81%AE%E5%AF%BE%E5%BF%9C%E6%96%B9%E6%B3%95.html</guid>
+                
+                <category>Ubuntu</category>
+                
+                <category>Linux</category>
+                
+                <category>APT</category>
+                
+                
+                <category>blog</category>
+                
+            </item>
         
             <item>
                 <title>ZoneID (Zone.Identifier) を一括で削除する</title>
@@ -834,199 +914,6 @@ echo &amp;quot;&amp;lt;!here&amp;gt;\nhoge\nfuga&amp;quot; | post_slack
                 <category>シェルスクリプト</category>
                 
                 <category>Slack</category>
-                
-                
-                <category>blog</category>
-                
-            </item>
-        
-            <item>
-                <title>M5StickC でキーボード操作を自動化する</title>
-                <description>&lt;p&gt;某ゲームでアイテムを交換する作業が面倒になってきたので
-キーボード操作を自動化したいと思った。&lt;/p&gt;
-
-&lt;p&gt;まず思いついたのは、手元にあった
-&lt;a href=&quot;https://www.amazon.co.jp/dp/B004INFZEG/saasan-22&quot;&gt;サンワサプライ製のプログラマブルテンキー NT-19UH2BK&lt;/a&gt;。
-久しぶりに引っぱりだして確認したところ、これは &lt;kbd&gt;Ctrl + C&lt;/kbd&gt; のような同時押しには対応しているが、
-ウェイトをはさみながら複数のキーを順次入力する用途には対応していなかった。&lt;/p&gt;
-
-&lt;p&gt;次に &lt;a href=&quot;https://booth.pm/ja/items/2655838&quot;&gt;AZ-Macro&lt;/a&gt;
-というマクロ機能のある自作 Bluetooth キーボードキットがあることを思い出した。
-これは ESP32 で作られていて、
-&lt;a href=&quot;https://github.com/palette-system/az-macro&quot;&gt;ファームウェアのソースコードも公開&lt;/a&gt;
-されている。
-手持ちの M5StickC なら同じ ESP32 が内蔵されており
-Bluetooth にも対応しているため、目的を実現できるのではないか？&lt;/p&gt;
-
-&lt;p&gt;ということで、M5StickC を Bluetooth キーボードとして PC へ接続し操作を自動化する。&lt;/p&gt;
-
-&lt;h2 id=&quot;arduino-ide-へ-esp32-ble-keyboard-をインストール&quot;&gt;Arduino IDE へ ESP32-BLE-Keyboard をインストール&lt;/h2&gt;
-
-&lt;p&gt;まずは M5StickC を Bluetooth キーボードとして使うためのライブラリを
-Arduino IDE へインストールする。&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/T-vK/ESP32-BLE-Keyboard/releases&quot;&gt;Releases · T-vK/ESP32-BLE-Keyboard&lt;/a&gt;
-から ESP32-BLE-Keyboard.zip をダウンロード&lt;/li&gt;
-  &lt;li&gt;Arduino IDE のメニューで [スケッチ] - [ライブラリをインクルード] - [.ZIP形式のライブラリをインストール…] をクリック&lt;/li&gt;
-  &lt;li&gt;さきほどダウンロードした ESP32-BLE-Keyboard.zip を選択&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;esp32-ble-keyboard-の使い方&quot;&gt;ESP32-BLE-Keyboard の使い方&lt;/h2&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://github.com/T-vK/ESP32-BLE-Keyboard/blob/master/examples/SendKeyStrokes/SendKeyStrokes.ino&quot;&gt;公式のサンプル&lt;/a&gt;
-を見れば大まかな使い方はわかると思うが、メソッドの説明がないので補足しておく。&lt;/p&gt;
-
-&lt;p&gt;BleKeyboard クラスの以下のメソッドでキーを操作できる。&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;print: 文字列を入力&lt;/li&gt;
-  &lt;li&gt;write: キーを押してすぐに離す&lt;/li&gt;
-  &lt;li&gt;press: キーを押す (release するまで押したままにする)&lt;/li&gt;
-  &lt;li&gt;release: キーを離す&lt;/li&gt;
-  &lt;li&gt;releaseAll: すべてのキーを離す&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;キーの指定は、英数記号の場合、文字をそのまま渡す。
-大文字を渡すと自動でシフトキーが補完され大文字での入力になる。&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;bleKeyboard.write(&apos;a&apos;);
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;ファンクションキー、修飾キーなどの場合は
-&lt;a href=&quot;https://github.com/T-vK/ESP32-BLE-Keyboard/blob/master/BleKeyboard.h&quot;&gt;BleKeyboard.h&lt;/a&gt;
-で定義されている定数を渡す。&lt;/p&gt;
-
-&lt;h2 id=&quot;スケッチの作成&quot;&gt;スケッチの作成&lt;/h2&gt;
-
-&lt;p&gt;M5StickC のボタンA (正面の「M5」ボタン) を押すと
-500ms 間隔で順番に B, L, E, Enterキーを押すサンプルスケッチを作成した。
-今回は同時押しが不要だったため
-keystroke に書かれたキーを順に write で出力するだけとなっている。&lt;/p&gt;
-
-&lt;noscript&gt;&lt;pre&gt;#include &amp;lt;vector&amp;gt;
-#include &amp;lt;M5StickC.h&amp;gt;
-#include &amp;lt;BleKeyboard.h&amp;gt;
-
-// -----------------------------------------------------------------------------
-// 定数
-// -----------------------------------------------------------------------------
-// 電源ボタンが1秒未満押された
-const uint8_t AXP_WAS_PRESSED = 2;
-// キーと待ち時間の構造体
-struct Key {
-  uint8_t key;
-  uint32_t delay;
-};
-// 送信するキーストローク
-const std::vector&amp;lt;Key&amp;gt; keystroke = {
-    { &amp;#39;B&amp;#39;       , 500 },
-    { &amp;#39;L&amp;#39;       , 500 },
-    { &amp;#39;E&amp;#39;       , 500 },
-    { KEY_RETURN, 0 }
-};
-
-// -----------------------------------------------------------------------------
-// 変数
-// -----------------------------------------------------------------------------
-// ESP32-BLE-Keyboard
-BleKeyboard bleKeyboard;
-
-// -----------------------------------------------------------------------------
-// 関数
-// -----------------------------------------------------------------------------
-// 画面を消去する
-void clearScreen() {
-    M5.Lcd.fillScreen(TFT_BLACK);
-    M5.Lcd.setCursor(0, 0);
-}
-
-// キーストロークを送信する
-void sendKeystroke() {
-    clearScreen();
-    M5.Lcd.println(&amp;quot;Sending...&amp;quot;);
-
-    for (const auto&amp;amp; n : keystroke) {
-        bleKeyboard.write(n.key);
-        delay(n.delay);
-    }
-
-    M5.Lcd.println(&amp;quot;Complete!&amp;quot;);
-}
-
-void setup() {
-    M5.begin();
-
-    // 画面の表示設定
-    M5.Lcd.setRotation(1);
-    M5.Lcd.setTextFont(2);
-    clearScreen();
-    M5.Lcd.println(&amp;quot;ESP32-BLE-Keyboard&amp;quot;);
-
-    // Bluetooth接続
-    bleKeyboard.begin();
-}
-
-void loop() {
-    M5.update();
-
-    // 電源ボタンが押されたらリセット
-    if (M5.Axp.GetBtnPress() == AXP_WAS_PRESSED) {
-        esp_restart();
-    }
-
-    if (bleKeyboard.isConnected()) {
-        // Bluetooth接続済みの場合
-        // ボタンAが押されたらキーを送信
-        if (M5.BtnA.wasPressed()) {
-            sendKeystroke();
-        }
-
-        delay(10);
-    }
-    else {
-        // Bluetooth未接続の場合は5秒待つ
-        M5.Lcd.println(&amp;quot;Waiting 5 seconds...&amp;quot;);
-        delay(5000);
-    }
-}
-&lt;/pre&gt;&lt;/noscript&gt;
-&lt;script src=&quot;https://gist.github.com/saasan/95c34469ebd1186c12398fbeb8266d17.js&quot;&gt; &lt;/script&gt;
-
-&lt;h2 id=&quot;動作確認&quot;&gt;動作確認&lt;/h2&gt;
-
-&lt;p&gt;以下の手順で動作を確認できる。&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;M5StickC にスケッチを書き込む&lt;/li&gt;
-  &lt;li&gt;M5StickC の画面に “Waiting 5 seconds…” と表示されていることを確認&lt;/li&gt;
-  &lt;li&gt;PC で Bluetooth デバイスを検索し “ESP32 BLE Keyboard” へ接続&lt;/li&gt;
-  &lt;li&gt;メモ帳などのアプリを開く&lt;/li&gt;
-  &lt;li&gt;M5StickC のボタンA (正面の「M5」ボタン) を押す&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;これで複雑なキーボードマクロでも思い通りに実行できるようになった。
-キーボードでできることなら何でもボタン一発で実行できるため、
-思っていた以上に利便性が高い。&lt;/p&gt;
-
-&lt;h2 id=&quot;参考サイト&quot;&gt;参考サイト&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://neocat.hatenablog.com/entry/2019/09/28/151947&quot;&gt;ESP32をBluetoothキーボードやマウスにする - Okiraku Programming&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/T-vK/ESP32-BLE-Keyboard&quot;&gt;T-vK/ESP32-BLE-Keyboard: Bluetooth LE Keyboard library for the ESP32 (Arduino IDE compatible)&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-                <pubDate>Sun, 04 Apr 2021 05:50:17 +0900</pubDate>
-                <link>https://saasan.github.io/blog/2021/04/04/m5stickc%E3%81%A7%E3%82%AD%E3%83%BC%E3%83%9C%E3%83%BC%E3%83%89%E6%93%8D%E4%BD%9C%E3%82%92%E8%87%AA%E5%8B%95%E5%8C%96%E3%81%99%E3%82%8B.html</link>
-                <guid isPermaLink="true">https://saasan.github.io/blog/2021/04/04/m5stickc%E3%81%A7%E3%82%AD%E3%83%BC%E3%83%9C%E3%83%BC%E3%83%89%E6%93%8D%E4%BD%9C%E3%82%92%E8%87%AA%E5%8B%95%E5%8C%96%E3%81%99%E3%82%8B.html</guid>
-                
-                <category>M5Stack</category>
-                
-                <category>M5StickC</category>
-                
-                <category>ESP32</category>
-                
-                <category>ESP32-BLE-Keyboard</category>
                 
                 
                 <category>blog</category>

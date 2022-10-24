@@ -68,6 +68,74 @@
           </header>
           <article class="post-content">
             <section>
+              <h2><a class="post-link" href="/blog/2022/10/24/ubuntu-22.04%E3%81%A7apt-key-add%E3%81%97%E3%81%9F%E3%81%82%E3%81%A8apt-update%E3%81%A7key-is-stored-in-legacy-trusted.gpg-keyring%E3%81%A8%E3%81%84%E3%81%86%E3%83%A1%E3%83%83%E3%82%BB%E3%83%BC%E3%82%B8%E3%81%8C%E8%A1%A8%E7%A4%BA%E3%81%95%E3%82%8C%E3%82%8B%E5%A0%B4%E5%90%88%E3%81%AE%E5%AF%BE%E5%BF%9C%E6%96%B9%E6%B3%95.html">Ubuntu 22.04 で apt-key add したあと apt-update で Key is stored in legacy trusted.gpg keyring というメッセージが表示される場合の対応方法</a></h2>
+              <div class="post-meta">2022-10-24</div>
+              <section>
+                <p>結論から言うと、以下のコマンドで鍵を追加すれば良い。</p>
+                <div class="language-plaintext highlighter-rouge">
+                  <div class="highlight">
+                    <pre class="highlight"><code>sudo curl -fsSL https://myrepo.example/myrepo.asc -o /etc/apt/keyrings/myrepo.asc
+</code></pre>
+                  </div>
+                </div>
+                <p>鍵がテキスト形式の場合は拡張子を <code class="language-plaintext highlighter-rouge">.asc</code>、バイナリ形式の場合は <code class="language-plaintext highlighter-rouge">.gpg</code> にすること。</p>
+                <p>既に公開鍵を追加済みの場合は <code class="language-plaintext highlighter-rouge">apt-key list</code> で下8桁を確認し <code class="language-plaintext highlighter-rouge">apt-key del XXXXXXXX</code> で削除する。</p>
+                <h2 id="解説">解説</h2>
+                <p>Ubuntu 22.04 で <code class="language-plaintext highlighter-rouge">apt-key add</code> したあと <code class="language-plaintext highlighter-rouge">apt-update</code> すると以下のメッセージが表示される。</p>
+                <div class="language-plaintext highlighter-rouge">
+                  <div class="highlight">
+                    <pre class="highlight"><code>Key is stored in legacy trusted.gpg keyring (/etc/apt/trusted.gpg), see the DEPRECATION section in apt-key(8) for details.
+</code></pre>
+                  </div>
+                </div>
+                <p><code class="language-plaintext highlighter-rouge">man apt-key</code> によると</p>
+                <blockquote>
+                  <p>apt-key(8) will last be available in Debian 11 and Ubuntu 22.04.</p>
+                </blockquote>
+                <p>apt-key は Debian 11 と Ubuntu 22.04 を最後に廃止となるので変える必要があるらしい。</p>
+                <p>メッセージ通り DEPRECATION セクションを見ると次のように書かれている。</p>
+                <blockquote>
+                  <p>DEPRECATION</p>
+                  <p>Except for using apt-key del in maintainer scripts, the use of apt-key is deprecated. This section shows how to replace existing use of apt-key.</p>
+                  <p>If your existing use of apt-key add looks like this:</p>
+                  <div class="language-plaintext highlighter-rouge">
+                    <div class="highlight">
+                      <pre class="highlight"><code>wget -qO- https://myrepo.example/myrepo.asc | sudo apt-key add -
+</code></pre>
+                    </div>
+  </div>
+                  <p>Then you can directly replace this with (though note the recommendation below):</p>
+                  <div class="language-plaintext highlighter-rouge">
+                    <div class="highlight">
+                      <pre class="highlight"><code>wget -qO- https://myrepo.example/myrepo.asc | sudo tee /etc/apt/trusted.gpg.d/myrepo.asc
+</code></pre>
+                    </div>
+  </div>
+                  <p>Make sure to use the “asc” extension for ASCII armored keys and the “gpg” extension for the binary OpenPGP format (also known as “GPG key public ring”). The binary OpenPGP format works for all apt versions, while the ASCII armored format works for apt version &gt;= 1.4.</p>
+                  <p>Recommended: Instead of placing keys into the /etc/apt/trusted.gpg.d directory, you can place them anywhere on your filesystem by using the Signed-By option in your sources.list and pointing to the filename of the key. See sources.list(5) for details. Since APT 2.4, /etc/apt/keyrings is provided as the recommended location for keys not managed by packages. When using a deb822-style sources.list, and with apt version &gt;= 2.4, the Signed-By option can also be used to include the full ASCII armored keyring directly in the sources.list without an additional file.</p>
+                </blockquote>
+                <p>以下のような形式で使用している場合は</p>
+                <div class="language-plaintext highlighter-rouge">
+                  <div class="highlight">
+                    <pre class="highlight"><code>wget -qO- https://myrepo.example/myrepo.asc | sudo apt-key add -
+</code></pre>
+                  </div>
+                </div>
+                <p>次のように書き換えればよい。</p>
+                <div class="language-plaintext highlighter-rouge">
+                  <div class="highlight">
+                    <pre class="highlight"><code>wget -qO- https://myrepo.example/myrepo.asc | sudo tee /etc/apt/trusted.gpg.d/myrepo.asc
+</code></pre>
+                  </div>
+                </div>
+                <p>拡張子が <code class="language-plaintext highlighter-rouge">.asc</code> のファイルを置けば ASCII armored 形式 (テキスト形式)、
+                  <code class="language-plaintext highlighter-rouge">.gpg</code> のファイルを置けばバイナリ形式として処理される。
+                  Ubuntu 22.04 の場合 ASCII armored 形式からバイナリ形式への変換 (<code class="language-plaintext highlighter-rouge">gpg --dearmor</code>) は不要らしい。</p>
+                <p>また、パッケージで管理されていない鍵は <code class="language-plaintext highlighter-rouge">/etc/apt/keyrings</code> に置くことが推奨されている。
+                  よって冒頭のコマンドとなる。</p>
+              </section>
+            </section>
+            <section>
               <h2><a class="post-link" href="/blog/2022/10/03/zoneid-zone.identifier%E3%82%92%E4%B8%80%E6%8B%AC%E3%81%A7%E5%89%8A%E9%99%A4%E3%81%99%E3%82%8B.html">ZoneID (Zone.Identifier) を一括で削除する</a></h2>
               <div class="post-meta">2022-10-03</div>
               <section>
@@ -300,66 +368,6 @@ jp.co.omronsoft.iwnnime.ml_lenovo
                 <h3 id="usb-type-c-での充電">USB Type-C での充電</h3>
                 <p>第11世代から充電が USB Type-C になったそうで、
                   他の機器と充電器を共用できるのはやはり便利。</p>
-              </section>
-            </section>
-            <section>
-              <h2><a class="post-link" href="/blog/2021/12/26/%E3%83%96%E3%83%83%E3%82%AF%E3%83%9E%E3%83%BC%E3%82%AF%E3%83%AC%E3%83%83%E3%83%88%E3%81%A7%E3%83%88%E3%83%BC%E3%82%B9%E3%83%88%E3%82%92%E8%A1%A8%E7%A4%BA%E3%81%99%E3%82%8B.html">ブックマークレットでトーストを表示する</a></h2>
-              <div class="post-meta">2021-12-26</div>
-              <section>
-                <p>ブックマークレットでクリップボードへコピーするスクリプトをいくつか使ってるけど、
-                  コピー後に何も表示されないかたちだったんでコピーされたか分からないし
-                  alertでメッセージを表示するのも野暮ったいんでトーストを表示することにした。</p>
-                <noscript>
-                  <pre>function generateToastHTML(message) {
-    return `
-        &lt;div class=&quot;_toast&quot;&gt;
-            &lt;style scoped&gt;
-                ._toast
-                {
-                    position: fixed;
-                    right: 2rem;
-                    bottom: 0;
-                    padding: 1rem;
-                    width: 350px;
-                    max-width: 100%;
-                    opacity: 0;
-                    color: #000;
-                    background-color: rgba(255,255,255,.85);
-                    border: 1px solid rgba(0,0,0,.1);
-                    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
-                    border-radius: .25rem;
-                    transition: opacity .3s, bottom .3s;
-                }
-            &lt;/style&gt;
-
-            ${message}
-        &lt;/div&gt;
-    `;
-}
-
-function showToast(message) {
-    const html = generateToastHTML(message);
-    document.body.insertAdjacentHTML(&#39;beforeend&#39;, html);
-    const toast = document.body.lastElementChild;
-    setTimeout(() =&gt; {
-        toast.style.bottom = &#39;2rem&#39;;
-        toast.style.opacity = 1;
-
-        setTimeout(() =&gt; {
-            toast.style.bottom = &#39;0&#39;;
-            toast.style.opacity = 0;
-            setTimeout(() =&gt; toast.remove(), 1000);
-        }, 3000);
-    }, 1);
-}
-
-showToast(&#39;トーストのメッセージ&#39;);
-</pre>
-                </noscript>
-                <script src="https://gist.github.com/saasan/f0d41060f5be49d8aa2e3b636ea41e15.js"></script>
-                <p>ブックマークレットなので
-                  ライブラリ等なしの素のJavaScript (いわゆるVanilla JS) で書いたけど
-                  意外とシンプルに実装できた。</p>
               </section>
             </section>
             <div class="pagination">

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <title>Ubuntu 22.04 で apt-key add したあと apt-update で Key is stored in legacy trusted.gpg keyring というメッセージが表示される場合の対応方法</title>
+    <link href='//fonts.googleapis.com/css?family=Orbitron:500' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="canonical" href="https://saasan.github.io/blog/2022/10/24/ubuntu-22.04%E3%81%A7apt-key-add%E3%81%97%E3%81%9F%E3%81%82%E3%81%A8apt-update%E3%81%A7key-is-stored-in-legacy-trusted.gpg-keyring%E3%81%A8%E3%81%84%E3%81%86%E3%83%A1%E3%83%83%E3%82%BB%E3%83%BC%E3%82%B8%E3%81%8C%E8%A1%A8%E7%A4%BA%E3%81%95%E3%82%8C%E3%82%8B%E5%A0%B4%E5%90%88%E3%81%AE%E5%AF%BE%E5%BF%9C%E6%96%B9%E6%B3%95.html">
+    <link rel="alternate" type="application/rss+xml" title="saasan.github.io" href="https://saasan.github.io/feed.xml" />
+    <link rel="apple-touch-icon" href="https://saasan.github.io/img/s2works_favicon.png">
+    <script data-ad-client="ca-pub-0141905477316976" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@saasan">
+    <meta property="og:url" content="https://saasan.github.io/blog/2022/10/24/ubuntu-22.04%E3%81%A7apt-key-add%E3%81%97%E3%81%9F%E3%81%82%E3%81%A8apt-update%E3%81%A7key-is-stored-in-legacy-trusted.gpg-keyring%E3%81%A8%E3%81%84%E3%81%86%E3%83%A1%E3%83%83%E3%82%BB%E3%83%BC%E3%82%B8%E3%81%8C%E8%A1%A8%E7%A4%BA%E3%81%95%E3%82%8C%E3%82%8B%E5%A0%B4%E5%90%88%E3%81%AE%E5%AF%BE%E5%BF%9C%E6%96%B9%E6%B3%95.html">
+    <meta property="og:title" content="Ubuntu 22.04 で apt-key add したあと apt-update で Key is stored in legacy trusted.gpg keyring というメッセージが表示される場合の対応方法">
+    <meta property="og:description" content="結論から言うと、以下のコマンドで鍵を追加すれば良い。">
+    <meta property="og:image" content="https://saasan.github.io/img/s2works_favicon.png">
+    <script type="application/ld+json">
+      {
+          "@context": "http://schema.org/",
+          "@type": "Person",
+          "name": "saasan",
+          "sameAs": [
+              "https://twitter.com/saasan",
+              "https://github.com/saasan"
+          ]
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+          "@context": "http://schema.org",
+          "@type": "Article",
+          "name": "Ubuntu 22.04 で apt-key add したあと apt-update で Key is stored in legacy trusted.gpg keyring というメッセージが表示される場合の対応方法",
+          "datePublished": "2022-10-24T16:25:04+09:00",
+          "headline": "結論から言うと、以下のコマンドで鍵を追加すれば良い。",
+          "image": "https://saasan.github.io/img/s2works_favicon.png",
+          "url": "https://saasan.github.io/blog/2022/10/24/ubuntu-22.04%E3%81%A7apt-key-add%E3%81%97%E3%81%9F%E3%81%82%E3%81%A8apt-update%E3%81%A7key-is-stored-in-legacy-trusted.gpg-keyring%E3%81%A8%E3%81%84%E3%81%86%E3%83%A1%E3%83%83%E3%82%BB%E3%83%BC%E3%82%B8%E3%81%8C%E8%A1%A8%E7%A4%BA%E3%81%95%E3%82%8C%E3%82%8B%E5%A0%B4%E5%90%88%E3%81%AE%E5%AF%BE%E5%BF%9C%E6%96%B9%E6%B3%95.html",
+          "publisher" : {
+              "@type": "Person",
+              "name": "saasan"
+          }
+      }
+    </script>
+  </head>
+  <body itemscope itemtype="http://schema.org/WebPage">
+    <header class="site-header">
+      <div class="wrapper">
+        <a class="site-title" href="/">saasan.github.io</a>
+        <nav class="site-nav">
+          <div class="site-nav-contents">
+            <ul>
+              <li><a href="/blog/">ブログ</a></li>
+              <li><a href="/imas/">アイマス</a></li>
+              <li><a href="/software/">ソフトウェア</a></li>
+              <li><a href="/script/">スクリプト</a></li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+    </header>
+    <div class="page-content">
+      <div class="wrapper">
+        <div class="post" itemprop="mainContentOfPage" itemscope itemtype="http://schema.org/WebPageElement">
+          <header class="post-header">
+            <h1 class="post-title">Ubuntu 22.04 で apt-key add したあと apt-update で Key is stored in legacy trusted.gpg keyring というメッセージが表示される場合の対応方法</h1>
+            <div class="post-meta">
+              <time datetime="2022-10-24T16:25:04+09:00" itemprop="dateModified">2022/10/24</time>
+            </div>
+          </header>
+          <article class="post-content">
+            <p>結論から言うと、以下のコマンドで鍵を追加すれば良い。</p>
+            <div class="language-plaintext highlighter-rouge">
+              <div class="highlight">
+                <pre class="highlight"><code>sudo curl -fsSL https://myrepo.example/myrepo.asc -o /etc/apt/keyrings/myrepo.asc
+</code></pre>
+              </div>
+            </div>
+            <p>鍵がテキスト形式の場合は拡張子を <code class="language-plaintext highlighter-rouge">.asc</code>、バイナリ形式の場合は <code class="language-plaintext highlighter-rouge">.gpg</code> にすること。</p>
+            <p>既に公開鍵を追加済みの場合は <code class="language-plaintext highlighter-rouge">apt-key list</code> で下8桁を確認し <code class="language-plaintext highlighter-rouge">apt-key del XXXXXXXX</code> で削除する。</p>
+            <h2 id="解説">解説</h2>
+            <p>Ubuntu 22.04 で <code class="language-plaintext highlighter-rouge">apt-key add</code> したあと <code class="language-plaintext highlighter-rouge">apt-update</code> すると以下のメッセージが表示される。</p>
+            <div class="language-plaintext highlighter-rouge">
+              <div class="highlight">
+                <pre class="highlight"><code>Key is stored in legacy trusted.gpg keyring (/etc/apt/trusted.gpg), see the DEPRECATION section in apt-key(8) for details.
+</code></pre>
+              </div>
+            </div>
+            <p><code class="language-plaintext highlighter-rouge">man apt-key</code> によると</p>
+            <blockquote>
+              <p>apt-key(8) will last be available in Debian 11 and Ubuntu 22.04.</p>
+            </blockquote>
+            <p>apt-key は Debian 11 と Ubuntu 22.04 を最後に廃止となるので変える必要があるらしい。</p>
+            <p>メッセージ通り DEPRECATION セクションを見ると次のように書かれている。</p>
+            <blockquote>
+              <p>DEPRECATION</p>
+              <p>Except for using apt-key del in maintainer scripts, the use of apt-key is deprecated. This section shows how to replace existing use of apt-key.</p>
+              <p>If your existing use of apt-key add looks like this:</p>
+              <div class="language-plaintext highlighter-rouge">
+                <div class="highlight">
+                  <pre class="highlight"><code>wget -qO- https://myrepo.example/myrepo.asc | sudo apt-key add -
+</code></pre>
+                </div>
+  </div>
+              <p>Then you can directly replace this with (though note the recommendation below):</p>
+              <div class="language-plaintext highlighter-rouge">
+                <div class="highlight">
+                  <pre class="highlight"><code>wget -qO- https://myrepo.example/myrepo.asc | sudo tee /etc/apt/trusted.gpg.d/myrepo.asc
+</code></pre>
+                </div>
+  </div>
+              <p>Make sure to use the “asc” extension for ASCII armored keys and the “gpg” extension for the binary OpenPGP format (also known as “GPG key public ring”). The binary OpenPGP format works for all apt versions, while the ASCII armored format works for apt version &gt;= 1.4.</p>
+              <p>Recommended: Instead of placing keys into the /etc/apt/trusted.gpg.d directory, you can place them anywhere on your filesystem by using the Signed-By option in your sources.list and pointing to the filename of the key. See sources.list(5) for details. Since APT 2.4, /etc/apt/keyrings is provided as the recommended location for keys not managed by packages. When using a deb822-style sources.list, and with apt version &gt;= 2.4, the Signed-By option can also be used to include the full ASCII armored keyring directly in the sources.list without an additional file.</p>
+            </blockquote>
+            <p>以下のような形式で使用している場合は</p>
+            <div class="language-plaintext highlighter-rouge">
+              <div class="highlight">
+                <pre class="highlight"><code>wget -qO- https://myrepo.example/myrepo.asc | sudo apt-key add -
+</code></pre>
+              </div>
+            </div>
+            <p>次のように書き換えればよい。</p>
+            <div class="language-plaintext highlighter-rouge">
+              <div class="highlight">
+                <pre class="highlight"><code>wget -qO- https://myrepo.example/myrepo.asc | sudo tee /etc/apt/trusted.gpg.d/myrepo.asc
+</code></pre>
+              </div>
+            </div>
+            <p>拡張子が <code class="language-plaintext highlighter-rouge">.asc</code> のファイルを置けば ASCII armored 形式 (テキスト形式)、
+              <code class="language-plaintext highlighter-rouge">.gpg</code> のファイルを置けばバイナリ形式として処理される。
+              Ubuntu 22.04 の場合 ASCII armored 形式からバイナリ形式への変換 (<code class="language-plaintext highlighter-rouge">gpg --dearmor</code>) は不要らしい。</p>
+            <p>また、パッケージで管理されていない鍵は <code class="language-plaintext highlighter-rouge">/etc/apt/keyrings</code> に置くことが推奨されている。
+              よって冒頭のコマンドとなる。</p>
+          </article>
+        </div>
+        <div>
+          <h2>タグ「Ubuntu」記事一覧</h2>
+          <ul class="tagged-post-list">
+            <li><a href="/blog/2022/10/24/ubuntu-22.04%E3%81%A7apt-key-add%E3%81%97%E3%81%9F%E3%81%82%E3%81%A8apt-update%E3%81%A7key-is-stored-in-legacy-trusted.gpg-keyring%E3%81%A8%E3%81%84%E3%81%86%E3%83%A1%E3%83%83%E3%82%BB%E3%83%BC%E3%82%B8%E3%81%8C%E8%A1%A8%E7%A4%BA%E3%81%95%E3%82%8C%E3%82%8B%E5%A0%B4%E5%90%88%E3%81%AE%E5%AF%BE%E5%BF%9C%E6%96%B9%E6%B3%95.html">Ubuntu 22.04 で apt-key add したあと apt-update で Key is stored in legacy trusted.gpg keyring というメッセージが表示される場合の対応方法</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <footer class="site-footer">
+      <div class="wrapper">
+        <nav>
+          <ul>
+            <li><a href="/blog/">ブログ</a></li>
+            <li><a href="/imas/">アイマス</a></li>
+            <li><a href="/software/">ソフトウェア</a></li>
+            <li><a href="/script/">スクリプト</a></li>
+          </ul>
+          <a href="https://twitter.com/saasan" target="_blank" class="twitter-username">
+            saasan
+          </a>
+          <a href="/feed.xml" target="_blank" class="rss">RSS</a>
+        </nav>
+      </div>
+    </footer>
+  </body>
+</html>
