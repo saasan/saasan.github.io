@@ -5,8 +5,8 @@
         <description></description>
         <link>https://saasan.github.io/</link>
         <atom:link href="https://saasan.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-        <pubDate>Mon, 24 Oct 2022 16:28:29 +0900</pubDate>
-        <lastBuildDate>Mon, 24 Oct 2022 16:28:29 +0900</lastBuildDate>
+        <pubDate>Wed, 26 Oct 2022 08:58:39 +0900</pubDate>
+        <lastBuildDate>Wed, 26 Oct 2022 08:58:39 +0900</lastBuildDate>
         <generator>Jekyll v4.2.2</generator>
         
             <item>
@@ -27,13 +27,15 @@
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Key is stored in legacy trusted.gpg keyring (/etc/apt/trusted.gpg), see the DEPRECATION section in apt-key(8) for details.
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;man apt-key&lt;/code&gt; によると&lt;/p&gt;
+&lt;p&gt;鍵が古い非推奨の場所に保存されているという警告だ。
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;man apt-key&lt;/code&gt; によると&lt;/p&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;apt-key(8) will last be available in Debian 11 and Ubuntu 22.04.&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;apt-key は Debian 11 と Ubuntu 22.04 を最後に廃止となるので変える必要があるらしい。&lt;/p&gt;
+&lt;p&gt;apt-key は Debian 11 と Ubuntu 22.04 を最後に廃止となるので
+鍵の追加方法も変える必要がある。&lt;/p&gt;
 
 &lt;p&gt;メッセージ通り DEPRECATION セクションを見ると次のように書かれている。&lt;/p&gt;
 
