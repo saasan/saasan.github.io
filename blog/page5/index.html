@@ -68,6 +68,43 @@
           </header>
           <article class="post-content">
             <section>
+              <h2><a class="post-link" href="/blog/2017/07/31/redhat5.7%E3%81%8B%E3%82%89centos5.7%E3%81%B8%E7%A7%BB%E8%A1%8C%E3%81%99%E3%82%8B.html">RedHat5.7からCentOS5.7へ移行する</a></h2>
+              <div class="post-meta">2017-07-31</div>
+              <section>
+                <p>RHEL 5.7 の物理サーバをクローンして仮想化する際、ライセンス的に問題がありそうなので CentOS 5.7 へ移行した話。</p>
+                <h2 id="公式ドキュメント">公式ドキュメント</h2>
+                <p><a href="https://wiki.centos.org/HowTos/MigrationGuide#head-c31a6a29f59a74d75074d1b110f563ffc15cb86a">Migration an existing system from RHEL5 to CentOS 5</a></p>
+                <h2 id="実際の作業">実際の作業</h2>
+                <p>基本的に上記公式ドキュメントのコマンド通り。
+                  パッケージのダウンロード元サーバが変更になっているのと、OS のバージョン、CPU アーキテクチャが違うので手直ししている。CPU アーキテクチャは uname -a で確認できる。</p>
+                <div class="language-plaintext highlighter-rouge">
+                  <div class="highlight">
+                    <pre class="highlight"><code>$ curl -O http://vault.centos.org/5.7/os/x86_64/CentOS/centos-release-5-7.el5.centos.x86_64.rpm
+$ curl -O http://vault.centos.org/5.7/os/x86_64/CentOS/centos-release-notes-5.7-0.x86_64.rpm
+$ curl -O http://vault.centos.org/5.7/os/x86_64/CentOS/redhat-logos-4.9.99-11.el5.centos.noarch.rpm
+$ su
+# cp /etc/redhat-release /etc/redhat-release-saved
+# rpm -e --nodeps redhat-release-notes redhat-release yum-rhn-plugin redhat-logos
+# rpm -ivh centos-release-5-7.el5.centos.x86_64.rpm centos-release-notes-5.7-0.x86_64.rpm redhat-logos-4.9.99-11.el5.centos.noarch.rpm
+# yum update
+Loaded plugins: product-id, security, subscription-manager
+Updating Red Hat repositories.
+YumRepo Error: All mirror URLs are not using ftp, http[s] or file.
+Eg. Invalid release/
+removing mirrorlist with no valid mirrors: /var/cache/yum/base/mirrorlist.txt
+Error: Cannot retrieve repository metadata (repomd.xml) for repository: base. Please verify its path and try again
+</code></pre>
+                  </div>
+                </div>
+                <p>yum update でエラーが出るので /etc/yum.repos.d/CentOS-Base.repo を編集。</p>
+                <ul>
+                  <li>mirrorlistをコメントアウト</li>
+                  <li>#baseurl=http://mirror.centos.org/centos/$releasever/ を baseurl=http://vault.centos.org/5.7/ へ変更</li>
+                </ul>
+                <p>再度 yum update したら完了。</p>
+              </section>
+            </section>
+            <section>
               <h2><a class="post-link" href="/blog/2017/05/03/%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%83%A9%E3%82%A4%E3%83%B3-CLI-%E3%81%A7FortiGate%E3%82%92%E8%A8%AD%E5%AE%9A%E3%81%99%E3%82%8B.html">コマンドライン(CLI)でFortiGateを設定する</a></h2>
               <div class="post-meta">2017-05-03</div>
               <section>
@@ -270,59 +307,6 @@ PAUSE
                 </div>
                 <p>参考: 
                   <a href="https://jekyllrb.com/docs/configuration/#build-command-options" target="_blank">Configuration - Jekyll • Simple, blog-aware, static sites</a></p>
-              </section>
-            </section>
-            <section>
-              <h2><a class="post-link" href="/blog/2016/02/19/Google-AdSense%E3%81%AE%E7%A2%BA%E5%AE%9A%E7%94%B3%E5%91%8A.html">Google AdSenseの確定申告</a></h2>
-              <div class="post-meta">2016-02-19</div>
-              <section>
-                <p>Google AdSenseでの収入が年間20万円を超えると、サラリーマンやアルバイトなど本業で源泉徴収されている人でも確定申告しなきゃいけないらしい。</p>
-                <p>参考 :
-                  <a href="https://www.nta.go.jp/taxanswer/shotoku/1900.htm" target="_blank">No.1900 給与所得者で確定申告が必要な人｜所得税｜国税庁</a></p>
-                <p>ありがたいことに、うちも売上が20万円を超えて確定申告することになったのでメモ。</p>
-                <h3 id="確定申告に必要なもの">確定申告に必要なもの</h3>
-                <ul>
-                  <li>生命保険料控除証明書など (いつも年末調整で提出してるやつ)</li>
-                  <li>本業の会社からもらった源泉徴収票</li>
-                  <li>パソコン</li>
-                  <li>プリンター
-                    または <a href="https://www.printing.ne.jp/" target="_blank">ネットプリント</a> などのコンビニで印刷できるサービス</li>
-                </ul>
-                <h3 id="申告書を作る">申告書を作る</h3>
-                <p>国税庁のホームページに
-                  <a href="https://www.keisan.nta.go.jp/h27/ta_top.htm" target="_blank">確定申告書等作成コーナー</a>
-                  があるのでそこで作る。</p>
-                <ol>
-                  <li>「書面提出」 &gt; 「所得税コーナー」 &gt; 「左記以外の所得のある方(全ての所得対応)」</li>
-                  <li>「給与所得」に源泉徴収票通り入力</li>
-                  <li>「雑所得」の「その他」に以下の通り入力
-                    <ul>
-                      <li>種目 : 広告収入</li>
-                      <li>報酬などの支払者の氏名・名称 : <del>グーグル株式会社</del> グーグル合同会社 (2018/03/04 修正)</li>
-                      <li>所得の生ずる場所 : 東京都港区六本木６丁目１０－１ 六本木ヒルズ森タワー</li>
-                      <li>収入金額 : AdSenseでの収入金額<br />
-                        (<a href="https://www.google.com/adsense/app#main/home" target="_blank">AdSenseのサイト</a>
-                        <blockquote>
-                          <p>「残高」右上の「…」 &gt; 「お支払いページを表示」 &gt; 「取引」右下の「取引を表示する」 &gt; 上部のフィルターを「詳細取引表示」、「お支払い」、「前年」にして金額を合計する)</p>
-                        </blockquote>
-                      </li>
-                    </ul>
-                  </li>
-                  <li>あとは控除など必要がある場合は入力</li>
-                  <li>最後にPDFファイルがダウンロードできるので、これをプリンターかネットプリントなどで印刷</li>
-                  <li>印刷した申告書に捺印と署名を行い、添付書類を貼り付ける</li>
-                  <li>印刷した紙に書かれている提出先税務署へ郵送する<br />
-                    (普通郵便でもいいが送った記録が残らないので、万全を期すなら
-                    <a href="https://www.post.japanpost.jp/service/fuka_service/tokutei_kiroku/" target="_blank">特定記録</a>
-                    や
-                    <a href="https://www.post.japanpost.jp/service/fuka_service/kakitome/" target="_blank">書留</a>
-                    で)</li>
-                </ol>
-                <h3 id="その他">その他</h3>
-                <ul>
-                  <li><strong>AdSenseでの収入を証明する書類は必要はない</strong> そうな (申告内容が不審で税務調査されない限りは)。</li>
-                  <li><strong>所得税の確定申告をすれば自動で各市町村に連絡が行き住民税に反映される</strong> ので住民税の申告は必要ない。</li>
-                </ul>
               </section>
             </section>
             <div class="pagination">

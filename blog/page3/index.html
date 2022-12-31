@@ -68,6 +68,37 @@
           </header>
           <article class="post-content">
             <section>
+              <h2><a class="post-link" href="/blog/2021/05/20/slack%E3%81%B8%E9%80%9A%E7%9F%A5%E3%81%99%E3%82%8B%E3%82%B7%E3%82%A7%E3%83%AB%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88.html">Slack へ通知するシェルスクリプト</a></h2>
+              <div class="post-meta">2021-05-20</div>
+              <section>
+                <p><a href="https://qiita.com/piroor/items/77233173707a0baa6360">プログラマーの君！ 騙されるな！ シェルスクリプトはそう書いちゃ駄目だ！！ という話 - Qiita</a>
+                  を読み、シェルスクリプトで関数へ値を渡す際は
+                  引数よりも標準入出力を使ったほうがシンプルに書けるようだったので、
+                  以前書いた Slack へ通知メッセージを送るスクリプトを書き直してみた。</p>
+                <noscript>
+                  <pre>#!/bin/bash
+
+WEBHOOK_URL=https://hooks.slack.com/services/xxxxxxxxxxx/xxxxxxxxxxx/xxxxxxxxxxxxxxxxxxxxxxxx
+
+post_slack() {
+    echo &quot;payload={\&quot;text\&quot;: \&quot;$(cat)\&quot;}&quot; | curl -s -S -X POST -d @- ${WEBHOOK_URL}
+}
+
+echo &quot;&lt;!here&gt;\nhoge\nfuga&quot; | post_slack
+</pre>
+                </noscript>
+                <script src="https://gist.github.com/saasan/cbca2f81a3d39ea6dfa85ada5460cf33.js"></script>
+                <p>post_slack では以下のかたちで処理している。</p>
+                <ol>
+                  <li>cat で標準入力から取り込んだ文字列を echo で結合し JSON を作成する。</li>
+                  <li>それをパイプで curl へ渡す。</li>
+                  <li>curl では <code class="language-plaintext highlighter-rouge">-d @-</code> で標準入力から取り込んだ文字列を POST する。</li>
+                </ol>
+                <p>標準入出力をパイプで繋ぐかたちとすることで、
+                  以前は10行あった post_slack が3行に短縮された。</p>
+              </section>
+            </section>
+            <section>
               <h2><a class="post-link" href="/blog/2021/04/04/m5stickc%E3%81%A7%E3%82%AD%E3%83%BC%E3%83%9C%E3%83%BC%E3%83%89%E6%93%8D%E4%BD%9C%E3%82%92%E8%87%AA%E5%8B%95%E5%8C%96%E3%81%99%E3%82%8B.html">M5StickC でキーボード操作を自動化する</a></h2>
               <div class="post-meta">2021-04-04</div>
               <section>
@@ -513,34 +544,6 @@ void loop() {
                 <p><kbd>git commit -m "hoge"</kbd> とか書いたところで <kbd>git add</kbd> してないことに気付いたりとか、
                   コマンド入力中に別のコマンドを先に実行したくなったときに便利。</p>
                 <p>ちなみに <kbd>Ctrl + k</kbd> ならカーソル位置から行末まで切り取れる。</p>
-              </section>
-            </section>
-            <section>
-              <h2><a class="post-link" href="/blog/2020/11/14/%E3%82%B9%E3%82%BF%E3%83%BC%E3%83%88%E3%83%A1%E3%83%8B%E3%83%A5%E3%83%BC%E3%81%8B%E3%82%89%E6%B6%88%E3%81%88%E3%81%9F-dell-command-update-%E3%82%92%E5%BE%A9%E6%B4%BB%E3%81%95%E3%81%9B%E3%82%8B.html">スタートメニューから消えた Dell Command | Update を復活させる</a></h2>
-              <div class="post-meta">2020-11-14</div>
-              <section>
-                <p>Dell Command | Update を実行したあとにスタートメニューから Dell Command | Update が消えることがある。</p>
-                <p>しばらく待っていれば自動で復活することもあれば復活しないこともある。
-                  復活しないときは一度アンインストールして
-                  <a href="https://www.dell.com/support/article/ja-jp/sln311129/dell-command-update?lang=ja">Dell のサイトからダウンロード</a>
-                  したものを入れ直していたが、けっこう手間がかかって面倒だった。
-                  そもそもアプリの一覧に残ってるならもっと簡単に復活できるんじゃないか？</p>
-                <p>そう思ってスタートメニューだけ復活させる方法がないか調べたら以下の方法で復活できた。</p>
-                <ol>
-                  <li>管理者権限で PowerShell を起動する。</li>
-                  <li>
-                    <p>以下のコマンドを実行する。</p>
-                    <div class="language-plaintext highlighter-rouge">
-                      <div class="highlight">
-                        <pre class="highlight"><code>$ManifestPath = (Get-AppxPackage -AllUsers -Name "DellInc.DellCommandUpdate").InstallLocation + "\Appxmanifest.xml"
-Add-AppxPackage -Path $ManifestPath -Register -DisableDevelopmentMode
-</code></pre>
-                      </div>
-    </div>
-                  </li>
-                </ol>
-                <p>※Get-AppxPackage に -AllUsers オプションを付けて実行するのに管理者権限が必要。</p>
-                <p>参考 : <a href="https://docs.microsoft.com/ja-jp/powershell/module/appx/add-appxpackage?view=winserver2012r2-ps#example-2">Add-AppxPackage (AppX) | Microsoft Docs</a></p>
               </section>
             </section>
             <div class="pagination">
