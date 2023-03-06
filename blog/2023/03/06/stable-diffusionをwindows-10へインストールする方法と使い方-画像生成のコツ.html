@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <title>Stable Diffusion を Windows 10 へインストールする方法と使い方、画像生成のコツ</title>
+    <link href='//fonts.googleapis.com/css?family=Orbitron:500' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="canonical" href="https://saasan.github.io/blog/2023/03/06/stable-diffusion%E3%82%92windows-10%E3%81%B8%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95%E3%81%A8%E4%BD%BF%E3%81%84%E6%96%B9-%E7%94%BB%E5%83%8F%E7%94%9F%E6%88%90%E3%81%AE%E3%82%B3%E3%83%84.html">
+    <link rel="alternate" type="application/rss+xml" title="saasan.github.io" href="https://saasan.github.io/feed.xml" />
+    <link rel="apple-touch-icon" href="https://saasan.github.io/img/s2works_favicon.png">
+    <script data-ad-client="ca-pub-0141905477316976" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@saasan">
+    <meta property="og:url" content="https://saasan.github.io/blog/2023/03/06/stable-diffusion%E3%82%92windows-10%E3%81%B8%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95%E3%81%A8%E4%BD%BF%E3%81%84%E6%96%B9-%E7%94%BB%E5%83%8F%E7%94%9F%E6%88%90%E3%81%AE%E3%82%B3%E3%83%84.html">
+    <meta property="og:title" content="Stable Diffusion を Windows 10 へインストールする方法と使い方、画像生成のコツ">
+    <meta property="og:description" content="Windows 10 へのインストール方法と使い方、画像生成のコツを紹介">
+    <meta property="og:image" content="https://saasan.github.io/img/s2works_favicon.png">
+    <script type="application/ld+json">
+      {
+          "@context": "http://schema.org/",
+          "@type": "Person",
+          "name": "saasan",
+          "sameAs": [
+              "https://twitter.com/saasan",
+              "https://github.com/saasan"
+          ]
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+          "@context": "http://schema.org",
+          "@type": "Article",
+          "name": "Stable Diffusion を Windows 10 へインストールする方法と使い方、画像生成のコツ",
+          "datePublished": "2023-03-06T15:15:00+09:00",
+          "headline": "Windows 10 へのインストール方法と使い方、画像生成のコツを紹介",
+          "image": "https://saasan.github.io/img/s2works_favicon.png",
+          "url": "https://saasan.github.io/blog/2023/03/06/stable-diffusion%E3%82%92windows-10%E3%81%B8%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95%E3%81%A8%E4%BD%BF%E3%81%84%E6%96%B9-%E7%94%BB%E5%83%8F%E7%94%9F%E6%88%90%E3%81%AE%E3%82%B3%E3%83%84.html",
+          "publisher" : {
+              "@type": "Person",
+              "name": "saasan"
+          }
+      }
+    </script>
+  </head>
+  <body itemscope itemtype="http://schema.org/WebPage">
+    <header class="site-header">
+      <div class="wrapper">
+        <a class="site-title" href="/">saasan.github.io</a>
+        <nav class="site-nav">
+          <div class="site-nav-contents">
+            <ul>
+              <li><a href="/blog/">ブログ</a></li>
+              <li><a href="/imas/">アイマス</a></li>
+              <li><a href="/software/">ソフトウェア</a></li>
+              <li><a href="/script/">スクリプト</a></li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+    </header>
+    <div class="page-content">
+      <div class="wrapper">
+        <div class="post" itemprop="mainContentOfPage" itemscope itemtype="http://schema.org/WebPageElement">
+          <header class="post-header">
+            <h1 class="post-title">Stable Diffusion を Windows 10 へインストールする方法と使い方、画像生成のコツ</h1>
+            <div class="post-meta">
+              <time datetime="2023-03-06T15:15:00+09:00" itemprop="dateModified">2023/03/06</time>
+            </div>
+          </header>
+          <article class="post-content">
+            <p>Stable Diffusion を Windows 10 のローカル環境へインストールする方法と使い方、
+              1ヶ月ほど使ってみて分かった画像生成のコツをメモしておく。</p>
+            <h2 id="実行環境">実行環境</h2>
+            <ul>
+              <li>Windows 10 Pro 22H2</li>
+              <li>GPU: <a href="https://www.amazon.co.jp/dp/B08WPJ5P4R/?tag=saasan-22">MSI GeForce RTX 3060 GAMING X 12G</a> (VRAM 12 GB 版 NVIDIA GeForce RTX 3060)</li>
+              <li>CPU: <a href="https://www.amazon.co.jp/dp/B08166SLDF/?tag=saasan-22">AMD Ryzen 5 5600X</a></li>
+              <li>メモリ: 32 GB</li>
+            </ul>
+            <iframe sandbox="allow-popups allow-scripts allow-modals allow-forms allow-same-origin" style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="//rcm-fe.amazon-adsystem.com/e/cm?lt1=_blank&amp;bc1=000000&amp;IS2=1&amp;bg1=FFFFFF&amp;fc1=000000&amp;lc1=0000FF&amp;t=saasan-22&amp;language=ja_JP&amp;o=9&amp;p=8&amp;l=as4&amp;m=amazon&amp;f=ifr&amp;ref=as_ss_li_til&amp;asins=B08WPJ5P4R&amp;linkId=a74f3cec7df215d727c5d4aae026eeb5"></iframe>
+            <iframe sandbox="allow-popups allow-scripts allow-modals allow-forms allow-same-origin" style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="//rcm-fe.amazon-adsystem.com/e/cm?lt1=_blank&amp;bc1=000000&amp;IS2=1&amp;bg1=FFFFFF&amp;fc1=000000&amp;lc1=0000FF&amp;t=saasan-22&amp;language=ja_JP&amp;o=9&amp;p=8&amp;l=as4&amp;m=amazon&amp;f=ifr&amp;ref=as_ss_li_til&amp;asins=B08166SLDF&amp;linkId=b75f07c2f52a0fa7123b5861e11649b6"></iframe>
+            <p>ドライバー等は最新のものを使用。
+              あくまでも私が実行した環境のためこのスペックを満たしている必要はない。</p>
+            <p>Stable Diffusion web UI は VRAM 4 GB 以上をサポートしているが、
+              GPU と VRAM の容量は画像生成速度と解像度に影響するため高性能なものが望ましい。</p>
+            <p>また、Stable Diffusion は NVIDIA 製 GPU で動かす前提となっている。
+              AMD や Intel 製 GPU に対応させたものもあるようだが以下の手順では使えない。</p>
+            <h2 id="cuda-toolkit-のインストール">CUDA Toolkit のインストール</h2>
+            <p>Stable Diffusion に限らず、NVIDIA の GPU で機械学習やディープラーニングを行うには
+              CUDA という並列計算のライブラリが必要。</p>
+            <p><a href="https://developer.nvidia.com/cuda-downloads">NVIDIA の公式サイト</a>
+              から CUDA Toolkit をダウンロードしインストールする。</p>
+            <h2 id="python-git-のインストール">Python, Git のインストール</h2>
+            <p>Stable Diffusion web UI (以下 web UI と略す) を利用するのが楽なので、
+              これを動かすのに必要な Python, Git をインストールする。</p>
+            <h3 id="python-のインストール">Python のインストール</h3>
+            <p><strong>3.11 系では web UI が動作しないため必ず 3.10 系をインストールすること。</strong></p>
+            <ol>
+              <li><a href="https://www.python.org/downloads/windows/">Python の公式サイト</a> から Python 3.10.x をダウンロードする。<br />
+                現在は 3.10.10 が最新のため「Stable Releases」の「Python 3.10.10 - Feb. 8, 2023」にある
+                「Windows installer (64-bit)」をクリックしてダウンロードすればよい。</li>
+              <li>ダウンロードしたファイルをダブルクリックしてインストーラーを起動する。</li>
+              <li><strong>「Add python.exe to PATH」にチェックを入れる。</strong></li>
+              <li>「Install Now」をクリックしインストールする。</li>
+            </ol>
+            <h3 id="git-のインストール">Git のインストール</h3>
+            <ol>
+              <li><a href="https://git-scm.com/download/win">Git の公式サイト</a> から 64-bit Git for Windows Setup をダウンロードする。</li>
+              <li>ダウンロードしたファイルをダブルクリックしてインストーラーを起動する。</li>
+              <li>英語で色々聞かれるが全部「Next」をクリックして進める。</li>
+              <li>最後に「Install」すればとりあえず使える状態になる。</li>
+            </ol>
+            <h2 id="stable-diffusion-web-ui-のインストール">Stable Diffusion web UI のインストール</h2>
+            <ol>
+              <li><a href="https://github.com/AUTOMATIC1111/stable-diffusion-webui">Stable Diffusion web UI のページ</a>
+                から「Code &gt; Download ZIP」でファイルをダウンロードする。<br />
+                Git を使える人は <code class="language-plaintext highlighter-rouge">git clone</code> してもよい。</li>
+              <li>ダウンロードした ZIP ファイルを展開する。<br />
+                展開したフォルダがそのままインストール先となるため、インストールしたいフォルダに展開すればよい。</li>
+              <li>展開したフォルダにある「webui-user.bat」を右クリックしてプロパティをクリックする。</li>
+              <li>プロパティ下部「セキュリティ」の右にある「許可する」にチェックを入れて OK をクリックする。</li>
+              <li>「webui-user.bat」をダブルクリックして起動する。 (管理者ではない一般ユーザーで実行してよい)</li>
+              <li>必要なファイルが自動でダウンロード・インストールされるため完了するまで待つ。</li>
+              <li>インストールと起動が完了したら <code class="language-plaintext highlighter-rouge">Running on local URL:  http://127.0.0.1:7860</code> が表示される。</li>
+              <li>ブラウザで <code class="language-plaintext highlighter-rouge">http://127.0.0.1:7860</code> を開く。</li>
+            </ol>
+            <h2 id="web-ui-起動時にエラーが発生する場合">web UI 起動時にエラーが発生する場合</h2>
+            <h3 id="runtimeerror-cannot-add-middleware-after-an-application-has-started">RuntimeError: Cannot add middleware after an application has started.</h3>
+            <p>web UI のバージョンによっては webui-user.bat を起動後に以下のエラーが表示される。</p>
+            <div class="language-plaintext highlighter-rouge">
+              <div class="highlight">
+                <pre class="highlight"><code>RuntimeError: Cannot add middleware after an application has started
+</code></pre>
+              </div>
+            </div>
+            <p>この場合はコマンドプロンプトで以下を実行してから再度 webui-user.bat を起動する。</p>
+            <div class="language-plaintext highlighter-rouge">
+              <div class="highlight">
+                <pre class="highlight"><code>cd [web UIのインストール先パス]
+venv\Scripts\activate.bat
+pip install --upgrade fastapi==0.90.1
+</code></pre>
+              </div>
+            </div>
+            <h3 id="loading-stable-diffusion-model-outofmemoryerror-や-torchcudaoutofmemoryerror-cuda-out-of-memory">loading stable diffusion model: OutOfMemoryError や torch.cuda.OutOfMemoryError: CUDA out of memory.</h3>
+            <p>VRAM が不足しているときに表示される。<br />
+              webui-user.bat を起動する前にタスクマネージャーを起動しておき、
+              「パフォーマンス」タブで GPU の「専用 GPU メモリ使用量」が 100% になっていないか確認するとよい。</p>
+            <p>VRAM が不足している場合は <code class="language-plaintext highlighter-rouge">--lowvram</code> オプションを指定することで起動できる場合がある。<br />
+              「webui-user.bat」をテキストエディタで開き</p>
+            <div class="language-plaintext highlighter-rouge">
+              <div class="highlight">
+                <pre class="highlight"><code>set COMMANDLINE_ARGS=
+</code></pre>
+              </div>
+            </div>
+            <p>となっている部分を以下のように変更し保存する。</p>
+            <div class="language-plaintext highlighter-rouge">
+              <div class="highlight">
+                <pre class="highlight"><code>set COMMANDLINE_ARGS=--lowvram
+</code></pre>
+              </div>
+            </div>
+            <h2 id="テキストからの画像生成-txt2img">テキストからの画像生成 (txt2img)</h2>
+            <p>web UI の URL を開くと txt2img の画面となる。
+              txt2img は文章、単語などの言葉から画像を生成できる。</p>
+            <h3 id="prompt-negative-prompt">Prompt, Negative prompt</h3>
+            <p>Prompt へ描かせたいもの、Negative prompt へ描かせたくないものを英語で入力し、
+              「Generate」をクリックすれば画像が生成される。
+              複数の要素を指定したい場合はカンマ (,) 区切りで入力する。</p>
+            <p>定番の「馬に乗った宇宙飛行士の写真」を生成させるなら Prompt へ以下を入力すればよい。</p>
+            <div class="language-plaintext highlighter-rouge">
+              <div class="highlight">
+                <pre class="highlight"><code>a photograph of an astronaut riding a horse
+</code></pre>
+              </div>
+            </div>
+            <p><code class="language-plaintext highlighter-rouge">()</code> または <code class="language-plaintext highlighter-rouge">[]</code> で言葉を囲むことで強調/抑制できる。</p>
+            <ul>
+              <li><code class="language-plaintext highlighter-rouge">(言葉)</code>: 1.1倍強調</li>
+              <li><code class="language-plaintext highlighter-rouge">((言葉))</code>: 1.21倍強調 (= 1.1×1.1)</li>
+              <li><code class="language-plaintext highlighter-rouge">[言葉]</code>: 1.1倍抑制</li>
+              <li><code class="language-plaintext highlighter-rouge">(言葉:1.5)</code>: 1.5倍強調</li>
+            </ul>
+            <p>参考: <a href="https://github.com/AUTOMATIC1111/stable-diffusion-webui/wiki/Features#attentionemphasis">Attention/emphasis</a></p>
+            <h3 id="generate--interrupt--skip">Generate / Interrupt / Skip</h3>
+            <p>前述の通り、「Generate」をクリックすると画像の生成が開始される。</p>
+            <p>生成が始まると Interrupt / Skip ボタンに変化する。
+              Interrupt で生成を中断し終了する。
+              Skip は後述の Batch で複数枚生成している場合に、現在生成しているものをスキップできる。</p>
+            <h3 id="生成画像の出力先">生成画像の出力先</h3>
+            <p>生成後に画像下のフォルダボタンをクリックすると、出力先の outputs\txt2img-images フォルダが開かれる。</p>
+            <p>Save ボタンをクリックすると log\images フォルダにコピーが保存される。</p>
+            <h2 id="txt2img-の設定項目">txt2img の設定項目</h2>
+            <h3 id="width-height">Width, Height</h3>
+            <p>生成する画像の幅と高さ。</p>
+            <p>モデルにもよるが、デフォルトの 512 x 512 が一番うまく画像を生成できる。
+              これでは小さいため解像度を上げたくなるが、
+              解像度を上げると破綻した画像が生成されやすくなる。</p>
+            <p>Width, Height はあまり上げずに生成後「Extras」タブにある拡大機能を使うか、
+              画像からの画像生成 (img2img) がオススメ。</p>
+            <p>16:9 の画像を生成したいなら 896 x 512 を指定するとよい。</p>
+            <h3 id="batch-count-batch-size">Batch count, Batch size</h3>
+            <p>Batch size が1回で生成する枚数で、Batch count が何回実行するか。
+              最終的に Batch size × Batch count の枚数が生成される。</p>
+            <p>Batch size を増やすと VRAM の必要量が増える。</p>
+            <h3 id="seed">Seed</h3>
+            <p>乱数の種。
+              Seed の値とモデル、プロンプト等の生成条件が同じであれば毎回同じ画像が生成される。</p>
+            <p>サイコロアイコンをクリックするか -1 を指定すればランダムに、
+              リサイクルアイコンをクリックすると前回と同じ Seed がセットされる。</p>
+            <p>基本的には -1 を指定し画像をランダム生成するが、
+              プロンプトやサンプリングの影響を比較したい場合には値を固定する。</p>
+            <p>右にある Extra にチェックを入れると追加の UI が表示される。
+              Seed を固定し Variation strength を上げることで、
+              大まかな構図はそのままに一部が変わった画像を生成できる。
+              全体の雰囲気はいいけど一部を修正したいときに使える。</p>
+            <h3 id="sampling-method-sampling-steps">Sampling method, Sampling steps</h3>
+            <p>Sampling steps を上げると精緻な絵になるが生成に時間がかかる。
+              上げすぎてもあまり違いがわからない。デフォルトの 20 から 50 くらいがよさそう。</p>
+            <p>Sampling method の違いはよくわからない。
+              「DPM++ SDE karras」を選ぶとデフォルトの「Euler a」より
+              ステップ数が少なくてもいい絵ができる気がする。</p>
+            <h3 id="cfg-scale">CFG Scale</h3>
+            <p>プロンプトに対してどの程度従うかを設定できるらしい。
+              値を大きくすればプロンプトに沿った画像が生成される反面、破綻した画像が生成されやすくなるとか。</p>
+            <p>デフォルトの 7 のままでよさそう。</p>
+            <p>参考: <a href="https://gigazine.net/news/20220928-stable-diffusion-classifier-free-guidance/">画像生成AI「Stable Diffusion」でどれぐらいプロンプト・呪文の指示に従うかを決める「CFG(classifier-free guidance)」とは一体何なのか？ - GIGAZINE</a></p>
+            <h3 id="restore-faces-tiling-hires-fix">Restore faces, Tiling, Hires. fix</h3>
+            <p>Restore faces は人間の顔を生成した際に補正してくれる機能だが、
+              二次元のアニメ調イラストではキャラの目の中に人間の目が描かれて気持ち悪くなるのでオフ推奨。</p>
+            <p>Tiling はタイルのように並べても継ぎ目のないシームレスな画像を生成する。
+              3D のテクスチャを作成するのに使えるらしい。</p>
+            <p>Hires. fix は生成した画像を拡大して高解像度化してくれるがその分時間がかかる。
+              気に入ったものだけをあとから拡大したほうが効率がよいのでオフ推奨。</p>
+            <h2 id="モデルのダウンロードと追加">モデルのダウンロードと追加</h2>
+            <p>web UI の初期状態でもモデルがインストールされるが、
+              画風は実写的でアニメ調の二次元イラストを生成するには向いていない。
+              モデルと呼ばれるファイルを追加することで画風を変えることができる。</p>
+            <h3 id="モデルのダウンロード">モデルのダウンロード</h3>
+            <p>モデルは <a href="https://huggingface.co/spaces/huggingface-projects/diffusers-gallery">Hugging Face</a> や
+              <a href="https://civitai.com/">Civitai</a> などで探してダウンロードする。</p>
+            <p>拡張子が .ckpt または .safetensor のものをダウンロードすればよい。
+              両方用意されている場合は .safetensor のほうが安全性が高いためそちらをダウンロードする。</p>
+            <p>参考: <a href="https://economylife.net/safetensors-ckpt-difference/">AIモデルのsafetensors形式とは何者か？ckptと比較しつつ解説する | 経済的生活日誌</a></p>
+            <h4 id="モデルのファイル名に付いてる-pruned-や-fp16-って何">モデルのファイル名に付いてる pruned や fp16 って何？</h4>
+            <p>画像生成に影響の少ない部分を削って軽量化したもの。
+              pruned や fp16 が用意されている場合はそちらをダウンロードするとよい。</p>
+            <p><a href="https://www.tensorflow.org/guide/mixed_precision?hl=ja">TensorFlow のサイト</a>
+              によると「NVIDIA GPU は float32 よりも float16 で速く演算を実行でき」るらしい。 (float16 = fp16)</p>
+            <h3 id="モデルの追加方法">モデルの追加方法</h3>
+            <ol>
+              <li>モデルをダウンロードする。</li>
+              <li>ダウンロードしたモデルを web UI のフォルダにある models\Stable-diffusion フォルダへ入れる。</li>
+              <li>web UI 画面左上にある「Stable Diffusion checkpoint」右の更新ボタンを押す。</li>
+              <li>リストでモデルが選択できるようになる。</li>
+            </ol>
+            <h3 id="オススメの二次元イラスト系モデル">オススメの二次元イラスト系モデル</h3>
+            <p>以下の2つのモデルはどちらも美しいイラストが生成できるためオススメ。</p>
+            <ul>
+              <li><a href="https://huggingface.co/WarriorMama777/OrangeMixs">AbyssOrangeMix3 (AOM3)</a></li>
+              <li><a href="https://huggingface.co/andite/anything-v4.0">Anything v4.5</a></li>
+            </ul>
+            <p>AbyssOrangeMix3 は A1 から A3 と A1B がある。
+              A1 がアニメ調、A2が絵画調、A1B と A3 が中間。</p>
+            <p>アニメ調 ← A1 A1B A3 A2 → 絵画調</p>
+            <p>どちらのモデルも一緒に VAE (後述) が公開されているのでそちらを利用する。</p>
+            <h2 id="vae">VAE</h2>
+            <p>同じモデルでも VAE によって色が変わり印象が異なってくる。
+              AbyssOrangeMix や Anything のように VAE が一緒に公開されているモデルは
+              そちらを利用したほうがよい。</p>
+            <h3 id="vae-を選択できるようにする">VAE を選択できるようにする</h3>
+            <ol>
+              <li>「Settings」タブをクリック</li>
+              <li>左の一覧から「User interface」をクリック</li>
+              <li>下から4つ目くらいにある「Quicksettings list」に <code class="language-plaintext highlighter-rouge">,sd_vae</code> を追加する (<code class="language-plaintext highlighter-rouge">sd_model_checkpoint,sd_vae</code> になる)</li>
+              <li>上部の「Apply settings」をクリック</li>
+              <li>「Reload UI」をクリック</li>
+            </ol>
+            <h3 id="vae-の追加方法">VAE の追加方法</h3>
+            <ol>
+              <li>VAE をダウンロードする。</li>
+              <li>ダウンロードした VAE を web UI のフォルダにある models\VAE フォルダへ入れる。</li>
+              <li>web UI 画面上部にある「SD VAE」右の更新ボタンを押す。</li>
+              <li>リストで VAE が選択できるようになる。</li>
+            </ol>
+            <h2 id="過去に生成した画像のプロンプト等を確認-png-info">過去に生成した画像のプロンプト等を確認 (PNG Info)</h2>
+            <p>生成した画像を「PNG Info」タブにある「Source」へ
+              ドラッグアンドドロップすることでプロンプト、モデル、Seed 等を確認できる。</p>
+            <p>また、「Send to txt2img」等のボタンを押すことで txt2img 等へコピー可能。
+              過去に生成したものと似た画像を簡単に生成できる。
+              ただし、モデルと VAE は反映されないので注意。</p>
+            <h2 id="画像とテキストからの画像生成-img2img">画像とテキストからの画像生成 (img2img)</h2>
+            <p>「img2img」タブで画像とテキストを元に新たな画像を生成できる。</p>
+            <p>画像により構図やポーズをある程度制御できるため、
+              txt2img と比べ出力画像の解像度を高くしても破綻しにくい。
+              よって、txt2img では解像度低めでランダムに大量生成し、
+              良いものができたら img2img で高解像度化、細部の修正を行うとよい。</p>
+            <p>また、txt2img で生成された画像に足りない要素を手で描き加えたあと再生成するといった使い方もできる。
+              例えば、肌色で直線を描けば腕や足として認識して描き直してくれる。
+              英語で伝えにくい構図やポーズを描かせるのにも有用。</p>
+            <p>プロンプト等の設定は txt2img と同じ。
+              プロンプトなしの画像のみでも生成できるが、プロンプトを入力したほうが当然精度は高い。
+              txt2img で作成した画像を img2img で高解像度化するのであれば同じプロンプトを指定するとよい。</p>
+            <h3 id="元画像の指定">元画像の指定</h3>
+            <p>元となる画像を「ここに画像をドロップ」と書いてあるところにドラッグアンドドロップするだけ。</p>
+            <h3 id="resize-mode">Resize mode</h3>
+            <p>Resize mode は元画像と生成画像の縦横比が違う場合の処理を指定できる。</p>
+            <ul>
+              <li>Just resize<br />
+                元画像の縦横比を無視して生成画像全体に引き伸ばす。<br />
+                元画像が 512 x 512、生成画像が 1280 x 960 なら、元画像が横長の 1280 x 960 に引き伸ばされる。</li>
+              <li>Crop and resize<br />
+                元画像の縦横比を維持して拡大/縮小し、はみ出た部分は無視する。<br />
+                元画像が 512 x 512、生成画像が 1280 x 960 なら、元画像が 1280 x 1280 に引き伸ばされ上下が切れる。</li>
+              <li>Resize and fill<br />
+                元画像の縦横比を維持して拡大/縮小し、足りない部分を埋める。<br />
+                元画像が 512 x 512、生成画像が 1280 x 960 なら、元画像が 960 x 960 に引き伸ばされ左右の足りない部分は自動生成される。</li>
+              <li>Just resize (latent upscale)<br />
+                元画像を高解像度化したあと Just resize と同様の処理を行う。</li>
+            </ul>
+            <h3 id="denoising-strength">Denoising strength</h3>
+            <p>下げると元画像に近いがぼんやりとした画像、上げると元画像と違う画像になっていく。</p>
+            <p>デフォルトの 0.75 では大きく変わる場合があるため、元画像に似せたいなら 0.5 ～ 0.6 くらいへ下げるとよい。</p>
+            <h2 id="img2img-内のタブ">img2img 内のタブ</h2>
+            <ul>
+              <li>Sketch: img2img とほとんど同じだが、画面上の元画像に対してその場で書き込んで修正が可能。</li>
+              <li>Inpaint: 画像の一部のみを生成する。黒く塗りつぶした部分、または塗りつぶしていない部分を描き直す。</li>
+              <li>Inpaint sketch: 画像の一部のみを生成する。色を塗った部分のみ、その色を反映して描き直す。</li>
+              <li>Inpaint upload: Inpaint と同様だがマスクを別画像で指定できる。</li>
+              <li>Batch: ディレクトリを指定してバッチ処理ができる。</li>
+            </ul>
+            <h2 id="画像からプロンプトを生成-interrogate-clip-interrogate-deepbooru">画像からプロンプトを生成 (Interrogate CLIP, Interrogate DeepBooru)</h2>
+            <p>画像を指定したあと「Interrogate CLIP」または「Interrogate DeepBooru」のボタンをクリックすると
+              画像からプロンプトを生成できる。</p>
+            <p>「Interrogate DeepBooru」は Danbooru のタグになる。</p>
+            <h2 id="起動時の引数設定">起動時の引数設定</h2>
+            <p>「webui-user.bat」をテキストエディタで編集することで web UI 起動時の引数を設定できる。</p>
+            <h3 id="xformers-の導入">xFormers の導入</h3>
+            <p>xFormers を導入すると画像生成速度が向上しVRAMの使用量も削減される。
+              ただし、Seed 値を固定しても微妙に異なる画像が生成されるようになるという欠点がある。
+              欠点より利点が大きいため導入したほうがよい。</p>
+            <p>導入方法は簡単で、「webui-user.bat」をテキストエディタで開き</p>
+            <div class="language-plaintext highlighter-rouge">
+              <div class="highlight">
+                <pre class="highlight"><code>set COMMANDLINE_ARGS=
+</code></pre>
+              </div>
+            </div>
+            <p>となっている部分を以下のように変更し保存する。</p>
+            <div class="language-plaintext highlighter-rouge">
+              <div class="highlight">
+                <pre class="highlight"><code>set COMMANDLINE_ARGS=--xformers
+</code></pre>
+              </div>
+            </div>
+            <p>保存後の初回起動時に xFormers がインストールされる。</p>
+            <h3 id="no-half-vae-の指定">–no-half-vae の指定</h3>
+            <p>VAE を変更して画像を生成しているとまれにエラーが発生し、
+              エラーを回避するためには <code class="language-plaintext highlighter-rouge">--no-half-vae</code> というオプションを利用するよう指示されることがある。
+              この場合も同様に「webui-user.bat」をテキストエディタで編集すればよい。</p>
+            <p><code class="language-plaintext highlighter-rouge">--no-half-vae</code> だけを指定するなら</p>
+            <div class="language-plaintext highlighter-rouge">
+              <div class="highlight">
+                <pre class="highlight"><code>set COMMANDLINE_ARGS=--no-half-vae
+</code></pre>
+              </div>
+            </div>
+            <p>xFormers と併用するなら</p>
+            <div class="language-plaintext highlighter-rouge">
+              <div class="highlight">
+                <pre class="highlight"><code>set COMMANDLINE_ARGS=--xformers --no-half-vae
+</code></pre>
+              </div>
+            </div>
+          </article>
+        </div>
+        <div>
+          <h2>タグ「Stable Diffusion」記事一覧</h2>
+          <ul class="tagged-post-list">
+            <li><a href="/blog/2023/03/06/stable-diffusion%E3%82%92windows-10%E3%81%B8%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95%E3%81%A8%E4%BD%BF%E3%81%84%E6%96%B9-%E7%94%BB%E5%83%8F%E7%94%9F%E6%88%90%E3%81%AE%E3%82%B3%E3%83%84.html">Stable Diffusion を Windows 10 へインストールする方法と使い方、画像生成のコツ</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <footer class="site-footer">
+      <div class="wrapper">
+        <nav>
+          <ul>
+            <li><a href="/blog/">ブログ</a></li>
+            <li><a href="/imas/">アイマス</a></li>
+            <li><a href="/software/">ソフトウェア</a></li>
+            <li><a href="/script/">スクリプト</a></li>
+          </ul>
+          <a href="https://twitter.com/saasan" target="_blank" class="twitter-username">
+            saasan
+          </a>
+          <a href="/feed.xml" target="_blank" class="rss">RSS</a>
+        </nav>
+      </div>
+    </footer>
+  </body>
+</html>
