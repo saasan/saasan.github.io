@@ -1,185 +1,96 @@
 <!DOCTYPE html>
-<html lang="ja" ng-app="mobamasDojo" ng-controller="MainController">
-<head>
-  <meta charset="UTF-8">
-  <title>モバマス道場リスト(スマホ用)</title>
-  <link rel="apple-touch-icon" href="//saasan.github.io/img/s2works_favicon.png">
-  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
-  <link rel="stylesheet" href="css/mobamas-dojo.css">
-  <script src="js/mobamas-dojo.min.js"></script>
-  <script data-ad-client="ca-pub-0141905477316976" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:site" content="@saasan">
-  <meta property="og:url" content="http://saasan.github.io/mobamas-dojo/">
-  <meta property="og:title" content="モバマス道場リスト(スマホ用)">
-  <meta property="og:description" content="アイドルマスターシンデレラガールズの道場一覧サイトです。道場とは、わざとLIVEバトルで負けて、親愛度、ファン数、マニーを稼がせてくれる有志の方々の事です。">
-  <meta property="og:image" content="http://saasan.github.io/mobamas-dojo/img/site_thumbnail.png">
-</head>
-<body class="mobamas-dojo">
-  <noscript>
-    <p>JavaScriptを有効にして下さい。</p>
-  </noscript>
-
-  <section id="info" class="info" ng-show="$storage.showWelcomeMessage">
-    <button type="button" class="close" ng-click="$storage.showWelcomeMessage = false"><i class="fa fa-close"></i></button>
-    <h3>モバマス道場リストへようこそ！</h3>
-    <p>
-      ここは
-      <a href="http://sp.pf.mbga.jp/12008305/" target="_blank">アイドルマスターシンデレラガールズ</a>
-      (モバマス、デレマス)の道場一覧サイトです。
-    </p>
-
-    <h4>道場とは？</h4>
-    <section>
-      <p>
-        道場とは、わざとLIVEバトルで負けて、親愛度、ファン数、マニーを稼がせてくれる有志の方々の事です。
-        道場をやる側のメリットはほとんどありません。道場主の方々の厚意で成り立っています。
-        利用後は「応援」してあげましょう。
-      </p>
-    </section>
-
-    <h4>このサイトの使い方</h4>
-    <section>
-      <p>
-        道場を訪問する(タッチして開く)と赤くなります。
-        赤くなった道場は、他の道場を訪問すると消えます。
-        訪問状態は毎朝5時にリセットされ、消えた道場が再表示されます。
-        「道場リスト設定」で赤くなるまでの回数を変更したり、訪問済の道場を表示したままにする事もできます。
-      </p>
-       <p>
-        道場の右にある <i class="fa fa-remove"></i> ボタンを押すと、不要な道場を非表示にできます。
-        非表示にした道場は「道場リスト設定」でリセットするまで再表示されません。
-        守発揮値が高すぎる道場等にご利用下さい。
-      </p>
-    </section>
-  </section>
-
-  <section id="versionedInfo" class="info" ng-init="infoVersion = 26" ng-show="infoVersion > $storage.infoVersion">
-    <button type="button" class="close" ng-click="$storage.infoVersion = infoVersion"><i class="fa fa-close"></i></button>
-    <h3>お知らせ</h3>
-
-    <h4>2022/10/04</h4>
-    <ul>
-      <li>
-        Cinderella API v2へ対応。
-      </li>
-    </ul>
-  </section>
-
-  <section id="birthday" class="info" ng-show="$storage.showBirthday">
-    <button type="button" class="close" ng-click="$storage.showBirthday = false"><i class="fa fa-close"></i></button>
-    <h3>誕生日</h3>
-    <p ng-show="birthdayToday"><a href="http://sp.pf.mbga.jp/12008305/?url=http%3A%2F%2Fmobamas.net%2Fidolmaster%2Fbirthday" target="_blank">本日誕生日のアイドル：{{ birthdayToday }}</a></p>
-    <p ng-hide="birthdayToday">本日誕生日のアイドルはいません</p>
-    <p>次の誕生日は{{ birthdayNext }}</p>
-  </section>
-
-  <section id="toast" class="info {{ class }}" ng-controller="ToastController" ng-show="visible">
-    <button type="button" class="close" ng-click="close()"><i class="fa fa-close"></i></button>
-    <div ng-class="{ undo: callback }" ng-click="onclick()" ng-bind-html="message"></div>
-  </section>
-
-  <section id="mobamasMenu" ng-show="$storage.showMobamasMenu">
-    <a ng-repeat="item in ui.mobamasMenu"
-       ng-show="$storage.showMobamasMenuItem[item.key]"
-       ng-bind-html="item.label" class="btn"
-       href="http://sp.pf.mbga.jp/12008305/{{ item.url }}"></a>
-  </section>
-
-  <section id="viewSettings">
-    <h3 ng-click="$storage.showViewSettings = !$storage.showViewSettings">
-      <i class="fa fa-chevron-up" ng-show="$storage.showViewSettings"></i>
-      <i class="fa fa-chevron-down" ng-hide="$storage.showViewSettings"></i>
-      道場リスト設定
-    </h3>
-    <section class="form" ng-show="$storage.showViewSettings">
-      <section>
-        <select ng-model="$storage.visitedMax" ng-options="item for item in ui.visitedMax"></select>
-        回以上訪問した時、道場を訪問済とする
-      </section>
-      <section>
-        <label>
-          <input type="checkbox" ng-model="$storage.autoHide"> 訪問済の道場を表示しない
-        </label>
-        <label>
-          ┗ <input type="checkbox" ng-model="$storage.keepLastVisited"> 最後に訪問した道場を残す
-        </label>
-      </section>
-      <section>
-        一度に表示する道場数: 最大
-        <select ng-model="$storage.view.limitTo" ng-options="item for item in ui.limitTo"></select>
-        件
-      </section>
-      <section>
-        表示順:
-        <select ng-model="$storage.view.orderBy" ng-options="num as name for (name, num) in ui.orderBy"></select>
-      </section>
-      <section>
-        ランク:
-        <select ng-model="$storage.view.rankRange.min" ng-options="item.value as item.label for item in ui.rankRangeMin"></select>
-        ～
-        <select ng-model="$storage.view.rankRange.max" ng-options="item.value as item.label for item in ui.rankRangeMax"></select>
-      </section>
-      <section>
-        レベル:
-        <select ng-model="$storage.view.levelRange.min" ng-options="item.value as item.label for item in ui.levelRangeMin"></select>
-        ～
-        <select ng-model="$storage.view.levelRange.max" ng-options="item.value as item.label for item in ui.levelRangeMax"></select>
-      </section>
-      <section>
-        守発揮値:
-        <select ng-model="$storage.view.defenseRange.min" ng-options="item.value as item.label for item in ui.defenseRangeMin"></select>
-        ～
-        <select ng-model="$storage.view.defenseRange.max" ng-options="item.value as item.label for item in ui.defenseRangeMax"></select>
-      </section>
-      <section>
-        <label>
-          <input type="checkbox" ng-model="$storage.extendedView"> リーダー等を表示する
-        </label>
-      </section>
-      <section>
-        <label>
-          <input type="checkbox" ng-model="$storage.emphasizedView"> 休業中や発揮値っぽい物を強調する
-        </label>
-      </section>
-      <section>
-        <label>
-          <input type="checkbox" ng-model="$storage.hidePausedDojo"> 休業中っぽい道場を表示しない
-        </label>
-        <small>
-          ※ ユニット名に「休業」等が入っている道場
-        </small>
-      </section>
-      <section>
-        <a class="btn" href="settings.html"><i class="fa fa-cog"></i> その他の設定</a>
-      </section>
-    </section>
-  </section>
-
-  <section class="info-small">
-    <p><small>全道場数: {{ dojos.length }} 件 / 表示中: {{ filtered.length }} 件 / 訪問済: {{ $storage.visited | keyLength }} 件</small></p>
-  </section>
-
-  <section id="dojos" ng-class="{ extendedView: $storage.extendedView, emphasizedView: $storage.emphasizedView }">
-    <div class="btn block dojo" ng-class="dojoClass(dojo)" ng-repeat="dojo in filtered = (dojos | orderBy: ORDER_BY[$storage.view.orderBy] | filter: dojoFilter | limitTo : $storage.view.limitTo)">
-      <a ng-click="onClickDojoLink(dojo)" class="dojo-link"
-         href="{{ $storage.dojoLinkUrl }}{{ dojo.id }}"
-         target="{{ $storage.dojoLinkTarget }}"><span class="detail">{{ dojo.lv }} {{ ui.rank[dojo.rank] }} <span class="unit" ng-bind-html="dojo.htmlUnit"></span></span><span class="defense">{{ dojo.defense }}</span>
-        <div class="extraInfo">
-          <div>ﾘｰﾀﾞｰ：<span ng-bind-html="dojo.leader"></span></div>
-          <div>ｺﾒﾝﾄ：<span ng-bind-html="dojo.comment"></span></div>
-          <div>最終取得：<span am-time-ago="dojo.lastUpdate"></span></div>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <title>モバマス道場リスト(スマホ用)</title>
+    <link href='//fonts.googleapis.com/css?family=Orbitron:500' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="canonical" href="https://saasan.github.io/mobamas-dojo/">
+    <link rel="alternate" type="application/rss+xml" title="saasan.github.io" href="https://saasan.github.io/feed.xml" />
+    <link rel="apple-touch-icon" href="https://saasan.github.io/img/s2works_favicon.png">
+    <script data-ad-client="ca-pub-0141905477316976" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@saasan">
+    <meta property="og:url" content="https://saasan.github.io/mobamas-dojo/">
+    <meta property="og:title" content="モバマス道場リスト(スマホ用)">
+    <meta property="og:description" content="モバマスのサービス終了に伴い、モバマス道場リストも終了しました。">
+    <meta property="og:image" content="https://saasan.github.io/img/s2works_favicon.png">
+    <script type="application/ld+json">
+      {
+          "@context": "http://schema.org/",
+          "@type": "Person",
+          "name": "saasan",
+          "sameAs": [
+              "https://twitter.com/saasan",
+              "https://github.com/saasan"
+          ]
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+          "@context": "http://schema.org",
+          "@type": "Article",
+          "name": "モバマス道場リスト(スマホ用)",
+          "datePublished": "2023-03-30T21:20:00+09:00",
+          "headline": "モバマスのサービス終了に伴い、モバマス道場リストも終了しました。",
+          "image": "https://saasan.github.io/img/s2works_favicon.png",
+          "url": "https://saasan.github.io/mobamas-dojo/",
+          "publisher" : {
+              "@type": "Person",
+              "name": "saasan"
+          }
+      }
+    </script>
+  </head>
+  <body itemscope itemtype="http://schema.org/WebPage">
+    <header class="site-header">
+      <div class="wrapper">
+        <a class="site-title" href="/">saasan.github.io</a>
+        <nav class="site-nav">
+          <div class="site-nav-contents">
+            <ul>
+              <li><a href="/blog/">ブログ</a></li>
+              <li><a href="/imas/">アイマス</a></li>
+              <li><a href="/software/">ソフトウェア</a></li>
+              <li><a href="/script/">スクリプト</a></li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+    </header>
+    <div class="page-content">
+      <div class="wrapper">
+        <div class="post" itemprop="mainContentOfPage" itemscope itemtype="http://schema.org/WebPageElement">
+          <header class="post-header">
+            <h1 class="post-title">モバマス道場リスト(スマホ用)</h1>
+            <div class="post-meta">
+              <time datetime="2023-03-30T21:20:00+09:00" itemprop="dateModified">2023/03/30</time>
+            </div>
+          </header>
+          <article class="post-content">
+            <p>モバマスのサービス終了に伴い、モバマス道場リストも終了しました。</p>
+            <p>2013年3月の開始から10年間ご利用いただき、誠にありがとうございました。</p>
+          </article>
         </div>
-      </a>
-      <button ng-click="onClickHideDojo(dojo)" type="button" class="hide-dojo"><i class="fa fa-remove"></i></button>
+      </div>
     </div>
-  </section>
-
-  <section>
-    <a class="btn block" href="about.html">このサイトについて</a>
-    <a class="btn block" href="/imas/">「アイマス関連」に戻る</a>
-  </section>
-</body>
+    <footer class="site-footer">
+      <div class="wrapper">
+        <nav>
+          <ul>
+            <li><a href="/blog/">ブログ</a></li>
+            <li><a href="/imas/">アイマス</a></li>
+            <li><a href="/software/">ソフトウェア</a></li>
+            <li><a href="/script/">スクリプト</a></li>
+          </ul>
+          <a href="https://twitter.com/saasan" target="_blank" class="twitter-username">
+            saasan
+          </a>
+          <a href="/feed.xml" target="_blank" class="rss">RSS</a>
+        </nav>
+      </div>
+    </footer>
+  </body>
 </html>
