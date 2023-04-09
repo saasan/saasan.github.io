@@ -5,8 +5,8 @@
         <description></description>
         <link>https://saasan.github.io/</link>
         <atom:link href="https://saasan.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-        <pubDate>Thu, 30 Mar 2023 21:23:42 +0900</pubDate>
-        <lastBuildDate>Thu, 30 Mar 2023 21:23:42 +0900</lastBuildDate>
+        <pubDate>Mon, 10 Apr 2023 03:22:02 +0900</pubDate>
+        <lastBuildDate>Mon, 10 Apr 2023 03:22:02 +0900</lastBuildDate>
         <generator>Jekyll v4.2.2</generator>
         
             <item>
@@ -170,8 +170,8 @@ Skip は後述の Batch で複数枚生成している場合に、現在生成�
 これでは小さいため解像度を上げたくなるが、
 解像度を上げると破綻した画像が生成されやすくなる。&lt;/p&gt;
 
-&lt;p&gt;Width, Height はあまり上げずに生成後「Extras」タブにある拡大機能を使うか、
-画像からの画像生成 (img2img) がオススメ。&lt;/p&gt;
+&lt;p&gt;Width, Height はあまり上げずに下記の Hires. fix や
+「Extras」タブにある拡大機能、画像からの画像生成 (img2img) がオススメ。&lt;/p&gt;
 
 &lt;p&gt;16:9 の画像を生成したいなら 896 x 512 を指定するとよい。&lt;/p&gt;
 
@@ -216,7 +216,7 @@ Seed を固定し Variation strength を上げることで、
 
 &lt;p&gt;参考: &lt;a href=&quot;https://gigazine.net/news/20220928-stable-diffusion-classifier-free-guidance/&quot;&gt;画像生成AI「Stable Diffusion」でどれぐらいプロンプト・呪文の指示に従うかを決める「CFG(classifier-free guidance)」とは一体何なのか？ - GIGAZINE&lt;/a&gt;&lt;/p&gt;
 
-&lt;h3 id=&quot;restore-faces-tiling-hires-fix&quot;&gt;Restore faces, Tiling, Hires. fix&lt;/h3&gt;
+&lt;h3 id=&quot;restore-faces-tiling&quot;&gt;Restore faces, Tiling&lt;/h3&gt;
 
 &lt;p&gt;Restore faces は人間の顔を生成した際に補正してくれる機能だが、
 二次元のアニメ調イラストではキャラの目の中に人間の目が描かれて気持ち悪くなるのでオフ推奨。&lt;/p&gt;
@@ -224,8 +224,24 @@ Seed を固定し Variation strength を上げることで、
 &lt;p&gt;Tiling はタイルのように並べても継ぎ目のないシームレスな画像を生成する。
 3D のテクスチャを作成するのに使えるらしい。&lt;/p&gt;
 
-&lt;p&gt;Hires. fix は生成した画像を拡大して高解像度化してくれるがその分時間がかかる。
-気に入ったものだけをあとから拡大したほうが効率がよいのでオフ推奨。&lt;/p&gt;
+&lt;h3 id=&quot;hires-fix&quot;&gt;Hires. fix&lt;/h3&gt;
+
+&lt;p&gt;生成した画像を拡大して高解像度化してくれるがその分時間がかかる。
+&lt;del&gt;気に入ったものだけをあとから拡大したほうが効率がよいのでオフ推奨。&lt;/del&gt;&lt;/p&gt;
+
+&lt;p&gt;2023/04/10 追記：Hires. fix の Upscaler で Latent 系を選択すると細部の描き込みが追加される。
+単純な拡大機能である「Extras」タブと違い、イラストが改変されるため元のイラストと印象が異なってくる。&lt;/p&gt;
+
+&lt;h4 id=&quot;hires-steps&quot;&gt;Hires steps&lt;/h4&gt;
+
+&lt;p&gt;おそらく Sampling steps と似たようなものだと思われるが上げてもあまり違いがわからない。
+デフォルトの 0 でよさそう。&lt;/p&gt;
+
+&lt;h4 id=&quot;denoising-strength&quot;&gt;Denoising strength&lt;/h4&gt;
+
+&lt;p&gt;下げると元画像に近いがぼんやりとした画像、上げると元画像と違う画像になっていく。&lt;/p&gt;
+
+&lt;p&gt;デフォルトの 0.7 では大きく変わる場合があるため、元画像に似せたいなら 0.5 ～ 0.6 くらいへ下げるとよい。&lt;/p&gt;
 
 &lt;h2 id=&quot;モデルのダウンロードと追加&quot;&gt;モデルのダウンロードと追加&lt;/h2&gt;
 
@@ -349,7 +365,7 @@ txt2img で作成した画像を img2img で高解像度化するのであれば
 元画像を高解像度化したあと Just resize と同様の処理を行う。&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h3 id=&quot;denoising-strength&quot;&gt;Denoising strength&lt;/h3&gt;
+&lt;h3 id=&quot;denoising-strength-1&quot;&gt;Denoising strength&lt;/h3&gt;
 
 &lt;p&gt;下げると元画像に近いがぼんやりとした画像、上げると元画像と違う画像になっていく。&lt;/p&gt;
 

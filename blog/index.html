@@ -200,8 +200,8 @@ pip install --upgrade fastapi==0.90.1
                 <p>モデルにもよるが、デフォルトの 512 x 512 が一番うまく画像を生成できる。
                   これでは小さいため解像度を上げたくなるが、
                   解像度を上げると破綻した画像が生成されやすくなる。</p>
-                <p>Width, Height はあまり上げずに生成後「Extras」タブにある拡大機能を使うか、
-                  画像からの画像生成 (img2img) がオススメ。</p>
+                <p>Width, Height はあまり上げずに下記の Hires. fix や
+                  「Extras」タブにある拡大機能、画像からの画像生成 (img2img) がオススメ。</p>
                 <p>16:9 の画像を生成したいなら 896 x 512 を指定するとよい。</p>
                 <h3 id="batch-count-batch-size">Batch count, Batch size</h3>
                 <p>Batch size が1回で生成する枚数で、Batch count が何回実行するか。
@@ -229,13 +229,22 @@ pip install --upgrade fastapi==0.90.1
                   値を大きくすればプロンプトに沿った画像が生成される反面、破綻した画像が生成されやすくなるとか。</p>
                 <p>デフォルトの 7 のままでよさそう。</p>
                 <p>参考: <a href="https://gigazine.net/news/20220928-stable-diffusion-classifier-free-guidance/">画像生成AI「Stable Diffusion」でどれぐらいプロンプト・呪文の指示に従うかを決める「CFG(classifier-free guidance)」とは一体何なのか？ - GIGAZINE</a></p>
-                <h3 id="restore-faces-tiling-hires-fix">Restore faces, Tiling, Hires. fix</h3>
+                <h3 id="restore-faces-tiling">Restore faces, Tiling</h3>
                 <p>Restore faces は人間の顔を生成した際に補正してくれる機能だが、
                   二次元のアニメ調イラストではキャラの目の中に人間の目が描かれて気持ち悪くなるのでオフ推奨。</p>
                 <p>Tiling はタイルのように並べても継ぎ目のないシームレスな画像を生成する。
                   3D のテクスチャを作成するのに使えるらしい。</p>
-                <p>Hires. fix は生成した画像を拡大して高解像度化してくれるがその分時間がかかる。
-                  気に入ったものだけをあとから拡大したほうが効率がよいのでオフ推奨。</p>
+                <h3 id="hires-fix">Hires. fix</h3>
+                <p>生成した画像を拡大して高解像度化してくれるがその分時間がかかる。
+                  <del>気に入ったものだけをあとから拡大したほうが効率がよいのでオフ推奨。</del></p>
+                <p>2023/04/10 追記：Hires. fix の Upscaler で Latent 系を選択すると細部の描き込みが追加される。
+                  単純な拡大機能である「Extras」タブと違い、イラストが改変されるため元のイラストと印象が異なってくる。</p>
+                <h4 id="hires-steps">Hires steps</h4>
+                <p>おそらく Sampling steps と似たようなものだと思われるが上げてもあまり違いがわからない。
+                  デフォルトの 0 でよさそう。</p>
+                <h4 id="denoising-strength">Denoising strength</h4>
+                <p>下げると元画像に近いがぼんやりとした画像、上げると元画像と違う画像になっていく。</p>
+                <p>デフォルトの 0.7 では大きく変わる場合があるため、元画像に似せたいなら 0.5 ～ 0.6 くらいへ下げるとよい。</p>
                 <h2 id="モデルのダウンロードと追加">モデルのダウンロードと追加</h2>
                 <p>web UI の初期状態でもモデルがインストールされるが、
                   画風は実写的でアニメ調の二次元イラストを生成するには向いていない。
@@ -322,7 +331,7 @@ pip install --upgrade fastapi==0.90.1
                   <li>Just resize (latent upscale)<br />
                     元画像を高解像度化したあと Just resize と同様の処理を行う。</li>
                 </ul>
-                <h3 id="denoising-strength">Denoising strength</h3>
+                <h3 id="denoising-strength-1">Denoising strength</h3>
                 <p>下げると元画像に近いがぼんやりとした画像、上げると元画像と違う画像になっていく。</p>
                 <p>デフォルトの 0.75 では大きく変わる場合があるため、元画像に似せたいなら 0.5 ～ 0.6 くらいへ下げるとよい。</p>
                 <h2 id="img2img-内のタブ">img2img 内のタブ</h2>
