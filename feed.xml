@@ -5,8 +5,8 @@
         <description></description>
         <link>https://saasan.github.io/</link>
         <atom:link href="https://saasan.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-        <pubDate>Mon, 10 Apr 2023 03:22:02 +0900</pubDate>
-        <lastBuildDate>Mon, 10 Apr 2023 03:22:02 +0900</lastBuildDate>
+        <pubDate>Mon, 10 Apr 2023 04:14:57 +0900</pubDate>
+        <lastBuildDate>Mon, 10 Apr 2023 04:14:57 +0900</lastBuildDate>
         <generator>Jekyll v4.2.2</generator>
         
             <item>
@@ -235,7 +235,7 @@ Seed を固定し Variation strength を上げることで、
 &lt;h4 id=&quot;hires-steps&quot;&gt;Hires steps&lt;/h4&gt;
 
 &lt;p&gt;おそらく Sampling steps と似たようなものだと思われるが上げてもあまり違いがわからない。
-デフォルトの 0 でよさそう。&lt;/p&gt;
+デフォルトの 0 では Sampling steps と同じ値が使用される。&lt;/p&gt;
 
 &lt;h4 id=&quot;denoising-strength&quot;&gt;Denoising strength&lt;/h4&gt;
 
