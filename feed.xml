@@ -5,8 +5,8 @@
         <description></description>
         <link>https://saasan.github.io/</link>
         <atom:link href="https://saasan.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-        <pubDate>Mon, 10 Apr 2023 04:14:57 +0900</pubDate>
-        <lastBuildDate>Mon, 10 Apr 2023 04:14:57 +0900</lastBuildDate>
+        <pubDate>Sat, 15 Apr 2023 12:53:23 +0900</pubDate>
+        <lastBuildDate>Sat, 15 Apr 2023 12:53:23 +0900</lastBuildDate>
         <generator>Jekyll v4.2.2</generator>
         
             <item>
@@ -387,6 +387,56 @@ txt2img で作成した画像を img2img で高解像度化するのであれば
 画像からプロンプトを生成できる。&lt;/p&gt;
 
 &lt;p&gt;「Interrogate DeepBooru」は Danbooru のタグになる。&lt;/p&gt;
+
+&lt;h2 id=&quot;設定-settings&quot;&gt;設定 (Settings)&lt;/h2&gt;
+
+&lt;p&gt;「Settings」タブで設定が変更できる。
+全部説明するとキリがないため個人的に便利だと思う設定を紹介。&lt;/p&gt;
+
+&lt;h3 id=&quot;saving-imagesgrids--images-filename-pattern&quot;&gt;Saving images/grids &amp;gt; Images filename pattern&lt;/h3&gt;
+
+&lt;p&gt;出力するファイル名のパターン。&lt;/p&gt;
+
+&lt;p&gt;デフォルトの空欄状態だと同日内での連番と Seed 値になるため、
+他の日付のものと同じフォルダに入れたとき順番がバラバラになる。
+以下を設定し、直下にある「Add number to filename when saving」のチェックをはずすと、
+ファイル名が日付と時刻となるため便利。&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[datetime&amp;lt;%Y-%m-%d %H%M%S&amp;gt;&amp;lt;+0900&amp;gt;]-[seed]-[model_name]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;ファイル名に使用できるタグは「Images filename pattern」という文字にマウスカーソルを合わせると表示される。&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;[steps],
+[cfg],
+[prompt_hash],
+[prompt],
+[prompt_no_styles],
+[prompt_spaces],
+[width],
+[height],
+[styles],
+[sampler],
+[seed],
+[model_hash],
+[model_name],
+[prompt_words],
+[date],
+[datetime],
+[datetime&amp;lt;Format&amp;gt;],
+[datetime&amp;lt;Format&amp;gt;&amp;lt;Time Zone&amp;gt;],
+[job_timestamp]&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;saving-imagesgrids--always-save-all-generated-image-grids-とuser-interface--show-grid-in-results-for-web&quot;&gt;Saving images/grids &amp;gt; Always save all generated image grids と&lt;br /&gt;User interface &amp;gt; Show grid in results for web&lt;/h3&gt;
+
+&lt;p&gt;生成した画像を縦横に連結したグリッド画像を生成する設定。&lt;/p&gt;
+
+&lt;p&gt;Batch で大量の画像を生成すると、完了後に
+Interrupt / Skip ボタンが Generate ボタンへ戻るのに時間がかかる。
+これはグリッド画像の作成が原因のため、
+待ちたくない場合は上記のチェックをはずすと良い。&lt;/p&gt;
 
 &lt;h2 id=&quot;起動時の引数設定&quot;&gt;起動時の引数設定&lt;/h2&gt;
 

@@ -345,6 +345,50 @@ pip install --upgrade fastapi==0.90.1
             <p>画像を指定したあと「Interrogate CLIP」または「Interrogate DeepBooru」のボタンをクリックすると
               画像からプロンプトを生成できる。</p>
             <p>「Interrogate DeepBooru」は Danbooru のタグになる。</p>
+            <h2 id="設定-settings">設定 (Settings)</h2>
+            <p>「Settings」タブで設定が変更できる。
+              全部説明するとキリがないため個人的に便利だと思う設定を紹介。</p>
+            <h3 id="saving-imagesgrids--images-filename-pattern">Saving images/grids &gt; Images filename pattern</h3>
+            <p>出力するファイル名のパターン。</p>
+            <p>デフォルトの空欄状態だと同日内での連番と Seed 値になるため、
+              他の日付のものと同じフォルダに入れたとき順番がバラバラになる。
+              以下を設定し、直下にある「Add number to filename when saving」のチェックをはずすと、
+              ファイル名が日付と時刻となるため便利。</p>
+            <div class="language-plaintext highlighter-rouge">
+              <div class="highlight">
+                <pre class="highlight"><code>[datetime&lt;%Y-%m-%d %H%M%S&gt;&lt;+0900&gt;]-[seed]-[model_name]
+</code></pre>
+              </div>
+            </div>
+            <p>ファイル名に使用できるタグは「Images filename pattern」という文字にマウスカーソルを合わせると表示される。</p>
+            <blockquote>
+              <p>[steps],
+                [cfg],
+                [prompt_hash],
+                [prompt],
+                [prompt_no_styles],
+                [prompt_spaces],
+                [width],
+                [height],
+                [styles],
+                [sampler],
+                [seed],
+                [model_hash],
+                [model_name],
+                [prompt_words],
+                [date],
+                [datetime],
+                [datetime&lt;Format&gt;],
+                [datetime&lt;Format&gt;&lt;Time Zone&gt;],
+                [job_timestamp]</p>
+            </blockquote>
+            <h3 id="saving-imagesgrids--always-save-all-generated-image-grids-とuser-interface--show-grid-in-results-for-web">Saving images/grids &gt; Always save all generated image grids と<br />
+              User interface &gt; Show grid in results for web</h3>
+            <p>生成した画像を縦横に連結したグリッド画像を生成する設定。</p>
+            <p>Batch で大量の画像を生成すると、完了後に
+              Interrupt / Skip ボタンが Generate ボタンへ戻るのに時間がかかる。
+              これはグリッド画像の作成が原因のため、
+              待ちたくない場合は上記のチェックをはずすと良い。</p>
             <h2 id="起動時の引数設定">起動時の引数設定</h2>
             <p>「webui-user.bat」をテキストエディタで編集することで web UI 起動時の引数を設定できる。</p>
             <h3 id="xformers-の導入">xFormers の導入</h3>
