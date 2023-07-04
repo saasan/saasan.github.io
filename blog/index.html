@@ -69,6 +69,101 @@
           </header>
           <article class="post-content">
             <section>
+              <h2><a class="post-link" href="/blog/2023/07/05/ifttt%E3%81%AEtwitter%E9%80%A3%E6%90%BA%E3%81%8C%E6%9C%89%E6%96%99%E5%8C%96%E3%81%97%E3%81%9F%E3%81%AE%E3%81%A7python%E3%81%A8github-actions%E3%81%A7rss%E3%82%92%E3%83%84%E3%82%A4%E3%83%BC%E3%83%88%E3%81%99%E3%82%8B.html">IFTTT の Twitter 連携が有料化したので Python と GitHub Actions で RSS をツイートする</a></h2>
+              <div class="post-meta">2023-07-05</div>
+              <section>
+                <p>IFTTT で動かしてた某ゲーム公式サイトの RSS をツイートするやつが
+                  Twitter 連携の有料化によって動かなくなったため、
+                  GitHub Actions で自作の Python スクリプトを動かして代用することにした。</p>
+                <p>コードは以下のリポジトリにある。</p>
+                <p><a href="https://github.com/saasan/feed2tweet"><img src="https://github-link-card.s3.ap-northeast-1.amazonaws.com/saasan/feed2tweet.png" width="460px" /></a></p>
+                <h2 id="なぜ-github-actions-なのか">なぜ GitHub Actions なのか？</h2>
+                <ol>
+                  <li>Public リポジトリなら無料で利用可能</li>
+                  <li>定期的な実行が可能</li>
+                  <li>データの永続化に近いことが可能</li>
+                  <li>GitHub Actions の利用経験がなかったため学習用として</li>
+                </ol>
+                <p>RSS 内のどこまでツイートしたかを判別するためその情報を保存しておきたいが、
+                  IFTTT を利用する前に調べた際は
+                  無料で利用可能でデータの永続化が可能なサービスが見つからなかった記憶がある。</p>
+                <p>今回いくつかの候補の中から GitHub Actions について調べていたところ、
+                  <a href="https://mjhd.hatenablog.com/entry/2022/06/04/104711">Github Actionsのcacheをデータの永続化(?)に使う - MJHD</a>
+                  を見て cache が永続化に利用できると知り GitHub Actions を利用することとした。</p>
+                <h2 id="github-actions-の-cache">Github Actions の cache</h2>
+                <p>公式のドキュメント: 
+                  <a href="https://docs.github.com/ja/actions/using-workflows/caching-dependencies-to-speed-up-workflows">依存関係をキャッシュしてワークフローのスピードを上げる - GitHub Docs</a></p>
+                <p>ファイルをキャッシュとして保存し、次回以降のワークフロー実行時に利用できる。</p>
+                <p>本来はビルドに必要なライブラリなど依存関係を保持しておき
+                  ワークフローの実行を高速化するためのものだが、
+                  データの永続化に利用することも可能。</p>
+                <p>ただし、7日間以上アクセスされていないキャッシュは削除される。容量は最大10 GB。</p>
+                <h2 id="キャッシュの利用方法">キャッシュの利用方法</h2>
+                <p>キャッシュを上書きすることはできないため、
+                  保存時は常に新しいキャッシュを作成し、
+                  読込時は最新のものを取得する必要がある。</p>
+                <p>以下のように key に新しいキーを指定することで新しいキャッシュを作成、
+                  restore-keys に接頭辞のみ指定すると最新のものが取得できる。</p>
+                <div class="language-plaintext highlighter-rouge">
+                  <div class="highlight">
+                    <pre class="highlight"><code>- name: actions/cache用keyの生成
+  run: echo "CACHE_TIMESTAMP=$(date +%s)" &gt;&gt; "$GITHUB_ENV"
+
+- uses: actions/cache@v3
+  id: tweeted
+  with:
+    path: ./tweeted
+    key: tweeted-$
+    restore-keys: tweeted-
+</code></pre>
+                  </div>
+                </div>
+                <h2 id="古いキャッシュの削除">古いキャッシュの削除</h2>
+                <p>前述の通り放置していても古いキャッシュは7日で消えるが、
+                  <a href="https://zenn.dev/hankei6km/articles/manage-cache-in-github-actions-2023-01">GitHub Actions の Cache 管理(2023 年 1 月の場合)</a>
+                  を参考に、1日経ったキャッシュはワークフロー内で削除することとした。</p>
+                <p>GitHub CLI の
+                  extension (<a href="https://github.com/actions/gh-actions-cache">gh-actions-cache</a>)
+                  を使用している。</p>
+                <div class="language-plaintext highlighter-rouge">
+                  <div class="highlight">
+                    <pre class="highlight"><code>- name: Cleanup cache
+  run: |
+    gh extension install actions/gh-actions-cache
+
+    # キャッシュがない場合にエラーとなって停止するのを防ぐ
+    set +e
+
+    # 作成から1日以上経っているキャッシュを削除
+    for KEY in $(gh actions-cache list -R "${REPO}" -B "${BRANCH}" --key $ --order asc --sort created-at | grep -P 'days? ago' | cut -f 1)
+    do
+        echo "Deleting ${KEY}"
+        gh actions-cache delete "${KEY}" -R "${REPO}" -B "${BRANCH}" --confirm
+    done
+  env:
+    GH_TOKEN: $
+    REPO: $
+    BRANCH: $
+</code></pre>
+                  </div>
+                </div>
+                <h2 id="github-actions-での定期実行に関する注意点">GitHub Actions での定期実行に関する注意点</h2>
+                <p>以下のように schedule で10分毎に実行する設定としたが、
+                  <a href="https://docs.github.com/ja/actions/using-workflows/events-that-trigger-workflows#schedule">公式のドキュメント</a>
+                  にも書かれている通り、負荷が高い場合は遅延したりそもそも実行されない場合がある。</p>
+                <div class="language-plaintext highlighter-rouge">
+                  <div class="highlight">
+                    <pre class="highlight"><code>on:
+  schedule:
+    - cron: '3-59/10 * * * *'
+</code></pre>
+                  </div>
+                </div>
+                <p>実際半日で72回ほど動くはずが53回しか動いていなかった。
+                  確実に動かしたいものは避けたほうがよい。</p>
+              </section>
+            </section>
+            <section>
               <h2><a class="post-link" href="/blog/2023/03/06/stable-diffusion%E3%82%92windows-10%E3%81%B8%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95%E3%81%A8%E4%BD%BF%E3%81%84%E6%96%B9-%E7%94%BB%E5%83%8F%E7%94%9F%E6%88%90%E3%81%AE%E3%82%B3%E3%83%84.html">Stable Diffusion を Windows 10 へインストールする方法と使い方、画像生成のコツ</a></h2>
               <div class="post-meta">2023-03-06</div>
               <section>
@@ -589,27 +684,6 @@ pip install --upgrade fastapi==0.90.1
                   でもいい。</p>
               </section>
             </section>
-            <section>
-              <h2><a class="post-link" href="/blog/2022/09/07/mozilla-firefox%E3%81%A7web%E3%82%B5%E3%82%A4%E3%83%88%E3%81%AE%E3%83%80%E3%83%BC%E3%82%AF%E3%83%A2%E3%83%BC%E3%83%89%E3%82%92%E7%84%A1%E5%8A%B9%E5%8C%96%E3%81%99%E3%82%8B.html">Mozilla Firefox で Web サイトのダークモードを無効化する</a></h2>
-              <div class="post-meta">2022-09-07</div>
-              <section>
-                <p>Firefox 本体はダークテーマを使いたいけど
-                  Web サイトまでダークモードになると文字が読みづらい。</p>
-                <p>そんな私みたいにわがままな人向けなのかは分からないが
-                  Firefox には Web サイトだけライトモードにする方法があった。</p>
-                <p><code class="language-plaintext highlighter-rouge">about:config</code> で
-                  <code class="language-plaintext highlighter-rouge">layout.css.prefers-color-scheme.content-override</code>
-                  を変更すればいいらしい。</p>
-                <ul>
-                  <li>0: ダーク固定</li>
-                  <li>1: ライト固定</li>
-                  <li>2: OS の設定に従う</li>
-                  <li>3: Firefox のテーマに従う</li>
-                </ul>
-                <p>デフォルト値は 3。</p>
-                <p>当然だがこれを 0 にしても対応していないサイトはダークモードにならない。</p>
-              </section>
-            </section>
             <div class="pagination">
               <span>&laquo; 前のページ</span>
               <em>1</em>
@@ -618,6 +692,7 @@ pip install --upgrade fastapi==0.90.1
               <a href="/blog/page4/">4</a>
               <a href="/blog/page5/">5</a>
               <a href="/blog/page6/">6</a>
+              <a href="/blog/page7/">7</a>
               <a href="/blog/page2/">次のページ &raquo;</a>
             </div>
           </article>

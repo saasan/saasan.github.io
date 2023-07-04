@@ -5,9 +5,121 @@
         <description></description>
         <link>https://saasan.github.io/</link>
         <atom:link href="https://saasan.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-        <pubDate>Mon, 24 Apr 2023 14:39:24 +0900</pubDate>
-        <lastBuildDate>Mon, 24 Apr 2023 14:39:24 +0900</lastBuildDate>
+        <pubDate>Wed, 05 Jul 2023 00:27:11 +0900</pubDate>
+        <lastBuildDate>Wed, 05 Jul 2023 00:27:11 +0900</lastBuildDate>
         <generator>Jekyll v4.2.2</generator>
+        
+            <item>
+                <title>IFTTT の Twitter 連携が有料化したので Python と GitHub Actions で RSS をツイートする</title>
+                <description>&lt;p&gt;IFTTT で動かしてた某ゲーム公式サイトの RSS をツイートするやつが
+Twitter 連携の有料化によって動かなくなったため、
+GitHub Actions で自作の Python スクリプトを動かして代用することにした。&lt;/p&gt;
+
+&lt;p&gt;コードは以下のリポジトリにある。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/saasan/feed2tweet&quot;&gt;&lt;img src=&quot;https://github-link-card.s3.ap-northeast-1.amazonaws.com/saasan/feed2tweet.png&quot; width=&quot;460px&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;なぜ-github-actions-なのか&quot;&gt;なぜ GitHub Actions なのか？&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Public リポジトリなら無料で利用可能&lt;/li&gt;
+  &lt;li&gt;定期的な実行が可能&lt;/li&gt;
+  &lt;li&gt;データの永続化に近いことが可能&lt;/li&gt;
+  &lt;li&gt;GitHub Actions の利用経験がなかったため学習用として&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;RSS 内のどこまでツイートしたかを判別するためその情報を保存しておきたいが、
+IFTTT を利用する前に調べた際は
+無料で利用可能でデータの永続化が可能なサービスが見つからなかった記憶がある。&lt;/p&gt;
+
+&lt;p&gt;今回いくつかの候補の中から GitHub Actions について調べていたところ、
+&lt;a href=&quot;https://mjhd.hatenablog.com/entry/2022/06/04/104711&quot;&gt;Github Actionsのcacheをデータの永続化(?)に使う - MJHD&lt;/a&gt;
+を見て cache が永続化に利用できると知り GitHub Actions を利用することとした。&lt;/p&gt;
+
+&lt;h2 id=&quot;github-actions-の-cache&quot;&gt;Github Actions の cache&lt;/h2&gt;
+
+&lt;p&gt;公式のドキュメント: 
+&lt;a href=&quot;https://docs.github.com/ja/actions/using-workflows/caching-dependencies-to-speed-up-workflows&quot;&gt;依存関係をキャッシュしてワークフローのスピードを上げる - GitHub Docs&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;ファイルをキャッシュとして保存し、次回以降のワークフロー実行時に利用できる。&lt;/p&gt;
+
+&lt;p&gt;本来はビルドに必要なライブラリなど依存関係を保持しておき
+ワークフローの実行を高速化するためのものだが、
+データの永続化に利用することも可能。&lt;/p&gt;
+
+&lt;p&gt;ただし、7日間以上アクセスされていないキャッシュは削除される。容量は最大10 GB。&lt;/p&gt;
+
+&lt;h2 id=&quot;キャッシュの利用方法&quot;&gt;キャッシュの利用方法&lt;/h2&gt;
+
+&lt;p&gt;キャッシュを上書きすることはできないため、
+保存時は常に新しいキャッシュを作成し、
+読込時は最新のものを取得する必要がある。&lt;/p&gt;
+
+&lt;p&gt;以下のように key に新しいキーを指定することで新しいキャッシュを作成、
+restore-keys に接頭辞のみ指定すると最新のものが取得できる。&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;- name: actions/cache用keyの生成
+  run: echo &quot;CACHE_TIMESTAMP=$(date +%s)&quot; &amp;gt;&amp;gt; &quot;$GITHUB_ENV&quot;
+
+- uses: actions/cache@v3
+  id: tweeted
+  with:
+    path: ./tweeted
+    key: tweeted-$
+    restore-keys: tweeted-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;古いキャッシュの削除&quot;&gt;古いキャッシュの削除&lt;/h2&gt;
+
+&lt;p&gt;前述の通り放置していても古いキャッシュは7日で消えるが、
+&lt;a href=&quot;https://zenn.dev/hankei6km/articles/manage-cache-in-github-actions-2023-01&quot;&gt;GitHub Actions の Cache 管理(2023 年 1 月の場合)&lt;/a&gt;
+を参考に、1日経ったキャッシュはワークフロー内で削除することとした。&lt;/p&gt;
+
+&lt;p&gt;GitHub CLI の
+extension (&lt;a href=&quot;https://github.com/actions/gh-actions-cache&quot;&gt;gh-actions-cache&lt;/a&gt;)
+を使用している。&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;- name: Cleanup cache
+  run: |
+    gh extension install actions/gh-actions-cache
+
+    # キャッシュがない場合にエラーとなって停止するのを防ぐ
+    set +e
+
+    # 作成から1日以上経っているキャッシュを削除
+    for KEY in $(gh actions-cache list -R &quot;${REPO}&quot; -B &quot;${BRANCH}&quot; --key $ --order asc --sort created-at | grep -P &apos;days? ago&apos; | cut -f 1)
+    do
+        echo &quot;Deleting ${KEY}&quot;
+        gh actions-cache delete &quot;${KEY}&quot; -R &quot;${REPO}&quot; -B &quot;${BRANCH}&quot; --confirm
+    done
+  env:
+    GH_TOKEN: $
+    REPO: $
+    BRANCH: $
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;github-actions-での定期実行に関する注意点&quot;&gt;GitHub Actions での定期実行に関する注意点&lt;/h2&gt;
+
+&lt;p&gt;以下のように schedule で10分毎に実行する設定としたが、
+&lt;a href=&quot;https://docs.github.com/ja/actions/using-workflows/events-that-trigger-workflows#schedule&quot;&gt;公式のドキュメント&lt;/a&gt;
+にも書かれている通り、負荷が高い場合は遅延したりそもそも実行されない場合がある。&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;on:
+  schedule:
+    - cron: &apos;3-59/10 * * * *&apos;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;実際半日で72回ほど動くはずが53回しか動いていなかった。
+確実に動かしたいものは避けたほうがよい。&lt;/p&gt;
+</description>
+                <pubDate>Wed, 05 Jul 2023 00:20:00 +0900</pubDate>
+                <link>https://saasan.github.io/blog/2023/07/05/ifttt%E3%81%AEtwitter%E9%80%A3%E6%90%BA%E3%81%8C%E6%9C%89%E6%96%99%E5%8C%96%E3%81%97%E3%81%9F%E3%81%AE%E3%81%A7python%E3%81%A8github-actions%E3%81%A7rss%E3%82%92%E3%83%84%E3%82%A4%E3%83%BC%E3%83%88%E3%81%99%E3%82%8B.html</link>
+                <guid isPermaLink="true">https://saasan.github.io/blog/2023/07/05/ifttt%E3%81%AEtwitter%E9%80%A3%E6%90%BA%E3%81%8C%E6%9C%89%E6%96%99%E5%8C%96%E3%81%97%E3%81%9F%E3%81%AE%E3%81%A7python%E3%81%A8github-actions%E3%81%A7rss%E3%82%92%E3%83%84%E3%82%A4%E3%83%BC%E3%83%88%E3%81%99%E3%82%8B.html</guid>
+                
+                
+                <category>blog</category>
+                
+            </item>
         
             <item>
                 <title>Stable Diffusion を Windows 10 へインストールする方法と使い方、画像生成のコツ</title>
@@ -1188,118 +1300,6 @@ BYで「見に来て」と言っていることからBY外にあると思われ�
                 <category>私の百合はお仕事です！</category>
                 
                 <category>わたゆり</category>
-                
-                
-                <category>blog</category>
-                
-            </item>
-        
-            <item>
-                <title>Lenovo ThinkCentre M600 Tiny に PCI Express を無理やり増設する</title>
-                <description>&lt;p&gt;5年ほど前に組んだ自作 PC がスペック的につらくなってきたため
-新しいものを組むことにしました。
-PC 入れ替えにあたり、これまで1台で
-ゲーム、開発、TV 録画などすべて行っていた状態から録画機能を切り離し、
-録画専用 PC として分けることにしました。&lt;/p&gt;
-
-&lt;p&gt;目的は以下のとおりです。&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;PC 交換時の録画への影響を最小限にする&lt;/li&gt;
-  &lt;li&gt;ゲームなどの高負荷による録画への影響を避ける&lt;/li&gt;
-  &lt;li&gt;電力消費の少ない録画用 PC を常時起動しておき、メインの PC はいつでも電源を切れるようにする&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;使用-pc&quot;&gt;使用 PC&lt;/h2&gt;
-
-&lt;p&gt;録画用 PC には、ほとんど使わないまま放置していた
-Lenovo ThinkCentre M600 Tiny
-を使用することにしました。
-昨年メルカリで 15,000 円で購入したやつです。&lt;/p&gt;
-
-&lt;p&gt;これは容積1リットルを謳う超小型デスクトップ PC で、
-CPU は
-&lt;a href=&quot;https://ark.intel.com/content/www/jp/ja/ark/products/91534/intel-celeron-processor-j3060-2m-cache-up-to-2-48-ghz.html&quot;&gt;Intel Celeron J3060&lt;/a&gt;
-1.6GHz 2コア、TDP 6 W となっています。&lt;/p&gt;
-
-&lt;h2 id=&quot;usb-接続の-tv-チューナーを購入したが&quot;&gt;USB 接続の TV チューナーを購入したが…&lt;/h2&gt;
-
-&lt;p&gt;M600 Tiny は前述の通り超小型デスクトップ PC のため、
-今まで使用していた PCI Express (以下 PCI-E) 接続の TV チューナーボードが利用できません。
-また、しばらくはメイン PC での録画と平行運用して様子をみたかったため、別途 USB 接続の TV チューナーを購入しました。&lt;/p&gt;
-
-&lt;p&gt;購入後1週間ほど使用してみましたが、
-信号がドロップしているのか
-時々ひどいブロックノイズが入り使い物になりません。
-これは困りました。
-PC を変えるか USB 接続でも安定する別のチューナーが必要です。&lt;/p&gt;
-
-&lt;h2 id=&quot;pci-e-の-tv-チューナーを無理やり増設&quot;&gt;PCI-E の TV チューナーを無理やり増設&lt;/h2&gt;
-
-&lt;p&gt;もう1つ思いついたのが
-今まで使用していた PCI-E 接続の TV チューナーボードを
-無理やり M600 Tiny に取り付けるというものです。&lt;/p&gt;
-
-&lt;p&gt;最初は PCI-E を USB に変換するものがないか探していましたが、
-M.2 の A &amp;amp; E キーに対応した以下の
-M.2 → PCI-E x1 変換アダプタを見つけました。&lt;/p&gt;
-
-&lt;iframe style=&quot;width:120px;height:240px;&quot; marginwidth=&quot;0&quot; marginheight=&quot;0&quot; scrolling=&quot;no&quot; frameborder=&quot;0&quot; src=&quot;//rcm-fe.amazon-adsystem.com/e/cm?lt1=_blank&amp;amp;bc1=000000&amp;amp;IS2=1&amp;amp;bg1=FFFFFF&amp;amp;fc1=000000&amp;amp;lc1=0000FF&amp;amp;t=saasan-22&amp;amp;language=ja_JP&amp;amp;o=9&amp;amp;p=8&amp;amp;l=as4&amp;amp;m=amazon&amp;amp;f=ifr&amp;amp;ref=as_ss_li_til&amp;amp;asins=B07L9RFVBZ&amp;amp;linkId=31ddd9c90c3fbc07e3d46e34298fdb14&quot;&gt;&lt;/iframe&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://ja.wikipedia.org/wiki/M.2&quot;&gt;M.2&lt;/a&gt;
-は物理的な接続方法が異なるだけで
-PCI-E の信号をそのまま送ることができます。
-M600 Tiny には Wi-Fi の増設用と思われる
-E キーに対応した M.2 スロットがあるため、
-そこにこの変換アダプタを接続すれば問題なく使用できるはずです。&lt;/p&gt;
-
-&lt;p&gt;変換アダプタには 5 V と 12 V の電源を
-FDD 4ピンコネクタで供給する必要があります。
-光学ドライブなどに使用される4ピンペリフェラルコネクタから
-FDD 4ピンコネクタへ変換するケーブルが付属していますが、
-M600 Tiny にはどちらもありません。
-そこで以下の変換ケーブルを購入し SATA から電源を取ることにしました。&lt;/p&gt;
-
-&lt;iframe style=&quot;width:120px;height:240px;&quot; marginwidth=&quot;0&quot; marginheight=&quot;0&quot; scrolling=&quot;no&quot; frameborder=&quot;0&quot; src=&quot;//rcm-fe.amazon-adsystem.com/e/cm?lt1=_blank&amp;amp;bc1=000000&amp;amp;IS2=1&amp;amp;bg1=FFFFFF&amp;amp;fc1=000000&amp;amp;lc1=0000FF&amp;amp;t=saasan-22&amp;amp;language=ja_JP&amp;amp;o=9&amp;amp;p=8&amp;amp;l=as4&amp;amp;m=amazon&amp;amp;f=ifr&amp;amp;ref=as_ss_li_til&amp;amp;asins=B0028WIES8&amp;amp;linkId=237de3b0f34f25bc2d854c0df081beac&quot;&gt;&lt;/iframe&gt;
-
-&lt;p&gt;SATA が使えなくなるため、ストレージはもともと付属していた SATA 接続の HDD をはずして M.2 の SSD にします。
-(上記の Wi-Fi 用 M.2 とは別にもうひとつストレージ用の M.2 があります。)&lt;/p&gt;
-
-&lt;h2 id=&quot;完成&quot;&gt;完成&lt;/h2&gt;
-
-&lt;p&gt;変換アダプタを購入して実際に接続してみました。
-内部は以下のようになっています。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/img/blog/2021-09-18/thinkcentre-tiny-pci-express1.jpg&quot; target=&quot;_blank&quot;&gt;&lt;img src=&quot;/img/blog/2021-09-18/thinkcentre-tiny-pci-express1.jpg&quot; alt=&quot;PC 内部&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;背面の VGA (D-Sub 15 ピン) 端子が増設できる場所の板をはずして
-ケーブルを外に出しています。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/img/blog/2021-09-18/thinkcentre-tiny-pci-express2.jpg&quot; target=&quot;_blank&quot;&gt;&lt;img src=&quot;/img/blog/2021-09-18/thinkcentre-tiny-pci-express2.jpg&quot; alt=&quot;ケーブルの外出し1&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/img/blog/2021-09-18/thinkcentre-tiny-pci-express3.jpg&quot; target=&quot;_blank&quot;&gt;&lt;img src=&quot;/img/blog/2021-09-18/thinkcentre-tiny-pci-express3.jpg&quot; alt=&quot;ケーブルの外出し2&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;最後に TV チューナーボードを取り付けて以下のようになりました。
-PC を起動して確認しましたが問題なく認識され使用できました！&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/img/blog/2021-09-18/thinkcentre-tiny-pci-express4.jpg&quot; target=&quot;_blank&quot;&gt;&lt;img src=&quot;/img/blog/2021-09-18/thinkcentre-tiny-pci-express4.jpg&quot; alt=&quot;TV チューナーボードの取り付け&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;まとめ&quot;&gt;まとめ&lt;/h2&gt;
-
-&lt;p&gt;以上のように超小型デスクトップ PC で
-PCI-E 接続の TV チューナーボードを利用できました。&lt;/p&gt;
-
-&lt;p&gt;Dell の Optiplex Micro も中身は似たような作りのため
-おそらく同様に PCI-E のボードを増設できると思います。
-HP の ProDesk DM や EliteDesk DM は中を見たことがないためわかりません。&lt;/p&gt;
-
-&lt;p&gt;基板がむき出しのため今後ホコリへの対策を考えます。&lt;/p&gt;
-</description>
-                <pubDate>Sat, 18 Sep 2021 13:04:35 +0900</pubDate>
-                <link>https://saasan.github.io/blog/2021/09/18/lenovo-thinkcentre-m600-tiny%E3%81%ABpci-express%E3%82%92%E7%84%A1%E7%90%86%E3%82%84%E3%82%8A%E5%A2%97%E8%A8%AD%E3%81%99%E3%82%8B.html</link>
-                <guid isPermaLink="true">https://saasan.github.io/blog/2021/09/18/lenovo-thinkcentre-m600-tiny%E3%81%ABpci-express%E3%82%92%E7%84%A1%E7%90%86%E3%82%84%E3%82%8A%E5%A2%97%E8%A8%AD%E3%81%99%E3%82%8B.html</guid>
-                
-                <category>PC</category>
                 
                 
                 <category>blog</category>
