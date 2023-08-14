@@ -5,9 +5,195 @@
         <description></description>
         <link>https://saasan.github.io/</link>
         <atom:link href="https://saasan.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-        <pubDate>Wed, 05 Jul 2023 00:27:11 +0900</pubDate>
-        <lastBuildDate>Wed, 05 Jul 2023 00:27:11 +0900</lastBuildDate>
+        <pubDate>Mon, 14 Aug 2023 23:09:56 +0900</pubDate>
+        <lastBuildDate>Mon, 14 Aug 2023 23:09:56 +0900</lastBuildDate>
         <generator>Jekyll v4.2.2</generator>
+        
+            <item>
+                <title>aptX Adaptive LL 対応 Bluetooth 機器で PC ゲームに使える完全ワイヤレスなオーディオ環境構築</title>
+                <description>&lt;p&gt;PC でゲームをしたり音楽を聞いたりする際に有線のイヤホンを使用していたが、
+ケーブルが煩わしく感じていたのでゲームに使える完全ワイヤレスイヤホンを探すことにした。&lt;/p&gt;
+
+&lt;h2 id=&quot;aptx-ll-と-aptx-adaptive&quot;&gt;aptX LL と aptX Adaptive&lt;/h2&gt;
+
+&lt;p&gt;ある程度汎用的に使える Bluetooth 接続のものにしたいが、
+Bluetooth のプロファイル A2DP で標準のコーデック SBC は音声の遅延が大きい。
+ゲームに向いた低遅延のコーデックについて調べたところ、
+aptX LL (Low Latency) と aptX Adaptive という規格があるらしい。&lt;/p&gt;
+
+&lt;p&gt;aptX LL は名前通り低遅延なコーデック、
+aptX Adaptive はローレイテンシー (LL) モードとハイクオリティ (HQ) モードを切替可能。
+aptX Adaptive の方が新しいコーデックだが、
+aptX Adaptive のローレイテンシーモードよりも aptX LL の方が規格上の遅延は少ない。&lt;/p&gt;
+
+&lt;p&gt;よって、aptX LL 対応の機器を買おうとネット上で調べたり某家電量販店で探したが、
+aptX LL 対応の機器が少なくいいものが見つからなかった。&lt;/p&gt;
+
+&lt;h2 id=&quot;creative-bt-w5-と-earfun-air-pro-3-を購入&quot;&gt;Creative BT-W5 と EarFun Air Pro 3 を購入&lt;/h2&gt;
+
+&lt;p&gt;結局 aptX Adaptive 対応の USB アダプタ
+&lt;a href=&quot;https://jp.creative.com/p/accessories/creative-bt-w5&quot;&gt;Creative BT-W5&lt;/a&gt; と
+完全ワイヤレスイヤホン EarFun Air Pro 3 を購入した。&lt;/p&gt;
+
+&lt;iframe sandbox=&quot;allow-popups allow-scripts allow-modals allow-forms allow-same-origin&quot; style=&quot;width:120px;height:240px;&quot; marginwidth=&quot;0&quot; marginheight=&quot;0&quot; scrolling=&quot;no&quot; frameborder=&quot;0&quot; src=&quot;//rcm-fe.amazon-adsystem.com/e/cm?lt1=_blank&amp;amp;bc1=000000&amp;amp;IS2=1&amp;amp;bg1=FFFFFF&amp;amp;fc1=000000&amp;amp;lc1=0000FF&amp;amp;t=saasan-22&amp;amp;language=ja_JP&amp;amp;o=9&amp;amp;p=8&amp;amp;l=as4&amp;amp;m=amazon&amp;amp;f=ifr&amp;amp;ref=as_ss_li_til&amp;amp;asins=B0B1J2WTB2&amp;amp;linkId=9cc0a2d08025eb3043b98b76ba4dc416&quot;&gt;&lt;/iframe&gt;
+&lt;iframe sandbox=&quot;allow-popups allow-scripts allow-modals allow-forms allow-same-origin&quot; style=&quot;width:120px;height:240px;&quot; marginwidth=&quot;0&quot; marginheight=&quot;0&quot; scrolling=&quot;no&quot; frameborder=&quot;0&quot; src=&quot;//rcm-fe.amazon-adsystem.com/e/cm?lt1=_blank&amp;amp;bc1=000000&amp;amp;IS2=1&amp;amp;bg1=FFFFFF&amp;amp;fc1=000000&amp;amp;lc1=0000FF&amp;amp;t=saasan-22&amp;amp;language=ja_JP&amp;amp;o=9&amp;amp;p=8&amp;amp;l=as4&amp;amp;m=amazon&amp;amp;f=ifr&amp;amp;ref=as_ss_li_til&amp;amp;asins=B0BNQ611R2&amp;amp;linkId=9067d37eb0930db46206690499ce71eb&quot;&gt;&lt;/iframe&gt;
+
+&lt;p&gt;BT-W5 は発売時の記事が印象に残っていたのと、
+Sound Blaster 等 PC 用サウンド系パーツの老舗メーカーという安心感から選択。&lt;/p&gt;
+
+&lt;p&gt;クリエイティブストアのみでの販売なので、上のリンクは旧機種の BT-W4 にしている。
+BT-W5 との違いは aptX HD、24bit/96kHz への対応の有無なので低遅延が目的ならどちらでもいい。&lt;/p&gt;
+
+&lt;p&gt;EarFun Air Pro 3 を選んだ理由は、1万円以下の完全ワイヤレスイヤホンで評判が良かったため。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://av.watch.impress.co.jp/docs/topic/special/1500373.html&quot;&gt;迫力サウンドと強力NCで8,990円! 信じられない超コスパTWS「EarFun Air Pro 3」 - AV Watch[Sponsored]&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;遅延時間の確認&quot;&gt;遅延時間の確認&lt;/h2&gt;
+
+&lt;p&gt;遅延時間の確認には
+&lt;a href=&quot;https://nullvoxpopuli.github.io/latency-tester/&quot;&gt;Latency Tester&lt;/a&gt;
+を使用した。
+Web サイト上で音に合わせてマウスをクリックするかスペースキーを押すことで簡易的に遅延時間を確認できる。&lt;/p&gt;
+
+&lt;p&gt;また、確認に使用した機器は以下の通り。&lt;/p&gt;
+
+&lt;h3 id=&quot;アダプタ&quot;&gt;アダプタ&lt;/h3&gt;
+
+&lt;table class=&quot;border&quot;&gt;
+    &lt;thead&gt;
+        &lt;tr&gt;
+            &lt;th&gt;アダプタ&lt;/th&gt;
+            &lt;th&gt;対応コーデック&lt;/th&gt;
+        &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+        &lt;tr&gt;
+            &lt;td&gt;サンワサプライ MM-BTUD43&lt;/td&gt;
+            &lt;td&gt;SBC, aptX&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;Creative BT-W5&lt;/td&gt;
+            &lt;td&gt;SBC, aptX, aptX HD, aptX Adaptive&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h3 id=&quot;ヘッドホン--イヤホン&quot;&gt;ヘッドホン / イヤホン&lt;/h3&gt;
+
+&lt;table class=&quot;border&quot;&gt;
+    &lt;thead&gt;
+        &lt;tr&gt;
+            &lt;th&gt;ヘッドホン / イヤホン&lt;/th&gt;
+            &lt;th&gt;対応コーデック&lt;/th&gt;
+        &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+        &lt;tr&gt;
+            &lt;td&gt;EarFun Air Pro 3&lt;/td&gt;
+            &lt;td&gt;SBC, AAC, aptX Adaptive&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;Sony MDR-ZX770BN&lt;/td&gt;
+            &lt;td&gt;SBC, AAC, aptX&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;FOSTEX TM2C&lt;/td&gt;
+            &lt;td&gt;SBC, AAC, aptX&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h3 id=&quot;確認結果&quot;&gt;確認結果&lt;/h3&gt;
+
+&lt;table class=&quot;border&quot;&gt;
+    &lt;thead&gt;
+        &lt;tr&gt;
+            &lt;th&gt;アダプタ&lt;/th&gt;
+            &lt;th&gt;ヘッドホン / イヤホン&lt;/th&gt;
+            &lt;th&gt;コーデック&lt;/th&gt;
+            &lt;th&gt;遅延時間&lt;/th&gt;
+        &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+        &lt;tr&gt;
+            &lt;td&gt;Creative BT-W5&lt;/td&gt;
+            &lt;td&gt;EarFun Air Pro 3&lt;/td&gt;
+            &lt;td&gt;aptX Adaptive LL&lt;/td&gt;
+            &lt;td&gt;100 ms&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;サンワサプライ MM-BTUD43&lt;/td&gt;
+            &lt;td&gt;Sony MDR-ZX770BN&lt;/td&gt;
+            &lt;td&gt;aptX&lt;/td&gt;
+            &lt;td&gt;160 ms&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;Creative BT-W5&lt;/td&gt;
+            &lt;td&gt;Sony MDR-ZX770BN&lt;/td&gt;
+            &lt;td&gt;SBC&lt;/td&gt;
+            &lt;td&gt;200 ms&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;Creative BT-W5&lt;/td&gt;
+            &lt;td&gt;FOSTEX TM2C&lt;/td&gt;
+            &lt;td&gt;aptX&lt;/td&gt;
+            &lt;td&gt;335 ms&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;Creative BT-W5&lt;/td&gt;
+            &lt;td&gt;EarFun Air Pro 3&lt;/td&gt;
+            &lt;td&gt;aptX Adaptive HQ&lt;/td&gt;
+            &lt;td&gt;350 ms&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;当然だが Creative BT-W5 と EarFun Air Pro 3
+の組み合わせが最も遅延が少ない結果となった。&lt;/p&gt;
+
+&lt;p&gt;実際に PSO2 を遊んでみたがアクションゲームで使用するなら特に問題なさそうだった。
+音ゲーはやってないからわからない。&lt;/p&gt;
+
+&lt;h2 id=&quot;問題点&quot;&gt;問題点&lt;/h2&gt;
+
+&lt;p&gt;低遅延という点では満足な結果だったが、
+それ以外の点でいくつか問題があったので書いておく。&lt;/p&gt;
+
+&lt;h3 id=&quot;creative-bt-w5&quot;&gt;Creative BT-W5&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;PC からはスピーカーとして認識される&lt;/li&gt;
+  &lt;li&gt;よって Windows 標準の Bluetooth 設定画面からは機器との接続/切断ができず、 Creative 独自のアプリで操作する必要がある&lt;/li&gt;
+  &lt;li&gt;Windows 標準の Bluetooth 接続だと機器が切断されたら自動で別のスピーカー等へ音声出力が切り替わるが、それも行われないため手動で切り替えが必要&lt;/li&gt;
+  &lt;li&gt;音量が大きいため Windows の音量設定を 1 ～ 5% あたりまで下げる必要があり細かい音量調整が効かない&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;earfun-air-pro-3&quot;&gt;EarFun Air Pro 3&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;付属のイヤーピースが最大のものでも私には小さくはずれやすい&lt;/li&gt;
+  &lt;li&gt;タッチ操作のため誤タッチにより意図しない操作が発生する場合がある&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;参考サイト&quot;&gt;参考サイト&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://uzuky.hatenablog.com/entry/20201215/1608005651&quot;&gt;aptX LL / Adaptive でやる音ゲー - う！&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://androplus.org/entry/creative-bt-w5-review/&quot;&gt;Creative BT-W5レビュー。aptX Adaptiveで24bit/96kHzや低遅延にできるトランスミッター - AndroPlus&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+                <pubDate>Mon, 14 Aug 2023 23:07:00 +0900</pubDate>
+                <link>https://saasan.github.io/blog/2023/08/14/aptx-adaptive-ll%E5%AF%BE%E5%BF%9Cbluetooth%E6%A9%9F%E5%99%A8%E3%81%A7pc%E3%82%B2%E3%83%BC%E3%83%A0%E3%81%AB%E4%BD%BF%E3%81%88%E3%82%8B%E5%AE%8C%E5%85%A8%E3%83%AF%E3%82%A4%E3%83%A4%E3%83%AC%E3%82%B9%E3%81%AA%E3%82%AA%E3%83%BC%E3%83%87%E3%82%A3%E3%82%AA%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89.html</link>
+                <guid isPermaLink="true">https://saasan.github.io/blog/2023/08/14/aptx-adaptive-ll%E5%AF%BE%E5%BF%9Cbluetooth%E6%A9%9F%E5%99%A8%E3%81%A7pc%E3%82%B2%E3%83%BC%E3%83%A0%E3%81%AB%E4%BD%BF%E3%81%88%E3%82%8B%E5%AE%8C%E5%85%A8%E3%83%AF%E3%82%A4%E3%83%A4%E3%83%AC%E3%82%B9%E3%81%AA%E3%82%AA%E3%83%BC%E3%83%87%E3%82%A3%E3%82%AA%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89.html</guid>
+                
+                <category>ガジェット</category>
+                
+                <category>PC</category>
+                
+                
+                <category>blog</category>
+                
+            </item>
         
             <item>
                 <title>IFTTT の Twitter 連携が有料化したので Python と GitHub Actions で RSS をツイートする</title>
@@ -1146,160 +1332,6 @@ showToast(&amp;#39;トーストのメッセージ&amp;#39;);
                 <category>JavaScript</category>
                 
                 <category>Bookmarklet</category>
-                
-                
-                <category>blog</category>
-                
-            </item>
-        
-            <item>
-                <title>私の百合はお仕事です！(わたゆり)「カフェ・リーベ女学園」の間取り図を作ってみた</title>
-                <description>&lt;p&gt;最近「私の百合はお仕事です！」(わたゆり) にハマってます。
-&lt;a href=&quot;https://www.ichijinsha.co.jp/yurihime/title/%e6%9c%aa%e5%b9%a1/%e7%a7%81%e3%81%ae%e7%99%be%e5%90%88%e3%81%af%e3%81%8a%e4%bb%95%e4%ba%8b%e3%81%a7%e3%81%99%ef%bc%81/&quot;&gt;公式サイトの紹介&lt;/a&gt;
-を読めば分かる通り、
-&lt;ruby&gt;姉妹&lt;rp&gt;(&lt;/rp&gt;&lt;rt&gt;シュヴェスター&lt;/rt&gt;&lt;rp&gt;)&lt;/rp&gt;&lt;/ruby&gt;
-制度のある
-&lt;ruby&gt;お嬢様学校&lt;rp&gt;(&lt;/rp&gt;&lt;rt&gt;ミッションスクール&lt;/rt&gt;&lt;rp&gt;)&lt;/rp&gt;&lt;/ruby&gt;
-「リーベ女学園」という設定で運営されている
-コンセプトカフェを舞台とした作品です。&lt;/p&gt;
-
-&lt;p&gt;ストーリーが良くて泣ける作品なのでぜひ読んでみてください。
-登場人物全員に二面性があるので、ツンデレなどのギャップ萌え好きな人にもオススメです！
-今なら Amazon Prime で1、2巻が読み放題になっています。&lt;/p&gt;
-
-&lt;iframe style=&quot;width:120px;height:240px;&quot; marginwidth=&quot;0&quot; marginheight=&quot;0&quot; scrolling=&quot;no&quot; frameborder=&quot;0&quot; src=&quot;//rcm-fe.amazon-adsystem.com/e/cm?lt1=_blank&amp;amp;bc1=000000&amp;amp;IS2=1&amp;amp;bg1=FFFFFF&amp;amp;fc1=000000&amp;amp;lc1=0000FF&amp;amp;t=saasan-22&amp;amp;language=ja_JP&amp;amp;o=9&amp;amp;p=8&amp;amp;l=as4&amp;amp;m=amazon&amp;amp;f=ifr&amp;amp;ref=as_ss_li_til&amp;amp;asins=B072KH2H5V&amp;amp;linkId=6f19c25541d8022627fc2e8a66573385&quot;&gt;&lt;/iframe&gt;
-&lt;iframe style=&quot;width:120px;height:240px;&quot; marginwidth=&quot;0&quot; marginheight=&quot;0&quot; scrolling=&quot;no&quot; frameborder=&quot;0&quot; src=&quot;//rcm-fe.amazon-adsystem.com/e/cm?lt1=_blank&amp;amp;bc1=000000&amp;amp;IS2=1&amp;amp;bg1=FFFFFF&amp;amp;fc1=000000&amp;amp;lc1=0000FF&amp;amp;t=saasan-22&amp;amp;language=ja_JP&amp;amp;o=9&amp;amp;p=8&amp;amp;l=as4&amp;amp;m=amazon&amp;amp;f=ifr&amp;amp;ref=as_ss_li_til&amp;amp;asins=B076F2DRBL&amp;amp;linkId=de5dc53d2d5358c2fc09428e9729c389&quot;&gt;&lt;/iframe&gt;
-
-&lt;p&gt;わたゆりは上記の通り「カフェ・リーベ女学園」が舞台となっており
-多くのシーンがその中で展開されるため、
-その間取りが分かればさらに理解が深まるかと思い間取り図を作成してみました。&lt;/p&gt;
-
-&lt;h2 id=&quot;出典について&quot;&gt;出典について&lt;/h2&gt;
-
-&lt;p&gt;以下の間取り図は
-&lt;a href=&quot;https://www.amazon.co.jp/dp/B07878H4D9/?tag=saasan-22&quot;&gt;Amazon Kindle の電子書籍「私の百合はお仕事です！」&lt;/a&gt;
-1～9巻を参考に
-&lt;a href=&quot;https://twitter.com/saasan&quot;&gt;カガミ&lt;/a&gt;
-が作成したものです。
-公式な情報ではありませんので、間取り図について未幡先生や一迅社へ問い合わせないでください。&lt;/p&gt;
-
-&lt;p&gt;ページ番号については、物理書籍と合わせるためページ内記載のものとしています。
-Kindle の Android 版アプリで表示されるロケーションは、これに1を足した数値となります。&lt;/p&gt;
-
-&lt;h2 id=&quot;間取り図&quot;&gt;間取り図&lt;/h2&gt;
-
-&lt;p&gt;以下が作成した間取り図です。
-&lt;a href=&quot;https://myhome-cloud.net/&quot;&gt;マイホームクラウド&lt;/a&gt;
-で間取り図を作成したあと別のアプリで文字の追加など加工を行っています。&lt;/p&gt;
-
-&lt;p&gt;リーベの背景は手で描かれているため、シーンによって物の大きさが異なることがあります。
-間取り図の作成にあたっては複数のシーンを確認した上で、
-大きな破綻がないよう一部調整しています。&lt;/p&gt;
-
-&lt;p&gt;※2021/12/21追記: 背景は &lt;a href=&quot;https://twitter.com/n28miman/status/1473186141684002821&quot;&gt;途中から3Dに変更された&lt;/a&gt; とのことです。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/img/blog/2021-12-19/liebe-layout.png&quot;&gt;&lt;img src=&quot;/img/blog/2021-12-19/liebe-layout.png&quot; alt=&quot;「カフェ・リーベ女学園」間取り図&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;by-バックヤード&quot;&gt;BY (バックヤード)&lt;/h2&gt;
-
-&lt;p&gt;サロンと並び頻繁に登場する場所のため
-大まかな配置について特に異論はないかと思います。&lt;/p&gt;
-
-&lt;h3 id=&quot;by-内の小部屋&quot;&gt;BY 内の小部屋&lt;/h3&gt;
-
-&lt;p&gt;BY 内にある小部屋 (※1) は作中で使用されておらず用途が分かりません。
-壁には扉と手洗器、消毒液と思われるものが付いています。
-扉に小窓が付いていることや (9巻120ページなど)、
-手洗器と一緒に水周りとしてまとめられていると考えると
-従業員用トイレでしょうか？&lt;/p&gt;
-
-&lt;h3 id=&quot;タイムレコーダー&quot;&gt;タイムレコーダー&lt;/h3&gt;
-
-&lt;p&gt;間取り図に入っていない要素としてタイムレコーダー (打刻機) があります。
-時計の下にあるキャビネットの上に置かれています (2巻99ページ)。
-また、右にある柱にタイムカード入れがあります (3巻32ページ)。
-作中では描かれていませんが、出退勤時にここで打刻していると思われます。&lt;/p&gt;
-
-&lt;h2 id=&quot;サロン&quot;&gt;サロン&lt;/h2&gt;
-
-&lt;p&gt;客席は5巻3ページに描かれている引きの絵を参考に、
-対面2席のテーブルが左右に6つずつ、計24席としました。&lt;/p&gt;
-
-&lt;p&gt;窓側に近い客席後ろの壁に鳩時計があります。 (1巻30ページ、2巻132ページ、9巻77ページなど)&lt;/p&gt;
-
-&lt;h2 id=&quot;キッチン&quot;&gt;キッチン&lt;/h2&gt;
-
-&lt;p&gt;キッチン内部やデシャップから繋がる部分は
-作中であまり描かれていないため間違っているかもしれません。&lt;/p&gt;
-
-&lt;p&gt;BY出入口右側にコンロとシンク (5巻77～78ページ)、左側に冷蔵庫があります (3巻34ページなど)。&lt;/p&gt;
-
-&lt;p&gt;デシャップ側から入って右側にもシンクがあります。 (1巻107ページ、5巻78ページ)&lt;/p&gt;
-
-&lt;p&gt;冷蔵庫と横にある作業台の中間、天井から吊られている棚にモニターが付いています。 (9巻120ページ)&lt;/p&gt;
-
-&lt;h2 id=&quot;デシャップの右側にある扉&quot;&gt;デシャップの右側にある扉&lt;/h2&gt;
-
-&lt;p&gt;デシャップの右側にある扉 (※2) は作中で使用されておらず用途が分かりません。
-以下の理由からお客様用トイレでしょうか？&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;飲食店のためお客様用トイレが必要&lt;/li&gt;
-  &lt;li&gt;客席から近い&lt;/li&gt;
-  &lt;li&gt;店の一番奥&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;レジ&quot;&gt;レジ&lt;/h2&gt;
-
-&lt;p&gt;レジはBYへ入ってすぐ左側に置かれています。
-雰囲気を損ねないため普段見えない場所に置かれているのだと思われますが、
-客席か受付でお客様からお金を預かってBYへ持ち込み精算するかたちでしょうか？&lt;/p&gt;
-
-&lt;p&gt;受付で精算の場合はお金を預かってBYへ持ち込むと
-位置的にゲストからBY内が丸見えになってしまうため、
-客席での精算のほうが有力かも？&lt;/p&gt;
-
-&lt;h2 id=&quot;ピアノ左のテーブル&quot;&gt;ピアノ左のテーブル&lt;/h2&gt;
-
-&lt;p&gt;ピアノ左にあるブルーメ選挙の投票箱が置かれていたテーブルは
-選挙後も度々描かれており常設されているようです。
-(9巻102ページなど)&lt;/p&gt;
-
-&lt;h2 id=&quot;受付&quot;&gt;受付&lt;/h2&gt;
-
-&lt;p&gt;受付にはレトロ風電話機が置かれています。
-電話予約の対応は舞が行っていると7巻シフト36.2に書かれており、
-Web受付の状況も確認しながら対応していると考えると
-必然的にBYで受付を行う必要があります。
-よってレトロ風電話機は雰囲気を出すための飾りと思われます。&lt;/p&gt;
-
-&lt;p&gt;&lt;del&gt;実際に使えるとしても舞さん以外かけ方が分からなそう。「21世紀少女たちめ…」&lt;/del&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;出入口&quot;&gt;出入口&lt;/h2&gt;
-
-&lt;p&gt;出入口の扉は内側に開きます。 (5巻71ページ)&lt;/p&gt;
-
-&lt;h2 id=&quot;作中で言及されているが場所不明のもの&quot;&gt;作中で言及されているが場所不明のもの&lt;/h2&gt;
-
-&lt;h3 id=&quot;貴重品ロッカー&quot;&gt;貴重品ロッカー&lt;/h3&gt;
-
-&lt;p&gt;3巻で果乃子のスマホが入れられた貴重品ロッカー。&lt;/p&gt;
-
-&lt;h3 id=&quot;物置&quot;&gt;物置&lt;/h3&gt;
-
-&lt;p&gt;ブルーメ選挙の投票箱が置かれている物置。
-5巻88ページで舞が美月へ「ブルーメ選挙の投票箱を出すから見に来て」と言っています。
-BYで「見に来て」と言っていることからBY外にあると思われます。&lt;/p&gt;
-</description>
-                <pubDate>Sun, 19 Dec 2021 16:50:36 +0900</pubDate>
-                <link>https://saasan.github.io/blog/2021/12/19/%E3%82%8F%E3%81%9F%E3%82%86%E3%82%8A-%E3%82%AB%E3%83%95%E3%82%A7-%E3%83%AA%E3%83%BC%E3%83%99%E5%A5%B3%E5%AD%A6%E5%9C%92-%E3%81%AE%E9%96%93%E5%8F%96%E3%82%8A%E5%9B%B3%E3%82%92%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%BF%E3%81%9F.html</link>
-                <guid isPermaLink="true">https://saasan.github.io/blog/2021/12/19/%E3%82%8F%E3%81%9F%E3%82%86%E3%82%8A-%E3%82%AB%E3%83%95%E3%82%A7-%E3%83%AA%E3%83%BC%E3%83%99%E5%A5%B3%E5%AD%A6%E5%9C%92-%E3%81%AE%E9%96%93%E5%8F%96%E3%82%8A%E5%9B%B3%E3%82%92%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%BF%E3%81%9F.html</guid>
-                
-                <category>本</category>
-                
-                <category>私の百合はお仕事です！</category>
-                
-                <category>わたゆり</category>
                 
                 
                 <category>blog</category>

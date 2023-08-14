@@ -69,6 +69,152 @@
           </header>
           <article class="post-content">
             <section>
+              <h2><a class="post-link" href="/blog/2023/08/14/aptx-adaptive-ll%E5%AF%BE%E5%BF%9Cbluetooth%E6%A9%9F%E5%99%A8%E3%81%A7pc%E3%82%B2%E3%83%BC%E3%83%A0%E3%81%AB%E4%BD%BF%E3%81%88%E3%82%8B%E5%AE%8C%E5%85%A8%E3%83%AF%E3%82%A4%E3%83%A4%E3%83%AC%E3%82%B9%E3%81%AA%E3%82%AA%E3%83%BC%E3%83%87%E3%82%A3%E3%82%AA%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89.html">aptX Adaptive LL 対応 Bluetooth 機器で PC ゲームに使える完全ワイヤレスなオーディオ環境構築</a></h2>
+              <div class="post-meta">2023-08-14</div>
+              <section>
+                <p>PC でゲームをしたり音楽を聞いたりする際に有線のイヤホンを使用していたが、
+                  ケーブルが煩わしく感じていたのでゲームに使える完全ワイヤレスイヤホンを探すことにした。</p>
+                <h2 id="aptx-ll-と-aptx-adaptive">aptX LL と aptX Adaptive</h2>
+                <p>ある程度汎用的に使える Bluetooth 接続のものにしたいが、
+                  Bluetooth のプロファイル A2DP で標準のコーデック SBC は音声の遅延が大きい。
+                  ゲームに向いた低遅延のコーデックについて調べたところ、
+                  aptX LL (Low Latency) と aptX Adaptive という規格があるらしい。</p>
+                <p>aptX LL は名前通り低遅延なコーデック、
+                  aptX Adaptive はローレイテンシー (LL) モードとハイクオリティ (HQ) モードを切替可能。
+                  aptX Adaptive の方が新しいコーデックだが、
+                  aptX Adaptive のローレイテンシーモードよりも aptX LL の方が規格上の遅延は少ない。</p>
+                <p>よって、aptX LL 対応の機器を買おうとネット上で調べたり某家電量販店で探したが、
+                  aptX LL 対応の機器が少なくいいものが見つからなかった。</p>
+                <h2 id="creative-bt-w5-と-earfun-air-pro-3-を購入">Creative BT-W5 と EarFun Air Pro 3 を購入</h2>
+                <p>結局 aptX Adaptive 対応の USB アダプタ
+                  <a href="https://jp.creative.com/p/accessories/creative-bt-w5">Creative BT-W5</a> と
+                  完全ワイヤレスイヤホン EarFun Air Pro 3 を購入した。</p>
+                <iframe sandbox="allow-popups allow-scripts allow-modals allow-forms allow-same-origin" style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="//rcm-fe.amazon-adsystem.com/e/cm?lt1=_blank&amp;bc1=000000&amp;IS2=1&amp;bg1=FFFFFF&amp;fc1=000000&amp;lc1=0000FF&amp;t=saasan-22&amp;language=ja_JP&amp;o=9&amp;p=8&amp;l=as4&amp;m=amazon&amp;f=ifr&amp;ref=as_ss_li_til&amp;asins=B0B1J2WTB2&amp;linkId=9cc0a2d08025eb3043b98b76ba4dc416"></iframe>
+                <iframe sandbox="allow-popups allow-scripts allow-modals allow-forms allow-same-origin" style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="//rcm-fe.amazon-adsystem.com/e/cm?lt1=_blank&amp;bc1=000000&amp;IS2=1&amp;bg1=FFFFFF&amp;fc1=000000&amp;lc1=0000FF&amp;t=saasan-22&amp;language=ja_JP&amp;o=9&amp;p=8&amp;l=as4&amp;m=amazon&amp;f=ifr&amp;ref=as_ss_li_til&amp;asins=B0BNQ611R2&amp;linkId=9067d37eb0930db46206690499ce71eb"></iframe>
+                <p>BT-W5 は発売時の記事が印象に残っていたのと、
+                  Sound Blaster 等 PC 用サウンド系パーツの老舗メーカーという安心感から選択。</p>
+                <p>クリエイティブストアのみでの販売なので、上のリンクは旧機種の BT-W4 にしている。
+                  BT-W5 との違いは aptX HD、24bit/96kHz への対応の有無なので低遅延が目的ならどちらでもいい。</p>
+                <p>EarFun Air Pro 3 を選んだ理由は、1万円以下の完全ワイヤレスイヤホンで評判が良かったため。</p>
+                <p><a href="https://av.watch.impress.co.jp/docs/topic/special/1500373.html">迫力サウンドと強力NCで8,990円! 信じられない超コスパTWS「EarFun Air Pro 3」 - AV Watch[Sponsored]</a></p>
+                <h2 id="遅延時間の確認">遅延時間の確認</h2>
+                <p>遅延時間の確認には
+                  <a href="https://nullvoxpopuli.github.io/latency-tester/">Latency Tester</a>
+                  を使用した。
+                  Web サイト上で音に合わせてマウスをクリックするかスペースキーを押すことで簡易的に遅延時間を確認できる。</p>
+                <p>また、確認に使用した機器は以下の通り。</p>
+                <h3 id="アダプタ">アダプタ</h3>
+                <table class="border">
+                  <thead>
+                    <tr>
+                      <th>アダプタ</th>
+                      <th>対応コーデック</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>サンワサプライ MM-BTUD43</td>
+                      <td>SBC, aptX</td>
+                    </tr>
+                    <tr>
+                      <td>Creative BT-W5</td>
+                      <td>SBC, aptX, aptX HD, aptX Adaptive</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <h3 id="ヘッドホン--イヤホン">ヘッドホン / イヤホン</h3>
+                <table class="border">
+                  <thead>
+                    <tr>
+                      <th>ヘッドホン / イヤホン</th>
+                      <th>対応コーデック</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>EarFun Air Pro 3</td>
+                      <td>SBC, AAC, aptX Adaptive</td>
+                    </tr>
+                    <tr>
+                      <td>Sony MDR-ZX770BN</td>
+                      <td>SBC, AAC, aptX</td>
+                    </tr>
+                    <tr>
+                      <td>FOSTEX TM2C</td>
+                      <td>SBC, AAC, aptX</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <h3 id="確認結果">確認結果</h3>
+                <table class="border">
+                  <thead>
+                    <tr>
+                      <th>アダプタ</th>
+                      <th>ヘッドホン / イヤホン</th>
+                      <th>コーデック</th>
+                      <th>遅延時間</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Creative BT-W5</td>
+                      <td>EarFun Air Pro 3</td>
+                      <td>aptX Adaptive LL</td>
+                      <td>100 ms</td>
+                    </tr>
+                    <tr>
+                      <td>サンワサプライ MM-BTUD43</td>
+                      <td>Sony MDR-ZX770BN</td>
+                      <td>aptX</td>
+                      <td>160 ms</td>
+                    </tr>
+                    <tr>
+                      <td>Creative BT-W5</td>
+                      <td>Sony MDR-ZX770BN</td>
+                      <td>SBC</td>
+                      <td>200 ms</td>
+                    </tr>
+                    <tr>
+                      <td>Creative BT-W5</td>
+                      <td>FOSTEX TM2C</td>
+                      <td>aptX</td>
+                      <td>335 ms</td>
+                    </tr>
+                    <tr>
+                      <td>Creative BT-W5</td>
+                      <td>EarFun Air Pro 3</td>
+                      <td>aptX Adaptive HQ</td>
+                      <td>350 ms</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p>当然だが Creative BT-W5 と EarFun Air Pro 3
+                  の組み合わせが最も遅延が少ない結果となった。</p>
+                <p>実際に PSO2 を遊んでみたがアクションゲームで使用するなら特に問題なさそうだった。
+                  音ゲーはやってないからわからない。</p>
+                <h2 id="問題点">問題点</h2>
+                <p>低遅延という点では満足な結果だったが、
+                  それ以外の点でいくつか問題があったので書いておく。</p>
+                <h3 id="creative-bt-w5">Creative BT-W5</h3>
+                <ul>
+                  <li>PC からはスピーカーとして認識される</li>
+                  <li>よって Windows 標準の Bluetooth 設定画面からは機器との接続/切断ができず、 Creative 独自のアプリで操作する必要がある</li>
+                  <li>Windows 標準の Bluetooth 接続だと機器が切断されたら自動で別のスピーカー等へ音声出力が切り替わるが、それも行われないため手動で切り替えが必要</li>
+                  <li>音量が大きいため Windows の音量設定を 1 ～ 5% あたりまで下げる必要があり細かい音量調整が効かない</li>
+                </ul>
+                <h3 id="earfun-air-pro-3">EarFun Air Pro 3</h3>
+                <ul>
+                  <li>付属のイヤーピースが最大のものでも私には小さくはずれやすい</li>
+                  <li>タッチ操作のため誤タッチにより意図しない操作が発生する場合がある</li>
+                </ul>
+                <h2 id="参考サイト">参考サイト</h2>
+                <ul>
+                  <li><a href="https://uzuky.hatenablog.com/entry/20201215/1608005651">aptX LL / Adaptive でやる音ゲー - う！</a></li>
+                  <li><a href="https://androplus.org/entry/creative-bt-w5-review/">Creative BT-W5レビュー。aptX Adaptiveで24bit/96kHzや低遅延にできるトランスミッター - AndroPlus</a></li>
+                </ul>
+              </section>
+            </section>
+            <section>
               <h2><a class="post-link" href="/blog/2023/07/05/ifttt%E3%81%AEtwitter%E9%80%A3%E6%90%BA%E3%81%8C%E6%9C%89%E6%96%99%E5%8C%96%E3%81%97%E3%81%9F%E3%81%AE%E3%81%A7python%E3%81%A8github-actions%E3%81%A7rss%E3%82%92%E3%83%84%E3%82%A4%E3%83%BC%E3%83%88%E3%81%99%E3%82%8B.html">IFTTT の Twitter 連携が有料化したので Python と GitHub Actions で RSS をツイートする</a></h2>
               <div class="post-meta">2023-07-05</div>
               <section>
@@ -654,34 +800,6 @@ pip install --upgrade fastapi==0.90.1
                   Ubuntu 22.04 の場合 ASCII armored 形式からバイナリ形式への変換 (<code class="language-plaintext highlighter-rouge">gpg --dearmor</code>) は不要らしい。</p>
                 <p>また、パッケージで管理されていない鍵は <code class="language-plaintext highlighter-rouge">/etc/apt/keyrings</code> に置くことが推奨されている。
                   よって冒頭のコマンドとなる。</p>
-              </section>
-            </section>
-            <section>
-              <h2><a class="post-link" href="/blog/2022/10/03/zoneid-zone.identifier%E3%82%92%E4%B8%80%E6%8B%AC%E3%81%A7%E5%89%8A%E9%99%A4%E3%81%99%E3%82%8B.html">ZoneID (Zone.Identifier) を一括で削除する</a></h2>
-              <div class="post-meta">2022-10-03</div>
-              <section>
-                <p>ネットからダウンロードしたファイルを WSL の Linux 環境にコピーすると
-                  <code class="language-plaintext highlighter-rouge">〇〇:Zone.Identifier</code> というファイルが一緒にコピーされて煩わしい。</p>
-                <p>ファイルが1つだけならコピー前にファイルのプロパティから解除するかコピー後に削除すればいいが、
-                  サブディレクトリ内なども含め複数まとめて処理したい場合は PowerShell を使う。</p>
-                <p>PowerShell で削除したいファイルがあるディレクトリに移動後に
-                  以下のコマンドで Zone.Identifier があることを確認。</p>
-                <div class="language-plaintext highlighter-rouge">
-                  <div class="highlight">
-                    <pre class="highlight"><code>Get-ChildItem -Recurse -File | Get-Item -Stream Zone.Identifier -ErrorAction SilentlyContinue
-</code></pre>
-                  </div>
-                </div>
-                <p><a href="https://learn.microsoft.com/ja-jp/powershell/module/microsoft.powershell.utility/unblock-file">Unblock-File</a>
-                  で削除できる。</p>
-                <div class="language-plaintext highlighter-rouge">
-                  <div class="highlight">
-                    <pre class="highlight"><code>Get-ChildItem -Recurse -File | Unblock-File
-</code></pre>
-                  </div>
-                </div>
-                <p><a href="https://learn.microsoft.com/ja-jp/powershell/module/microsoft.powershell.management/remove-item#7">Remove-Item -Stream Zone.Identifier</a>
-                  でもいい。</p>
               </section>
             </section>
             <div class="pagination">
