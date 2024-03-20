@@ -1,2 +1,2 @@
 User-agent: *
-Sitemap: https://saasan.github.io/sitemap.xml
+Sitemap: https://slx.jp/sitemap.xml
