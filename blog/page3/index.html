@@ -70,6 +70,66 @@
           </header>
           <article class="post-content">
             <section>
+              <h2><a class="post-link" href="/blog/2021/12/26/%E3%83%96%E3%83%83%E3%82%AF%E3%83%9E%E3%83%BC%E3%82%AF%E3%83%AC%E3%83%83%E3%83%88%E3%81%A7%E3%83%88%E3%83%BC%E3%82%B9%E3%83%88%E3%82%92%E8%A1%A8%E7%A4%BA%E3%81%99%E3%82%8B.html">ブックマークレットでトーストを表示する</a></h2>
+              <div class="post-meta">2021-12-26</div>
+              <section>
+                <p>ブックマークレットでクリップボードへコピーするスクリプトをいくつか使ってるけど、
+                  コピー後に何も表示されないかたちだったんでコピーされたか分からないし
+                  alertでメッセージを表示するのも野暮ったいんでトーストを表示することにした。</p>
+                <noscript>
+                  <pre>function generateToastHTML(message) {
+    return `
+        &lt;div class=&quot;_toast&quot;&gt;
+            &lt;style scoped&gt;
+                ._toast
+                {
+                    position: fixed;
+                    right: 2rem;
+                    bottom: 0;
+                    padding: 1rem;
+                    width: 350px;
+                    max-width: 100%;
+                    opacity: 0;
+                    color: #000;
+                    background-color: rgba(255,255,255,.85);
+                    border: 1px solid rgba(0,0,0,.1);
+                    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
+                    border-radius: .25rem;
+                    transition: opacity .3s, bottom .3s;
+                }
+            &lt;/style&gt;
+
+            ${message}
+        &lt;/div&gt;
+    `;
+}
+
+function showToast(message) {
+    const html = generateToastHTML(message);
+    document.body.insertAdjacentHTML(&#39;beforeend&#39;, html);
+    const toast = document.body.lastElementChild;
+    setTimeout(() =&gt; {
+        toast.style.bottom = &#39;2rem&#39;;
+        toast.style.opacity = 1;
+
+        setTimeout(() =&gt; {
+            toast.style.bottom = &#39;0&#39;;
+            toast.style.opacity = 0;
+            setTimeout(() =&gt; toast.remove(), 1000);
+        }, 3000);
+    }, 1);
+}
+
+showToast(&#39;トーストのメッセージ&#39;);
+</pre>
+                </noscript>
+                <script src="https://gist.github.com/saasan/f0d41060f5be49d8aa2e3b636ea41e15.js"></script>
+                <p>ブックマークレットなので
+                  ライブラリ等なしの素のJavaScript (いわゆるVanilla JS) で書いたけど
+                  意外とシンプルに実装できた。</p>
+              </section>
+            </section>
+            <section>
               <h2><a class="post-link" href="/blog/2021/12/19/%E3%82%8F%E3%81%9F%E3%82%86%E3%82%8A-%E3%82%AB%E3%83%95%E3%82%A7-%E3%83%AA%E3%83%BC%E3%83%99%E5%A5%B3%E5%AD%A6%E5%9C%92-%E3%81%AE%E9%96%93%E5%8F%96%E3%82%8A%E5%9B%B3%E3%82%92%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%BF%E3%81%9F.html">私の百合はお仕事です！(わたゆり)「カフェ・リーベ女学園」の間取り図を作ってみた</a></h2>
               <div class="post-meta">2021-12-19</div>
               <section>
@@ -388,169 +448,6 @@ echo &quot;&lt;!here&gt;\nhoge\nfuga&quot; | post_slack
                 </ol>
                 <p>標準入出力をパイプで繋ぐかたちとすることで、
                   以前は10行あった post_slack が3行に短縮された。</p>
-              </section>
-            </section>
-            <section>
-              <h2><a class="post-link" href="/blog/2021/04/04/m5stickc%E3%81%A7%E3%82%AD%E3%83%BC%E3%83%9C%E3%83%BC%E3%83%89%E6%93%8D%E4%BD%9C%E3%82%92%E8%87%AA%E5%8B%95%E5%8C%96%E3%81%99%E3%82%8B.html">M5StickC でキーボード操作を自動化する</a></h2>
-              <div class="post-meta">2021-04-04</div>
-              <section>
-                <p>某ゲームでアイテムを交換する作業が面倒になってきたので
-                  キーボード操作を自動化したいと思った。</p>
-                <p>まず思いついたのは、手元にあった
-                  <a href="https://www.amazon.co.jp/dp/B004INFZEG/saasan-22">サンワサプライ製のプログラマブルテンキー NT-19UH2BK</a>。
-                  久しぶりに引っぱりだして確認したところ、これは <kbd>Ctrl + C</kbd> のような同時押しには対応しているが、
-                  ウェイトをはさみながら複数のキーを順次入力する用途には対応していなかった。</p>
-                <p>次に <a href="https://booth.pm/ja/items/2655838">AZ-Macro</a>
-                  というマクロ機能のある自作 Bluetooth キーボードキットがあることを思い出した。
-                  これは ESP32 で作られていて、
-                  <a href="https://github.com/palette-system/az-macro">ファームウェアのソースコードも公開</a>
-                  されている。
-                  手持ちの M5StickC なら同じ ESP32 が内蔵されており
-                  Bluetooth にも対応しているため、目的を実現できるのではないか？</p>
-                <p>ということで、M5StickC を Bluetooth キーボードとして PC へ接続し操作を自動化する。</p>
-                <h2 id="arduino-ide-へ-esp32-ble-keyboard-をインストール">Arduino IDE へ ESP32-BLE-Keyboard をインストール</h2>
-                <p>まずは M5StickC を Bluetooth キーボードとして使うためのライブラリを
-                  Arduino IDE へインストールする。</p>
-                <ol>
-                  <li><a href="https://github.com/T-vK/ESP32-BLE-Keyboard/releases">Releases · T-vK/ESP32-BLE-Keyboard</a>
-                    から ESP32-BLE-Keyboard.zip をダウンロード</li>
-                  <li>Arduino IDE のメニューで [スケッチ] - [ライブラリをインクルード] - [.ZIP形式のライブラリをインストール…] をクリック</li>
-                  <li>さきほどダウンロードした ESP32-BLE-Keyboard.zip を選択</li>
-                </ol>
-                <h2 id="esp32-ble-keyboard-の使い方">ESP32-BLE-Keyboard の使い方</h2>
-                <p><a href="https://github.com/T-vK/ESP32-BLE-Keyboard/blob/master/examples/SendKeyStrokes/SendKeyStrokes.ino">公式のサンプル</a>
-                  を見れば大まかな使い方はわかると思うが、メソッドの説明がないので補足しておく。</p>
-                <p>BleKeyboard クラスの以下のメソッドでキーを操作できる。</p>
-                <ul>
-                  <li>print: 文字列を入力</li>
-                  <li>write: キーを押してすぐに離す</li>
-                  <li>press: キーを押す (release するまで押したままにする)</li>
-                  <li>release: キーを離す</li>
-                  <li>releaseAll: すべてのキーを離す</li>
-                </ul>
-                <p>キーの指定は、英数記号の場合、文字をそのまま渡す。
-                  大文字を渡すと自動でシフトキーが補完され大文字での入力になる。</p>
-                <div class="language-plaintext highlighter-rouge">
-                  <div class="highlight">
-                    <pre class="highlight"><code>bleKeyboard.write('a');
-</code></pre>
-                  </div>
-                </div>
-                <p>ファンクションキー、修飾キーなどの場合は
-                  <a href="https://github.com/T-vK/ESP32-BLE-Keyboard/blob/master/BleKeyboard.h">BleKeyboard.h</a>
-                  で定義されている定数を渡す。</p>
-                <h2 id="スケッチの作成">スケッチの作成</h2>
-                <p>M5StickC のボタンA (正面の「M5」ボタン) を押すと
-                  500ms 間隔で順番に B, L, E, Enterキーを押すサンプルスケッチを作成した。
-                  今回は同時押しが不要だったため
-                  keystroke に書かれたキーを順に write で出力するだけとなっている。</p>
-                <noscript>
-                  <pre>#include &lt;vector&gt;
-#include &lt;M5StickC.h&gt;
-#include &lt;BleKeyboard.h&gt;
-
-// -----------------------------------------------------------------------------
-// 定数
-// -----------------------------------------------------------------------------
-// 電源ボタンが1秒未満押された
-const uint8_t AXP_WAS_PRESSED = 2;
-// キーと待ち時間の構造体
-struct Key {
-  uint8_t key;
-  uint32_t delay;
-};
-// 送信するキーストローク
-const std::vector&lt;Key&gt; keystroke = {
-    { &#39;B&#39;       , 500 },
-    { &#39;L&#39;       , 500 },
-    { &#39;E&#39;       , 500 },
-    { KEY_RETURN, 0 }
-};
-
-// -----------------------------------------------------------------------------
-// 変数
-// -----------------------------------------------------------------------------
-// ESP32-BLE-Keyboard
-BleKeyboard bleKeyboard;
-
-// -----------------------------------------------------------------------------
-// 関数
-// -----------------------------------------------------------------------------
-// 画面を消去する
-void clearScreen() {
-    M5.Lcd.fillScreen(TFT_BLACK);
-    M5.Lcd.setCursor(0, 0);
-}
-
-// キーストロークを送信する
-void sendKeystroke() {
-    clearScreen();
-    M5.Lcd.println(&quot;Sending...&quot;);
-
-    for (const auto&amp; n : keystroke) {
-        bleKeyboard.write(n.key);
-        delay(n.delay);
-    }
-
-    M5.Lcd.println(&quot;Complete!&quot;);
-}
-
-void setup() {
-    M5.begin();
-
-    // 画面の表示設定
-    M5.Lcd.setRotation(1);
-    M5.Lcd.setTextFont(2);
-    clearScreen();
-    M5.Lcd.println(&quot;ESP32-BLE-Keyboard&quot;);
-
-    // Bluetooth接続
-    bleKeyboard.begin();
-}
-
-void loop() {
-    M5.update();
-
-    // 電源ボタンが押されたらリセット
-    if (M5.Axp.GetBtnPress() == AXP_WAS_PRESSED) {
-        esp_restart();
-    }
-
-    if (bleKeyboard.isConnected()) {
-        // Bluetooth接続済みの場合
-        // ボタンAが押されたらキーを送信
-        if (M5.BtnA.wasPressed()) {
-            sendKeystroke();
-        }
-
-        delay(10);
-    }
-    else {
-        // Bluetooth未接続の場合は5秒待つ
-        M5.Lcd.println(&quot;Waiting 5 seconds...&quot;);
-        delay(5000);
-    }
-}
-</pre>
-                </noscript>
-                <script src="https://gist.github.com/saasan/95c34469ebd1186c12398fbeb8266d17.js"></script>
-                <h2 id="動作確認">動作確認</h2>
-                <p>以下の手順で動作を確認できる。</p>
-                <ol>
-                  <li>M5StickC にスケッチを書き込む</li>
-                  <li>M5StickC の画面に “Waiting 5 seconds…” と表示されていることを確認</li>
-                  <li>PC で Bluetooth デバイスを検索し “ESP32 BLE Keyboard” へ接続</li>
-                  <li>メモ帳などのアプリを開く</li>
-                  <li>M5StickC のボタンA (正面の「M5」ボタン) を押す</li>
-                </ol>
-                <p>これで複雑なキーボードマクロでも思い通りに実行できるようになった。
-                  キーボードでできることなら何でもボタン一発で実行できるため、
-                  思っていた以上に利便性が高い。</p>
-                <h2 id="参考サイト">参考サイト</h2>
-                <ul>
-                  <li><a href="https://neocat.hatenablog.com/entry/2019/09/28/151947">ESP32をBluetoothキーボードやマウスにする - Okiraku Programming</a></li>
-                  <li><a href="https://github.com/T-vK/ESP32-BLE-Keyboard">T-vK/ESP32-BLE-Keyboard: Bluetooth LE Keyboard library for the ESP32 (Arduino IDE compatible)</a></li>
-                </ul>
               </section>
             </section>
             <div class="pagination">

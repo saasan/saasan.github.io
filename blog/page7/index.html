@@ -70,6 +70,32 @@
           </header>
           <article class="post-content">
             <section>
+              <h2><a class="post-link" href="/blog/2015/12/15/jekyll-escape-liquid-tags.html">[Jekyll] Liquidのタグをエスケープする方法</a></h2>
+              <div class="post-meta">2015-12-15</div>
+              <section>
+                <p><code class="language-plaintext highlighter-rouge">{% raw %}</code> と <code class="language-plaintext highlighter-rouge">{% endraw %}</code> で囲むと
+                  Liquidのタグもそのまま出力されます。</p>
+                <p>例えば</p>
+                <figure class="highlight">
+                  <pre><code class="language-html" data-lang="html">{% raw %}
+<span class="nt">&lt;ul&gt;</span>
+  {% for post in site.posts %}
+    <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">"{{ post.url }}"</span><span class="nt">&gt;</span>{{ post.title }}<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+  {% endfor %}
+<span class="nt">&lt;/ul&gt;</span>
+{% endraw %}</code></pre>
+                </figure>
+                <p>と書いた場合の出力は以下のようになります。</p>
+                <figure class="highlight">
+                  <pre><code class="language-html" data-lang="html"><span class="nt">&lt;ul&gt;</span>
+  {% for post in site.posts %}
+    <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">"{{ post.url }}"</span><span class="nt">&gt;</span>{{ post.title }}<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+  {% endfor %}
+<span class="nt">&lt;/ul&gt;</span></code></pre>
+                </figure>
+              </section>
+            </section>
+            <section>
               <h2><a class="post-link" href="/blog/2015/12/15/jekyll-html-beautifier-plugin.html">[Jekyll] HTMLを読みやすいように整形するプラグイン</a></h2>
               <div class="post-meta">2015-12-15</div>
               <section>
