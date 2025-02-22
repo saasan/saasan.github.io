@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <title>Windows 11 の WSL で ext4 ファイルシステムのドライブの内容を確認する</title>
+    <link href='//fonts.googleapis.com/css?family=Orbitron:500' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="canonical" href="https://slx.jp/blog/2025/02/23/windows-11%E3%81%AEWSL%E3%81%A7ext4%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E3%81%AE%E3%83%89%E3%83%A9%E3%82%A4%E3%83%96%E3%81%AE%E5%86%85%E5%AE%B9%E3%82%92%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B.html">
+    <link rel="alternate" type="application/rss+xml" title="slx.jp" href="https://slx.jp/feed.xml" />
+    <link rel="apple-touch-icon" href="/img/s2works_favicon.png">
+    <link rel="me" href="https://misskey.io/@saasan">
+    <script data-ad-client="ca-pub-0141905477316976" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@saasan">
+    <meta property="og:url" content="https://slx.jp/blog/2025/02/23/windows-11%E3%81%AEWSL%E3%81%A7ext4%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E3%81%AE%E3%83%89%E3%83%A9%E3%82%A4%E3%83%96%E3%81%AE%E5%86%85%E5%AE%B9%E3%82%92%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B.html">
+    <meta property="og:title" content="Windows 11 の WSL で ext4 ファイルシステムのドライブの内容を確認する">
+    <meta property="og:description" content="WSL 2 で Linux ディスクのマウントを開始する の内容を自分用にまとめたやつ">
+    <meta property="og:image" content="https://slx.jp/img/s2works_favicon.png">
+    <script type="application/ld+json">
+      {
+          "@context": "http://schema.org/",
+          "@type": "Person",
+          "name": "saasan",
+          "sameAs": [
+              "https://twitter.com/saasan",
+              "https://github.com/saasan"
+          ]
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+          "@context": "http://schema.org",
+          "@type": "Article",
+          "name": "Windows 11 の WSL で ext4 ファイルシステムのドライブの内容を確認する",
+          "datePublished": "2025-02-23T03:20:00+09:00",
+          "headline": "WSL 2 で Linux ディスクのマウントを開始する の内容を自分用にまとめたやつ",
+          "image": "https://slx.jp/img/s2works_favicon.png",
+          "url": "https://slx.jp/blog/2025/02/23/windows-11%E3%81%AEWSL%E3%81%A7ext4%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E3%81%AE%E3%83%89%E3%83%A9%E3%82%A4%E3%83%96%E3%81%AE%E5%86%85%E5%AE%B9%E3%82%92%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B.html",
+          "publisher" : {
+              "@type": "Person",
+              "name": "saasan"
+          }
+      }
+    </script>
+  </head>
+  <body itemscope itemtype="http://schema.org/WebPage">
+    <header class="site-header">
+      <div class="wrapper">
+        <a class="site-title" href="/">slx.jp</a>
+        <nav class="site-nav">
+          <div class="site-nav-contents">
+            <ul>
+              <li><a href="/blog/">ブログ</a></li>
+              <li><a href="/imas/">アイマス</a></li>
+              <li><a href="/software/">ソフトウェア</a></li>
+              <li><a href="/script/">スクリプト</a></li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+    </header>
+    <div class="page-content">
+      <div class="wrapper">
+        <div class="post" itemprop="mainContentOfPage" itemscope itemtype="http://schema.org/WebPageElement">
+          <header class="post-header">
+            <h1 class="post-title">Windows 11 の WSL で ext4 ファイルシステムのドライブの内容を確認する</h1>
+            <div class="post-meta">
+              <time datetime="2025-02-23T03:20:00+09:00" itemprop="dateModified">2025/02/23</time>
+            </div>
+          </header>
+          <article class="post-content">
+            <p><a href="https://learn.microsoft.com/ja-jp/windows/wsl/wsl2-mount-disk">WSL 2 で Linux ディスクのマウントを開始する</a>
+              の内容を自分用にまとめたやつ</p>
+            <ol>
+              <li>
+                <p>PowerShell でドライブを確認</p>
+                <div class="language-plaintext highlighter-rouge">
+                  <div class="highlight">
+                    <pre class="highlight"><code>GET-CimInstance -query "SELECT * from Win32_DiskDrive"
+</code></pre>
+                  </div>
+    </div>
+              </li>
+              <li>
+                <p>PowerShell でドライブをマウント (要管理者権限)</p>
+                <div class="language-plaintext highlighter-rouge">
+                  <div class="highlight">
+                    <pre class="highlight"><code>wsl --mount \\.\PHYSICALDRIVE5 --bare
+</code></pre>
+                  </div>
+    </div>
+                <p>PHYSICALDRIVE5 は確認したいドライブ</p>
+              </li>
+              <li>
+                <p>WSL 内でパーティション番号とファイルシステムを確認</p>
+                <div class="language-plaintext highlighter-rouge">
+                  <div class="highlight">
+                    <pre class="highlight"><code>lsblk -f
+sudo blkid
+</code></pre>
+                  </div>
+    </div>
+              </li>
+              <li>
+                <p>PowerShell でパーティションをマウント</p>
+                <div class="language-plaintext highlighter-rouge">
+                  <div class="highlight">
+                    <pre class="highlight"><code>wsl --mount \\.\PHYSICALDRIVE5 --partition 1 --type ext4
+</code></pre>
+                  </div>
+    </div>
+              </li>
+              <li>
+                <p>WSL 内でパーティションをマウント</p>
+                <div class="language-plaintext highlighter-rouge">
+                  <div class="highlight">
+                    <pre class="highlight"><code>sudo mkdir /mnt/external
+sudo mount /dev/sdf1 /mnt/external
+</code></pre>
+                  </div>
+    </div>
+                <p>sdf1 は確認したいパーティション</p>
+              </li>
+              <li>
+                <p>ドライブの内容を確認</p>
+                <div class="language-plaintext highlighter-rouge">
+                  <div class="highlight">
+                    <pre class="highlight"><code>ls /mnt/external
+</code></pre>
+                  </div>
+    </div>
+              </li>
+              <li>
+                <p>WSL 内でマウント解除</p>
+                <div class="language-plaintext highlighter-rouge">
+                  <div class="highlight">
+                    <pre class="highlight"><code>sudo umount /mnt/external
+ls /mnt/external
+</code></pre>
+                  </div>
+    </div>
+              </li>
+              <li>
+                <p>PowerShell でマウント解除 (要管理者権限)</p>
+                <div class="language-plaintext highlighter-rouge">
+                  <div class="highlight">
+                    <pre class="highlight"><code>wsl.exe --unmount \\.\PHYSICALDRIVE5
+</code></pre>
+                  </div>
+    </div>
+              </li>
+            </ol>
+          </article>
+        </div>
+        <div>
+          <h2>タグ「Windows」記事一覧</h2>
+          <ul class="tagged-post-list">
+            <li><a href="/blog/2025/02/23/windows-11%E3%81%AEWSL%E3%81%A7ext4%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E3%81%AE%E3%83%89%E3%83%A9%E3%82%A4%E3%83%96%E3%81%AE%E5%86%85%E5%AE%B9%E3%82%92%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B.html">Windows 11 の WSL で ext4 ファイルシステムのドライブの内容を確認する</a></li>
+            <li><a href="/blog/2022/10/03/zoneid-zone.identifier%E3%82%92%E4%B8%80%E6%8B%AC%E3%81%A7%E5%89%8A%E9%99%A4%E3%81%99%E3%82%8B.html">ZoneID (Zone.Identifier) を一括で削除する</a></li>
+            <li><a href="/blog/2020/12/25/%E6%B6%88%E3%81%97%E3%81%A6%E3%81%97%E3%81%BE%E3%81%A3%E3%81%9Fwsl%E7%92%B0%E5%A2%83%E3%81%AE%E3%83%90%E3%83%83%E3%82%AF%E3%82%A2%E3%83%83%E3%83%97%E3%81%8B%E3%82%89%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%92%E5%8F%96%E3%82%8A%E5%87%BA%E3%81%99.html">消してしまった WSL 環境のバックアップからファイルを取り出す</a></li>
+            <li><a href="/blog/2016/08/02/%E3%83%90%E3%83%83%E3%83%81%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%A7%E3%83%9F%E3%83%AA%E7%A7%92%E5%8D%98%E4%BD%8D%E3%81%AEsleep%E3%82%92%E8%A1%8C%E3%81%86.html">バッチファイルでミリ秒単位のSleepを行う</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <footer class="site-footer">
+      <div class="wrapper">
+        <nav>
+          <ul>
+            <li><a href="/blog/">ブログ</a></li>
+            <li><a href="/imas/">アイマス</a></li>
+            <li><a href="/software/">ソフトウェア</a></li>
+            <li><a href="/script/">スクリプト</a></li>
+          </ul>
+        </nav>
+        <div class="footer-link">
+          <a href="https://twitter.com/saasan" target="_blank" class="twitter-username">
+            saasan
+          </a>
+          <a href="/feed.xml" target="_blank" class="rss">RSS</a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

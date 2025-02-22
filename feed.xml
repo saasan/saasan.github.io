@@ -5,9 +5,85 @@
         <description></description>
         <link>https://slx.jp/</link>
         <atom:link href="https://slx.jp/feed.xml" rel="self" type="application/rss+xml"/>
-        <pubDate>Sun, 02 Feb 2025 13:32:37 +0900</pubDate>
-        <lastBuildDate>Sun, 02 Feb 2025 13:32:37 +0900</lastBuildDate>
+        <pubDate>Sun, 23 Feb 2025 03:22:09 +0900</pubDate>
+        <lastBuildDate>Sun, 23 Feb 2025 03:22:09 +0900</lastBuildDate>
         <generator>Jekyll v4.2.2</generator>
+        
+            <item>
+                <title>Windows 11 の WSL で ext4 ファイルシステムのドライブの内容を確認する</title>
+                <description>&lt;p&gt;&lt;a href=&quot;https://learn.microsoft.com/ja-jp/windows/wsl/wsl2-mount-disk&quot;&gt;WSL 2 で Linux ディスクのマウントを開始する&lt;/a&gt;
+の内容を自分用にまとめたやつ&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;PowerShell でドライブを確認&lt;/p&gt;
+
+    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;GET-CimInstance -query &quot;SELECT * from Win32_DiskDrive&quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;PowerShell でドライブをマウント (要管理者権限)&lt;/p&gt;
+
+    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;wsl --mount \\.\PHYSICALDRIVE5 --bare
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+
+    &lt;p&gt;PHYSICALDRIVE5 は確認したいドライブ&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;WSL 内でパーティション番号とファイルシステムを確認&lt;/p&gt;
+
+    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;lsblk -f
+sudo blkid
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;PowerShell でパーティションをマウント&lt;/p&gt;
+
+    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;wsl --mount \\.\PHYSICALDRIVE5 --partition 1 --type ext4
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;WSL 内でパーティションをマウント&lt;/p&gt;
+
+    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo mkdir /mnt/external
+sudo mount /dev/sdf1 /mnt/external
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+
+    &lt;p&gt;sdf1 は確認したいパーティション&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;ドライブの内容を確認&lt;/p&gt;
+
+    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ls /mnt/external
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;WSL 内でマウント解除&lt;/p&gt;
+
+    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo umount /mnt/external
+ls /mnt/external
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;PowerShell でマウント解除 (要管理者権限)&lt;/p&gt;
+
+    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;wsl.exe --unmount \\.\PHYSICALDRIVE5
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+</description>
+                <pubDate>Sun, 23 Feb 2025 03:20:00 +0900</pubDate>
+                <link>https://slx.jp/blog/2025/02/23/windows-11%E3%81%AEWSL%E3%81%A7ext4%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E3%81%AE%E3%83%89%E3%83%A9%E3%82%A4%E3%83%96%E3%81%AE%E5%86%85%E5%AE%B9%E3%82%92%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B.html</link>
+                <guid isPermaLink="true">https://slx.jp/blog/2025/02/23/windows-11%E3%81%AEWSL%E3%81%A7ext4%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E3%81%AE%E3%83%89%E3%83%A9%E3%82%A4%E3%83%96%E3%81%AE%E5%86%85%E5%AE%B9%E3%82%92%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B.html</guid>
+                
+                <category>Windows</category>
+                
+                <category>WSL</category>
+                
+                
+                <category>blog</category>
+                
+            </item>
         
             <item>
                 <title>【2024年最新版】今年買ってよかったもの</title>
@@ -1321,143 +1397,6 @@ jp.co.omronsoft.iwnnime.ml_lenovo
                 <category>ガジェット</category>
                 
                 <category>Android</category>
-                
-                
-                <category>blog</category>
-                
-            </item>
-        
-            <item>
-                <title>Kindle Paperwhite (第11世代) を買って1ヶ月で売り払った話</title>
-                <description>&lt;p&gt;Kindle Paperwhite を買ってから1ヶ月で売り払ってしまったので
-良かった点と悪かった点をメモしておく。&lt;/p&gt;
-
-&lt;blockquote class=&quot;twitter-tweet&quot;&gt;&lt;p lang=&quot;ja&quot; dir=&quot;ltr&quot;&gt;Kindle Paperwhite買ったら無駄にでかい箱で送られてきたｗ &lt;a href=&quot;https://t.co/XZ0IkAhQ3v&quot;&gt;pic.twitter.com/XZ0IkAhQ3v&lt;/a&gt;&lt;/p&gt;&amp;mdash; カガミ (@saasan) &lt;a href=&quot;https://twitter.com/saasan/status/1490296551885148160?ref_src=twsrc%5Etfw&quot;&gt;February 6, 2022&lt;/a&gt;&lt;/blockquote&gt;
-&lt;script async=&quot;&quot; src=&quot;https://platform.twitter.com/widgets.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
-
-&lt;h2 id=&quot;購入した機種と動機&quot;&gt;購入した機種と動機&lt;/h2&gt;
-
-&lt;p&gt;購入した機種は昨年発売された
-第11世代の Kindle Paperwhite シグニチャー エディション。&lt;/p&gt;
-
-&lt;div class=&quot;affiliate-product-list&quot;&gt;
-    &lt;a href=&quot;https://www.amazon.co.jp/dp/B08N2ZL7PS?tag=saasan-22&quot; class=&quot;affiliate-product&quot;&gt;
-        &lt;img src=&quot;https://m.media-amazon.com/images/I/71Lp7niNMAL._AC_SX466_.jpg&quot; alt=&quot;Kindle Paperwhite シグニチャー エディション (32GB) 6.8インチディスプレイ ワイヤレス充電対応 明るさ自動調節機能つき 広告なし ブラック&quot; /&gt;
-        &lt;span class=&quot;affiliate-product-name&quot;&gt;Kindle Paperwhite シグニチャー エディション (32GB) 6.8インチディスプレイ ワイヤレス充電対応 明るさ自動調節機能つき 広告なし ブラック&lt;/span&gt;
-    &lt;/a&gt;
-&lt;/div&gt;
-
-&lt;p&gt;一昨年までどの電子書籍サービスを使うか迷ってたんだけど、
-昨年 Kindle に一本化すると決めてから吹っ切れて
-1年で200冊くらい Kindle 本を買った。&lt;/p&gt;
-
-&lt;p&gt;電子書籍を読む端末は軽量でコンパクトな
-Xperia Z3 Tablet Compact を使ってたんだけど
-6月に踏んで割ってしまい、
-それ以降重たくて大きい Galaxy Tab S4 で読むかたちに。&lt;/p&gt;
-
-&lt;blockquote class=&quot;twitter-tweet&quot;&gt;&lt;p lang=&quot;ja&quot; dir=&quot;ltr&quot;&gt;仕事の電話でたたき起こされて寝ぼけてたせいで枕元に置いてたタブレット踏んでしまった…さよならXperia Z3 Tablet Compact… &lt;a href=&quot;https://t.co/ZiXxpe3isL&quot;&gt;pic.twitter.com/ZiXxpe3isL&lt;/a&gt;&lt;/p&gt;&amp;mdash; カガミ (@saasan) &lt;a href=&quot;https://twitter.com/saasan/status/1407072065677512705?ref_src=twsrc%5Etfw&quot;&gt;June 21, 2021&lt;/a&gt;&lt;/blockquote&gt;
-&lt;script async=&quot;&quot; src=&quot;https://platform.twitter.com/widgets.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
-
-&lt;p&gt;その後第11世代の Kindle Paperwhite が発売され
-小型軽量で良さそうだったのと
-電子ペーパーにも興味があったんで購入した。&lt;/p&gt;
-
-&lt;p&gt;シグニチャーエディションにした理由は、
-主に漫画を読むので下位モデルでは容量が足りないと判断したため。&lt;/p&gt;
-
-&lt;p&gt;下位モデルの容量は 8GB だけど Galaxy Tab S4 で使ってる Kindle アプリの使用容量は 8GB を超えてた。
-読み終わった本を消せば下位モデルでも入らないことはないけど
-管理が面倒かな、と。&lt;/p&gt;
-
-&lt;h2 id=&quot;悪かった点&quot;&gt;悪かった点&lt;/h2&gt;
-
-&lt;h3 id=&quot;見開き表示切り替えのボタンが邪魔&quot;&gt;見開き表示切り替えのボタンが邪魔&lt;/h3&gt;
-
-&lt;p&gt;Kindle Paperwhite では漫画の見開きページで
-見開き表示へ切り替えるボタンが
-下部中央に表示される。
-これをタップすることで
-1画面1ページ表示の状態から1画面2ページ表示に切り替わるわけだ。&lt;/p&gt;
-
-&lt;p&gt;ただしこれは切り替えボタンが
-漫画本文にかぶさって表示されるという問題がある。
-しかも、一部の漫画では全ページにこれが表示されるので
-漫画を読むときかなり邪魔。
-一応ボタン右上の×をタップすれば消えるが、
-全ページに表示されるのと電子ペーパー特有の反応の遅さが合わさり
-イライラすることになる。&lt;/p&gt;
-
-&lt;p&gt;おそらく電子書籍を作っている出版社が
-その仕様を知らずに全ページ見開きとして
-データを作っているのが原因なんだろうけど、
-Kindle 端末側でも表示しない設定にできたらいいんだが…。&lt;/p&gt;
-
-&lt;p&gt;前述の通り主に漫画を読むこともあり、
-この仕様に耐えられなかったのが売り払った主な原因。&lt;/p&gt;
-
-&lt;h3 id=&quot;次の巻を開くボタンが自動で表示されない&quot;&gt;次の巻を開くボタンが自動で表示されない&lt;/h3&gt;
-
-&lt;p&gt;Android の Kindle アプリだと、
-複数巻ある漫画を1冊読み終わったあと次の巻を開くボタンが自動で表示されるけど
-Kindle 端末ではそれが表示されない。&lt;/p&gt;
-
-&lt;p&gt;最終ページで画面の上部をタップするか
-一度ライブラリに戻らないと次の巻を開けないのが
-UIの反応の遅さと合わさって地味に面倒。&lt;/p&gt;
-
-&lt;h3 id=&quot;ダウンロードが遅い&quot;&gt;ダウンロードが遅い&lt;/h3&gt;
-
-&lt;p&gt;Wi-Fi は IEEE 802.11n まで対応してるけど明らかにダウンロード速度が遅い。&lt;/p&gt;
-
-&lt;p&gt;ストレージが 32GB あっても容量いっぱいにダウンロードするには忍耐が必要。&lt;/p&gt;
-
-&lt;h3 id=&quot;ページ送りボタンがない&quot;&gt;ページ送りボタンがない&lt;/h3&gt;
-
-&lt;p&gt;これは購入前から分かってたことだけど、
-ページ送りの際タップする必要があるので操作を片手で完結できない。
-端末が片手で持てる重さと画面サイズでも意味がない。&lt;/p&gt;
-
-&lt;h2 id=&quot;良かった点&quot;&gt;良かった点&lt;/h2&gt;
-
-&lt;h3 id=&quot;最後に読んだ本の表紙をスリープ中に表示する機能&quot;&gt;最後に読んだ本の表紙をスリープ中に表示する機能&lt;/h3&gt;
-
-&lt;p&gt;画面を書き換えなければ電力を消費しない
-電子ペーパーだからできる機能。&lt;/p&gt;
-
-&lt;p&gt;モノクロとはいえ、好きな漫画の表紙を常時表示できるのはうれしい。&lt;/p&gt;
-
-&lt;h3 id=&quot;片手で持てる重さと画面サイズ&quot;&gt;片手で持てる重さと画面サイズ&lt;/h3&gt;
-
-&lt;p&gt;軽量で片手で持っていても疲れにくい。
-ただし、前述の通りページを送るときは両手を使うことになる。&lt;/p&gt;
-
-&lt;p&gt;画面サイズはほとんど漫画を読むのに困らなかった。
-普通の漫画なら拡大せずにスラスラ読める。
-セリフにルビが多い星界の紋章を読むときはさすがに拡大したけど。&lt;/p&gt;
-
-&lt;h3 id=&quot;e-ink-電子ペーパー&quot;&gt;E Ink 電子ペーパー&lt;/h3&gt;
-
-&lt;p&gt;液晶画面より目が疲れない気がする。&lt;/p&gt;
-
-&lt;p&gt;ページ送り速度は耐えられるレベルだけど、
-UI の表示が遅いのはタップに反応してるのかしてないのかわからず困る。&lt;/p&gt;
-
-&lt;h3 id=&quot;明るさ自動調節機能&quot;&gt;明るさ自動調節機能&lt;/h3&gt;
-
-&lt;p&gt;明るい部屋で読むときも、寝る前に暗くした部屋で読むときも
-バックライトの明るさを調整しなくて済むのは良い。&lt;/p&gt;
-
-&lt;h3 id=&quot;usb-type-c-での充電&quot;&gt;USB Type-C での充電&lt;/h3&gt;
-
-&lt;p&gt;第11世代から充電が USB Type-C になったそうで、
-他の機器と充電器を共用できるのはやはり便利。&lt;/p&gt;
-</description>
-                <pubDate>Sun, 13 Mar 2022 07:05:19 +0900</pubDate>
-                <link>https://slx.jp/blog/2022/03/13/kindle-paperwhite%E3%82%92%E8%B2%B7%E3%81%A3%E3%81%A61%E3%83%B6%E6%9C%88%E3%81%A7%E5%A3%B2%E3%82%8A%E6%89%95%E3%81%A3%E3%81%9F.html</link>
-                <guid isPermaLink="true">https://slx.jp/blog/2022/03/13/kindle-paperwhite%E3%82%92%E8%B2%B7%E3%81%A3%E3%81%A61%E3%83%B6%E6%9C%88%E3%81%A7%E5%A3%B2%E3%82%8A%E6%89%95%E3%81%A3%E3%81%9F.html</guid>
-                
-                <category>ガジェット</category>
                 
                 
                 <category>blog</category>
