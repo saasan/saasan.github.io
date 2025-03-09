@@ -1,949 +1,875 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-    <channel>
-        <title>slx.jp</title>
-        <description></description>
-        <link>https://slx.jp/</link>
-        <atom:link href="https://slx.jp/feed.xml" rel="self" type="application/rss+xml"/>
-        <pubDate>Sun, 23 Feb 2025 03:22:09 +0900</pubDate>
-        <lastBuildDate>Sun, 23 Feb 2025 03:22:09 +0900</lastBuildDate>
-        <generator>Jekyll v4.2.2</generator>
-        
-            <item>
-                <title>Windows 11 の WSL で ext4 ファイルシステムのドライブの内容を確認する</title>
-                <description>&lt;p&gt;&lt;a href=&quot;https://learn.microsoft.com/ja-jp/windows/wsl/wsl2-mount-disk&quot;&gt;WSL 2 で Linux ディスクのマウントを開始する&lt;/a&gt;
-の内容を自分用にまとめたやつ&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ja"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://slx.jp/feed.xml" rel="self" type="application/atom+xml" /><link href="https://slx.jp/" rel="alternate" type="text/html" hreflang="ja" /><updated>2025-03-10T04:35:02+09:00</updated><id>https://slx.jp/feed.xml</id><title type="html">slx.jp</title><author><name>saasan</name></author><entry><title type="html">Windows 11 の WSL で ext4 ファイルシステムのドライブの内容を確認する</title><link href="https://slx.jp/blog/2025/02/23/windows-11%E3%81%AEWSL%E3%81%A7ext4%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E3%81%AE%E3%83%89%E3%83%A9%E3%82%A4%E3%83%96%E3%81%AE%E5%86%85%E5%AE%B9%E3%82%92%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B.html" rel="alternate" type="text/html" title="Windows 11 の WSL で ext4 ファイルシステムのドライブの内容を確認する" /><published>2025-02-23T03:20:00+09:00</published><updated>2025-02-23T03:20:00+09:00</updated><id>https://slx.jp/blog/2025/02/23/windows-11%E3%81%AEWSL%E3%81%A7ext4%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E3%81%AE%E3%83%89%E3%83%A9%E3%82%A4%E3%83%96%E3%81%AE%E5%86%85%E5%AE%B9%E3%82%92%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B</id><content type="html" xml:base="https://slx.jp/blog/2025/02/23/windows-11%E3%81%AEWSL%E3%81%A7ext4%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E3%81%AE%E3%83%89%E3%83%A9%E3%82%A4%E3%83%96%E3%81%AE%E5%86%85%E5%AE%B9%E3%82%92%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B.html"><![CDATA[<p><a href="https://learn.microsoft.com/ja-jp/windows/wsl/wsl2-mount-disk">WSL 2 で Linux ディスクのマウントを開始する</a>
+の内容を自分用にまとめたやつ</p>
 
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;PowerShell でドライブを確認&lt;/p&gt;
+<ol>
+  <li>
+    <p>PowerShell でドライブを確認</p>
 
-    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;GET-CimInstance -query &quot;SELECT * from Win32_DiskDrive&quot;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;PowerShell でドライブをマウント (要管理者権限)&lt;/p&gt;
+    <div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">GET-CimInstance</span><span class="w"> </span><span class="nt">-query</span><span class="w"> </span><span class="s2">"SELECT * from Win32_DiskDrive"</span><span class="w">
+</span></code></pre></div>    </div>
+  </li>
+  <li>
+    <p>PowerShell でドライブをマウント (要管理者権限)</p>
 
-    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;wsl --mount \\.\PHYSICALDRIVE5 --bare
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+    <div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">wsl</span><span class="w"> </span><span class="nt">--mount</span><span class="w"> </span><span class="nx">\\.\PHYSICALDRIVE5</span><span class="w"> </span><span class="nt">--bare</span><span class="w">
+</span></code></pre></div>    </div>
 
-    &lt;p&gt;PHYSICALDRIVE5 は確認したいドライブ&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;WSL 内でパーティション番号とファイルシステムを確認&lt;/p&gt;
+    <p>PHYSICALDRIVE5 は確認したいドライブ</p>
+  </li>
+  <li>
+    <p>WSL 内でパーティション番号とファイルシステムを確認</p>
 
-    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;lsblk -f
-sudo blkid
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;PowerShell でパーティションをマウント&lt;/p&gt;
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>lsblk <span class="nt">-f</span>
+<span class="nb">sudo </span>blkid
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>PowerShell でパーティションをマウント</p>
 
-    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;wsl --mount \\.\PHYSICALDRIVE5 --partition 1 --type ext4
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;WSL 内でパーティションをマウント&lt;/p&gt;
+    <div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">wsl</span><span class="w"> </span><span class="nt">--mount</span><span class="w"> </span><span class="nx">\\.\PHYSICALDRIVE5</span><span class="w"> </span><span class="nt">--partition</span><span class="w"> </span><span class="nx">1</span><span class="w"> </span><span class="nt">--type</span><span class="w"> </span><span class="nx">ext4</span><span class="w">
+</span></code></pre></div>    </div>
+  </li>
+  <li>
+    <p>WSL 内でパーティションをマウント</p>
 
-    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo mkdir /mnt/external
-sudo mount /dev/sdf1 /mnt/external
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo mkdir</span> /mnt/external
+<span class="nb">sudo </span>mount /dev/sdf1 /mnt/external
+</code></pre></div>    </div>
 
-    &lt;p&gt;sdf1 は確認したいパーティション&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;ドライブの内容を確認&lt;/p&gt;
+    <p>sdf1 は確認したいパーティション</p>
+  </li>
+  <li>
+    <p>ドライブの内容を確認</p>
 
-    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ls /mnt/external
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;WSL 内でマウント解除&lt;/p&gt;
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">ls</span> /mnt/external
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>WSL 内でマウント解除</p>
 
-    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo umount /mnt/external
-ls /mnt/external
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;PowerShell でマウント解除 (要管理者権限)&lt;/p&gt;
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>umount /mnt/external
+<span class="nb">ls</span> /mnt/external
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>PowerShell でマウント解除 (要管理者権限)</p>
 
-    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;wsl.exe --unmount \\.\PHYSICALDRIVE5
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-</description>
-                <pubDate>Sun, 23 Feb 2025 03:20:00 +0900</pubDate>
-                <link>https://slx.jp/blog/2025/02/23/windows-11%E3%81%AEWSL%E3%81%A7ext4%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E3%81%AE%E3%83%89%E3%83%A9%E3%82%A4%E3%83%96%E3%81%AE%E5%86%85%E5%AE%B9%E3%82%92%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B.html</link>
-                <guid isPermaLink="true">https://slx.jp/blog/2025/02/23/windows-11%E3%81%AEWSL%E3%81%A7ext4%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E3%81%AE%E3%83%89%E3%83%A9%E3%82%A4%E3%83%96%E3%81%AE%E5%86%85%E5%AE%B9%E3%82%92%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B.html</guid>
-                
-                <category>Windows</category>
-                
-                <category>WSL</category>
-                
-                
-                <category>blog</category>
-                
-            </item>
-        
-            <item>
-                <title>【2024年最新版】今年買ってよかったもの</title>
-                <description>&lt;p&gt;1年以上このサイトを放置してたんで更新方法すら忘れてる感があるが、
-今年買ってよかったものを羅列していく。&lt;/p&gt;
+    <div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">wsl.exe</span><span class="w"> </span><span class="nt">--unmount</span><span class="w"> </span><span class="nx">\\.\PHYSICALDRIVE5</span><span class="w">
+</span></code></pre></div>    </div>
+  </li>
+</ol>]]></content><author><name>saasan</name></author><category term="blog" /><category term="Windows" /><category term="WSL" /><summary type="html"><![CDATA[WSL 2 で Linux ディスクのマウントを開始する の内容を自分用にまとめたやつ]]></summary></entry><entry><title type="html">【2024年最新版】今年買ってよかったもの</title><link href="https://slx.jp/blog/2024/12/31/2024%E5%B9%B4%E6%9C%80%E6%96%B0%E7%89%88-%E4%BB%8A%E5%B9%B4%E8%B2%B7%E3%81%A3%E3%81%A6%E3%82%88%E3%81%8B%E3%81%A3%E3%81%9F%E3%82%82%E3%81%AE.html" rel="alternate" type="text/html" title="【2024年最新版】今年買ってよかったもの" /><published>2024-12-31T08:30:00+09:00</published><updated>2024-12-31T08:30:00+09:00</updated><id>https://slx.jp/blog/2024/12/31/%E3%80%902024%E5%B9%B4%E6%9C%80%E6%96%B0%E7%89%88%E3%80%91%E4%BB%8A%E5%B9%B4%E8%B2%B7%E3%81%A3%E3%81%A6%E3%82%88%E3%81%8B%E3%81%A3%E3%81%9F%E3%82%82%E3%81%AE</id><content type="html" xml:base="https://slx.jp/blog/2024/12/31/2024%E5%B9%B4%E6%9C%80%E6%96%B0%E7%89%88-%E4%BB%8A%E5%B9%B4%E8%B2%B7%E3%81%A3%E3%81%A6%E3%82%88%E3%81%8B%E3%81%A3%E3%81%9F%E3%82%82%E3%81%AE.html"><![CDATA[<p>1年以上このサイトを放置してたんで更新方法すら忘れてる感があるが、
+今年買ってよかったものを羅列していく。</p>
 
-&lt;h2 id=&quot;skagen-jorn-hybrid-hr-スマートウォッチ-skt3000&quot;&gt;SKAGEN JORN HYBRID HR スマートウォッチ SKT3000&lt;/h2&gt;
+<h2 id="skagen-jorn-hybrid-hr-スマートウォッチ-skt3000">SKAGEN JORN HYBRID HR スマートウォッチ SKT3000</h2>
 
-&lt;div class=&quot;affiliate-product-list&quot;&gt;
-    &lt;a href=&quot;https://www.amazon.co.jp/dp/B08RDJSZ71?tag=saasan-22&quot; class=&quot;affiliate-product&quot;&gt;
-        &lt;img src=&quot;https://m.media-amazon.com/images/I/81pMxAixRUL._AC_SX679_.jpg&quot; alt=&quot;[スカーゲン] 腕時計 JORN 42MM HYBRID HR SKT3000 メンズ ブラウン&quot; /&gt;
-        &lt;span class=&quot;affiliate-product-name&quot;&gt;[スカーゲン] 腕時計 JORN 42MM HYBRID HR SKT3000 メンズ ブラウン&lt;/span&gt;
-    &lt;/a&gt;
-&lt;/div&gt;
+<div class="affiliate-product-list">
+    <a href="https://www.amazon.co.jp/dp/B08RDJSZ71?tag=saasan-22" class="affiliate-product">
+        <img src="https://m.media-amazon.com/images/I/81pMxAixRUL._AC_SX679_.jpg" alt="[スカーゲン] 腕時計 JORN 42MM HYBRID HR SKT3000 メンズ ブラウン" />
+        <span class="affiliate-product-name">[スカーゲン] 腕時計 JORN 42MM HYBRID HR SKT3000 メンズ ブラウン</span>
+    </a>
+</div>
 
-&lt;p&gt;今年一番買ってよかったやつ。
-アナログ腕時計の文字盤が電子ペーパーになってるタイプのスマートウォッチ。&lt;/p&gt;
+<p>今年一番買ってよかったやつ。
+アナログ腕時計の文字盤が電子ペーパーになってるタイプのスマートウォッチ。</p>
 
-&lt;ul&gt;
-  &lt;li&gt;良い点
-    &lt;ul&gt;
-      &lt;li&gt;見た目が普通の腕時計&lt;/li&gt;
-      &lt;li&gt;スマホの通知確認、アラームに使えて便利&lt;/li&gt;
-      &lt;li&gt;電子ペーパーのためバッテリーが数週間もつ&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;悪い点
-    &lt;ul&gt;
-      &lt;li&gt;電子ペーパーのため画面の更新は若干もたつく (画面が小さいこともあり1秒もかからないが)&lt;/li&gt;
-      &lt;li&gt;タッチパネルではないため、側面にある3つのボタンでの操作が必要
-        &lt;ul&gt;
-          &lt;li&gt;ボタンを押し込む際の荷重は軽めで 3mm ほど出っ張っている&lt;/li&gt;
-          &lt;li&gt;手の甲などにあたって画面が勝手に変わっていることがある&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
+<ul>
+  <li>良い点
+    <ul>
+      <li>見た目が普通の腕時計</li>
+      <li>スマホの通知確認、アラームに使えて便利</li>
+      <li>電子ペーパーのためバッテリーが数週間もつ</li>
+    </ul>
+  </li>
+  <li>悪い点
+    <ul>
+      <li>電子ペーパーのため画面の更新は若干もたつく (画面が小さいこともあり1秒もかからないが)</li>
+      <li>タッチパネルではないため、側面にある3つのボタンでの操作が必要
+        <ul>
+          <li>ボタンを押し込む際の荷重は軽めで 3mm ほど出っ張っている</li>
+          <li>手の甲などにあたって画面が勝手に変わっていることがある</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
 
-&lt;blockquote class=&quot;twitter-tweet&quot;&gt;&lt;p lang=&quot;ja&quot; dir=&quot;ltr&quot;&gt;先日買ったハイブリッドスマートウォッチのベルト交換してきた &lt;a href=&quot;https://t.co/8iD071xftc&quot;&gt;pic.twitter.com/8iD071xftc&lt;/a&gt;&lt;/p&gt;&amp;mdash; カガミ (@saasan) &lt;a href=&quot;https://twitter.com/saasan/status/1788145173278691625?ref_src=twsrc%5Etfw&quot;&gt;May 8, 2024&lt;/a&gt;&lt;/blockquote&gt;
-&lt;script async=&quot;&quot; src=&quot;https://platform.twitter.com/widgets.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">先日買ったハイブリッドスマートウォッチのベルト交換してきた <a href="https://t.co/8iD071xftc">pic.twitter.com/8iD071xftc</a></p>&mdash; カガミ (@saasan) <a href="https://twitter.com/saasan/status/1788145173278691625?ref_src=twsrc%5Etfw">May 8, 2024</a></blockquote>
+<script async="" src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
-&lt;h2 id=&quot;エレコム-bluetooth50-マウス-ex-g-pro-lサイズ-m-xgl50mbskbk&quot;&gt;エレコム Bluetooth5.0 マウス EX-G PRO Lサイズ M-XGL50MBSKBK&lt;/h2&gt;
+<h2 id="エレコム-bluetooth50-マウス-ex-g-pro-lサイズ-m-xgl50mbskbk">エレコム Bluetooth5.0 マウス EX-G PRO Lサイズ M-XGL50MBSKBK</h2>
 
-&lt;div class=&quot;affiliate-product-list&quot;&gt;
-    &lt;a href=&quot;https://www.amazon.co.jp/dp/B0CGWN5V9N/?tag=saasan-22&quot; class=&quot;affiliate-product&quot;&gt;
-        &lt;img src=&quot;https://m.media-amazon.com/images/I/71lZi6zwg1L._AC_SX679_.jpg&quot; alt=&quot;エレコム ワイヤレスマウス 静音 EX-G PRO Lサイズ Bluetooth 無線2.4GHz 両対応 充電式 8ボタン 高速スクロール チルトホイール 抗菌 ブラック M-XGL50MBSKBK&quot; /&gt;
-        &lt;span class=&quot;affiliate-product-name&quot;&gt;エレコム ワイヤレスマウス 静音 EX-G PRO Lサイズ Bluetooth 無線2.4GHz 両対応 充電式 8ボタン 高速スクロール チルトホイール 抗菌 ブラック M-XGL50MBSKBK&lt;/span&gt;
-    &lt;/a&gt;
-&lt;/div&gt;
+<div class="affiliate-product-list">
+    <a href="https://www.amazon.co.jp/dp/B0CGWN5V9N/?tag=saasan-22" class="affiliate-product">
+        <img src="https://m.media-amazon.com/images/I/71lZi6zwg1L._AC_SX679_.jpg" alt="エレコム ワイヤレスマウス 静音 EX-G PRO Lサイズ Bluetooth 無線2.4GHz 両対応 充電式 8ボタン 高速スクロール チルトホイール 抗菌 ブラック M-XGL50MBSKBK" />
+        <span class="affiliate-product-name">エレコム ワイヤレスマウス 静音 EX-G PRO Lサイズ Bluetooth 無線2.4GHz 両対応 充電式 8ボタン 高速スクロール チルトホイール 抗菌 ブラック M-XGL50MBSKBK</span>
+    </a>
+</div>
 
-&lt;p&gt;長年使ってた Microsoft Sculpt Ergonomic Mouse が廃番になっていたため乗り換え&lt;/p&gt;
+<p>長年使ってた Microsoft Sculpt Ergonomic Mouse が廃番になっていたため乗り換え</p>
 
-&lt;ul&gt;
-  &lt;li&gt;良い点
-    &lt;ul&gt;
-      &lt;li&gt;高さがあり持ちやすい&lt;/li&gt;
-      &lt;li&gt;M、XL サイズも試したが、L サイズの握り心地が一番良かった&lt;/li&gt;
-      &lt;li&gt;ボタン数多め&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;悪い点
-    &lt;ul&gt;
-      &lt;li&gt;充電式のバッテリーは数日しかもたないため、頻繁に充電が必要&lt;/li&gt;
-      &lt;li&gt;中クリック(ホイールクリック)がかなり固くて押しづらい&lt;/li&gt;
-      &lt;li&gt;充電ケーブルの差込口が狭く、付属の USB Type-C ケーブルでしか充電できない&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
+<ul>
+  <li>良い点
+    <ul>
+      <li>高さがあり持ちやすい</li>
+      <li>M、XL サイズも試したが、L サイズの握り心地が一番良かった</li>
+      <li>ボタン数多め</li>
+    </ul>
+  </li>
+  <li>悪い点
+    <ul>
+      <li>充電式のバッテリーは数日しかもたないため、頻繁に充電が必要</li>
+      <li>中クリック(ホイールクリック)がかなり固くて押しづらい</li>
+      <li>充電ケーブルの差込口が狭く、付属の USB Type-C ケーブルでしか充電できない</li>
+    </ul>
+  </li>
+</ul>
 
-&lt;h2 id=&quot;電動空気入れ-panp-ride-mini&quot;&gt;電動空気入れ PANP RIDE MINI&lt;/h2&gt;
+<h2 id="電動空気入れ-panp-ride-mini">電動空気入れ PANP RIDE MINI</h2>
 
-&lt;div class=&quot;affiliate-product-list&quot;&gt;
-    &lt;a href=&quot;https://www.amazon.co.jp/dp/B0D7MMH36N/?tag=saasan-22&quot; class=&quot;affiliate-product&quot;&gt;
-        &lt;img src=&quot;https://m.media-amazon.com/images/I/61csfSJXeKL._AC_SY879_.jpg&quot; alt=&quot;PANP RIDE MINI 空気入れ 自転車 ロードバイク ツーリング 日本 メーカー (全バルブ対応) 米式 英式 仏式 バイク ボール 電動空気入れ 自動 軽量 小型コンパクト エアコンプレッサー KUKIIRE スマート空気入れ【保証2年間】&quot; /&gt;
-        &lt;span class=&quot;affiliate-product-name&quot;&gt;PANP RIDE MINI 空気入れ 自転車 ロードバイク ツーリング 日本 メーカー (全バルブ対応) 米式 英式 仏式 バイク ボール 電動空気入れ 自動 軽量 小型コンパクト エアコンプレッサー KUKIIRE スマート空気入れ【保証2年間】&lt;/span&gt;
-    &lt;/a&gt;
-&lt;/div&gt;
+<div class="affiliate-product-list">
+    <a href="https://www.amazon.co.jp/dp/B0D7MMH36N/?tag=saasan-22" class="affiliate-product">
+        <img src="https://m.media-amazon.com/images/I/61csfSJXeKL._AC_SY879_.jpg" alt="PANP RIDE MINI 空気入れ 自転車 ロードバイク ツーリング 日本 メーカー (全バルブ対応) 米式 英式 仏式 バイク ボール 電動空気入れ 自動 軽量 小型コンパクト エアコンプレッサー KUKIIRE スマート空気入れ【保証2年間】" />
+        <span class="affiliate-product-name">PANP RIDE MINI 空気入れ 自転車 ロードバイク ツーリング 日本 メーカー (全バルブ対応) 米式 英式 仏式 バイク ボール 電動空気入れ 自動 軽量 小型コンパクト エアコンプレッサー KUKIIRE スマート空気入れ【保証2年間】</span>
+    </a>
+</div>
 
-&lt;p&gt;ボタンを押すだけで、事前に設定しておいた空気圧まで自動で空気が入る。便利。&lt;/p&gt;
+<p>ボタンを押すだけで、事前に設定しておいた空気圧まで自動で空気が入る。便利。</p>
 
-&lt;h2 id=&quot;créer-人感センサーライト&quot;&gt;créer 人感センサーライト&lt;/h2&gt;
+<h2 id="créer-人感センサーライト">créer 人感センサーライト</h2>
 
-&lt;div class=&quot;affiliate-product-list&quot;&gt;
-    &lt;a href=&quot;https://www.amazon.co.jp/dp/B0B11ZVBQ5/?tag=saasan-22&quot; class=&quot;affiliate-product&quot;&gt;
-        &lt;img src=&quot;https://m.media-amazon.com/images/I/61Pzaizi-nL._AC_SX679_.jpg&quot; alt=&quot;créer(クレエ) 人感 センサーライト 室内 【PSE取得済】 明るさ調節(10段階)・点灯時間設定可能/足元灯 コンセント式 省エネ フットライト 電球色 暖色/白色 照明 (ホワイト)&quot; /&gt;
-        &lt;span class=&quot;affiliate-product-name&quot;&gt;créer(クレエ) 人感 センサーライト 室内 【PSE取得済】 明るさ調節(10段階)・点灯時間設定可能/足元灯 コンセント式 省エネ フットライト 電球色 暖色/白色 照明 (ホワイト)&lt;/span&gt;
-    &lt;/a&gt;
-&lt;/div&gt;
+<div class="affiliate-product-list">
+    <a href="https://www.amazon.co.jp/dp/B0B11ZVBQ5/?tag=saasan-22" class="affiliate-product">
+        <img src="https://m.media-amazon.com/images/I/61Pzaizi-nL._AC_SX679_.jpg" alt="créer(クレエ) 人感 センサーライト 室内 【PSE取得済】 明るさ調節(10段階)・点灯時間設定可能/足元灯 コンセント式 省エネ フットライト 電球色 暖色/白色 照明 (ホワイト)" />
+        <span class="affiliate-product-name">créer(クレエ) 人感 センサーライト 室内 【PSE取得済】 明るさ調節(10段階)・点灯時間設定可能/足元灯 コンセント式 省エネ フットライト 電球色 暖色/白色 照明 (ホワイト)</span>
+    </a>
+</div>
 
-&lt;p&gt;廊下にこれを付けたら、夜中にトイレへ行く際などわざわざ照明をつけなくてもよくなった。
-コンセント式なので電池交換の手間もない。&lt;/p&gt;
+<p>廊下にこれを付けたら、夜中にトイレへ行く際などわざわざ照明をつけなくてもよくなった。
+コンセント式なので電池交換の手間もない。</p>
 
-&lt;h2 id=&quot;マキタ-携帯電話ホルダー-a-73162&quot;&gt;マキタ 携帯電話ホルダー A-73162&lt;/h2&gt;
+<h2 id="マキタ-携帯電話ホルダー-a-73162">マキタ 携帯電話ホルダー A-73162</h2>
 
-&lt;div class=&quot;affiliate-product-list&quot;&gt;
-    &lt;a href=&quot;https://www.amazon.co.jp/dp/B0BZCXXQPB/?tag=saasan-22&quot; class=&quot;affiliate-product&quot;&gt;
-        &lt;img src=&quot;https://m.media-amazon.com/images/I/81HJjeNtTbL._AC_SX679_.jpg&quot; alt=&quot;マキタ(Makita) 携帯電話ホルダー A-73162&quot; /&gt;
-        &lt;span class=&quot;affiliate-product-name&quot;&gt;マキタ(Makita) 携帯電話ホルダー A-73162&lt;/span&gt;
-    &lt;/a&gt;
-&lt;/div&gt;
+<div class="affiliate-product-list">
+    <a href="https://www.amazon.co.jp/dp/B0BZCXXQPB/?tag=saasan-22" class="affiliate-product">
+        <img src="https://m.media-amazon.com/images/I/81HJjeNtTbL._AC_SX679_.jpg" alt="マキタ(Makita) 携帯電話ホルダー A-73162" />
+        <span class="affiliate-product-name">マキタ(Makita) 携帯電話ホルダー A-73162</span>
+    </a>
+</div>
 
-&lt;p&gt;Galaxy Z Fold5 がデカいんで、ポケットに入れられないとき使ってる&lt;/p&gt;
+<p>Galaxy Z Fold5 がデカいんで、ポケットに入れられないとき使ってる</p>
 
-&lt;h2 id=&quot;secrid-カードケース&quot;&gt;Secrid カードケース&lt;/h2&gt;
+<h2 id="secrid-カードケース">Secrid カードケース</h2>
 
-&lt;div class=&quot;affiliate-product-list&quot;&gt;
-    &lt;a href=&quot;https://www.amazon.co.jp/dp/B074MN1146/?tag=saasan-22&quot; class=&quot;affiliate-product&quot;&gt;
-        &lt;img src=&quot;https://m.media-amazon.com/images/I/61Iur4dn5yL._AC_SX679_.jpg&quot; alt=&quot;Secrid (シークリッド) - ミニ 財布 本革 RFID保護 カードケース カード最大12枚用, RFID財布。, ブラックオリーブ, 21 mm&quot; /&gt;
-        &lt;span class=&quot;affiliate-product-name&quot;&gt;Secrid (シークリッド) - ミニ 財布 本革 RFID保護 カードケース カード最大12枚用, RFID財布。, ブラックオリーブ, 21 mm&lt;/span&gt;
-    &lt;/a&gt;
-&lt;/div&gt;
+<div class="affiliate-product-list">
+    <a href="https://www.amazon.co.jp/dp/B074MN1146/?tag=saasan-22" class="affiliate-product">
+        <img src="https://m.media-amazon.com/images/I/61Iur4dn5yL._AC_SX679_.jpg" alt="Secrid (シークリッド) - ミニ 財布 本革 RFID保護 カードケース カード最大12枚用, RFID財布。, ブラックオリーブ, 21 mm" />
+        <span class="affiliate-product-name">Secrid (シークリッド) - ミニ 財布 本革 RFID保護 カードケース カード最大12枚用, RFID財布。, ブラックオリーブ, 21 mm</span>
+    </a>
+</div>
 
-&lt;p&gt;下のレバーを引くとカードが少しずつズレた状態で飛び出すので取り出しやすい&lt;/p&gt;
+<p>下のレバーを引くとカードが少しずつズレた状態で飛び出すので取り出しやすい</p>
 
-&lt;h2 id=&quot;タニタのツインスティック&quot;&gt;タニタのツインスティック&lt;/h2&gt;
+<h2 id="タニタのツインスティック">タニタのツインスティック</h2>
 
-&lt;p&gt;バーチャロンやるならやっぱりこれ&lt;/p&gt;
+<p>バーチャロンやるならやっぱりこれ</p>
 
-&lt;blockquote class=&quot;twitter-tweet&quot;&gt;&lt;p lang=&quot;ja&quot; dir=&quot;ltr&quot;&gt;PS4発掘してバーチャロン環境整えた&lt;br /&gt;フォースのアーケード一周プレイしてみたけど元々ツインスティック自体に重量があるのと吸盤がガラス天板の机と相性よくて安定感ある &lt;a href=&quot;https://t.co/XmwsBOK7wE&quot;&gt;pic.twitter.com/XmwsBOK7wE&lt;/a&gt;&lt;/p&gt;&amp;mdash; カガミ (@saasan) &lt;a href=&quot;https://twitter.com/saasan/status/1816377426865447364?ref_src=twsrc%5Etfw&quot;&gt;July 25, 2024&lt;/a&gt;&lt;/blockquote&gt;
-&lt;script async=&quot;&quot; src=&quot;https://platform.twitter.com/widgets.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">PS4発掘してバーチャロン環境整えた<br />フォースのアーケード一周プレイしてみたけど元々ツインスティック自体に重量があるのと吸盤がガラス天板の机と相性よくて安定感ある <a href="https://t.co/XmwsBOK7wE">pic.twitter.com/XmwsBOK7wE</a></p>&mdash; カガミ (@saasan) <a href="https://twitter.com/saasan/status/1816377426865447364?ref_src=twsrc%5Etfw">July 25, 2024</a></blockquote>
+<script async="" src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
-&lt;h2 id=&quot;ロフトベッド&quot;&gt;ロフトベッド&lt;/h2&gt;
+<h2 id="ロフトベッド">ロフトベッド</h2>
 
-&lt;p&gt;物を置けるスペースが拡大したが、既に埋まってしまった&lt;/p&gt;
+<p>物を置けるスペースが拡大したが、既に埋まってしまった</p>
 
-&lt;blockquote class=&quot;twitter-tweet&quot;&gt;&lt;p lang=&quot;ja&quot; dir=&quot;ltr&quot;&gt;ロフトベッドとポケットコイルマットレスの設置終わった&lt;br /&gt;4時間くらいかかった&lt;br /&gt;これで起きたときに身体が痛いの改善するといいんだけど &lt;a href=&quot;https://t.co/oaUfnpqpv0&quot;&gt;pic.twitter.com/oaUfnpqpv0&lt;/a&gt;&lt;/p&gt;&amp;mdash; カガミ (@saasan) &lt;a href=&quot;https://twitter.com/saasan/status/1753680538991579183?ref_src=twsrc%5Etfw&quot;&gt;February 3, 2024&lt;/a&gt;&lt;/blockquote&gt;
-&lt;script async=&quot;&quot; src=&quot;https://platform.twitter.com/widgets.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">ロフトベッドとポケットコイルマットレスの設置終わった<br />4時間くらいかかった<br />これで起きたときに身体が痛いの改善するといいんだけど <a href="https://t.co/oaUfnpqpv0">pic.twitter.com/oaUfnpqpv0</a></p>&mdash; カガミ (@saasan) <a href="https://twitter.com/saasan/status/1753680538991579183?ref_src=twsrc%5Etfw">February 3, 2024</a></blockquote>
+<script async="" src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
-&lt;h2 id=&quot;にゃんぷっぷーぬいぐるみ&quot;&gt;にゃんぷっぷーぬいぐるみ&lt;/h2&gt;
+<h2 id="にゃんぷっぷーぬいぐるみ">にゃんぷっぷーぬいぐるみ</h2>
 
-&lt;p&gt;かわいい&lt;/p&gt;
+<p>かわいい</p>
 
-&lt;blockquote class=&quot;twitter-tweet&quot;&gt;&lt;p lang=&quot;ja&quot; dir=&quot;ltr&quot;&gt;にゃんぷっぷーぬいぐるみ届いた！ &lt;a href=&quot;https://t.co/nGSoA3g5kp&quot;&gt;pic.twitter.com/nGSoA3g5kp&lt;/a&gt;&lt;/p&gt;&amp;mdash; カガミ (@saasan) &lt;a href=&quot;https://twitter.com/saasan/status/1853768089244250293?ref_src=twsrc%5Etfw&quot;&gt;November 5, 2024&lt;/a&gt;&lt;/blockquote&gt;
-&lt;script async=&quot;&quot; src=&quot;https://platform.twitter.com/widgets.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">にゃんぷっぷーぬいぐるみ届いた！ <a href="https://t.co/nGSoA3g5kp">pic.twitter.com/nGSoA3g5kp</a></p>&mdash; カガミ (@saasan) <a href="https://twitter.com/saasan/status/1853768089244250293?ref_src=twsrc%5Etfw">November 5, 2024</a></blockquote>
+<script async="" src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>]]></content><author><name>saasan</name></author><category term="blog" /><category term="ガジェット" /><summary type="html"><![CDATA[2024年に買ってよかったものをご紹介]]></summary></entry><entry><title type="html">aptX Adaptive LL 対応 Bluetooth 機器で PC ゲームに使える完全ワイヤレスなオーディオ環境構築</title><link href="https://slx.jp/blog/2023/08/14/aptx-adaptive-ll%E5%AF%BE%E5%BF%9Cbluetooth%E6%A9%9F%E5%99%A8%E3%81%A7pc%E3%82%B2%E3%83%BC%E3%83%A0%E3%81%AB%E4%BD%BF%E3%81%88%E3%82%8B%E5%AE%8C%E5%85%A8%E3%83%AF%E3%82%A4%E3%83%A4%E3%83%AC%E3%82%B9%E3%81%AA%E3%82%AA%E3%83%BC%E3%83%87%E3%82%A3%E3%82%AA%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89.html" rel="alternate" type="text/html" title="aptX Adaptive LL 対応 Bluetooth 機器で PC ゲームに使える完全ワイヤレスなオーディオ環境構築" /><published>2023-08-14T23:07:00+09:00</published><updated>2023-08-14T23:07:00+09:00</updated><id>https://slx.jp/blog/2023/08/14/aptx-adaptive-ll%E5%AF%BE%E5%BF%9Cbluetooth%E6%A9%9F%E5%99%A8%E3%81%A7pc%E3%82%B2%E3%83%BC%E3%83%A0%E3%81%AB%E4%BD%BF%E3%81%88%E3%82%8B%E5%AE%8C%E5%85%A8%E3%83%AF%E3%82%A4%E3%83%A4%E3%83%AC%E3%82%B9%E3%81%AA%E3%82%AA%E3%83%BC%E3%83%87%E3%82%A3%E3%82%AA%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89</id><content type="html" xml:base="https://slx.jp/blog/2023/08/14/aptx-adaptive-ll%E5%AF%BE%E5%BF%9Cbluetooth%E6%A9%9F%E5%99%A8%E3%81%A7pc%E3%82%B2%E3%83%BC%E3%83%A0%E3%81%AB%E4%BD%BF%E3%81%88%E3%82%8B%E5%AE%8C%E5%85%A8%E3%83%AF%E3%82%A4%E3%83%A4%E3%83%AC%E3%82%B9%E3%81%AA%E3%82%AA%E3%83%BC%E3%83%87%E3%82%A3%E3%82%AA%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89.html"><![CDATA[<p>PC でゲームをしたり音楽を聞いたりする際に有線のイヤホンを使用していたが、
+ケーブルが煩わしく感じていたのでゲームに使える完全ワイヤレスイヤホンを探すことにした。</p>
 
-</description>
-                <pubDate>Tue, 31 Dec 2024 08:30:00 +0900</pubDate>
-                <link>https://slx.jp/blog/2024/12/31/2024%E5%B9%B4%E6%9C%80%E6%96%B0%E7%89%88-%E4%BB%8A%E5%B9%B4%E8%B2%B7%E3%81%A3%E3%81%A6%E3%82%88%E3%81%8B%E3%81%A3%E3%81%9F%E3%82%82%E3%81%AE.html</link>
-                <guid isPermaLink="true">https://slx.jp/blog/2024/12/31/2024%E5%B9%B4%E6%9C%80%E6%96%B0%E7%89%88-%E4%BB%8A%E5%B9%B4%E8%B2%B7%E3%81%A3%E3%81%A6%E3%82%88%E3%81%8B%E3%81%A3%E3%81%9F%E3%82%82%E3%81%AE.html</guid>
-                
-                
-                <category>blog</category>
-                
-            </item>
-        
-            <item>
-                <title>aptX Adaptive LL 対応 Bluetooth 機器で PC ゲームに使える完全ワイヤレスなオーディオ環境構築</title>
-                <description>&lt;p&gt;PC でゲームをしたり音楽を聞いたりする際に有線のイヤホンを使用していたが、
-ケーブルが煩わしく感じていたのでゲームに使える完全ワイヤレスイヤホンを探すことにした。&lt;/p&gt;
+<h2 id="aptx-ll-と-aptx-adaptive">aptX LL と aptX Adaptive</h2>
 
-&lt;h2 id=&quot;aptx-ll-と-aptx-adaptive&quot;&gt;aptX LL と aptX Adaptive&lt;/h2&gt;
-
-&lt;p&gt;ある程度汎用的に使える Bluetooth 接続のものにしたいが、
+<p>ある程度汎用的に使える Bluetooth 接続のものにしたいが、
 Bluetooth のプロファイル A2DP で標準のコーデック SBC は音声の遅延が大きい。
 ゲームに向いた低遅延のコーデックについて調べたところ、
-aptX LL (Low Latency) と aptX Adaptive という規格があるらしい。&lt;/p&gt;
+aptX LL (Low Latency) と aptX Adaptive という規格があるらしい。</p>
 
-&lt;p&gt;aptX LL は名前通り低遅延なコーデック、
+<p>aptX LL は名前通り低遅延なコーデック、
 aptX Adaptive はローレイテンシー (LL) モードとハイクオリティ (HQ) モードを切替可能。
 aptX Adaptive の方が新しいコーデックだが、
-aptX Adaptive のローレイテンシーモードよりも aptX LL の方が規格上の遅延は少ない。&lt;/p&gt;
+aptX Adaptive のローレイテンシーモードよりも aptX LL の方が規格上の遅延は少ない。</p>
 
-&lt;p&gt;よって、aptX LL 対応の機器を買おうとネット上で調べたり某家電量販店で探したが、
-aptX LL 対応の機器が少なくいいものが見つからなかった。&lt;/p&gt;
+<p>よって、aptX LL 対応の機器を買おうとネット上で調べたり某家電量販店で探したが、
+aptX LL 対応の機器が少なくいいものが見つからなかった。</p>
 
-&lt;h2 id=&quot;creative-bt-w5-と-earfun-air-pro-3-を購入&quot;&gt;Creative BT-W5 と EarFun Air Pro 3 を購入&lt;/h2&gt;
+<h2 id="creative-bt-w5-と-earfun-air-pro-3-を購入">Creative BT-W5 と EarFun Air Pro 3 を購入</h2>
 
-&lt;p&gt;結局 aptX Adaptive 対応の USB アダプタ
-&lt;a href=&quot;https://jp.creative.com/p/accessories/creative-bt-w5&quot;&gt;Creative BT-W5&lt;/a&gt; と
-完全ワイヤレスイヤホン EarFun Air Pro 3 を購入した。&lt;/p&gt;
+<p>結局 aptX Adaptive 対応の USB アダプタ
+<a href="https://jp.creative.com/p/accessories/creative-bt-w5">Creative BT-W5</a> と
+完全ワイヤレスイヤホン EarFun Air Pro 3 を購入した。</p>
 
-&lt;div class=&quot;affiliate-product-list&quot;&gt;
-    &lt;a href=&quot;https://www.amazon.co.jp/dp/B0B1J2WTB2?tag=saasan-22&quot; class=&quot;affiliate-product&quot;&gt;
-        &lt;img src=&quot;https://m.media-amazon.com/images/I/41V33CRpvGL._AC_SY355_.jpg&quot; alt=&quot;Creative BT-W4 Bluetooth トランスミッター USB オーディオ/チャット用アナログマイク付 aptX Adaptiveモデル HP-BTW4&quot; /&gt;
-        &lt;span class=&quot;affiliate-product-name&quot;&gt;Creative BT-W4 Bluetooth トランスミッター USB オーディオ/チャット用アナログマイク付 aptX Adaptiveモデル HP-BTW4&lt;/span&gt;
-    &lt;/a&gt;
-    &lt;a href=&quot;https://www.amazon.co.jp/dp/B0BNQ611R2?tag=saasan-22&quot; class=&quot;affiliate-product&quot;&gt;
-        &lt;img src=&quot;https://m.media-amazon.com/images/I/51mtle79kTL._AC_SX522_.jpg&quot; alt=&quot;【VGP金賞】EarFun Air Pro 3 ANC搭載完全ワイヤレスイヤホン【Bluetooth 5.3 + 43dBまでノイズキャンセリング】QCC3071チップ搭載/aptX adaptive対応/超低遅延55ms/マルチポイント接続/専用アプリ/cVc8.0通話ノイズリダクション/最大45時間再生/ワイヤレス充電/IPX5防水(ブラック)&quot; /&gt;
-        &lt;span class=&quot;affiliate-product-name&quot;&gt;【VGP金賞】EarFun Air Pro 3 ANC搭載完全ワイヤレスイヤホン【Bluetooth 5.3 + 43dBまでノイズキャンセリング】QCC3071チップ搭載/aptX adaptive対応/超低遅延55ms/マルチポイント接続/専用アプリ/cVc8.0通話ノイズリダクション/最大45時間再生/ワイヤレス充電/IPX5防水(ブラック)&lt;/span&gt;
-    &lt;/a&gt;
-&lt;/div&gt;
+<div class="affiliate-product-list">
+    <a href="https://www.amazon.co.jp/dp/B0B1J2WTB2?tag=saasan-22" class="affiliate-product">
+        <img src="https://m.media-amazon.com/images/I/41V33CRpvGL._AC_SY355_.jpg" alt="Creative BT-W4 Bluetooth トランスミッター USB オーディオ/チャット用アナログマイク付 aptX Adaptiveモデル HP-BTW4" />
+        <span class="affiliate-product-name">Creative BT-W4 Bluetooth トランスミッター USB オーディオ/チャット用アナログマイク付 aptX Adaptiveモデル HP-BTW4</span>
+    </a>
+    <a href="https://www.amazon.co.jp/dp/B0BNQ611R2?tag=saasan-22" class="affiliate-product">
+        <img src="https://m.media-amazon.com/images/I/51mtle79kTL._AC_SX522_.jpg" alt="【VGP金賞】EarFun Air Pro 3 ANC搭載完全ワイヤレスイヤホン【Bluetooth 5.3 + 43dBまでノイズキャンセリング】QCC3071チップ搭載/aptX adaptive対応/超低遅延55ms/マルチポイント接続/専用アプリ/cVc8.0通話ノイズリダクション/最大45時間再生/ワイヤレス充電/IPX5防水(ブラック)" />
+        <span class="affiliate-product-name">【VGP金賞】EarFun Air Pro 3 ANC搭載完全ワイヤレスイヤホン【Bluetooth 5.3 + 43dBまでノイズキャンセリング】QCC3071チップ搭載/aptX adaptive対応/超低遅延55ms/マルチポイント接続/専用アプリ/cVc8.0通話ノイズリダクション/最大45時間再生/ワイヤレス充電/IPX5防水(ブラック)</span>
+    </a>
+</div>
 
-&lt;p&gt;BT-W5 は発売時の記事が印象に残っていたのと、
-Sound Blaster 等 PC 用サウンド系パーツの老舗メーカーという安心感から選択。&lt;/p&gt;
+<p>BT-W5 は発売時の記事が印象に残っていたのと、
+Sound Blaster 等 PC 用サウンド系パーツの老舗メーカーという安心感から選択。</p>
 
-&lt;p&gt;クリエイティブストアのみでの販売なので、上のリンクは旧機種の BT-W4 にしている。
-BT-W5 との違いは aptX HD、24bit/96kHz への対応の有無なので低遅延が目的ならどちらでもいい。&lt;/p&gt;
+<p>クリエイティブストアのみでの販売なので、上のリンクは旧機種の BT-W4 にしている。
+BT-W5 との違いは aptX HD、24bit/96kHz への対応の有無なので低遅延が目的ならどちらでもいい。</p>
 
-&lt;p&gt;EarFun Air Pro 3 を選んだ理由は、1万円以下の完全ワイヤレスイヤホンで評判が良かったため。&lt;/p&gt;
+<p>EarFun Air Pro 3 を選んだ理由は、1万円以下の完全ワイヤレスイヤホンで評判が良かったため。</p>
 
-&lt;p&gt;&lt;a href=&quot;https://av.watch.impress.co.jp/docs/topic/special/1500373.html&quot;&gt;迫力サウンドと強力NCで8,990円! 信じられない超コスパTWS「EarFun Air Pro 3」 - AV Watch[Sponsored]&lt;/a&gt;&lt;/p&gt;
+<p><a href="https://av.watch.impress.co.jp/docs/topic/special/1500373.html">迫力サウンドと強力NCで8,990円! 信じられない超コスパTWS「EarFun Air Pro 3」 - AV Watch[Sponsored]</a></p>
 
-&lt;h2 id=&quot;遅延時間の確認&quot;&gt;遅延時間の確認&lt;/h2&gt;
+<h2 id="遅延時間の確認">遅延時間の確認</h2>
 
-&lt;p&gt;遅延時間の確認には
-&lt;a href=&quot;https://nullvoxpopuli.github.io/latency-tester/&quot;&gt;Latency Tester&lt;/a&gt;
+<p>遅延時間の確認には
+<a href="https://nullvoxpopuli.github.io/latency-tester/">Latency Tester</a>
 を使用した。
-Web サイト上で音に合わせてマウスをクリックするかスペースキーを押すことで簡易的に遅延時間を確認できる。&lt;/p&gt;
+Web サイト上で音に合わせてマウスをクリックするかスペースキーを押すことで簡易的に遅延時間を確認できる。</p>
 
-&lt;p&gt;また、確認に使用した機器は以下の通り。&lt;/p&gt;
+<p>また、確認に使用した機器は以下の通り。</p>
 
-&lt;h3 id=&quot;アダプタ&quot;&gt;アダプタ&lt;/h3&gt;
+<h3 id="アダプタ">アダプタ</h3>
 
-&lt;table class=&quot;border&quot;&gt;
-    &lt;thead&gt;
-        &lt;tr&gt;
-            &lt;th&gt;アダプタ&lt;/th&gt;
-            &lt;th&gt;対応コーデック&lt;/th&gt;
-        &lt;/tr&gt;
-    &lt;/thead&gt;
-    &lt;tbody&gt;
-        &lt;tr&gt;
-            &lt;td&gt;サンワサプライ MM-BTUD43&lt;/td&gt;
-            &lt;td&gt;SBC, aptX&lt;/td&gt;
-        &lt;/tr&gt;
-        &lt;tr&gt;
-            &lt;td&gt;Creative BT-W5&lt;/td&gt;
-            &lt;td&gt;SBC, aptX, aptX HD, aptX Adaptive&lt;/td&gt;
-        &lt;/tr&gt;
-    &lt;/tbody&gt;
-&lt;/table&gt;
+<table>
+  <thead>
+    <tr>
+      <th>アダプタ</th>
+      <th>対応コーデック</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>サンワサプライ MM-BTUD43</td>
+      <td>SBC, aptX</td>
+    </tr>
+    <tr>
+      <td>Creative BT-W5</td>
+      <td>SBC, aptX, aptX HD, aptX Adaptive</td>
+    </tr>
+  </tbody>
+</table>
 
-&lt;h3 id=&quot;ヘッドホン--イヤホン&quot;&gt;ヘッドホン / イヤホン&lt;/h3&gt;
+<h3 id="ヘッドホン--イヤホン">ヘッドホン / イヤホン</h3>
 
-&lt;table class=&quot;border&quot;&gt;
-    &lt;thead&gt;
-        &lt;tr&gt;
-            &lt;th&gt;ヘッドホン / イヤホン&lt;/th&gt;
-            &lt;th&gt;対応コーデック&lt;/th&gt;
-        &lt;/tr&gt;
-    &lt;/thead&gt;
-    &lt;tbody&gt;
-        &lt;tr&gt;
-            &lt;td&gt;EarFun Air Pro 3&lt;/td&gt;
-            &lt;td&gt;SBC, AAC, aptX Adaptive&lt;/td&gt;
-        &lt;/tr&gt;
-        &lt;tr&gt;
-            &lt;td&gt;Sony MDR-ZX770BN&lt;/td&gt;
-            &lt;td&gt;SBC, AAC, aptX&lt;/td&gt;
-        &lt;/tr&gt;
-        &lt;tr&gt;
-            &lt;td&gt;FOSTEX TM2C&lt;/td&gt;
-            &lt;td&gt;SBC, AAC, aptX&lt;/td&gt;
-        &lt;/tr&gt;
-    &lt;/tbody&gt;
-&lt;/table&gt;
+<table>
+  <thead>
+    <tr>
+      <th>ヘッドホン / イヤホン</th>
+      <th>対応コーデック</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>EarFun Air Pro 3</td>
+      <td>SBC, AAC, aptX Adaptive</td>
+    </tr>
+    <tr>
+      <td>Sony MDR-ZX770BN</td>
+      <td>SBC, AAC, aptX</td>
+    </tr>
+    <tr>
+      <td>FOSTEX TM2C</td>
+      <td>SBC, AAC, aptX</td>
+    </tr>
+  </tbody>
+</table>
 
-&lt;h3 id=&quot;確認結果&quot;&gt;確認結果&lt;/h3&gt;
+<h3 id="確認結果">確認結果</h3>
 
-&lt;table class=&quot;border&quot;&gt;
-    &lt;thead&gt;
-        &lt;tr&gt;
-            &lt;th&gt;アダプタ&lt;/th&gt;
-            &lt;th&gt;ヘッドホン / イヤホン&lt;/th&gt;
-            &lt;th&gt;コーデック&lt;/th&gt;
-            &lt;th&gt;遅延時間&lt;/th&gt;
-        &lt;/tr&gt;
-    &lt;/thead&gt;
-    &lt;tbody&gt;
-        &lt;tr&gt;
-            &lt;td&gt;Creative BT-W5&lt;/td&gt;
-            &lt;td&gt;EarFun Air Pro 3&lt;/td&gt;
-            &lt;td&gt;aptX Adaptive LL&lt;/td&gt;
-            &lt;td&gt;100 ms&lt;/td&gt;
-        &lt;/tr&gt;
-        &lt;tr&gt;
-            &lt;td&gt;サンワサプライ MM-BTUD43&lt;/td&gt;
-            &lt;td&gt;Sony MDR-ZX770BN&lt;/td&gt;
-            &lt;td&gt;aptX&lt;/td&gt;
-            &lt;td&gt;160 ms&lt;/td&gt;
-        &lt;/tr&gt;
-        &lt;tr&gt;
-            &lt;td&gt;Creative BT-W5&lt;/td&gt;
-            &lt;td&gt;Sony MDR-ZX770BN&lt;/td&gt;
-            &lt;td&gt;SBC&lt;/td&gt;
-            &lt;td&gt;200 ms&lt;/td&gt;
-        &lt;/tr&gt;
-        &lt;tr&gt;
-            &lt;td&gt;Creative BT-W5&lt;/td&gt;
-            &lt;td&gt;FOSTEX TM2C&lt;/td&gt;
-            &lt;td&gt;aptX&lt;/td&gt;
-            &lt;td&gt;335 ms&lt;/td&gt;
-        &lt;/tr&gt;
-        &lt;tr&gt;
-            &lt;td&gt;Creative BT-W5&lt;/td&gt;
-            &lt;td&gt;EarFun Air Pro 3&lt;/td&gt;
-            &lt;td&gt;aptX Adaptive HQ&lt;/td&gt;
-            &lt;td&gt;350 ms&lt;/td&gt;
-        &lt;/tr&gt;
-    &lt;/tbody&gt;
-&lt;/table&gt;
+<table>
+  <thead>
+    <tr>
+      <th>アダプタ</th>
+      <th>ヘッドホン / イヤホン</th>
+      <th>コーデック</th>
+      <th>遅延時間</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Creative BT-W5</td>
+      <td>EarFun Air Pro 3</td>
+      <td>aptX Adaptive LL</td>
+      <td>100 ms</td>
+    </tr>
+    <tr>
+      <td>サンワサプライ MM-BTUD43</td>
+      <td>Sony MDR-ZX770BN</td>
+      <td>aptX</td>
+      <td>160 ms</td>
+    </tr>
+    <tr>
+      <td>Creative BT-W5</td>
+      <td>Sony MDR-ZX770BN</td>
+      <td>SBC</td>
+      <td>200 ms</td>
+    </tr>
+    <tr>
+      <td>Creative BT-W5</td>
+      <td>FOSTEX TM2C</td>
+      <td>aptX</td>
+      <td>335 ms</td>
+    </tr>
+    <tr>
+      <td>Creative BT-W5</td>
+      <td>EarFun Air Pro 3</td>
+      <td>aptX Adaptive HQ</td>
+      <td>350 ms</td>
+    </tr>
+  </tbody>
+</table>
 
-&lt;p&gt;当然だが Creative BT-W5 と EarFun Air Pro 3
-の組み合わせが最も遅延が少ない結果となった。&lt;/p&gt;
+<p>当然だが Creative BT-W5 と EarFun Air Pro 3
+の組み合わせが最も遅延が少ない結果となった。</p>
 
-&lt;p&gt;実際に PSO2 を遊んでみたがアクションゲームで使用するなら特に問題なさそうだった。
-音ゲーはやってないからわからない。&lt;/p&gt;
+<p>実際に PSO2 を遊んでみたがアクションゲームで使用するなら特に問題なさそうだった。
+音ゲーはやってないからわからない。</p>
 
-&lt;h2 id=&quot;問題点&quot;&gt;問題点&lt;/h2&gt;
+<h2 id="問題点">問題点</h2>
 
-&lt;p&gt;低遅延という点では満足な結果だったが、
-それ以外の点でいくつか問題があったので書いておく。&lt;/p&gt;
+<p>低遅延という点では満足な結果だったが、
+それ以外の点でいくつか問題があったので書いておく。</p>
 
-&lt;h3 id=&quot;creative-bt-w5&quot;&gt;Creative BT-W5&lt;/h3&gt;
+<h3 id="creative-bt-w5">Creative BT-W5</h3>
 
-&lt;ul&gt;
-  &lt;li&gt;PC からはスピーカーとして認識される&lt;/li&gt;
-  &lt;li&gt;よって Windows 標準の Bluetooth 設定画面からは機器との接続/切断ができず、 Creative 独自のアプリで操作する必要がある&lt;/li&gt;
-  &lt;li&gt;Windows 標準の Bluetooth 接続だと機器が切断されたら自動で別のスピーカー等へ音声出力が切り替わるが、それも行われないため手動で切り替えが必要&lt;/li&gt;
-  &lt;li&gt;音量が大きいため Windows の音量設定を 1 ～ 5% あたりまで下げる必要があり細かい音量調整が効かない&lt;/li&gt;
-&lt;/ul&gt;
+<ul>
+  <li>PC からはスピーカーとして認識される</li>
+  <li>よって Windows 標準の Bluetooth 設定画面からは機器との接続/切断ができず、 Creative 独自のアプリで操作する必要がある</li>
+  <li>Windows 標準の Bluetooth 接続だと機器が切断されたら自動で別のスピーカー等へ音声出力が切り替わるが、それも行われないため手動で切り替えが必要</li>
+  <li>音量が大きいため Windows の音量設定を 1 ～ 5% あたりまで下げる必要があり細かい音量調整が効かない</li>
+</ul>
 
-&lt;h3 id=&quot;earfun-air-pro-3&quot;&gt;EarFun Air Pro 3&lt;/h3&gt;
+<h3 id="earfun-air-pro-3">EarFun Air Pro 3</h3>
 
-&lt;ul&gt;
-  &lt;li&gt;付属のイヤーピースが最大のものでも私には小さくはずれやすい&lt;/li&gt;
-  &lt;li&gt;タッチ操作のため誤タッチにより意図しない操作が発生する場合がある&lt;/li&gt;
-&lt;/ul&gt;
+<ul>
+  <li>付属のイヤーピースが最大のものでも私には小さくはずれやすい</li>
+  <li>タッチ操作のため誤タッチにより意図しない操作が発生する場合がある</li>
+</ul>
 
-&lt;h2 id=&quot;参考サイト&quot;&gt;参考サイト&lt;/h2&gt;
+<h2 id="参考サイト">参考サイト</h2>
 
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://uzuky.hatenablog.com/entry/20201215/1608005651&quot;&gt;aptX LL / Adaptive でやる音ゲー - う！&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://androplus.org/entry/creative-bt-w5-review/&quot;&gt;Creative BT-W5レビュー。aptX Adaptiveで24bit/96kHzや低遅延にできるトランスミッター - AndroPlus&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-                <pubDate>Mon, 14 Aug 2023 23:07:00 +0900</pubDate>
-                <link>https://slx.jp/blog/2023/08/14/aptx-adaptive-ll%E5%AF%BE%E5%BF%9Cbluetooth%E6%A9%9F%E5%99%A8%E3%81%A7pc%E3%82%B2%E3%83%BC%E3%83%A0%E3%81%AB%E4%BD%BF%E3%81%88%E3%82%8B%E5%AE%8C%E5%85%A8%E3%83%AF%E3%82%A4%E3%83%A4%E3%83%AC%E3%82%B9%E3%81%AA%E3%82%AA%E3%83%BC%E3%83%87%E3%82%A3%E3%82%AA%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89.html</link>
-                <guid isPermaLink="true">https://slx.jp/blog/2023/08/14/aptx-adaptive-ll%E5%AF%BE%E5%BF%9Cbluetooth%E6%A9%9F%E5%99%A8%E3%81%A7pc%E3%82%B2%E3%83%BC%E3%83%A0%E3%81%AB%E4%BD%BF%E3%81%88%E3%82%8B%E5%AE%8C%E5%85%A8%E3%83%AF%E3%82%A4%E3%83%A4%E3%83%AC%E3%82%B9%E3%81%AA%E3%82%AA%E3%83%BC%E3%83%87%E3%82%A3%E3%82%AA%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89.html</guid>
-                
-                <category>ガジェット</category>
-                
-                <category>PC</category>
-                
-                
-                <category>blog</category>
-                
-            </item>
-        
-            <item>
-                <title>IFTTT の Twitter 連携が有料化したので Python と GitHub Actions で RSS をツイートする</title>
-                <description>&lt;p&gt;IFTTT で動かしてた某ゲーム公式サイトの RSS をツイートするやつが
+<ul>
+  <li><a href="https://uzuky.hatenablog.com/entry/20201215/1608005651">aptX LL / Adaptive でやる音ゲー - う！</a></li>
+  <li><a href="https://androplus.org/entry/creative-bt-w5-review/">Creative BT-W5レビュー。aptX Adaptiveで24bit/96kHzや低遅延にできるトランスミッター - AndroPlus</a></li>
+</ul>]]></content><author><name>saasan</name></author><category term="blog" /><category term="ガジェット" /><category term="PC" /><summary type="html"><![CDATA[PC でゲームをしたり音楽を聞いたりする際に有線のイヤホンを使用していたが、 ケーブルが煩わしく感じていたのでゲームに使える完全ワイヤレスイヤホンを探すことにした。]]></summary></entry><entry><title type="html">IFTTT の Twitter 連携が有料化したので Python と GitHub Actions で RSS をツイートする</title><link href="https://slx.jp/blog/2023/07/05/ifttt%E3%81%AEtwitter%E9%80%A3%E6%90%BA%E3%81%8C%E6%9C%89%E6%96%99%E5%8C%96%E3%81%97%E3%81%9F%E3%81%AE%E3%81%A7python%E3%81%A8github-actions%E3%81%A7rss%E3%82%92%E3%83%84%E3%82%A4%E3%83%BC%E3%83%88%E3%81%99%E3%82%8B.html" rel="alternate" type="text/html" title="IFTTT の Twitter 連携が有料化したので Python と GitHub Actions で RSS をツイートする" /><published>2023-07-05T00:20:00+09:00</published><updated>2023-07-05T00:20:00+09:00</updated><id>https://slx.jp/blog/2023/07/05/ifttt%E3%81%AEtwitter%E9%80%A3%E6%90%BA%E3%81%8C%E6%9C%89%E6%96%99%E5%8C%96%E3%81%97%E3%81%9F%E3%81%AE%E3%81%A7python%E3%81%A8github-actions%E3%81%A7rss%E3%82%92%E3%83%84%E3%82%A4%E3%83%BC%E3%83%88%E3%81%99%E3%82%8B</id><content type="html" xml:base="https://slx.jp/blog/2023/07/05/ifttt%E3%81%AEtwitter%E9%80%A3%E6%90%BA%E3%81%8C%E6%9C%89%E6%96%99%E5%8C%96%E3%81%97%E3%81%9F%E3%81%AE%E3%81%A7python%E3%81%A8github-actions%E3%81%A7rss%E3%82%92%E3%83%84%E3%82%A4%E3%83%BC%E3%83%88%E3%81%99%E3%82%8B.html"><![CDATA[<p>IFTTT で動かしてた某ゲーム公式サイトの RSS をツイートするやつが
 Twitter 連携の有料化によって動かなくなったため、
-GitHub Actions で自作の Python スクリプトを動かして代用することにした。&lt;/p&gt;
+GitHub Actions で自作の Python スクリプトを動かして代用することにした。</p>
 
-&lt;p&gt;コードは以下のリポジトリにある。&lt;/p&gt;
+<p>コードは以下のリポジトリにある。</p>
 
-&lt;p&gt;&lt;a href=&quot;https://github.com/saasan/feed2tweet&quot;&gt;&lt;img src=&quot;https://github-link-card.s3.ap-northeast-1.amazonaws.com/saasan/feed2tweet.png&quot; width=&quot;460px&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+<p><a href="https://github.com/saasan/feed2tweet"><img src="https://github-link-card.s3.ap-northeast-1.amazonaws.com/saasan/feed2tweet.png" width="460px" /></a></p>
 
-&lt;h2 id=&quot;なぜ-github-actions-なのか&quot;&gt;なぜ GitHub Actions なのか？&lt;/h2&gt;
+<h2 id="なぜ-github-actions-なのか">なぜ GitHub Actions なのか？</h2>
 
-&lt;ol&gt;
-  &lt;li&gt;Public リポジトリなら無料で利用可能&lt;/li&gt;
-  &lt;li&gt;定期的な実行が可能&lt;/li&gt;
-  &lt;li&gt;データの永続化に近いことが可能&lt;/li&gt;
-  &lt;li&gt;GitHub Actions の利用経験がなかったため学習用として&lt;/li&gt;
-&lt;/ol&gt;
+<ol>
+  <li>Public リポジトリなら無料で利用可能</li>
+  <li>定期的な実行が可能</li>
+  <li>データの永続化に近いことが可能</li>
+  <li>GitHub Actions の利用経験がなかったため学習用として</li>
+</ol>
 
-&lt;p&gt;RSS 内のどこまでツイートしたかを判別するためその情報を保存しておきたいが、
+<p>RSS 内のどこまでツイートしたかを判別するためその情報を保存しておきたいが、
 IFTTT を利用する前に調べた際は
-無料で利用可能でデータの永続化が可能なサービスが見つからなかった記憶がある。&lt;/p&gt;
+無料で利用可能でデータの永続化が可能なサービスが見つからなかった記憶がある。</p>
 
-&lt;p&gt;今回いくつかの候補の中から GitHub Actions について調べていたところ、
-&lt;a href=&quot;https://mjhd.hatenablog.com/entry/2022/06/04/104711&quot;&gt;Github Actionsのcacheをデータの永続化(?)に使う - MJHD&lt;/a&gt;
-を見て cache が永続化に利用できると知り GitHub Actions を利用することとした。&lt;/p&gt;
+<p>今回いくつかの候補の中から GitHub Actions について調べていたところ、
+<a href="https://mjhd.hatenablog.com/entry/2022/06/04/104711">Github Actionsのcacheをデータの永続化(?)に使う - MJHD</a>
+を見て cache が永続化に利用できると知り GitHub Actions を利用することとした。</p>
 
-&lt;h2 id=&quot;github-actions-の-cache&quot;&gt;Github Actions の cache&lt;/h2&gt;
+<h2 id="github-actions-の-cache">Github Actions の cache</h2>
 
-&lt;p&gt;公式のドキュメント: 
-&lt;a href=&quot;https://docs.github.com/ja/actions/using-workflows/caching-dependencies-to-speed-up-workflows&quot;&gt;依存関係をキャッシュしてワークフローのスピードを上げる - GitHub Docs&lt;/a&gt;&lt;/p&gt;
+<p>公式のドキュメント: 
+<a href="https://docs.github.com/ja/actions/using-workflows/caching-dependencies-to-speed-up-workflows">依存関係をキャッシュしてワークフローのスピードを上げる - GitHub Docs</a></p>
 
-&lt;p&gt;ファイルをキャッシュとして保存し、次回以降のワークフロー実行時に利用できる。&lt;/p&gt;
+<p>ファイルをキャッシュとして保存し、次回以降のワークフロー実行時に利用できる。</p>
 
-&lt;p&gt;本来はビルドに必要なライブラリなど依存関係を保持しておき
+<p>本来はビルドに必要なライブラリなど依存関係を保持しておき
 ワークフローの実行を高速化するためのものだが、
-データの永続化に利用することも可能。&lt;/p&gt;
+データの永続化に利用することも可能。</p>
 
-&lt;p&gt;ただし、7日間以上アクセスされていないキャッシュは削除される。容量は最大10 GB。&lt;/p&gt;
+<p>ただし、7日間以上アクセスされていないキャッシュは削除される。容量は最大10 GB。</p>
 
-&lt;h2 id=&quot;キャッシュの利用方法&quot;&gt;キャッシュの利用方法&lt;/h2&gt;
+<h2 id="キャッシュの利用方法">キャッシュの利用方法</h2>
 
-&lt;p&gt;キャッシュを上書きすることはできないため、
+<p>キャッシュを上書きすることはできないため、
 保存時は常に新しいキャッシュを作成し、
-読込時は最新のものを取得する必要がある。&lt;/p&gt;
+読込時は最新のものを取得する必要がある。</p>
 
-&lt;p&gt;以下のように key に新しいキーを指定することで新しいキャッシュを作成、
-restore-keys に接頭辞のみ指定すると最新のものが取得できる。&lt;/p&gt;
+<p>以下のように key に新しいキーを指定することで新しいキャッシュを作成、
+restore-keys に接頭辞のみ指定すると最新のものが取得できる。</p>
 
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;- name: actions/cache用keyの生成
-  run: echo &quot;CACHE_TIMESTAMP=$(date +%s)&quot; &amp;gt;&amp;gt; &quot;$GITHUB_ENV&quot;
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">actions/cache用keyの生成</span>
+  <span class="na">run</span><span class="pi">:</span> <span class="s">echo "CACHE_TIMESTAMP=$(date +%s)" &gt;&gt; "$GITHUB_ENV"</span>
 
-- uses: actions/cache@v3
-  id: tweeted
-  with:
-    path: ./tweeted
-    key: tweeted-$
-    restore-keys: tweeted-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+<span class="pi">-</span> <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/cache@v3</span>
+  <span class="na">id</span><span class="pi">:</span> <span class="s">tweeted</span>
+  <span class="na">with</span><span class="pi">:</span>
+    <span class="na">path</span><span class="pi">:</span> <span class="s">./tweeted</span>
+    <span class="na">key</span><span class="pi">:</span> <span class="s">tweeted-$</span>
+    <span class="na">restore-keys</span><span class="pi">:</span> <span class="s">tweeted-</span>
+</code></pre></div></div>
 
-&lt;h2 id=&quot;古いキャッシュの削除&quot;&gt;古いキャッシュの削除&lt;/h2&gt;
+<h2 id="古いキャッシュの削除">古いキャッシュの削除</h2>
 
-&lt;p&gt;前述の通り放置していても古いキャッシュは7日で消えるが、
-&lt;a href=&quot;https://zenn.dev/hankei6km/articles/manage-cache-in-github-actions-2023-01&quot;&gt;GitHub Actions の Cache 管理(2023 年 1 月の場合)&lt;/a&gt;
-を参考に、1日経ったキャッシュはワークフロー内で削除することとした。&lt;/p&gt;
+<p>前述の通り放置していても古いキャッシュは7日で消えるが、
+<a href="https://zenn.dev/hankei6km/articles/manage-cache-in-github-actions-2023-01">GitHub Actions の Cache 管理(2023 年 1 月の場合)</a>
+を参考に、1日経ったキャッシュはワークフロー内で削除することとした。</p>
 
-&lt;p&gt;GitHub CLI の
-extension (&lt;a href=&quot;https://github.com/actions/gh-actions-cache&quot;&gt;gh-actions-cache&lt;/a&gt;)
-を使用している。&lt;/p&gt;
+<p>GitHub CLI の
+extension (<a href="https://github.com/actions/gh-actions-cache">gh-actions-cache</a>)
+を使用している。</p>
 
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;- name: Cleanup cache
-  run: |
-    gh extension install actions/gh-actions-cache
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Cleanup cache</span>
+  <span class="na">run</span><span class="pi">:</span> <span class="pi">|</span>
+    <span class="s">gh extension install actions/gh-actions-cache</span>
 
-    # キャッシュがない場合にエラーとなって停止するのを防ぐ
-    set +e
+    <span class="s"># キャッシュがない場合にエラーとなって停止するのを防ぐ</span>
+    <span class="s">set +e</span>
 
-    # 作成から1日以上経っているキャッシュを削除
-    for KEY in $(gh actions-cache list -R &quot;${REPO}&quot; -B &quot;${BRANCH}&quot; --key $ --order asc --sort created-at | grep -P &apos;days? ago&apos; | cut -f 1)
-    do
-        echo &quot;Deleting ${KEY}&quot;
-        gh actions-cache delete &quot;${KEY}&quot; -R &quot;${REPO}&quot; -B &quot;${BRANCH}&quot; --confirm
-    done
-  env:
-    GH_TOKEN: $
-    REPO: $
-    BRANCH: $
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+    <span class="s"># 作成から1日以上経っているキャッシュを削除</span>
+    <span class="s">for KEY in $(gh actions-cache list -R "${REPO}" -B "${BRANCH}" --key $ --order asc --sort created-at | grep -P 'days? ago' | cut -f 1)</span>
+    <span class="s">do</span>
+        <span class="s">echo "Deleting ${KEY}"</span>
+        <span class="s">gh actions-cache delete "${KEY}" -R "${REPO}" -B "${BRANCH}" --confirm</span>
+    <span class="s">done</span>
+  <span class="na">env</span><span class="pi">:</span>
+    <span class="na">GH_TOKEN</span><span class="pi">:</span> <span class="s">$</span>
+    <span class="na">REPO</span><span class="pi">:</span> <span class="s">$</span>
+    <span class="na">BRANCH</span><span class="pi">:</span> <span class="s">$</span>
+</code></pre></div></div>
 
-&lt;h2 id=&quot;github-actions-での定期実行に関する注意点&quot;&gt;GitHub Actions での定期実行に関する注意点&lt;/h2&gt;
+<h2 id="github-actions-での定期実行に関する注意点">GitHub Actions での定期実行に関する注意点</h2>
 
-&lt;p&gt;以下のように schedule で10分毎に実行する設定としたが、
-&lt;a href=&quot;https://docs.github.com/ja/actions/using-workflows/events-that-trigger-workflows#schedule&quot;&gt;公式のドキュメント&lt;/a&gt;
-にも書かれている通り、負荷が高い場合は遅延したりそもそも実行されない場合がある。&lt;/p&gt;
+<p>以下のように schedule で10分毎に実行する設定としたが、
+<a href="https://docs.github.com/ja/actions/using-workflows/events-that-trigger-workflows#schedule">公式のドキュメント</a>
+にも書かれている通り、負荷が高い場合は遅延したりそもそも実行されない場合がある。</p>
 
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;on:
-  schedule:
-    - cron: &apos;3-59/10 * * * *&apos;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">on</span><span class="pi">:</span>
+  <span class="na">schedule</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">cron</span><span class="pi">:</span> <span class="s1">'</span><span class="s">3-59/10</span><span class="nv"> </span><span class="s">*</span><span class="nv"> </span><span class="s">*</span><span class="nv"> </span><span class="s">*</span><span class="nv"> </span><span class="s">*'</span>
+</code></pre></div></div>
 
-&lt;p&gt;実際半日で72回ほど動くはずが53回しか動いていなかった。
-確実に動かしたいものは避けたほうがよい。&lt;/p&gt;
-</description>
-                <pubDate>Wed, 05 Jul 2023 00:20:00 +0900</pubDate>
-                <link>https://slx.jp/blog/2023/07/05/ifttt%E3%81%AEtwitter%E9%80%A3%E6%90%BA%E3%81%8C%E6%9C%89%E6%96%99%E5%8C%96%E3%81%97%E3%81%9F%E3%81%AE%E3%81%A7python%E3%81%A8github-actions%E3%81%A7rss%E3%82%92%E3%83%84%E3%82%A4%E3%83%BC%E3%83%88%E3%81%99%E3%82%8B.html</link>
-                <guid isPermaLink="true">https://slx.jp/blog/2023/07/05/ifttt%E3%81%AEtwitter%E9%80%A3%E6%90%BA%E3%81%8C%E6%9C%89%E6%96%99%E5%8C%96%E3%81%97%E3%81%9F%E3%81%AE%E3%81%A7python%E3%81%A8github-actions%E3%81%A7rss%E3%82%92%E3%83%84%E3%82%A4%E3%83%BC%E3%83%88%E3%81%99%E3%82%8B.html</guid>
-                
-                
-                <category>blog</category>
-                
-            </item>
-        
-            <item>
-                <title>Stable Diffusion を Windows 10 へインストールする方法と使い方、画像生成のコツ</title>
-                <description>&lt;p&gt;Stable Diffusion を Windows 10 のローカル環境へインストールする方法と使い方、
-1ヶ月ほど使ってみて分かった画像生成のコツをメモしておく。&lt;/p&gt;
+<p>実際半日で72回ほど動くはずが53回しか動いていなかった。
+確実に動かしたいものは避けたほうがよい。</p>]]></content><author><name>saasan</name></author><category term="blog" /><category term="Twitter" /><category term="Python" /><category term="GitHub Actions" /><summary type="html"><![CDATA[Github Actions の cache をデータの永続化に使う]]></summary></entry><entry><title type="html">Stable Diffusion を Windows 10 へインストールする方法と使い方、画像生成のコツ</title><link href="https://slx.jp/blog/2023/03/06/stable-diffusion%E3%82%92windows-10%E3%81%B8%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95%E3%81%A8%E4%BD%BF%E3%81%84%E6%96%B9-%E7%94%BB%E5%83%8F%E7%94%9F%E6%88%90%E3%81%AE%E3%82%B3%E3%83%84.html" rel="alternate" type="text/html" title="Stable Diffusion を Windows 10 へインストールする方法と使い方、画像生成のコツ" /><published>2023-03-06T15:15:00+09:00</published><updated>2023-03-06T15:15:00+09:00</updated><id>https://slx.jp/blog/2023/03/06/stable-diffusion%E3%82%92windows-10%E3%81%B8%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95%E3%81%A8%E4%BD%BF%E3%81%84%E6%96%B9%E3%80%81%E7%94%BB%E5%83%8F%E7%94%9F%E6%88%90%E3%81%AE%E3%82%B3%E3%83%84</id><content type="html" xml:base="https://slx.jp/blog/2023/03/06/stable-diffusion%E3%82%92windows-10%E3%81%B8%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95%E3%81%A8%E4%BD%BF%E3%81%84%E6%96%B9-%E7%94%BB%E5%83%8F%E7%94%9F%E6%88%90%E3%81%AE%E3%82%B3%E3%83%84.html"><![CDATA[<p>Stable Diffusion を Windows 10 のローカル環境へインストールする方法と使い方、
+1ヶ月ほど使ってみて分かった画像生成のコツをメモしておく。</p>
 
-&lt;h2 id=&quot;実行環境&quot;&gt;実行環境&lt;/h2&gt;
+<h2 id="実行環境">実行環境</h2>
 
-&lt;ul&gt;
-  &lt;li&gt;Windows 10 Pro 22H2&lt;/li&gt;
-  &lt;li&gt;GPU: &lt;a href=&quot;https://www.amazon.co.jp/dp/B08WPJ5P4R/?tag=saasan-22&quot;&gt;MSI GeForce RTX 3060 GAMING X 12G&lt;/a&gt; (VRAM 12 GB 版 NVIDIA GeForce RTX 3060)&lt;/li&gt;
-  &lt;li&gt;CPU: &lt;a href=&quot;https://www.amazon.co.jp/dp/B08166SLDF/?tag=saasan-22&quot;&gt;AMD Ryzen 5 5600X&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;メモリ: 32 GB&lt;/li&gt;
-&lt;/ul&gt;
+<ul>
+  <li>Windows 10 Pro 22H2</li>
+  <li>GPU: <a href="https://www.amazon.co.jp/dp/B08WPJ5P4R/?tag=saasan-22">MSI GeForce RTX 3060 GAMING X 12G</a> (VRAM 12 GB 版 NVIDIA GeForce RTX 3060)</li>
+  <li>CPU: <a href="https://www.amazon.co.jp/dp/B08166SLDF/?tag=saasan-22">AMD Ryzen 5 5600X</a></li>
+  <li>メモリ: 32 GB</li>
+</ul>
 
-&lt;div class=&quot;affiliate-product-list&quot;&gt;
-    &lt;a href=&quot;https://www.amazon.co.jp/dp/B08WPJ5P4R/?tag=saasan-22&quot; class=&quot;affiliate-product&quot;&gt;
-        &lt;img src=&quot;https://m.media-amazon.com/images/I/811sBakp3+L._AC_SX355_.jpg&quot; alt=&quot;MSI GeForce RTX 3060 GAMING X 12G グラフィックスボード VD7552&quot; /&gt;
-        &lt;span class=&quot;affiliate-product-name&quot;&gt;MSI GeForce RTX 3060 GAMING X 12G グラフィックスボード VD7552&lt;/span&gt;
-    &lt;/a&gt;
-    &lt;a href=&quot;https://www.amazon.co.jp/dp/B08166SLDF/?tag=saasan-22&quot; class=&quot;affiliate-product&quot;&gt;
-        &lt;img src=&quot;https://m.media-amazon.com/images/I/51ld6RR8IrL._AC_SY450_.jpg&quot; alt=&quot;AMD Ryzen 5 5600X with Wraith Stealth cooler 3.7GHz 6コア / 12スレッド 35MB 65W【国内正規代理店品】 100-100000065BOX&quot; /&gt;
-        &lt;span class=&quot;affiliate-product-name&quot;&gt;AMD Ryzen 5 5600X with Wraith Stealth cooler 3.7GHz 6コア / 12スレッド 35MB 65W【国内正規代理店品】 100-100000065BOX&lt;/span&gt;
-    &lt;/a&gt;
-&lt;/div&gt;
+<div class="affiliate-product-list">
+    <a href="https://www.amazon.co.jp/dp/B08WPJ5P4R/?tag=saasan-22" class="affiliate-product">
+        <img src="https://m.media-amazon.com/images/I/811sBakp3+L._AC_SX355_.jpg" alt="MSI GeForce RTX 3060 GAMING X 12G グラフィックスボード VD7552" />
+        <span class="affiliate-product-name">MSI GeForce RTX 3060 GAMING X 12G グラフィックスボード VD7552</span>
+    </a>
+    <a href="https://www.amazon.co.jp/dp/B08166SLDF/?tag=saasan-22" class="affiliate-product">
+        <img src="https://m.media-amazon.com/images/I/51ld6RR8IrL._AC_SY450_.jpg" alt="AMD Ryzen 5 5600X with Wraith Stealth cooler 3.7GHz 6コア / 12スレッド 35MB 65W【国内正規代理店品】 100-100000065BOX" />
+        <span class="affiliate-product-name">AMD Ryzen 5 5600X with Wraith Stealth cooler 3.7GHz 6コア / 12スレッド 35MB 65W【国内正規代理店品】 100-100000065BOX</span>
+    </a>
+</div>
 
-&lt;p&gt;ドライバー等は最新のものを使用。
-あくまでも私が実行した環境のためこのスペックを満たしている必要はない。&lt;/p&gt;
+<p>ドライバー等は最新のものを使用。
+あくまでも私が実行した環境のためこのスペックを満たしている必要はない。</p>
 
-&lt;p&gt;Stable Diffusion web UI は VRAM 4 GB 以上をサポートしているが、
-GPU と VRAM の容量は画像生成速度と解像度に影響するため高性能なものが望ましい。&lt;/p&gt;
+<p>Stable Diffusion web UI は VRAM 4 GB 以上をサポートしているが、
+GPU と VRAM の容量は画像生成速度と解像度に影響するため高性能なものが望ましい。</p>
 
-&lt;p&gt;また、Stable Diffusion は NVIDIA 製 GPU で動かす前提となっている。
-AMD や Intel 製 GPU に対応させたものもあるようだが以下の手順では使えない。&lt;/p&gt;
+<p>また、Stable Diffusion は NVIDIA 製 GPU で動かす前提となっている。
+AMD や Intel 製 GPU に対応させたものもあるようだが以下の手順では使えない。</p>
 
-&lt;h2 id=&quot;cuda-toolkit-のインストール&quot;&gt;CUDA Toolkit のインストール&lt;/h2&gt;
+<h2 id="cuda-toolkit-のインストール">CUDA Toolkit のインストール</h2>
 
-&lt;p&gt;Stable Diffusion に限らず、NVIDIA の GPU で機械学習やディープラーニングを行うには
-CUDA という並列計算のライブラリが必要。&lt;/p&gt;
+<p>Stable Diffusion に限らず、NVIDIA の GPU で機械学習やディープラーニングを行うには
+CUDA という並列計算のライブラリが必要。</p>
 
-&lt;p&gt;&lt;a href=&quot;https://developer.nvidia.com/cuda-downloads&quot;&gt;NVIDIA の公式サイト&lt;/a&gt;
-から CUDA Toolkit をダウンロードしインストールする。&lt;/p&gt;
+<p><a href="https://developer.nvidia.com/cuda-downloads">NVIDIA の公式サイト</a>
+から CUDA Toolkit をダウンロードしインストールする。</p>
 
-&lt;h2 id=&quot;python-git-のインストール&quot;&gt;Python, Git のインストール&lt;/h2&gt;
+<h2 id="python-git-のインストール">Python, Git のインストール</h2>
 
-&lt;p&gt;Stable Diffusion web UI (以下 web UI と略す) を利用するのが楽なので、
-これを動かすのに必要な Python, Git をインストールする。&lt;/p&gt;
+<p>Stable Diffusion web UI (以下 web UI と略す) を利用するのが楽なので、
+これを動かすのに必要な Python, Git をインストールする。</p>
 
-&lt;h3 id=&quot;python-のインストール&quot;&gt;Python のインストール&lt;/h3&gt;
+<h3 id="python-のインストール">Python のインストール</h3>
 
-&lt;p&gt;&lt;strong&gt;3.11 系では web UI が動作しないため必ず 3.10 系をインストールすること。&lt;/strong&gt;&lt;/p&gt;
+<p><strong>3.11 系では web UI が動作しないため必ず 3.10 系をインストールすること。</strong></p>
 
-&lt;ol&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.python.org/downloads/windows/&quot;&gt;Python の公式サイト&lt;/a&gt; から Python 3.10.x をダウンロードする。&lt;br /&gt;
+<ol>
+  <li><a href="https://www.python.org/downloads/windows/">Python の公式サイト</a> から Python 3.10.x をダウンロードする。<br />
 現在は 3.10.10 が最新のため「Stable Releases」の「Python 3.10.10 - Feb. 8, 2023」にある
-「Windows installer (64-bit)」をクリックしてダウンロードすればよい。&lt;/li&gt;
-  &lt;li&gt;ダウンロードしたファイルをダブルクリックしてインストーラーを起動する。&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;「Add python.exe to PATH」にチェックを入れる。&lt;/strong&gt;&lt;/li&gt;
-  &lt;li&gt;「Install Now」をクリックしインストールする。&lt;/li&gt;
-&lt;/ol&gt;
+「Windows installer (64-bit)」をクリックしてダウンロードすればよい。</li>
+  <li>ダウンロードしたファイルをダブルクリックしてインストーラーを起動する。</li>
+  <li><strong>「Add python.exe to PATH」にチェックを入れる。</strong></li>
+  <li>「Install Now」をクリックしインストールする。</li>
+</ol>
 
-&lt;h3 id=&quot;git-のインストール&quot;&gt;Git のインストール&lt;/h3&gt;
+<h3 id="git-のインストール">Git のインストール</h3>
 
-&lt;ol&gt;
-  &lt;li&gt;&lt;a href=&quot;https://git-scm.com/download/win&quot;&gt;Git の公式サイト&lt;/a&gt; から 64-bit Git for Windows Setup をダウンロードする。&lt;/li&gt;
-  &lt;li&gt;ダウンロードしたファイルをダブルクリックしてインストーラーを起動する。&lt;/li&gt;
-  &lt;li&gt;英語で色々聞かれるが全部「Next」をクリックして進める。&lt;/li&gt;
-  &lt;li&gt;最後に「Install」すればとりあえず使える状態になる。&lt;/li&gt;
-&lt;/ol&gt;
+<ol>
+  <li><a href="https://git-scm.com/download/win">Git の公式サイト</a> から 64-bit Git for Windows Setup をダウンロードする。</li>
+  <li>ダウンロードしたファイルをダブルクリックしてインストーラーを起動する。</li>
+  <li>英語で色々聞かれるが全部「Next」をクリックして進める。</li>
+  <li>最後に「Install」すればとりあえず使える状態になる。</li>
+</ol>
 
-&lt;h2 id=&quot;stable-diffusion-web-ui-のインストール&quot;&gt;Stable Diffusion web UI のインストール&lt;/h2&gt;
+<h2 id="stable-diffusion-web-ui-のインストール">Stable Diffusion web UI のインストール</h2>
 
-&lt;ol&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/AUTOMATIC1111/stable-diffusion-webui&quot;&gt;Stable Diffusion web UI のページ&lt;/a&gt;
-から「Code &amp;gt; Download ZIP」でファイルをダウンロードする。&lt;br /&gt;
-Git を使える人は &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git clone&lt;/code&gt; してもよい。&lt;/li&gt;
-  &lt;li&gt;ダウンロードした ZIP ファイルを展開する。&lt;br /&gt;
-展開したフォルダがそのままインストール先となるため、インストールしたいフォルダに展開すればよい。&lt;/li&gt;
-  &lt;li&gt;展開したフォルダにある「webui-user.bat」を右クリックしてプロパティをクリックする。&lt;/li&gt;
-  &lt;li&gt;プロパティ下部「セキュリティ」の右にある「許可する」にチェックを入れて OK をクリックする。&lt;/li&gt;
-  &lt;li&gt;「webui-user.bat」をダブルクリックして起動する。 (管理者ではない一般ユーザーで実行してよい)&lt;/li&gt;
-  &lt;li&gt;必要なファイルが自動でダウンロード・インストールされるため完了するまで待つ。&lt;/li&gt;
-  &lt;li&gt;インストールと起動が完了したら &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Running on local URL:  http://127.0.0.1:7860&lt;/code&gt; が表示される。&lt;/li&gt;
-  &lt;li&gt;ブラウザで &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;http://127.0.0.1:7860&lt;/code&gt; を開く。&lt;/li&gt;
-&lt;/ol&gt;
+<ol>
+  <li><a href="https://github.com/AUTOMATIC1111/stable-diffusion-webui">Stable Diffusion web UI のページ</a>
+から「Code &gt; Download ZIP」でファイルをダウンロードする。<br />
+Git を使える人は <code class="language-plaintext highlighter-rouge">git clone</code> してもよい。</li>
+  <li>ダウンロードした ZIP ファイルを展開する。<br />
+展開したフォルダがそのままインストール先となるため、インストールしたいフォルダに展開すればよい。</li>
+  <li>展開したフォルダにある「webui-user.bat」を右クリックしてプロパティをクリックする。</li>
+  <li>プロパティ下部「セキュリティ」の右にある「許可する」にチェックを入れて OK をクリックする。</li>
+  <li>「webui-user.bat」をダブルクリックして起動する。 (管理者ではない一般ユーザーで実行してよい)</li>
+  <li>必要なファイルが自動でダウンロード・インストールされるため完了するまで待つ。</li>
+  <li>インストールと起動が完了したら <code class="language-plaintext highlighter-rouge">Running on local URL:  http://127.0.0.1:7860</code> が表示される。</li>
+  <li>ブラウザで <code class="language-plaintext highlighter-rouge">http://127.0.0.1:7860</code> を開く。</li>
+</ol>
 
-&lt;h2 id=&quot;web-ui-起動時にエラーが発生する場合&quot;&gt;web UI 起動時にエラーが発生する場合&lt;/h2&gt;
+<h2 id="web-ui-起動時にエラーが発生する場合">web UI 起動時にエラーが発生する場合</h2>
 
-&lt;h3 id=&quot;runtimeerror-cannot-add-middleware-after-an-application-has-started&quot;&gt;RuntimeError: Cannot add middleware after an application has started.&lt;/h3&gt;
+<h3 id="runtimeerror-cannot-add-middleware-after-an-application-has-started">RuntimeError: Cannot add middleware after an application has started.</h3>
 
-&lt;p&gt;web UI のバージョンによっては webui-user.bat を起動後に以下のエラーが表示される。&lt;/p&gt;
+<p>web UI のバージョンによっては webui-user.bat を起動後に以下のエラーが表示される。</p>
 
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;RuntimeError: Cannot add middleware after an application has started
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+<pre><code class="language-cmd">RuntimeError: Cannot add middleware after an application has started
+</code></pre>
 
-&lt;p&gt;この場合はコマンドプロンプトで以下を実行してから再度 webui-user.bat を起動する。&lt;/p&gt;
+<p>この場合はコマンドプロンプトで以下を実行してから再度 webui-user.bat を起動する。</p>
 
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;cd [web UIのインストール先パス]
+<pre><code class="language-cmd">cd [web UIのインストール先パス]
 venv\Scripts\activate.bat
 pip install --upgrade fastapi==0.90.1
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</code></pre>
 
-&lt;h3 id=&quot;loading-stable-diffusion-model-outofmemoryerror-や-torchcudaoutofmemoryerror-cuda-out-of-memory&quot;&gt;loading stable diffusion model: OutOfMemoryError や torch.cuda.OutOfMemoryError: CUDA out of memory.&lt;/h3&gt;
+<h3 id="loading-stable-diffusion-model-outofmemoryerror-や-torchcudaoutofmemoryerror-cuda-out-of-memory">loading stable diffusion model: OutOfMemoryError や torch.cuda.OutOfMemoryError: CUDA out of memory.</h3>
 
-&lt;p&gt;VRAM が不足しているときに表示される。&lt;br /&gt;
+<p>VRAM が不足しているときに表示される。<br />
 webui-user.bat を起動する前にタスクマネージャーを起動しておき、
-「パフォーマンス」タブで GPU の「専用 GPU メモリ使用量」が 100% になっていないか確認するとよい。&lt;/p&gt;
+「パフォーマンス」タブで GPU の「専用 GPU メモリ使用量」が 100% になっていないか確認するとよい。</p>
 
-&lt;p&gt;VRAM が不足している場合は &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--lowvram&lt;/code&gt; オプションを指定することで起動できる場合がある。&lt;br /&gt;
-「webui-user.bat」をテキストエディタで開き&lt;/p&gt;
+<p>VRAM が不足している場合は <code class="language-plaintext highlighter-rouge">--lowvram</code> オプションを指定することで起動できる場合がある。<br />
+「webui-user.bat」をテキストエディタで開き</p>
 
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;set COMMANDLINE_ARGS=
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+<div class="language-bat highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">set</span> <span class="kd">COMMANDLINE_ARGS</span><span class="o">=</span>
+</code></pre></div></div>
 
-&lt;p&gt;となっている部分を以下のように変更し保存する。&lt;/p&gt;
+<p>となっている部分を以下のように変更し保存する。</p>
 
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;set COMMANDLINE_ARGS=--lowvram
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+<div class="language-bat highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">set</span> <span class="kd">COMMANDLINE_ARGS</span><span class="o">=</span><span class="na">--lowvram
+</span></code></pre></div></div>
 
-&lt;h2 id=&quot;テキストからの画像生成-txt2img&quot;&gt;テキストからの画像生成 (txt2img)&lt;/h2&gt;
+<h2 id="テキストからの画像生成-txt2img">テキストからの画像生成 (txt2img)</h2>
 
-&lt;p&gt;web UI の URL を開くと txt2img の画面となる。
-txt2img は文章、単語などの言葉から画像を生成できる。&lt;/p&gt;
+<p>web UI の URL を開くと txt2img の画面となる。
+txt2img は文章、単語などの言葉から画像を生成できる。</p>
 
-&lt;h3 id=&quot;prompt-negative-prompt&quot;&gt;Prompt, Negative prompt&lt;/h3&gt;
+<h3 id="prompt-negative-prompt">Prompt, Negative prompt</h3>
 
-&lt;p&gt;Prompt へ描かせたいもの、Negative prompt へ描かせたくないものを英語で入力し、
+<p>Prompt へ描かせたいもの、Negative prompt へ描かせたくないものを英語で入力し、
 「Generate」をクリックすれば画像が生成される。
-複数の要素を指定したい場合はカンマ (,) 区切りで入力する。&lt;/p&gt;
+複数の要素を指定したい場合はカンマ (,) 区切りで入力する。</p>
 
-&lt;p&gt;定番の「馬に乗った宇宙飛行士の写真」を生成させるなら Prompt へ以下を入力すればよい。&lt;/p&gt;
+<p>定番の「馬に乗った宇宙飛行士の写真」を生成させるなら Prompt へ以下を入力すればよい。</p>
 
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;a photograph of an astronaut riding a horse
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>a photograph of an astronaut riding a horse
+</code></pre></div></div>
 
-&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;()&lt;/code&gt; または &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;[]&lt;/code&gt; で言葉を囲むことで強調/抑制できる。&lt;/p&gt;
+<p><code class="language-plaintext highlighter-rouge">()</code> または <code class="language-plaintext highlighter-rouge">[]</code> で言葉を囲むことで強調/抑制できる。</p>
 
-&lt;ul&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;(言葉)&lt;/code&gt;: 1.1倍強調&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;((言葉))&lt;/code&gt;: 1.21倍強調 (= 1.1×1.1)&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;[言葉]&lt;/code&gt;: 1.1倍抑制&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;(言葉:1.5)&lt;/code&gt;: 1.5倍強調&lt;/li&gt;
-&lt;/ul&gt;
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">(言葉)</code>: 1.1倍強調</li>
+  <li><code class="language-plaintext highlighter-rouge">((言葉))</code>: 1.21倍強調 (= 1.1×1.1)</li>
+  <li><code class="language-plaintext highlighter-rouge">[言葉]</code>: 1.1倍抑制</li>
+  <li><code class="language-plaintext highlighter-rouge">(言葉:1.5)</code>: 1.5倍強調</li>
+</ul>
 
-&lt;p&gt;参考: &lt;a href=&quot;https://github.com/AUTOMATIC1111/stable-diffusion-webui/wiki/Features#attentionemphasis&quot;&gt;Attention/emphasis&lt;/a&gt;&lt;/p&gt;
+<p>参考: <a href="https://github.com/AUTOMATIC1111/stable-diffusion-webui/wiki/Features#attentionemphasis">Attention/emphasis</a></p>
 
-&lt;h3 id=&quot;generate--interrupt--skip&quot;&gt;Generate / Interrupt / Skip&lt;/h3&gt;
+<h3 id="generate--interrupt--skip">Generate / Interrupt / Skip</h3>
 
-&lt;p&gt;前述の通り、「Generate」をクリックすると画像の生成が開始される。&lt;/p&gt;
+<p>前述の通り、「Generate」をクリックすると画像の生成が開始される。</p>
 
-&lt;p&gt;生成が始まると Interrupt / Skip ボタンに変化する。
+<p>生成が始まると Interrupt / Skip ボタンに変化する。
 Interrupt で生成を中断し終了する。
-Skip は後述の Batch で複数枚生成している場合に、現在生成しているものをスキップできる。&lt;/p&gt;
+Skip は後述の Batch で複数枚生成している場合に、現在生成しているものをスキップできる。</p>
 
-&lt;h3 id=&quot;生成画像の出力先&quot;&gt;生成画像の出力先&lt;/h3&gt;
+<h3 id="生成画像の出力先">生成画像の出力先</h3>
 
-&lt;p&gt;生成後に画像下のフォルダボタンをクリックすると、出力先の outputs\txt2img-images フォルダが開かれる。&lt;/p&gt;
+<p>生成後に画像下のフォルダボタンをクリックすると、出力先の outputs\txt2img-images フォルダが開かれる。</p>
 
-&lt;p&gt;Save ボタンをクリックすると log\images フォルダにコピーが保存される。&lt;/p&gt;
+<p>Save ボタンをクリックすると log\images フォルダにコピーが保存される。</p>
 
-&lt;h2 id=&quot;txt2img-の設定項目&quot;&gt;txt2img の設定項目&lt;/h2&gt;
+<h2 id="txt2img-の設定項目">txt2img の設定項目</h2>
 
-&lt;h3 id=&quot;width-height&quot;&gt;Width, Height&lt;/h3&gt;
+<h3 id="width-height">Width, Height</h3>
 
-&lt;p&gt;生成する画像の幅と高さ。&lt;/p&gt;
+<p>生成する画像の幅と高さ。</p>
 
-&lt;p&gt;モデルにもよるが、デフォルトの 512 x 512 が一番うまく画像を生成できる。
+<p>モデルにもよるが、デフォルトの 512 x 512 が一番うまく画像を生成できる。
 これでは小さいため解像度を上げたくなるが、
-解像度を上げると破綻した画像が生成されやすくなる。&lt;/p&gt;
+解像度を上げると破綻した画像が生成されやすくなる。</p>
 
-&lt;p&gt;Width, Height はあまり上げずに下記の Hires. fix や
-「Extras」タブにある拡大機能、画像からの画像生成 (img2img) がオススメ。&lt;/p&gt;
+<p>Width, Height はあまり上げずに下記の Hires. fix や
+「Extras」タブにある拡大機能、画像からの画像生成 (img2img) がオススメ。</p>
 
-&lt;p&gt;16:9 の画像を生成したいなら 896 x 512 を指定するとよい。&lt;/p&gt;
+<p>16:9 の画像を生成したいなら 896 x 512 を指定するとよい。</p>
 
-&lt;h3 id=&quot;batch-count-batch-size&quot;&gt;Batch count, Batch size&lt;/h3&gt;
+<h3 id="batch-count-batch-size">Batch count, Batch size</h3>
 
-&lt;p&gt;Batch size が1回で生成する枚数で、Batch count が何回実行するか。
-最終的に Batch size × Batch count の枚数が生成される。&lt;/p&gt;
+<p>Batch size が1回で生成する枚数で、Batch count が何回実行するか。
+最終的に Batch size × Batch count の枚数が生成される。</p>
 
-&lt;p&gt;Batch size を増やすと VRAM の必要量が増える。&lt;/p&gt;
+<p>Batch size を増やすと VRAM の必要量が増える。</p>
 
-&lt;h3 id=&quot;seed&quot;&gt;Seed&lt;/h3&gt;
+<h3 id="seed">Seed</h3>
 
-&lt;p&gt;乱数の種。
-Seed の値とモデル、プロンプト等の生成条件が同じであれば毎回同じ画像が生成される。&lt;/p&gt;
+<p>乱数の種。
+Seed の値とモデル、プロンプト等の生成条件が同じであれば毎回同じ画像が生成される。</p>
 
-&lt;p&gt;サイコロアイコンをクリックするか -1 を指定すればランダムに、
-リサイクルアイコンをクリックすると前回と同じ Seed がセットされる。&lt;/p&gt;
+<p>サイコロアイコンをクリックするか -1 を指定すればランダムに、
+リサイクルアイコンをクリックすると前回と同じ Seed がセットされる。</p>
 
-&lt;p&gt;基本的には -1 を指定し画像をランダム生成するが、
-プロンプトやサンプリングの影響を比較したい場合には値を固定する。&lt;/p&gt;
+<p>基本的には -1 を指定し画像をランダム生成するが、
+プロンプトやサンプリングの影響を比較したい場合には値を固定する。</p>
 
-&lt;p&gt;右にある Extra にチェックを入れると追加の UI が表示される。
+<p>右にある Extra にチェックを入れると追加の UI が表示される。
 Seed を固定し Variation strength を上げることで、
 大まかな構図はそのままに一部が変わった画像を生成できる。
-全体の雰囲気はいいけど一部を修正したいときに使える。&lt;/p&gt;
+全体の雰囲気はいいけど一部を修正したいときに使える。</p>
 
-&lt;h3 id=&quot;sampling-method-sampling-steps&quot;&gt;Sampling method, Sampling steps&lt;/h3&gt;
+<h3 id="sampling-method-sampling-steps">Sampling method, Sampling steps</h3>
 
-&lt;p&gt;Sampling steps を上げると精緻な絵になるが生成に時間がかかる。
-上げすぎてもあまり違いがわからない。デフォルトの 20 から 50 くらいがよさそう。&lt;/p&gt;
+<p>Sampling steps を上げると精緻な絵になるが生成に時間がかかる。
+上げすぎてもあまり違いがわからない。デフォルトの 20 から 50 くらいがよさそう。</p>
 
-&lt;p&gt;Sampling method の違いはよくわからない。
+<p>Sampling method の違いはよくわからない。
 「DPM++ SDE karras」を選ぶとデフォルトの「Euler a」より
-ステップ数が少なくてもいい絵ができる気がする。&lt;/p&gt;
+ステップ数が少なくてもいい絵ができる気がする。</p>
 
-&lt;h3 id=&quot;cfg-scale&quot;&gt;CFG Scale&lt;/h3&gt;
+<h3 id="cfg-scale">CFG Scale</h3>
 
-&lt;p&gt;プロンプトに対してどの程度従うかを設定できるらしい。
-値を大きくすればプロンプトに沿った画像が生成される反面、破綻した画像が生成されやすくなるとか。&lt;/p&gt;
+<p>プロンプトに対してどの程度従うかを設定できるらしい。
+値を大きくすればプロンプトに沿った画像が生成される反面、破綻した画像が生成されやすくなるとか。</p>
 
-&lt;p&gt;デフォルトの 7 のままでよさそう。&lt;/p&gt;
+<p>デフォルトの 7 のままでよさそう。</p>
 
-&lt;p&gt;参考: &lt;a href=&quot;https://gigazine.net/news/20220928-stable-diffusion-classifier-free-guidance/&quot;&gt;画像生成AI「Stable Diffusion」でどれぐらいプロンプト・呪文の指示に従うかを決める「CFG(classifier-free guidance)」とは一体何なのか？ - GIGAZINE&lt;/a&gt;&lt;/p&gt;
+<p>参考: <a href="https://gigazine.net/news/20220928-stable-diffusion-classifier-free-guidance/">画像生成AI「Stable Diffusion」でどれぐらいプロンプト・呪文の指示に従うかを決める「CFG(classifier-free guidance)」とは一体何なのか？ - GIGAZINE</a></p>
 
-&lt;h3 id=&quot;restore-faces-tiling&quot;&gt;Restore faces, Tiling&lt;/h3&gt;
+<h3 id="restore-faces-tiling">Restore faces, Tiling</h3>
 
-&lt;p&gt;Restore faces は人間の顔を生成した際に補正してくれる機能だが、
-二次元のアニメ調イラストではキャラの目の中に人間の目が描かれて気持ち悪くなるのでオフ推奨。&lt;/p&gt;
+<p>Restore faces は人間の顔を生成した際に補正してくれる機能だが、
+二次元のアニメ調イラストではキャラの目の中に人間の目が描かれて気持ち悪くなるのでオフ推奨。</p>
 
-&lt;p&gt;Tiling はタイルのように並べても継ぎ目のないシームレスな画像を生成する。
-3D のテクスチャを作成するのに使えるらしい。&lt;/p&gt;
+<p>Tiling はタイルのように並べても継ぎ目のないシームレスな画像を生成する。
+3D のテクスチャを作成するのに使えるらしい。</p>
 
-&lt;h3 id=&quot;hires-fix&quot;&gt;Hires. fix&lt;/h3&gt;
+<h3 id="hires-fix">Hires. fix</h3>
 
-&lt;p&gt;生成した画像を拡大して高解像度化してくれるがその分時間がかかる。
-&lt;del&gt;気に入ったものだけをあとから拡大したほうが効率がよいのでオフ推奨。&lt;/del&gt;&lt;/p&gt;
+<p>生成した画像を拡大して高解像度化してくれるがその分時間がかかる。
+<del>気に入ったものだけをあとから拡大したほうが効率がよいのでオフ推奨。</del></p>
 
-&lt;p&gt;2023/04/10 追記：Hires. fix の Upscaler で Latent 系を選択すると細部の描き込みが追加される。
-単純な拡大機能である「Extras」タブと違い、イラストが改変されるため元のイラストと印象が異なってくる。&lt;/p&gt;
+<p>2023/04/10 追記：Hires. fix の Upscaler で Latent 系を選択すると細部の描き込みが追加される。
+単純な拡大機能である「Extras」タブと違い、イラストが改変されるため元のイラストと印象が異なってくる。</p>
 
-&lt;h4 id=&quot;hires-steps&quot;&gt;Hires steps&lt;/h4&gt;
+<h4 id="hires-steps">Hires steps</h4>
 
-&lt;p&gt;おそらく Sampling steps と似たようなものだと思われるが上げてもあまり違いがわからない。
-デフォルトの 0 では Sampling steps と同じ値が使用される。&lt;/p&gt;
+<p>おそらく Sampling steps と似たようなものだと思われるが上げてもあまり違いがわからない。
+デフォルトの 0 では Sampling steps と同じ値が使用される。</p>
 
-&lt;h4 id=&quot;denoising-strength&quot;&gt;Denoising strength&lt;/h4&gt;
+<h4 id="denoising-strength">Denoising strength</h4>
 
-&lt;p&gt;下げると元画像に近いがぼんやりとした画像、上げると元画像と違う画像になっていく。&lt;/p&gt;
+<p>下げると元画像に近いがぼんやりとした画像、上げると元画像と違う画像になっていく。</p>
 
-&lt;p&gt;デフォルトの 0.7 では大きく変わる場合があるため、元画像に似せたいなら 0.5 ～ 0.6 くらいへ下げるとよい。&lt;/p&gt;
+<p>デフォルトの 0.7 では大きく変わる場合があるため、元画像に似せたいなら 0.5 ～ 0.6 くらいへ下げるとよい。</p>
 
-&lt;h2 id=&quot;モデルのダウンロードと追加&quot;&gt;モデルのダウンロードと追加&lt;/h2&gt;
+<h2 id="モデルのダウンロードと追加">モデルのダウンロードと追加</h2>
 
-&lt;p&gt;web UI の初期状態でもモデルがインストールされるが、
+<p>web UI の初期状態でもモデルがインストールされるが、
 画風は実写的でアニメ調の二次元イラストを生成するには向いていない。
-モデルと呼ばれるファイルを追加することで画風を変えることができる。&lt;/p&gt;
+モデルと呼ばれるファイルを追加することで画風を変えることができる。</p>
 
-&lt;h3 id=&quot;モデルのダウンロード&quot;&gt;モデルのダウンロード&lt;/h3&gt;
+<h3 id="モデルのダウンロード">モデルのダウンロード</h3>
 
-&lt;p&gt;モデルは &lt;a href=&quot;https://huggingface.co/spaces/huggingface-projects/diffusers-gallery&quot;&gt;Hugging Face&lt;/a&gt; や
-&lt;a href=&quot;https://civitai.com/&quot;&gt;Civitai&lt;/a&gt; などで探してダウンロードする。&lt;/p&gt;
+<p>モデルは <a href="https://huggingface.co/spaces/huggingface-projects/diffusers-gallery">Hugging Face</a> や
+<a href="https://civitai.com/">Civitai</a> などで探してダウンロードする。</p>
 
-&lt;p&gt;拡張子が .ckpt または .safetensor のものをダウンロードすればよい。
-両方用意されている場合は .safetensor のほうが安全性が高いためそちらをダウンロードする。&lt;/p&gt;
+<p>拡張子が .ckpt または .safetensor のものをダウンロードすればよい。
+両方用意されている場合は .safetensor のほうが安全性が高いためそちらをダウンロードする。</p>
 
-&lt;p&gt;参考: &lt;a href=&quot;https://economylife.net/safetensors-ckpt-difference/&quot;&gt;AIモデルのsafetensors形式とは何者か？ckptと比較しつつ解説する | 経済的生活日誌&lt;/a&gt;&lt;/p&gt;
+<p>参考: <a href="https://economylife.net/safetensors-ckpt-difference/">AIモデルのsafetensors形式とは何者か？ckptと比較しつつ解説する | 経済的生活日誌</a></p>
 
-&lt;h4 id=&quot;モデルのファイル名に付いてる-pruned-や-fp16-って何&quot;&gt;モデルのファイル名に付いてる pruned や fp16 って何？&lt;/h4&gt;
+<h4 id="モデルのファイル名に付いてる-pruned-や-fp16-って何">モデルのファイル名に付いてる pruned や fp16 って何？</h4>
 
-&lt;p&gt;画像生成に影響の少ない部分を削って軽量化したもの。
-pruned や fp16 が用意されている場合はそちらをダウンロードするとよい。&lt;/p&gt;
+<p>画像生成に影響の少ない部分を削って軽量化したもの。
+pruned や fp16 が用意されている場合はそちらをダウンロードするとよい。</p>
 
-&lt;p&gt;&lt;a href=&quot;https://www.tensorflow.org/guide/mixed_precision?hl=ja&quot;&gt;TensorFlow のサイト&lt;/a&gt;
-によると「NVIDIA GPU は float32 よりも float16 で速く演算を実行でき」るらしい。 (float16 = fp16)&lt;/p&gt;
+<p><a href="https://www.tensorflow.org/guide/mixed_precision?hl=ja">TensorFlow のサイト</a>
+によると「NVIDIA GPU は float32 よりも float16 で速く演算を実行でき」るらしい。 (float16 = fp16)</p>
 
-&lt;h3 id=&quot;モデルの追加方法&quot;&gt;モデルの追加方法&lt;/h3&gt;
+<h3 id="モデルの追加方法">モデルの追加方法</h3>
 
-&lt;ol&gt;
-  &lt;li&gt;モデルをダウンロードする。&lt;/li&gt;
-  &lt;li&gt;ダウンロードしたモデルを web UI のフォルダにある models\Stable-diffusion フォルダへ入れる。&lt;/li&gt;
-  &lt;li&gt;web UI 画面左上にある「Stable Diffusion checkpoint」右の更新ボタンを押す。&lt;/li&gt;
-  &lt;li&gt;リストでモデルが選択できるようになる。&lt;/li&gt;
-&lt;/ol&gt;
+<ol>
+  <li>モデルをダウンロードする。</li>
+  <li>ダウンロードしたモデルを web UI のフォルダにある models\Stable-diffusion フォルダへ入れる。</li>
+  <li>web UI 画面左上にある「Stable Diffusion checkpoint」右の更新ボタンを押す。</li>
+  <li>リストでモデルが選択できるようになる。</li>
+</ol>
 
-&lt;h3 id=&quot;オススメの二次元イラスト系モデル&quot;&gt;オススメの二次元イラスト系モデル&lt;/h3&gt;
+<h3 id="オススメの二次元イラスト系モデル">オススメの二次元イラスト系モデル</h3>
 
-&lt;p&gt;以下の2つのモデルはどちらも美しいイラストが生成できるためオススメ。&lt;/p&gt;
+<p>以下の2つのモデルはどちらも美しいイラストが生成できるためオススメ。</p>
 
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://huggingface.co/WarriorMama777/OrangeMixs&quot;&gt;AbyssOrangeMix3 (AOM3)&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://huggingface.co/andite/anything-v4.0&quot;&gt;Anything v4.5&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
+<ul>
+  <li><a href="https://huggingface.co/WarriorMama777/OrangeMixs">AbyssOrangeMix3 (AOM3)</a></li>
+  <li><a href="https://huggingface.co/andite/anything-v4.0">Anything v4.5</a></li>
+</ul>
 
-&lt;p&gt;AbyssOrangeMix3 は A1 から A3 と A1B がある。
-A1 がアニメ調、A2が絵画調、A1B と A3 が中間。&lt;/p&gt;
+<p>AbyssOrangeMix3 は A1 から A3 と A1B がある。
+A1 がアニメ調、A2が絵画調、A1B と A3 が中間。</p>
 
-&lt;p&gt;アニメ調 ← A1 A1B A3 A2 → 絵画調&lt;/p&gt;
+<p>アニメ調 ← A1 A1B A3 A2 → 絵画調</p>
 
-&lt;p&gt;どちらのモデルも一緒に VAE (後述) が公開されているのでそちらを利用する。&lt;/p&gt;
+<p>どちらのモデルも一緒に VAE (後述) が公開されているのでそちらを利用する。</p>
 
-&lt;h2 id=&quot;vae&quot;&gt;VAE&lt;/h2&gt;
+<h2 id="vae">VAE</h2>
 
-&lt;p&gt;同じモデルでも VAE によって色が変わり印象が異なってくる。
+<p>同じモデルでも VAE によって色が変わり印象が異なってくる。
 AbyssOrangeMix や Anything のように VAE が一緒に公開されているモデルは
-そちらを利用したほうがよい。&lt;/p&gt;
+そちらを利用したほうがよい。</p>
 
-&lt;h3 id=&quot;vae-を選択できるようにする&quot;&gt;VAE を選択できるようにする&lt;/h3&gt;
+<h3 id="vae-を選択できるようにする">VAE を選択できるようにする</h3>
 
-&lt;ol&gt;
-  &lt;li&gt;「Settings」タブをクリック&lt;/li&gt;
-  &lt;li&gt;左の一覧から「User interface」をクリック&lt;/li&gt;
-  &lt;li&gt;下から4つ目くらいにある「Quicksettings list」に &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;,sd_vae&lt;/code&gt; を追加する (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sd_model_checkpoint,sd_vae&lt;/code&gt; になる)&lt;/li&gt;
-  &lt;li&gt;上部の「Apply settings」をクリック&lt;/li&gt;
-  &lt;li&gt;「Reload UI」をクリック&lt;/li&gt;
-&lt;/ol&gt;
+<ol>
+  <li>「Settings」タブをクリック</li>
+  <li>左の一覧から「User interface」をクリック</li>
+  <li>下から4つ目くらいにある「Quicksettings list」に <code class="language-plaintext highlighter-rouge">,sd_vae</code> を追加する (<code class="language-plaintext highlighter-rouge">sd_model_checkpoint,sd_vae</code> になる)</li>
+  <li>上部の「Apply settings」をクリック</li>
+  <li>「Reload UI」をクリック</li>
+</ol>
 
-&lt;h3 id=&quot;vae-の追加方法&quot;&gt;VAE の追加方法&lt;/h3&gt;
+<h3 id="vae-の追加方法">VAE の追加方法</h3>
 
-&lt;ol&gt;
-  &lt;li&gt;VAE をダウンロードする。&lt;/li&gt;
-  &lt;li&gt;ダウンロードした VAE を web UI のフォルダにある models\VAE フォルダへ入れる。&lt;/li&gt;
-  &lt;li&gt;web UI 画面上部にある「SD VAE」右の更新ボタンを押す。&lt;/li&gt;
-  &lt;li&gt;リストで VAE が選択できるようになる。&lt;/li&gt;
-&lt;/ol&gt;
+<ol>
+  <li>VAE をダウンロードする。</li>
+  <li>ダウンロードした VAE を web UI のフォルダにある models\VAE フォルダへ入れる。</li>
+  <li>web UI 画面上部にある「SD VAE」右の更新ボタンを押す。</li>
+  <li>リストで VAE が選択できるようになる。</li>
+</ol>
 
-&lt;h2 id=&quot;過去に生成した画像のプロンプト等を確認-png-info&quot;&gt;過去に生成した画像のプロンプト等を確認 (PNG Info)&lt;/h2&gt;
+<h2 id="過去に生成した画像のプロンプト等を確認-png-info">過去に生成した画像のプロンプト等を確認 (PNG Info)</h2>
 
-&lt;p&gt;生成した画像を「PNG Info」タブにある「Source」へ
-ドラッグアンドドロップすることでプロンプト、モデル、Seed 等を確認できる。&lt;/p&gt;
+<p>生成した画像を「PNG Info」タブにある「Source」へ
+ドラッグアンドドロップすることでプロンプト、モデル、Seed 等を確認できる。</p>
 
-&lt;p&gt;また、「Send to txt2img」等のボタンを押すことで txt2img 等へコピー可能。
+<p>また、「Send to txt2img」等のボタンを押すことで txt2img 等へコピー可能。
 過去に生成したものと似た画像を簡単に生成できる。
-ただし、モデルと VAE は反映されないので注意。&lt;/p&gt;
+ただし、モデルと VAE は反映されないので注意。</p>
 
-&lt;h2 id=&quot;画像とテキストからの画像生成-img2img&quot;&gt;画像とテキストからの画像生成 (img2img)&lt;/h2&gt;
+<h2 id="画像とテキストからの画像生成-img2img">画像とテキストからの画像生成 (img2img)</h2>
 
-&lt;p&gt;「img2img」タブで画像とテキストを元に新たな画像を生成できる。&lt;/p&gt;
+<p>「img2img」タブで画像とテキストを元に新たな画像を生成できる。</p>
 
-&lt;p&gt;画像により構図やポーズをある程度制御できるため、
+<p>画像により構図やポーズをある程度制御できるため、
 txt2img と比べ出力画像の解像度を高くしても破綻しにくい。
 よって、txt2img では解像度低めでランダムに大量生成し、
-良いものができたら img2img で高解像度化、細部の修正を行うとよい。&lt;/p&gt;
+良いものができたら img2img で高解像度化、細部の修正を行うとよい。</p>
 
-&lt;p&gt;また、txt2img で生成された画像に足りない要素を手で描き加えたあと再生成するといった使い方もできる。
+<p>また、txt2img で生成された画像に足りない要素を手で描き加えたあと再生成するといった使い方もできる。
 例えば、肌色で直線を描けば腕や足として認識して描き直してくれる。
-英語で伝えにくい構図やポーズを描かせるのにも有用。&lt;/p&gt;
+英語で伝えにくい構図やポーズを描かせるのにも有用。</p>
 
-&lt;p&gt;プロンプト等の設定は txt2img と同じ。
+<p>プロンプト等の設定は txt2img と同じ。
 プロンプトなしの画像のみでも生成できるが、プロンプトを入力したほうが当然精度は高い。
-txt2img で作成した画像を img2img で高解像度化するのであれば同じプロンプトを指定するとよい。&lt;/p&gt;
+txt2img で作成した画像を img2img で高解像度化するのであれば同じプロンプトを指定するとよい。</p>
 
-&lt;h3 id=&quot;元画像の指定&quot;&gt;元画像の指定&lt;/h3&gt;
+<h3 id="元画像の指定">元画像の指定</h3>
 
-&lt;p&gt;元となる画像を「ここに画像をドロップ」と書いてあるところにドラッグアンドドロップするだけ。&lt;/p&gt;
+<p>元となる画像を「ここに画像をドロップ」と書いてあるところにドラッグアンドドロップするだけ。</p>
 
-&lt;h3 id=&quot;resize-mode&quot;&gt;Resize mode&lt;/h3&gt;
+<h3 id="resize-mode">Resize mode</h3>
 
-&lt;p&gt;Resize mode は元画像と生成画像の縦横比が違う場合の処理を指定できる。&lt;/p&gt;
+<p>Resize mode は元画像と生成画像の縦横比が違う場合の処理を指定できる。</p>
 
-&lt;ul&gt;
-  &lt;li&gt;Just resize&lt;br /&gt;
-元画像の縦横比を無視して生成画像全体に引き伸ばす。&lt;br /&gt;
-元画像が 512 x 512、生成画像が 1280 x 960 なら、元画像が横長の 1280 x 960 に引き伸ばされる。&lt;/li&gt;
-  &lt;li&gt;Crop and resize&lt;br /&gt;
-元画像の縦横比を維持して拡大/縮小し、はみ出た部分は無視する。&lt;br /&gt;
-元画像が 512 x 512、生成画像が 1280 x 960 なら、元画像が 1280 x 1280 に引き伸ばされ上下が切れる。&lt;/li&gt;
-  &lt;li&gt;Resize and fill&lt;br /&gt;
-元画像の縦横比を維持して拡大/縮小し、足りない部分を埋める。&lt;br /&gt;
-元画像が 512 x 512、生成画像が 1280 x 960 なら、元画像が 960 x 960 に引き伸ばされ左右の足りない部分は自動生成される。&lt;/li&gt;
-  &lt;li&gt;Just resize (latent upscale)&lt;br /&gt;
-元画像を高解像度化したあと Just resize と同様の処理を行う。&lt;/li&gt;
-&lt;/ul&gt;
+<ul>
+  <li>Just resize<br />
+元画像の縦横比を無視して生成画像全体に引き伸ばす。<br />
+元画像が 512 x 512、生成画像が 1280 x 960 なら、元画像が横長の 1280 x 960 に引き伸ばされる。</li>
+  <li>Crop and resize<br />
+元画像の縦横比を維持して拡大/縮小し、はみ出た部分は無視する。<br />
+元画像が 512 x 512、生成画像が 1280 x 960 なら、元画像が 1280 x 1280 に引き伸ばされ上下が切れる。</li>
+  <li>Resize and fill<br />
+元画像の縦横比を維持して拡大/縮小し、足りない部分を埋める。<br />
+元画像が 512 x 512、生成画像が 1280 x 960 なら、元画像が 960 x 960 に引き伸ばされ左右の足りない部分は自動生成される。</li>
+  <li>Just resize (latent upscale)<br />
+元画像を高解像度化したあと Just resize と同様の処理を行う。</li>
+</ul>
 
-&lt;h3 id=&quot;denoising-strength-1&quot;&gt;Denoising strength&lt;/h3&gt;
+<h3 id="denoising-strength-1">Denoising strength</h3>
 
-&lt;p&gt;下げると元画像に近いがぼんやりとした画像、上げると元画像と違う画像になっていく。&lt;/p&gt;
+<p>下げると元画像に近いがぼんやりとした画像、上げると元画像と違う画像になっていく。</p>
 
-&lt;p&gt;デフォルトの 0.75 では大きく変わる場合があるため、元画像に似せたいなら 0.5 ～ 0.6 くらいへ下げるとよい。&lt;/p&gt;
+<p>デフォルトの 0.75 では大きく変わる場合があるため、元画像に似せたいなら 0.5 ～ 0.6 くらいへ下げるとよい。</p>
 
-&lt;h2 id=&quot;img2img-内のタブ&quot;&gt;img2img 内のタブ&lt;/h2&gt;
+<h2 id="img2img-内のタブ">img2img 内のタブ</h2>
 
-&lt;ul&gt;
-  &lt;li&gt;Sketch: img2img とほとんど同じだが、画面上の元画像に対してその場で書き込んで修正が可能。&lt;/li&gt;
-  &lt;li&gt;Inpaint: 画像の一部のみを生成する。黒く塗りつぶした部分、または塗りつぶしていない部分を描き直す。&lt;/li&gt;
-  &lt;li&gt;Inpaint sketch: 画像の一部のみを生成する。色を塗った部分のみ、その色を反映して描き直す。&lt;/li&gt;
-  &lt;li&gt;Inpaint upload: Inpaint と同様だがマスクを別画像で指定できる。&lt;/li&gt;
-  &lt;li&gt;Batch: ディレクトリを指定してバッチ処理ができる。&lt;/li&gt;
-&lt;/ul&gt;
+<ul>
+  <li>Sketch: img2img とほとんど同じだが、画面上の元画像に対してその場で書き込んで修正が可能。</li>
+  <li>Inpaint: 画像の一部のみを生成する。黒く塗りつぶした部分、または塗りつぶしていない部分を描き直す。</li>
+  <li>Inpaint sketch: 画像の一部のみを生成する。色を塗った部分のみ、その色を反映して描き直す。</li>
+  <li>Inpaint upload: Inpaint と同様だがマスクを別画像で指定できる。</li>
+  <li>Batch: ディレクトリを指定してバッチ処理ができる。</li>
+</ul>
 
-&lt;h2 id=&quot;画像からプロンプトを生成-interrogate-clip-interrogate-deepbooru&quot;&gt;画像からプロンプトを生成 (Interrogate CLIP, Interrogate DeepBooru)&lt;/h2&gt;
+<h2 id="画像からプロンプトを生成-interrogate-clip-interrogate-deepbooru">画像からプロンプトを生成 (Interrogate CLIP, Interrogate DeepBooru)</h2>
 
-&lt;p&gt;画像を指定したあと「Interrogate CLIP」または「Interrogate DeepBooru」のボタンをクリックすると
-画像からプロンプトを生成できる。&lt;/p&gt;
+<p>画像を指定したあと「Interrogate CLIP」または「Interrogate DeepBooru」のボタンをクリックすると
+画像からプロンプトを生成できる。</p>
 
-&lt;p&gt;「Interrogate DeepBooru」は Danbooru のタグになる。&lt;/p&gt;
+<p>「Interrogate DeepBooru」は Danbooru のタグになる。</p>
 
-&lt;h2 id=&quot;設定-settings&quot;&gt;設定 (Settings)&lt;/h2&gt;
+<h2 id="設定-settings">設定 (Settings)</h2>
 
-&lt;p&gt;「Settings」タブで設定が変更できる。
-全部説明するとキリがないため個人的に便利だと思う設定を紹介。&lt;/p&gt;
+<p>「Settings」タブで設定が変更できる。
+全部説明するとキリがないため個人的に便利だと思う設定を紹介。</p>
 
-&lt;h3 id=&quot;saving-imagesgrids--images-filename-pattern&quot;&gt;Saving images/grids &amp;gt; Images filename pattern&lt;/h3&gt;
+<h3 id="saving-imagesgrids--images-filename-pattern">Saving images/grids &gt; Images filename pattern</h3>
 
-&lt;p&gt;出力するファイル名のパターン。&lt;/p&gt;
+<p>出力するファイル名のパターン。</p>
 
-&lt;p&gt;デフォルトの空欄状態だと同日内での連番と Seed 値になるため、
+<p>デフォルトの空欄状態だと同日内での連番と Seed 値になるため、
 他の日付のものと同じフォルダに入れたとき順番がバラバラになる。
 以下を設定し、直下にある「Add number to filename when saving」のチェックをはずすと、
-ファイル名が日付と時刻となるため便利。&lt;/p&gt;
+ファイル名が日付と時刻となるため便利。</p>
 
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[datetime&amp;lt;%Y-%m-%d %H%M%S&amp;gt;&amp;lt;+0900&amp;gt;]-[seed]-[model_name]
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[datetime&lt;%Y-%m-%d %H%M%S&gt;&lt;+0900&gt;]-[seed]-[model_name]
+</code></pre></div></div>
 
-&lt;p&gt;ファイル名に使用できるタグは「Images filename pattern」という文字にマウスカーソルを合わせると表示される。&lt;/p&gt;
+<p>ファイル名に使用できるタグは「Images filename pattern」という文字にマウスカーソルを合わせると表示される。</p>
 
-&lt;blockquote&gt;
-  &lt;p&gt;[steps],
+<blockquote>
+  <p>[steps],
 [cfg],
 [prompt_hash],
 [prompt],
@@ -959,388 +885,311 @@ txt2img で作成した画像を img2img で高解像度化するのであれば
 [prompt_words],
 [date],
 [datetime],
-[datetime&amp;lt;Format&amp;gt;],
-[datetime&amp;lt;Format&amp;gt;&amp;lt;Time Zone&amp;gt;],
-[job_timestamp]&lt;/p&gt;
-&lt;/blockquote&gt;
+[datetime&lt;Format&gt;],
+[datetime&lt;Format&gt;&lt;Time Zone&gt;],
+[job_timestamp]</p>
+</blockquote>
 
-&lt;h3 id=&quot;saving-imagesgrids--always-save-all-generated-image-grids-とuser-interface--show-grid-in-results-for-web&quot;&gt;Saving images/grids &amp;gt; Always save all generated image grids と&lt;br /&gt;User interface &amp;gt; Show grid in results for web&lt;/h3&gt;
+<h3 id="saving-imagesgrids--always-save-all-generated-image-grids-とuser-interface--show-grid-in-results-for-web">Saving images/grids &gt; Always save all generated image grids と<br />User interface &gt; Show grid in results for web</h3>
 
-&lt;p&gt;生成した画像を縦横に連結したグリッド画像を生成する設定。&lt;/p&gt;
+<p>生成した画像を縦横に連結したグリッド画像を生成する設定。</p>
 
-&lt;p&gt;Batch で大量の画像を生成すると、完了後に
+<p>Batch で大量の画像を生成すると、完了後に
 Interrupt / Skip ボタンが Generate ボタンへ戻るのに時間がかかる。
 これはグリッド画像の作成が原因のため、
-待ちたくない場合は上記のチェックをはずすと良い。&lt;/p&gt;
+待ちたくない場合は上記のチェックをはずすと良い。</p>
 
-&lt;h2 id=&quot;起動時の引数設定&quot;&gt;起動時の引数設定&lt;/h2&gt;
+<h2 id="起動時の引数設定">起動時の引数設定</h2>
 
-&lt;p&gt;「webui-user.bat」をテキストエディタで編集することで web UI 起動時の引数を設定できる。&lt;/p&gt;
+<p>「webui-user.bat」をテキストエディタで編集することで web UI 起動時の引数を設定できる。</p>
 
-&lt;h3 id=&quot;xformers-の導入&quot;&gt;xFormers の導入&lt;/h3&gt;
+<h3 id="xformers-の導入">xFormers の導入</h3>
 
-&lt;p&gt;xFormers を導入すると画像生成速度が向上しVRAMの使用量も削減される。
+<p>xFormers を導入すると画像生成速度が向上しVRAMの使用量も削減される。
 ただし、Seed 値を固定しても微妙に異なる画像が生成されるようになるという欠点がある。
-欠点より利点が大きいため導入したほうがよい。&lt;/p&gt;
+欠点より利点が大きいため導入したほうがよい。</p>
 
-&lt;p&gt;導入方法は簡単で、「webui-user.bat」をテキストエディタで開き&lt;/p&gt;
+<p>導入方法は簡単で、「webui-user.bat」をテキストエディタで開き</p>
 
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;set COMMANDLINE_ARGS=
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+<div class="language-bat highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">set</span> <span class="kd">COMMANDLINE_ARGS</span><span class="o">=</span>
+</code></pre></div></div>
 
-&lt;p&gt;となっている部分を以下のように変更し保存する。&lt;/p&gt;
+<p>となっている部分を以下のように変更し保存する。</p>
 
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;set COMMANDLINE_ARGS=--xformers
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+<div class="language-bat highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">set</span> <span class="kd">COMMANDLINE_ARGS</span><span class="o">=</span><span class="na">--xformers
+</span></code></pre></div></div>
 
-&lt;p&gt;保存後の初回起動時に xFormers がインストールされる。&lt;/p&gt;
+<p>保存後の初回起動時に xFormers がインストールされる。</p>
 
-&lt;h3 id=&quot;no-half-vae-の指定&quot;&gt;–no-half-vae の指定&lt;/h3&gt;
+<h3 id="no-half-vae-の指定">–no-half-vae の指定</h3>
 
-&lt;p&gt;VAE を変更して画像を生成しているとまれにエラーが発生し、
-エラーを回避するためには &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--no-half-vae&lt;/code&gt; というオプションを利用するよう指示されることがある。
-この場合も同様に「webui-user.bat」をテキストエディタで編集すればよい。&lt;/p&gt;
+<p>VAE を変更して画像を生成しているとまれにエラーが発生し、
+エラーを回避するためには <code class="language-plaintext highlighter-rouge">--no-half-vae</code> というオプションを利用するよう指示されることがある。
+この場合も同様に「webui-user.bat」をテキストエディタで編集すればよい。</p>
 
-&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--no-half-vae&lt;/code&gt; だけを指定するなら&lt;/p&gt;
+<p><code class="language-plaintext highlighter-rouge">--no-half-vae</code> だけを指定するなら</p>
 
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;set COMMANDLINE_ARGS=--no-half-vae
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+<div class="language-bat highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">set</span> <span class="kd">COMMANDLINE_ARGS</span><span class="o">=</span><span class="na">--no-half-vae
+</span></code></pre></div></div>
 
-&lt;p&gt;xFormers と併用するなら&lt;/p&gt;
+<p>xFormers と併用するなら</p>
 
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;set COMMANDLINE_ARGS=--xformers --no-half-vae
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-</description>
-                <pubDate>Mon, 06 Mar 2023 15:15:00 +0900</pubDate>
-                <link>https://slx.jp/blog/2023/03/06/stable-diffusion%E3%82%92windows-10%E3%81%B8%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95%E3%81%A8%E4%BD%BF%E3%81%84%E6%96%B9-%E7%94%BB%E5%83%8F%E7%94%9F%E6%88%90%E3%81%AE%E3%82%B3%E3%83%84.html</link>
-                <guid isPermaLink="true">https://slx.jp/blog/2023/03/06/stable-diffusion%E3%82%92windows-10%E3%81%B8%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95%E3%81%A8%E4%BD%BF%E3%81%84%E6%96%B9-%E7%94%BB%E5%83%8F%E7%94%9F%E6%88%90%E3%81%AE%E3%82%B3%E3%83%84.html</guid>
-                
-                <category>Stable Diffusion</category>
-                
-                
-                <category>blog</category>
-                
-            </item>
-        
-            <item>
-                <title>【2022年】買ってよかったものとか</title>
-                <description>&lt;p&gt;今年買ってよかったものとか&lt;/p&gt;
+<div class="language-bat highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">set</span> <span class="kd">COMMANDLINE_ARGS</span><span class="o">=</span><span class="na">--xformers --no-half-vae
+</span></code></pre></div></div>]]></content><author><name>saasan</name></author><category term="blog" /><category term="Stable Diffusion" /><summary type="html"><![CDATA[Windows 10 へのインストール方法と使い方、画像生成のコツを紹介]]></summary></entry><entry><title type="html">【2022年】買ってよかったものとか</title><link href="https://slx.jp/blog/2022/12/31/2022%E5%B9%B4-%E8%B2%B7%E3%81%A3%E3%81%A6%E3%82%88%E3%81%8B%E3%81%A3%E3%81%9F%E3%82%82%E3%81%AE%E3%81%A8%E3%81%8B.html" rel="alternate" type="text/html" title="【2022年】買ってよかったものとか" /><published>2022-12-31T21:30:00+09:00</published><updated>2022-12-31T21:30:00+09:00</updated><id>https://slx.jp/blog/2022/12/31/%E3%80%902022%E5%B9%B4%E3%80%91%E8%B2%B7%E3%81%A3%E3%81%A6%E3%82%88%E3%81%8B%E3%81%A3%E3%81%9F%E3%82%82%E3%81%AE%E3%81%A8%E3%81%8B</id><content type="html" xml:base="https://slx.jp/blog/2022/12/31/2022%E5%B9%B4-%E8%B2%B7%E3%81%A3%E3%81%A6%E3%82%88%E3%81%8B%E3%81%A3%E3%81%9F%E3%82%82%E3%81%AE%E3%81%A8%E3%81%8B.html"><![CDATA[<p>今年買ってよかったものとか</p>
 
-&lt;h2 id=&quot;かみ田先生に雪美とペロを描いてもらった&quot;&gt;かみ田先生に雪美とペロを描いてもらった&lt;/h2&gt;
+<h2 id="かみ田先生に雪美とペロを描いてもらった">かみ田先生に雪美とペロを描いてもらった</h2>
 
-&lt;p&gt;初っ端から買ったものじゃないですが
-&lt;a href=&quot;https://skeb.jp/@kamita_k/works/17&quot;&gt;Skeb でかみ田先生にリクエスト&lt;/a&gt;
-してめちゃくちゃ可愛い雪美とペロを描いていただきました！&lt;/p&gt;
+<p>初っ端から買ったものじゃないですが
+<a href="https://skeb.jp/@kamita_k/works/17">Skeb でかみ田先生にリクエスト</a>
+してめちゃくちゃ可愛い雪美とペロを描いていただきました！</p>
 
-&lt;p&gt;かみ田先生に雪美を描いてもらえたら絶対可愛いだろうと以前から思ってたので
-リクエストを受けていただけて夢が叶った感じです。&lt;/p&gt;
+<p>かみ田先生に雪美を描いてもらえたら絶対可愛いだろうと以前から思ってたので
+リクエストを受けていただけて夢が叶った感じです。</p>
 
-&lt;blockquote class=&quot;twitter-tweet&quot;&gt;&lt;p lang=&quot;ja&quot; dir=&quot;ltr&quot;&gt;雪美ちゃん &lt;a href=&quot;https://t.co/PXBtc7hAGu&quot;&gt;pic.twitter.com/PXBtc7hAGu&lt;/a&gt;&lt;/p&gt;&amp;mdash; かみ田🥲土曜日東タ-37b (@kamita_k) &lt;a href=&quot;https://twitter.com/kamita_k/status/1601831710286827521?ref_src=twsrc%5Etfw&quot;&gt;December 11, 2022&lt;/a&gt;&lt;/blockquote&gt;
-&lt;script async=&quot;&quot; src=&quot;https://platform.twitter.com/widgets.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">雪美ちゃん <a href="https://t.co/PXBtc7hAGu">pic.twitter.com/PXBtc7hAGu</a></p>&mdash; かみ田🥲土曜日東タ-37b (@kamita_k) <a href="https://twitter.com/kamita_k/status/1601831710286827521?ref_src=twsrc%5Etfw">December 11, 2022</a></blockquote>
+<script async="" src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
-&lt;h2 id=&quot;ブリヂストン-tb1e&quot;&gt;ブリヂストン TB1e&lt;/h2&gt;
+<h2 id="ブリヂストン-tb1e">ブリヂストン TB1e</h2>
 
-&lt;div class=&quot;affiliate-product-list&quot;&gt;
-    &lt;a href=&quot;https://www.amazon.co.jp/dp/B09VGJHKQ2?tag=saasan-22&quot; class=&quot;affiliate-product&quot;&gt;
-        &lt;img src=&quot;https://m.media-amazon.com/images/I/41zZ3xsH8WL._AC_SX355_.jpg&quot; alt=&quot;電動自転車 クロスバイク ブリヂストン(BRIDGESTONE) TB1e M.Xオーシャンブルー 27インチ 2022年モデル TB7B40 e-bike&quot; /&gt;
-        &lt;span class=&quot;affiliate-product-name&quot;&gt;電動自転車 クロスバイク ブリヂストン(BRIDGESTONE) TB1e M.Xオーシャンブルー 27インチ 2022年モデル TB7B40 e-bike&lt;/span&gt;
-    &lt;/a&gt;
-&lt;/div&gt;
+<div class="affiliate-product-list">
+    <a href="https://www.amazon.co.jp/dp/B09VGJHKQ2?tag=saasan-22" class="affiliate-product">
+        <img src="https://m.media-amazon.com/images/I/41zZ3xsH8WL._AC_SX355_.jpg" alt="電動自転車 クロスバイク ブリヂストン(BRIDGESTONE) TB1e M.Xオーシャンブルー 27インチ 2022年モデル TB7B40 e-bike" />
+        <span class="affiliate-product-name">電動自転車 クロスバイク ブリヂストン(BRIDGESTONE) TB1e M.Xオーシャンブルー 27インチ 2022年モデル TB7B40 e-bike</span>
+    </a>
+</div>
 
-&lt;p&gt;電動アシストのクロスバイク。
-アシストがあるので 10km くらいまでなら運動不足気味の私でも楽に走れる。&lt;/p&gt;
+<p>電動アシストのクロスバイク。
+アシストがあるので 10km くらいまでなら運動不足気味の私でも楽に走れる。</p>
 
-&lt;p&gt;8ヶ月で 600km 以上走りました。たぶん1年でこんなに自転車に乗ったのは初めて。
-通勤も駅が遠いので電車に乗るより自転車で行ったほうが早くて楽になりました。&lt;/p&gt;
+<p>8ヶ月で 600km 以上走りました。たぶん1年でこんなに自転車に乗ったのは初めて。
+通勤も駅が遠いので電車に乗るより自転車で行ったほうが早くて楽になりました。</p>
 
-&lt;h2 id=&quot;サイクルコンピューター-xoss-g&quot;&gt;サイクルコンピューター XOSS G&lt;/h2&gt;
+<h2 id="サイクルコンピューター-xoss-g">サイクルコンピューター XOSS G</h2>
 
-&lt;div class=&quot;affiliate-product-list&quot;&gt;
-    &lt;a href=&quot;https://www.amazon.co.jp/dp/B083WK3BV5?tag=saasan-22&quot; class=&quot;affiliate-product&quot;&gt;
-        &lt;img src=&quot;https://m.media-amazon.com/images/I/61Uz-fdUCaL._AC_SY450_.jpg&quot; alt=&quot;XOSS G サイクルコンピュータ GPS サイコン 無線 自転車スピードメーター バッテリー内蔵 Bluetooth対応 日本語説明書付き (G)&quot; /&gt;
-        &lt;span class=&quot;affiliate-product-name&quot;&gt;XOSS G サイクルコンピュータ GPS サイコン 無線 自転車スピードメーター バッテリー内蔵 Bluetooth対応 日本語説明書付き (G)&lt;/span&gt;
-    &lt;/a&gt;
-&lt;/div&gt;
+<div class="affiliate-product-list">
+    <a href="https://www.amazon.co.jp/dp/B083WK3BV5?tag=saasan-22" class="affiliate-product">
+        <img src="https://m.media-amazon.com/images/I/61Uz-fdUCaL._AC_SY450_.jpg" alt="XOSS G サイクルコンピュータ GPS サイコン 無線 自転車スピードメーター バッテリー内蔵 Bluetooth対応 日本語説明書付き (G)" />
+        <span class="affiliate-product-name">XOSS G サイクルコンピュータ GPS サイコン 無線 自転車スピードメーター バッテリー内蔵 Bluetooth対応 日本語説明書付き (G)</span>
+    </a>
+</div>
 
-&lt;p&gt;TB1e に乗り始めてから購入。
-速度や走行距離、時間が測れる。&lt;/p&gt;
+<p>TB1e に乗り始めてから購入。
+速度や走行距離、時間が測れる。</p>
 
-&lt;p&gt;某有名自転車アプリだと無課金では停車中も走行時間がカウントされるけど
+<p>某有名自転車アプリだと無課金では停車中も走行時間がカウントされるけど
 これなら3,000円くらいで実際の走行時間だけが測れる。
-スマホアプリと連動すれば走行ルートを Google マップ上に表示したりも可能。&lt;/p&gt;
+スマホアプリと連動すれば走行ルートを Google マップ上に表示したりも可能。</p>
 
-&lt;blockquote class=&quot;twitter-tweet&quot;&gt;&lt;p lang=&quot;ja&quot; dir=&quot;ltr&quot;&gt;今日は道を間違えずに着いた &lt;a href=&quot;https://t.co/JZsveyGX71&quot;&gt;pic.twitter.com/JZsveyGX71&lt;/a&gt;&lt;/p&gt;&amp;mdash; カガミ (@saasan) &lt;a href=&quot;https://twitter.com/saasan/status/1528275360114126849?ref_src=twsrc%5Etfw&quot;&gt;May 22, 2022&lt;/a&gt;&lt;/blockquote&gt;
-&lt;script async=&quot;&quot; src=&quot;https://platform.twitter.com/widgets.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">今日は道を間違えずに着いた <a href="https://t.co/JZsveyGX71">pic.twitter.com/JZsveyGX71</a></p>&mdash; カガミ (@saasan) <a href="https://twitter.com/saasan/status/1528275360114126849?ref_src=twsrc%5Etfw">May 22, 2022</a></blockquote>
+<script async="" src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
-&lt;h2 id=&quot;xbox-elite-ワイヤレス-コントローラー-シリーズ-2&quot;&gt;Xbox Elite ワイヤレス コントローラー シリーズ 2&lt;/h2&gt;
+<h2 id="xbox-elite-ワイヤレス-コントローラー-シリーズ-2">Xbox Elite ワイヤレス コントローラー シリーズ 2</h2>
 
-&lt;div class=&quot;affiliate-product-list&quot;&gt;
-    &lt;a href=&quot;https://www.amazon.co.jp/dp/B07V8VMY9Q?tag=saasan-22&quot; class=&quot;affiliate-product&quot;&gt;
-        &lt;img src=&quot;https://m.media-amazon.com/images/I/61o3VwNkdVL._AC_SX522_.jpg&quot; alt=&quot;【純正品】Xbox Elite ワイヤレス コントローラー シリーズ 2&quot; /&gt;
-        &lt;span class=&quot;affiliate-product-name&quot;&gt;【純正品】Xbox Elite ワイヤレス コントローラー シリーズ 2&lt;/span&gt;
-    &lt;/a&gt;
-&lt;/div&gt;
+<div class="affiliate-product-list">
+    <a href="https://www.amazon.co.jp/dp/B07V8VMY9Q?tag=saasan-22" class="affiliate-product">
+        <img src="https://m.media-amazon.com/images/I/61o3VwNkdVL._AC_SX522_.jpg" alt="【純正品】Xbox Elite ワイヤレス コントローラー シリーズ 2" />
+        <span class="affiliate-product-name">【純正品】Xbox Elite ワイヤレス コントローラー シリーズ 2</span>
+    </a>
+</div>
 
-&lt;p&gt;初代エリコンと比べ背面のパドルが小さくなり誤って押すことが減った。
+<p>初代エリコンと比べ背面のパドルが小さくなり誤って押すことが減った。
 初代エリコンでは手前側2つは誤爆が多くて使い物にならなかったけど
-シリーズ2ではそれがなくなり4つ全部使えてる。&lt;/p&gt;
+シリーズ2ではそれがなくなり4つ全部使えてる。</p>
 
-&lt;p&gt;&lt;a href=&quot;https://www.rewasd.com/&quot;&gt;reWASD&lt;/a&gt;
-でパドルにサブパレット(キーボード)を割り当てたら PSO2 がかなり快適になった。&lt;/p&gt;
+<p><a href="https://www.rewasd.com/">reWASD</a>
+でパドルにサブパレット(キーボード)を割り当てたら PSO2 がかなり快適になった。</p>
 
-&lt;h2 id=&quot;dell-ドッキングステーション-wd15&quot;&gt;Dell ドッキングステーション WD15&lt;/h2&gt;
+<h2 id="dell-ドッキングステーション-wd15">Dell ドッキングステーション WD15</h2>
 
-&lt;div class=&quot;affiliate-product-list&quot;&gt;
-    &lt;a href=&quot;https://www.amazon.co.jp/dp/B07J5P9TJD?tag=saasan-22&quot; class=&quot;affiliate-product&quot;&gt;
-        &lt;img src=&quot;https://m.media-amazon.com/images/I/61PC+kfiDQL._AC_SY450_.jpg&quot; alt=&quot;Dell WD15 モニター ドック 4K 130Wアダプター付き USB-C(450-AFGM、6GFRT) (更新)&quot; /&gt;
-        &lt;span class=&quot;affiliate-product-name&quot;&gt;Dell WD15 モニター ドック 4K 130Wアダプター付き USB-C(450-AFGM、6GFRT) (更新)&lt;/span&gt;
-    &lt;/a&gt;
-&lt;/div&gt;
+<div class="affiliate-product-list">
+    <a href="https://www.amazon.co.jp/dp/B07J5P9TJD?tag=saasan-22" class="affiliate-product">
+        <img src="https://m.media-amazon.com/images/I/61PC+kfiDQL._AC_SY450_.jpg" alt="Dell WD15 モニター ドック 4K 130Wアダプター付き USB-C(450-AFGM、6GFRT) (更新)" />
+        <span class="affiliate-product-name">Dell WD15 モニター ドック 4K 130Wアダプター付き USB-C(450-AFGM、6GFRT) (更新)</span>
+    </a>
+</div>
 
-&lt;p&gt;以前使用していたバッファロー製のドッキングステーションは動作が不安定で
+<p>以前使用していたバッファロー製のドッキングステーションは動作が不安定で
 実質電源と HDMI 出力だけにしか使えていなかったので、
-会社の PC と同じ Dell 製で相性が良いかと思ったこちらを購入。&lt;/p&gt;
+会社の PC と同じ Dell 製で相性が良いかと思ったこちらを購入。</p>
 
-&lt;p&gt;電源、HDMI と DisplayPort による2画面出力、USBキーボードとマウスが
-ケーブル1本で繋がるのは便利。&lt;/p&gt;
+<p>電源、HDMI と DisplayPort による2画面出力、USBキーボードとマウスが
+ケーブル1本で繋がるのは便利。</p>
 
-&lt;h2 id=&quot;ベッセルvessel-ボールラチェットドライバー-2200-2100&quot;&gt;ベッセル(VESSEL) ボールラチェットドライバー 2200 +2×100&lt;/h2&gt;
+<h2 id="ベッセルvessel-ボールラチェットドライバー-2200-2100">ベッセル(VESSEL) ボールラチェットドライバー 2200 +2×100</h2>
 
-&lt;div class=&quot;affiliate-product-list&quot;&gt;
-    &lt;a href=&quot;https://www.amazon.co.jp/dp/B019C821PC?tag=saasan-22&quot; class=&quot;affiliate-product&quot;&gt;
-        &lt;img src=&quot;https://m.media-amazon.com/images/I/61lQKR9RGnL.__AC_SX300_SY300_QL70_ML2_.jpg&quot; alt=&quot;ベッセル(VESSEL) ボールラチェットドライバー 2200 +2×100&quot; /&gt;
-        &lt;span class=&quot;affiliate-product-name&quot;&gt;ベッセル(VESSEL) ボールラチェットドライバー 2200 +2×100&lt;/span&gt;
-    &lt;/a&gt;
-&lt;/div&gt;
+<div class="affiliate-product-list">
+    <a href="https://www.amazon.co.jp/dp/B019C821PC?tag=saasan-22" class="affiliate-product">
+        <img src="https://m.media-amazon.com/images/I/61lQKR9RGnL.__AC_SX300_SY300_QL70_ML2_.jpg" alt="ベッセル(VESSEL) ボールラチェットドライバー 2200 +2×100" />
+        <span class="affiliate-product-name">ベッセル(VESSEL) ボールラチェットドライバー 2200 +2×100</span>
+    </a>
+</div>
 
-&lt;p&gt;ボールグリップドライバーにラチェット機構がついてて押さえながら回せる。
-自転車や PC などのメンテが楽になった。&lt;/p&gt;
+<p>ボールグリップドライバーにラチェット機構がついてて押さえながら回せる。
+自転車や PC などのメンテが楽になった。</p>
 
-&lt;h2 id=&quot;ピザ焼網&quot;&gt;ピザ焼網&lt;/h2&gt;
+<h2 id="ピザ焼網">ピザ焼網</h2>
 
-&lt;div class=&quot;affiliate-product-list&quot;&gt;
-    &lt;a href=&quot;https://www.amazon.co.jp/dp/B001U7ENTQ?tag=saasan-22&quot; class=&quot;affiliate-product&quot;&gt;
-        &lt;img src=&quot;https://m.media-amazon.com/images/I/81z662mB4TL._AC_SX522_.jpg&quot; alt=&quot;遠藤商事 TKG 焼き網 ピザ 直径(mm)205 ステンレスで錆びにくく衛生的 いろんな食材も焼ける キャンプBBQアウトドア 業務用 日本 WPZ01008&quot; /&gt;
-        &lt;span class=&quot;affiliate-product-name&quot;&gt;遠藤商事 TKG 焼き網 ピザ 直径(mm)205 ステンレスで錆びにくく衛生的 いろんな食材も焼ける キャンプBBQアウトドア 業務用 日本 WPZ01008&lt;/span&gt;
-    &lt;/a&gt;
-&lt;/div&gt;
+<div class="affiliate-product-list">
+    <a href="https://www.amazon.co.jp/dp/B001U7ENTQ?tag=saasan-22" class="affiliate-product">
+        <img src="https://m.media-amazon.com/images/I/81z662mB4TL._AC_SX522_.jpg" alt="遠藤商事 TKG 焼き網 ピザ 直径(mm)205 ステンレスで錆びにくく衛生的 いろんな食材も焼ける キャンプBBQアウトドア 業務用 日本 WPZ01008" />
+        <span class="affiliate-product-name">遠藤商事 TKG 焼き網 ピザ 直径(mm)205 ステンレスで錆びにくく衛生的 いろんな食材も焼ける キャンプBBQアウトドア 業務用 日本 WPZ01008</span>
+    </a>
+</div>
 
-&lt;p&gt;オーブンレンジがあるのにオーブン機能をまったく使ってなかったんで
-試しに市販のチルドピザ(&lt;a href=&quot;https://www.nipponham.co.jp/ishigama/&quot;&gt;石窯工房&lt;/a&gt; とか)を焼いてみたらおいしかった。&lt;/p&gt;
+<p>オーブンレンジがあるのにオーブン機能をまったく使ってなかったんで
+試しに市販のチルドピザ(<a href="https://www.nipponham.co.jp/ishigama/">石窯工房</a> とか)を焼いてみたらおいしかった。</p>
 
-&lt;p&gt;しかし皿に乗せて焼くとあまりカリッとした感じにならないんでこちらを購入。
-ピザがさらにおいしく焼けるようになった。&lt;/p&gt;
+<p>しかし皿に乗せて焼くとあまりカリッとした感じにならないんでこちらを購入。
+ピザがさらにおいしく焼けるようになった。</p>
 
-&lt;p&gt;私は10インチ用を買ったけど大きすぎたのでたぶん8インチ用でいい。&lt;/p&gt;
-</description>
-                <pubDate>Sat, 31 Dec 2022 21:30:00 +0900</pubDate>
-                <link>https://slx.jp/blog/2022/12/31/2022%E5%B9%B4-%E8%B2%B7%E3%81%A3%E3%81%A6%E3%82%88%E3%81%8B%E3%81%A3%E3%81%9F%E3%82%82%E3%81%AE%E3%81%A8%E3%81%8B.html</link>
-                <guid isPermaLink="true">https://slx.jp/blog/2022/12/31/2022%E5%B9%B4-%E8%B2%B7%E3%81%A3%E3%81%A6%E3%82%88%E3%81%8B%E3%81%A3%E3%81%9F%E3%82%82%E3%81%AE%E3%81%A8%E3%81%8B.html</guid>
-                
-                
-                <category>blog</category>
-                
-            </item>
-        
-            <item>
-                <title>Ubuntu 22.04 で apt-key add したあと apt-update で Key is stored in legacy trusted.gpg keyring というメッセージが表示される場合の対応方法</title>
-                <description>&lt;p&gt;結論から言うと、以下のコマンドで鍵を追加すれば良い。&lt;/p&gt;
+<p>私は10インチ用を買ったけど大きすぎたのでたぶん8インチ用でいい。</p>]]></content><author><name>saasan</name></author><category term="blog" /><category term="ガジェット" /><summary type="html"><![CDATA[今年買ってよかったものとか]]></summary></entry><entry><title type="html">Ubuntu 22.04 で apt-key add したあと apt-update で Key is stored in legacy trusted.gpg keyring というメッセージが表示される場合の対応方法</title><link href="https://slx.jp/blog/2022/10/24/ubuntu-22.04%E3%81%A7apt-key-add%E3%81%97%E3%81%9F%E3%81%82%E3%81%A8apt-update%E3%81%A7key-is-stored-in-legacy-trusted.gpg-keyring%E3%81%A8%E3%81%84%E3%81%86%E3%83%A1%E3%83%83%E3%82%BB%E3%83%BC%E3%82%B8%E3%81%8C%E8%A1%A8%E7%A4%BA%E3%81%95%E3%82%8C%E3%82%8B%E5%A0%B4%E5%90%88%E3%81%AE%E5%AF%BE%E5%BF%9C%E6%96%B9%E6%B3%95.html" rel="alternate" type="text/html" title="Ubuntu 22.04 で apt-key add したあと apt-update で Key is stored in legacy trusted.gpg keyring というメッセージが表示される場合の対応方法" /><published>2022-10-24T16:25:04+09:00</published><updated>2022-10-24T16:25:04+09:00</updated><id>https://slx.jp/blog/2022/10/24/ubuntu-22.04%E3%81%A7apt-key-add%E3%81%97%E3%81%9F%E3%81%82%E3%81%A8apt-update%E3%81%A7key-is-stored-in-legacy-trusted.gpg-keyring%E3%81%A8%E3%81%84%E3%81%86%E3%83%A1%E3%83%83%E3%82%BB%E3%83%BC%E3%82%B8%E3%81%8C%E8%A1%A8%E7%A4%BA%E3%81%95%E3%82%8C%E3%82%8B%E5%A0%B4%E5%90%88%E3%81%AE%E5%AF%BE%E5%BF%9C%E6%96%B9%E6%B3%95</id><content type="html" xml:base="https://slx.jp/blog/2022/10/24/ubuntu-22.04%E3%81%A7apt-key-add%E3%81%97%E3%81%9F%E3%81%82%E3%81%A8apt-update%E3%81%A7key-is-stored-in-legacy-trusted.gpg-keyring%E3%81%A8%E3%81%84%E3%81%86%E3%83%A1%E3%83%83%E3%82%BB%E3%83%BC%E3%82%B8%E3%81%8C%E8%A1%A8%E7%A4%BA%E3%81%95%E3%82%8C%E3%82%8B%E5%A0%B4%E5%90%88%E3%81%AE%E5%AF%BE%E5%BF%9C%E6%96%B9%E6%B3%95.html"><![CDATA[<p>結論から言うと、以下のコマンドで鍵を追加すれば良い。</p>
 
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo curl -fsSL https://myrepo.example/myrepo.asc -o /etc/apt/keyrings/myrepo.asc
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>curl <span class="nt">-fsSL</span> https://myrepo.example/myrepo.asc <span class="nt">-o</span> /etc/apt/keyrings/myrepo.asc
+</code></pre></div></div>
 
-&lt;p&gt;鍵がテキスト形式の場合は拡張子を &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.asc&lt;/code&gt;、バイナリ形式の場合は &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.gpg&lt;/code&gt; にすること。&lt;/p&gt;
+<p>鍵がテキスト形式の場合は拡張子を <code class="language-plaintext highlighter-rouge">.asc</code>、バイナリ形式の場合は <code class="language-plaintext highlighter-rouge">.gpg</code> にすること。</p>
 
-&lt;p&gt;既に公開鍵を追加済みの場合は &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;apt-key list&lt;/code&gt; で下8桁を確認し &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;apt-key del XXXXXXXX&lt;/code&gt; で削除する。&lt;/p&gt;
+<p>既に公開鍵を追加済みの場合は <code class="language-plaintext highlighter-rouge">apt-key list</code> で下8桁を確認し <code class="language-plaintext highlighter-rouge">apt-key del XXXXXXXX</code> で削除する。</p>
 
-&lt;h2 id=&quot;解説&quot;&gt;解説&lt;/h2&gt;
+<h2 id="解説">解説</h2>
 
-&lt;p&gt;Ubuntu 22.04 で &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;apt-key add&lt;/code&gt; したあと &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;apt-update&lt;/code&gt; すると以下のメッセージが表示される。&lt;/p&gt;
+<p>Ubuntu 22.04 で <code class="language-plaintext highlighter-rouge">apt-key add</code> したあと <code class="language-plaintext highlighter-rouge">apt-update</code> すると以下のメッセージが表示される。</p>
 
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Key is stored in legacy trusted.gpg keyring (/etc/apt/trusted.gpg), see the DEPRECATION section in apt-key(8) for details.
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Key is stored <span class="k">in </span>legacy trusted.gpg keyring <span class="o">(</span>/etc/apt/trusted.gpg<span class="o">)</span>, see the DEPRECATION section <span class="k">in </span>apt-key<span class="o">(</span>8<span class="o">)</span> <span class="k">for </span>details.
+</code></pre></div></div>
 
-&lt;p&gt;鍵が古い非推奨の場所に保存されているという警告だ。
-&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;man apt-key&lt;/code&gt; によると&lt;/p&gt;
+<p>鍵が古い非推奨の場所に保存されているという警告だ。
+<code class="language-plaintext highlighter-rouge">man apt-key</code> によると</p>
 
-&lt;blockquote&gt;
-  &lt;p&gt;apt-key(8) will last be available in Debian 11 and Ubuntu 22.04.&lt;/p&gt;
-&lt;/blockquote&gt;
+<blockquote>
+  <p>apt-key(8) will last be available in Debian 11 and Ubuntu 22.04.</p>
+</blockquote>
 
-&lt;p&gt;apt-key は Debian 11 と Ubuntu 22.04 を最後に廃止となるので
-鍵の追加方法も変える必要がある。&lt;/p&gt;
+<p>apt-key は Debian 11 と Ubuntu 22.04 を最後に廃止となるので
+鍵の追加方法も変える必要がある。</p>
 
-&lt;p&gt;メッセージ通り DEPRECATION セクションを見ると次のように書かれている。&lt;/p&gt;
+<p>メッセージ通り DEPRECATION セクションを見ると次のように書かれている。</p>
 
-&lt;blockquote&gt;
-  &lt;p&gt;DEPRECATION&lt;/p&gt;
+<blockquote>
+  <p>DEPRECATION</p>
 
-  &lt;p&gt;Except for using apt-key del in maintainer scripts, the use of apt-key is deprecated. This section shows how to replace existing use of apt-key.&lt;/p&gt;
+  <p>Except for using apt-key del in maintainer scripts, the use of apt-key is deprecated. This section shows how to replace existing use of apt-key.</p>
 
-  &lt;p&gt;If your existing use of apt-key add looks like this:&lt;/p&gt;
+  <p>If your existing use of apt-key add looks like this:</p>
 
-  &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;wget -qO- https://myrepo.example/myrepo.asc | sudo apt-key add -
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;  &lt;/div&gt;
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget -qO- https://myrepo.example/myrepo.asc | sudo apt-key add -
+</code></pre></div>  </div>
 
-  &lt;p&gt;Then you can directly replace this with (though note the recommendation below):&lt;/p&gt;
+  <p>Then you can directly replace this with (though note the recommendation below):</p>
 
-  &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;wget -qO- https://myrepo.example/myrepo.asc | sudo tee /etc/apt/trusted.gpg.d/myrepo.asc
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;  &lt;/div&gt;
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget -qO- https://myrepo.example/myrepo.asc | sudo tee /etc/apt/trusted.gpg.d/myrepo.asc
+</code></pre></div>  </div>
 
-  &lt;p&gt;Make sure to use the “asc” extension for ASCII armored keys and the “gpg” extension for the binary OpenPGP format (also known as “GPG key public ring”). The binary OpenPGP format works for all apt versions, while the ASCII armored format works for apt version &amp;gt;= 1.4.&lt;/p&gt;
+  <p>Make sure to use the “asc” extension for ASCII armored keys and the “gpg” extension for the binary OpenPGP format (also known as “GPG key public ring”). The binary OpenPGP format works for all apt versions, while the ASCII armored format works for apt version &gt;= 1.4.</p>
 
-  &lt;p&gt;Recommended: Instead of placing keys into the /etc/apt/trusted.gpg.d directory, you can place them anywhere on your filesystem by using the Signed-By option in your sources.list and pointing to the filename of the key. See sources.list(5) for details. Since APT 2.4, /etc/apt/keyrings is provided as the recommended location for keys not managed by packages. When using a deb822-style sources.list, and with apt version &amp;gt;= 2.4, the Signed-By option can also be used to include the full ASCII armored keyring directly in the sources.list without an additional file.&lt;/p&gt;
-&lt;/blockquote&gt;
+  <p>Recommended: Instead of placing keys into the /etc/apt/trusted.gpg.d directory, you can place them anywhere on your filesystem by using the Signed-By option in your sources.list and pointing to the filename of the key. See sources.list(5) for details. Since APT 2.4, /etc/apt/keyrings is provided as the recommended location for keys not managed by packages. When using a deb822-style sources.list, and with apt version &gt;= 2.4, the Signed-By option can also be used to include the full ASCII armored keyring directly in the sources.list without an additional file.</p>
+</blockquote>
 
-&lt;p&gt;以下のような形式で使用している場合は&lt;/p&gt;
+<p>以下のような形式で使用している場合は</p>
 
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;wget -qO- https://myrepo.example/myrepo.asc | sudo apt-key add -
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget <span class="nt">-qO-</span> https://myrepo.example/myrepo.asc | <span class="nb">sudo </span>apt-key add -
+</code></pre></div></div>
 
-&lt;p&gt;次のように書き換えればよい。&lt;/p&gt;
+<p>次のように書き換えればよい。</p>
 
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;wget -qO- https://myrepo.example/myrepo.asc | sudo tee /etc/apt/trusted.gpg.d/myrepo.asc
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget <span class="nt">-qO-</span> https://myrepo.example/myrepo.asc | <span class="nb">sudo tee</span> /etc/apt/trusted.gpg.d/myrepo.asc
+</code></pre></div></div>
 
-&lt;p&gt;拡張子が &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.asc&lt;/code&gt; のファイルを置けば ASCII armored 形式 (テキスト形式)、
-&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.gpg&lt;/code&gt; のファイルを置けばバイナリ形式として処理される。
-Ubuntu 22.04 の場合 ASCII armored 形式からバイナリ形式への変換 (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;gpg --dearmor&lt;/code&gt;) は不要らしい。&lt;/p&gt;
+<p>拡張子が <code class="language-plaintext highlighter-rouge">.asc</code> のファイルを置けば ASCII armored 形式 (テキスト形式)、
+<code class="language-plaintext highlighter-rouge">.gpg</code> のファイルを置けばバイナリ形式として処理される。
+Ubuntu 22.04 の場合 ASCII armored 形式からバイナリ形式への変換 (<code class="language-plaintext highlighter-rouge">gpg --dearmor</code>) は不要らしい。</p>
 
-&lt;p&gt;また、パッケージで管理されていない鍵は &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/etc/apt/keyrings&lt;/code&gt; に置くことが推奨されている。
-よって冒頭のコマンドとなる。&lt;/p&gt;
-</description>
-                <pubDate>Mon, 24 Oct 2022 16:25:04 +0900</pubDate>
-                <link>https://slx.jp/blog/2022/10/24/ubuntu-22.04%E3%81%A7apt-key-add%E3%81%97%E3%81%9F%E3%81%82%E3%81%A8apt-update%E3%81%A7key-is-stored-in-legacy-trusted.gpg-keyring%E3%81%A8%E3%81%84%E3%81%86%E3%83%A1%E3%83%83%E3%82%BB%E3%83%BC%E3%82%B8%E3%81%8C%E8%A1%A8%E7%A4%BA%E3%81%95%E3%82%8C%E3%82%8B%E5%A0%B4%E5%90%88%E3%81%AE%E5%AF%BE%E5%BF%9C%E6%96%B9%E6%B3%95.html</link>
-                <guid isPermaLink="true">https://slx.jp/blog/2022/10/24/ubuntu-22.04%E3%81%A7apt-key-add%E3%81%97%E3%81%9F%E3%81%82%E3%81%A8apt-update%E3%81%A7key-is-stored-in-legacy-trusted.gpg-keyring%E3%81%A8%E3%81%84%E3%81%86%E3%83%A1%E3%83%83%E3%82%BB%E3%83%BC%E3%82%B8%E3%81%8C%E8%A1%A8%E7%A4%BA%E3%81%95%E3%82%8C%E3%82%8B%E5%A0%B4%E5%90%88%E3%81%AE%E5%AF%BE%E5%BF%9C%E6%96%B9%E6%B3%95.html</guid>
-                
-                <category>Ubuntu</category>
-                
-                <category>Linux</category>
-                
-                <category>APT</category>
-                
-                
-                <category>blog</category>
-                
-            </item>
-        
-            <item>
-                <title>ZoneID (Zone.Identifier) を一括で削除する</title>
-                <description>&lt;p&gt;ネットからダウンロードしたファイルを WSL の Linux 環境にコピーすると
-&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;〇〇:Zone.Identifier&lt;/code&gt; というファイルが一緒にコピーされて煩わしい。&lt;/p&gt;
+<p>また、パッケージで管理されていない鍵は <code class="language-plaintext highlighter-rouge">/etc/apt/keyrings</code> に置くことが推奨されている。
+よって冒頭のコマンドとなる。</p>]]></content><author><name>saasan</name></author><category term="blog" /><category term="Ubuntu" /><category term="Linux" /><category term="APT" /><summary type="html"><![CDATA[結論から言うと、以下のコマンドで鍵を追加すれば良い。]]></summary></entry><entry><title type="html">ZoneID (Zone.Identifier) を一括で削除する</title><link href="https://slx.jp/blog/2022/10/03/zoneid-zone.identifier%E3%82%92%E4%B8%80%E6%8B%AC%E3%81%A7%E5%89%8A%E9%99%A4%E3%81%99%E3%82%8B.html" rel="alternate" type="text/html" title="ZoneID (Zone.Identifier) を一括で削除する" /><published>2022-10-03T18:30:00+09:00</published><updated>2022-10-03T18:30:00+09:00</updated><id>https://slx.jp/blog/2022/10/03/zoneid-zone.identifier%E3%82%92%E4%B8%80%E6%8B%AC%E3%81%A7%E5%89%8A%E9%99%A4%E3%81%99%E3%82%8B</id><content type="html" xml:base="https://slx.jp/blog/2022/10/03/zoneid-zone.identifier%E3%82%92%E4%B8%80%E6%8B%AC%E3%81%A7%E5%89%8A%E9%99%A4%E3%81%99%E3%82%8B.html"><![CDATA[<p>ネットからダウンロードしたファイルを WSL の Linux 環境にコピーすると
+<code class="language-plaintext highlighter-rouge">〇〇:Zone.Identifier</code> というファイルが一緒にコピーされて煩わしい。</p>
 
-&lt;p&gt;ファイルが1つだけならコピー前にファイルのプロパティから解除するかコピー後に削除すればいいが、
-サブディレクトリ内なども含め複数まとめて処理したい場合は PowerShell を使う。&lt;/p&gt;
+<p>ファイルが1つだけならコピー前にファイルのプロパティから解除するかコピー後に削除すればいいが、
+サブディレクトリ内なども含め複数まとめて処理したい場合は PowerShell を使う。</p>
 
-&lt;p&gt;PowerShell で削除したいファイルがあるディレクトリに移動後に
-以下のコマンドで Zone.Identifier があることを確認。&lt;/p&gt;
+<p>PowerShell で削除したいファイルがあるディレクトリに移動後に
+以下のコマンドで Zone.Identifier があることを確認。</p>
 
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Get-ChildItem -Recurse -File | Get-Item -Stream Zone.Identifier -ErrorAction SilentlyContinue
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get-ChildItem</span><span class="w"> </span><span class="nt">-Recurse</span><span class="w"> </span><span class="nt">-File</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Get-Item</span><span class="w"> </span><span class="nt">-Stream</span><span class="w"> </span><span class="nx">Zone.Identifier</span><span class="w"> </span><span class="nt">-ErrorAction</span><span class="w"> </span><span class="nx">SilentlyContinue</span><span class="w">
+</span></code></pre></div></div>
 
-&lt;p&gt;&lt;a href=&quot;https://learn.microsoft.com/ja-jp/powershell/module/microsoft.powershell.utility/unblock-file&quot;&gt;Unblock-File&lt;/a&gt;
-で削除できる。&lt;/p&gt;
+<p><a href="https://learn.microsoft.com/ja-jp/powershell/module/microsoft.powershell.utility/unblock-file">Unblock-File</a>
+で削除できる。</p>
 
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Get-ChildItem -Recurse -File | Unblock-File
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get-ChildItem</span><span class="w"> </span><span class="nt">-Recurse</span><span class="w"> </span><span class="nt">-File</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Unblock-File</span><span class="w">
+</span></code></pre></div></div>
 
-&lt;p&gt;&lt;a href=&quot;https://learn.microsoft.com/ja-jp/powershell/module/microsoft.powershell.management/remove-item#7&quot;&gt;Remove-Item -Stream Zone.Identifier&lt;/a&gt;
-でもいい。&lt;/p&gt;
-</description>
-                <pubDate>Mon, 03 Oct 2022 18:30:00 +0900</pubDate>
-                <link>https://slx.jp/blog/2022/10/03/zoneid-zone.identifier%E3%82%92%E4%B8%80%E6%8B%AC%E3%81%A7%E5%89%8A%E9%99%A4%E3%81%99%E3%82%8B.html</link>
-                <guid isPermaLink="true">https://slx.jp/blog/2022/10/03/zoneid-zone.identifier%E3%82%92%E4%B8%80%E6%8B%AC%E3%81%A7%E5%89%8A%E9%99%A4%E3%81%99%E3%82%8B.html</guid>
-                
-                <category>Windows</category>
-                
-                <category>WSL</category>
-                
-                
-                <category>blog</category>
-                
-            </item>
-        
-            <item>
-                <title>Mozilla Firefox で Web サイトのダークモードを無効化する</title>
-                <description>&lt;p&gt;Firefox 本体はダークテーマを使いたいけど
-Web サイトまでダークモードになると文字が読みづらい。&lt;/p&gt;
+<p><a href="https://learn.microsoft.com/ja-jp/powershell/module/microsoft.powershell.management/remove-item#7">Remove-Item -Stream Zone.Identifier</a>
+でもいい。</p>]]></content><author><name>saasan</name></author><category term="blog" /><category term="Windows" /><category term="WSL" /><summary type="html"><![CDATA[ネットからダウンロードしたファイルを WSL の Linux 環境にコピーすると 〇〇:Zone.Identifier というファイルが一緒にコピーされて煩わしい。]]></summary></entry><entry><title type="html">Mozilla Firefox で Web サイトのダークモードを無効化する</title><link href="https://slx.jp/blog/2022/09/07/mozilla-firefox%E3%81%A7web%E3%82%B5%E3%82%A4%E3%83%88%E3%81%AE%E3%83%80%E3%83%BC%E3%82%AF%E3%83%A2%E3%83%BC%E3%83%89%E3%82%92%E7%84%A1%E5%8A%B9%E5%8C%96%E3%81%99%E3%82%8B.html" rel="alternate" type="text/html" title="Mozilla Firefox で Web サイトのダークモードを無効化する" /><published>2022-09-07T00:16:02+09:00</published><updated>2022-09-07T00:16:02+09:00</updated><id>https://slx.jp/blog/2022/09/07/mozilla-firefox%E3%81%A7web%E3%82%B5%E3%82%A4%E3%83%88%E3%81%AE%E3%83%80%E3%83%BC%E3%82%AF%E3%83%A2%E3%83%BC%E3%83%89%E3%82%92%E7%84%A1%E5%8A%B9%E5%8C%96%E3%81%99%E3%82%8B</id><content type="html" xml:base="https://slx.jp/blog/2022/09/07/mozilla-firefox%E3%81%A7web%E3%82%B5%E3%82%A4%E3%83%88%E3%81%AE%E3%83%80%E3%83%BC%E3%82%AF%E3%83%A2%E3%83%BC%E3%83%89%E3%82%92%E7%84%A1%E5%8A%B9%E5%8C%96%E3%81%99%E3%82%8B.html"><![CDATA[<p>Firefox 本体はダークテーマを使いたいけど
+Web サイトまでダークモードになると文字が読みづらい。</p>
 
-&lt;p&gt;そんな私みたいにわがままな人向けなのかは分からないが
-Firefox には Web サイトだけライトモードにする方法があった。&lt;/p&gt;
+<p>そんな私みたいにわがままな人向けなのかは分からないが
+Firefox には Web サイトだけライトモードにする方法があった。</p>
 
-&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;about:config&lt;/code&gt; で
-&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;layout.css.prefers-color-scheme.content-override&lt;/code&gt;
-を変更すればいいらしい。&lt;/p&gt;
+<p><code class="language-plaintext highlighter-rouge">about:config</code> で
+<code class="language-plaintext highlighter-rouge">layout.css.prefers-color-scheme.content-override</code>
+を変更すればいいらしい。</p>
 
-&lt;ul&gt;
-  &lt;li&gt;0: ダーク固定&lt;/li&gt;
-  &lt;li&gt;1: ライト固定&lt;/li&gt;
-  &lt;li&gt;2: OS の設定に従う&lt;/li&gt;
-  &lt;li&gt;3: Firefox のテーマに従う&lt;/li&gt;
-&lt;/ul&gt;
+<ul>
+  <li>0: ダーク固定</li>
+  <li>1: ライト固定</li>
+  <li>2: OS の設定に従う</li>
+  <li>3: Firefox のテーマに従う</li>
+</ul>
 
-&lt;p&gt;デフォルト値は 3。&lt;/p&gt;
+<p>デフォルト値は 3。</p>
 
-&lt;p&gt;当然だがこれを 0 にしても対応していないサイトはダークモードにならない。&lt;/p&gt;
-</description>
-                <pubDate>Wed, 07 Sep 2022 00:16:02 +0900</pubDate>
-                <link>https://slx.jp/blog/2022/09/07/mozilla-firefox%E3%81%A7web%E3%82%B5%E3%82%A4%E3%83%88%E3%81%AE%E3%83%80%E3%83%BC%E3%82%AF%E3%83%A2%E3%83%BC%E3%83%89%E3%82%92%E7%84%A1%E5%8A%B9%E5%8C%96%E3%81%99%E3%82%8B.html</link>
-                <guid isPermaLink="true">https://slx.jp/blog/2022/09/07/mozilla-firefox%E3%81%A7web%E3%82%B5%E3%82%A4%E3%83%88%E3%81%AE%E3%83%80%E3%83%BC%E3%82%AF%E3%83%A2%E3%83%BC%E3%83%89%E3%82%92%E7%84%A1%E5%8A%B9%E5%8C%96%E3%81%99%E3%82%8B.html</guid>
-                
-                
-                <category>blog</category>
-                
-            </item>
-        
-            <item>
-                <title>dtab Compact d-42A から不要なアプリを削除する方法</title>
-                <description>&lt;p&gt;昨年踏んで割ってしまった Xperia Z3 Tablet Compact の後継として
-&lt;a href=&quot;https://www.docomo.ne.jp/product/d42a/&quot;&gt;dtab Compact d-42A&lt;/a&gt; を買った。&lt;/p&gt;
+<p>当然だがこれを 0 にしても対応していないサイトはダークモードにならない。</p>]]></content><author><name>saasan</name></author><category term="blog" /><category term="PC" /><category term="Mozilla Firefox" /><summary type="html"><![CDATA[Firefox 本体はダークテーマを使いたいけど Web サイトまでダークモードになると文字が読みづらい。]]></summary></entry><entry><title type="html">dtab Compact d-42A から不要なアプリを削除する方法</title><link href="https://slx.jp/blog/2022/05/06/dtab-compact-d-42a%E3%81%8B%E3%82%89%E4%B8%8D%E8%A6%81%E3%81%AA%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E5%89%8A%E9%99%A4%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95.html" rel="alternate" type="text/html" title="dtab Compact d-42A から不要なアプリを削除する方法" /><published>2022-05-06T01:31:47+09:00</published><updated>2022-05-06T01:31:47+09:00</updated><id>https://slx.jp/blog/2022/05/06/dtab-compact-d-42a%E3%81%8B%E3%82%89%E4%B8%8D%E8%A6%81%E3%81%AA%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E5%89%8A%E9%99%A4%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95</id><content type="html" xml:base="https://slx.jp/blog/2022/05/06/dtab-compact-d-42a%E3%81%8B%E3%82%89%E4%B8%8D%E8%A6%81%E3%81%AA%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E5%89%8A%E9%99%A4%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95.html"><![CDATA[<p>昨年踏んで割ってしまった Xperia Z3 Tablet Compact の後継として
+<a href="https://www.docomo.ne.jp/product/d42a/">dtab Compact d-42A</a> を買った。</p>
 
-&lt;p&gt;スペック的にはミドルレンジの Snapdragon 665 なので最新のゲームは動かないけど、
+<p>スペック的にはミドルレンジの Snapdragon 665 なので最新のゲームは動かないけど、
 Z3 Tablet Compact と同じ8インチサイズだし電子書籍を読むにはいいんじゃないかと。
 そもそも Android の8インチタブレットは不作で、
-他は低スペックな激安タブレットしか選択肢がない。&lt;/p&gt;
+他は低スペックな激安タブレットしか選択肢がない。</p>
 
-&lt;p&gt;d-42A はドコモ製なのでキャリア製端末の例に漏れず
+<p>d-42A はドコモ製なのでキャリア製端末の例に漏れず
 削除できない不要なアプリが大量に入っていた。
 まずはこれを削除したので手順を残しておく。
 なお、Android 11 へアップデート後にアプリを削除したが
-以前と同じ手順で特に問題なかった。&lt;/p&gt;
+以前と同じ手順で特に問題なかった。</p>
 
-&lt;h2 id=&quot;削除手順&quot;&gt;削除手順&lt;/h2&gt;
+<h2 id="削除手順">削除手順</h2>
 
-&lt;p&gt;&lt;strong&gt;アプリを削除すると最悪の場合端末が起動しなくなったり
-動作が不安定になる可能性があります。&lt;br /&gt;
-リスクを承知の上、自己責任で行ってください。&lt;/strong&gt;&lt;/p&gt;
+<p><strong>アプリを削除すると最悪の場合端末が起動しなくなったり
+動作が不安定になる可能性があります。<br />
+リスクを承知の上、自己責任で行ってください。</strong></p>
 
-&lt;ol&gt;
-  &lt;li&gt;d-42A で 設定 &amp;gt; タブレット情報 を開く&lt;/li&gt;
-  &lt;li&gt;ビルド番号を7回タップし開発者向けオプションを表示する&lt;/li&gt;
-  &lt;li&gt;設定 &amp;gt; システム &amp;gt; 詳細設定 &amp;gt; 開発者向けオプション を開く&lt;/li&gt;
-  &lt;li&gt;USBデバッグをオンにする&lt;/li&gt;
-  &lt;li&gt;PC で
-&lt;a href=&quot;https://developer.android.com/studio/releases/platform-tools&quot;&gt;Android SDK Platform-Tools&lt;/a&gt;
-をダウンロードし展開する&lt;/li&gt;
-  &lt;li&gt;Platform-Tools を展開したフォルダをコマンドプロンプトで開く&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;adb devices&lt;/code&gt; を実行し接続している端末を確認する&lt;/li&gt;
-  &lt;li&gt;d-42A に「USBデバッグを許可しますか?」と表示されるので「OK」を押して許可する&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;adb shell pm list packages -s&lt;/code&gt; を実行しパッケージ名の一覧を表示する&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;adb shell&lt;/code&gt; を実行しシェルを起動する&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;pm uninstall -k --user 0 パッケージ名&lt;/code&gt; を実行し不要アプリを削除する&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;exit&lt;/code&gt; を実行しシェルを終了する&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;adb kill-server&lt;/code&gt; を実行し adb サーバーを停止する&lt;/li&gt;
-&lt;/ol&gt;
+<ol>
+  <li>d-42A で 設定 &gt; タブレット情報 を開く</li>
+  <li>ビルド番号を7回タップし開発者向けオプションを表示する</li>
+  <li>設定 &gt; システム &gt; 詳細設定 &gt; 開発者向けオプション を開く</li>
+  <li>USBデバッグをオンにする</li>
+  <li>PC で
+<a href="https://developer.android.com/studio/releases/platform-tools">Android SDK Platform-Tools</a>
+をダウンロードし展開する</li>
+  <li>Platform-Tools を展開したフォルダをコマンドプロンプトで開く</li>
+  <li><code class="language-plaintext highlighter-rouge">adb devices</code> を実行し接続している端末を確認する</li>
+  <li>d-42A に「USBデバッグを許可しますか?」と表示されるので「OK」を押して許可する</li>
+  <li><code class="language-plaintext highlighter-rouge">adb shell pm list packages -s</code> を実行しパッケージ名の一覧を表示する</li>
+  <li><code class="language-plaintext highlighter-rouge">adb shell</code> を実行しシェルを起動する</li>
+  <li><code class="language-plaintext highlighter-rouge">pm uninstall -k --user 0 パッケージ名</code> を実行し不要アプリを削除する</li>
+  <li><code class="language-plaintext highlighter-rouge">exit</code> を実行しシェルを終了する</li>
+  <li><code class="language-plaintext highlighter-rouge">adb kill-server</code> を実行し adb サーバーを停止する</li>
+</ol>
 
-&lt;h2 id=&quot;削除したパッケージ&quot;&gt;削除したパッケージ&lt;/h2&gt;
+<h2 id="削除したパッケージ">削除したパッケージ</h2>
 
-&lt;p&gt;パッケージ名に &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nttdocomo&lt;/code&gt; が含まれるもの+αを削除した。&lt;/p&gt;
+<p>パッケージ名に <code class="language-plaintext highlighter-rouge">nttdocomo</code> が含まれるもの+αを削除した。</p>
 
-&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;jp.co.omronsoft.iwnnime.ml_lenovo&lt;/code&gt; は標準のキーボードアプリのため
+<p><code class="language-plaintext highlighter-rouge">jp.co.omronsoft.iwnnime.ml_lenovo</code> は標準のキーボードアプリのため
 Gboard など他のキーボードアプリをインスールする前に消すと
-文字が入力できなくなって死ぬので注意。&lt;/p&gt;
+文字が入力できなくなって死ぬので注意。</p>
 
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;com.android.contacts (ドコモ電話帳)
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>com.android.contacts (ドコモ電話帳)
 com.google.android.apps.photos (Google フォト)
 com.google.android.apps.tachyon (Google Duo)
 com.google.android.apps.wellbeing (Digital Wellbeing)
@@ -1388,20 +1237,4 @@ jp.co.nttdocomo.lcsapp
 jp.co.nttdocomo.saigaiban
 jp.co.omronsoft.android.decoemojimanager_docomo
 jp.co.omronsoft.iwnnime.ml_lenovo
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-</description>
-                <pubDate>Fri, 06 May 2022 01:31:47 +0900</pubDate>
-                <link>https://slx.jp/blog/2022/05/06/dtab-compact-d-42a%E3%81%8B%E3%82%89%E4%B8%8D%E8%A6%81%E3%81%AA%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E5%89%8A%E9%99%A4%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95.html</link>
-                <guid isPermaLink="true">https://slx.jp/blog/2022/05/06/dtab-compact-d-42a%E3%81%8B%E3%82%89%E4%B8%8D%E8%A6%81%E3%81%AA%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E5%89%8A%E9%99%A4%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95.html</guid>
-                
-                <category>ガジェット</category>
-                
-                <category>Android</category>
-                
-                
-                <category>blog</category>
-                
-            </item>
-        
-    </channel>
-</rss>
+</code></pre></div></div>]]></content><author><name>saasan</name></author><category term="blog" /><category term="ガジェット" /><category term="Android" /><summary type="html"><![CDATA[Android 端末の不要なアプリを削除する方法]]></summary></entry></feed>

@@ -1,115 +1,759 @@
 <!DOCTYPE html>
 <html lang="ja">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <title>M5StickC で毎朝照明を自動で点灯する</title>
-    <link href='//fonts.googleapis.com/css?family=Orbitron:500' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="/css/main.css">
-    <link rel="canonical" href="https://slx.jp/blog/2021/01/03/m5stickc%E3%81%A7%E6%AF%8E%E6%9C%9D%E7%85%A7%E6%98%8E%E3%82%92%E8%87%AA%E5%8B%95%E3%81%A7%E7%82%B9%E7%81%AF%E3%81%99%E3%82%8B.html">
-    <link rel="alternate" type="application/rss+xml" title="slx.jp" href="https://slx.jp/feed.xml" />
-    <link rel="apple-touch-icon" href="/img/s2works_favicon.png">
-    <link rel="me" href="https://misskey.io/@saasan">
-    <script data-ad-client="ca-pub-0141905477316976" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:site" content="@saasan">
-    <meta property="og:url" content="https://slx.jp/blog/2021/01/03/m5stickc%E3%81%A7%E6%AF%8E%E6%9C%9D%E7%85%A7%E6%98%8E%E3%82%92%E8%87%AA%E5%8B%95%E3%81%A7%E7%82%B9%E7%81%AF%E3%81%99%E3%82%8B.html">
-    <meta property="og:title" content="M5StickC で毎朝照明を自動で点灯する">
-    <meta property="og:description" content="遮光カーテンに変えたら朝になっても部屋が真っ暗なので自動で照明が点灯するようにしたい">
-    <meta property="og:image" content="https://slx.jp/img/s2works_favicon.png">
-    <script type="application/ld+json">
-      {
-          "@context": "http://schema.org/",
-          "@type": "Person",
-          "name": "saasan",
-          "sameAs": [
-              "https://twitter.com/saasan",
-              "https://github.com/saasan"
-          ]
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c">
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>M5StickC で毎朝照明を自動で点灯する | slx.jp</title>
+<meta name="generator" content="Jekyll v4.4.1">
+<meta property="og:title" content="M5StickC で毎朝照明を自動で点灯する">
+<meta name="author" content="saasan">
+<meta property="og:locale" content="ja">
+<meta name="description" content="遮光カーテンに変えたら朝になっても部屋が真っ暗なので自動で照明が点灯するようにしたい">
+<meta property="og:description" content="遮光カーテンに変えたら朝になっても部屋が真っ暗なので自動で照明が点灯するようにしたい">
+<link rel="canonical" href="https://slx.jp/blog/2021/01/03/m5stickc%E3%81%A7%E6%AF%8E%E6%9C%9D%E7%85%A7%E6%98%8E%E3%82%92%E8%87%AA%E5%8B%95%E3%81%A7%E7%82%B9%E7%81%AF%E3%81%99%E3%82%8B.html">
+<meta property="og:url" content="https://slx.jp/blog/2021/01/03/m5stickc%E3%81%A7%E6%AF%8E%E6%9C%9D%E7%85%A7%E6%98%8E%E3%82%92%E8%87%AA%E5%8B%95%E3%81%A7%E7%82%B9%E7%81%AF%E3%81%99%E3%82%8B.html">
+<meta property="og:site_name" content="slx.jp">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2021-01-03T10:05:33+09:00">
+<meta name="twitter:card" content="summary">
+<meta property="twitter:title" content="M5StickC で毎朝照明を自動で点灯する">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"saasan"},"dateModified":"2021-01-03T10:05:33+09:00","datePublished":"2021-01-03T10:05:33+09:00","description":"遮光カーテンに変えたら朝になっても部屋が真っ暗なので自動で照明が点灯するようにしたい","headline":"M5StickC で毎朝照明を自動で点灯する","mainEntityOfPage":{"@type":"WebPage","@id":"https://slx.jp/blog/2021/01/03/m5stickc%E3%81%A7%E6%AF%8E%E6%9C%9D%E7%85%A7%E6%98%8E%E3%82%92%E8%87%AA%E5%8B%95%E3%81%A7%E7%82%B9%E7%81%AF%E3%81%99%E3%82%8B.html"},"url":"https://slx.jp/blog/2021/01/03/m5stickc%E3%81%A7%E6%AF%8E%E6%9C%9D%E7%85%A7%E6%98%8E%E3%82%92%E8%87%AA%E5%8B%95%E3%81%A7%E7%82%B9%E7%81%AF%E3%81%99%E3%82%8B.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="icon" href="/assets/images/favicon.png">
+  <link rel="canonical" href="https://slx.jp">
+  <link rel="apple-touch-icon" href="/assets/images/favicon.png">
+  <link rel="me" href="https://misskey.io/@saasan">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-noto-sans@0.0.72/index.min.css">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <script src="/assets/js/main.js"></script>
+  <script data-ad-client="ca-pub-0141905477316976" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><link type="application/atom+xml" rel="alternate" href="https://slx.jp/feed.xml" title="slx.jp">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/vs2015.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+<!-- and it's easy to individually load additional languages -->
+<script charset="UTF-8" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/go.min.js" async></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+// Init highlight js
+document.addEventListener('DOMContentLoaded', function(event) {
+  var els = document.querySelectorAll('pre code')
+
+  function addLangData(block) {
+    var outer = block.parentElement.parentElement.parentElement;
+    var lang = block.getAttribute('data-lang');
+    for (var i = 0; i < outer.classList.length; i++) {
+      var cls = outer.classList[i];
+      if (cls.startsWith('language-')) {
+        lang = cls;
+        break;
       }
-    </script>
-    <script type="application/ld+json">
-      {
-          "@context": "http://schema.org",
-          "@type": "Article",
-          "name": "M5StickC で毎朝照明を自動で点灯する",
-          "datePublished": "2021-01-03T10:05:33+09:00",
-          "headline": "遮光カーテンに変えたら朝になっても部屋が真っ暗なので自動で照明が点灯するようにしたい",
-          "image": "https://slx.jp/img/s2works_favicon.png",
-          "url": "https://slx.jp/blog/2021/01/03/m5stickc%E3%81%A7%E6%AF%8E%E6%9C%9D%E7%85%A7%E6%98%8E%E3%82%92%E8%87%AA%E5%8B%95%E3%81%A7%E7%82%B9%E7%81%AF%E3%81%99%E3%82%8B.html",
-          "publisher" : {
-              "@type": "Person",
-              "name": "saasan"
-          }
-      }
-    </script>
-  </head>
-  <body itemscope itemtype="http://schema.org/WebPage">
-    <header class="site-header">
-      <div class="wrapper">
-        <a class="site-title" href="/">slx.jp</a>
-        <nav class="site-nav">
-          <div class="site-nav-contents">
-            <ul>
-              <li><a href="/blog/">ブログ</a></li>
-              <li><a href="/imas/">アイマス</a></li>
-              <li><a href="/software/">ソフトウェア</a></li>
-              <li><a href="/script/">スクリプト</a></li>
-            </ul>
-          </div>
-        </nav>
-      </div>
-    </header>
-    <div class="page-content">
-      <div class="wrapper">
-        <div class="post" itemprop="mainContentOfPage" itemscope itemtype="http://schema.org/WebPageElement">
-          <header class="post-header">
-            <h1 class="post-title">M5StickC で毎朝照明を自動で点灯する</h1>
-            <div class="post-meta">
-              <time datetime="2021-01-03T10:05:33+09:00" itemprop="dateModified">2021/01/03</time>
+    }
+    if (!lang) {
+      cls = block.getAttribute('class');
+      lang = cls ? cls.replace('hljs ', '') : '';
+    }
+    if (lang.startsWith('language-')) {
+      lang = lang.substr(9);
+    }
+    block.setAttribute('class', 'hljs ' + lang);
+    block.parentNode.setAttribute('data-lang', lang);
+  }
+
+  function addBadge(block) {
+    var enabled = ('false' || 'true').toLowerCase();
+    if (enabled == 'true') {
+      var pre = block.parentElement;
+      pre.classList.add('badge');
+    }
+  }
+
+  function handle(block) {
+    addLangData(block);
+    addBadge(block)
+    hljs.highlightBlock(block);
+  }
+
+  for (var i = 0; i < els.length; i++) {
+    var el = els[i];
+    handle(el);
+  }
+});
+</script>
+
+<style>
+  /* code language badge */
+  pre.badge::before {
+    content: attr(data-lang);
+    color: #fff;
+    background-color: #ff4e00;
+    padding: 0 .5em;
+    border-radius: 0 2px;
+    text-transform: uppercase;
+    text-align: center;
+    min-width: 32px;
+    display: inline-block;
+    position: absolute;
+    right: 0;
+  }
+
+  /* fix wrong badge display for firefox browser */
+  code > table pre::before {
+    display: none;
+  }
+</style>
+<script src="//cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.3/photoswipe.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.3/default-skin/default-skin.css" rel="stylesheet">
+<style>
+  .pswp .pswp__container .pswp__img {
+    background-color: white;
+  }
+</style>
+
+<script>
+  function initPhotoSwipe() {
+    var mainEl = document.querySelector("section.main");
+
+    var imgEls = mainEl.querySelectorAll("img:not(.emoji)");
+    imgEls.forEach((imgEl) => {
+      imgEl.outerHTML = `
+    <a class="photo-swipe"
+      href="${imgEl.src}"
+      data-width="${imgEl.getAttribute("width") || imgEl.width * 2}"
+      data-height="${imgEl.getAttribute("height") || imgEl.height * 2}"
+      data-caption="${imgEl.getAttribute("caption") || imgEl.alt}"
+      target="_blank">
+      ${imgEl.outerHTML}
+    </a>`;
+    });
+
+    // Init empty gallery array
+    var container = [];
+
+    // Loop over gallery items and push it to the array
+    var linkEls = mainEl.querySelectorAll("a.photo-swipe");
+    linkEls.forEach((link) => {
+      var item = {
+        src: link.getAttribute("href"),
+        w: link.dataset.width,
+        h: link.dataset.height,
+        title: link.dataset.caption || "",
+      };
+      container.push(item);
+    });
+
+    // Define click event on gallery item
+    linkEls.forEach((link, index) => {
+      link.addEventListener("click", (event) => {
+        // Prevent location change
+        event.preventDefault();
+
+        // Define object and gallery options
+        var pswp = document.querySelector(".pswp");
+
+        var zoomLevel = 1;
+
+        // Define object and gallery options
+        var options = {
+          index: index,
+          bgOpacity: 0.85,
+          showHideOpacity: true,
+          closeOnScroll: true,
+          maxSpreadZoom: 1,
+          getDoubleTapZoom: (isMouseClick, item) => {
+            if (item.detail) {
+              zoomLevel += item.detail.origEvent.shiftKey ? -1 : 1;
+              item.detail = undefined;
+            } else {
+              zoomLevel = zoomLevel === 1 ? 2 : 1;
+            }
+            if (zoomLevel <= 1) {
+              zoomLevel = 1;
+              setTimeout(() => pswp.classList.remove("pswp--zoomed-in"), 0);
+            }
+            return item.initialZoomLevel * zoomLevel;
+          },
+        };
+
+        // Initialize PhotoSwipe
+        var gallery = new PhotoSwipe(
+          pswp,
+          PhotoSwipeUI_Default,
+          container,
+          options
+        );
+
+        gallery.init();
+
+        // Custom zoom event
+        gallery.container.addEventListener("pswpTap", (e) => {
+          gallery.currItem.detail = e.detail;
+        });
+      });
+    });
+  }
+
+  window.addEventListener("load", initPhotoSwipe);
+</script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+</head>
+<body>
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+  <!-- Background of PhotoSwipe.
+           It's a separate element as animating opacity is faster than rgba(). -->
+  <div class="pswp__bg"></div>
+  <!-- Slides wrapper with overflow:hidden. -->
+  <div class="pswp__scroll-wrap">
+    <!-- Container that holds slides.
+              PhotoSwipe keeps only 3 of them in the DOM to save memory.
+              Don't modify these 3 pswp__item elements, data is added later on. -->
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+    <div class="pswp__ui pswp__ui--hidden">
+      <div class="pswp__top-bar">
+        <!--  Controls are self-explanatory. Order can be changed. -->
+        <div class="pswp__counter"></div>
+        <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+        <button class="pswp__button pswp__button--share" title="Share"></button>
+        <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+        <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+        <!-- element will get class pswp__preloader--active when preloader is running -->
+        <div class="pswp__preloader">
+          <div class="pswp__preloader__icn">
+            <div class="pswp__preloader__cut">
+              <div class="pswp__preloader__donut"></div>
             </div>
-          </header>
-          <article class="post-content">
-            <p>最近寒いのでカーテンを遮光・遮熱のものに変えた。
-              遮熱のほうはあまり実感がないが遮光のほうはばっちりで、
-              昼間でもカーテンを閉めれば部屋がかなり暗くなる。</p>
-            <p>寝てる間は暗くてよいのだが、
-              朝になっても明るさで自然に目が覚めるということがなくなった。
-              時計を見ないと大まかな時間すら分からないのは思いの外不便だ。
-              そこで、以前購入した M5StickC を使って
-              毎朝自動で照明を点灯させることを思いついた。</p>
-            <h2 id="使用する照明器具とリモコン">使用する照明器具とリモコン</h2>
-            <p>私の部屋の照明はNECライティング(現ホタルクス)の
-              <a href="https://www.amazon.co.jp/gp/product/B07SS94YPN/saasan-22">LEDシーリングライトHLDX0801</a>
-              を使用している。
-              昨年買い換えたのだが、
-              これはシーリングライトとしてはかなりの薄型で、
-              引掛シーリングと合わせても高さ6cmくらいしかない。
-              以前使用していたものは高さ15cmほどあったため、
-              圧迫感がなくなり気に入っている。
-              唯一の不満点はリモコンが付属していないことで、別途
-              <a href="https://www.amazon.co.jp/dp/B075FBKZBT/saasan-22">RE0206</a>
-              を購入し使用している。</p>
-            <h2 id="リモコンの信号解析">リモコンの信号解析</h2>
-            <p>まずは点灯時に RE0206 から発信される赤外線信号を調べるため
-              <a href="https://www.amazon.co.jp/dp/B07Z621FQC/saasan-22">Grove 接続の IR ユニット</a>
-              を購入した。
-              M5StickC 単体でも赤外線の発信はできるが、受信はできないため、
-              リモコンの信号を調べる場合は別途購入する必要がある。</p>
-            <p><a href="https://siroitori.hatenablog.com/entry/2020/04/25/114250">M5StickC／M5Stack Fireで赤外線リモコンを作ろうと四苦八苦したのでメモ - カワリモノ息子の技術メモ的な〜</a>
-              を参考に Arduino IDE から
-              IRremoteESP8266 をインストールし、スケッチ例の IRvecvDumpV3 を開く。
-              kRecvPin を 33 に変更して M5StickC へ書き込んだあと、
-              IR ユニットへ向けてリモコンのボタンを押すと
-              シリアルモニタへ信号が表示された。</p>
-            <p>赤外線リモコンの信号にはいくつか種類があるらしいが、
-              NEC製品なので当然NECフォーマットだった。</p>
-            <h2 id="スケッチの作成">スケッチの作成</h2>
-            <p>M5StickC で設定時刻に赤外線信号を送信するスケッチを作成した。</p>
-            <p><a href="https://github.com/saasan/m5stickc-ir-timer">saasan/m5stickc-ir-timer: M5StickCで設定時刻に赤外線信号を送信する</a></p>
-            <figure class="highlight">
-              <pre><code class="language-cpp" data-lang="cpp"><span class="cp">#include</span> <span class="cpf">&lt;M5StickC.h&gt;</span><span class="cp">
+          </div>
+        </div>
+      </div>
+      <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+        <div class="pswp__share-tooltip"></div>
+      </div>
+      <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+      <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button>
+      <div class="pswp__caption">
+        <div class="pswp__caption__center"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<header class="site-header " role="banner">
+
+  <div class="wrapper">
+    <div class="site-header-inner">
+<span class="site-brand"><a class="site-brand-inner" rel="author" href="/">
+  <img class="site-favicon" title="slx.jp" src="/assets/images/favicon.png" onerror="this.style.display='none'">
+  slx.jp
+</a>
+</span><nav class="site-nav">
+          <input type="checkbox" id="nav-trigger" class="nav-trigger">
+          <label for="nav-trigger">
+            <span class="menu-icon">
+              <svg viewbox="0 0 18 15" width="18px" height="15px">
+                <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"></path>
+              </svg>
+            </span>
+          </label>
+
+          <div class="trigger">
+<a class="page-link" href="/">HOME</a><a class="page-link" href="/archives.html">ARCHIVES</a><a class="page-link" href="/categories.html">CATEGORIES</a><a class="page-link" href="/tags.html">TAGS</a>
+
+
+
+
+</div>
+        </nav>
+</div>
+  </div>
+</header>
+
+<script>
+  function initHeader() {
+    var lastScrollY = getScrollPos().y;
+    var documentElement = document.documentElement;
+
+    function storeScrollData() {
+      var y = getScrollPos().y;var scrollStatus = "";
+
+      if (y <= 0) {
+        scrollStatus = "top";
+      } else if ((window.innerHeight + y) >= document.body.offsetHeight) {
+        scrollStatus = "bottom";
+      } else {
+        var isScrollDown = (y - lastScrollY > 0) ? true : false;
+        scrollStatus = isScrollDown ? "down" : "up";
+      }
+
+      lastScrollY = y;
+      documentElement.setAttribute("data-scroll-status", scrollStatus);
+    }
+
+    window.addEventListener('scroll', function(e) {
+      storeScrollData();
+    });
+
+    storeScrollData();
+  }
+  document.addEventListener('DOMContentLoaded', initHeader);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  function hashLocate(hashValue) {
+    hashValue = hashValue.replace(/^.*#h-/, '');
+    hashValue = decodeURIComponent(hashValue);
+    var element = document.getElementById(hashValue);
+
+    if (!element) {
+      return;
+    }
+
+    var header = document.querySelector('header.site-header');
+    var headerRect = header.getBoundingClientRect();
+    var headerTop = Math.floor(headerRect.top);
+    var headerHeight = Math.floor(headerRect.height);
+    var scrollPos = getScrollPos();
+    var offsetY = element.offsetTop - (headerTop + headerHeight + 20);
+
+    if (offsetY == scrollPos.y) {
+      return;
+    }
+
+    if (headerTop == 0  && offsetY > scrollPos.y) {
+      offsetY += headerHeight + 2;
+    } else if (headerTop < 0  && offsetY < scrollPos.y) {
+      offsetY -= headerHeight - 2;
+    }
+
+    smoothScrollTo(offsetY);
+  }
+
+  // The first event occurred
+  window.addEventListener('load', function(event) {
+    if (window.location.hash) {
+      hashLocate(window.location.hash);
+    }
+  });
+
+  // The first event occurred
+  window.addEventListener('click', function(event) {
+    if (event.target.tagName.toLowerCase() == 'a') {
+      hashLocate(event.target.getAttribute('href'));
+    }
+  });
+</script>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <div class="framework">
+  <section class="main">
+
+     <div class="post">
+  <section>
+
+
+
+
+
+
+
+
+
+<header class="post-header">
+  <h1 class="post-title p-name" itemprop="name headline">M5StickC で毎朝照明を自動で点灯する</h1>
+  <h2 class="post-subtitle"></h2>
+
+  <p class="post-meta">
+    <time class="dt-published" datetime="2021-01-03T10:05:33+09:00" itemprop="datePublished"><i class="fa fa-calendar"></i> 2021-01-03 10:05
+    </time>
+
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 15 mins</span>
+  </p>
+<div class="post-tags">
+<a class="post-tag" href="/tags.html#M5Stack">#M5Stack</a><a class="post-tag" href="/tags.html#M5StickC">#M5StickC</a><a class="post-tag" href="/tags.html#ESP32">#ESP32</a><a class="post-tag" href="/tags.html#IRremoteESP8266">#IRremoteESP8266</a>
+</div></header>
+<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+    <div class="post-content e-content" itemprop="articleBody">
+
+      <p>最近寒いのでカーテンを遮光・遮熱のものに変えた。
+遮熱のほうはあまり実感がないが遮光のほうはばっちりで、
+昼間でもカーテンを閉めれば部屋がかなり暗くなる。</p>
+
+<p>寝てる間は暗くてよいのだが、
+朝になっても明るさで自然に目が覚めるということがなくなった。
+時計を見ないと大まかな時間すら分からないのは思いの外不便だ。
+そこで、以前購入した M5StickC を使って
+毎朝自動で照明を点灯させることを思いついた。</p>
+
+<h2 id="使用する照明器具とリモコン">使用する照明器具とリモコン</h2>
+
+<p>私の部屋の照明はNECライティング(現ホタルクス)の
+<a href="https://www.amazon.co.jp/gp/product/B07SS94YPN/saasan-22">LEDシーリングライトHLDX0801</a>
+を使用している。
+昨年買い換えたのだが、
+これはシーリングライトとしてはかなりの薄型で、
+引掛シーリングと合わせても高さ6cmくらいしかない。
+以前使用していたものは高さ15cmほどあったため、
+圧迫感がなくなり気に入っている。
+唯一の不満点はリモコンが付属していないことで、別途
+<a href="https://www.amazon.co.jp/dp/B075FBKZBT/saasan-22">RE0206</a>
+を購入し使用している。</p>
+
+<h2 id="リモコンの信号解析">リモコンの信号解析</h2>
+
+<p>まずは点灯時に RE0206 から発信される赤外線信号を調べるため
+<a href="https://www.amazon.co.jp/dp/B07Z621FQC/saasan-22">Grove 接続の IR ユニット</a>
+を購入した。
+M5StickC 単体でも赤外線の発信はできるが、受信はできないため、
+リモコンの信号を調べる場合は別途購入する必要がある。</p>
+
+<p><a href="https://siroitori.hatenablog.com/entry/2020/04/25/114250">M5StickC／M5Stack Fireで赤外線リモコンを作ろうと四苦八苦したのでメモ - カワリモノ息子の技術メモ的な〜</a>
+を参考に Arduino IDE から
+IRremoteESP8266 をインストールし、スケッチ例の IRvecvDumpV3 を開く。
+kRecvPin を 33 に変更して M5StickC へ書き込んだあと、
+IR ユニットへ向けてリモコンのボタンを押すと
+シリアルモニタへ信号が表示された。</p>
+
+<p>赤外線リモコンの信号にはいくつか種類があるらしいが、
+NEC製品なので当然NECフォーマットだった。</p>
+
+<h2 id="スケッチの作成">スケッチの作成</h2>
+
+<p>M5StickC で設定時刻に赤外線信号を送信するスケッチを作成した。</p>
+
+<p><a href="https://github.com/saasan/m5stickc-ir-timer">saasan/m5stickc-ir-timer: M5StickCで設定時刻に赤外線信号を送信する</a></p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;M5StickC.h&gt;</span><span class="cp">
 #include</span> <span class="cpf">&lt;WiFi.h&gt;</span><span class="cp">
 #include</span> <span class="cpf">&lt;IRremoteESP8266.h&gt;</span><span class="cp">
 #include</span> <span class="cpf">&lt;IRsend.h&gt;</span><span class="cp">
@@ -179,7 +823,7 @@
 <span class="p">}</span>
 
 <span class="c1">// 無線LAN接続</span>
-<span class="kt">void</span> <span class="n">connectWiFi</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">ssid</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">passphrase</span><span class="p">)</span> <span class="p">{</span>
+<span class="kt">void</span> <span class="nf">connectWiFi</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">ssid</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">passphrase</span><span class="p">)</span> <span class="p">{</span>
     <span class="n">M5</span><span class="p">.</span><span class="n">Lcd</span><span class="p">.</span><span class="n">printf</span><span class="p">(</span><span class="s">"Connecting to %s"</span><span class="p">,</span> <span class="n">ssid</span><span class="p">);</span>
     <span class="n">WiFi</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="n">ssid</span><span class="p">,</span> <span class="n">passphrase</span><span class="p">);</span>
     <span class="k">while</span> <span class="p">(</span><span class="n">WiFi</span><span class="p">.</span><span class="n">status</span><span class="p">()</span> <span class="o">!=</span> <span class="n">WL_CONNECTED</span><span class="p">)</span> <span class="p">{</span>
@@ -192,17 +836,17 @@
 <span class="p">}</span>
 
 <span class="c1">// 画面の輝度を上げる</span>
-<span class="kt">void</span> <span class="n">screenOn</span><span class="p">()</span> <span class="p">{</span>
+<span class="kt">void</span> <span class="nf">screenOn</span><span class="p">()</span> <span class="p">{</span>
     <span class="n">M5</span><span class="p">.</span><span class="n">Axp</span><span class="p">.</span><span class="n">ScreenBreath</span><span class="p">(</span><span class="n">SCREEN_ON_BRIGHTNESS</span><span class="p">);</span>
     <span class="n">button_pressed_millis</span> <span class="o">=</span> <span class="n">millis</span><span class="p">();</span>
 <span class="p">}</span>
 
 <span class="c1">// 画面の輝度を下げる</span>
-<span class="kt">void</span> <span class="n">screenOff</span><span class="p">()</span> <span class="p">{</span>
+<span class="kt">void</span> <span class="nf">screenOff</span><span class="p">()</span> <span class="p">{</span>
     <span class="n">M5</span><span class="p">.</span><span class="n">Axp</span><span class="p">.</span><span class="n">ScreenBreath</span><span class="p">(</span><span class="n">SCREEN_OFF_BRIGHTNESS</span><span class="p">);</span>
 <span class="p">}</span>
 
-<span class="kt">void</span> <span class="n">setup</span><span class="p">()</span> <span class="p">{</span>
+<span class="kt">void</span> <span class="nf">setup</span><span class="p">()</span> <span class="p">{</span>
     <span class="n">M5</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span>
 
     <span class="c1">// 画面の表示設定</span>
@@ -218,7 +862,7 @@
     <span class="n">button_pressed_millis</span> <span class="o">=</span> <span class="n">millis</span><span class="p">();</span>
 <span class="p">}</span>
 
-<span class="kt">void</span> <span class="n">loop</span><span class="p">()</span> <span class="p">{</span>
+<span class="kt">void</span> <span class="nf">loop</span><span class="p">()</span> <span class="p">{</span>
     <span class="n">M5</span><span class="p">.</span><span class="n">update</span><span class="p">();</span>
 
     <span class="c1">// ボタンAが押されたらアラーム時刻の時間を変更</span>
@@ -260,46 +904,182 @@
     <span class="p">}</span>
 
     <span class="n">delay</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
-<span class="p">}</span></code></pre>
-            </figure>
-            <p>IR_SEND_DATA の 0x41B6659A が上記で解析した点灯するための信号で、
-              これを IRsend クラスの sendNEC メソッドで送信している。</p>
-            <p>タイマーの時刻は
-              ボタンA(正面の「M5」ボタン)で時、
-              ボタンB(側面の小さいボタン)で分を変更できるようにした。</p>
-            <p>送信するリモコンの信号を変えればいろいろと応用できそう。</p>
-          </article>
-        </div>
-        <div>
-          <h2>タグ「M5Stack」記事一覧</h2>
-          <ul class="tagged-post-list">
-            <li><a href="/blog/2021/08/14/m5stack-atom-lite%E7%94%A8%E3%81%AE%E9%96%8B%E7%99%BA%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89.html">M5Stack ATOM Lite 用の開発環境構築</a></li>
-            <li><a href="/blog/2021/04/04/m5stickc%E3%81%A7%E3%82%AD%E3%83%BC%E3%83%9C%E3%83%BC%E3%83%89%E6%93%8D%E4%BD%9C%E3%82%92%E8%87%AA%E5%8B%95%E5%8C%96%E3%81%99%E3%82%8B.html">M5StickC でキーボード操作を自動化する</a></li>
-            <li><a href="/blog/2021/01/03/m5stickc%E3%81%A7%E6%AF%8E%E6%9C%9D%E7%85%A7%E6%98%8E%E3%82%92%E8%87%AA%E5%8B%95%E3%81%A7%E7%82%B9%E7%81%AF%E3%81%99%E3%82%8B.html">M5StickC で毎朝照明を自動で点灯する</a></li>
-            <li><a href="/blog/2020/06/17/m5stickc-speaker-hat%E3%81%A7esp8266audio%E3%83%A9%E3%82%A4%E3%83%96%E3%83%A9%E3%83%AA%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%97%E3%81%A6mp3%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%92%E5%86%8D%E7%94%9F%E3%81%99%E3%82%8B.html">M5StickC + Speaker Hat で ESP8266Audio ライブラリを使用して MP3 ファイルを再生する</a></li>
-            <li><a href="/blog/2020/06/07/m5stickc-speaker-hat%E3%81%A7spiffs%E3%81%8B%E3%82%89%E8%AA%AD%E3%81%BF%E8%BE%BC%E3%82%93%E3%81%A0wav%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%92%E5%86%8D%E7%94%9F%E3%81%99%E3%82%8B.html">M5StickC + Speaker Hat で SPIFFS から読み込んだ WAV ファイルを再生する</a></li>
-            <li><a href="/blog/2020/05/25/m5stickc-speaker-hat%E3%81%A7%E9%9F%B3%E5%A3%B0%E3%83%87%E3%83%BC%E3%82%BF%E3%82%92%E5%86%8D%E7%94%9F%E3%81%99%E3%82%8B.html">M5StickC + Speaker Hat で音声データを再生する</a></li>
-          </ul>
-        </div>
-      </div>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>IR_SEND_DATA の 0x41B6659A が上記で解析した点灯するための信号で、
+これを IRsend クラスの sendNEC メソッドで送信している。</p>
+
+<p>タイマーの時刻は
+ボタンA(正面の「M5」ボタン)で時、
+ボタンB(側面の小さいボタン)で分を変更できるようにした。</p>
+
+<p>送信するリモコンの信号を変えればいろいろと応用できそう。</p>
+
+
     </div>
-    <footer class="site-footer">
-      <div class="wrapper">
-        <nav>
-          <ul>
-            <li><a href="/blog/">ブログ</a></li>
-            <li><a href="/imas/">アイマス</a></li>
-            <li><a href="/software/">ソフトウェア</a></li>
-            <li><a href="/script/">スクリプト</a></li>
-          </ul>
-        </nav>
-        <div class="footer-link">
-          <a href="https://twitter.com/saasan" target="_blank" class="twitter-username">
-            saasan
-          </a>
-          <a href="/feed.xml" target="_blank" class="rss">RSS</a>
-        </div>
+
+</article>
+<div class="post-nav">
+<a class="previous" href="/blog/2020/12/25/%E6%B6%88%E3%81%97%E3%81%A6%E3%81%97%E3%81%BE%E3%81%A3%E3%81%9Fwsl%E7%92%B0%E5%A2%83%E3%81%AE%E3%83%90%E3%83%83%E3%82%AF%E3%82%A2%E3%83%83%E3%83%97%E3%81%8B%E3%82%89%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%92%E5%8F%96%E3%82%8A%E5%87%BA%E3%81%99.html" title="消してしまった WSL 環境のバックアップからファイルを取り出す">消してしまった WSL 環境のバックアップからファイルを取り出す</a><a class="next" href="/blog/2021/04/04/m5stickc%E3%81%A7%E3%82%AD%E3%83%BC%E3%83%9C%E3%83%BC%E3%83%89%E6%93%8D%E4%BD%9C%E3%82%92%E8%87%AA%E5%8B%95%E5%8C%96%E3%81%99%E3%82%8B.html" title="M5StickC でキーボード操作を自動化する">M5StickC でキーボード操作を自動化する</a>
+</div>
+<div class="post-related">
+      <div>Related Articles</div>
+      <ul>
+        <li><a class="post-link" href="/blog/2023/08/14/aptx-adaptive-ll%E5%AF%BE%E5%BF%9Cbluetooth%E6%A9%9F%E5%99%A8%E3%81%A7pc%E3%82%B2%E3%83%BC%E3%83%A0%E3%81%AB%E4%BD%BF%E3%81%88%E3%82%8B%E5%AE%8C%E5%85%A8%E3%83%AF%E3%82%A4%E3%83%A4%E3%83%AC%E3%82%B9%E3%81%AA%E3%82%AA%E3%83%BC%E3%83%87%E3%82%A3%E3%82%AA%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89.html" title="M5StickC でキーボード操作を自動化する">aptX Adaptive LL 対応 Bluetooth 機器で PC ゲームに使える完全ワイヤレスなオーディオ環境構築</a></li>
+<li><a class="post-link" href="/blog/2021/04/04/m5stickc%E3%81%A7%E3%82%AD%E3%83%BC%E3%83%9C%E3%83%BC%E3%83%89%E6%93%8D%E4%BD%9C%E3%82%92%E8%87%AA%E5%8B%95%E5%8C%96%E3%81%99%E3%82%8B.html" title="M5StickC でキーボード操作を自動化する">M5StickC でキーボード操作を自動化する</a></li>
+<li><a class="post-link" href="/blog/2021/09/18/lenovo-thinkcentre-m600-tiny%E3%81%ABpci-express%E3%82%92%E7%84%A1%E7%90%86%E3%82%84%E3%82%8A%E5%A2%97%E8%A8%AD%E3%81%99%E3%82%8B.html" title="M5StickC でキーボード操作を自動化する">Lenovo ThinkCentre M600 Tiny に PCI Express を無理やり増設する</a></li>
+<li><a class="post-link" href="/blog/2015/12/15/jekyll-escape-liquid-tags.html" title="M5StickC でキーボード操作を自動化する">[Jekyll] Liquidのタグをエスケープする方法</a></li>
+</ul>
+    </div>
+<div class="post-comments"></div></section>
+</div>
+
+
+  </section>
+  <section class="sidebar" style="margin-left: 15px;">
+    <!-- Get sidebar items --><style type="text/css" media="screen">
+.post-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+</style>
+
+<div class="post-menu">
+  <div class="post-menu-title">TOC</div>
+  <div class="post-menu-content"></div>
+</div>
+
+<script>
+  function generateContent() {
+    var menu = document.querySelector(".post-menu");
+    var menuContent =  menu.querySelector(".post-menu-content");
+    var headings = document.querySelector(".post-content").querySelectorAll("h2, h3, h4, h5, h6");
+
+    // Hide menu when no headings
+    if (headings.length === 0) {
+      return menu.style.display = "none";
+    }
+
+    // Generate post menu
+    var menuHTML = '';
+    for (var i = 0; i < headings.length; i++) {
+      var h = headings[i];
+      menuHTML += (
+        '<li class="h-' + h.tagName.toLowerCase() + '">'
+        + '<a href="#h-' + h.getAttribute('id') + '">' + h.textContent + '</a></li>');
+    }
+
+    menuContent.innerHTML = '<ul>' + menuHTML + '</ul>';
+
+    // The header element
+    var header = document.querySelector('header.site-header');
+
+    function doMenuCollapse(index, over_items) {
+      var items = menuContent.firstChild.children;
+
+      if (over_items == undefined) {
+        over_items = 20;
+      }
+
+      if (items.length < over_items) {
+        return;
+      }
+
+      var activeItem = items[index];
+      var beginItem = activeItem
+      var endItem = activeItem
+      var beginIndex = index;
+      var endIndex = index + 1;
+      while (beginIndex >= 0
+        && !items[beginIndex].classList.contains('h-h2')) {
+        beginIndex -= 1;
+      }
+      while (endIndex < items.length
+        && !items[endIndex].classList.contains('h-h2')) {
+        endIndex += 1;
+      }
+      for (var i = 0; i < beginIndex; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+      for (var i = beginIndex + 1; i < endIndex; i++) {
+        item = items[i]
+        // if (!item.classList.contains('h-h2')) {
+          item.style.display = '';
+        // }
+      }
+      for (var i = endIndex; i < items.length; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+    }
+
+    // Init menu collapsed
+    doMenuCollapse(-1);
+
+    // Active the menu item
+    window.addEventListener('scroll', function (event) {
+      var lastActive = menuContent.querySelector('.active');
+      var changed = true;
+      var activeIndex = -1;
+      for (var i = headings.length - 1; i >= 0; i--) {
+        var h = headings[i];
+        var headingRect = h.getBoundingClientRect();
+        var headerRect = header.getBoundingClientRect();
+        var headerTop = Math.floor(headerRect.top);
+        var headerHeight = Math.floor(headerRect.height);
+        var headerHeight = headerTop + headerHeight + 20;
+        if (headingRect.top <= headerHeight) {
+          var id = 'h-' + h.getAttribute('id');
+          var a = menuContent.querySelector('a[href="#' + id  + '"]');
+          var curActive = a.parentNode;
+          if (curActive) {
+            curActive.classList.add('active');
+            activeIndex = i;
+          }
+          if (lastActive == curActive) {
+            changed = false;
+          }
+          break;
+        }
+      }
+      if (changed) {
+        if (lastActive) {
+          lastActive.classList.remove('active');
+        }
+        doMenuCollapse(activeIndex);
+      }
+      event.preventDefault();
+    });
+  }
+  generateContent();
+</script>
+</section>
+</div>
+
       </div>
-    </footer>
-  </body>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+    <div class="site-footer-inner">
+<div>© 2025 saasan</div>
+      <div class="footer-link">
+    <a href="https://x.com/saasan" target="_blank" class="twitter-username">
+        saasan
+    </a>
+
+<a href="/feed.xml" target="_blank" class="rss">RSS</a>
+</div>
+    </div>
+  </div>
+</footer>
+
+</body>
 </html>

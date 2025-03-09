@@ -1,177 +1,959 @@
 <!DOCTYPE html>
 <html lang="ja">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <title>SideM風会話ジェネレータ</title>
-    <link href='//fonts.googleapis.com/css?family=Orbitron:500' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="/css/main.css">
-    <link rel="canonical" href="https://slx.jp/sidem-mydesk/">
-    <link rel="alternate" type="application/rss+xml" title="slx.jp" href="https://slx.jp/feed.xml" />
-    <link rel="apple-touch-icon" href="/img/s2works_favicon.png">
-    <link rel="me" href="https://misskey.io/@saasan">
-    <script data-ad-client="ca-pub-0141905477316976" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:site" content="@saasan">
-    <meta property="og:url" content="https://slx.jp/sidem-mydesk/">
-    <meta property="og:title" content="SideM風会話ジェネレータ">
-    <meta property="og:description" content="アイドルマスター SideM にある、マイデスクでアイドル同士が会話するシステム。あれが シンデレラガールズ や ミリオンライブ！ にもあったらなぁ…。ということで作ってみた。">
-    <meta property="og:image" content="https://slx.jp/img/sidem-mydesk.png">
-    <script type="application/ld+json">
-      {
-          "@context": "http://schema.org/",
-          "@type": "Person",
-          "name": "saasan",
-          "sameAs": [
-              "https://twitter.com/saasan",
-              "https://github.com/saasan"
-          ]
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c">
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>SideM風会話ジェネレータ | slx.jp</title>
+<meta name="generator" content="Jekyll v4.4.1">
+<meta property="og:title" content="SideM風会話ジェネレータ">
+<meta name="author" content="saasan">
+<meta property="og:locale" content="ja">
+<link rel="canonical" href="https://slx.jp/sidem-mydesk/">
+<meta property="og:url" content="https://slx.jp/sidem-mydesk/">
+<meta property="og:site_name" content="slx.jp">
+<meta property="og:image" content="https://slx.jp/assets/images/sidem-mydesk.png">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2014-03-08T20:00:00+09:00">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="twitter:image" content="https://slx.jp/assets/images/sidem-mydesk.png">
+<meta property="twitter:title" content="SideM風会話ジェネレータ">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"saasan"},"dateModified":"2014-03-08T20:00:00+09:00","datePublished":"2014-03-08T20:00:00+09:00","headline":"SideM風会話ジェネレータ","image":"https://slx.jp/assets/images/sidem-mydesk.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://slx.jp/sidem-mydesk/"},"url":"https://slx.jp/sidem-mydesk/"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="icon" href="/assets/images/favicon.png">
+  <link rel="canonical" href="https://slx.jp">
+  <link rel="apple-touch-icon" href="/assets/images/favicon.png">
+  <link rel="me" href="https://misskey.io/@saasan">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-noto-sans@0.0.72/index.min.css">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <script src="/assets/js/main.js"></script>
+  <script data-ad-client="ca-pub-0141905477316976" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><link type="application/atom+xml" rel="alternate" href="https://slx.jp/feed.xml" title="slx.jp">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/vs2015.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+<!-- and it's easy to individually load additional languages -->
+<script charset="UTF-8" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/go.min.js" async></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+// Init highlight js
+document.addEventListener('DOMContentLoaded', function(event) {
+  var els = document.querySelectorAll('pre code')
+
+  function addLangData(block) {
+    var outer = block.parentElement.parentElement.parentElement;
+    var lang = block.getAttribute('data-lang');
+    for (var i = 0; i < outer.classList.length; i++) {
+      var cls = outer.classList[i];
+      if (cls.startsWith('language-')) {
+        lang = cls;
+        break;
       }
-    </script>
-    <script type="application/ld+json">
-      {
-          "@context": "http://schema.org",
-          "@type": "Article",
-          "name": "SideM風会話ジェネレータ",
-          "datePublished": "2014-03-08T20:00:00+09:00",
-          "headline": "アイドルマスター SideM にある、マイデスクでアイドル同士が会話するシステム。あれが シンデレラガールズ や ミリオンライブ！ にもあったらなぁ…。ということで作ってみた。",
-          "image": "https://slx.jp/img/sidem-mydesk.png",
-          "url": "https://slx.jp/sidem-mydesk/",
-          "publisher" : {
-              "@type": "Person",
-              "name": "saasan"
-          }
-      }
-    </script>
-  </head>
-  <body itemscope itemtype="http://schema.org/WebPage">
-    <header class="site-header">
-      <div class="wrapper">
-        <a class="site-title" href="/">slx.jp</a>
-        <nav class="site-nav">
-          <div class="site-nav-contents">
-            <ul>
-              <li><a href="/blog/">ブログ</a></li>
-              <li><a href="/imas/">アイマス</a></li>
-              <li><a href="/software/">ソフトウェア</a></li>
-              <li><a href="/script/">スクリプト</a></li>
-            </ul>
-          </div>
-        </nav>
-      </div>
-    </header>
-    <div class="page-content">
-      <div class="wrapper">
-        <div class="post" itemprop="mainContentOfPage" itemscope itemtype="http://schema.org/WebPageElement">
-          <header class="post-header">
-            <h1 class="post-title">SideM風会話ジェネレータ</h1>
-            <div class="post-meta">
-              <time datetime="2014-03-08T20:00:00+09:00" itemprop="dateModified">2014/03/08</time>
+    }
+    if (!lang) {
+      cls = block.getAttribute('class');
+      lang = cls ? cls.replace('hljs ', '') : '';
+    }
+    if (lang.startsWith('language-')) {
+      lang = lang.substr(9);
+    }
+    block.setAttribute('class', 'hljs ' + lang);
+    block.parentNode.setAttribute('data-lang', lang);
+  }
+
+  function addBadge(block) {
+    var enabled = ('false' || 'true').toLowerCase();
+    if (enabled == 'true') {
+      var pre = block.parentElement;
+      pre.classList.add('badge');
+    }
+  }
+
+  function handle(block) {
+    addLangData(block);
+    addBadge(block)
+    hljs.highlightBlock(block);
+  }
+
+  for (var i = 0; i < els.length; i++) {
+    var el = els[i];
+    handle(el);
+  }
+});
+</script>
+
+<style>
+  /* code language badge */
+  pre.badge::before {
+    content: attr(data-lang);
+    color: #fff;
+    background-color: #ff4e00;
+    padding: 0 .5em;
+    border-radius: 0 2px;
+    text-transform: uppercase;
+    text-align: center;
+    min-width: 32px;
+    display: inline-block;
+    position: absolute;
+    right: 0;
+  }
+
+  /* fix wrong badge display for firefox browser */
+  code > table pre::before {
+    display: none;
+  }
+</style>
+<script src="//cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.3/photoswipe.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.3/default-skin/default-skin.css" rel="stylesheet">
+<style>
+  .pswp .pswp__container .pswp__img {
+    background-color: white;
+  }
+</style>
+
+<script>
+  function initPhotoSwipe() {
+    var mainEl = document.querySelector("section.main");
+
+    var imgEls = mainEl.querySelectorAll("img:not(.emoji)");
+    imgEls.forEach((imgEl) => {
+      imgEl.outerHTML = `
+    <a class="photo-swipe"
+      href="${imgEl.src}"
+      data-width="${imgEl.getAttribute("width") || imgEl.width * 2}"
+      data-height="${imgEl.getAttribute("height") || imgEl.height * 2}"
+      data-caption="${imgEl.getAttribute("caption") || imgEl.alt}"
+      target="_blank">
+      ${imgEl.outerHTML}
+    </a>`;
+    });
+
+    // Init empty gallery array
+    var container = [];
+
+    // Loop over gallery items and push it to the array
+    var linkEls = mainEl.querySelectorAll("a.photo-swipe");
+    linkEls.forEach((link) => {
+      var item = {
+        src: link.getAttribute("href"),
+        w: link.dataset.width,
+        h: link.dataset.height,
+        title: link.dataset.caption || "",
+      };
+      container.push(item);
+    });
+
+    // Define click event on gallery item
+    linkEls.forEach((link, index) => {
+      link.addEventListener("click", (event) => {
+        // Prevent location change
+        event.preventDefault();
+
+        // Define object and gallery options
+        var pswp = document.querySelector(".pswp");
+
+        var zoomLevel = 1;
+
+        // Define object and gallery options
+        var options = {
+          index: index,
+          bgOpacity: 0.85,
+          showHideOpacity: true,
+          closeOnScroll: true,
+          maxSpreadZoom: 1,
+          getDoubleTapZoom: (isMouseClick, item) => {
+            if (item.detail) {
+              zoomLevel += item.detail.origEvent.shiftKey ? -1 : 1;
+              item.detail = undefined;
+            } else {
+              zoomLevel = zoomLevel === 1 ? 2 : 1;
+            }
+            if (zoomLevel <= 1) {
+              zoomLevel = 1;
+              setTimeout(() => pswp.classList.remove("pswp--zoomed-in"), 0);
+            }
+            return item.initialZoomLevel * zoomLevel;
+          },
+        };
+
+        // Initialize PhotoSwipe
+        var gallery = new PhotoSwipe(
+          pswp,
+          PhotoSwipeUI_Default,
+          container,
+          options
+        );
+
+        gallery.init();
+
+        // Custom zoom event
+        gallery.container.addEventListener("pswpTap", (e) => {
+          gallery.currItem.detail = e.detail;
+        });
+      });
+    });
+  }
+
+  window.addEventListener("load", initPhotoSwipe);
+</script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+</head>
+<body>
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+  <!-- Background of PhotoSwipe.
+           It's a separate element as animating opacity is faster than rgba(). -->
+  <div class="pswp__bg"></div>
+  <!-- Slides wrapper with overflow:hidden. -->
+  <div class="pswp__scroll-wrap">
+    <!-- Container that holds slides.
+              PhotoSwipe keeps only 3 of them in the DOM to save memory.
+              Don't modify these 3 pswp__item elements, data is added later on. -->
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+    <div class="pswp__ui pswp__ui--hidden">
+      <div class="pswp__top-bar">
+        <!--  Controls are self-explanatory. Order can be changed. -->
+        <div class="pswp__counter"></div>
+        <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+        <button class="pswp__button pswp__button--share" title="Share"></button>
+        <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+        <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+        <!-- element will get class pswp__preloader--active when preloader is running -->
+        <div class="pswp__preloader">
+          <div class="pswp__preloader__icn">
+            <div class="pswp__preloader__cut">
+              <div class="pswp__preloader__donut"></div>
             </div>
-          </header>
-          <article class="post-content">
-            <p>
-              <a href="http://side-m.idolmaster.jp/" target="_blank">アイドルマスター SideM</a>
-              にある、マイデスクでアイドル同士が会話するシステム。あれが
-              <a href="http://www.bandainamcogames.co.jp/cs/list/idolmaster/social_m/" target="_blank">シンデレラガールズ</a>
-              や
-              <a href="http://www.bandainamcogames.co.jp/cs/list/idolmaster/million_live/" target="_blank">ミリオンライブ！</a>
-              にもあったらなぁ…。ということで作ってみた。
-            </p>
-            <section class="info">
-              <h4>2015/12/21 更新</h4>
-              <ul>
-                <li>吹き出しの表示設定を追加</li>
-              </ul>
-              <noscript>
-                <p>JavaScriptを有効にして下さい。</p>
-              </noscript>
-            </section>
-            <section>
-              <h4>遊び方</h4>
-              <ol>
-                <li>名前と台詞を入力します。</li>
-                <li>
-                  <div>各コマに画像ファイルをドラッグアンドドロップで入れます。</div>
-                  <div><small>画像ファイルは、パソコンに保存されているものが使えます。</small></div>
-                </li>
-                <li>各コマをドラッグして画像の位置を調整します。</li>
-                <li>各コマの上でマウスホイールを動かして画像を拡大/縮小します。</li>
-                <li>完成したら「保存用画像を出力する」ボタンを押します。</li>
-                <li>出てきた画像を右クリックして保存します。</li>
-                <li>画像とハッシュタグ「#SideM風会話」を付けてツイートすると<a href="http://twitter.com/saasan" target="_blank">作者</a>が喜びます！</li>
-              </ol>
-            </section>
-            <section>
-              <h4>動作環境</h4>
-              <ul>
-                <li>パソコン用です。</li>
-                <li>Internet Explorer 11、Mozilla Firefox 27、Google Chrome 33で動作する事を確認しています。</li>
-                <li>Internet Explorer 9で動作しない事を確認しています。</li>
-              </ul>
-            </section>
-            <section class="sidem-mydesk-form">
-              <fieldset>
-                <legend>上の人</legend>
-                <label class="block">
-                  <input type="checkbox" class="balloonVisible" data-number="0" checked> 吹き出しを表示する
-                </label>
-                <div class="flex">
-                  <label for="name0">名前：</label>
-                  <input type="text" class="name" data-number="0" id="name0">
-                  <label for="line0">台詞：</label>
-                  <input type="text" class="line" data-number="0" id="line0">
-                </div>
-              </fieldset>
-              <fieldset>
-                <legend>下の人</legend>
-                <label>
-                  <input type="checkbox" class="balloonVisible" data-number="1" checked> 吹き出しを表示する
-                </label>
-                <div class="flex">
-                  <label for="name1">名前：</label>
-                  <input type="text" class="name" data-number="1" id="name1">
-                  <label for="line1">台詞：</label>
-                  <input type="text" class="line" data-number="1" id="line1">
-                </div>
-              </fieldset>
-            </section>
-            <section class="well center">
-              <p>
-                <canvas id="sidem-mydesk" width="640" height="586">canvasに対応したブラウザーでご覧下さい。</canvas>
-              </p>
-              <p><button id="output">↓保存用画像を出力する↓</button></p>
-              <p id="result"></p>
-            </section>
-            <section>
-              <a class="twitter-timeline" data-dnt="true" href="https://twitter.com/search?q=%23SideM%E9%A2%A8%E4%BC%9A%E8%A9%B1"    data-widget-id="442248991078490114">Tweets about "#SideM風会話"</a>
-            </section>
-            <script src="js/sidem-mydesk.js"></script>
-            <script src="js/sidem-mydesk-ui.js"></script>
-            <script src="js/init.js"></script>
-            <script async src="//platform.twitter.com/widgets.js"></script>
-          </article>
+          </div>
         </div>
+      </div>
+      <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+        <div class="pswp__share-tooltip"></div>
+      </div>
+      <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+      <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button>
+      <div class="pswp__caption">
+        <div class="pswp__caption__center"></div>
       </div>
     </div>
-    <footer class="site-footer">
-      <div class="wrapper">
-        <nav>
-          <ul>
-            <li><a href="/blog/">ブログ</a></li>
-            <li><a href="/imas/">アイマス</a></li>
-            <li><a href="/software/">ソフトウェア</a></li>
-            <li><a href="/script/">スクリプト</a></li>
-          </ul>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<header class="site-header " role="banner">
+
+  <div class="wrapper">
+    <div class="site-header-inner">
+<span class="site-brand"><a class="site-brand-inner" rel="author" href="/">
+  <img class="site-favicon" title="slx.jp" src="/assets/images/favicon.png" onerror="this.style.display='none'">
+  slx.jp
+</a>
+</span><nav class="site-nav">
+          <input type="checkbox" id="nav-trigger" class="nav-trigger">
+          <label for="nav-trigger">
+            <span class="menu-icon">
+              <svg viewbox="0 0 18 15" width="18px" height="15px">
+                <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"></path>
+              </svg>
+            </span>
+          </label>
+
+          <div class="trigger">
+<a class="page-link" href="/">HOME</a><a class="page-link" href="/archives.html">ARCHIVES</a><a class="page-link" href="/categories.html">CATEGORIES</a><a class="page-link" href="/tags.html">TAGS</a>
+
+
+
+
+</div>
         </nav>
-        <div class="footer-link">
-          <a href="https://twitter.com/saasan" target="_blank" class="twitter-username">
-            saasan
-          </a>
-          <a href="/feed.xml" target="_blank" class="rss">RSS</a>
+</div>
+  </div>
+</header>
+
+<script>
+  function initHeader() {
+    var lastScrollY = getScrollPos().y;
+    var documentElement = document.documentElement;
+
+    function storeScrollData() {
+      var y = getScrollPos().y;var scrollStatus = "";
+
+      if (y <= 0) {
+        scrollStatus = "top";
+      } else if ((window.innerHeight + y) >= document.body.offsetHeight) {
+        scrollStatus = "bottom";
+      } else {
+        var isScrollDown = (y - lastScrollY > 0) ? true : false;
+        scrollStatus = isScrollDown ? "down" : "up";
+      }
+
+      lastScrollY = y;
+      documentElement.setAttribute("data-scroll-status", scrollStatus);
+    }
+
+    window.addEventListener('scroll', function(e) {
+      storeScrollData();
+    });
+
+    storeScrollData();
+  }
+  document.addEventListener('DOMContentLoaded', initHeader);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  function hashLocate(hashValue) {
+    hashValue = hashValue.replace(/^.*#h-/, '');
+    hashValue = decodeURIComponent(hashValue);
+    var element = document.getElementById(hashValue);
+
+    if (!element) {
+      return;
+    }
+
+    var header = document.querySelector('header.site-header');
+    var headerRect = header.getBoundingClientRect();
+    var headerTop = Math.floor(headerRect.top);
+    var headerHeight = Math.floor(headerRect.height);
+    var scrollPos = getScrollPos();
+    var offsetY = element.offsetTop - (headerTop + headerHeight + 20);
+
+    if (offsetY == scrollPos.y) {
+      return;
+    }
+
+    if (headerTop == 0  && offsetY > scrollPos.y) {
+      offsetY += headerHeight + 2;
+    } else if (headerTop < 0  && offsetY < scrollPos.y) {
+      offsetY -= headerHeight - 2;
+    }
+
+    smoothScrollTo(offsetY);
+  }
+
+  // The first event occurred
+  window.addEventListener('load', function(event) {
+    if (window.location.hash) {
+      hashLocate(window.location.hash);
+    }
+  });
+
+  // The first event occurred
+  window.addEventListener('click', function(event) {
+    if (event.target.tagName.toLowerCase() == 'a') {
+      hashLocate(event.target.getAttribute('href'));
+    }
+  });
+</script>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <div class="framework">
+  <section class="main">
+
+     <div class="post">
+  <section>
+
+
+
+
+
+
+
+
+
+<header class="post-header">
+  <h1 class="post-title p-name" itemprop="name headline">SideM風会話ジェネレータ</h1>
+  <h2 class="post-subtitle"></h2>
+
+  <p class="post-meta">
+    <time class="dt-published" datetime="2014-03-08T20:00:00+09:00" itemprop="datePublished"><i class="fa fa-calendar"></i> 2014-03-08 11:00
+    </time>
+
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 3 mins</span>
+  </p></header>
+<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+    <div class="post-content e-content" itemprop="articleBody">
+
+      <p>
+    <a href="https://side-m.idolmaster.jp/" target="_blank">アイドルマスター SideM</a>
+    にある、マイデスクでアイドル同士が会話するシステム。あれが
+    <a href="https://www.bandainamcogames.co.jp/cs/list/idolmaster/social_m/" target="_blank">シンデレラガールズ</a>
+    や
+    <a href="https://www.bandainamcogames.co.jp/cs/list/idolmaster/million_live/" target="_blank">ミリオンライブ！</a>
+    にもあったらなぁ…。ということで作ってみた。
+</p>
+
+<section class="info">
+    <h4>2015/12/21 更新</h4>
+    <ul>
+        <li>吹き出しの表示設定を追加</li>
+    </ul>
+
+    <noscript>
+        <p>JavaScriptを有効にして下さい。</p>
+    </noscript>
+</section>
+
+<section>
+    <h4>遊び方</h4>
+    <ol>
+        <li>名前と台詞を入力します。</li>
+        <li>
+            <div>各コマに画像ファイルをドラッグアンドドロップで入れます。</div>
+            <div><small>画像ファイルは、パソコンに保存されているものが使えます。</small></div>
+        </li>
+        <li>各コマをドラッグして画像の位置を調整します。</li>
+        <li>各コマの上でマウスホイールを動かして画像を拡大/縮小します。</li>
+        <li>完成したら「保存用画像を出力する」ボタンを押します。</li>
+        <li>出てきた画像を右クリックして保存します。</li>
+        <li>画像とハッシュタグ「#SideM風会話」を付けてツイートすると<a href="https://x.com/saasan" target="_blank">作者</a>が喜びます！</li>
+    </ol>
+</section>
+
+<section>
+    <h4>動作環境</h4>
+    <ul>
+        <li>パソコン用です。</li>
+        <li>Internet Explorer 11、Mozilla Firefox 27、Google Chrome 33で動作する事を確認しています。</li>
+        <li>Internet Explorer 9で動作しない事を確認しています。</li>
+    </ul>
+</section>
+
+<section class="sidem-mydesk-form">
+    <fieldset>
+        <legend>上の人</legend>
+        <label class="block">
+            <input type="checkbox" class="balloonVisible" data-number="0" checked> 吹き出しを表示する
+        </label>
+
+        <div class="flex">
+            <label for="name0">名前：</label>
+            <input type="text" class="name" data-number="0" id="name0">
+
+            <label for="line0">台詞：</label>
+            <input type="text" class="line" data-number="0" id="line0">
         </div>
+    </fieldset>
+
+    <fieldset>
+        <legend>下の人</legend>
+        <label>
+            <input type="checkbox" class="balloonVisible" data-number="1" checked> 吹き出しを表示する
+        </label>
+
+        <div class="flex">
+            <label for="name1">名前：</label>
+            <input type="text" class="name" data-number="1" id="name1">
+
+            <label for="line1">台詞：</label>
+            <input type="text" class="line" data-number="1" id="line1">
+        </div>
+    </fieldset>
+</section>
+
+<section class="well center">
+    <p><canvas id="sidem-mydesk" width="640" height="586">canvasに対応したブラウザーでご覧下さい。</canvas></p>
+    <p><button id="output">↓保存用画像を出力する↓</button></p>
+    <p id="result"></p>
+</section>
+
+<section>
+    <a class="twitter-timeline" data-dnt="true" href="https://twitter.com/search?q=%23SideM%E9%A2%A8%E4%BC%9A%E8%A9%B1" data-widget-id="442248991078490114">Tweets about "#SideM風会話"</a>
+</section>
+
+<script src="js/sidem-mydesk.js"></script>
+<script src="js/sidem-mydesk-ui.js"></script>
+<script src="js/init.js"></script>
+<script async src="//platform.twitter.com/widgets.js"></script>
+
+
+    </div>
+
+</article>
+<div class="post-nav">
+<span></span><span></span>
+</div>
+<div class="post-related">
+      <div>Related Articles</div>
+      <ul>
+        </ul>
+    </div>
+<div class="post-comments"></div></section>
+</div>
+
+
+  </section>
+  <section class="sidebar" style="margin-left: 15px;">
+    <!-- Get sidebar items --><style type="text/css" media="screen">
+.post-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+</style>
+
+<div class="post-menu">
+  <div class="post-menu-title">TOC</div>
+  <div class="post-menu-content"></div>
+</div>
+
+<script>
+  function generateContent() {
+    var menu = document.querySelector(".post-menu");
+    var menuContent =  menu.querySelector(".post-menu-content");
+    var headings = document.querySelector(".post-content").querySelectorAll("h2, h3, h4, h5, h6");
+
+    // Hide menu when no headings
+    if (headings.length === 0) {
+      return menu.style.display = "none";
+    }
+
+    // Generate post menu
+    var menuHTML = '';
+    for (var i = 0; i < headings.length; i++) {
+      var h = headings[i];
+      menuHTML += (
+        '<li class="h-' + h.tagName.toLowerCase() + '">'
+        + '<a href="#h-' + h.getAttribute('id') + '">' + h.textContent + '</a></li>');
+    }
+
+    menuContent.innerHTML = '<ul>' + menuHTML + '</ul>';
+
+    // The header element
+    var header = document.querySelector('header.site-header');
+
+    function doMenuCollapse(index, over_items) {
+      var items = menuContent.firstChild.children;
+
+      if (over_items == undefined) {
+        over_items = 20;
+      }
+
+      if (items.length < over_items) {
+        return;
+      }
+
+      var activeItem = items[index];
+      var beginItem = activeItem
+      var endItem = activeItem
+      var beginIndex = index;
+      var endIndex = index + 1;
+      while (beginIndex >= 0
+        && !items[beginIndex].classList.contains('h-h2')) {
+        beginIndex -= 1;
+      }
+      while (endIndex < items.length
+        && !items[endIndex].classList.contains('h-h2')) {
+        endIndex += 1;
+      }
+      for (var i = 0; i < beginIndex; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+      for (var i = beginIndex + 1; i < endIndex; i++) {
+        item = items[i]
+        // if (!item.classList.contains('h-h2')) {
+          item.style.display = '';
+        // }
+      }
+      for (var i = endIndex; i < items.length; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+    }
+
+    // Init menu collapsed
+    doMenuCollapse(-1);
+
+    // Active the menu item
+    window.addEventListener('scroll', function (event) {
+      var lastActive = menuContent.querySelector('.active');
+      var changed = true;
+      var activeIndex = -1;
+      for (var i = headings.length - 1; i >= 0; i--) {
+        var h = headings[i];
+        var headingRect = h.getBoundingClientRect();
+        var headerRect = header.getBoundingClientRect();
+        var headerTop = Math.floor(headerRect.top);
+        var headerHeight = Math.floor(headerRect.height);
+        var headerHeight = headerTop + headerHeight + 20;
+        if (headingRect.top <= headerHeight) {
+          var id = 'h-' + h.getAttribute('id');
+          var a = menuContent.querySelector('a[href="#' + id  + '"]');
+          var curActive = a.parentNode;
+          if (curActive) {
+            curActive.classList.add('active');
+            activeIndex = i;
+          }
+          if (lastActive == curActive) {
+            changed = false;
+          }
+          break;
+        }
+      }
+      if (changed) {
+        if (lastActive) {
+          lastActive.classList.remove('active');
+        }
+        doMenuCollapse(activeIndex);
+      }
+      event.preventDefault();
+    });
+  }
+  generateContent();
+</script>
+</section>
+</div>
+
       </div>
-    </footer>
-  </body>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+    <div class="site-footer-inner">
+<div>© 2025 saasan</div>
+      <div class="footer-link">
+    <a href="https://x.com/saasan" target="_blank" class="twitter-username">
+        saasan
+    </a>
+
+<a href="/feed.xml" target="_blank" class="rss">RSS</a>
+</div>
+    </div>
+  </div>
+</footer>
+
+</body>
 </html>

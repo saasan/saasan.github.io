@@ -1,71 +1,1212 @@
 <!DOCTYPE html>
-<html lang="ja" class="top-page">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <title>slx.jp</title>
-    <link href='//fonts.googleapis.com/css?family=Orbitron:500' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="/css/main.css">
-    <link rel="canonical" href="https://slx.jp/">
-    <link rel="alternate" type="application/rss+xml" title="slx.jp" href="https://slx.jp/feed.xml" />
-    <link rel="apple-touch-icon" href="/img/s2works_favicon.png">
-    <link rel="me" href="https://misskey.io/@saasan">
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:site" content="@saasan">
-    <meta property="og:url" content="https://slx.jp/">
-    <meta property="og:title" content="slx.jp">
-    <meta property="og:description" content="saasanが作ったソフトウェア、スクリプトを公開するサイト">
-    <meta property="og:image" content="https://slx.jp/img/s2works_favicon.png">
-    <script type="application/ld+json">
-      {
-          "@context": "http://schema.org/",
-          "@type": "Person",
-          "name": "saasan",
-          "sameAs": [
-              "https://twitter.com/saasan",
-              "https://github.com/saasan"
-          ]
-      }
-    </script>
-    <script type="application/ld+json">
-      {
-          "@context": "http://schema.org",
-          "@type": "Article",
-          "name": "slx.jp",
+<html lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c">
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Home | slx.jp</title>
+<meta name="generator" content="Jekyll v4.4.1">
+<meta property="og:title" content="Home">
+<meta name="author" content="saasan">
+<meta property="og:locale" content="ja">
+<link rel="canonical" href="https://slx.jp/">
+<meta property="og:url" content="https://slx.jp/">
+<meta property="og:site_name" content="slx.jp">
+<meta property="og:type" content="website">
+<link rel="next" href="https://slx.jp/blog/page2/">
+<meta name="twitter:card" content="summary">
+<meta property="twitter:title" content="Home">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebSite","author":{"@type":"Person","name":"saasan"},"headline":"Home","name":"slx.jp","url":"https://slx.jp/"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="icon" href="/assets/images/favicon.png">
+  <link rel="canonical" href="https://slx.jp">
+  <link rel="apple-touch-icon" href="/assets/images/favicon.png">
+  <link rel="me" href="https://misskey.io/@saasan">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-noto-sans@0.0.72/index.min.css">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <script src="/assets/js/main.js"></script>
+  <script data-ad-client="ca-pub-0141905477316976" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><link type="application/atom+xml" rel="alternate" href="https://slx.jp/feed.xml" title="slx.jp">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/vs2015.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+<!-- and it's easy to individually load additional languages -->
+<script charset="UTF-8" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/go.min.js" async></script>
 
-          "headline": "saasanが作ったソフトウェア、スクリプトを公開するサイト",
-          "image": "https://slx.jp/img/s2works_favicon.png",
-          "url": "https://slx.jp/",
-          "publisher" : {
-              "@type": "Person",
-              "name": "saasan"
-          }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+// Init highlight js
+document.addEventListener('DOMContentLoaded', function(event) {
+  var els = document.querySelectorAll('pre code')
+
+  function addLangData(block) {
+    var outer = block.parentElement.parentElement.parentElement;
+    var lang = block.getAttribute('data-lang');
+    for (var i = 0; i < outer.classList.length; i++) {
+      var cls = outer.classList[i];
+      if (cls.startsWith('language-')) {
+        lang = cls;
+        break;
       }
-    </script>
-  </head>
-  <body>
-    <div class="top-wrapper">
-      <div class="top-wrapper-h1">
-        <h1>slx.jp</h1>
-      </div>
-      <h2>contents</h2>
-      <nav>
-        <ul>
-          <li><a href="/blog/">ブログ</a></li>
-          <li><a href="/imas/">アイマス</a></li>
-          <li><a href="/software/">ソフトウェア</a></li>
-          <li><a href="/script/">スクリプト</a></li>
-        </ul>
-      </nav>
+    }
+    if (!lang) {
+      cls = block.getAttribute('class');
+      lang = cls ? cls.replace('hljs ', '') : '';
+    }
+    if (lang.startsWith('language-')) {
+      lang = lang.substr(9);
+    }
+    block.setAttribute('class', 'hljs ' + lang);
+    block.parentNode.setAttribute('data-lang', lang);
+  }
+
+  function addBadge(block) {
+    var enabled = ('false' || 'true').toLowerCase();
+    if (enabled == 'true') {
+      var pre = block.parentElement;
+      pre.classList.add('badge');
+    }
+  }
+
+  function handle(block) {
+    addLangData(block);
+    addBadge(block)
+    hljs.highlightBlock(block);
+  }
+
+  for (var i = 0; i < els.length; i++) {
+    var el = els[i];
+    handle(el);
+  }
+});
+</script>
+
+<style>
+  /* code language badge */
+  pre.badge::before {
+    content: attr(data-lang);
+    color: #fff;
+    background-color: #ff4e00;
+    padding: 0 .5em;
+    border-radius: 0 2px;
+    text-transform: uppercase;
+    text-align: center;
+    min-width: 32px;
+    display: inline-block;
+    position: absolute;
+    right: 0;
+  }
+
+  /* fix wrong badge display for firefox browser */
+  code > table pre::before {
+    display: none;
+  }
+</style>
+<script src="//cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.3/photoswipe.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.3/default-skin/default-skin.css" rel="stylesheet">
+<style>
+  .pswp .pswp__container .pswp__img {
+    background-color: white;
+  }
+</style>
+
+<script>
+  function initPhotoSwipe() {
+    var mainEl = document.querySelector("section.main");
+
+    var imgEls = mainEl.querySelectorAll("img:not(.emoji)");
+    imgEls.forEach((imgEl) => {
+      imgEl.outerHTML = `
+    <a class="photo-swipe"
+      href="${imgEl.src}"
+      data-width="${imgEl.getAttribute("width") || imgEl.width * 2}"
+      data-height="${imgEl.getAttribute("height") || imgEl.height * 2}"
+      data-caption="${imgEl.getAttribute("caption") || imgEl.alt}"
+      target="_blank">
+      ${imgEl.outerHTML}
+    </a>`;
+    });
+
+    // Init empty gallery array
+    var container = [];
+
+    // Loop over gallery items and push it to the array
+    var linkEls = mainEl.querySelectorAll("a.photo-swipe");
+    linkEls.forEach((link) => {
+      var item = {
+        src: link.getAttribute("href"),
+        w: link.dataset.width,
+        h: link.dataset.height,
+        title: link.dataset.caption || "",
+      };
+      container.push(item);
+    });
+
+    // Define click event on gallery item
+    linkEls.forEach((link, index) => {
+      link.addEventListener("click", (event) => {
+        // Prevent location change
+        event.preventDefault();
+
+        // Define object and gallery options
+        var pswp = document.querySelector(".pswp");
+
+        var zoomLevel = 1;
+
+        // Define object and gallery options
+        var options = {
+          index: index,
+          bgOpacity: 0.85,
+          showHideOpacity: true,
+          closeOnScroll: true,
+          maxSpreadZoom: 1,
+          getDoubleTapZoom: (isMouseClick, item) => {
+            if (item.detail) {
+              zoomLevel += item.detail.origEvent.shiftKey ? -1 : 1;
+              item.detail = undefined;
+            } else {
+              zoomLevel = zoomLevel === 1 ? 2 : 1;
+            }
+            if (zoomLevel <= 1) {
+              zoomLevel = 1;
+              setTimeout(() => pswp.classList.remove("pswp--zoomed-in"), 0);
+            }
+            return item.initialZoomLevel * zoomLevel;
+          },
+        };
+
+        // Initialize PhotoSwipe
+        var gallery = new PhotoSwipe(
+          pswp,
+          PhotoSwipeUI_Default,
+          container,
+          options
+        );
+
+        gallery.init();
+
+        // Custom zoom event
+        gallery.container.addEventListener("pswpTap", (e) => {
+          gallery.currItem.detail = e.detail;
+        });
+      });
+    });
+  }
+
+  window.addEventListener("load", initPhotoSwipe);
+</script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+</head>
+<body>
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+  <!-- Background of PhotoSwipe.
+           It's a separate element as animating opacity is faster than rgba(). -->
+  <div class="pswp__bg"></div>
+  <!-- Slides wrapper with overflow:hidden. -->
+  <div class="pswp__scroll-wrap">
+    <!-- Container that holds slides.
+              PhotoSwipe keeps only 3 of them in the DOM to save memory.
+              Don't modify these 3 pswp__item elements, data is added later on. -->
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
     </div>
-    <footer>
-      <div class="footer-link">
-        <a href="https://twitter.com/saasan" target="_blank" class="twitter-username">
-          saasan
-        </a>
-        <a href="/feed.xml" target="_blank" class="rss">RSS</a>
+    <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+    <div class="pswp__ui pswp__ui--hidden">
+      <div class="pswp__top-bar">
+        <!--  Controls are self-explanatory. Order can be changed. -->
+        <div class="pswp__counter"></div>
+        <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+        <button class="pswp__button pswp__button--share" title="Share"></button>
+        <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+        <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+        <!-- element will get class pswp__preloader--active when preloader is running -->
+        <div class="pswp__preloader">
+          <div class="pswp__preloader__icn">
+            <div class="pswp__preloader__cut">
+              <div class="pswp__preloader__donut"></div>
+            </div>
+          </div>
+        </div>
       </div>
-    </footer>
-  </body>
+      <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+        <div class="pswp__share-tooltip"></div>
+      </div>
+      <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+      <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button>
+      <div class="pswp__caption">
+        <div class="pswp__caption__center"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<header class="site-header site-header-transparent" role="banner">
+
+  <div class="wrapper">
+    <div class="site-header-inner">
+<span class="site-brand"><a class="site-brand-inner" rel="author" href="/">
+  <img class="site-favicon" title="slx.jp" src="/assets/images/favicon.png" onerror="this.style.display='none'">
+  slx.jp
+</a>
+</span><nav class="site-nav">
+          <input type="checkbox" id="nav-trigger" class="nav-trigger">
+          <label for="nav-trigger">
+            <span class="menu-icon">
+              <svg viewbox="0 0 18 15" width="18px" height="15px">
+                <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"></path>
+              </svg>
+            </span>
+          </label>
+
+          <div class="trigger">
+<a class="page-link" href="/">HOME</a><a class="page-link" href="/archives.html">ARCHIVES</a><a class="page-link" href="/categories.html">CATEGORIES</a><a class="page-link" href="/tags.html">TAGS</a>
+
+
+
+
+</div>
+        </nav>
+</div>
+  </div>
+</header>
+
+<script>
+  function initHeader() {
+    var lastScrollY = getScrollPos().y;
+    var documentElement = document.documentElement;
+
+    function storeScrollData() {
+      var y = getScrollPos().y;documentElement.setAttribute("data-header-transparent", "");var scrollStatus = "";
+
+      if (y <= 0) {
+        scrollStatus = "top";
+      } else if ((window.innerHeight + y) >= document.body.offsetHeight) {
+        scrollStatus = "bottom";
+      } else {
+        var isScrollDown = (y - lastScrollY > 0) ? true : false;
+        scrollStatus = isScrollDown ? "down" : "up";
+      }
+
+      lastScrollY = y;
+      documentElement.setAttribute("data-scroll-status", scrollStatus);
+    }
+
+    window.addEventListener('scroll', function(e) {
+      storeScrollData();
+    });
+
+    storeScrollData();
+  }
+  document.addEventListener('DOMContentLoaded', initHeader);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="page-banner">
+    <div class="page-banner-img">
+<div style="background-image: url(/assets/images/banners/l_091_256.png)"></div>
+        <img class="img-placeholder" src="/assets/images/banners/l_091_256.png">
+</div>
+    <div class="wrapper">
+      <div class="page-banner-inner"><div class="page-banner-default">
+            <h1 class="page-banner-heading">
+              slx.jp
+            </h1>
+            <h2 class="page-banner-subheading">
+              S2 Logical Experience
+            </h2>
+          </div></div>
+    </div>
+  </section><script>
+  function hashLocate(hashValue) {
+    hashValue = hashValue.replace(/^.*#h-/, '');
+    hashValue = decodeURIComponent(hashValue);
+    var element = document.getElementById(hashValue);
+
+    if (!element) {
+      return;
+    }
+
+    var header = document.querySelector('header.site-header');
+    var headerRect = header.getBoundingClientRect();
+    var headerTop = Math.floor(headerRect.top);
+    var headerHeight = Math.floor(headerRect.height);
+    var scrollPos = getScrollPos();
+    var offsetY = element.offsetTop - (headerTop + headerHeight + 20);
+
+    if (offsetY == scrollPos.y) {
+      return;
+    }
+
+    if (headerTop == 0  && offsetY > scrollPos.y) {
+      offsetY += headerHeight + 2;
+    } else if (headerTop < 0  && offsetY < scrollPos.y) {
+      offsetY -= headerHeight - 2;
+    }
+
+    smoothScrollTo(offsetY);
+  }
+
+  // The first event occurred
+  window.addEventListener('load', function(event) {
+    if (window.location.hash) {
+      hashLocate(window.location.hash);
+    }
+  });
+
+  // The first event occurred
+  window.addEventListener('click', function(event) {
+    if (event.target.tagName.toLowerCase() == 'a') {
+      hashLocate(event.target.getAttribute('href'));
+    }
+  });
+</script>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <div class="framework">
+  <section class="main">
+
+     <div class="articles">
+  
+
+  
+
+
+  <div class="pagination">
+  <!-- Post list links -->
+  <ul class="post-list">
+<li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/blog/2025/02/23/windows-11%E3%81%AEWSL%E3%81%A7ext4%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E3%81%AE%E3%83%89%E3%83%A9%E3%82%A4%E3%83%96%E3%81%AE%E5%86%85%E5%AE%B9%E3%82%92%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B.html">
+          Windows 11 の WSL で ext4 ファイルシステムのドライブの内容を確認する
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> 2025-02-23 03:20</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 2 mins</span>
+      </div>
+      <a class="post-excerpt" href="/blog/2025/02/23/windows-11%E3%81%AEWSL%E3%81%A7ext4%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E3%81%AE%E3%83%89%E3%83%A9%E3%82%A4%E3%83%96%E3%81%AE%E5%86%85%E5%AE%B9%E3%82%92%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B.html">
+        <p>
+        WSL 2 で Linux ディスクのマウントを開始する
+の内容を自分用にまとめたやつ
+
+
+  
+    PowerShell でドライブを確認
+
+    GET-CimInstance -query "SELECT * from Win32_DiskDrive"
+    
+  
+  
+    PowerShell でドライブをマウント (要管理... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags">
+<a class="post-tag" href="/tags.html#Windows">#Windows</a><a class="post-tag" href="/tags.html#WSL">#WSL</a>
+</div>
+    </li>
+<li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/blog/2024/12/31/2024%E5%B9%B4%E6%9C%80%E6%96%B0%E7%89%88-%E4%BB%8A%E5%B9%B4%E8%B2%B7%E3%81%A3%E3%81%A6%E3%82%88%E3%81%8B%E3%81%A3%E3%81%9F%E3%82%82%E3%81%AE.html">
+          【2024年最新版】今年買ってよかったもの
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> 2024-12-31 08:30</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 6 mins</span>
+      </div>
+      <a class="post-excerpt" href="/blog/2024/12/31/2024%E5%B9%B4%E6%9C%80%E6%96%B0%E7%89%88-%E4%BB%8A%E5%B9%B4%E8%B2%B7%E3%81%A3%E3%81%A6%E3%82%88%E3%81%8B%E3%81%A3%E3%81%9F%E3%82%82%E3%81%AE.html">
+        <p>
+        1年以上このサイトを放置してたんで更新方法すら忘れてる感があるが、
+今年買ってよかったものを羅列していく。
+
+SKAGEN JORN HYBRID HR スマートウォッチ SKT3000
+
+
+    
+        
+        [スカーゲン] 腕時計 JORN 42MM HYBRID HR SKT3000 メンズ ブラウ... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags"><a class="post-tag" href="/tags.html#%E3%82%AC%E3%82%B8%E3%82%A7%E3%83%83%E3%83%88">#ガジェット</a></div>
+    </li>
+<li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/blog/2023/08/14/aptx-adaptive-ll%E5%AF%BE%E5%BF%9Cbluetooth%E6%A9%9F%E5%99%A8%E3%81%A7pc%E3%82%B2%E3%83%BC%E3%83%A0%E3%81%AB%E4%BD%BF%E3%81%88%E3%82%8B%E5%AE%8C%E5%85%A8%E3%83%AF%E3%82%A4%E3%83%A4%E3%83%AC%E3%82%B9%E3%81%AA%E3%82%AA%E3%83%BC%E3%83%87%E3%82%A3%E3%82%AA%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89.html">
+          aptX Adaptive LL 対応 Bluetooth 機器で PC ゲームに使える完全ワイヤレスなオーディオ環境構築
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> 2023-08-14 23:07</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 8 mins</span>
+      </div>
+      <a class="post-excerpt" href="/blog/2023/08/14/aptx-adaptive-ll%E5%AF%BE%E5%BF%9Cbluetooth%E6%A9%9F%E5%99%A8%E3%81%A7pc%E3%82%B2%E3%83%BC%E3%83%A0%E3%81%AB%E4%BD%BF%E3%81%88%E3%82%8B%E5%AE%8C%E5%85%A8%E3%83%AF%E3%82%A4%E3%83%A4%E3%83%AC%E3%82%B9%E3%81%AA%E3%82%AA%E3%83%BC%E3%83%87%E3%82%A3%E3%82%AA%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89.html">
+        <p>
+        PC でゲームをしたり音楽を聞いたりする際に有線のイヤホンを使用していたが、
+ケーブルが煩わしく感じていたのでゲームに使える完全ワイヤレスイヤホンを探すことにした。
+
+aptX LL と aptX Adaptive
+
+ある程度汎用的に使える Bluetooth 接続のものにしたいが、
+Bluetooth のプロ... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags">
+<a class="post-tag" href="/tags.html#%E3%82%AC%E3%82%B8%E3%82%A7%E3%83%83%E3%83%88">#ガジェット</a><a class="post-tag" href="/tags.html#PC">#PC</a>
+</div>
+    </li>
+<li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/blog/2023/07/05/ifttt%E3%81%AEtwitter%E9%80%A3%E6%90%BA%E3%81%8C%E6%9C%89%E6%96%99%E5%8C%96%E3%81%97%E3%81%9F%E3%81%AE%E3%81%A7python%E3%81%A8github-actions%E3%81%A7rss%E3%82%92%E3%83%84%E3%82%A4%E3%83%BC%E3%83%88%E3%81%99%E3%82%8B.html">
+          IFTTT の Twitter 連携が有料化したので Python と GitHub Actions で RSS をツイートする
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> 2023-07-05 00:20</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 5 mins</span>
+      </div>
+      <a class="post-excerpt" href="/blog/2023/07/05/ifttt%E3%81%AEtwitter%E9%80%A3%E6%90%BA%E3%81%8C%E6%9C%89%E6%96%99%E5%8C%96%E3%81%97%E3%81%9F%E3%81%AE%E3%81%A7python%E3%81%A8github-actions%E3%81%A7rss%E3%82%92%E3%83%84%E3%82%A4%E3%83%BC%E3%83%88%E3%81%99%E3%82%8B.html">
+        <p>
+        IFTTT で動かしてた某ゲーム公式サイトの RSS をツイートするやつが
+Twitter 連携の有料化によって動かなくなったため、
+GitHub Actions で自作の Python スクリプトを動かして代用することにした。
+
+コードは以下のリポジトリにある。
+
+
+
+なぜ GitHub Actions なのか？
+
+
+... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags">
+<a class="post-tag" href="/tags.html#Twitter">#Twitter</a><a class="post-tag" href="/tags.html#Python">#Python</a><a class="post-tag" href="/tags.html#GitHub%20Actions">#GitHub Actions</a>
+</div>
+    </li>
+<li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/blog/2023/03/06/stable-diffusion%E3%82%92windows-10%E3%81%B8%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95%E3%81%A8%E4%BD%BF%E3%81%84%E6%96%B9-%E7%94%BB%E5%83%8F%E7%94%9F%E6%88%90%E3%81%AE%E3%82%B3%E3%83%84.html">
+          Stable Diffusion を Windows 10 へインストールする方法と使い方、画像生成のコツ
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> 2023-03-06 15:15</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 27 mins</span>
+      </div>
+      <a class="post-excerpt" href="/blog/2023/03/06/stable-diffusion%E3%82%92windows-10%E3%81%B8%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95%E3%81%A8%E4%BD%BF%E3%81%84%E6%96%B9-%E7%94%BB%E5%83%8F%E7%94%9F%E6%88%90%E3%81%AE%E3%82%B3%E3%83%84.html">
+        <p>
+        Stable Diffusion を Windows 10 のローカル環境へインストールする方法と使い方、
+1ヶ月ほど使ってみて分かった画像生成のコツをメモしておく。
+
+実行環境
+
+
+  Windows 10 Pro 22H2
+  GPU: MSI GeForce RTX 3060 GAMING X 12G... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags"><a class="post-tag" href="/tags.html#Stable%20Diffusion">#Stable Diffusion</a></div>
+    </li>
+</ul>
+
+  <!-- Pagination links -->
+
+
+  <div class="paginator">
+    <span class="previous">
+    
+      <span>Prev</span>
+    
+    </span>
+
+    <span class="indicator"> 1/8</span>
+
+    <span class="next">
+    
+      <a href="/blog/page2/">Next</a>
+    
+    </span>
+  </div>
+
+</div>
+</div>
+
+
+  </section>
+  <section class="sidebar" style="margin-left: 15px;">
+    <!-- Get sidebar items -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="common-list">
+  <ul>
+    <li>
+      <a href="/index.html">
+        All<span>39</span>
+      </a>
+    </li>
+
+    
+      <li>
+        <a href="/categories.html#h-blog">
+          blog <span>34</span>
+        </a>
+      </li>
+    
+      <li>
+        <a href="/categories.html#h-script">
+          script <span>3</span>
+        </a>
+      </li>
+    
+      <li>
+        <a href="/categories.html#h-software">
+          software <span>2</span>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+</section>
+</div>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+    <div class="site-footer-inner">
+<div>© 2025 saasan</div>
+      <div class="footer-link">
+    <a href="https://x.com/saasan" target="_blank" class="twitter-username">
+        saasan
+    </a>
+
+<a href="/feed.xml" target="_blank" class="rss">RSS</a>
+</div>
+    </div>
+  </div>
+</footer>
+
+</body>
 </html>

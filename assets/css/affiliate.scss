@@ -1,0 +1,38 @@
+.affiliate-product-list {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.affiliate-product-list {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.affiliate-product {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    align-items: center;
+    width: 150px;
+    text-align: center;
+    color: #333;
+    border: 1px solid #000;
+    border-radius: 5px;
+    padding: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.affiliate-product img {
+    max-height: 100px !important;
+    margin-bottom: 10px;
+    object-fit: contain;
+}
+
+.affiliate-product-name {
+    font-size: xx-small;
+    font-weight: 600;
+}
