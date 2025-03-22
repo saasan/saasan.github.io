@@ -6,22 +6,22 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- Begin Jekyll SEO tag v2.8.0 -->
-<title>dtab Compact d-42A から不要なアプリを削除する方法 | slx.jp</title>
+<title>VMware ESXi 上に Flatcar Container Linux のサーバを立てる | slx.jp</title>
 <meta name="generator" content="Jekyll v4.4.1">
-<meta property="og:title" content="dtab Compact d-42A から不要なアプリを削除する方法">
+<meta property="og:title" content="VMware ESXi 上に Flatcar Container Linux のサーバを立てる">
 <meta name="author" content="saasan">
 <meta property="og:locale" content="ja">
-<meta name="description" content="Android 端末の不要なアプリを削除する方法">
-<meta property="og:description" content="Android 端末の不要なアプリを削除する方法">
-<link rel="canonical" href="https://slx.jp/blog/2022/05/06/dtab-compact-d-42a%E3%81%8B%E3%82%89%E4%B8%8D%E8%A6%81%E3%81%AA%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E5%89%8A%E9%99%A4%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95.html">
-<meta property="og:url" content="https://slx.jp/blog/2022/05/06/dtab-compact-d-42a%E3%81%8B%E3%82%89%E4%B8%8D%E8%A6%81%E3%81%AA%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E5%89%8A%E9%99%A4%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95.html">
+<meta name="description" content="VMware ESXi 上に Flatcar Container Linux のサーバを立てた際のメモ">
+<meta property="og:description" content="VMware ESXi 上に Flatcar Container Linux のサーバを立てた際のメモ">
+<link rel="canonical" href="https://slx.jp/blog/2025/03/22/vmware-esxi%E4%B8%8A%E3%81%ABflatcar-container-linux%E3%81%AE%E3%82%B5%E3%83%BC%E3%83%90%E3%82%92%E7%AB%8B%E3%81%A6%E3%82%8B.html">
+<meta property="og:url" content="https://slx.jp/blog/2025/03/22/vmware-esxi%E4%B8%8A%E3%81%ABflatcar-container-linux%E3%81%AE%E3%82%B5%E3%83%BC%E3%83%90%E3%82%92%E7%AB%8B%E3%81%A6%E3%82%8B.html">
 <meta property="og:site_name" content="slx.jp">
 <meta property="og:type" content="article">
-<meta property="article:published_time" content="2022-05-06T01:31:47+09:00">
+<meta property="article:published_time" content="2025-03-22T23:55:00+09:00">
 <meta name="twitter:card" content="summary">
-<meta property="twitter:title" content="dtab Compact d-42A から不要なアプリを削除する方法">
+<meta property="twitter:title" content="VMware ESXi 上に Flatcar Container Linux のサーバを立てる">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"saasan"},"dateModified":"2022-05-06T01:31:47+09:00","datePublished":"2022-05-06T01:31:47+09:00","description":"Android 端末の不要なアプリを削除する方法","headline":"dtab Compact d-42A から不要なアプリを削除する方法","mainEntityOfPage":{"@type":"WebPage","@id":"https://slx.jp/blog/2022/05/06/dtab-compact-d-42a%E3%81%8B%E3%82%89%E4%B8%8D%E8%A6%81%E3%81%AA%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E5%89%8A%E9%99%A4%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95.html"},"url":"https://slx.jp/blog/2022/05/06/dtab-compact-d-42a%E3%81%8B%E3%82%89%E4%B8%8D%E8%A6%81%E3%81%AA%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E5%89%8A%E9%99%A4%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95.html"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"saasan"},"dateModified":"2025-03-22T23:55:00+09:00","datePublished":"2025-03-22T23:55:00+09:00","description":"VMware ESXi 上に Flatcar Container Linux のサーバを立てた際のメモ","headline":"VMware ESXi 上に Flatcar Container Linux のサーバを立てる","mainEntityOfPage":{"@type":"WebPage","@id":"https://slx.jp/blog/2025/03/22/vmware-esxi%E4%B8%8A%E3%81%ABflatcar-container-linux%E3%81%AE%E3%82%B5%E3%83%BC%E3%83%90%E3%82%92%E7%AB%8B%E3%81%A6%E3%82%8B.html"},"url":"https://slx.jp/blog/2025/03/22/vmware-esxi%E4%B8%8A%E3%81%ABflatcar-container-linux%E3%81%AE%E3%82%B5%E3%83%BC%E3%83%90%E3%82%92%E7%AB%8B%E3%81%A6%E3%82%8B.html"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="icon" href="/assets/images/favicon.png">
   <link rel="canonical" href="https://slx.jp">
@@ -658,11 +658,11 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 <header class="post-header">
-  <h1 class="post-title p-name" itemprop="name headline">dtab Compact d-42A から不要なアプリを削除する方法</h1>
+  <h1 class="post-title p-name" itemprop="name headline">VMware ESXi 上に Flatcar Container Linux のサーバを立てる</h1>
   <h2 class="post-subtitle"></h2>
 
   <p class="post-meta">
-    <time class="dt-published" datetime="2022-05-06T01:31:47+09:00" itemprop="datePublished"><i class="fa fa-calendar"></i> 2022-05-06 01:31
+    <time class="dt-published" datetime="2025-03-22T23:55:00+09:00" itemprop="datePublished"><i class="fa fa-calendar"></i> 2025-03-22 23:55
     </time>
 
     
@@ -699,131 +699,136 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 
-    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 7 mins</span>
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 6 mins</span>
   </p>
 <div class="post-tags">
-<a class="post-tag" href="/tags.html#%E3%82%AC%E3%82%B8%E3%82%A7%E3%83%83%E3%83%88">#ガジェット</a><a class="post-tag" href="/tags.html#Android">#Android</a>
+<a class="post-tag" href="/tags.html#VMware">#VMware</a><a class="post-tag" href="/tags.html#ESXi">#ESXi</a><a class="post-tag" href="/tags.html#Flatcar%20Container%20Linux">#Flatcar Container Linux</a>
 </div></header>
 <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
     <div class="post-content e-content" itemprop="articleBody">
 
-      <p>昨年踏んで割ってしまった Xperia Z3 Tablet Compact の後継として
-<a href="https://www.docomo.ne.jp/product/d42a/">dtab Compact d-42A</a> を買った。</p>
+      <p>ChatGPT に Docker コンテナの実行・運用に最適な OS を聞いたところ、
+選択肢の一つとして「Flatcar Container Linux (CoreOS の後継)」があった。
+気になったのでとりあえず VMware ESXi 上にサーバを立ててみた。</p>
 
-<p>スペック的にはミドルレンジの Snapdragon 665 なので最新のゲームは動かないけど、
-Z3 Tablet Compact と同じ8インチサイズだし電子書籍を読むにはいいんじゃないかと。
-そもそも Android の8インチタブレットは不作で、
-他は低スペックな激安タブレットしか選択肢がない。</p>
+<h2 id="flatcar-container-linux-とは">Flatcar Container Linux とは？</h2>
 
-<p>d-42A はドコモ製なのでキャリア製端末の例に漏れず
-削除できない不要なアプリが大量に入っていた。
-まずはこれを削除したので手順を残しておく。
-なお、Android 11 へアップデート後にアプリを削除したが
-以前と同じ手順で特に問題なかった。</p>
+<p>Flatcar Container Linux は、コンテナの運用に特化した軽量 Linux ディストリビューションである。
+自動更新機能を備え、シンプルな構成でセキュリティと安定性を重視している。</p>
 
-<h2 id="削除手順">削除手順</h2>
+<p>本記事では、VMware ESXi 上に Flatcar Container Linux を導入する手順を解説する。</p>
 
-<p><strong>アプリを削除すると最悪の場合端末が起動しなくなったり
-動作が不安定になる可能性があります。<br>
-リスクを承知の上、自己責任で行ってください。</strong></p>
+<h2 id="事前準備">事前準備</h2>
 
-<ol>
-  <li>d-42A で 設定 &gt; タブレット情報 を開く</li>
-  <li>ビルド番号を7回タップし開発者向けオプションを表示する</li>
-  <li>設定 &gt; システム &gt; 詳細設定 &gt; 開発者向けオプション を開く</li>
-  <li>USBデバッグをオンにする</li>
-  <li>PC で
-<a href="https://developer.android.com/studio/releases/platform-tools">Android SDK Platform-Tools</a>
-をダウンロードし展開する</li>
-  <li>Platform-Tools を展開したフォルダをコマンドプロンプトで開く</li>
-  <li>
-<code class="language-plaintext highlighter-rouge">adb devices</code> を実行し接続している端末を確認する</li>
-  <li>d-42A に「USBデバッグを許可しますか?」と表示されるので「OK」を押して許可する</li>
-  <li>
-<code class="language-plaintext highlighter-rouge">adb shell pm list packages -s</code> を実行しパッケージ名の一覧を表示する</li>
-  <li>
-<code class="language-plaintext highlighter-rouge">adb shell</code> を実行しシェルを起動する</li>
-  <li>
-<code class="language-plaintext highlighter-rouge">pm uninstall -k --user 0 パッケージ名</code> を実行し不要アプリを削除する</li>
-  <li>
-<code class="language-plaintext highlighter-rouge">exit</code> を実行しシェルを終了する</li>
-  <li>
-<code class="language-plaintext highlighter-rouge">adb kill-server</code> を実行し adb サーバーを停止する</li>
-</ol>
+<p>作業 PC にて事前に以下を準備しておく。</p>
 
-<h2 id="削除したパッケージ">削除したパッケージ</h2>
+<h3 id="vmware-用-ova-ファイルのダウンロード">VMware 用 OVA ファイルのダウンロード</h3>
 
-<p>パッケージ名に <code class="language-plaintext highlighter-rouge">nttdocomo</code> が含まれるもの+αを削除した。</p>
+<p>OVA ファイルのダウンロード元は
+<a href="https://www.flatcar.org/docs/latest/installing/cloud/vmware/">Running Flatcar Container Linux on VMware</a>
+に書かれている。</p>
 
-<p><code class="language-plaintext highlighter-rouge">jp.co.omronsoft.iwnnime.ml_lenovo</code> は標準のキーボードアプリのため
-Gboard など他のキーボードアプリをインスールする前に消すと
-文字が入力できなくなって死ぬので注意。</p>
+<h3 id="ovftool-のインストール">ovftool のインストール</h3>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>com.android.contacts (ドコモ電話帳)
-com.google.android.apps.photos (Google フォト)
-com.google.android.apps.tachyon (Google Duo)
-com.google.android.apps.wellbeing (Digital Wellbeing)
-com.google.android.apps.youtube.music (YouTube Music)
-com.google.android.projection.gearhead (Android Auto)
-com.google.android.videos (Google Play ムービー＆ TV)
-com.iii.app.kidsgallery
-com.iii.app.safebrowser
-com.lenovo.d42a.manual
-com.lenovo.docomosettings
-com.lenovo.homescreenshot (マイホームスクリーン)
-com.lenovo.simplemenu
-com.nttdocomo.android.accountauthenticator
-com.nttdocomo.android.accountwipe
-com.nttdocomo.android.anmane2
-com.nttdocomo.android.apnsw
-com.nttdocomo.android.applicationmanager
-com.nttdocomo.android.cloudset
-com.nttdocomo.android.databackup
-com.nttdocomo.android.devicehelp
-com.nttdocomo.android.dmenu2
-com.nttdocomo.android.docomoset
-com.nttdocomo.android.homezozo
-com.nttdocomo.android.idmanager
-com.nttdocomo.android.initialization
-com.nttdocomo.android.lpa
-com.nttdocomo.android.mascot
-com.nttdocomo.android.msg
-com.nttdocomo.android.mymagazine
-com.nttdocomo.android.pf.dcmippushaggregator
-com.nttdocomo.android.pf.dcmwappush
-com.nttdocomo.android.remotelock
-com.nttdocomo.android.schedulememo
-com.nttdocomo.android.sdcardbackup
-com.nttdocomo.android.sha2.kids
-com.nttdocomo.android.store
-com.nttdocomo.android.wipe
-com.tblenovo.kidslauncher
-com.tblenovo.kidsmodewebview
-com.tblenovo.lewea
-jp.co.nttdocomo.anshinmode
-jp.co.nttdocomo.bridgelauncher
-jp.co.nttdocomo.carriermail
-jp.co.nttdocomo.lcsapp
-jp.co.nttdocomo.saigaiban
-jp.co.omronsoft.android.decoemojimanager_docomo
-jp.co.omronsoft.iwnnime.ml_lenovo
+<p>仮想マシン作成時に Base64 エンコードした設定ファイルを指定する必要がある。
+GUI でも構築可能だが、CLI で ovftool を使用したほうが楽。</p>
+
+<h2 id="butane-設定ファイルを作成">Butane 設定ファイルを作成</h2>
+
+<p>Butane 設定ファイル (<code class="language-plaintext highlighter-rouge">butane_config.yaml</code>) を作成する。
+以下は静的 IP アドレスとホスト名、SSH 公開鍵の設定例である。</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">variant</span><span class="pi">:</span> <span class="s">flatcar</span>
+<span class="na">version</span><span class="pi">:</span> <span class="s">1.0.0</span>
+<span class="na">storage</span><span class="pi">:</span>
+  <span class="na">files</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">path</span><span class="pi">:</span> <span class="s">/etc/systemd/network/00-static.network</span>
+      <span class="na">mode</span><span class="pi">:</span> <span class="m">0644</span>
+      <span class="na">contents</span><span class="pi">:</span>
+        <span class="na">inline</span><span class="pi">:</span> <span class="pi">|</span>
+          <span class="s">[Match]</span>
+          <span class="s">Name=ens192</span>
+          <span class="s">[Network]</span>
+          <span class="s">Address=192.168.xxx.xxx/24</span>
+          <span class="s">Gateway=192.168.xxx.xxx</span>
+          <span class="s">DNS=192.168.xxx.xxx</span>
+          <span class="s">LinkLocalAddressing=no</span>
+          <span class="s">IPv6AcceptRA=no</span>
+
+    <span class="pi">-</span> <span class="na">path</span><span class="pi">:</span> <span class="s">/etc/hostname</span>
+      <span class="na">mode</span><span class="pi">:</span> <span class="m">0644</span>
+      <span class="na">contents</span><span class="pi">:</span>
+        <span class="na">inline</span><span class="pi">:</span> <span class="s">ホスト名</span>
+
+<span class="na">passwd</span><span class="pi">:</span>
+  <span class="na">users</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">core</span>
+      <span class="na">ssh_authorized_keys</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="s">SSH公開鍵</span>
 </code></pre></div></div>
+
+<h2 id="ignition-設定ファイルへトランスパイル">Ignition 設定ファイルへトランスパイル</h2>
+
+<p>Butane 設定ファイルを Ignition 設定ファイル (<code class="language-plaintext highlighter-rouge">ignition_config.json</code>) へ変換する。</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run <span class="nt">--interactive</span> <span class="nt">--rm</span> quay.io/coreos/butane:release <span class="nt">--pretty</span> <span class="nt">--strict</span> &lt; butane_config.yaml <span class="o">&gt;</span> ignition_config.json
+</code></pre></div></div>
+
+<h2 id="ignition-設定ファイルを検証">Ignition 設定ファイルを検証</h2>
+
+<p>変換した <code class="language-plaintext highlighter-rouge">ignition_config.json</code> を検証する。</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run <span class="nt">--pull</span><span class="o">=</span>always <span class="nt">--rm</span> <span class="nt">-i</span> quay.io/coreos/ignition-validate:release - &lt; ignition_config.json
+</code></pre></div></div>
+
+<h2 id="ovftool-で-ignition-設定ファイルを指定して起動">ovftool で Ignition 設定ファイルを指定して起動</h2>
+
+<p>作業 PC にて ovftool を実行する。
+オプションとして Ignition 設定ファイルを指定し
+ESXi サーバ上で仮想マシンを作成・起動する。</p>
+
+<p><code class="language-plaintext highlighter-rouge">vi:///～</code> は デプロイ先の ESXi サーバの情報。</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ovftool <span class="nt">--name</span><span class="o">=</span>testvm <span class="se">\</span>
+  <span class="nt">--skipManifestCheck</span> <span class="nt">--noSSLVerify</span> <span class="se">\</span>
+  <span class="nt">--datastore</span><span class="o">=</span>datastore1 <span class="nt">--powerOn</span><span class="o">=</span>True <span class="se">\</span>
+  <span class="nt">--net</span>:<span class="s2">"VM Network=VM Network"</span> <span class="nt">--X</span>:waitForIp <span class="se">\</span>
+  <span class="nt">--overwrite</span> <span class="nt">--powerOffTarget</span> <span class="se">\</span>
+  <span class="nt">--X</span>:guest:ignition.config.data<span class="o">=</span><span class="si">$(</span><span class="nb">cat </span>ignition_config.json | <span class="nb">base64</span> <span class="nt">--wrap</span><span class="o">=</span>0<span class="si">)</span> <span class="se">\</span>
+  <span class="nt">--X</span>:guest:ignition.config.data.encoding<span class="o">=</span><span class="nb">base64</span> <span class="se">\</span>
+  ./flatcar_production_vmware_ova.ova <span class="se">\</span>
+  <span class="s1">'vi:///&lt;YOUR_USER&gt;:&lt;ESXI_PASSWORD&gt;@&lt;ESXI_HOST_IP&gt;'</span>
+</code></pre></div></div>
+
+<p>コンソール上に設定した IP アドレスが表示されていれば OK。
+SSH で接続し Docker コマンドも実行できた。</p>
+
+<h2 id="参考サイト">参考サイト</h2>
+
+<ul>
+  <li><a href="https://www.flatcar.org/docs/latest/installing/cloud/vmware/">Running Flatcar Container Linux on VMware</a></li>
+  <li><a href="https://coreos.github.io/ignition/getting-started/#config-validation">Getting Started | Ignition</a></li>
+  <li><a href="https://coreos.github.io/butane/getting-started/">Getting started | Butane</a></li>
+  <li><a href="https://www.flatcar.org/docs/latest/setup/customization/network-config-with-networkd/">Network configuration with networkd</a></li>
+  <li><a href="https://www.flatcar.org/docs/latest/provisioning/config-transpiler/">Butane Config Transpiler</a></li>
+</ul>
+
 
 
     </div>
 
 </article>
 <div class="post-nav">
-<a class="previous" href="/blog/2022/03/13/kindle-paperwhite%E3%82%92%E8%B2%B7%E3%81%A3%E3%81%A61%E3%83%B6%E6%9C%88%E3%81%A7%E5%A3%B2%E3%82%8A%E6%89%95%E3%81%A3%E3%81%9F.html" title="Kindle Paperwhite (第11世代) を買って1ヶ月で売り払った話">Kindle Paperwhite (第11世代) を買って1ヶ月で売り払った話</a><a class="next" href="/blog/2022/09/07/mozilla-firefox%E3%81%A7web%E3%82%B5%E3%82%A4%E3%83%88%E3%81%AE%E3%83%80%E3%83%BC%E3%82%AF%E3%83%A2%E3%83%BC%E3%83%89%E3%82%92%E7%84%A1%E5%8A%B9%E5%8C%96%E3%81%99%E3%82%8B.html" title="Mozilla Firefox で Web サイトのダークモードを無効化する">Mozilla Firefox で Web サイトのダークモードを無効化する</a>
+<a class="previous" href="/blog/2025/02/23/windows-11%E3%81%AEWSL%E3%81%A7ext4%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E3%81%AE%E3%83%89%E3%83%A9%E3%82%A4%E3%83%96%E3%81%AE%E5%86%85%E5%AE%B9%E3%82%92%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B.html" title="Windows 11 の WSL で ext4 ファイルシステムのドライブの内容を確認する">Windows 11 の WSL で ext4...</a><span></span>
 </div>
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/software/2019/09/08/%E3%83%97%E3%83%AA%E3%82%B9%E3%82%AF-dmm%E7%89%88-windows-pc%E7%89%88-%E3%83%97%E3%83%AA%E3%83%B3%E3%82%BB%E3%82%B9%E3%82%B3%E3%83%8D%E3%82%AF%E3%83%88-re-dive%E3%82%92%E3%83%95%E3%83%AB%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E5%8C%96.html" title="Mozilla Firefox で Web サイトのダークモードを無効化する">プリスク - DMM版(Windows PC版)プリンセスコネクト！Re:Diveをフルスクリーン化</a></li>
-<li><a class="post-link" href="/blog/2016/02/19/Google-AdSense%E3%81%AE%E7%A2%BA%E5%AE%9A%E7%94%B3%E5%91%8A.html" title="Mozilla Firefox で Web サイトのダークモードを無効化する">Google AdSenseの確定申告</a></li>
-<li><a class="post-link" href="/script/2016/03/04/pixiv-tags.html" title="Mozilla Firefox で Web サイトのダークモードを無効化する">pixiv Tags</a></li>
-<li><a class="post-link" href="/blog/2015/09/07/google-opinion-rewards.html" title="Mozilla Firefox で Web サイトのダークモードを無効化する">デレステ、PSO2プレイヤーにおすすめ。無料でGoogle Playのクレジットがもらえる「Google アンケート モニター」</a></li>
+        <li><a class="post-link" href="/script/2016/03/04/pixiv-tags.html" title="">pixiv Tags</a></li>
+<li><a class="post-link" href="/blog/2020/06/17/m5stickc-speaker-hat%E3%81%A7esp8266audio%E3%83%A9%E3%82%A4%E3%83%96%E3%83%A9%E3%83%AA%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%97%E3%81%A6mp3%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%92%E5%86%8D%E7%94%9F%E3%81%99%E3%82%8B.html" title="">M5StickC + Speaker Hat で ESP8266Audio ライブラリを使用して MP3 ファイルを再生する</a></li>
+<li><a class="post-link" href="/blog/2021/09/18/lenovo-thinkcentre-m600-tiny%E3%81%ABpci-express%E3%82%92%E7%84%A1%E7%90%86%E3%82%84%E3%82%8A%E5%A2%97%E8%A8%AD%E3%81%99%E3%82%8B.html" title="">Lenovo ThinkCentre M600 Tiny に PCI Express を無理やり増設する</a></li>
+<li><a class="post-link" href="/blog/2023/08/14/aptx-adaptive-ll%E5%AF%BE%E5%BF%9Cbluetooth%E6%A9%9F%E5%99%A8%E3%81%A7pc%E3%82%B2%E3%83%BC%E3%83%A0%E3%81%AB%E4%BD%BF%E3%81%88%E3%82%8B%E5%AE%8C%E5%85%A8%E3%83%AF%E3%82%A4%E3%83%A4%E3%83%AC%E3%82%B9%E3%81%AA%E3%82%AA%E3%83%BC%E3%83%87%E3%82%A3%E3%82%AA%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89.html" title="">aptX Adaptive LL 対応 Bluetooth 機器で PC ゲームに使える完全ワイヤレスなオーディオ環境構築</a></li>
 </ul>
     </div>
 <div class="post-comments"></div></section>

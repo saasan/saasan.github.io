@@ -1,15 +1,19 @@
 function addCopyButtons() {
-    document.querySelectorAll(".highlighter-rouge").forEach(block => {
+    document.querySelectorAll("pre code").forEach(block => {
+        let outer = block.parentElement.parentElement.parentElement;
+
+        // classにhighlighter-rougeがない場合はスキップ
+        if (!outer.classList.contains("highlighter-rouge")) return;
         // すでにボタンがある場合はスキップ
-        if (block.querySelector(".copy-button")) return;
+        if (outer.querySelector(".copy-button")) return;
 
         let button = document.createElement("button");
         button.innerText = "Copy";
         button.className = "copy-button";
-        block.appendChild(button);
+        outer.appendChild(button);
 
         button.addEventListener("click", async () => {
-            let code = block.querySelector("pre code");
+            let code = outer.querySelector("pre code");
             if (!code) return;
 
             let text = code.innerText;
