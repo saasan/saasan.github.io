@@ -1,11 +1,18 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ja"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://slx.jp/feed.xml" rel="self" type="application/atom+xml" /><link href="https://slx.jp/" rel="alternate" type="text/html" hreflang="ja" /><updated>2025-03-22T23:55:52+09:00</updated><id>https://slx.jp/feed.xml</id><title type="html">slx.jp</title><author><name>saasan</name></author><entry><title type="html">VMware ESXi 上に Flatcar Container Linux のサーバを立てる</title><link href="https://slx.jp/blog/2025/03/22/vmware-esxi%E4%B8%8A%E3%81%ABflatcar-container-linux%E3%81%AE%E3%82%B5%E3%83%BC%E3%83%90%E3%82%92%E7%AB%8B%E3%81%A6%E3%82%8B.html" rel="alternate" type="text/html" title="VMware ESXi 上に Flatcar Container Linux のサーバを立てる" /><published>2025-03-22T23:55:00+09:00</published><updated>2025-03-22T23:55:00+09:00</updated><id>https://slx.jp/blog/2025/03/22/vmware-esxi%E4%B8%8A%E3%81%ABflatcar-container-linux%E3%81%AE%E3%82%B5%E3%83%BC%E3%83%90%E3%82%92%E7%AB%8B%E3%81%A6%E3%82%8B</id><content type="html" xml:base="https://slx.jp/blog/2025/03/22/vmware-esxi%E4%B8%8A%E3%81%ABflatcar-container-linux%E3%81%AE%E3%82%B5%E3%83%BC%E3%83%90%E3%82%92%E7%AB%8B%E3%81%A6%E3%82%8B.html"><![CDATA[<p>ChatGPT に Docker コンテナの実行・運用に最適な OS を聞いたところ、
-選択肢の一つとして「Flatcar Container Linux (CoreOS の後継)」があった。
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ja"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://slx.jp/feed.xml" rel="self" type="application/atom+xml" /><link href="https://slx.jp/" rel="alternate" type="text/html" hreflang="ja" /><updated>2025-03-23T18:14:47+09:00</updated><id>https://slx.jp/feed.xml</id><title type="html">slx.jp</title><author><name>saasan</name></author><entry><title type="html">VMware ESXi 上に Flatcar Container Linux のサーバを立てる</title><link href="https://slx.jp/blog/2025/03/22/vmware-esxi%E4%B8%8A%E3%81%ABflatcar-container-linux%E3%81%AE%E3%82%B5%E3%83%BC%E3%83%90%E3%82%92%E7%AB%8B%E3%81%A6%E3%82%8B.html" rel="alternate" type="text/html" title="VMware ESXi 上に Flatcar Container Linux のサーバを立てる" /><published>2025-03-22T23:55:00+09:00</published><updated>2025-03-22T23:55:00+09:00</updated><id>https://slx.jp/blog/2025/03/22/vmware-esxi%E4%B8%8A%E3%81%ABflatcar-container-linux%E3%81%AE%E3%82%B5%E3%83%BC%E3%83%90%E3%82%92%E7%AB%8B%E3%81%A6%E3%82%8B</id><content type="html" xml:base="https://slx.jp/blog/2025/03/22/vmware-esxi%E4%B8%8A%E3%81%ABflatcar-container-linux%E3%81%AE%E3%82%B5%E3%83%BC%E3%83%90%E3%82%92%E7%AB%8B%E3%81%A6%E3%82%8B.html"><![CDATA[<p>ChatGPT に Docker コンテナの実行・運用に最適な OS を聞いたところ、
+その中のひとつに「Flatcar Container Linux」があった。
 気になったのでとりあえず VMware ESXi 上にサーバを立ててみた。</p>
 
 <h2 id="flatcar-container-linux-とは">Flatcar Container Linux とは？</h2>
 
 <p>Flatcar Container Linux は、コンテナの運用に特化した軽量 Linux ディストリビューションである。
 自動更新機能を備え、シンプルな構成でセキュリティと安定性を重視している。</p>
+
+<h3 id="特徴">特徴</h3>
+
+<ul>
+  <li><strong>自動アップデート</strong>: システムのアップデートが自動で適用され、セキュリティと安定性を確保する。</li>
+  <li><strong>イミュータブルな設計</strong>: ルートファイルシステムが書き換え不可のため、一貫性が保たれ、運用時のトラブルを低減できる。</li>
+</ul>
 
 <p>本記事では、VMware ESXi 上に Flatcar Container Linux を導入する手順を解説する。</p>
 
@@ -15,9 +22,11 @@
 
 <h3 id="vmware-用-ova-ファイルのダウンロード">VMware 用 OVA ファイルのダウンロード</h3>
 
-<p>OVA ファイルのダウンロード元は
-<a href="https://www.flatcar.org/docs/latest/installing/cloud/vmware/">Running Flatcar Container Linux on VMware</a>
-に書かれている。</p>
+<p>OVA ファイルのダウンロード元は、以下の公式ドキュメントに書かれている。</p>
+
+<ul>
+  <li><a href="https://www.flatcar.org/docs/latest/installing/cloud/vmware/">Running Flatcar Container Linux on VMware</a></li>
+</ul>
 
 <h3 id="ovftool-のインストール">ovftool のインストール</h3>
 
@@ -88,11 +97,90 @@ ESXi サーバ上で仮想マシンを作成・起動する。</p>
   <span class="nt">--X</span>:guest:ignition.config.data<span class="o">=</span><span class="si">$(</span><span class="nb">cat </span>ignition_config.json | <span class="nb">base64</span> <span class="nt">--wrap</span><span class="o">=</span>0<span class="si">)</span> <span class="se">\</span>
   <span class="nt">--X</span>:guest:ignition.config.data.encoding<span class="o">=</span><span class="nb">base64</span> <span class="se">\</span>
   ./flatcar_production_vmware_ova.ova <span class="se">\</span>
-  <span class="s1">'vi:///&lt;YOUR_USER&gt;:&lt;ESXI_PASSWORD&gt;@&lt;ESXI_HOST_IP&gt;'</span>
+  <span class="s1">'vi:///&lt;YOUR_USER&gt;@&lt;ESXI_HOST_IP&gt;'</span>
 </code></pre></div></div>
 
 <p>コンソール上に設定した IP アドレスが表示されていれば OK。
-SSH で接続し Docker コマンドも実行できた。</p>
+SSH で接続し <code class="language-plaintext highlighter-rouge">docker</code> コマンドも実行できた。</p>
+
+<h2 id="docker-compose-を含めたサーバの構築">Docker Compose を含めたサーバの構築</h2>
+
+<p>標準状態では Docker Compose が含まれていなかった。</p>
+
+<p>Flatcar では <code class="language-plaintext highlighter-rouge">systemd-sysext</code> を利用して機能を拡張する仕組みになっている。
+Docker Compose を利用するには、以下の公式ドキュメントを参考に Butane 設定ファイルを変更する。</p>
+
+<ul>
+  <li><a href="https://flatcar.github.io/sysext-bakery/docker_compose/">Docker-compose sysext | sysext-bakery</a></li>
+</ul>
+
+<p>また、利用可能な Docker Compose のバージョンは以下で確認できる。</p>
+
+<ul>
+  <li><a href="https://github.com/flatcar/sysext-bakery/releases/tag/docker-compose">Release docker-compose · flatcar/sysext-bakery</a></li>
+</ul>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">variant</span><span class="pi">:</span> <span class="s">flatcar</span>
+<span class="na">version</span><span class="pi">:</span> <span class="s">1.0.0</span>
+<span class="na">storage</span><span class="pi">:</span>
+  <span class="na">files</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">path</span><span class="pi">:</span> <span class="s">/etc/systemd/network/00-static.network</span>
+      <span class="na">mode</span><span class="pi">:</span> <span class="m">0644</span>
+      <span class="na">contents</span><span class="pi">:</span>
+        <span class="na">inline</span><span class="pi">:</span> <span class="pi">|</span>
+          <span class="s">[Match]</span>
+          <span class="s">Name=ens192</span>
+          <span class="s">[Network]</span>
+          <span class="s">Address=192.168.xxx.xxx/24</span>
+          <span class="s">Gateway=192.168.xxx.xxx</span>
+          <span class="s">DNS=192.168.xxx.xxx</span>
+          <span class="s">LinkLocalAddressing=no</span>
+          <span class="s">IPv6AcceptRA=no</span>
+
+    <span class="pi">-</span> <span class="na">path</span><span class="pi">:</span> <span class="s">/etc/hostname</span>
+      <span class="na">mode</span><span class="pi">:</span> <span class="m">0644</span>
+      <span class="na">contents</span><span class="pi">:</span>
+        <span class="na">inline</span><span class="pi">:</span> <span class="s">ホスト名</span>
+
+    <span class="pi">-</span> <span class="na">path</span><span class="pi">:</span> <span class="s">/opt/extensions/docker-compose/docker-compose-2.34.0-x86-64.raw</span>
+      <span class="na">mode</span><span class="pi">:</span> <span class="m">0644</span>
+      <span class="na">contents</span><span class="pi">:</span>
+        <span class="na">source</span><span class="pi">:</span> <span class="s">https://extensions.flatcar.org/extensions/docker-compose-2.34.0-x86-64.raw</span>
+    <span class="pi">-</span> <span class="na">path</span><span class="pi">:</span> <span class="s">/etc/sysupdate.docker-compose.d/docker-compose.conf</span>
+      <span class="na">contents</span><span class="pi">:</span>
+        <span class="na">source</span><span class="pi">:</span> <span class="s">https://extensions.flatcar.org/extensions/docker-compose.conf</span>
+    <span class="pi">-</span> <span class="na">path</span><span class="pi">:</span> <span class="s">/etc/sysupdate.d/noop.conf</span>
+      <span class="na">contents</span><span class="pi">:</span>
+        <span class="na">source</span><span class="pi">:</span> <span class="s">https://extensions.flatcar.org/extensions/noop.conf</span>
+
+  <span class="na">links</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">target</span><span class="pi">:</span> <span class="s">/opt/extensions/docker-compose/docker-compose-2.34.0-x86-64.raw</span>
+      <span class="na">path</span><span class="pi">:</span> <span class="s">/etc/extensions/docker-compose.raw</span>
+      <span class="na">hard</span><span class="pi">:</span> <span class="kc">false</span>
+
+<span class="na">systemd</span><span class="pi">:</span>
+  <span class="na">units</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">systemd-sysupdate.timer</span>
+      <span class="na">enabled</span><span class="pi">:</span> <span class="kc">true</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">systemd-sysupdate.service</span>
+      <span class="na">dropins</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">docker-compose.conf</span>
+          <span class="na">contents</span><span class="pi">:</span> <span class="pi">|</span>
+            <span class="s">[Service]</span>
+            <span class="s">ExecStartPre=/usr/bin/sh -c "readlink --canonicalize /etc/extensions/docker-compose.raw &gt; /tmp/docker-compose"</span>
+            <span class="s">ExecStartPre=/usr/lib/systemd/systemd-sysupdate -C docker-compose update</span>
+            <span class="s">ExecStartPost=/usr/bin/sh -c "readlink --canonicalize /etc/extensions/docker-compose.raw &gt; /tmp/docker-compose-new"</span>
+            <span class="s">ExecStartPost=/usr/bin/sh -c "if ! cmp --silent /tmp/docker-compose /tmp/docker-compose-new; then touch /run/reboot-required; fi"</span>
+
+<span class="na">passwd</span><span class="pi">:</span>
+  <span class="na">users</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">core</span>
+      <span class="na">ssh_authorized_keys</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="s">SSH公開鍵</span>
+</code></pre></div></div>
+
+<p>先ほど作成した仮想マシンを削除し再構築したところ、
+無事 Docker Compose が利用できる環境ができあがった。</p>
 
 <h2 id="参考サイト">参考サイト</h2>
 
@@ -102,6 +190,8 @@ SSH で接続し Docker コマンドも実行できた。</p>
   <li><a href="https://coreos.github.io/butane/getting-started/">Getting started | Butane</a></li>
   <li><a href="https://www.flatcar.org/docs/latest/setup/customization/network-config-with-networkd/">Network configuration with networkd</a></li>
   <li><a href="https://www.flatcar.org/docs/latest/provisioning/config-transpiler/">Butane Config Transpiler</a></li>
+  <li><a href="https://flatcar.github.io/sysext-bakery/docker_compose/">Docker-compose sysext | sysext-bakery</a></li>
+  <li><a href="https://github.com/flatcar/sysext-bakery/releases/tag/docker-compose">Release docker-compose · flatcar/sysext-bakery</a></li>
 </ul>]]></content><author><name>saasan</name></author><category term="blog" /><category term="VMware" /><category term="ESXi" /><category term="Flatcar Container Linux" /><summary type="html"><![CDATA[VMware ESXi 上に Flatcar Container Linux のサーバを立てた際のメモ]]></summary></entry><entry><title type="html">Windows 11 の WSL で ext4 ファイルシステムのドライブの内容を確認する</title><link href="https://slx.jp/blog/2025/02/23/windows-11%E3%81%AEWSL%E3%81%A7ext4%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E3%81%AE%E3%83%89%E3%83%A9%E3%82%A4%E3%83%96%E3%81%AE%E5%86%85%E5%AE%B9%E3%82%92%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B.html" rel="alternate" type="text/html" title="Windows 11 の WSL で ext4 ファイルシステムのドライブの内容を確認する" /><published>2025-02-23T03:20:00+09:00</published><updated>2025-02-23T03:20:00+09:00</updated><id>https://slx.jp/blog/2025/02/23/windows-11%E3%81%AEWSL%E3%81%A7ext4%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E3%81%AE%E3%83%89%E3%83%A9%E3%82%A4%E3%83%96%E3%81%AE%E5%86%85%E5%AE%B9%E3%82%92%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B</id><content type="html" xml:base="https://slx.jp/blog/2025/02/23/windows-11%E3%81%AEWSL%E3%81%A7ext4%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E3%81%AE%E3%83%89%E3%83%A9%E3%82%A4%E3%83%96%E3%81%AE%E5%86%85%E5%AE%B9%E3%82%92%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B.html"><![CDATA[<p><a href="https://learn.microsoft.com/ja-jp/windows/wsl/wsl2-mount-disk">WSL 2 で Linux ディスクのマウントを開始する</a>
 の内容を自分用にまとめたやつ</p>
 

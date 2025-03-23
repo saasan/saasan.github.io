@@ -699,7 +699,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 
-    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 6 mins</span>
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 13 mins</span>
   </p>
 <div class="post-tags">
 <a class="post-tag" href="/tags.html#VMware">#VMware</a><a class="post-tag" href="/tags.html#ESXi">#ESXi</a><a class="post-tag" href="/tags.html#Flatcar%20Container%20Linux">#Flatcar Container Linux</a>
@@ -709,13 +709,22 @@ document.addEventListener('DOMContentLoaded', function(event) {
     <div class="post-content e-content" itemprop="articleBody">
 
       <p>ChatGPT に Docker コンテナの実行・運用に最適な OS を聞いたところ、
-選択肢の一つとして「Flatcar Container Linux (CoreOS の後継)」があった。
+その中のひとつに「Flatcar Container Linux」があった。
 気になったのでとりあえず VMware ESXi 上にサーバを立ててみた。</p>
 
 <h2 id="flatcar-container-linux-とは">Flatcar Container Linux とは？</h2>
 
 <p>Flatcar Container Linux は、コンテナの運用に特化した軽量 Linux ディストリビューションである。
 自動更新機能を備え、シンプルな構成でセキュリティと安定性を重視している。</p>
+
+<h3 id="特徴">特徴</h3>
+
+<ul>
+  <li>
+<strong>自動アップデート</strong>: システムのアップデートが自動で適用され、セキュリティと安定性を確保する。</li>
+  <li>
+<strong>イミュータブルな設計</strong>: ルートファイルシステムが書き換え不可のため、一貫性が保たれ、運用時のトラブルを低減できる。</li>
+</ul>
 
 <p>本記事では、VMware ESXi 上に Flatcar Container Linux を導入する手順を解説する。</p>
 
@@ -725,9 +734,11 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 <h3 id="vmware-用-ova-ファイルのダウンロード">VMware 用 OVA ファイルのダウンロード</h3>
 
-<p>OVA ファイルのダウンロード元は
-<a href="https://www.flatcar.org/docs/latest/installing/cloud/vmware/">Running Flatcar Container Linux on VMware</a>
-に書かれている。</p>
+<p>OVA ファイルのダウンロード元は、以下の公式ドキュメントに書かれている。</p>
+
+<ul>
+  <li><a href="https://www.flatcar.org/docs/latest/installing/cloud/vmware/">Running Flatcar Container Linux on VMware</a></li>
+</ul>
 
 <h3 id="ovftool-のインストール">ovftool のインストール</h3>
 
@@ -798,11 +809,90 @@ ESXi サーバ上で仮想マシンを作成・起動する。</p>
   <span class="nt">--X</span>:guest:ignition.config.data<span class="o">=</span><span class="si">$(</span><span class="nb">cat </span>ignition_config.json | <span class="nb">base64</span> <span class="nt">--wrap</span><span class="o">=</span>0<span class="si">)</span> <span class="se">\</span>
   <span class="nt">--X</span>:guest:ignition.config.data.encoding<span class="o">=</span><span class="nb">base64</span> <span class="se">\</span>
   ./flatcar_production_vmware_ova.ova <span class="se">\</span>
-  <span class="s1">'vi:///&lt;YOUR_USER&gt;:&lt;ESXI_PASSWORD&gt;@&lt;ESXI_HOST_IP&gt;'</span>
+  <span class="s1">'vi:///&lt;YOUR_USER&gt;@&lt;ESXI_HOST_IP&gt;'</span>
 </code></pre></div></div>
 
 <p>コンソール上に設定した IP アドレスが表示されていれば OK。
-SSH で接続し Docker コマンドも実行できた。</p>
+SSH で接続し <code class="language-plaintext highlighter-rouge">docker</code> コマンドも実行できた。</p>
+
+<h2 id="docker-compose-を含めたサーバの構築">Docker Compose を含めたサーバの構築</h2>
+
+<p>標準状態では Docker Compose が含まれていなかった。</p>
+
+<p>Flatcar では <code class="language-plaintext highlighter-rouge">systemd-sysext</code> を利用して機能を拡張する仕組みになっている。
+Docker Compose を利用するには、以下の公式ドキュメントを参考に Butane 設定ファイルを変更する。</p>
+
+<ul>
+  <li><a href="https://flatcar.github.io/sysext-bakery/docker_compose/">Docker-compose sysext | sysext-bakery</a></li>
+</ul>
+
+<p>また、利用可能な Docker Compose のバージョンは以下で確認できる。</p>
+
+<ul>
+  <li><a href="https://github.com/flatcar/sysext-bakery/releases/tag/docker-compose">Release docker-compose · flatcar/sysext-bakery</a></li>
+</ul>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">variant</span><span class="pi">:</span> <span class="s">flatcar</span>
+<span class="na">version</span><span class="pi">:</span> <span class="s">1.0.0</span>
+<span class="na">storage</span><span class="pi">:</span>
+  <span class="na">files</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">path</span><span class="pi">:</span> <span class="s">/etc/systemd/network/00-static.network</span>
+      <span class="na">mode</span><span class="pi">:</span> <span class="m">0644</span>
+      <span class="na">contents</span><span class="pi">:</span>
+        <span class="na">inline</span><span class="pi">:</span> <span class="pi">|</span>
+          <span class="s">[Match]</span>
+          <span class="s">Name=ens192</span>
+          <span class="s">[Network]</span>
+          <span class="s">Address=192.168.xxx.xxx/24</span>
+          <span class="s">Gateway=192.168.xxx.xxx</span>
+          <span class="s">DNS=192.168.xxx.xxx</span>
+          <span class="s">LinkLocalAddressing=no</span>
+          <span class="s">IPv6AcceptRA=no</span>
+
+    <span class="pi">-</span> <span class="na">path</span><span class="pi">:</span> <span class="s">/etc/hostname</span>
+      <span class="na">mode</span><span class="pi">:</span> <span class="m">0644</span>
+      <span class="na">contents</span><span class="pi">:</span>
+        <span class="na">inline</span><span class="pi">:</span> <span class="s">ホスト名</span>
+
+    <span class="pi">-</span> <span class="na">path</span><span class="pi">:</span> <span class="s">/opt/extensions/docker-compose/docker-compose-2.34.0-x86-64.raw</span>
+      <span class="na">mode</span><span class="pi">:</span> <span class="m">0644</span>
+      <span class="na">contents</span><span class="pi">:</span>
+        <span class="na">source</span><span class="pi">:</span> <span class="s">https://extensions.flatcar.org/extensions/docker-compose-2.34.0-x86-64.raw</span>
+    <span class="pi">-</span> <span class="na">path</span><span class="pi">:</span> <span class="s">/etc/sysupdate.docker-compose.d/docker-compose.conf</span>
+      <span class="na">contents</span><span class="pi">:</span>
+        <span class="na">source</span><span class="pi">:</span> <span class="s">https://extensions.flatcar.org/extensions/docker-compose.conf</span>
+    <span class="pi">-</span> <span class="na">path</span><span class="pi">:</span> <span class="s">/etc/sysupdate.d/noop.conf</span>
+      <span class="na">contents</span><span class="pi">:</span>
+        <span class="na">source</span><span class="pi">:</span> <span class="s">https://extensions.flatcar.org/extensions/noop.conf</span>
+
+  <span class="na">links</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">target</span><span class="pi">:</span> <span class="s">/opt/extensions/docker-compose/docker-compose-2.34.0-x86-64.raw</span>
+      <span class="na">path</span><span class="pi">:</span> <span class="s">/etc/extensions/docker-compose.raw</span>
+      <span class="na">hard</span><span class="pi">:</span> <span class="kc">false</span>
+
+<span class="na">systemd</span><span class="pi">:</span>
+  <span class="na">units</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">systemd-sysupdate.timer</span>
+      <span class="na">enabled</span><span class="pi">:</span> <span class="kc">true</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">systemd-sysupdate.service</span>
+      <span class="na">dropins</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">docker-compose.conf</span>
+          <span class="na">contents</span><span class="pi">:</span> <span class="pi">|</span>
+            <span class="s">[Service]</span>
+            <span class="s">ExecStartPre=/usr/bin/sh -c "readlink --canonicalize /etc/extensions/docker-compose.raw &gt; /tmp/docker-compose"</span>
+            <span class="s">ExecStartPre=/usr/lib/systemd/systemd-sysupdate -C docker-compose update</span>
+            <span class="s">ExecStartPost=/usr/bin/sh -c "readlink --canonicalize /etc/extensions/docker-compose.raw &gt; /tmp/docker-compose-new"</span>
+            <span class="s">ExecStartPost=/usr/bin/sh -c "if ! cmp --silent /tmp/docker-compose /tmp/docker-compose-new; then touch /run/reboot-required; fi"</span>
+
+<span class="na">passwd</span><span class="pi">:</span>
+  <span class="na">users</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">core</span>
+      <span class="na">ssh_authorized_keys</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="s">SSH公開鍵</span>
+</code></pre></div></div>
+
+<p>先ほど作成した仮想マシンを削除し再構築したところ、
+無事 Docker Compose が利用できる環境ができあがった。</p>
 
 <h2 id="参考サイト">参考サイト</h2>
 
@@ -812,6 +902,8 @@ SSH で接続し Docker コマンドも実行できた。</p>
   <li><a href="https://coreos.github.io/butane/getting-started/">Getting started | Butane</a></li>
   <li><a href="https://www.flatcar.org/docs/latest/setup/customization/network-config-with-networkd/">Network configuration with networkd</a></li>
   <li><a href="https://www.flatcar.org/docs/latest/provisioning/config-transpiler/">Butane Config Transpiler</a></li>
+  <li><a href="https://flatcar.github.io/sysext-bakery/docker_compose/">Docker-compose sysext | sysext-bakery</a></li>
+  <li><a href="https://github.com/flatcar/sysext-bakery/releases/tag/docker-compose">Release docker-compose · flatcar/sysext-bakery</a></li>
 </ul>
 
 
@@ -825,10 +917,10 @@ SSH で接続し Docker コマンドも実行できた。</p>
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/script/2016/03/04/pixiv-tags.html" title="">pixiv Tags</a></li>
-<li><a class="post-link" href="/blog/2020/06/17/m5stickc-speaker-hat%E3%81%A7esp8266audio%E3%83%A9%E3%82%A4%E3%83%96%E3%83%A9%E3%83%AA%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%97%E3%81%A6mp3%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%92%E5%86%8D%E7%94%9F%E3%81%99%E3%82%8B.html" title="">M5StickC + Speaker Hat で ESP8266Audio ライブラリを使用して MP3 ファイルを再生する</a></li>
-<li><a class="post-link" href="/blog/2021/09/18/lenovo-thinkcentre-m600-tiny%E3%81%ABpci-express%E3%82%92%E7%84%A1%E7%90%86%E3%82%84%E3%82%8A%E5%A2%97%E8%A8%AD%E3%81%99%E3%82%8B.html" title="">Lenovo ThinkCentre M600 Tiny に PCI Express を無理やり増設する</a></li>
+        <li><a class="post-link" href="/blog/2020/07/19/usb-cable-checker-2%E3%81%A7usb-type-c%E3%82%B1%E3%83%BC%E3%83%96%E3%83%AB%E3%81%AE%E6%80%A7%E8%83%BD%E3%82%92%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B.html" title="">USB CABLE CHECKER 2 で USB Type-C ケーブルの性能を確認する</a></li>
+<li><a class="post-link" href="/blog/2020/11/14/%E3%82%B9%E3%82%BF%E3%83%BC%E3%83%88%E3%83%A1%E3%83%8B%E3%83%A5%E3%83%BC%E3%81%8B%E3%82%89%E6%B6%88%E3%81%88%E3%81%9F-dell-command-update-%E3%82%92%E5%BE%A9%E6%B4%BB%E3%81%95%E3%81%9B%E3%82%8B.html" title="">スタートメニューから消えた Dell Command | Update を復活させる</a></li>
 <li><a class="post-link" href="/blog/2023/08/14/aptx-adaptive-ll%E5%AF%BE%E5%BF%9Cbluetooth%E6%A9%9F%E5%99%A8%E3%81%A7pc%E3%82%B2%E3%83%BC%E3%83%A0%E3%81%AB%E4%BD%BF%E3%81%88%E3%82%8B%E5%AE%8C%E5%85%A8%E3%83%AF%E3%82%A4%E3%83%A4%E3%83%AC%E3%82%B9%E3%81%AA%E3%82%AA%E3%83%BC%E3%83%87%E3%82%A3%E3%82%AA%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89.html" title="">aptX Adaptive LL 対応 Bluetooth 機器で PC ゲームに使える完全ワイヤレスなオーディオ環境構築</a></li>
+<li><a class="post-link" href="/blog/2022/12/31/2022%E5%B9%B4-%E8%B2%B7%E3%81%A3%E3%81%A6%E3%82%88%E3%81%8B%E3%81%A3%E3%81%9F%E3%82%82%E3%81%AE%E3%81%A8%E3%81%8B.html" title="">【2022年】買ってよかったものとか</a></li>
 </ul>
     </div>
 <div class="post-comments"></div></section>
