@@ -6,22 +6,22 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- Begin Jekyll SEO tag v2.8.0 -->
-<title>M5StickC でキーボード操作を自動化する | slx.jp</title>
+<title>Claude for Desktop で AWS Documentation MCP Server を使ってみる | slx.jp</title>
 <meta name="generator" content="Jekyll v4.4.1">
-<meta property="og:title" content="M5StickC でキーボード操作を自動化する">
+<meta property="og:title" content="Claude for Desktop で AWS Documentation MCP Server を使ってみる">
 <meta name="author" content="saasan">
 <meta property="og:locale" content="ja">
-<meta name="description" content="M5StickC を Bluetooth キーボードとして PC へ接続し操作を自動化する">
-<meta property="og:description" content="M5StickC を Bluetooth キーボードとして PC へ接続し操作を自動化する">
-<link rel="canonical" href="https://slx.jp/blog/2021/04/04/m5stickc%E3%81%A7%E3%82%AD%E3%83%BC%E3%83%9C%E3%83%BC%E3%83%89%E6%93%8D%E4%BD%9C%E3%82%92%E8%87%AA%E5%8B%95%E5%8C%96%E3%81%99%E3%82%8B.html">
-<meta property="og:url" content="https://slx.jp/blog/2021/04/04/m5stickc%E3%81%A7%E3%82%AD%E3%83%BC%E3%83%9C%E3%83%BC%E3%83%89%E6%93%8D%E4%BD%9C%E3%82%92%E8%87%AA%E5%8B%95%E5%8C%96%E3%81%99%E3%82%8B.html">
+<meta name="description" content="MCP の使い道を調べているうちに知った AWS Documentation MCP Server が便利そうだったので使ってみた。">
+<meta property="og:description" content="MCP の使い道を調べているうちに知った AWS Documentation MCP Server が便利そうだったので使ってみた。">
+<link rel="canonical" href="https://slx.jp/blog/2025/06/22/claude-for-desktop%E3%81%A7aws-documentation-mcp-server%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%8B.html">
+<meta property="og:url" content="https://slx.jp/blog/2025/06/22/claude-for-desktop%E3%81%A7aws-documentation-mcp-server%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%8B.html">
 <meta property="og:site_name" content="slx.jp">
 <meta property="og:type" content="article">
-<meta property="article:published_time" content="2021-04-04T05:50:17+09:00">
+<meta property="article:published_time" content="2025-06-22T23:00:00+09:00">
 <meta name="twitter:card" content="summary">
-<meta property="twitter:title" content="M5StickC でキーボード操作を自動化する">
+<meta property="twitter:title" content="Claude for Desktop で AWS Documentation MCP Server を使ってみる">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"saasan"},"dateModified":"2021-04-04T05:50:17+09:00","datePublished":"2021-04-04T05:50:17+09:00","description":"M5StickC を Bluetooth キーボードとして PC へ接続し操作を自動化する","headline":"M5StickC でキーボード操作を自動化する","mainEntityOfPage":{"@type":"WebPage","@id":"https://slx.jp/blog/2021/04/04/m5stickc%E3%81%A7%E3%82%AD%E3%83%BC%E3%83%9C%E3%83%BC%E3%83%89%E6%93%8D%E4%BD%9C%E3%82%92%E8%87%AA%E5%8B%95%E5%8C%96%E3%81%99%E3%82%8B.html"},"url":"https://slx.jp/blog/2021/04/04/m5stickc%E3%81%A7%E3%82%AD%E3%83%BC%E3%83%9C%E3%83%BC%E3%83%89%E6%93%8D%E4%BD%9C%E3%82%92%E8%87%AA%E5%8B%95%E5%8C%96%E3%81%99%E3%82%8B.html"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"saasan"},"dateModified":"2025-06-22T23:00:00+09:00","datePublished":"2025-06-22T23:00:00+09:00","description":"MCP の使い道を調べているうちに知った AWS Documentation MCP Server が便利そうだったので使ってみた。","headline":"Claude for Desktop で AWS Documentation MCP Server を使ってみる","mainEntityOfPage":{"@type":"WebPage","@id":"https://slx.jp/blog/2025/06/22/claude-for-desktop%E3%81%A7aws-documentation-mcp-server%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%8B.html"},"url":"https://slx.jp/blog/2025/06/22/claude-for-desktop%E3%81%A7aws-documentation-mcp-server%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%8B.html"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="icon" href="/assets/images/favicon.png">
   <link rel="canonical" href="https://slx.jp">
@@ -658,11 +658,11 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 <header class="post-header">
-  <h1 class="post-title p-name" itemprop="name headline">M5StickC でキーボード操作を自動化する</h1>
+  <h1 class="post-title p-name" itemprop="name headline">Claude for Desktop で AWS Documentation MCP Server を使ってみる</h1>
   <h2 class="post-subtitle"></h2>
 
   <p class="post-meta">
-    <time class="dt-published" datetime="2021-04-04T05:50:17+09:00" itemprop="datePublished"><i class="fa fa-calendar"></i> 2021-04-04 05:50
+    <time class="dt-published" datetime="2025-06-22T23:00:00+09:00" itemprop="datePublished"><i class="fa fa-calendar"></i> 2025-06-22 23:00
     </time>
 
     
@@ -699,203 +699,83 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 
-    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 10 mins</span>
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 2 mins</span>
   </p>
 <div class="post-tags">
-<a class="post-tag" href="/tags.html#M5Stack">#M5Stack</a><a class="post-tag" href="/tags.html#M5StickC">#M5StickC</a><a class="post-tag" href="/tags.html#ESP32">#ESP32</a><a class="post-tag" href="/tags.html#ESP32-BLE-Keyboard">#ESP32-BLE-Keyboard</a>
+<a class="post-tag" href="/tags.html#Claude">#Claude</a><a class="post-tag" href="/tags.html#AWS">#AWS</a><a class="post-tag" href="/tags.html#MCP">#MCP</a>
 </div></header>
 <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
     <div class="post-content e-content" itemprop="articleBody">
 
-      <p>某ゲームでアイテムを交換する作業が面倒になってきたので
-キーボード操作を自動化したいと思った。</p>
+      <p>MCP の使い道を調べているうちに知った
+AWS Documentation MCP Server が便利そうだったので使ってみた。</p>
 
-<p>まず思いついたのは、手元にあった
-<a href="https://www.amazon.co.jp/dp/B004INFZEG/saasan-22">サンワサプライ製のプログラマブルテンキー NT-19UH2BK</a>。
-久しぶりに引っぱりだして確認したところ、これは <kbd>Ctrl + C</kbd> のような同時押しには対応しているが、
-ウェイトをはさみながら複数のキーを順次入力する用途には対応していなかった。</p>
+<h2 id="aws-documentation-mcp-server-とは">AWS Documentation MCP Server とは？</h2>
 
-<p>次に <a href="https://booth.pm/ja/items/2655838">AZ-Macro</a>
-というマクロ機能のある自作 Bluetooth キーボードキットがあることを思い出した。
-これは ESP32 で作られていて、
-<a href="https://github.com/palette-system/az-macro">ファームウェアのソースコードも公開</a>
-されている。
-手持ちの M5StickC なら同じ ESP32 が内蔵されており
-Bluetooth にも対応しているため、目的を実現できるのではないか？</p>
+<p>AI アシスタントが AWS の公式ドキュメントを参照して回答できるようにする MCP Server。
+これにより、AWS に関する質問に対してより正確で詳細な回答が提供されるようになる。</p>
 
-<p>ということで、M5StickC を Bluetooth キーボードとして PC へ接続し操作を自動化する。</p>
+<p><a href="https://awslabs.github.io/mcp/servers/aws-documentation-mcp-server/" target="_blank">AWS Documentation MCP Server - AWS MCP Servers</a></p>
 
-<h2 id="arduino-ide-へ-esp32-ble-keyboard-をインストール">Arduino IDE へ ESP32-BLE-Keyboard をインストール</h2>
+<h2 id="aws-documentation-mcp-server-を起動する">AWS Documentation MCP Server を起動する</h2>
 
-<p>まずは M5StickC を Bluetooth キーボードとして使うためのライブラリを
-Arduino IDE へインストールする。</p>
+<p>GitHub の
+<a href="https://github.com/awslabs/mcp" target="_blank">awslabs/mcp</a>
+を git clone して docker build で起動するだけ。</p>
+
+<p>uv と Python のインストールから説明しているサイトもあるが、
+ 現状 Dockerfile が提供されておりインストール不要になっている。</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone git@github.com:awslabs/mcp.git aws-mcp
+docker build <span class="nt">-t</span> mcp/aws-documentation aws-mcp/src/aws-documentation-mcp-server
+</code></pre></div></div>
+
+<h2 id="claude-for-desktop-の設定">Claude for Desktop の設定</h2>
 
 <ol>
+  <li>ウィンドウ左上のハンバーガーボタンから「ファイル &gt; 設定…」をクリックする
+<img src="/assets/images/blog/2025-06-22/claude-for-desktop1.png" alt="設定画面を開く">
+</li>
+  <li>「開発者」をクリックする</li>
+  <li>「構成を編集」をクリックする</li>
   <li>
-<a href="https://github.com/T-vK/ESP32-BLE-Keyboard/releases">Releases · T-vK/ESP32-BLE-Keyboard</a>
-から ESP32-BLE-Keyboard.zip をダウンロード</li>
-  <li>Arduino IDE のメニューで [スケッチ] - [ライブラリをインクルード] - [.ZIP形式のライブラリをインストール…] をクリック</li>
-  <li>さきほどダウンロードした ESP32-BLE-Keyboard.zip を選択</li>
+<code class="language-plaintext highlighter-rouge">claude_desktop_config.json</code> があるフォルダが開く</li>
+  <li>
+<code class="language-plaintext highlighter-rouge">claude_desktop_config.json</code> へ
+<a href="https://awslabs.github.io/mcp/servers/aws-documentation-mcp-server/#installation" target="_blank">Installation</a>
+にかかれている Docker 用 JSON を書き込む
+1． 設定画面を閉じる</li>
+  <li>ウィンドウ左上のハンバーガーボタンから「ファイル &gt; 終了」をクリックし Claude for Desktop を終了させる</li>
+  <li>再度 Claude for Desktop を起動すると、チャット入力欄のメニューに追加されている
+<img src="/assets/images/blog/2025-06-22/claude-for-desktop2.png" alt="チャット入力欄のメニューに追加された AWS Documentation MCP Server">
+</li>
 </ol>
 
-<h2 id="esp32-ble-keyboard-の使い方">ESP32-BLE-Keyboard の使い方</h2>
+<h2 id="使ってみる">使ってみる</h2>
 
-<p><a href="https://github.com/T-vK/ESP32-BLE-Keyboard/blob/master/examples/SendKeyStrokes/SendKeyStrokes.ino">公式のサンプル</a>
-を見れば大まかな使い方はわかると思うが、メソッドの説明がないので補足しておく。</p>
+<p>AWS に関する質問をすると外部連携の許可を何度か確認される。</p>
 
-<p>BleKeyboard クラスの以下のメソッドでキーを操作できる。</p>
+<p><img src="/assets/images/blog/2025-06-22/claude-for-desktop3.png" alt="外部連携の許可"></p>
 
-<ul>
-  <li>print: 文字列を入力</li>
-  <li>write: キーを押してすぐに離す</li>
-  <li>press: キーを押す (release するまで押したままにする)</li>
-  <li>release: キーを離す</li>
-  <li>releaseAll: すべてのキーを離す</li>
-</ul>
+<p>しばらく待つと AWS の公式ドキュメントを元にした回答が提示される。</p>
 
-<p>キーの指定は、英数記号の場合、文字をそのまま渡す。
-大文字を渡すと自動でシフトキーが補完され大文字での入力になる。</p>
-
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">bleKeyboard</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="sc">'a'</span><span class="p">);</span>
-</code></pre></div></div>
-
-<p>ファンクションキー、修飾キーなどの場合は
-<a href="https://github.com/T-vK/ESP32-BLE-Keyboard/blob/master/BleKeyboard.h">BleKeyboard.h</a>
-で定義されている定数を渡す。</p>
-
-<h2 id="スケッチの作成">スケッチの作成</h2>
-
-<p>M5StickC のボタンA (正面の「M5」ボタン) を押すと
-500ms 間隔で順番に B, L, E, Enterキーを押すサンプルスケッチを作成した。
-今回は同時押しが不要だったため
-keystroke に書かれたキーを順に write で出力するだけとなっている。</p>
-
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp">
-#include</span> <span class="cpf">&lt;M5StickC.h&gt;</span><span class="cp">
-#include</span> <span class="cpf">&lt;BleKeyboard.h&gt;</span><span class="cp">
-</span>
-<span class="c1">// -----------------------------------------------------------------------------</span>
-<span class="c1">// 定数</span>
-<span class="c1">// -----------------------------------------------------------------------------</span>
-<span class="c1">// 電源ボタンが1秒未満押された</span>
-<span class="k">const</span> <span class="kt">uint8_t</span> <span class="n">AXP_WAS_PRESSED</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
-<span class="c1">// キーと待ち時間の構造体</span>
-<span class="k">struct</span> <span class="nc">Key</span> <span class="p">{</span>
-  <span class="kt">uint8_t</span> <span class="n">key</span><span class="p">;</span>
-  <span class="kt">uint32_t</span> <span class="n">delay</span><span class="p">;</span>
-<span class="p">};</span>
-<span class="c1">// 送信するキーストローク</span>
-<span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Key</span><span class="o">&gt;</span> <span class="n">keystroke</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="p">{</span> <span class="sc">'B'</span>       <span class="p">,</span> <span class="mi">500</span> <span class="p">},</span>
-    <span class="p">{</span> <span class="sc">'L'</span>       <span class="p">,</span> <span class="mi">500</span> <span class="p">},</span>
-    <span class="p">{</span> <span class="sc">'E'</span>       <span class="p">,</span> <span class="mi">500</span> <span class="p">},</span>
-    <span class="p">{</span> <span class="n">KEY_RETURN</span><span class="p">,</span> <span class="mi">0</span> <span class="p">}</span>
-<span class="p">};</span>
-
-<span class="c1">// -----------------------------------------------------------------------------</span>
-<span class="c1">// 変数</span>
-<span class="c1">// -----------------------------------------------------------------------------</span>
-<span class="c1">// ESP32-BLE-Keyboard</span>
-<span class="n">BleKeyboard</span> <span class="n">bleKeyboard</span><span class="p">;</span>
-
-<span class="c1">// -----------------------------------------------------------------------------</span>
-<span class="c1">// 関数</span>
-<span class="c1">// -----------------------------------------------------------------------------</span>
-<span class="c1">// 画面を消去する</span>
-<span class="kt">void</span> <span class="nf">clearScreen</span><span class="p">()</span> <span class="p">{</span>
-    <span class="n">M5</span><span class="p">.</span><span class="n">Lcd</span><span class="p">.</span><span class="n">fillScreen</span><span class="p">(</span><span class="n">TFT_BLACK</span><span class="p">);</span>
-    <span class="n">M5</span><span class="p">.</span><span class="n">Lcd</span><span class="p">.</span><span class="n">setCursor</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
-<span class="p">}</span>
-
-<span class="c1">// キーストロークを送信する</span>
-<span class="kt">void</span> <span class="nf">sendKeystroke</span><span class="p">()</span> <span class="p">{</span>
-    <span class="n">clearScreen</span><span class="p">();</span>
-    <span class="n">M5</span><span class="p">.</span><span class="n">Lcd</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s">"Sending..."</span><span class="p">);</span>
-
-    <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="n">n</span> <span class="o">:</span> <span class="n">keystroke</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">bleKeyboard</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="n">n</span><span class="p">.</span><span class="n">key</span><span class="p">);</span>
-        <span class="n">delay</span><span class="p">(</span><span class="n">n</span><span class="p">.</span><span class="n">delay</span><span class="p">);</span>
-    <span class="p">}</span>
-
-    <span class="n">M5</span><span class="p">.</span><span class="n">Lcd</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s">"Complete!"</span><span class="p">);</span>
-<span class="p">}</span>
-
-<span class="kt">void</span> <span class="nf">setup</span><span class="p">()</span> <span class="p">{</span>
-    <span class="n">M5</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span>
-
-    <span class="c1">// 画面の表示設定</span>
-    <span class="n">M5</span><span class="p">.</span><span class="n">Lcd</span><span class="p">.</span><span class="n">setRotation</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
-    <span class="n">M5</span><span class="p">.</span><span class="n">Lcd</span><span class="p">.</span><span class="n">setTextFont</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
-    <span class="n">clearScreen</span><span class="p">();</span>
-    <span class="n">M5</span><span class="p">.</span><span class="n">Lcd</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s">"ESP32-BLE-Keyboard"</span><span class="p">);</span>
-
-    <span class="c1">// Bluetooth接続</span>
-    <span class="n">bleKeyboard</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span>
-<span class="p">}</span>
-
-<span class="kt">void</span> <span class="nf">loop</span><span class="p">()</span> <span class="p">{</span>
-    <span class="n">M5</span><span class="p">.</span><span class="n">update</span><span class="p">();</span>
-
-    <span class="c1">// 電源ボタンが押されたらリセット</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">M5</span><span class="p">.</span><span class="n">Axp</span><span class="p">.</span><span class="n">GetBtnPress</span><span class="p">()</span> <span class="o">==</span> <span class="n">AXP_WAS_PRESSED</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">esp_restart</span><span class="p">();</span>
-    <span class="p">}</span>
-
-    <span class="k">if</span> <span class="p">(</span><span class="n">bleKeyboard</span><span class="p">.</span><span class="n">isConnected</span><span class="p">())</span> <span class="p">{</span>
-        <span class="c1">// Bluetooth接続済みの場合</span>
-        <span class="c1">// ボタンAが押されたらキーを送信</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">M5</span><span class="p">.</span><span class="n">BtnA</span><span class="p">.</span><span class="n">wasPressed</span><span class="p">())</span> <span class="p">{</span>
-            <span class="n">sendKeystroke</span><span class="p">();</span>
-        <span class="p">}</span>
-
-        <span class="n">delay</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
-    <span class="p">}</span>
-    <span class="k">else</span> <span class="p">{</span>
-        <span class="c1">// Bluetooth未接続の場合は5秒待つ</span>
-        <span class="n">M5</span><span class="p">.</span><span class="n">Lcd</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s">"Waiting 5 seconds..."</span><span class="p">);</span>
-        <span class="n">delay</span><span class="p">(</span><span class="mi">5000</span><span class="p">);</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<h2 id="動作確認">動作確認</h2>
-
-<p>以下の手順で動作を確認できる。</p>
-
-<ol>
-  <li>M5StickC にスケッチを書き込む</li>
-  <li>M5StickC の画面に “Waiting 5 seconds…” と表示されていることを確認</li>
-  <li>PC で Bluetooth デバイスを検索し “ESP32 BLE Keyboard” へ接続</li>
-  <li>メモ帳などのアプリを開く</li>
-  <li>M5StickC のボタンA (正面の「M5」ボタン) を押す</li>
-</ol>
-
-<p>これで複雑なキーボードマクロでも思い通りに実行できるようになった。
-キーボードでできることなら何でもボタン一発で実行できるため、
-思っていた以上に利便性が高い。</p>
-
-<h2 id="参考サイト">参考サイト</h2>
-
-<ul>
-  <li><a href="https://neocat.hatenablog.com/entry/2019/09/28/151947">ESP32をBluetoothキーボードやマウスにする - Okiraku Programming</a></li>
-  <li><a href="https://github.com/T-vK/ESP32-BLE-Keyboard">T-vK/ESP32-BLE-Keyboard: Bluetooth LE Keyboard library for the ESP32 (Arduino IDE compatible)</a></li>
-</ul>
+<p><img src="/assets/images/blog/2025-06-22/claude-for-desktop4.png" alt="AWS の公式ドキュメントを元にした回答"></p>
 
 
     </div>
 
 </article>
 <div class="post-nav">
-<a class="previous" href="/blog/2021/01/03/m5stickc%E3%81%A7%E6%AF%8E%E6%9C%9D%E7%85%A7%E6%98%8E%E3%82%92%E8%87%AA%E5%8B%95%E3%81%A7%E7%82%B9%E7%81%AF%E3%81%99%E3%82%8B.html" title="M5StickC で毎朝照明を自動で点灯する">M5StickC で毎朝照明を自動で点灯する</a><a class="next" href="/blog/2021/05/20/slack%E3%81%B8%E9%80%9A%E7%9F%A5%E3%81%99%E3%82%8B%E3%82%B7%E3%82%A7%E3%83%AB%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88.html" title="Slack へ通知するシェルスクリプト">Slack へ通知するシェルスクリプト</a>
+<a class="previous" href="/blog/2025/06/22/cloud-config%E3%81%A7%E5%9B%BA%E5%AE%9Aip%E3%82%A2%E3%83%89%E3%83%AC%E3%82%B9%E3%82%92%E8%A8%AD%E5%AE%9A%E3%81%97amazon-linux-2023%E3%82%92%E3%82%AA%E3%83%B3%E3%83%97%E3%83%AC%E3%83%9F%E3%82%B9%E3%81%AEvmware-esxi%E3%82%B5%E3%83%BC%E3%83%90%E4%B8%8A%E3%81%AB%E3%83%87%E3%83%97%E3%83%AD%E3%82%A4%E3%81%99%E3%82%8B.html" title="cloud-config で固定 IP アドレスを設定し Amazon Linux 2023 をオンプレミスの VMware ESXi サーバ上にデプロイする">cloud-config で固定 IP アドレスを設定し Amazon Linux...</a><span></span>
 </div>
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/blog/2016/02/19/Google-AdSense%E3%81%AE%E7%A2%BA%E5%AE%9A%E7%94%B3%E5%91%8A.html" title="Slack へ通知するシェルスクリプト">Google AdSenseの確定申告</a></li>
-<li><a class="post-link" href="/blog/2016/08/02/%E3%83%90%E3%83%83%E3%83%81%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%A7%E3%83%9F%E3%83%AA%E7%A7%92%E5%8D%98%E4%BD%8D%E3%81%AEsleep%E3%82%92%E8%A1%8C%E3%81%86.html" title="Slack へ通知するシェルスクリプト">バッチファイルでミリ秒単位のSleepを行う</a></li>
-<li><a class="post-link" href="/blog/2022/10/03/zoneid-zone.identifier%E3%82%92%E4%B8%80%E6%8B%AC%E3%81%A7%E5%89%8A%E9%99%A4%E3%81%99%E3%82%8B.html" title="Slack へ通知するシェルスクリプト">ZoneID (Zone.Identifier) を一括で削除する</a></li>
-<li><a class="post-link" href="/blog/2020/12/25/%E6%B6%88%E3%81%97%E3%81%A6%E3%81%97%E3%81%BE%E3%81%A3%E3%81%9Fwsl%E7%92%B0%E5%A2%83%E3%81%AE%E3%83%90%E3%83%83%E3%82%AF%E3%82%A2%E3%83%83%E3%83%97%E3%81%8B%E3%82%89%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%92%E5%8F%96%E3%82%8A%E5%87%BA%E3%81%99.html" title="Slack へ通知するシェルスクリプト">消してしまった WSL 環境のバックアップからファイルを取り出す</a></li>
+        <li><a class="post-link" href="/blog/2022/03/13/kindle-paperwhite%E3%82%92%E8%B2%B7%E3%81%A3%E3%81%A61%E3%83%B6%E6%9C%88%E3%81%A7%E5%A3%B2%E3%82%8A%E6%89%95%E3%81%A3%E3%81%9F.html" title="">Kindle Paperwhite (第11世代) を買って1ヶ月で売り払った話</a></li>
+<li><a class="post-link" href="/blog/2016/03/04/jekyll-%E3%83%93%E3%83%AB%E3%83%89%E3%81%99%E3%82%8B%E3%81%A8%E3%81%8D%E3%81%AB%E3%81%A0%E3%81%91sass-scss-%E3%82%92%E5%9C%A7%E7%B8%AE%E3%81%99%E3%82%8B.html" title="">[Jekyll] ビルドするときにだけSass(SCSS)を圧縮する</a></li>
+<li><a class="post-link" href="/blog/2021/01/03/m5stickc%E3%81%A7%E6%AF%8E%E6%9C%9D%E7%85%A7%E6%98%8E%E3%82%92%E8%87%AA%E5%8B%95%E3%81%A7%E7%82%B9%E7%81%AF%E3%81%99%E3%82%8B.html" title="">M5StickC で毎朝照明を自動で点灯する</a></li>
+<li><a class="post-link" href="/blog/2015/09/07/google-opinion-rewards.html" title="">デレステ、PSO2プレイヤーにおすすめ。無料でGoogle Playのクレジットがもらえる「Google アンケート モニター」</a></li>
 </ul>
     </div>
 <div class="post-comments"></div></section>

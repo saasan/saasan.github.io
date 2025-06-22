@@ -775,19 +775,19 @@ ovftool で OVA ファイルを ESXi サーバにデプロイする。</p>
 <p><code class="language-plaintext highlighter-rouge">guestinfo.metadata</code> 等は <code class="language-plaintext highlighter-rouge">--extraConfig</code> を使用して指定する。
 AI に聞くと <code class="language-plaintext highlighter-rouge">--prop</code> で指定する方法を提案されるがそれは誤り。</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ovftool \
-  --name=al2023-server \
-  --datastore=datastore1 \
-  --diskMode=thin \
-  --network="VM Network" \
-  --allowExtraConfig \
-  --extraConfig:guestinfo.metadata="$(base64 -w0 meta-data.yaml)" \
-  --extraConfig:guestinfo.metadata.encoding="base64" \
-  --extraConfig:guestinfo.userdata="$(base64 -w0 user-data.yaml)" \
-  --extraConfig:guestinfo.userdata.encoding="base64" \
-  --powerOn \
-  al2023-vmware_esx-2023.7.20250609.0-kernel-6.1-x86_64.xfs.gpt.ova \
-  'vi://&lt;YOUR_USER&gt;@&lt;ESXI_HOST_IP&gt;'
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ovftool <span class="se">\</span>
+  <span class="nt">--name</span><span class="o">=</span>al2023-server <span class="se">\</span>
+  <span class="nt">--datastore</span><span class="o">=</span>datastore1 <span class="se">\</span>
+  <span class="nt">--diskMode</span><span class="o">=</span>thin <span class="se">\</span>
+  <span class="nt">--network</span><span class="o">=</span><span class="s2">"VM Network"</span> <span class="se">\</span>
+  <span class="nt">--allowExtraConfig</span> <span class="se">\</span>
+  <span class="nt">--extraConfig</span>:guestinfo.metadata<span class="o">=</span><span class="s2">"</span><span class="si">$(</span><span class="nb">base64</span> <span class="nt">-w0</span> meta-data.yaml<span class="si">)</span><span class="s2">"</span> <span class="se">\</span>
+  <span class="nt">--extraConfig</span>:guestinfo.metadata.encoding<span class="o">=</span><span class="s2">"base64"</span> <span class="se">\</span>
+  <span class="nt">--extraConfig</span>:guestinfo.userdata<span class="o">=</span><span class="s2">"</span><span class="si">$(</span><span class="nb">base64</span> <span class="nt">-w0</span> user-data.yaml<span class="si">)</span><span class="s2">"</span> <span class="se">\</span>
+  <span class="nt">--extraConfig</span>:guestinfo.userdata.encoding<span class="o">=</span><span class="s2">"base64"</span> <span class="se">\</span>
+  <span class="nt">--powerOn</span> <span class="se">\</span>
+  al2023-vmware_esx-2023.7.20250609.0-kernel-6.1-x86_64.xfs.gpt.ova <span class="se">\</span>
+  <span class="s1">'vi://&lt;YOUR_USER&gt;@&lt;ESXI_HOST_IP&gt;'</span>
 </code></pre></div></div>
 
 
@@ -795,15 +795,15 @@ AI に聞くと <code class="language-plaintext highlighter-rouge">--prop</code>
 
 </article>
 <div class="post-nav">
-<a class="previous" href="/blog/2025/03/22/vmware-esxi%E4%B8%8A%E3%81%ABflatcar-container-linux%E3%81%AE%E3%82%B5%E3%83%BC%E3%83%90%E3%82%92%E7%AB%8B%E3%81%A6%E3%82%8B.html" title="VMware ESXi 上に Flatcar Container Linux のサーバを立てる">VMware ESXi 上に Flatcar Container Linux...</a><span></span>
+<a class="previous" href="/blog/2025/03/22/vmware-esxi%E4%B8%8A%E3%81%ABflatcar-container-linux%E3%81%AE%E3%82%B5%E3%83%BC%E3%83%90%E3%82%92%E7%AB%8B%E3%81%A6%E3%82%8B.html" title="VMware ESXi 上に Flatcar Container Linux のサーバを立てる">VMware ESXi 上に Flatcar Container Linux...</a><a class="next" href="/blog/2025/06/22/claude-for-desktop%E3%81%A7aws-documentation-mcp-server%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%8B.html" title="Claude for Desktop で AWS Documentation MCP Server を使ってみる">Claude for Desktop で AWS Documentation...</a>
 </div>
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/blog/2024/12/31/2024%E5%B9%B4%E6%9C%80%E6%96%B0%E7%89%88-%E4%BB%8A%E5%B9%B4%E8%B2%B7%E3%81%A3%E3%81%A6%E3%82%88%E3%81%8B%E3%81%A3%E3%81%9F%E3%82%82%E3%81%AE.html" title="">【2024年最新版】今年買ってよかったもの</a></li>
-<li><a class="post-link" href="/blog/2023/07/05/ifttt%E3%81%AEtwitter%E9%80%A3%E6%90%BA%E3%81%8C%E6%9C%89%E6%96%99%E5%8C%96%E3%81%97%E3%81%9F%E3%81%AE%E3%81%A7python%E3%81%A8github-actions%E3%81%A7rss%E3%82%92%E3%83%84%E3%82%A4%E3%83%BC%E3%83%88%E3%81%99%E3%82%8B.html" title="">IFTTT の Twitter 連携が有料化したので Python と GitHub Actions で RSS をツイートする</a></li>
-<li><a class="post-link" href="/blog/2020/07/19/usb-cable-checker-2%E3%81%A7usb-type-c%E3%82%B1%E3%83%BC%E3%83%96%E3%83%AB%E3%81%AE%E6%80%A7%E8%83%BD%E3%82%92%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B.html" title="">USB CABLE CHECKER 2 で USB Type-C ケーブルの性能を確認する</a></li>
-<li><a class="post-link" href="/blog/2016/08/02/%E3%83%90%E3%83%83%E3%83%81%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%A7%E3%83%9F%E3%83%AA%E7%A7%92%E5%8D%98%E4%BD%8D%E3%81%AEsleep%E3%82%92%E8%A1%8C%E3%81%86.html" title="">バッチファイルでミリ秒単位のSleepを行う</a></li>
+        <li><a class="post-link" href="/blog/2020/11/14/%E3%82%B9%E3%82%BF%E3%83%BC%E3%83%88%E3%83%A1%E3%83%8B%E3%83%A5%E3%83%BC%E3%81%8B%E3%82%89%E6%B6%88%E3%81%88%E3%81%9F-dell-command-update-%E3%82%92%E5%BE%A9%E6%B4%BB%E3%81%95%E3%81%9B%E3%82%8B.html" title="Claude for Desktop で AWS Documentation MCP Server を使ってみる">スタートメニューから消えた Dell Command | Update を復活させる</a></li>
+<li><a class="post-link" href="/blog/2025/06/22/claude-for-desktop%E3%81%A7aws-documentation-mcp-server%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%8B.html" title="Claude for Desktop で AWS Documentation MCP Server を使ってみる">Claude for Desktop で AWS Documentation MCP Server を使ってみる</a></li>
+<li><a class="post-link" href="/blog/2020/06/07/m5stickc-speaker-hat%E3%81%A7spiffs%E3%81%8B%E3%82%89%E8%AA%AD%E3%81%BF%E8%BE%BC%E3%82%93%E3%81%A0wav%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%92%E5%86%8D%E7%94%9F%E3%81%99%E3%82%8B.html" title="Claude for Desktop で AWS Documentation MCP Server を使ってみる">M5StickC + Speaker Hat で SPIFFS から読み込んだ WAV ファイルを再生する</a></li>
+<li><a class="post-link" href="/blog/2023/07/05/ifttt%E3%81%AEtwitter%E9%80%A3%E6%90%BA%E3%81%8C%E6%9C%89%E6%96%99%E5%8C%96%E3%81%97%E3%81%9F%E3%81%AE%E3%81%A7python%E3%81%A8github-actions%E3%81%A7rss%E3%82%92%E3%83%84%E3%82%A4%E3%83%BC%E3%83%88%E3%81%99%E3%82%8B.html" title="Claude for Desktop で AWS Documentation MCP Server を使ってみる">IFTTT の Twitter 連携が有料化したので Python と GitHub Actions で RSS をツイートする</a></li>
 </ul>
     </div>
 <div class="post-comments"></div></section>

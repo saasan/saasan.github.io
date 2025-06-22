@@ -1,4 +1,52 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ja"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://slx.jp/feed.xml" rel="self" type="application/atom+xml" /><link href="https://slx.jp/" rel="alternate" type="text/html" hreflang="ja" /><updated>2025-06-22T09:58:54+09:00</updated><id>https://slx.jp/feed.xml</id><title type="html">slx.jp</title><author><name>saasan</name></author><entry><title type="html">cloud-config で固定 IP アドレスを設定し Amazon Linux 2023 をオンプレミスの VMware ESXi サーバ上にデプロイする</title><link href="https://slx.jp/blog/2025/06/22/cloud-config%E3%81%A7%E5%9B%BA%E5%AE%9Aip%E3%82%A2%E3%83%89%E3%83%AC%E3%82%B9%E3%82%92%E8%A8%AD%E5%AE%9A%E3%81%97amazon-linux-2023%E3%82%92%E3%82%AA%E3%83%B3%E3%83%97%E3%83%AC%E3%83%9F%E3%82%B9%E3%81%AEvmware-esxi%E3%82%B5%E3%83%BC%E3%83%90%E4%B8%8A%E3%81%AB%E3%83%87%E3%83%97%E3%83%AD%E3%82%A4%E3%81%99%E3%82%8B.html" rel="alternate" type="text/html" title="cloud-config で固定 IP アドレスを設定し Amazon Linux 2023 をオンプレミスの VMware ESXi サーバ上にデプロイする" /><published>2025-06-22T09:55:00+09:00</published><updated>2025-06-22T09:55:00+09:00</updated><id>https://slx.jp/blog/2025/06/22/cloud-config%E3%81%A7%E5%9B%BA%E5%AE%9Aip%E3%82%A2%E3%83%89%E3%83%AC%E3%82%B9%E3%82%92%E8%A8%AD%E5%AE%9A%E3%81%97amazon-linux-2023%E3%82%92%E3%82%AA%E3%83%B3%E3%83%97%E3%83%AC%E3%83%9F%E3%82%B9%E3%81%AEvmware-esxi%E3%82%B5%E3%83%BC%E3%83%90%E4%B8%8A%E3%81%AB%E3%83%87%E3%83%97%E3%83%AD%E3%82%A4%E3%81%99%E3%82%8B</id><content type="html" xml:base="https://slx.jp/blog/2025/06/22/cloud-config%E3%81%A7%E5%9B%BA%E5%AE%9Aip%E3%82%A2%E3%83%89%E3%83%AC%E3%82%B9%E3%82%92%E8%A8%AD%E5%AE%9A%E3%81%97amazon-linux-2023%E3%82%92%E3%82%AA%E3%83%B3%E3%83%97%E3%83%AC%E3%83%9F%E3%82%B9%E3%81%AEvmware-esxi%E3%82%B5%E3%83%BC%E3%83%90%E4%B8%8A%E3%81%AB%E3%83%87%E3%83%97%E3%83%AD%E3%82%A4%E3%81%99%E3%82%8B.html"><![CDATA[<p>AWS の公式ドキュメントが分かりづらい上に面倒な手順となっているため、
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ja"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://slx.jp/feed.xml" rel="self" type="application/atom+xml" /><link href="https://slx.jp/" rel="alternate" type="text/html" hreflang="ja" /><updated>2025-06-22T23:05:25+09:00</updated><id>https://slx.jp/feed.xml</id><title type="html">slx.jp</title><author><name>saasan</name></author><entry><title type="html">Claude for Desktop で AWS Documentation MCP Server を使ってみる</title><link href="https://slx.jp/blog/2025/06/22/claude-for-desktop%E3%81%A7aws-documentation-mcp-server%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%8B.html" rel="alternate" type="text/html" title="Claude for Desktop で AWS Documentation MCP Server を使ってみる" /><published>2025-06-22T23:00:00+09:00</published><updated>2025-06-22T23:00:00+09:00</updated><id>https://slx.jp/blog/2025/06/22/claude-for-desktop%E3%81%A7aws-documentation-mcp-server%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%8B</id><content type="html" xml:base="https://slx.jp/blog/2025/06/22/claude-for-desktop%E3%81%A7aws-documentation-mcp-server%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%8B.html"><![CDATA[<p>MCP の使い道を調べているうちに知った
+AWS Documentation MCP Server が便利そうだったので使ってみた。</p>
+
+<h2 id="aws-documentation-mcp-server-とは">AWS Documentation MCP Server とは？</h2>
+
+<p>AI アシスタントが AWS の公式ドキュメントを参照して回答できるようにする MCP Server。
+これにより、AWS に関する質問に対してより正確で詳細な回答が提供されるようになる。</p>
+
+<p><a href="https://awslabs.github.io/mcp/servers/aws-documentation-mcp-server/" target="_blank">AWS Documentation MCP Server - AWS MCP Servers</a></p>
+
+<h2 id="aws-documentation-mcp-server-を起動する">AWS Documentation MCP Server を起動する</h2>
+
+<p>GitHub の
+<a href="https://github.com/awslabs/mcp" target="_blank">awslabs/mcp</a>
+を git clone して docker build で起動するだけ。</p>
+
+<p>uv と Python のインストールから説明しているサイトもあるが、
+ 現状 Dockerfile が提供されておりインストール不要になっている。</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone git@github.com:awslabs/mcp.git aws-mcp
+docker build <span class="nt">-t</span> mcp/aws-documentation aws-mcp/src/aws-documentation-mcp-server
+</code></pre></div></div>
+
+<h2 id="claude-for-desktop-の設定">Claude for Desktop の設定</h2>
+
+<ol>
+  <li>ウィンドウ左上のハンバーガーボタンから「ファイル &gt; 設定…」をクリックする
+<img src="/assets/images/blog/2025-06-22/claude-for-desktop1.png" alt="設定画面を開く" /></li>
+  <li>「開発者」をクリックする</li>
+  <li>「構成を編集」をクリックする</li>
+  <li><code class="language-plaintext highlighter-rouge">claude_desktop_config.json</code> があるフォルダが開く</li>
+  <li><code class="language-plaintext highlighter-rouge">claude_desktop_config.json</code> へ
+<a href="https://awslabs.github.io/mcp/servers/aws-documentation-mcp-server/#installation" target="_blank">Installation</a>
+にかかれている Docker 用 JSON を書き込む
+1． 設定画面を閉じる</li>
+  <li>ウィンドウ左上のハンバーガーボタンから「ファイル &gt; 終了」をクリックし Claude for Desktop を終了させる</li>
+  <li>再度 Claude for Desktop を起動すると、チャット入力欄のメニューに追加されている
+<img src="/assets/images/blog/2025-06-22/claude-for-desktop2.png" alt="チャット入力欄のメニューに追加された AWS Documentation MCP Server" /></li>
+</ol>
+
+<h2 id="使ってみる">使ってみる</h2>
+
+<p>AWS に関する質問をすると外部連携の許可を何度か確認される。</p>
+
+<p><img src="/assets/images/blog/2025-06-22/claude-for-desktop3.png" alt="外部連携の許可" /></p>
+
+<p>しばらく待つと AWS の公式ドキュメントを元にした回答が提示される。</p>
+
+<p><img src="/assets/images/blog/2025-06-22/claude-for-desktop4.png" alt="AWS の公式ドキュメントを元にした回答" /></p>]]></content><author><name>saasan</name></author><category term="blog" /><category term="Claude" /><category term="AWS" /><category term="MCP" /><summary type="html"><![CDATA[MCP の使い道を調べているうちに知った AWS Documentation MCP Server が便利そうだったので使ってみた。]]></summary></entry><entry><title type="html">cloud-config で固定 IP アドレスを設定し Amazon Linux 2023 をオンプレミスの VMware ESXi サーバ上にデプロイする</title><link href="https://slx.jp/blog/2025/06/22/cloud-config%E3%81%A7%E5%9B%BA%E5%AE%9Aip%E3%82%A2%E3%83%89%E3%83%AC%E3%82%B9%E3%82%92%E8%A8%AD%E5%AE%9A%E3%81%97amazon-linux-2023%E3%82%92%E3%82%AA%E3%83%B3%E3%83%97%E3%83%AC%E3%83%9F%E3%82%B9%E3%81%AEvmware-esxi%E3%82%B5%E3%83%BC%E3%83%90%E4%B8%8A%E3%81%AB%E3%83%87%E3%83%97%E3%83%AD%E3%82%A4%E3%81%99%E3%82%8B.html" rel="alternate" type="text/html" title="cloud-config で固定 IP アドレスを設定し Amazon Linux 2023 をオンプレミスの VMware ESXi サーバ上にデプロイする" /><published>2025-06-22T09:55:00+09:00</published><updated>2025-06-22T09:55:00+09:00</updated><id>https://slx.jp/blog/2025/06/22/cloud-config%E3%81%A7%E5%9B%BA%E5%AE%9Aip%E3%82%A2%E3%83%89%E3%83%AC%E3%82%B9%E3%82%92%E8%A8%AD%E5%AE%9A%E3%81%97amazon-linux-2023%E3%82%92%E3%82%AA%E3%83%B3%E3%83%97%E3%83%AC%E3%83%9F%E3%82%B9%E3%81%AEvmware-esxi%E3%82%B5%E3%83%BC%E3%83%90%E4%B8%8A%E3%81%AB%E3%83%87%E3%83%97%E3%83%AD%E3%82%A4%E3%81%99%E3%82%8B</id><content type="html" xml:base="https://slx.jp/blog/2025/06/22/cloud-config%E3%81%A7%E5%9B%BA%E5%AE%9Aip%E3%82%A2%E3%83%89%E3%83%AC%E3%82%B9%E3%82%92%E8%A8%AD%E5%AE%9A%E3%81%97amazon-linux-2023%E3%82%92%E3%82%AA%E3%83%B3%E3%83%97%E3%83%AC%E3%83%9F%E3%82%B9%E3%81%AEvmware-esxi%E3%82%B5%E3%83%BC%E3%83%90%E4%B8%8A%E3%81%AB%E3%83%87%E3%83%97%E3%83%AD%E3%82%A4%E3%81%99%E3%82%8B.html"><![CDATA[<p>AWS の公式ドキュメントが分かりづらい上に面倒な手順となっているため、
 簡単にデプロイできる手順をメモしておく。</p>
 
 <h2 id="amazon-linux-2023-ova-ファイルのダウンロード">Amazon Linux 2023 OVA ファイルのダウンロード</h2>
@@ -65,19 +113,19 @@ ovftool で OVA ファイルを ESXi サーバにデプロイする。</p>
 <p><code class="language-plaintext highlighter-rouge">guestinfo.metadata</code> 等は <code class="language-plaintext highlighter-rouge">--extraConfig</code> を使用して指定する。
 AI に聞くと <code class="language-plaintext highlighter-rouge">--prop</code> で指定する方法を提案されるがそれは誤り。</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ovftool \
-  --name=al2023-server \
-  --datastore=datastore1 \
-  --diskMode=thin \
-  --network="VM Network" \
-  --allowExtraConfig \
-  --extraConfig:guestinfo.metadata="$(base64 -w0 meta-data.yaml)" \
-  --extraConfig:guestinfo.metadata.encoding="base64" \
-  --extraConfig:guestinfo.userdata="$(base64 -w0 user-data.yaml)" \
-  --extraConfig:guestinfo.userdata.encoding="base64" \
-  --powerOn \
-  al2023-vmware_esx-2023.7.20250609.0-kernel-6.1-x86_64.xfs.gpt.ova \
-  'vi://&lt;YOUR_USER&gt;@&lt;ESXI_HOST_IP&gt;'
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ovftool <span class="se">\</span>
+  <span class="nt">--name</span><span class="o">=</span>al2023-server <span class="se">\</span>
+  <span class="nt">--datastore</span><span class="o">=</span>datastore1 <span class="se">\</span>
+  <span class="nt">--diskMode</span><span class="o">=</span>thin <span class="se">\</span>
+  <span class="nt">--network</span><span class="o">=</span><span class="s2">"VM Network"</span> <span class="se">\</span>
+  <span class="nt">--allowExtraConfig</span> <span class="se">\</span>
+  <span class="nt">--extraConfig</span>:guestinfo.metadata<span class="o">=</span><span class="s2">"</span><span class="si">$(</span><span class="nb">base64</span> <span class="nt">-w0</span> meta-data.yaml<span class="si">)</span><span class="s2">"</span> <span class="se">\</span>
+  <span class="nt">--extraConfig</span>:guestinfo.metadata.encoding<span class="o">=</span><span class="s2">"base64"</span> <span class="se">\</span>
+  <span class="nt">--extraConfig</span>:guestinfo.userdata<span class="o">=</span><span class="s2">"</span><span class="si">$(</span><span class="nb">base64</span> <span class="nt">-w0</span> user-data.yaml<span class="si">)</span><span class="s2">"</span> <span class="se">\</span>
+  <span class="nt">--extraConfig</span>:guestinfo.userdata.encoding<span class="o">=</span><span class="s2">"base64"</span> <span class="se">\</span>
+  <span class="nt">--powerOn</span> <span class="se">\</span>
+  al2023-vmware_esx-2023.7.20250609.0-kernel-6.1-x86_64.xfs.gpt.ova <span class="se">\</span>
+  <span class="s1">'vi://&lt;YOUR_USER&gt;@&lt;ESXI_HOST_IP&gt;'</span>
 </code></pre></div></div>]]></content><author><name>saasan</name></author><category term="blog" /><category term="VMware" /><category term="ESXi" /><category term="Amazon Linux 2023" /><category term="cloud-config" /><summary type="html"><![CDATA[AWS の公式ドキュメントが分かりづらい上に面倒な手順となっているため、 簡単にデプロイできる手順をメモしておく。]]></summary></entry><entry><title type="html">VMware ESXi 上に Flatcar Container Linux のサーバを立てる</title><link href="https://slx.jp/blog/2025/03/22/vmware-esxi%E4%B8%8A%E3%81%ABflatcar-container-linux%E3%81%AE%E3%82%B5%E3%83%BC%E3%83%90%E3%82%92%E7%AB%8B%E3%81%A6%E3%82%8B.html" rel="alternate" type="text/html" title="VMware ESXi 上に Flatcar Container Linux のサーバを立てる" /><published>2025-03-22T23:55:00+09:00</published><updated>2025-03-22T23:55:00+09:00</updated><id>https://slx.jp/blog/2025/03/22/vmware-esxi%E4%B8%8A%E3%81%ABflatcar-container-linux%E3%81%AE%E3%82%B5%E3%83%BC%E3%83%90%E3%82%92%E7%AB%8B%E3%81%A6%E3%82%8B</id><content type="html" xml:base="https://slx.jp/blog/2025/03/22/vmware-esxi%E4%B8%8A%E3%81%ABflatcar-container-linux%E3%81%AE%E3%82%B5%E3%83%BC%E3%83%90%E3%82%92%E7%AB%8B%E3%81%A6%E3%82%8B.html"><![CDATA[<p>ChatGPT に Docker コンテナの実行・運用に最適な OS を聞いたところ、
 その中のひとつに「Flatcar Container Linux」があった。
 気になったのでとりあえず VMware ESXi 上にサーバを立ててみた。</p>
@@ -1379,23 +1427,4 @@ Interrupt / Skip ボタンが Generate ボタンへ戻るのに時間がかか�
 Ubuntu 22.04 の場合 ASCII armored 形式からバイナリ形式への変換 (<code class="language-plaintext highlighter-rouge">gpg --dearmor</code>) は不要らしい。</p>
 
 <p>また、パッケージで管理されていない鍵は <code class="language-plaintext highlighter-rouge">/etc/apt/keyrings</code> に置くことが推奨されている。
-よって冒頭のコマンドとなる。</p>]]></content><author><name>saasan</name></author><category term="blog" /><category term="Ubuntu" /><category term="Linux" /><category term="APT" /><summary type="html"><![CDATA[結論から言うと、以下のコマンドで鍵を追加すれば良い。]]></summary></entry><entry><title type="html">ZoneID (Zone.Identifier) を一括で削除する</title><link href="https://slx.jp/blog/2022/10/03/zoneid-zone.identifier%E3%82%92%E4%B8%80%E6%8B%AC%E3%81%A7%E5%89%8A%E9%99%A4%E3%81%99%E3%82%8B.html" rel="alternate" type="text/html" title="ZoneID (Zone.Identifier) を一括で削除する" /><published>2022-10-03T18:30:00+09:00</published><updated>2022-10-03T18:30:00+09:00</updated><id>https://slx.jp/blog/2022/10/03/zoneid-zone.identifier%E3%82%92%E4%B8%80%E6%8B%AC%E3%81%A7%E5%89%8A%E9%99%A4%E3%81%99%E3%82%8B</id><content type="html" xml:base="https://slx.jp/blog/2022/10/03/zoneid-zone.identifier%E3%82%92%E4%B8%80%E6%8B%AC%E3%81%A7%E5%89%8A%E9%99%A4%E3%81%99%E3%82%8B.html"><![CDATA[<p>ネットからダウンロードしたファイルを WSL の Linux 環境にコピーすると
-<code class="language-plaintext highlighter-rouge">〇〇:Zone.Identifier</code> というファイルが一緒にコピーされて煩わしい。</p>
-
-<p>ファイルが1つだけならコピー前にファイルのプロパティから解除するかコピー後に削除すればいいが、
-サブディレクトリ内なども含め複数まとめて処理したい場合は PowerShell を使う。</p>
-
-<p>PowerShell で削除したいファイルがあるディレクトリに移動後に
-以下のコマンドで Zone.Identifier があることを確認。</p>
-
-<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get-ChildItem</span><span class="w"> </span><span class="nt">-Recurse</span><span class="w"> </span><span class="nt">-File</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Get-Item</span><span class="w"> </span><span class="nt">-Stream</span><span class="w"> </span><span class="nx">Zone.Identifier</span><span class="w"> </span><span class="nt">-ErrorAction</span><span class="w"> </span><span class="nx">SilentlyContinue</span><span class="w">
-</span></code></pre></div></div>
-
-<p><a href="https://learn.microsoft.com/ja-jp/powershell/module/microsoft.powershell.utility/unblock-file">Unblock-File</a>
-で削除できる。</p>
-
-<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get-ChildItem</span><span class="w"> </span><span class="nt">-Recurse</span><span class="w"> </span><span class="nt">-File</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Unblock-File</span><span class="w">
-</span></code></pre></div></div>
-
-<p><a href="https://learn.microsoft.com/ja-jp/powershell/module/microsoft.powershell.management/remove-item#7">Remove-Item -Stream Zone.Identifier</a>
-でもいい。</p>]]></content><author><name>saasan</name></author><category term="blog" /><category term="Windows" /><category term="WSL" /><summary type="html"><![CDATA[ネットからダウンロードしたファイルを WSL の Linux 環境にコピーすると 〇〇:Zone.Identifier というファイルが一緒にコピーされて煩わしい。]]></summary></entry></feed>
+よって冒頭のコマンドとなる。</p>]]></content><author><name>saasan</name></author><category term="blog" /><category term="Ubuntu" /><category term="Linux" /><category term="APT" /><summary type="html"><![CDATA[結論から言うと、以下のコマンドで鍵を追加すれば良い。]]></summary></entry></feed>
