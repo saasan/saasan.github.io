@@ -1,4 +1,84 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ja"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://slx.jp/feed.xml" rel="self" type="application/atom+xml" /><link href="https://slx.jp/" rel="alternate" type="text/html" hreflang="ja" /><updated>2025-05-25T16:13:26+09:00</updated><id>https://slx.jp/feed.xml</id><title type="html">slx.jp</title><author><name>saasan</name></author><entry><title type="html">VMware ESXi 上に Flatcar Container Linux のサーバを立てる</title><link href="https://slx.jp/blog/2025/03/22/vmware-esxi%E4%B8%8A%E3%81%ABflatcar-container-linux%E3%81%AE%E3%82%B5%E3%83%BC%E3%83%90%E3%82%92%E7%AB%8B%E3%81%A6%E3%82%8B.html" rel="alternate" type="text/html" title="VMware ESXi 上に Flatcar Container Linux のサーバを立てる" /><published>2025-03-22T23:55:00+09:00</published><updated>2025-03-22T23:55:00+09:00</updated><id>https://slx.jp/blog/2025/03/22/vmware-esxi%E4%B8%8A%E3%81%ABflatcar-container-linux%E3%81%AE%E3%82%B5%E3%83%BC%E3%83%90%E3%82%92%E7%AB%8B%E3%81%A6%E3%82%8B</id><content type="html" xml:base="https://slx.jp/blog/2025/03/22/vmware-esxi%E4%B8%8A%E3%81%ABflatcar-container-linux%E3%81%AE%E3%82%B5%E3%83%BC%E3%83%90%E3%82%92%E7%AB%8B%E3%81%A6%E3%82%8B.html"><![CDATA[<p>ChatGPT に Docker コンテナの実行・運用に最適な OS を聞いたところ、
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ja"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://slx.jp/feed.xml" rel="self" type="application/atom+xml" /><link href="https://slx.jp/" rel="alternate" type="text/html" hreflang="ja" /><updated>2025-06-22T09:58:54+09:00</updated><id>https://slx.jp/feed.xml</id><title type="html">slx.jp</title><author><name>saasan</name></author><entry><title type="html">cloud-config で固定 IP アドレスを設定し Amazon Linux 2023 をオンプレミスの VMware ESXi サーバ上にデプロイする</title><link href="https://slx.jp/blog/2025/06/22/cloud-config%E3%81%A7%E5%9B%BA%E5%AE%9Aip%E3%82%A2%E3%83%89%E3%83%AC%E3%82%B9%E3%82%92%E8%A8%AD%E5%AE%9A%E3%81%97amazon-linux-2023%E3%82%92%E3%82%AA%E3%83%B3%E3%83%97%E3%83%AC%E3%83%9F%E3%82%B9%E3%81%AEvmware-esxi%E3%82%B5%E3%83%BC%E3%83%90%E4%B8%8A%E3%81%AB%E3%83%87%E3%83%97%E3%83%AD%E3%82%A4%E3%81%99%E3%82%8B.html" rel="alternate" type="text/html" title="cloud-config で固定 IP アドレスを設定し Amazon Linux 2023 をオンプレミスの VMware ESXi サーバ上にデプロイする" /><published>2025-06-22T09:55:00+09:00</published><updated>2025-06-22T09:55:00+09:00</updated><id>https://slx.jp/blog/2025/06/22/cloud-config%E3%81%A7%E5%9B%BA%E5%AE%9Aip%E3%82%A2%E3%83%89%E3%83%AC%E3%82%B9%E3%82%92%E8%A8%AD%E5%AE%9A%E3%81%97amazon-linux-2023%E3%82%92%E3%82%AA%E3%83%B3%E3%83%97%E3%83%AC%E3%83%9F%E3%82%B9%E3%81%AEvmware-esxi%E3%82%B5%E3%83%BC%E3%83%90%E4%B8%8A%E3%81%AB%E3%83%87%E3%83%97%E3%83%AD%E3%82%A4%E3%81%99%E3%82%8B</id><content type="html" xml:base="https://slx.jp/blog/2025/06/22/cloud-config%E3%81%A7%E5%9B%BA%E5%AE%9Aip%E3%82%A2%E3%83%89%E3%83%AC%E3%82%B9%E3%82%92%E8%A8%AD%E5%AE%9A%E3%81%97amazon-linux-2023%E3%82%92%E3%82%AA%E3%83%B3%E3%83%97%E3%83%AC%E3%83%9F%E3%82%B9%E3%81%AEvmware-esxi%E3%82%B5%E3%83%BC%E3%83%90%E4%B8%8A%E3%81%AB%E3%83%87%E3%83%97%E3%83%AD%E3%82%A4%E3%81%99%E3%82%8B.html"><![CDATA[<p>AWS の公式ドキュメントが分かりづらい上に面倒な手順となっているため、
+簡単にデプロイできる手順をメモしておく。</p>
+
+<h2 id="amazon-linux-2023-ova-ファイルのダウンロード">Amazon Linux 2023 OVA ファイルのダウンロード</h2>
+
+<p><a href="https://docs.aws.amazon.com/ja_jp/linux/al2023/ug/outside-ec2-download.html">KVM、VMware、Hyper-V で使用する Amazon Linux 2023 イメージをダウンロードする - Amazon Linux 2023</a>
+に書かれている
+<a href="https://cdn.amazonlinux.com/al2023/os-images/latest/">cdn.amazonlinux.com</a>
+から VMware 用の OVA ファイルをダウンロードする。</p>
+
+<h2 id="ovftool-のダウンロードとインストール">ovftool のダウンロードとインストール</h2>
+
+<p><a href="https://developer.broadcom.com/tools/open-virtualization-format-ovf-tool/latest">ovftool</a>
+をダウンロード・展開しパスを通しておく。
+base64 コマンドを使用するため、Windows 環境の場合は WSL に Linux 版を入れいると楽。</p>
+
+<h2 id="cloud-config-ファイルの準備">cloud-config ファイルの準備</h2>
+
+<p><a href="https://docs.aws.amazon.com/ja_jp/linux/al2023/ug/seed-iso.html">公式の手順</a>
+だと <code class="language-plaintext highlighter-rouge">meta-data</code>, <code class="language-plaintext highlighter-rouge">user-data</code>, <code class="language-plaintext highlighter-rouge">network-config</code> の3ファイルを用意し
+<code class="language-plaintext highlighter-rouge">seed.iso</code> ディスクイメージを作成するが、
+<code class="language-plaintext highlighter-rouge">network-config</code> と <code class="language-plaintext highlighter-rouge">seed.iso</code> は不要。</p>
+
+<p>以下のように <code class="language-plaintext highlighter-rouge">meta-data</code> と <code class="language-plaintext highlighter-rouge">user-data</code> を作成し、
+<code class="language-plaintext highlighter-rouge">meta-data</code> にネットワーク設定を記載すればよい。</p>
+
+<p>meta-data.yaml</p>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#cloud-config</span>
+<span class="na">local-hostname</span><span class="pi">:</span> <span class="s">al2023-server</span>
+
+<span class="na">network</span><span class="pi">:</span>
+  <span class="na">version</span><span class="pi">:</span> <span class="m">2</span>
+  <span class="na">ethernets</span><span class="pi">:</span>
+    <span class="na">ens192</span><span class="pi">:</span>
+      <span class="na">addresses</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="s">192.168.1.100/24</span>
+      <span class="na">routes</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="na">to</span><span class="pi">:</span> <span class="s">0.0.0.0/0</span>
+          <span class="na">via</span><span class="pi">:</span> <span class="s">192.168.1.1</span>
+      <span class="na">nameservers</span><span class="pi">:</span>
+        <span class="na">addresses</span><span class="pi">:</span>
+          <span class="pi">-</span> <span class="s">8.8.8.8</span>
+          <span class="pi">-</span> <span class="s">8.8.4.4</span>
+</code></pre></div></div>
+
+<p>user-data.yaml</p>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#cloud-config</span>
+<span class="na">users</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">default</span>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">ec2-user</span>
+    <span class="na">sudo</span><span class="pi">:</span> <span class="s2">"</span><span class="s">ALL=(ALL)</span><span class="nv"> </span><span class="s">NOPASSWD:ALL"</span>
+    <span class="na">groups</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">wheel</span><span class="pi">,</span> <span class="nv">adm</span><span class="pi">,</span> <span class="nv">systemd-journal</span><span class="pi">]</span>
+    <span class="na">ssh_authorized_keys</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">ssh-rsa ssh-key</span>
+
+<span class="na">timezone</span><span class="pi">:</span> <span class="s">Asia/Tokyo</span>
+<span class="na">locale</span><span class="pi">:</span> <span class="s">ja_JP.UTF-8</span>
+</code></pre></div></div>
+
+<h2 id="ovftool-を使用したデプロイ">ovftool を使用したデプロイ</h2>
+
+<p>仮想マシンの構成パラメータ <code class="language-plaintext highlighter-rouge">guestinfo.metadata</code> 等に作成済みの cloud-config を指定し、
+ovftool で OVA ファイルを ESXi サーバにデプロイする。</p>
+
+<p><code class="language-plaintext highlighter-rouge">guestinfo.metadata</code> 等は <code class="language-plaintext highlighter-rouge">--extraConfig</code> を使用して指定する。
+AI に聞くと <code class="language-plaintext highlighter-rouge">--prop</code> で指定する方法を提案されるがそれは誤り。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ovftool \
+  --name=al2023-server \
+  --datastore=datastore1 \
+  --diskMode=thin \
+  --network="VM Network" \
+  --allowExtraConfig \
+  --extraConfig:guestinfo.metadata="$(base64 -w0 meta-data.yaml)" \
+  --extraConfig:guestinfo.metadata.encoding="base64" \
+  --extraConfig:guestinfo.userdata="$(base64 -w0 user-data.yaml)" \
+  --extraConfig:guestinfo.userdata.encoding="base64" \
+  --powerOn \
+  al2023-vmware_esx-2023.7.20250609.0-kernel-6.1-x86_64.xfs.gpt.ova \
+  'vi://&lt;YOUR_USER&gt;@&lt;ESXI_HOST_IP&gt;'
+</code></pre></div></div>]]></content><author><name>saasan</name></author><category term="blog" /><category term="VMware" /><category term="ESXi" /><category term="Amazon Linux 2023" /><category term="cloud-config" /><summary type="html"><![CDATA[AWS の公式ドキュメントが分かりづらい上に面倒な手順となっているため、 簡単にデプロイできる手順をメモしておく。]]></summary></entry><entry><title type="html">VMware ESXi 上に Flatcar Container Linux のサーバを立てる</title><link href="https://slx.jp/blog/2025/03/22/vmware-esxi%E4%B8%8A%E3%81%ABflatcar-container-linux%E3%81%AE%E3%82%B5%E3%83%BC%E3%83%90%E3%82%92%E7%AB%8B%E3%81%A6%E3%82%8B.html" rel="alternate" type="text/html" title="VMware ESXi 上に Flatcar Container Linux のサーバを立てる" /><published>2025-03-22T23:55:00+09:00</published><updated>2025-03-22T23:55:00+09:00</updated><id>https://slx.jp/blog/2025/03/22/vmware-esxi%E4%B8%8A%E3%81%ABflatcar-container-linux%E3%81%AE%E3%82%B5%E3%83%BC%E3%83%90%E3%82%92%E7%AB%8B%E3%81%A6%E3%82%8B</id><content type="html" xml:base="https://slx.jp/blog/2025/03/22/vmware-esxi%E4%B8%8A%E3%81%ABflatcar-container-linux%E3%81%AE%E3%82%B5%E3%83%BC%E3%83%90%E3%82%92%E7%AB%8B%E3%81%A6%E3%82%8B.html"><![CDATA[<p>ChatGPT に Docker コンテナの実行・運用に最適な OS を聞いたところ、
 その中のひとつに「Flatcar Container Linux」があった。
 気になったのでとりあえず VMware ESXi 上にサーバを立ててみた。</p>
 
@@ -1318,23 +1398,4 @@ Ubuntu 22.04 の場合 ASCII armored 形式からバイナリ形式への変換 
 </span></code></pre></div></div>
 
 <p><a href="https://learn.microsoft.com/ja-jp/powershell/module/microsoft.powershell.management/remove-item#7">Remove-Item -Stream Zone.Identifier</a>
-でもいい。</p>]]></content><author><name>saasan</name></author><category term="blog" /><category term="Windows" /><category term="WSL" /><summary type="html"><![CDATA[ネットからダウンロードしたファイルを WSL の Linux 環境にコピーすると 〇〇:Zone.Identifier というファイルが一緒にコピーされて煩わしい。]]></summary></entry><entry><title type="html">Mozilla Firefox で Web サイトのダークモードを無効化する</title><link href="https://slx.jp/blog/2022/09/07/mozilla-firefox%E3%81%A7web%E3%82%B5%E3%82%A4%E3%83%88%E3%81%AE%E3%83%80%E3%83%BC%E3%82%AF%E3%83%A2%E3%83%BC%E3%83%89%E3%82%92%E7%84%A1%E5%8A%B9%E5%8C%96%E3%81%99%E3%82%8B.html" rel="alternate" type="text/html" title="Mozilla Firefox で Web サイトのダークモードを無効化する" /><published>2022-09-07T00:16:02+09:00</published><updated>2022-09-07T00:16:02+09:00</updated><id>https://slx.jp/blog/2022/09/07/mozilla-firefox%E3%81%A7web%E3%82%B5%E3%82%A4%E3%83%88%E3%81%AE%E3%83%80%E3%83%BC%E3%82%AF%E3%83%A2%E3%83%BC%E3%83%89%E3%82%92%E7%84%A1%E5%8A%B9%E5%8C%96%E3%81%99%E3%82%8B</id><content type="html" xml:base="https://slx.jp/blog/2022/09/07/mozilla-firefox%E3%81%A7web%E3%82%B5%E3%82%A4%E3%83%88%E3%81%AE%E3%83%80%E3%83%BC%E3%82%AF%E3%83%A2%E3%83%BC%E3%83%89%E3%82%92%E7%84%A1%E5%8A%B9%E5%8C%96%E3%81%99%E3%82%8B.html"><![CDATA[<p>Firefox 本体はダークテーマを使いたいけど
-Web サイトまでダークモードになると文字が読みづらい。</p>
-
-<p>そんな私みたいにわがままな人向けなのかは分からないが
-Firefox には Web サイトだけライトモードにする方法があった。</p>
-
-<p><code class="language-plaintext highlighter-rouge">about:config</code> で
-<code class="language-plaintext highlighter-rouge">layout.css.prefers-color-scheme.content-override</code>
-を変更すればいいらしい。</p>
-
-<ul>
-  <li>0: ダーク固定</li>
-  <li>1: ライト固定</li>
-  <li>2: OS の設定に従う</li>
-  <li>3: Firefox のテーマに従う</li>
-</ul>
-
-<p>デフォルト値は 3。</p>
-
-<p>当然だがこれを 0 にしても対応していないサイトはダークモードにならない。</p>]]></content><author><name>saasan</name></author><category term="blog" /><category term="PC" /><category term="Mozilla Firefox" /><summary type="html"><![CDATA[Firefox 本体はダークテーマを使いたいけど Web サイトまでダークモードになると文字が読みづらい。]]></summary></entry></feed>
+でもいい。</p>]]></content><author><name>saasan</name></author><category term="blog" /><category term="Windows" /><category term="WSL" /><summary type="html"><![CDATA[ネットからダウンロードしたファイルを WSL の Linux 環境にコピーすると 〇〇:Zone.Identifier というファイルが一緒にコピーされて煩わしい。]]></summary></entry></feed>

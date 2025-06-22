@@ -6,22 +6,22 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- Begin Jekyll SEO tag v2.8.0 -->
-<title>【2024年最新版】今年買ってよかったもの | slx.jp</title>
+<title>cloud-config で固定 IP アドレスを設定し Amazon Linux 2023 をオンプレミスの VMware ESXi サーバ上にデプロイする | slx.jp</title>
 <meta name="generator" content="Jekyll v4.4.1">
-<meta property="og:title" content="【2024年最新版】今年買ってよかったもの">
+<meta property="og:title" content="cloud-config で固定 IP アドレスを設定し Amazon Linux 2023 をオンプレミスの VMware ESXi サーバ上にデプロイする">
 <meta name="author" content="saasan">
 <meta property="og:locale" content="ja">
-<meta name="description" content="2024年に買ってよかったものをご紹介">
-<meta property="og:description" content="2024年に買ってよかったものをご紹介">
-<link rel="canonical" href="https://slx.jp/blog/2024/12/31/2024%E5%B9%B4%E6%9C%80%E6%96%B0%E7%89%88-%E4%BB%8A%E5%B9%B4%E8%B2%B7%E3%81%A3%E3%81%A6%E3%82%88%E3%81%8B%E3%81%A3%E3%81%9F%E3%82%82%E3%81%AE.html">
-<meta property="og:url" content="https://slx.jp/blog/2024/12/31/2024%E5%B9%B4%E6%9C%80%E6%96%B0%E7%89%88-%E4%BB%8A%E5%B9%B4%E8%B2%B7%E3%81%A3%E3%81%A6%E3%82%88%E3%81%8B%E3%81%A3%E3%81%9F%E3%82%82%E3%81%AE.html">
+<meta name="description" content="AWS の公式ドキュメントが分かりづらい上に面倒な手順となっているため、 簡単にデプロイできる手順をメモしておく。">
+<meta property="og:description" content="AWS の公式ドキュメントが分かりづらい上に面倒な手順となっているため、 簡単にデプロイできる手順をメモしておく。">
+<link rel="canonical" href="https://slx.jp/blog/2025/06/22/cloud-config%E3%81%A7%E5%9B%BA%E5%AE%9Aip%E3%82%A2%E3%83%89%E3%83%AC%E3%82%B9%E3%82%92%E8%A8%AD%E5%AE%9A%E3%81%97amazon-linux-2023%E3%82%92%E3%82%AA%E3%83%B3%E3%83%97%E3%83%AC%E3%83%9F%E3%82%B9%E3%81%AEvmware-esxi%E3%82%B5%E3%83%BC%E3%83%90%E4%B8%8A%E3%81%AB%E3%83%87%E3%83%97%E3%83%AD%E3%82%A4%E3%81%99%E3%82%8B.html">
+<meta property="og:url" content="https://slx.jp/blog/2025/06/22/cloud-config%E3%81%A7%E5%9B%BA%E5%AE%9Aip%E3%82%A2%E3%83%89%E3%83%AC%E3%82%B9%E3%82%92%E8%A8%AD%E5%AE%9A%E3%81%97amazon-linux-2023%E3%82%92%E3%82%AA%E3%83%B3%E3%83%97%E3%83%AC%E3%83%9F%E3%82%B9%E3%81%AEvmware-esxi%E3%82%B5%E3%83%BC%E3%83%90%E4%B8%8A%E3%81%AB%E3%83%87%E3%83%97%E3%83%AD%E3%82%A4%E3%81%99%E3%82%8B.html">
 <meta property="og:site_name" content="slx.jp">
 <meta property="og:type" content="article">
-<meta property="article:published_time" content="2024-12-31T08:30:00+09:00">
+<meta property="article:published_time" content="2025-06-22T09:55:00+09:00">
 <meta name="twitter:card" content="summary">
-<meta property="twitter:title" content="【2024年最新版】今年買ってよかったもの">
+<meta property="twitter:title" content="cloud-config で固定 IP アドレスを設定し Amazon Linux 2023 をオンプレミスの VMware ESXi サーバ上にデプロイする">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"saasan"},"dateModified":"2024-12-31T08:30:00+09:00","datePublished":"2024-12-31T08:30:00+09:00","description":"2024年に買ってよかったものをご紹介","headline":"【2024年最新版】今年買ってよかったもの","mainEntityOfPage":{"@type":"WebPage","@id":"https://slx.jp/blog/2024/12/31/2024%E5%B9%B4%E6%9C%80%E6%96%B0%E7%89%88-%E4%BB%8A%E5%B9%B4%E8%B2%B7%E3%81%A3%E3%81%A6%E3%82%88%E3%81%8B%E3%81%A3%E3%81%9F%E3%82%82%E3%81%AE.html"},"url":"https://slx.jp/blog/2024/12/31/2024%E5%B9%B4%E6%9C%80%E6%96%B0%E7%89%88-%E4%BB%8A%E5%B9%B4%E8%B2%B7%E3%81%A3%E3%81%A6%E3%82%88%E3%81%8B%E3%81%A3%E3%81%9F%E3%82%82%E3%81%AE.html"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"saasan"},"dateModified":"2025-06-22T09:55:00+09:00","datePublished":"2025-06-22T09:55:00+09:00","description":"AWS の公式ドキュメントが分かりづらい上に面倒な手順となっているため、 簡単にデプロイできる手順をメモしておく。","headline":"cloud-config で固定 IP アドレスを設定し Amazon Linux 2023 をオンプレミスの VMware ESXi サーバ上にデプロイする","mainEntityOfPage":{"@type":"WebPage","@id":"https://slx.jp/blog/2025/06/22/cloud-config%E3%81%A7%E5%9B%BA%E5%AE%9Aip%E3%82%A2%E3%83%89%E3%83%AC%E3%82%B9%E3%82%92%E8%A8%AD%E5%AE%9A%E3%81%97amazon-linux-2023%E3%82%92%E3%82%AA%E3%83%B3%E3%83%97%E3%83%AC%E3%83%9F%E3%82%B9%E3%81%AEvmware-esxi%E3%82%B5%E3%83%BC%E3%83%90%E4%B8%8A%E3%81%AB%E3%83%87%E3%83%97%E3%83%AD%E3%82%A4%E3%81%99%E3%82%8B.html"},"url":"https://slx.jp/blog/2025/06/22/cloud-config%E3%81%A7%E5%9B%BA%E5%AE%9Aip%E3%82%A2%E3%83%89%E3%83%AC%E3%82%B9%E3%82%92%E8%A8%AD%E5%AE%9A%E3%81%97amazon-linux-2023%E3%82%92%E3%82%AA%E3%83%B3%E3%83%97%E3%83%AC%E3%83%9F%E3%82%B9%E3%81%AEvmware-esxi%E3%82%B5%E3%83%BC%E3%83%90%E4%B8%8A%E3%81%AB%E3%83%87%E3%83%97%E3%83%AD%E3%82%A4%E3%81%99%E3%82%8B.html"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="icon" href="/assets/images/favicon.png">
   <link rel="canonical" href="https://slx.jp">
@@ -658,11 +658,11 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 <header class="post-header">
-  <h1 class="post-title p-name" itemprop="name headline">【2024年最新版】今年買ってよかったもの</h1>
+  <h1 class="post-title p-name" itemprop="name headline">cloud-config で固定 IP アドレスを設定し Amazon Linux 2023 をオンプレミスの VMware ESXi サーバ上にデプロイする</h1>
   <h2 class="post-subtitle"></h2>
 
   <p class="post-meta">
-    <time class="dt-published" datetime="2024-12-31T08:30:00+09:00" itemprop="datePublished"><i class="fa fa-calendar"></i> 2024-12-31 08:30
+    <time class="dt-published" datetime="2025-06-22T09:55:00+09:00" itemprop="datePublished"><i class="fa fa-calendar"></i> 2025-06-22 09:55
     </time>
 
     
@@ -699,169 +699,111 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 
-    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 6 mins</span>
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 5 mins</span>
   </p>
-<div class="post-tags"><a class="post-tag" href="/tags.html#%E3%82%AC%E3%82%B8%E3%82%A7%E3%83%83%E3%83%88">#ガジェット</a></div></header>
+<div class="post-tags">
+<a class="post-tag" href="/tags.html#VMware">#VMware</a><a class="post-tag" href="/tags.html#ESXi">#ESXi</a><a class="post-tag" href="/tags.html#Amazon%20Linux%202023">#Amazon Linux 2023</a><a class="post-tag" href="/tags.html#cloud-config">#cloud-config</a>
+</div></header>
 <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
     <div class="post-content e-content" itemprop="articleBody">
 
-      <p>1年以上このサイトを放置してたんで更新方法すら忘れてる感があるが、
-今年買ってよかったものを羅列していく。</p>
+      <p>AWS の公式ドキュメントが分かりづらい上に面倒な手順となっているため、
+簡単にデプロイできる手順をメモしておく。</p>
 
-<h2 id="skagen-jorn-hybrid-hr-スマートウォッチ-skt3000">SKAGEN JORN HYBRID HR スマートウォッチ SKT3000</h2>
+<h2 id="amazon-linux-2023-ova-ファイルのダウンロード">Amazon Linux 2023 OVA ファイルのダウンロード</h2>
 
-<div class="affiliate-product-list">
-    <a href="https://www.amazon.co.jp/dp/B08RDJSZ71?tag=saasan-22" class="affiliate-product">
-        <img src="https://m.media-amazon.com/images/I/81pMxAixRUL._AC_SX679_.jpg" alt="[スカーゲン] 腕時計 JORN 42MM HYBRID HR SKT3000 メンズ ブラウン">
-        <span class="affiliate-product-name">[スカーゲン] 腕時計 JORN 42MM HYBRID HR SKT3000 メンズ ブラウン</span>
-    </a>
-</div>
+<p><a href="https://docs.aws.amazon.com/ja_jp/linux/al2023/ug/outside-ec2-download.html">KVM、VMware、Hyper-V で使用する Amazon Linux 2023 イメージをダウンロードする - Amazon Linux 2023</a>
+に書かれている
+<a href="https://cdn.amazonlinux.com/al2023/os-images/latest/">cdn.amazonlinux.com</a>
+から VMware 用の OVA ファイルをダウンロードする。</p>
 
-<p>今年一番買ってよかったやつ。
-アナログ腕時計の文字盤が電子ペーパーになってるタイプのスマートウォッチ。</p>
+<h2 id="ovftool-のダウンロードとインストール">ovftool のダウンロードとインストール</h2>
 
-<ul>
-  <li>良い点
-    <ul>
-      <li>見た目が普通の腕時計</li>
-      <li>スマホの通知確認、アラームに使えて便利</li>
-      <li>電子ペーパーのためバッテリーが数週間もつ</li>
-    </ul>
-  </li>
-  <li>悪い点
-    <ul>
-      <li>電子ペーパーのため画面の更新は若干もたつく (画面が小さいこともあり1秒もかからないが)</li>
-      <li>タッチパネルではないため、側面にある3つのボタンでの操作が必要
-        <ul>
-          <li>ボタンを押し込む際の荷重は軽めで 3mm ほど出っ張っている</li>
-          <li>手の甲などにあたって画面が勝手に変わっていることがある</li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-</ul>
+<p><a href="https://developer.broadcom.com/tools/open-virtualization-format-ovf-tool/latest">ovftool</a>
+をダウンロード・展開しパスを通しておく。
+base64 コマンドを使用するため、Windows 環境の場合は WSL に Linux 版を入れいると楽。</p>
 
-<blockquote class="twitter-tweet">
-<p lang="ja" dir="ltr">先日買ったハイブリッドスマートウォッチのベルト交換してきた <a href="https://t.co/8iD071xftc">pic.twitter.com/8iD071xftc</a></p>— カガミ (@saasan) <a href="https://twitter.com/saasan/status/1788145173278691625?ref_src=twsrc%5Etfw">May 8, 2024</a>
-</blockquote>
-<script async="" src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<h2 id="cloud-config-ファイルの準備">cloud-config ファイルの準備</h2>
 
-<h2 id="エレコム-bluetooth50-マウス-ex-g-pro-lサイズ-m-xgl50mbskbk">エレコム Bluetooth5.0 マウス EX-G PRO Lサイズ M-XGL50MBSKBK</h2>
+<p><a href="https://docs.aws.amazon.com/ja_jp/linux/al2023/ug/seed-iso.html">公式の手順</a>
+だと <code class="language-plaintext highlighter-rouge">meta-data</code>, <code class="language-plaintext highlighter-rouge">user-data</code>, <code class="language-plaintext highlighter-rouge">network-config</code> の3ファイルを用意し
+<code class="language-plaintext highlighter-rouge">seed.iso</code> ディスクイメージを作成するが、
+<code class="language-plaintext highlighter-rouge">network-config</code> と <code class="language-plaintext highlighter-rouge">seed.iso</code> は不要。</p>
 
-<div class="affiliate-product-list">
-    <a href="https://www.amazon.co.jp/dp/B0CGWN5V9N/?tag=saasan-22" class="affiliate-product">
-        <img src="https://m.media-amazon.com/images/I/71lZi6zwg1L._AC_SX679_.jpg" alt="エレコム ワイヤレスマウス 静音 EX-G PRO Lサイズ Bluetooth 無線2.4GHz 両対応 充電式 8ボタン 高速スクロール チルトホイール 抗菌 ブラック M-XGL50MBSKBK">
-        <span class="affiliate-product-name">エレコム ワイヤレスマウス 静音 EX-G PRO Lサイズ Bluetooth 無線2.4GHz 両対応 充電式 8ボタン 高速スクロール チルトホイール 抗菌 ブラック M-XGL50MBSKBK</span>
-    </a>
-</div>
+<p>以下のように <code class="language-plaintext highlighter-rouge">meta-data</code> と <code class="language-plaintext highlighter-rouge">user-data</code> を作成し、
+<code class="language-plaintext highlighter-rouge">meta-data</code> にネットワーク設定を記載すればよい。</p>
 
-<p>長年使ってた Microsoft Sculpt Ergonomic Mouse が廃番になっていたため乗り換え</p>
+<p>meta-data.yaml</p>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#cloud-config</span>
+<span class="na">local-hostname</span><span class="pi">:</span> <span class="s">al2023-server</span>
 
-<ul>
-  <li>良い点
-    <ul>
-      <li>高さがあり持ちやすい</li>
-      <li>M、XL サイズも試したが、L サイズの握り心地が一番良かった</li>
-      <li>ボタン数多め</li>
-    </ul>
-  </li>
-  <li>悪い点
-    <ul>
-      <li>充電式のバッテリーは数日しかもたないため、頻繁に充電が必要</li>
-      <li>中クリック(ホイールクリック)がかなり固くて押しづらい</li>
-      <li>充電ケーブルの差込口が狭く、付属の USB Type-C ケーブルでしか充電できない</li>
-    </ul>
-  </li>
-</ul>
+<span class="na">network</span><span class="pi">:</span>
+  <span class="na">version</span><span class="pi">:</span> <span class="m">2</span>
+  <span class="na">ethernets</span><span class="pi">:</span>
+    <span class="na">ens192</span><span class="pi">:</span>
+      <span class="na">addresses</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="s">192.168.1.100/24</span>
+      <span class="na">routes</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="na">to</span><span class="pi">:</span> <span class="s">0.0.0.0/0</span>
+          <span class="na">via</span><span class="pi">:</span> <span class="s">192.168.1.1</span>
+      <span class="na">nameservers</span><span class="pi">:</span>
+        <span class="na">addresses</span><span class="pi">:</span>
+          <span class="pi">-</span> <span class="s">8.8.8.8</span>
+          <span class="pi">-</span> <span class="s">8.8.4.4</span>
+</code></pre></div></div>
 
-<h2 id="電動空気入れ-panp-ride-mini">電動空気入れ PANP RIDE MINI</h2>
+<p>user-data.yaml</p>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#cloud-config</span>
+<span class="na">users</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">default</span>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">ec2-user</span>
+    <span class="na">sudo</span><span class="pi">:</span> <span class="s2">"</span><span class="s">ALL=(ALL)</span><span class="nv"> </span><span class="s">NOPASSWD:ALL"</span>
+    <span class="na">groups</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">wheel</span><span class="pi">,</span> <span class="nv">adm</span><span class="pi">,</span> <span class="nv">systemd-journal</span><span class="pi">]</span>
+    <span class="na">ssh_authorized_keys</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">ssh-rsa ssh-key</span>
 
-<div class="affiliate-product-list">
-    <a href="https://www.amazon.co.jp/dp/B0D7MMH36N/?tag=saasan-22" class="affiliate-product">
-        <img src="https://m.media-amazon.com/images/I/61csfSJXeKL._AC_SY879_.jpg" alt="PANP RIDE MINI 空気入れ 自転車 ロードバイク ツーリング 日本 メーカー (全バルブ対応) 米式 英式 仏式 バイク ボール 電動空気入れ 自動 軽量 小型コンパクト エアコンプレッサー KUKIIRE スマート空気入れ【保証2年間】">
-        <span class="affiliate-product-name">PANP RIDE MINI 空気入れ 自転車 ロードバイク ツーリング 日本 メーカー (全バルブ対応) 米式 英式 仏式 バイク ボール 電動空気入れ 自動 軽量 小型コンパクト エアコンプレッサー KUKIIRE スマート空気入れ【保証2年間】</span>
-    </a>
-</div>
+<span class="na">timezone</span><span class="pi">:</span> <span class="s">Asia/Tokyo</span>
+<span class="na">locale</span><span class="pi">:</span> <span class="s">ja_JP.UTF-8</span>
+</code></pre></div></div>
 
-<p>ボタンを押すだけで、事前に設定しておいた空気圧まで自動で空気が入る。便利。</p>
+<h2 id="ovftool-を使用したデプロイ">ovftool を使用したデプロイ</h2>
 
-<h2 id="créer-人感センサーライト">créer 人感センサーライト</h2>
+<p>仮想マシンの構成パラメータ <code class="language-plaintext highlighter-rouge">guestinfo.metadata</code> 等に作成済みの cloud-config を指定し、
+ovftool で OVA ファイルを ESXi サーバにデプロイする。</p>
 
-<div class="affiliate-product-list">
-    <a href="https://www.amazon.co.jp/dp/B0B11ZVBQ5/?tag=saasan-22" class="affiliate-product">
-        <img src="https://m.media-amazon.com/images/I/61Pzaizi-nL._AC_SX679_.jpg" alt="créer(クレエ) 人感 センサーライト 室内 【PSE取得済】 明るさ調節(10段階)・点灯時間設定可能/足元灯 コンセント式 省エネ フットライト 電球色 暖色/白色 照明 (ホワイト)">
-        <span class="affiliate-product-name">créer(クレエ) 人感 センサーライト 室内 【PSE取得済】 明るさ調節(10段階)・点灯時間設定可能/足元灯 コンセント式 省エネ フットライト 電球色 暖色/白色 照明 (ホワイト)</span>
-    </a>
-</div>
+<p><code class="language-plaintext highlighter-rouge">guestinfo.metadata</code> 等は <code class="language-plaintext highlighter-rouge">--extraConfig</code> を使用して指定する。
+AI に聞くと <code class="language-plaintext highlighter-rouge">--prop</code> で指定する方法を提案されるがそれは誤り。</p>
 
-<p>廊下にこれを付けたら、夜中にトイレへ行く際などわざわざ照明をつけなくてもよくなった。
-コンセント式なので電池交換の手間もない。</p>
-
-<h2 id="マキタ-携帯電話ホルダー-a-73162">マキタ 携帯電話ホルダー A-73162</h2>
-
-<div class="affiliate-product-list">
-    <a href="https://www.amazon.co.jp/dp/B0BZCXXQPB/?tag=saasan-22" class="affiliate-product">
-        <img src="https://m.media-amazon.com/images/I/81HJjeNtTbL._AC_SX679_.jpg" alt="マキタ(Makita) 携帯電話ホルダー A-73162">
-        <span class="affiliate-product-name">マキタ(Makita) 携帯電話ホルダー A-73162</span>
-    </a>
-</div>
-
-<p>Galaxy Z Fold5 がデカいんで、ポケットに入れられないとき使ってる</p>
-
-<h2 id="secrid-カードケース">Secrid カードケース</h2>
-
-<div class="affiliate-product-list">
-    <a href="https://www.amazon.co.jp/dp/B074MN1146/?tag=saasan-22" class="affiliate-product">
-        <img src="https://m.media-amazon.com/images/I/61Iur4dn5yL._AC_SX679_.jpg" alt="Secrid (シークリッド) - ミニ 財布 本革 RFID保護 カードケース カード最大12枚用, RFID財布。, ブラックオリーブ, 21 mm">
-        <span class="affiliate-product-name">Secrid (シークリッド) - ミニ 財布 本革 RFID保護 カードケース カード最大12枚用, RFID財布。, ブラックオリーブ, 21 mm</span>
-    </a>
-</div>
-
-<p>下のレバーを引くとカードが少しずつズレた状態で飛び出すので取り出しやすい</p>
-
-<h2 id="タニタのツインスティック">タニタのツインスティック</h2>
-
-<p>バーチャロンやるならやっぱりこれ</p>
-
-<blockquote class="twitter-tweet">
-<p lang="ja" dir="ltr">PS4発掘してバーチャロン環境整えた<br>フォースのアーケード一周プレイしてみたけど元々ツインスティック自体に重量があるのと吸盤がガラス天板の机と相性よくて安定感ある <a href="https://t.co/XmwsBOK7wE">pic.twitter.com/XmwsBOK7wE</a></p>— カガミ (@saasan) <a href="https://twitter.com/saasan/status/1816377426865447364?ref_src=twsrc%5Etfw">July 25, 2024</a>
-</blockquote>
-<script async="" src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-
-<h2 id="ロフトベッド">ロフトベッド</h2>
-
-<p>物を置けるスペースが拡大したが、既に埋まってしまった</p>
-
-<blockquote class="twitter-tweet">
-<p lang="ja" dir="ltr">ロフトベッドとポケットコイルマットレスの設置終わった<br>4時間くらいかかった<br>これで起きたときに身体が痛いの改善するといいんだけど <a href="https://t.co/oaUfnpqpv0">pic.twitter.com/oaUfnpqpv0</a></p>— カガミ (@saasan) <a href="https://twitter.com/saasan/status/1753680538991579183?ref_src=twsrc%5Etfw">February 3, 2024</a>
-</blockquote>
-<script async="" src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-
-<h2 id="にゃんぷっぷーぬいぐるみ">にゃんぷっぷーぬいぐるみ</h2>
-
-<p>かわいい</p>
-
-<blockquote class="twitter-tweet">
-<p lang="ja" dir="ltr">にゃんぷっぷーぬいぐるみ届いた！ <a href="https://t.co/nGSoA3g5kp">pic.twitter.com/nGSoA3g5kp</a></p>— カガミ (@saasan) <a href="https://twitter.com/saasan/status/1853768089244250293?ref_src=twsrc%5Etfw">November 5, 2024</a>
-</blockquote>
-<script async="" src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ovftool \
+  --name=al2023-server \
+  --datastore=datastore1 \
+  --diskMode=thin \
+  --network="VM Network" \
+  --allowExtraConfig \
+  --extraConfig:guestinfo.metadata="$(base64 -w0 meta-data.yaml)" \
+  --extraConfig:guestinfo.metadata.encoding="base64" \
+  --extraConfig:guestinfo.userdata="$(base64 -w0 user-data.yaml)" \
+  --extraConfig:guestinfo.userdata.encoding="base64" \
+  --powerOn \
+  al2023-vmware_esx-2023.7.20250609.0-kernel-6.1-x86_64.xfs.gpt.ova \
+  'vi://&lt;YOUR_USER&gt;@&lt;ESXI_HOST_IP&gt;'
+</code></pre></div></div>
 
 
     </div>
 
 </article>
 <div class="post-nav">
-<a class="previous" href="/blog/2023/08/14/aptx-adaptive-ll%E5%AF%BE%E5%BF%9Cbluetooth%E6%A9%9F%E5%99%A8%E3%81%A7pc%E3%82%B2%E3%83%BC%E3%83%A0%E3%81%AB%E4%BD%BF%E3%81%88%E3%82%8B%E5%AE%8C%E5%85%A8%E3%83%AF%E3%82%A4%E3%83%A4%E3%83%AC%E3%82%B9%E3%81%AA%E3%82%AA%E3%83%BC%E3%83%87%E3%82%A3%E3%82%AA%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89.html" title="aptX Adaptive LL 対応 Bluetooth 機器で PC ゲームに使える完全ワイヤレスなオーディオ環境構築">aptX Adaptive LL 対応 Bluetooth 機器で...</a><a class="next" href="/blog/2025/02/23/windows-11%E3%81%AEWSL%E3%81%A7ext4%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E3%81%AE%E3%83%89%E3%83%A9%E3%82%A4%E3%83%96%E3%81%AE%E5%86%85%E5%AE%B9%E3%82%92%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B.html" title="Windows 11 の WSL で ext4 ファイルシステムのドライブの内容を確認する">Windows 11 の WSL で ext4...</a>
+<a class="previous" href="/blog/2025/03/22/vmware-esxi%E4%B8%8A%E3%81%ABflatcar-container-linux%E3%81%AE%E3%82%B5%E3%83%BC%E3%83%90%E3%82%92%E7%AB%8B%E3%81%A6%E3%82%8B.html" title="VMware ESXi 上に Flatcar Container Linux のサーバを立てる">VMware ESXi 上に Flatcar Container Linux...</a><span></span>
 </div>
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/blog/2023/03/06/stable-diffusion%E3%82%92windows-10%E3%81%B8%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95%E3%81%A8%E4%BD%BF%E3%81%84%E6%96%B9-%E7%94%BB%E5%83%8F%E7%94%9F%E6%88%90%E3%81%AE%E3%82%B3%E3%83%84.html" title="Windows 11 の WSL で ext4 ファイルシステムのドライブの内容を確認する">Stable Diffusion を Windows 10 へインストールする方法と使い方、画像生成のコツ</a></li>
-<li><a class="post-link" href="/blog/2021/09/18/lenovo-thinkcentre-m600-tiny%E3%81%ABpci-express%E3%82%92%E7%84%A1%E7%90%86%E3%82%84%E3%82%8A%E5%A2%97%E8%A8%AD%E3%81%99%E3%82%8B.html" title="Windows 11 の WSL で ext4 ファイルシステムのドライブの内容を確認する">Lenovo ThinkCentre M600 Tiny に PCI Express を無理やり増設する</a></li>
-<li><a class="post-link" href="/blog/2017/05/03/%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%83%A9%E3%82%A4%E3%83%B3-CLI-%E3%81%A7FortiGate%E3%82%92%E8%A8%AD%E5%AE%9A%E3%81%99%E3%82%8B.html" title="Windows 11 の WSL で ext4 ファイルシステムのドライブの内容を確認する">コマンドライン(CLI)でFortiGateを設定する</a></li>
-<li><a class="post-link" href="/blog/2020/06/17/m5stickc-speaker-hat%E3%81%A7esp8266audio%E3%83%A9%E3%82%A4%E3%83%96%E3%83%A9%E3%83%AA%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%97%E3%81%A6mp3%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%92%E5%86%8D%E7%94%9F%E3%81%99%E3%82%8B.html" title="Windows 11 の WSL で ext4 ファイルシステムのドライブの内容を確認する">M5StickC + Speaker Hat で ESP8266Audio ライブラリを使用して MP3 ファイルを再生する</a></li>
+        <li><a class="post-link" href="/blog/2024/12/31/2024%E5%B9%B4%E6%9C%80%E6%96%B0%E7%89%88-%E4%BB%8A%E5%B9%B4%E8%B2%B7%E3%81%A3%E3%81%A6%E3%82%88%E3%81%8B%E3%81%A3%E3%81%9F%E3%82%82%E3%81%AE.html" title="">【2024年最新版】今年買ってよかったもの</a></li>
+<li><a class="post-link" href="/blog/2023/07/05/ifttt%E3%81%AEtwitter%E9%80%A3%E6%90%BA%E3%81%8C%E6%9C%89%E6%96%99%E5%8C%96%E3%81%97%E3%81%9F%E3%81%AE%E3%81%A7python%E3%81%A8github-actions%E3%81%A7rss%E3%82%92%E3%83%84%E3%82%A4%E3%83%BC%E3%83%88%E3%81%99%E3%82%8B.html" title="">IFTTT の Twitter 連携が有料化したので Python と GitHub Actions で RSS をツイートする</a></li>
+<li><a class="post-link" href="/blog/2020/07/19/usb-cable-checker-2%E3%81%A7usb-type-c%E3%82%B1%E3%83%BC%E3%83%96%E3%83%AB%E3%81%AE%E6%80%A7%E8%83%BD%E3%82%92%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B.html" title="">USB CABLE CHECKER 2 で USB Type-C ケーブルの性能を確認する</a></li>
+<li><a class="post-link" href="/blog/2016/08/02/%E3%83%90%E3%83%83%E3%83%81%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%A7%E3%83%9F%E3%83%AA%E7%A7%92%E5%8D%98%E4%BD%8D%E3%81%AEsleep%E3%82%92%E8%A1%8C%E3%81%86.html" title="">バッチファイルでミリ秒単位のSleepを行う</a></li>
 </ul>
     </div>
 <div class="post-comments"></div></section>
