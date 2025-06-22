@@ -127,10 +127,9 @@ document.addEventListener('DOMContentLoaded', function(event) {
     display: none;
   }
 </style>
-<script src="//cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.3/photoswipe.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.3/photoswipe.css" rel="stylesheet">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.3/default-skin/default-skin.css" rel="stylesheet">
+<script src="//cdnjs.cloudflare.com/ajax/libs/photoswipe/5.3.7/umd/photoswipe-lightbox.umd.min.js" async></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/photoswipe/5.3.7/umd/photoswipe.umd.min.js" async></script>
+<link href="//cdnjs.cloudflare.com/ajax/libs/photoswipe/5.3.7/photoswipe.min.css" rel="stylesheet">
 <style>
   .pswp .pswp__container .pswp__img {
     background-color: white;
@@ -139,138 +138,76 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 <script>
   function initPhotoSwipe() {
-    var mainEl = document.querySelector("section.main");
+    let customOptions = {};
 
-    var imgEls = mainEl.querySelectorAll("img:not(.emoji)");
+    try {
+      const data = ``.replaceAll("=>", ":");
+      customOptions = JSON.parse(data);
+    } catch (e) {
+      console.info("Invalid custom photo previewer options! " + e.message);
+    }
+
+    // Define object and gallery options
+    const options = Object.assign(
+      {
+        gallery: "section.main",
+        children: "a.photo-swipe",
+        photo_scale: 2,
+        // dynamic import is not supported in UMD version
+        pswpModule: PhotoSwipe,
+      },
+      customOptions
+    );
+
+    const galleryEl = document.querySelector(options.gallery);
+    if (!galleryEl) {
+      return;
+    }
+
+    const imgEls = [];
+    const els = galleryEl.querySelectorAll("img:not(.emoji)");
+    els.forEach((el) => {
+      if (el.src.trim() == "") {
+        return;
+      }
+      if (el.parentElement?.tagName.toLowerCase() === "a") {
+        return;
+      }
+      if (!imgEls.includes(el)) {
+        imgEls.push(el);
+      }
+    });
+
+    if (imgEls.length === 0) {
+      return;
+    }
+
     imgEls.forEach((imgEl) => {
       imgEl.outerHTML = `
-    <a class="photo-swipe"
-      href="${imgEl.src}"
-      data-width="${imgEl.getAttribute("width") || imgEl.width * 2}"
-      data-height="${imgEl.getAttribute("height") || imgEl.height * 2}"
-      data-caption="${imgEl.getAttribute("caption") || imgEl.alt}"
-      target="_blank">
-      ${imgEl.outerHTML}
-    </a>`;
+      <a class="photo-swipe"
+        href="${imgEl.src}"
+        data-pswp-width="${
+          Math.max(imgEl.naturalWidth, imgEl.width) * options.photo_scale
+        }"
+        data-pswp-height="${
+          Math.max(imgEl.naturalHeight, imgEl.height) * options.photo_scale
+        }"
+        data-pswp-caption="${imgEl.getAttribute("caption") || imgEl.alt}"
+        target="_blank">
+        ${imgEl.outerHTML}
+      </a>`;
     });
 
-    // Init empty gallery array
-    var container = [];
+    // Initialize PhotoSwipe 5
+    var lightbox = new PhotoSwipeLightbox(options);
 
-    // Loop over gallery items and push it to the array
-    var linkEls = mainEl.querySelectorAll("a.photo-swipe");
-    linkEls.forEach((link) => {
-      var item = {
-        src: link.getAttribute("href"),
-        w: link.dataset.width,
-        h: link.dataset.height,
-        title: link.dataset.caption || "",
-      };
-      container.push(item);
-    });
-
-    // Define click event on gallery item
-    linkEls.forEach((link, index) => {
-      link.addEventListener("click", (event) => {
-        // Prevent location change
-        event.preventDefault();
-
-        // Define object and gallery options
-        var pswp = document.querySelector(".pswp");
-
-        var zoomLevel = 1;
-
-        // Define object and gallery options
-        var options = {
-          index: index,
-          bgOpacity: 0.85,
-          showHideOpacity: true,
-          closeOnScroll: true,
-          maxSpreadZoom: 1,
-          getDoubleTapZoom: (isMouseClick, item) => {
-            if (item.detail) {
-              zoomLevel += item.detail.origEvent.shiftKey ? -1 : 1;
-              item.detail = undefined;
-            } else {
-              zoomLevel = zoomLevel === 1 ? 2 : 1;
-            }
-            if (zoomLevel <= 1) {
-              zoomLevel = 1;
-              setTimeout(() => pswp.classList.remove("pswp--zoomed-in"), 0);
-            }
-            return item.initialZoomLevel * zoomLevel;
-          },
-        };
-
-        // Initialize PhotoSwipe
-        var gallery = new PhotoSwipe(
-          pswp,
-          PhotoSwipeUI_Default,
-          container,
-          options
-        );
-
-        gallery.init();
-
-        // Custom zoom event
-        gallery.container.addEventListener("pswpTap", (e) => {
-          gallery.currItem.detail = e.detail;
-        });
-      });
-    });
+    lightbox.init();
   }
 
   window.addEventListener("load", initPhotoSwipe);
 </script>
-
-<!-- Root element of PhotoSwipe. Must have class pswp. -->
 </head>
 <body>
-<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
-  <!-- Background of PhotoSwipe.
-           It's a separate element as animating opacity is faster than rgba(). -->
-  <div class="pswp__bg"></div>
-  <!-- Slides wrapper with overflow:hidden. -->
-  <div class="pswp__scroll-wrap">
-    <!-- Container that holds slides.
-              PhotoSwipe keeps only 3 of them in the DOM to save memory.
-              Don't modify these 3 pswp__item elements, data is added later on. -->
-    <div class="pswp__container">
-      <div class="pswp__item"></div>
-      <div class="pswp__item"></div>
-      <div class="pswp__item"></div>
-    </div>
-    <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
-    <div class="pswp__ui pswp__ui--hidden">
-      <div class="pswp__top-bar">
-        <!--  Controls are self-explanatory. Order can be changed. -->
-        <div class="pswp__counter"></div>
-        <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
-        <button class="pswp__button pswp__button--share" title="Share"></button>
-        <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
-        <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
-        <!-- element will get class pswp__preloader--active when preloader is running -->
-        <div class="pswp__preloader">
-          <div class="pswp__preloader__icn">
-            <div class="pswp__preloader__cut">
-              <div class="pswp__preloader__donut"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
-        <div class="pswp__share-tooltip"></div>
-      </div>
-      <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
-      <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button>
-      <div class="pswp__caption">
-        <div class="pswp__caption__center"></div>
-      </div>
-    </div>
-  </div>
-</div>
-
-
 
 
 
@@ -730,10 +667,10 @@ document.addEventListener('DOMContentLoaded', function(event) {
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/blog/2015/09/07/google-opinion-rewards.html" title="Instagram Download Button">デレステ、PSO2プレイヤーにおすすめ。無料でGoogle Playのクレジットがもらえる「Google アンケート モニター」</a></li>
-<li><a class="post-link" href="/blog/2021/01/03/m5stickc%E3%81%A7%E6%AF%8E%E6%9C%9D%E7%85%A7%E6%98%8E%E3%82%92%E8%87%AA%E5%8B%95%E3%81%A7%E7%82%B9%E7%81%AF%E3%81%99%E3%82%8B.html" title="Instagram Download Button">M5StickC で毎朝照明を自動で点灯する</a></li>
-<li><a class="post-link" href="/blog/2022/09/07/mozilla-firefox%E3%81%A7web%E3%82%B5%E3%82%A4%E3%83%88%E3%81%AE%E3%83%80%E3%83%BC%E3%82%AF%E3%83%A2%E3%83%BC%E3%83%89%E3%82%92%E7%84%A1%E5%8A%B9%E5%8C%96%E3%81%99%E3%82%8B.html" title="Instagram Download Button">Mozilla Firefox で Web サイトのダークモードを無効化する</a></li>
-<li><a class="post-link" href="/blog/2020/12/25/%E6%B6%88%E3%81%97%E3%81%A6%E3%81%97%E3%81%BE%E3%81%A3%E3%81%9Fwsl%E7%92%B0%E5%A2%83%E3%81%AE%E3%83%90%E3%83%83%E3%82%AF%E3%82%A2%E3%83%83%E3%83%97%E3%81%8B%E3%82%89%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%92%E5%8F%96%E3%82%8A%E5%87%BA%E3%81%99.html" title="Instagram Download Button">消してしまった WSL 環境のバックアップからファイルを取り出す</a></li>
+        <li><a class="post-link" href="/blog/2023/03/06/stable-diffusion%E3%82%92windows-10%E3%81%B8%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95%E3%81%A8%E4%BD%BF%E3%81%84%E6%96%B9-%E7%94%BB%E5%83%8F%E7%94%9F%E6%88%90%E3%81%AE%E3%82%B3%E3%83%84.html" title="Instagram Download Button">Stable Diffusion を Windows 10 へインストールする方法と使い方、画像生成のコツ</a></li>
+<li><a class="post-link" href="/script/2016/09/18/instagram-download-button.html" title="Instagram Download Button">Instagram Download Button</a></li>
+<li><a class="post-link" href="/blog/2021/08/14/m5stack-atom-lite%E7%94%A8%E3%81%AE%E9%96%8B%E7%99%BA%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89.html" title="Instagram Download Button">M5Stack ATOM Lite 用の開発環境構築</a></li>
+<li><a class="post-link" href="/blog/2021/12/19/%E3%82%8F%E3%81%9F%E3%82%86%E3%82%8A-%E3%82%AB%E3%83%95%E3%82%A7-%E3%83%AA%E3%83%BC%E3%83%99%E5%A5%B3%E5%AD%A6%E5%9C%92-%E3%81%AE%E9%96%93%E5%8F%96%E3%82%8A%E5%9B%B3%E3%82%92%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%BF%E3%81%9F.html" title="Instagram Download Button">私の百合はお仕事です！(わたゆり)「カフェ・リーベ女学園」の間取り図を作ってみた</a></li>
 </ul>
     </div>
 <div class="post-comments"></div></section>
@@ -884,6 +821,5 @@ document.addEventListener('DOMContentLoaded', function(event) {
     </div>
   </div>
 </footer>
-
 </body>
 </html>

@@ -129,10 +129,9 @@ document.addEventListener('DOMContentLoaded', function(event) {
     display: none;
   }
 </style>
-<script src="//cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.3/photoswipe.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.3/photoswipe.css" rel="stylesheet">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.3/default-skin/default-skin.css" rel="stylesheet">
+<script src="//cdnjs.cloudflare.com/ajax/libs/photoswipe/5.3.7/umd/photoswipe-lightbox.umd.min.js" async></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/photoswipe/5.3.7/umd/photoswipe.umd.min.js" async></script>
+<link href="//cdnjs.cloudflare.com/ajax/libs/photoswipe/5.3.7/photoswipe.min.css" rel="stylesheet">
 <style>
   .pswp .pswp__container .pswp__img {
     background-color: white;
@@ -141,138 +140,76 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 <script>
   function initPhotoSwipe() {
-    var mainEl = document.querySelector("section.main");
+    let customOptions = {};
 
-    var imgEls = mainEl.querySelectorAll("img:not(.emoji)");
+    try {
+      const data = ``.replaceAll("=>", ":");
+      customOptions = JSON.parse(data);
+    } catch (e) {
+      console.info("Invalid custom photo previewer options! " + e.message);
+    }
+
+    // Define object and gallery options
+    const options = Object.assign(
+      {
+        gallery: "section.main",
+        children: "a.photo-swipe",
+        photo_scale: 2,
+        // dynamic import is not supported in UMD version
+        pswpModule: PhotoSwipe,
+      },
+      customOptions
+    );
+
+    const galleryEl = document.querySelector(options.gallery);
+    if (!galleryEl) {
+      return;
+    }
+
+    const imgEls = [];
+    const els = galleryEl.querySelectorAll("img:not(.emoji)");
+    els.forEach((el) => {
+      if (el.src.trim() == "") {
+        return;
+      }
+      if (el.parentElement?.tagName.toLowerCase() === "a") {
+        return;
+      }
+      if (!imgEls.includes(el)) {
+        imgEls.push(el);
+      }
+    });
+
+    if (imgEls.length === 0) {
+      return;
+    }
+
     imgEls.forEach((imgEl) => {
       imgEl.outerHTML = `
-    <a class="photo-swipe"
-      href="${imgEl.src}"
-      data-width="${imgEl.getAttribute("width") || imgEl.width * 2}"
-      data-height="${imgEl.getAttribute("height") || imgEl.height * 2}"
-      data-caption="${imgEl.getAttribute("caption") || imgEl.alt}"
-      target="_blank">
-      ${imgEl.outerHTML}
-    </a>`;
+      <a class="photo-swipe"
+        href="${imgEl.src}"
+        data-pswp-width="${
+          Math.max(imgEl.naturalWidth, imgEl.width) * options.photo_scale
+        }"
+        data-pswp-height="${
+          Math.max(imgEl.naturalHeight, imgEl.height) * options.photo_scale
+        }"
+        data-pswp-caption="${imgEl.getAttribute("caption") || imgEl.alt}"
+        target="_blank">
+        ${imgEl.outerHTML}
+      </a>`;
     });
 
-    // Init empty gallery array
-    var container = [];
+    // Initialize PhotoSwipe 5
+    var lightbox = new PhotoSwipeLightbox(options);
 
-    // Loop over gallery items and push it to the array
-    var linkEls = mainEl.querySelectorAll("a.photo-swipe");
-    linkEls.forEach((link) => {
-      var item = {
-        src: link.getAttribute("href"),
-        w: link.dataset.width,
-        h: link.dataset.height,
-        title: link.dataset.caption || "",
-      };
-      container.push(item);
-    });
-
-    // Define click event on gallery item
-    linkEls.forEach((link, index) => {
-      link.addEventListener("click", (event) => {
-        // Prevent location change
-        event.preventDefault();
-
-        // Define object and gallery options
-        var pswp = document.querySelector(".pswp");
-
-        var zoomLevel = 1;
-
-        // Define object and gallery options
-        var options = {
-          index: index,
-          bgOpacity: 0.85,
-          showHideOpacity: true,
-          closeOnScroll: true,
-          maxSpreadZoom: 1,
-          getDoubleTapZoom: (isMouseClick, item) => {
-            if (item.detail) {
-              zoomLevel += item.detail.origEvent.shiftKey ? -1 : 1;
-              item.detail = undefined;
-            } else {
-              zoomLevel = zoomLevel === 1 ? 2 : 1;
-            }
-            if (zoomLevel <= 1) {
-              zoomLevel = 1;
-              setTimeout(() => pswp.classList.remove("pswp--zoomed-in"), 0);
-            }
-            return item.initialZoomLevel * zoomLevel;
-          },
-        };
-
-        // Initialize PhotoSwipe
-        var gallery = new PhotoSwipe(
-          pswp,
-          PhotoSwipeUI_Default,
-          container,
-          options
-        );
-
-        gallery.init();
-
-        // Custom zoom event
-        gallery.container.addEventListener("pswpTap", (e) => {
-          gallery.currItem.detail = e.detail;
-        });
-      });
-    });
+    lightbox.init();
   }
 
   window.addEventListener("load", initPhotoSwipe);
 </script>
-
-<!-- Root element of PhotoSwipe. Must have class pswp. -->
 </head>
 <body>
-<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
-  <!-- Background of PhotoSwipe.
-           It's a separate element as animating opacity is faster than rgba(). -->
-  <div class="pswp__bg"></div>
-  <!-- Slides wrapper with overflow:hidden. -->
-  <div class="pswp__scroll-wrap">
-    <!-- Container that holds slides.
-              PhotoSwipe keeps only 3 of them in the DOM to save memory.
-              Don't modify these 3 pswp__item elements, data is added later on. -->
-    <div class="pswp__container">
-      <div class="pswp__item"></div>
-      <div class="pswp__item"></div>
-      <div class="pswp__item"></div>
-    </div>
-    <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
-    <div class="pswp__ui pswp__ui--hidden">
-      <div class="pswp__top-bar">
-        <!--  Controls are self-explanatory. Order can be changed. -->
-        <div class="pswp__counter"></div>
-        <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
-        <button class="pswp__button pswp__button--share" title="Share"></button>
-        <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
-        <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
-        <!-- element will get class pswp__preloader--active when preloader is running -->
-        <div class="pswp__preloader">
-          <div class="pswp__preloader__icn">
-            <div class="pswp__preloader__cut">
-              <div class="pswp__preloader__donut"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
-        <div class="pswp__share-tooltip"></div>
-      </div>
-      <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
-      <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button>
-      <div class="pswp__caption">
-        <div class="pswp__caption__center"></div>
-      </div>
-    </div>
-  </div>
-</div>
-
-
 
 
 
@@ -711,7 +648,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
     <div class="post-content e-content" itemprop="articleBody">
 
       <p>最近「私の百合はお仕事です！」(わたゆり) にハマってます。
-<a href="https://www.ichijinsha.co.jp/yurihime/title/%e6%9c%aa%e5%b9%a1/%e7%a7%81%e3%81%ae%e7%99%be%e5%90%88%e3%81%af%e3%81%8a%e4%bb%95%e4%ba%8b%e3%81%a7%e3%81%99%ef%bc%81/">公式サイトの紹介</a>
+<a href="https://www.ichijinsha.co.jp/yurihime/title/%e6%9c%aa%e5%b9%a1/%e7%a7%81%e3%81%ae%e7%99%be%e5%90%88%e3%81%af%e3%81%8a%e4%bb%95%e4%ba%8b%e3%81%a7%e3%81%99%ef%bc%81/" target="_blank">公式サイトの紹介</a>
 を読めば分かる通り、
 <ruby>姉妹<rp>(</rp><rt>シュヴェスター</rt><rp>)</rp></ruby>
 制度のある
@@ -741,9 +678,9 @@ document.addEventListener('DOMContentLoaded', function(event) {
 <h2 id="出典について">出典について</h2>
 
 <p>以下の間取り図は
-<a href="https://www.amazon.co.jp/dp/B07878H4D9/?tag=saasan-22">Amazon Kindle の電子書籍「私の百合はお仕事です！」</a>
+<a href="https://www.amazon.co.jp/dp/B07878H4D9/?tag=saasan-22" target="_blank">Amazon Kindle の電子書籍「私の百合はお仕事です！」</a>
 1～9巻を参考に
-<a href="https://twitter.com/saasan">カガミ</a>
+<a href="https://twitter.com/saasan" target="_blank">カガミ</a>
 が作成したものです。
 公式な情報ではありませんので、間取り図について未幡先生や一迅社へ問い合わせないでください。</p>
 
@@ -753,16 +690,16 @@ Kindle の Android 版アプリで表示されるロケーションは、これ�
 <h2 id="間取り図">間取り図</h2>
 
 <p>以下が作成した間取り図です。
-<a href="https://myhome-cloud.net/">マイホームクラウド</a>
+<a href="https://myhome-cloud.net/" target="_blank">マイホームクラウド</a>
 で間取り図を作成したあと別のアプリで文字の追加など加工を行っています。</p>
 
 <p>リーベの背景は手で描かれているため、シーンによって物の大きさが異なることがあります。
 間取り図の作成にあたっては複数のシーンを確認した上で、
 大きな破綻がないよう一部調整しています。</p>
 
-<p>※2021/12/21追記: 背景は <a href="https://twitter.com/n28miman/status/1473186141684002821">途中から3Dに変更された</a> とのことです。</p>
+<p>※2021/12/21追記: 背景は <a href="https://twitter.com/n28miman/status/1473186141684002821" target="_blank">途中から3Dに変更された</a> とのことです。</p>
 
-<p><a href="/assets/images/blog/2021-12-19/liebe-layout.png"><img src="/assets/images/blog/2021-12-19/liebe-layout.png" alt="「カフェ・リーベ女学園」間取り図"></a></p>
+<p><img src="/assets/images/blog/2021-12-19/liebe-layout.png" alt="「カフェ・リーベ女学園」間取り図"></p>
 
 <h2 id="by-バックヤード">BY (バックヤード)</h2>
 
@@ -865,10 +802,10 @@ BYで「見に来て」と言っていることからBY外にあると思われ�
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/script/2016/09/18/host2ip.html" title="ブックマークレットでトーストを表示する">host2ip</a></li>
-<li><a class="post-link" href="/blog/2021/12/19/%E3%82%8F%E3%81%9F%E3%82%86%E3%82%8A-%E3%82%AB%E3%83%95%E3%82%A7-%E3%83%AA%E3%83%BC%E3%83%99%E5%A5%B3%E5%AD%A6%E5%9C%92-%E3%81%AE%E9%96%93%E5%8F%96%E3%82%8A%E5%9B%B3%E3%82%92%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%BF%E3%81%9F.html" title="ブックマークレットでトーストを表示する">私の百合はお仕事です！(わたゆり)「カフェ・リーベ女学園」の間取り図を作ってみた</a></li>
-<li><a class="post-link" href="/blog/2020/06/17/m5stickc-speaker-hat%E3%81%A7esp8266audio%E3%83%A9%E3%82%A4%E3%83%96%E3%83%A9%E3%83%AA%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%97%E3%81%A6mp3%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%92%E5%86%8D%E7%94%9F%E3%81%99%E3%82%8B.html" title="ブックマークレットでトーストを表示する">M5StickC + Speaker Hat で ESP8266Audio ライブラリを使用して MP3 ファイルを再生する</a></li>
-<li><a class="post-link" href="/blog/2022/10/24/ubuntu-22.04%E3%81%A7apt-key-add%E3%81%97%E3%81%9F%E3%81%82%E3%81%A8apt-update%E3%81%A7key-is-stored-in-legacy-trusted.gpg-keyring%E3%81%A8%E3%81%84%E3%81%86%E3%83%A1%E3%83%83%E3%82%BB%E3%83%BC%E3%82%B8%E3%81%8C%E8%A1%A8%E7%A4%BA%E3%81%95%E3%82%8C%E3%82%8B%E5%A0%B4%E5%90%88%E3%81%AE%E5%AF%BE%E5%BF%9C%E6%96%B9%E6%B3%95.html" title="ブックマークレットでトーストを表示する">Ubuntu 22.04 で apt-key add したあと apt-update で Key is stored in...</a></li>
+        <li><a class="post-link" href="/blog/2016/03/04/jekyll-%E3%83%93%E3%83%AB%E3%83%89%E3%81%99%E3%82%8B%E3%81%A8%E3%81%8D%E3%81%AB%E3%81%A0%E3%81%91sass-scss-%E3%82%92%E5%9C%A7%E7%B8%AE%E3%81%99%E3%82%8B.html" title="ブックマークレットでトーストを表示する">[Jekyll] ビルドするときにだけSass(SCSS)を圧縮する</a></li>
+<li><a class="post-link" href="/blog/2020/12/16/%E6%9C%80%E8%BF%91%E7%9F%A5%E3%81%A3%E3%81%9Fbash%E3%81%AE%E4%BE%BF%E5%88%A9%E6%A9%9F%E8%83%BD.html" title="ブックマークレットでトーストを表示する">最近知った Bash の便利機能</a></li>
+<li><a class="post-link" href="/blog/2017/07/31/redhat5.7%E3%81%8B%E3%82%89centos5.7%E3%81%B8%E7%A7%BB%E8%A1%8C%E3%81%99%E3%82%8B.html" title="ブックマークレットでトーストを表示する">RedHat5.7からCentOS5.7へ移行する</a></li>
+<li><a class="post-link" href="/software/2019/09/08/%E3%83%97%E3%83%AA%E3%82%B9%E3%82%AF-dmm%E7%89%88-windows-pc%E7%89%88-%E3%83%97%E3%83%AA%E3%83%B3%E3%82%BB%E3%82%B9%E3%82%B3%E3%83%8D%E3%82%AF%E3%83%88-re-dive%E3%82%92%E3%83%95%E3%83%AB%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E5%8C%96.html" title="ブックマークレットでトーストを表示する">プリスク - DMM版(Windows PC版)プリンセスコネクト！Re:Diveをフルスクリーン化</a></li>
 </ul>
     </div>
 <div class="post-comments"></div></section>
@@ -1019,6 +956,5 @@ BYで「見に来て」と言っていることからBY外にあると思われ�
     </div>
   </div>
 </footer>
-
 </body>
 </html>

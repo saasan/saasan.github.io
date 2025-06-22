@@ -127,10 +127,9 @@ document.addEventListener('DOMContentLoaded', function(event) {
     display: none;
   }
 </style>
-<script src="//cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.3/photoswipe.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.3/photoswipe.css" rel="stylesheet">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.3/default-skin/default-skin.css" rel="stylesheet">
+<script src="//cdnjs.cloudflare.com/ajax/libs/photoswipe/5.3.7/umd/photoswipe-lightbox.umd.min.js" async></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/photoswipe/5.3.7/umd/photoswipe.umd.min.js" async></script>
+<link href="//cdnjs.cloudflare.com/ajax/libs/photoswipe/5.3.7/photoswipe.min.css" rel="stylesheet">
 <style>
   .pswp .pswp__container .pswp__img {
     background-color: white;
@@ -139,138 +138,76 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 <script>
   function initPhotoSwipe() {
-    var mainEl = document.querySelector("section.main");
+    let customOptions = {};
 
-    var imgEls = mainEl.querySelectorAll("img:not(.emoji)");
+    try {
+      const data = ``.replaceAll("=>", ":");
+      customOptions = JSON.parse(data);
+    } catch (e) {
+      console.info("Invalid custom photo previewer options! " + e.message);
+    }
+
+    // Define object and gallery options
+    const options = Object.assign(
+      {
+        gallery: "section.main",
+        children: "a.photo-swipe",
+        photo_scale: 2,
+        // dynamic import is not supported in UMD version
+        pswpModule: PhotoSwipe,
+      },
+      customOptions
+    );
+
+    const galleryEl = document.querySelector(options.gallery);
+    if (!galleryEl) {
+      return;
+    }
+
+    const imgEls = [];
+    const els = galleryEl.querySelectorAll("img:not(.emoji)");
+    els.forEach((el) => {
+      if (el.src.trim() == "") {
+        return;
+      }
+      if (el.parentElement?.tagName.toLowerCase() === "a") {
+        return;
+      }
+      if (!imgEls.includes(el)) {
+        imgEls.push(el);
+      }
+    });
+
+    if (imgEls.length === 0) {
+      return;
+    }
+
     imgEls.forEach((imgEl) => {
       imgEl.outerHTML = `
-    <a class="photo-swipe"
-      href="${imgEl.src}"
-      data-width="${imgEl.getAttribute("width") || imgEl.width * 2}"
-      data-height="${imgEl.getAttribute("height") || imgEl.height * 2}"
-      data-caption="${imgEl.getAttribute("caption") || imgEl.alt}"
-      target="_blank">
-      ${imgEl.outerHTML}
-    </a>`;
+      <a class="photo-swipe"
+        href="${imgEl.src}"
+        data-pswp-width="${
+          Math.max(imgEl.naturalWidth, imgEl.width) * options.photo_scale
+        }"
+        data-pswp-height="${
+          Math.max(imgEl.naturalHeight, imgEl.height) * options.photo_scale
+        }"
+        data-pswp-caption="${imgEl.getAttribute("caption") || imgEl.alt}"
+        target="_blank">
+        ${imgEl.outerHTML}
+      </a>`;
     });
 
-    // Init empty gallery array
-    var container = [];
+    // Initialize PhotoSwipe 5
+    var lightbox = new PhotoSwipeLightbox(options);
 
-    // Loop over gallery items and push it to the array
-    var linkEls = mainEl.querySelectorAll("a.photo-swipe");
-    linkEls.forEach((link) => {
-      var item = {
-        src: link.getAttribute("href"),
-        w: link.dataset.width,
-        h: link.dataset.height,
-        title: link.dataset.caption || "",
-      };
-      container.push(item);
-    });
-
-    // Define click event on gallery item
-    linkEls.forEach((link, index) => {
-      link.addEventListener("click", (event) => {
-        // Prevent location change
-        event.preventDefault();
-
-        // Define object and gallery options
-        var pswp = document.querySelector(".pswp");
-
-        var zoomLevel = 1;
-
-        // Define object and gallery options
-        var options = {
-          index: index,
-          bgOpacity: 0.85,
-          showHideOpacity: true,
-          closeOnScroll: true,
-          maxSpreadZoom: 1,
-          getDoubleTapZoom: (isMouseClick, item) => {
-            if (item.detail) {
-              zoomLevel += item.detail.origEvent.shiftKey ? -1 : 1;
-              item.detail = undefined;
-            } else {
-              zoomLevel = zoomLevel === 1 ? 2 : 1;
-            }
-            if (zoomLevel <= 1) {
-              zoomLevel = 1;
-              setTimeout(() => pswp.classList.remove("pswp--zoomed-in"), 0);
-            }
-            return item.initialZoomLevel * zoomLevel;
-          },
-        };
-
-        // Initialize PhotoSwipe
-        var gallery = new PhotoSwipe(
-          pswp,
-          PhotoSwipeUI_Default,
-          container,
-          options
-        );
-
-        gallery.init();
-
-        // Custom zoom event
-        gallery.container.addEventListener("pswpTap", (e) => {
-          gallery.currItem.detail = e.detail;
-        });
-      });
-    });
+    lightbox.init();
   }
 
   window.addEventListener("load", initPhotoSwipe);
 </script>
-
-<!-- Root element of PhotoSwipe. Must have class pswp. -->
 </head>
 <body>
-<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
-  <!-- Background of PhotoSwipe.
-           It's a separate element as animating opacity is faster than rgba(). -->
-  <div class="pswp__bg"></div>
-  <!-- Slides wrapper with overflow:hidden. -->
-  <div class="pswp__scroll-wrap">
-    <!-- Container that holds slides.
-              PhotoSwipe keeps only 3 of them in the DOM to save memory.
-              Don't modify these 3 pswp__item elements, data is added later on. -->
-    <div class="pswp__container">
-      <div class="pswp__item"></div>
-      <div class="pswp__item"></div>
-      <div class="pswp__item"></div>
-    </div>
-    <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
-    <div class="pswp__ui pswp__ui--hidden">
-      <div class="pswp__top-bar">
-        <!--  Controls are self-explanatory. Order can be changed. -->
-        <div class="pswp__counter"></div>
-        <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
-        <button class="pswp__button pswp__button--share" title="Share"></button>
-        <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
-        <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
-        <!-- element will get class pswp__preloader--active when preloader is running -->
-        <div class="pswp__preloader">
-          <div class="pswp__preloader__icn">
-            <div class="pswp__preloader__cut">
-              <div class="pswp__preloader__donut"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
-        <div class="pswp__share-tooltip"></div>
-      </div>
-      <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
-      <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button>
-      <div class="pswp__caption">
-        <div class="pswp__caption__center"></div>
-      </div>
-    </div>
-  </div>
-</div>
-
-
 
 
 
@@ -714,7 +651,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 <h2 id="音声データの変換">音声データの変換</h2>
 
 <p>まずは WAV や MP3 など再生したい音声データを
-<a href="https://nn-hokuson.hatenablog.com/entry/2017/09/01/092945">【Arduino】WAVまたはMP3ファイルを再生する - おもちゃラボ</a>
+<a href="https://nn-hokuson.hatenablog.com/entry/2017/09/01/092945" target="_blank">【Arduino】WAVまたはMP3ファイルを再生する - おもちゃラボ</a>
 に書かれている方法で以下の形式へ変換します。</p>
 
 <ul>
@@ -728,7 +665,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 <p>その後C言語の配列に変換する必要がありますが、
 Windows 環境では xxd コマンドがないため
-<a href="https://hello-world.blog.ss-blog.jp/2016-10-16">バイナリファイルをC言語のデータ配列に変換する：放課後マイコンクラブ：SSブログ</a>
+<a href="https://hello-world.blog.ss-blog.jp/2016-10-16" target="_blank">バイナリファイルをC言語のデータ配列に変換する：放課後マイコンクラブ：SSブログ</a>
 の「PROGMEM作蔵さん」を使用して変換しました。</p>
 
 <h2 id="スケッチへ貼り付けて書き込み">スケッチへ貼り付けて書き込み</h2>
@@ -811,7 +748,7 @@ Aボタン(正面の「M5」ボタン)を押すと音声データが再生され
 </code></pre></div></div>
 
 <p>playMusic 関数は公式の
-<a href="https://github.com/m5stack/M5StickC/blob/master/examples/Hat/SPEAKER/SPEAKER.ino">サンプルスケッチ</a>
+<a href="https://github.com/m5stack/M5StickC/blob/master/examples/Hat/SPEAKER/SPEAKER.ino" target="_blank">サンプルスケッチ</a>
 のものですが、
 そのままでは音声が正常に再生されなかったため
 ledcWriteTone から ledcWrite へ変更しています。
@@ -820,17 +757,17 @@ ledcWriteTone から ledcWrite へ変更しています。
 <p>今回は短い音声の再生だったためスケッチにそのまま配列として書きましたが、
 音声データ部分だけで500行を超えましたし、
 配列への変換も面倒なのでファイルから読み込むようにしたいですね。
-<a href="https://lang-ship.com/reference/unofficial/M5StickC/Storage/SPIFFS/">SPIFFS</a>
+<a href="https://lang-ship.com/reference/unofficial/M5StickC/Storage/SPIFFS/" target="_blank">SPIFFS</a>
 を使えば実現できそう。</p>
 
 <h2 id="参考サイト">参考サイト</h2>
 
 <ul>
-  <li><a href="https://github.com/m5stack/M5StickC/blob/master/examples/Hat/SPEAKER/SPEAKER.ino">M5StickC/SPEAKER.ino at master · m5stack/M5StickC</a></li>
-  <li><a href="https://nn-hokuson.hatenablog.com/entry/2017/09/01/092945">【Arduino】WAVまたはMP3ファイルを再生する - おもちゃラボ</a></li>
-  <li><a href="https://hello-world.blog.ss-blog.jp/2016-10-16">バイナリファイルをC言語のデータ配列に変換する：放課後マイコンクラブ：SSブログ</a></li>
-  <li><a href="https://lang-ship.com/blog/work/esp32-pwm-max/">ESP32のPWM出力は255が最大じゃなかった – Lang-ship</a></li>
-  <li><a href="https://wisdom.sakura.ne.jp/system/winapi/media/mm5.html">PCM の基本</a></li>
+  <li><a href="https://github.com/m5stack/M5StickC/blob/master/examples/Hat/SPEAKER/SPEAKER.ino" target="_blank">M5StickC/SPEAKER.ino at master · m5stack/M5StickC</a></li>
+  <li><a href="https://nn-hokuson.hatenablog.com/entry/2017/09/01/092945" target="_blank">【Arduino】WAVまたはMP3ファイルを再生する - おもちゃラボ</a></li>
+  <li><a href="https://hello-world.blog.ss-blog.jp/2016-10-16" target="_blank">バイナリファイルをC言語のデータ配列に変換する：放課後マイコンクラブ：SSブログ</a></li>
+  <li><a href="https://lang-ship.com/blog/work/esp32-pwm-max/" target="_blank">ESP32のPWM出力は255が最大じゃなかった – Lang-ship</a></li>
+  <li><a href="https://wisdom.sakura.ne.jp/system/winapi/media/mm5.html" target="_blank">PCM の基本</a></li>
 </ul>
 
 
@@ -843,10 +780,10 @@ ledcWriteTone から ledcWrite へ変更しています。
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/blog/2022/10/24/ubuntu-22.04%E3%81%A7apt-key-add%E3%81%97%E3%81%9F%E3%81%82%E3%81%A8apt-update%E3%81%A7key-is-stored-in-legacy-trusted.gpg-keyring%E3%81%A8%E3%81%84%E3%81%86%E3%83%A1%E3%83%83%E3%82%BB%E3%83%BC%E3%82%B8%E3%81%8C%E8%A1%A8%E7%A4%BA%E3%81%95%E3%82%8C%E3%82%8B%E5%A0%B4%E5%90%88%E3%81%AE%E5%AF%BE%E5%BF%9C%E6%96%B9%E6%B3%95.html" title="M5StickC + Speaker Hat で SPIFFS から読み込んだ WAV ファイルを再生する">Ubuntu 22.04 で apt-key add したあと apt-update で Key is stored in...</a></li>
-<li><a class="post-link" href="/blog/2023/08/14/aptx-adaptive-ll%E5%AF%BE%E5%BF%9Cbluetooth%E6%A9%9F%E5%99%A8%E3%81%A7pc%E3%82%B2%E3%83%BC%E3%83%A0%E3%81%AB%E4%BD%BF%E3%81%88%E3%82%8B%E5%AE%8C%E5%85%A8%E3%83%AF%E3%82%A4%E3%83%A4%E3%83%AC%E3%82%B9%E3%81%AA%E3%82%AA%E3%83%BC%E3%83%87%E3%82%A3%E3%82%AA%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89.html" title="M5StickC + Speaker Hat で SPIFFS から読み込んだ WAV ファイルを再生する">aptX Adaptive LL 対応 Bluetooth 機器で PC ゲームに使える完全ワイヤレスなオーディオ環境構築</a></li>
-<li><a class="post-link" href="/blog/2021/09/18/lenovo-thinkcentre-m600-tiny%E3%81%ABpci-express%E3%82%92%E7%84%A1%E7%90%86%E3%82%84%E3%82%8A%E5%A2%97%E8%A8%AD%E3%81%99%E3%82%8B.html" title="M5StickC + Speaker Hat で SPIFFS から読み込んだ WAV ファイルを再生する">Lenovo ThinkCentre M600 Tiny に PCI Express を無理やり増設する</a></li>
-<li><a class="post-link" href="/blog/2022/12/31/2022%E5%B9%B4-%E8%B2%B7%E3%81%A3%E3%81%A6%E3%82%88%E3%81%8B%E3%81%A3%E3%81%9F%E3%82%82%E3%81%AE%E3%81%A8%E3%81%8B.html" title="M5StickC + Speaker Hat で SPIFFS から読み込んだ WAV ファイルを再生する">【2022年】買ってよかったものとか</a></li>
+        <li><a class="post-link" href="/blog/2023/07/05/ifttt%E3%81%AEtwitter%E9%80%A3%E6%90%BA%E3%81%8C%E6%9C%89%E6%96%99%E5%8C%96%E3%81%97%E3%81%9F%E3%81%AE%E3%81%A7python%E3%81%A8github-actions%E3%81%A7rss%E3%82%92%E3%83%84%E3%82%A4%E3%83%BC%E3%83%88%E3%81%99%E3%82%8B.html" title="M5StickC + Speaker Hat で SPIFFS から読み込んだ WAV ファイルを再生する">IFTTT の Twitter 連携が有料化したので Python と GitHub Actions で RSS をツイートする</a></li>
+<li><a class="post-link" href="/blog/2017/07/31/redhat5.7%E3%81%8B%E3%82%89centos5.7%E3%81%B8%E7%A7%BB%E8%A1%8C%E3%81%99%E3%82%8B.html" title="M5StickC + Speaker Hat で SPIFFS から読み込んだ WAV ファイルを再生する">RedHat5.7からCentOS5.7へ移行する</a></li>
+<li><a class="post-link" href="/blog/2021/05/20/slack%E3%81%B8%E9%80%9A%E7%9F%A5%E3%81%99%E3%82%8B%E3%82%B7%E3%82%A7%E3%83%AB%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88.html" title="M5StickC + Speaker Hat で SPIFFS から読み込んだ WAV ファイルを再生する">Slack へ通知するシェルスクリプト</a></li>
+<li><a class="post-link" href="/blog/2015/12/15/jekyll-html-beautifier-plugin.html" title="M5StickC + Speaker Hat で SPIFFS から読み込んだ WAV ファイルを再生する">[Jekyll] HTMLを読みやすいように整形するプラグイン</a></li>
 </ul>
     </div>
 <div class="post-comments"></div></section>
@@ -997,6 +934,5 @@ ledcWriteTone から ledcWrite へ変更しています。
     </div>
   </div>
 </footer>
-
 </body>
 </html>

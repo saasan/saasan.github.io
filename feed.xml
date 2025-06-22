@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ja"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://slx.jp/feed.xml" rel="self" type="application/atom+xml" /><link href="https://slx.jp/" rel="alternate" type="text/html" hreflang="ja" /><updated>2025-06-22T23:05:25+09:00</updated><id>https://slx.jp/feed.xml</id><title type="html">slx.jp</title><author><name>saasan</name></author><entry><title type="html">Claude for Desktop で AWS Documentation MCP Server を使ってみる</title><link href="https://slx.jp/blog/2025/06/22/claude-for-desktop%E3%81%A7aws-documentation-mcp-server%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%8B.html" rel="alternate" type="text/html" title="Claude for Desktop で AWS Documentation MCP Server を使ってみる" /><published>2025-06-22T23:00:00+09:00</published><updated>2025-06-22T23:00:00+09:00</updated><id>https://slx.jp/blog/2025/06/22/claude-for-desktop%E3%81%A7aws-documentation-mcp-server%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%8B</id><content type="html" xml:base="https://slx.jp/blog/2025/06/22/claude-for-desktop%E3%81%A7aws-documentation-mcp-server%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%8B.html"><![CDATA[<p>MCP の使い道を調べているうちに知った
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ja"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://slx.jp/feed.xml" rel="self" type="application/atom+xml" /><link href="https://slx.jp/" rel="alternate" type="text/html" hreflang="ja" /><updated>2025-06-23T02:35:15+09:00</updated><id>https://slx.jp/feed.xml</id><title type="html">slx.jp</title><author><name>saasan</name></author><entry><title type="html">Claude for Desktop で AWS Documentation MCP Server を使ってみる</title><link href="https://slx.jp/blog/2025/06/22/claude-for-desktop%E3%81%A7aws-documentation-mcp-server%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%8B.html" rel="alternate" type="text/html" title="Claude for Desktop で AWS Documentation MCP Server を使ってみる" /><published>2025-06-22T23:00:00+09:00</published><updated>2025-06-22T23:00:00+09:00</updated><id>https://slx.jp/blog/2025/06/22/claude-for-desktop%E3%81%A7aws-documentation-mcp-server%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%8B</id><content type="html" xml:base="https://slx.jp/blog/2025/06/22/claude-for-desktop%E3%81%A7aws-documentation-mcp-server%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%8B.html"><![CDATA[<p>MCP の使い道を調べているうちに知った
 AWS Documentation MCP Server が便利そうだったので使ってみた。</p>
 
 <h2 id="aws-documentation-mcp-server-とは">AWS Documentation MCP Server とは？</h2>
@@ -51,20 +51,20 @@ docker build <span class="nt">-t</span> mcp/aws-documentation aws-mcp/src/aws-do
 
 <h2 id="amazon-linux-2023-ova-ファイルのダウンロード">Amazon Linux 2023 OVA ファイルのダウンロード</h2>
 
-<p><a href="https://docs.aws.amazon.com/ja_jp/linux/al2023/ug/outside-ec2-download.html">KVM、VMware、Hyper-V で使用する Amazon Linux 2023 イメージをダウンロードする - Amazon Linux 2023</a>
+<p><a href="https://docs.aws.amazon.com/ja_jp/linux/al2023/ug/outside-ec2-download.html" target="_blank">KVM、VMware、Hyper-V で使用する Amazon Linux 2023 イメージをダウンロードする - Amazon Linux 2023</a>
 に書かれている
-<a href="https://cdn.amazonlinux.com/al2023/os-images/latest/">cdn.amazonlinux.com</a>
+<a href="https://cdn.amazonlinux.com/al2023/os-images/latest/" target="_blank">cdn.amazonlinux.com</a>
 から VMware 用の OVA ファイルをダウンロードする。</p>
 
 <h2 id="ovftool-のダウンロードとインストール">ovftool のダウンロードとインストール</h2>
 
-<p><a href="https://developer.broadcom.com/tools/open-virtualization-format-ovf-tool/latest">ovftool</a>
+<p><a href="https://developer.broadcom.com/tools/open-virtualization-format-ovf-tool/latest" target="_blank">ovftool</a>
 をダウンロード・展開しパスを通しておく。
 base64 コマンドを使用するため、Windows 環境の場合は WSL に Linux 版を入れいると楽。</p>
 
 <h2 id="cloud-config-ファイルの準備">cloud-config ファイルの準備</h2>
 
-<p><a href="https://docs.aws.amazon.com/ja_jp/linux/al2023/ug/seed-iso.html">公式の手順</a>
+<p><a href="https://docs.aws.amazon.com/ja_jp/linux/al2023/ug/seed-iso.html" target="_blank">公式の手順</a>
 だと <code class="language-plaintext highlighter-rouge">meta-data</code>, <code class="language-plaintext highlighter-rouge">user-data</code>, <code class="language-plaintext highlighter-rouge">network-config</code> の3ファイルを用意し
 <code class="language-plaintext highlighter-rouge">seed.iso</code> ディスクイメージを作成するが、
 <code class="language-plaintext highlighter-rouge">network-config</code> と <code class="language-plaintext highlighter-rouge">seed.iso</code> は不要。</p>
@@ -153,7 +153,7 @@ AI に聞くと <code class="language-plaintext highlighter-rouge">--prop</code>
 <p>OVA ファイルのダウンロード元は、以下の公式ドキュメントに書かれている。</p>
 
 <ul>
-  <li><a href="https://www.flatcar.org/docs/latest/installing/cloud/vmware/">Running Flatcar Container Linux on VMware</a></li>
+  <li><a href="https://www.flatcar.org/docs/latest/installing/cloud/vmware/" target="_blank">Running Flatcar Container Linux on VMware</a></li>
 </ul>
 
 <h3 id="ovftool-のインストール">ovftool のインストール</h3>
@@ -239,13 +239,13 @@ SSH で接続し <code class="language-plaintext highlighter-rouge">docker</code
 Docker Compose を利用するには、以下の公式ドキュメントを参考に Butane 設定ファイルを変更する。</p>
 
 <ul>
-  <li><a href="https://flatcar.github.io/sysext-bakery/docker_compose/">Docker-compose sysext | sysext-bakery</a></li>
+  <li><a href="https://flatcar.github.io/sysext-bakery/docker_compose/" target="_blank">Docker-compose sysext | sysext-bakery</a></li>
 </ul>
 
 <p>また、利用可能な Docker Compose のバージョンは以下で確認できる。</p>
 
 <ul>
-  <li><a href="https://github.com/flatcar/sysext-bakery/releases/tag/docker-compose">Release docker-compose · flatcar/sysext-bakery</a></li>
+  <li><a href="https://github.com/flatcar/sysext-bakery/releases/tag/docker-compose" target="_blank">Release docker-compose · flatcar/sysext-bakery</a></li>
 </ul>
 
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">variant</span><span class="pi">:</span> <span class="s">flatcar</span>
@@ -313,14 +313,14 @@ Docker Compose を利用するには、以下の公式ドキュメントを参�
 <h2 id="参考サイト">参考サイト</h2>
 
 <ul>
-  <li><a href="https://www.flatcar.org/docs/latest/installing/cloud/vmware/">Running Flatcar Container Linux on VMware</a></li>
-  <li><a href="https://coreos.github.io/ignition/getting-started/#config-validation">Getting Started | Ignition</a></li>
-  <li><a href="https://coreos.github.io/butane/getting-started/">Getting started | Butane</a></li>
-  <li><a href="https://www.flatcar.org/docs/latest/setup/customization/network-config-with-networkd/">Network configuration with networkd</a></li>
-  <li><a href="https://www.flatcar.org/docs/latest/provisioning/config-transpiler/">Butane Config Transpiler</a></li>
-  <li><a href="https://flatcar.github.io/sysext-bakery/docker_compose/">Docker-compose sysext | sysext-bakery</a></li>
-  <li><a href="https://github.com/flatcar/sysext-bakery/releases/tag/docker-compose">Release docker-compose · flatcar/sysext-bakery</a></li>
-</ul>]]></content><author><name>saasan</name></author><category term="blog" /><category term="VMware" /><category term="ESXi" /><category term="Flatcar Container Linux" /><summary type="html"><![CDATA[VMware ESXi 上に Flatcar Container Linux のサーバを立てた際のメモ]]></summary></entry><entry><title type="html">Windows 11 の WSL で ext4 ファイルシステムのドライブの内容を確認する</title><link href="https://slx.jp/blog/2025/02/23/windows-11%E3%81%AEWSL%E3%81%A7ext4%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E3%81%AE%E3%83%89%E3%83%A9%E3%82%A4%E3%83%96%E3%81%AE%E5%86%85%E5%AE%B9%E3%82%92%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B.html" rel="alternate" type="text/html" title="Windows 11 の WSL で ext4 ファイルシステムのドライブの内容を確認する" /><published>2025-02-23T03:20:00+09:00</published><updated>2025-02-23T03:20:00+09:00</updated><id>https://slx.jp/blog/2025/02/23/windows-11%E3%81%AEWSL%E3%81%A7ext4%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E3%81%AE%E3%83%89%E3%83%A9%E3%82%A4%E3%83%96%E3%81%AE%E5%86%85%E5%AE%B9%E3%82%92%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B</id><content type="html" xml:base="https://slx.jp/blog/2025/02/23/windows-11%E3%81%AEWSL%E3%81%A7ext4%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E3%81%AE%E3%83%89%E3%83%A9%E3%82%A4%E3%83%96%E3%81%AE%E5%86%85%E5%AE%B9%E3%82%92%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B.html"><![CDATA[<p><a href="https://learn.microsoft.com/ja-jp/windows/wsl/wsl2-mount-disk">WSL 2 で Linux ディスクのマウントを開始する</a>
+  <li><a href="https://www.flatcar.org/docs/latest/installing/cloud/vmware/" target="_blank">Running Flatcar Container Linux on VMware</a></li>
+  <li><a href="https://coreos.github.io/ignition/getting-started/#config-validation" target="_blank">Getting Started | Ignition</a></li>
+  <li><a href="https://coreos.github.io/butane/getting-started/" target="_blank">Getting started | Butane</a></li>
+  <li><a href="https://www.flatcar.org/docs/latest/setup/customization/network-config-with-networkd/" target="_blank">Network configuration with networkd</a></li>
+  <li><a href="https://www.flatcar.org/docs/latest/provisioning/config-transpiler/" target="_blank">Butane Config Transpiler</a></li>
+  <li><a href="https://flatcar.github.io/sysext-bakery/docker_compose/" target="_blank">Docker-compose sysext | sysext-bakery</a></li>
+  <li><a href="https://github.com/flatcar/sysext-bakery/releases/tag/docker-compose" target="_blank">Release docker-compose · flatcar/sysext-bakery</a></li>
+</ul>]]></content><author><name>saasan</name></author><category term="blog" /><category term="VMware" /><category term="ESXi" /><category term="Flatcar Container Linux" /><summary type="html"><![CDATA[VMware ESXi 上に Flatcar Container Linux のサーバを立てた際のメモ]]></summary></entry><entry><title type="html">Windows 11 の WSL で ext4 ファイルシステムのドライブの内容を確認する</title><link href="https://slx.jp/blog/2025/02/23/windows-11%E3%81%AEWSL%E3%81%A7ext4%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E3%81%AE%E3%83%89%E3%83%A9%E3%82%A4%E3%83%96%E3%81%AE%E5%86%85%E5%AE%B9%E3%82%92%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B.html" rel="alternate" type="text/html" title="Windows 11 の WSL で ext4 ファイルシステムのドライブの内容を確認する" /><published>2025-02-23T03:20:00+09:00</published><updated>2025-02-23T03:20:00+09:00</updated><id>https://slx.jp/blog/2025/02/23/windows-11%E3%81%AEWSL%E3%81%A7ext4%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E3%81%AE%E3%83%89%E3%83%A9%E3%82%A4%E3%83%96%E3%81%AE%E5%86%85%E5%AE%B9%E3%82%92%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B</id><content type="html" xml:base="https://slx.jp/blog/2025/02/23/windows-11%E3%81%AEWSL%E3%81%A7ext4%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E3%81%AE%E3%83%89%E3%83%A9%E3%82%A4%E3%83%96%E3%81%AE%E5%86%85%E5%AE%B9%E3%82%92%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B.html"><![CDATA[<p><a href="https://learn.microsoft.com/ja-jp/windows/wsl/wsl2-mount-disk" target="_blank">WSL 2 で Linux ディスクのマウントを開始する</a>
 の内容を自分用にまとめたやつ</p>
 
 <ol>
@@ -531,7 +531,7 @@ aptX LL 対応の機器が少なくいいものが見つからなかった。</p
 <h2 id="creative-bt-w5-と-earfun-air-pro-3-を購入">Creative BT-W5 と EarFun Air Pro 3 を購入</h2>
 
 <p>結局 aptX Adaptive 対応の USB アダプタ
-<a href="https://jp.creative.com/p/accessories/creative-bt-w5">Creative BT-W5</a> と
+<a href="https://jp.creative.com/p/accessories/creative-bt-w5" target="_blank">Creative BT-W5</a> と
 完全ワイヤレスイヤホン EarFun Air Pro 3 を購入した。</p>
 
 <div class="affiliate-product-list">
@@ -558,7 +558,7 @@ BT-W5 との違いは aptX HD、24bit/96kHz への対応の有無なので低遅
 <h2 id="遅延時間の確認">遅延時間の確認</h2>
 
 <p>遅延時間の確認には
-<a href="https://nullvoxpopuli.github.io/latency-tester/">Latency Tester</a>
+<a href="https://nullvoxpopuli.github.io/latency-tester/" target="_blank">Latency Tester</a>
 を使用した。
 Web サイト上で音に合わせてマウスをクリックするかスペースキーを押すことで簡易的に遅延時間を確認できる。</p>
 
@@ -685,15 +685,15 @@ Web サイト上で音に合わせてマウスをクリックするかスペー�
 <h2 id="参考サイト">参考サイト</h2>
 
 <ul>
-  <li><a href="https://uzuky.hatenablog.com/entry/20201215/1608005651">aptX LL / Adaptive でやる音ゲー - う！</a></li>
-  <li><a href="https://androplus.org/entry/creative-bt-w5-review/">Creative BT-W5レビュー。aptX Adaptiveで24bit/96kHzや低遅延にできるトランスミッター - AndroPlus</a></li>
+  <li><a href="https://uzuky.hatenablog.com/entry/20201215/1608005651" target="_blank">aptX LL / Adaptive でやる音ゲー - う！</a></li>
+  <li><a href="https://androplus.org/entry/creative-bt-w5-review/" target="_blank">Creative BT-W5レビュー。aptX Adaptiveで24bit/96kHzや低遅延にできるトランスミッター - AndroPlus</a></li>
 </ul>]]></content><author><name>saasan</name></author><category term="blog" /><category term="ガジェット" /><category term="PC" /><summary type="html"><![CDATA[PC でゲームをしたり音楽を聞いたりする際に有線のイヤホンを使用していたが、 ケーブルが煩わしく感じていたのでゲームに使える完全ワイヤレスイヤホンを探すことにした。]]></summary></entry><entry><title type="html">IFTTT の Twitter 連携が有料化したので Python と GitHub Actions で RSS をツイートする</title><link href="https://slx.jp/blog/2023/07/05/ifttt%E3%81%AEtwitter%E9%80%A3%E6%90%BA%E3%81%8C%E6%9C%89%E6%96%99%E5%8C%96%E3%81%97%E3%81%9F%E3%81%AE%E3%81%A7python%E3%81%A8github-actions%E3%81%A7rss%E3%82%92%E3%83%84%E3%82%A4%E3%83%BC%E3%83%88%E3%81%99%E3%82%8B.html" rel="alternate" type="text/html" title="IFTTT の Twitter 連携が有料化したので Python と GitHub Actions で RSS をツイートする" /><published>2023-07-05T00:20:00+09:00</published><updated>2023-07-05T00:20:00+09:00</updated><id>https://slx.jp/blog/2023/07/05/ifttt%E3%81%AEtwitter%E9%80%A3%E6%90%BA%E3%81%8C%E6%9C%89%E6%96%99%E5%8C%96%E3%81%97%E3%81%9F%E3%81%AE%E3%81%A7python%E3%81%A8github-actions%E3%81%A7rss%E3%82%92%E3%83%84%E3%82%A4%E3%83%BC%E3%83%88%E3%81%99%E3%82%8B</id><content type="html" xml:base="https://slx.jp/blog/2023/07/05/ifttt%E3%81%AEtwitter%E9%80%A3%E6%90%BA%E3%81%8C%E6%9C%89%E6%96%99%E5%8C%96%E3%81%97%E3%81%9F%E3%81%AE%E3%81%A7python%E3%81%A8github-actions%E3%81%A7rss%E3%82%92%E3%83%84%E3%82%A4%E3%83%BC%E3%83%88%E3%81%99%E3%82%8B.html"><![CDATA[<p>IFTTT で動かしてた某ゲーム公式サイトの RSS をツイートするやつが
 Twitter 連携の有料化によって動かなくなったため、
 GitHub Actions で自作の Python スクリプトを動かして代用することにした。</p>
 
 <p>コードは以下のリポジトリにある。</p>
 
-<p><a href="https://github.com/saasan/feed2tweet"><img src="https://github-link-card.s3.ap-northeast-1.amazonaws.com/saasan/feed2tweet.png" width="460px" /></a></p>
+<p><a href="https://github.com/saasan/feed2tweet" target="_blank"><img src="https://github-link-card.s3.ap-northeast-1.amazonaws.com/saasan/feed2tweet.png" width="460px" /></a></p>
 
 <h2 id="なぜ-github-actions-なのか">なぜ GitHub Actions なのか？</h2>
 
@@ -709,13 +709,13 @@ IFTTT を利用する前に調べた際は
 無料で利用可能でデータの永続化が可能なサービスが見つからなかった記憶がある。</p>
 
 <p>今回いくつかの候補の中から GitHub Actions について調べていたところ、
-<a href="https://mjhd.hatenablog.com/entry/2022/06/04/104711">Github Actionsのcacheをデータの永続化(?)に使う - MJHD</a>
+<a href="https://mjhd.hatenablog.com/entry/2022/06/04/104711" target="_blank">Github Actionsのcacheをデータの永続化(?)に使う - MJHD</a>
 を見て cache が永続化に利用できると知り GitHub Actions を利用することとした。</p>
 
 <h2 id="github-actions-の-cache">Github Actions の cache</h2>
 
 <p>公式のドキュメント: 
-<a href="https://docs.github.com/ja/actions/using-workflows/caching-dependencies-to-speed-up-workflows">依存関係をキャッシュしてワークフローのスピードを上げる - GitHub Docs</a></p>
+<a href="https://docs.github.com/ja/actions/using-workflows/caching-dependencies-to-speed-up-workflows" target="_blank">依存関係をキャッシュしてワークフローのスピードを上げる - GitHub Docs</a></p>
 
 <p>ファイルをキャッシュとして保存し、次回以降のワークフロー実行時に利用できる。</p>
 
@@ -748,11 +748,11 @@ restore-keys に接頭辞のみ指定すると最新のものが取得できる�
 <h2 id="古いキャッシュの削除">古いキャッシュの削除</h2>
 
 <p>前述の通り放置していても古いキャッシュは7日で消えるが、
-<a href="https://zenn.dev/hankei6km/articles/manage-cache-in-github-actions-2023-01">GitHub Actions の Cache 管理(2023 年 1 月の場合)</a>
+<a href="https://zenn.dev/hankei6km/articles/manage-cache-in-github-actions-2023-01" target="_blank">GitHub Actions の Cache 管理(2023 年 1 月の場合)</a>
 を参考に、1日経ったキャッシュはワークフロー内で削除することとした。</p>
 
 <p>GitHub CLI の
-extension (<a href="https://github.com/actions/gh-actions-cache">gh-actions-cache</a>)
+extension (<a href="https://github.com/actions/gh-actions-cache" target="_blank">gh-actions-cache</a>)
 を使用している。</p>
 
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Cleanup cache</span>
@@ -777,7 +777,7 @@ extension (<a href="https://github.com/actions/gh-actions-cache">gh-actions-cach
 <h2 id="github-actions-での定期実行に関する注意点">GitHub Actions での定期実行に関する注意点</h2>
 
 <p>以下のように schedule で10分毎に実行する設定としたが、
-<a href="https://docs.github.com/ja/actions/using-workflows/events-that-trigger-workflows#schedule">公式のドキュメント</a>
+<a href="https://docs.github.com/ja/actions/using-workflows/events-that-trigger-workflows#schedule" target="_blank">公式のドキュメント</a>
 にも書かれている通り、負荷が高い場合は遅延したりそもそも実行されない場合がある。</p>
 
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">on</span><span class="pi">:</span>
@@ -793,8 +793,8 @@ extension (<a href="https://github.com/actions/gh-actions-cache">gh-actions-cach
 
 <ul>
   <li>Windows 10 Pro 22H2</li>
-  <li>GPU: <a href="https://www.amazon.co.jp/dp/B08WPJ5P4R/?tag=saasan-22">MSI GeForce RTX 3060 GAMING X 12G</a> (VRAM 12 GB 版 NVIDIA GeForce RTX 3060)</li>
-  <li>CPU: <a href="https://www.amazon.co.jp/dp/B08166SLDF/?tag=saasan-22">AMD Ryzen 5 5600X</a></li>
+  <li>GPU: <a href="https://www.amazon.co.jp/dp/B08WPJ5P4R/?tag=saasan-22" target="_blank">MSI GeForce RTX 3060 GAMING X 12G</a> (VRAM 12 GB 版 NVIDIA GeForce RTX 3060)</li>
+  <li>CPU: <a href="https://www.amazon.co.jp/dp/B08166SLDF/?tag=saasan-22" target="_blank">AMD Ryzen 5 5600X</a></li>
   <li>メモリ: 32 GB</li>
 </ul>
 
@@ -823,7 +823,7 @@ AMD や Intel 製 GPU に対応させたものもあるようだが以下の手�
 <p>Stable Diffusion に限らず、NVIDIA の GPU で機械学習やディープラーニングを行うには
 CUDA という並列計算のライブラリが必要。</p>
 
-<p><a href="https://developer.nvidia.com/cuda-downloads">NVIDIA の公式サイト</a>
+<p><a href="https://developer.nvidia.com/cuda-downloads" target="_blank">NVIDIA の公式サイト</a>
 から CUDA Toolkit をダウンロードしインストールする。</p>
 
 <h2 id="python-git-のインストール">Python, Git のインストール</h2>
@@ -836,7 +836,7 @@ CUDA という並列計算のライブラリが必要。</p>
 <p><strong>3.11 系では web UI が動作しないため必ず 3.10 系をインストールすること。</strong></p>
 
 <ol>
-  <li><a href="https://www.python.org/downloads/windows/">Python の公式サイト</a> から Python 3.10.x をダウンロードする。<br />
+  <li><a href="https://www.python.org/downloads/windows/" target="_blank">Python の公式サイト</a> から Python 3.10.x をダウンロードする。<br />
 現在は 3.10.10 が最新のため「Stable Releases」の「Python 3.10.10 - Feb. 8, 2023」にある
 「Windows installer (64-bit)」をクリックしてダウンロードすればよい。</li>
   <li>ダウンロードしたファイルをダブルクリックしてインストーラーを起動する。</li>
@@ -847,7 +847,7 @@ CUDA という並列計算のライブラリが必要。</p>
 <h3 id="git-のインストール">Git のインストール</h3>
 
 <ol>
-  <li><a href="https://git-scm.com/download/win">Git の公式サイト</a> から 64-bit Git for Windows Setup をダウンロードする。</li>
+  <li><a href="https://git-scm.com/download/win" target="_blank">Git の公式サイト</a> から 64-bit Git for Windows Setup をダウンロードする。</li>
   <li>ダウンロードしたファイルをダブルクリックしてインストーラーを起動する。</li>
   <li>英語で色々聞かれるが全部「Next」をクリックして進める。</li>
   <li>最後に「Install」すればとりあえず使える状態になる。</li>
@@ -856,7 +856,7 @@ CUDA という並列計算のライブラリが必要。</p>
 <h2 id="stable-diffusion-web-ui-のインストール">Stable Diffusion web UI のインストール</h2>
 
 <ol>
-  <li><a href="https://github.com/AUTOMATIC1111/stable-diffusion-webui">Stable Diffusion web UI のページ</a>
+  <li><a href="https://github.com/AUTOMATIC1111/stable-diffusion-webui" target="_blank">Stable Diffusion web UI のページ</a>
 から「Code &gt; Download ZIP」でファイルをダウンロードする。<br />
 Git を使える人は <code class="language-plaintext highlighter-rouge">git clone</code> してもよい。</li>
   <li>ダウンロードした ZIP ファイルを展開する。<br />
@@ -927,7 +927,7 @@ txt2img は文章、単語などの言葉から画像を生成できる。</p>
   <li><code class="language-plaintext highlighter-rouge">(言葉:1.5)</code>: 1.5倍強調</li>
 </ul>
 
-<p>参考: <a href="https://github.com/AUTOMATIC1111/stable-diffusion-webui/wiki/Features#attentionemphasis">Attention/emphasis</a></p>
+<p>参考: <a href="https://github.com/AUTOMATIC1111/stable-diffusion-webui/wiki/Features#attentionemphasis" target="_blank">Attention/emphasis</a></p>
 
 <h3 id="generate--interrupt--skip">Generate / Interrupt / Skip</h3>
 
@@ -997,7 +997,7 @@ Seed を固定し Variation strength を上げることで、
 
 <p>デフォルトの 7 のままでよさそう。</p>
 
-<p>参考: <a href="https://gigazine.net/news/20220928-stable-diffusion-classifier-free-guidance/">画像生成AI「Stable Diffusion」でどれぐらいプロンプト・呪文の指示に従うかを決める「CFG(classifier-free guidance)」とは一体何なのか？ - GIGAZINE</a></p>
+<p>参考: <a href="https://gigazine.net/news/20220928-stable-diffusion-classifier-free-guidance/" target="_blank">画像生成AI「Stable Diffusion」でどれぐらいプロンプト・呪文の指示に従うかを決める「CFG(classifier-free guidance)」とは一体何なのか？ - GIGAZINE</a></p>
 
 <h3 id="restore-faces-tiling">Restore faces, Tiling</h3>
 
@@ -1034,20 +1034,20 @@ Seed を固定し Variation strength を上げることで、
 
 <h3 id="モデルのダウンロード">モデルのダウンロード</h3>
 
-<p>モデルは <a href="https://huggingface.co/spaces/huggingface-projects/diffusers-gallery">Hugging Face</a> や
-<a href="https://civitai.com/">Civitai</a> などで探してダウンロードする。</p>
+<p>モデルは <a href="https://huggingface.co/spaces/huggingface-projects/diffusers-gallery" target="_blank">Hugging Face</a> や
+<a href="https://civitai.com/" target="_blank">Civitai</a> などで探してダウンロードする。</p>
 
 <p>拡張子が .ckpt または .safetensor のものをダウンロードすればよい。
 両方用意されている場合は .safetensor のほうが安全性が高いためそちらをダウンロードする。</p>
 
-<p>参考: <a href="https://economylife.net/safetensors-ckpt-difference/">AIモデルのsafetensors形式とは何者か？ckptと比較しつつ解説する | 経済的生活日誌</a></p>
+<p>参考: <a href="https://economylife.net/safetensors-ckpt-difference/" target="_blank">AIモデルのsafetensors形式とは何者か？ckptと比較しつつ解説する | 経済的生活日誌</a></p>
 
 <h4 id="モデルのファイル名に付いてる-pruned-や-fp16-って何">モデルのファイル名に付いてる pruned や fp16 って何？</h4>
 
 <p>画像生成に影響の少ない部分を削って軽量化したもの。
 pruned や fp16 が用意されている場合はそちらをダウンロードするとよい。</p>
 
-<p><a href="https://www.tensorflow.org/guide/mixed_precision?hl=ja">TensorFlow のサイト</a>
+<p><a href="https://www.tensorflow.org/guide/mixed_precision?hl=ja" target="_blank">TensorFlow のサイト</a>
 によると「NVIDIA GPU は float32 よりも float16 で速く演算を実行でき」るらしい。 (float16 = fp16)</p>
 
 <h3 id="モデルの追加方法">モデルの追加方法</h3>
@@ -1064,8 +1064,8 @@ pruned や fp16 が用意されている場合はそちらをダウンロード�
 <p>以下の2つのモデルはどちらも美しいイラストが生成できるためオススメ。</p>
 
 <ul>
-  <li><a href="https://huggingface.co/WarriorMama777/OrangeMixs">AbyssOrangeMix3 (AOM3)</a></li>
-  <li><a href="https://huggingface.co/andite/anything-v4.0">Anything v4.5</a></li>
+  <li><a href="https://huggingface.co/WarriorMama777/OrangeMixs" target="_blank">AbyssOrangeMix3 (AOM3)</a></li>
+  <li><a href="https://huggingface.co/andite/anything-v4.0" target="_blank">Anything v4.5</a></li>
 </ul>
 
 <p>AbyssOrangeMix3 は A1 から A3 と A1B がある。
@@ -1262,7 +1262,7 @@ Interrupt / Skip ボタンが Generate ボタンへ戻るのに時間がかか�
 <h2 id="かみ田先生に雪美とペロを描いてもらった">かみ田先生に雪美とペロを描いてもらった</h2>
 
 <p>初っ端から買ったものじゃないですが
-<a href="https://skeb.jp/@kamita_k/works/17">Skeb でかみ田先生にリクエスト</a>
+<a href="https://skeb.jp/@kamita_k/works/17" target="_blank">Skeb でかみ田先生にリクエスト</a>
 してめちゃくちゃ可愛い雪美とペロを描いていただきました！</p>
 
 <p>かみ田先生に雪美を描いてもらえたら絶対可愛いだろうと以前から思ってたので
@@ -1318,7 +1318,7 @@ Interrupt / Skip ボタンが Generate ボタンへ戻るのに時間がかか�
 初代エリコンでは手前側2つは誤爆が多くて使い物にならなかったけど
 シリーズ2ではそれがなくなり4つ全部使えてる。</p>
 
-<p><a href="https://www.rewasd.com/">reWASD</a>
+<p><a href="https://www.rewasd.com/" target="_blank">reWASD</a>
 でパドルにサブパレット(キーボード)を割り当てたら PSO2 がかなり快適になった。</p>
 
 <h2 id="dell-ドッキングステーション-wd15">Dell ドッキングステーション WD15</h2>
@@ -1359,7 +1359,7 @@ Interrupt / Skip ボタンが Generate ボタンへ戻るのに時間がかか�
 </div>
 
 <p>オーブンレンジがあるのにオーブン機能をまったく使ってなかったんで
-試しに市販のチルドピザ(<a href="https://www.nipponham.co.jp/ishigama/">石窯工房</a> とか)を焼いてみたらおいしかった。</p>
+試しに市販のチルドピザ(<a href="https://www.nipponham.co.jp/ishigama/" target="_blank">石窯工房</a> とか)を焼いてみたらおいしかった。</p>
 
 <p>しかし皿に乗せて焼くとあまりカリッとした感じにならないんでこちらを購入。
 ピザがさらにおいしく焼けるようになった。</p>
