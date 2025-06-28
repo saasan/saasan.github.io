@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ja"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://slx.jp/feed.xml" rel="self" type="application/atom+xml" /><link href="https://slx.jp/" rel="alternate" type="text/html" hreflang="ja" /><updated>2025-06-25T01:16:45+09:00</updated><id>https://slx.jp/feed.xml</id><title type="html">slx.jp</title><author><name>saasan</name></author><entry><title type="html">Claude for Desktop で AWS Documentation MCP Server を使ってみる</title><link href="https://slx.jp/blog/2025/06/22/claude-for-desktop%E3%81%A7aws-documentation-mcp-server%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%8B.html" rel="alternate" type="text/html" title="Claude for Desktop で AWS Documentation MCP Server を使ってみる" /><published>2025-06-22T23:00:00+09:00</published><updated>2025-06-22T23:00:00+09:00</updated><id>https://slx.jp/blog/2025/06/22/claude-for-desktop%E3%81%A7aws-documentation-mcp-server%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%8B</id><content type="html" xml:base="https://slx.jp/blog/2025/06/22/claude-for-desktop%E3%81%A7aws-documentation-mcp-server%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%8B.html"><![CDATA[<p>MCP の使い道を調べているうちに知った
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ja"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://slx.jp/feed.xml" rel="self" type="application/atom+xml" /><link href="https://slx.jp/" rel="alternate" type="text/html" hreflang="ja" /><updated>2025-06-28T20:20:43+09:00</updated><id>https://slx.jp/feed.xml</id><title type="html">slx.jp</title><author><name>saasan</name></author><entry><title type="html">Claude for Desktop で AWS Documentation MCP Server を使ってみる</title><link href="https://slx.jp/blog/2025/06/22/claude-for-desktop%E3%81%A7aws-documentation-mcp-server%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%8B.html" rel="alternate" type="text/html" title="Claude for Desktop で AWS Documentation MCP Server を使ってみる" /><published>2025-06-22T23:00:00+09:00</published><updated>2025-06-22T23:00:00+09:00</updated><id>https://slx.jp/blog/2025/06/22/claude-for-desktop%E3%81%A7aws-documentation-mcp-server%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%8B</id><content type="html" xml:base="https://slx.jp/blog/2025/06/22/claude-for-desktop%E3%81%A7aws-documentation-mcp-server%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%8B.html"><![CDATA[<p>MCP の使い道を調べているうちに知った
 AWS Documentation MCP Server が便利そうだったので使ってみた。</p>
 
 <h2 id="aws-documentation-mcp-server-とは">AWS Documentation MCP Server とは？</h2>
@@ -748,30 +748,16 @@ restore-keys に接頭辞のみ指定すると最新のものが取得できる�
 <h2 id="古いキャッシュの削除">古いキャッシュの削除</h2>
 
 <p>前述の通り放置していても古いキャッシュは7日で消えるが、
-<a href="https://zenn.dev/hankei6km/articles/manage-cache-in-github-actions-2023-01" target="_blank">GitHub Actions の Cache 管理(2023 年 1 月の場合)</a>
-を参考に、1日経ったキャッシュはワークフロー内で削除することとした。</p>
+新しいものから5個を残して削除することとした。</p>
 
-<p>GitHub CLI の
-extension (<a href="https://github.com/actions/gh-actions-cache" target="_blank">gh-actions-cache</a>)
-を使用している。</p>
+<p>GitHub CLI の <code class="language-plaintext highlighter-rouge">gh cache</code> を使用している。</p>
 
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Cleanup cache</span>
   <span class="na">run</span><span class="pi">:</span> <span class="pi">|</span>
-    <span class="s">gh extension install actions/gh-actions-cache</span>
-
-    <span class="s"># キャッシュがない場合にエラーとなって停止するのを防ぐ</span>
-    <span class="s">set +e</span>
-
-    <span class="s"># 作成から1日以上経っているキャッシュを削除</span>
-    <span class="s">for KEY in $(gh actions-cache list -R "${REPO}" -B "${BRANCH}" --key $ --order asc --sort created-at | grep -P 'days? ago' | cut -f 1)</span>
-    <span class="s">do</span>
-        <span class="s">echo "Deleting ${KEY}"</span>
-        <span class="s">gh actions-cache delete "${KEY}" -R "${REPO}" -B "${BRANCH}" --confirm</span>
-    <span class="s">done</span>
-  <span class="na">env</span><span class="pi">:</span>
-    <span class="na">GH_TOKEN</span><span class="pi">:</span> <span class="s">$</span>
-    <span class="na">REPO</span><span class="pi">:</span> <span class="s">$</span>
-    <span class="na">BRANCH</span><span class="pi">:</span> <span class="s">$</span>
+    <span class="s"># 新しいものから5個を残してキャッシュ削除</span>
+    <span class="s">gh cache list --key tweeted- --order asc --sort created_at --json id | \</span>
+      <span class="s">jq -r '.[0:-5][].id' | \</span>
+      <span class="s">xargs -r -I ID gh cache delete ID</span>
 </code></pre></div></div>
 
 <h2 id="github-actions-での定期実行に関する注意点">GitHub Actions での定期実行に関する注意点</h2>
