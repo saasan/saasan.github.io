@@ -680,6 +680,94 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 <h2 class="post-title">
+        <a class="post-link" href="/blog/2022/10/24/ubuntu-22.04%E3%81%A7apt-key-add%E3%81%97%E3%81%9F%E3%81%82%E3%81%A8apt-update%E3%81%A7key-is-stored-in-legacy-trusted.gpg-keyring%E3%81%A8%E3%81%84%E3%81%86%E3%83%A1%E3%83%83%E3%82%BB%E3%83%BC%E3%82%B8%E3%81%8C%E8%A1%A8%E7%A4%BA%E3%81%95%E3%82%8C%E3%82%8B%E5%A0%B4%E5%90%88%E3%81%AE%E5%AF%BE%E5%BF%9C%E6%96%B9%E6%B3%95.html">
+          Ubuntu 22.04 で apt-key add したあと apt-update で Key is stored in legacy trusted.gpg keyring というメッセージが表示される場合の対応方法
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> 2022-10-24 16:25</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 7 mins</span>
+      </div>
+      <a class="post-excerpt" href="/blog/2022/10/24/ubuntu-22.04%E3%81%A7apt-key-add%E3%81%97%E3%81%9F%E3%81%82%E3%81%A8apt-update%E3%81%A7key-is-stored-in-legacy-trusted.gpg-keyring%E3%81%A8%E3%81%84%E3%81%86%E3%83%A1%E3%83%83%E3%82%BB%E3%83%BC%E3%82%B8%E3%81%8C%E8%A1%A8%E7%A4%BA%E3%81%95%E3%82%8C%E3%82%8B%E5%A0%B4%E5%90%88%E3%81%AE%E5%AF%BE%E5%BF%9C%E6%96%B9%E6%B3%95.html">
+        <p>
+        結論から言うと、以下のコマンドで鍵を追加すれば良い。
+
+sudo curl -fsSL https://myrepo.example/myrepo.asc -o /etc/apt/keyrings/myrepo.asc
+
+
+鍵がテキスト形式の場合は拡張子を .asc、バイナリ形式の場合は .gpg にすること。
+
+既に公開鍵を追加済... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags">
+<a class="post-tag" href="/tags.html#Ubuntu">#Ubuntu</a><a class="post-tag" href="/tags.html#Linux">#Linux</a><a class="post-tag" href="/tags.html#APT">#APT</a>
+</div>
+    </li>
+<li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
         <a class="post-link" href="/blog/2022/10/03/zoneid-zone.identifier%E3%82%92%E4%B8%80%E6%8B%AC%E3%81%A7%E5%89%8A%E9%99%A4%E3%81%99%E3%82%8B.html">
           ZoneID (Zone.Identifier) を一括で削除する
         </a>
@@ -956,92 +1044,6 @@ Kindle Paperwhite買ったら無駄にでかい箱で送られてきたｗ pic.t
       </a>
       <div class="post-tags"><a class="post-tag" href="/tags.html#%E3%82%AC%E3%82%B8%E3%82%A7%E3%83%83%E3%83%88">#ガジェット</a></div>
     </li>
-<li>
-      
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h2 class="post-title">
-        <a class="post-link" href="/blog/2021/12/26/%E3%83%96%E3%83%83%E3%82%AF%E3%83%9E%E3%83%BC%E3%82%AF%E3%83%AC%E3%83%83%E3%83%88%E3%81%A7%E3%83%88%E3%83%BC%E3%82%B9%E3%83%88%E3%82%92%E8%A1%A8%E7%A4%BA%E3%81%99%E3%82%8B.html">
-          ブックマークレットでトーストを表示する
-        </a>
-      </h2>
-      <div class="post-meta">
-        <span class="post-date"><i class="fa fa-calendar"></i> 2021-12-26 01:07</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 4 mins</span>
-      </div>
-      <a class="post-excerpt" href="/blog/2021/12/26/%E3%83%96%E3%83%83%E3%82%AF%E3%83%9E%E3%83%BC%E3%82%AF%E3%83%AC%E3%83%83%E3%83%88%E3%81%A7%E3%83%88%E3%83%BC%E3%82%B9%E3%83%88%E3%82%92%E8%A1%A8%E7%A4%BA%E3%81%99%E3%82%8B.html">
-        <p>
-        ブックマークレットでクリップボードへコピーするスクリプトをいくつか使ってるけど、
-コピー後に何も表示されないかたちだったんでコピーされたか分からないし
-alertでメッセージを表示するのも野暮ったいんでトーストを表示することにした。
-
-function generateToastHTML(message) {
-    ret... <span class="read_more">Read More</span>
-        </p>
-      </a>
-      <div class="post-tags">
-<a class="post-tag" href="/tags.html#JavaScript">#JavaScript</a><a class="post-tag" href="/tags.html#Bookmarklet">#Bookmarklet</a>
-</div>
-    </li>
 </ul>
 
   <!-- Pagination links -->
@@ -1094,14 +1096,14 @@ function generateToastHTML(message) {
   <ul>
     <li>
       <a href="/index.html">
-        All<span>42</span>
+        All<span>43</span>
       </a>
     </li>
 
     
       <li>
         <a href="/categories.html#h-blog">
-          blog <span>37</span>
+          blog <span>38</span>
         </a>
       </li>
     

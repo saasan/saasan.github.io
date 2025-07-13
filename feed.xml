@@ -1,4 +1,54 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ja"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://slx.jp/feed.xml" rel="self" type="application/atom+xml" /><link href="https://slx.jp/" rel="alternate" type="text/html" hreflang="ja" /><updated>2025-06-28T20:47:08+09:00</updated><id>https://slx.jp/feed.xml</id><title type="html">slx.jp</title><author><name>saasan</name></author><entry><title type="html">Claude for Desktop で AWS Documentation MCP Server を使ってみる</title><link href="https://slx.jp/blog/2025/06/22/claude-for-desktop%E3%81%A7aws-documentation-mcp-server%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%8B.html" rel="alternate" type="text/html" title="Claude for Desktop で AWS Documentation MCP Server を使ってみる" /><published>2025-06-22T23:00:00+09:00</published><updated>2025-06-22T23:00:00+09:00</updated><id>https://slx.jp/blog/2025/06/22/claude-for-desktop%E3%81%A7aws-documentation-mcp-server%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%8B</id><content type="html" xml:base="https://slx.jp/blog/2025/06/22/claude-for-desktop%E3%81%A7aws-documentation-mcp-server%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%8B.html"><![CDATA[<p>MCP の使い道を調べているうちに知った
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ja"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://slx.jp/feed.xml" rel="self" type="application/atom+xml" /><link href="https://slx.jp/" rel="alternate" type="text/html" hreflang="ja" /><updated>2025-07-13T23:49:53+09:00</updated><id>https://slx.jp/feed.xml</id><title type="html">slx.jp</title><author><name>saasan</name></author><entry><title type="html">「WSL の起動中にエラーが発生しました」への対応</title><link href="https://slx.jp/blog/2025/07/13/wsl-%E3%81%AE%E8%B5%B7%E5%8B%95%E4%B8%AD%E3%81%AB%E3%82%A8%E3%83%A9%E3%83%BC%E3%81%8C%E7%99%BA%E7%94%9F%E3%81%97%E3%81%BE%E3%81%97%E3%81%9F-%E3%81%B8%E3%81%AE%E5%AF%BE%E5%BF%9C.html" rel="alternate" type="text/html" title="「WSL の起動中にエラーが発生しました」への対応" /><published>2025-07-13T23:45:00+09:00</published><updated>2025-07-13T23:45:00+09:00</updated><id>https://slx.jp/blog/2025/07/13/%E3%80%8Cwsl-%E3%81%AE%E8%B5%B7%E5%8B%95%E4%B8%AD%E3%81%AB%E3%82%A8%E3%83%A9%E3%83%BC%E3%81%8C%E7%99%BA%E7%94%9F%E3%81%97%E3%81%BE%E3%81%97%E3%81%9F%E3%80%8D%E3%81%B8%E3%81%AE%E5%AF%BE%E5%BF%9C</id><content type="html" xml:base="https://slx.jp/blog/2025/07/13/wsl-%E3%81%AE%E8%B5%B7%E5%8B%95%E4%B8%AD%E3%81%AB%E3%82%A8%E3%83%A9%E3%83%BC%E3%81%8C%E7%99%BA%E7%94%9F%E3%81%97%E3%81%BE%E3%81%97%E3%81%9F-%E3%81%B8%E3%81%AE%E5%AF%BE%E5%BF%9C.html"><![CDATA[<p>結論から言うと Docker Desktop を更新したら直った。</p>
+
+<p>今後のために原因の確認方法を残しておく。</p>
+
+<ol>
+  <li>イベントビューアーを起動</li>
+  <li>「Windows ログ」&gt;「Application」を開く</li>
+  <li>右側の「現在のログをフィルター…」をクリック</li>
+  <li>イベントソースに「WSL」と入力してフィルタをかける</li>
+</ol>
+
+<p>最新の警告イベント内容を確認すると以下の通りだった。</p>
+
+<blockquote>
+  <p>ソース “WSL” からのイベント ID 0 の説明が見つかりません。このイベントを発生させるコンポーネントがローカル コンピューターにインストールされていないか、インストールが壊れています。ローカル コンピューターにコンポーネントをインストールするか、コンポーネントを修復してください。</p>
+
+  <p>イベントが別のコンピューターから発生している場合、イベントと共に表示情報を保存する必要があります。</p>
+
+  <p>イベントには次の情報が含まれています:</p>
+
+  <p>Unknown key ‘automount.crossDistro’ in /etc/wsl.conf:3</p>
+
+  <p>メッセージ リソースは存在しますが、メッセージがメッセージ テーブルに見つかりませんでした。</p>
+</blockquote>
+
+<p><code class="language-plaintext highlighter-rouge">/etc/wsl.conf</code> に問題があるようだが
+Ubuntu のものをを見ても <code class="language-plaintext highlighter-rouge">automount.crossDistro</code> という記述はない。</p>
+
+<p><code class="language-plaintext highlighter-rouge">wsl -l -v</code> ディストリビューションを確認する。</p>
+
+<pre><code class="language-cmd">&gt;wsl -l -v
+  NAME              STATE           VERSION
+* Ubuntu            Running         2
+  docker-desktop    Running         2
+</code></pre>
+
+<p>Ubuntu 以外に
+<code class="language-plaintext highlighter-rouge">docker-desktop</code> があるため Docker の問題と判断。
+Docker Desktop を更新したところ問題が解消した。</p>
+
+<p>更新前に確認するのを忘れていたが、
+更新後に <code class="language-plaintext highlighter-rouge">docker-desktop</code> の
+<code class="language-plaintext highlighter-rouge">/etc/wsl.conf</code> を確認しところ以下のようになっていた。</p>
+
+<pre><code class="language-cmd">&gt;wsl -d docker-desktop cat /etc/wsl.conf
+[automount]
+root = /mnt/host
+options = "metadata"
+[interop]
+enabled = true
+</code></pre>]]></content><author><name>saasan</name></author><category term="blog" /><category term="WSL" /><category term="Docker" /><summary type="html"><![CDATA[結論から言うと Docker Desktop を更新したら直った。]]></summary></entry><entry><title type="html">Claude for Desktop で AWS Documentation MCP Server を使ってみる</title><link href="https://slx.jp/blog/2025/06/22/claude-for-desktop%E3%81%A7aws-documentation-mcp-server%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%8B.html" rel="alternate" type="text/html" title="Claude for Desktop で AWS Documentation MCP Server を使ってみる" /><published>2025-06-22T23:00:00+09:00</published><updated>2025-06-22T23:00:00+09:00</updated><id>https://slx.jp/blog/2025/06/22/claude-for-desktop%E3%81%A7aws-documentation-mcp-server%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%8B</id><content type="html" xml:base="https://slx.jp/blog/2025/06/22/claude-for-desktop%E3%81%A7aws-documentation-mcp-server%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%8B.html"><![CDATA[<p>MCP の使い道を調べているうちに知った
 AWS Documentation MCP Server が便利そうだったので使ってみた。</p>
 
 <h2 id="aws-documentation-mcp-server-とは">AWS Documentation MCP Server とは？</h2>
@@ -1352,67 +1402,4 @@ Interrupt / Skip ボタンが Generate ボタンへ戻るのに時間がかか�
 <p>しかし皿に乗せて焼くとあまりカリッとした感じにならないんでこちらを購入。
 ピザがさらにおいしく焼けるようになった。</p>
 
-<p>私は10インチ用を買ったけど大きすぎたのでたぶん8インチ用でいい。</p>]]></content><author><name>saasan</name></author><category term="blog" /><category term="ガジェット" /><summary type="html"><![CDATA[今年買ってよかったものとか]]></summary></entry><entry><title type="html">Ubuntu 22.04 で apt-key add したあと apt-update で Key is stored in legacy trusted.gpg keyring というメッセージが表示される場合の対応方法</title><link href="https://slx.jp/blog/2022/10/24/ubuntu-22.04%E3%81%A7apt-key-add%E3%81%97%E3%81%9F%E3%81%82%E3%81%A8apt-update%E3%81%A7key-is-stored-in-legacy-trusted.gpg-keyring%E3%81%A8%E3%81%84%E3%81%86%E3%83%A1%E3%83%83%E3%82%BB%E3%83%BC%E3%82%B8%E3%81%8C%E8%A1%A8%E7%A4%BA%E3%81%95%E3%82%8C%E3%82%8B%E5%A0%B4%E5%90%88%E3%81%AE%E5%AF%BE%E5%BF%9C%E6%96%B9%E6%B3%95.html" rel="alternate" type="text/html" title="Ubuntu 22.04 で apt-key add したあと apt-update で Key is stored in legacy trusted.gpg keyring というメッセージが表示される場合の対応方法" /><published>2022-10-24T16:25:04+09:00</published><updated>2022-10-24T16:25:04+09:00</updated><id>https://slx.jp/blog/2022/10/24/ubuntu-22.04%E3%81%A7apt-key-add%E3%81%97%E3%81%9F%E3%81%82%E3%81%A8apt-update%E3%81%A7key-is-stored-in-legacy-trusted.gpg-keyring%E3%81%A8%E3%81%84%E3%81%86%E3%83%A1%E3%83%83%E3%82%BB%E3%83%BC%E3%82%B8%E3%81%8C%E8%A1%A8%E7%A4%BA%E3%81%95%E3%82%8C%E3%82%8B%E5%A0%B4%E5%90%88%E3%81%AE%E5%AF%BE%E5%BF%9C%E6%96%B9%E6%B3%95</id><content type="html" xml:base="https://slx.jp/blog/2022/10/24/ubuntu-22.04%E3%81%A7apt-key-add%E3%81%97%E3%81%9F%E3%81%82%E3%81%A8apt-update%E3%81%A7key-is-stored-in-legacy-trusted.gpg-keyring%E3%81%A8%E3%81%84%E3%81%86%E3%83%A1%E3%83%83%E3%82%BB%E3%83%BC%E3%82%B8%E3%81%8C%E8%A1%A8%E7%A4%BA%E3%81%95%E3%82%8C%E3%82%8B%E5%A0%B4%E5%90%88%E3%81%AE%E5%AF%BE%E5%BF%9C%E6%96%B9%E6%B3%95.html"><![CDATA[<p>結論から言うと、以下のコマンドで鍵を追加すれば良い。</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>curl <span class="nt">-fsSL</span> https://myrepo.example/myrepo.asc <span class="nt">-o</span> /etc/apt/keyrings/myrepo.asc
-</code></pre></div></div>
-
-<p>鍵がテキスト形式の場合は拡張子を <code class="language-plaintext highlighter-rouge">.asc</code>、バイナリ形式の場合は <code class="language-plaintext highlighter-rouge">.gpg</code> にすること。</p>
-
-<p>既に公開鍵を追加済みの場合は <code class="language-plaintext highlighter-rouge">apt-key list</code> で下8桁を確認し <code class="language-plaintext highlighter-rouge">apt-key del XXXXXXXX</code> で削除する。</p>
-
-<h2 id="解説">解説</h2>
-
-<p>Ubuntu 22.04 で <code class="language-plaintext highlighter-rouge">apt-key add</code> したあと <code class="language-plaintext highlighter-rouge">apt-update</code> すると以下のメッセージが表示される。</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Key is stored <span class="k">in </span>legacy trusted.gpg keyring <span class="o">(</span>/etc/apt/trusted.gpg<span class="o">)</span>, see the DEPRECATION section <span class="k">in </span>apt-key<span class="o">(</span>8<span class="o">)</span> <span class="k">for </span>details.
-</code></pre></div></div>
-
-<p>鍵が古い非推奨の場所に保存されているという警告だ。
-<code class="language-plaintext highlighter-rouge">man apt-key</code> によると</p>
-
-<blockquote>
-  <p>apt-key(8) will last be available in Debian 11 and Ubuntu 22.04.</p>
-</blockquote>
-
-<p>apt-key は Debian 11 と Ubuntu 22.04 を最後に廃止となるので
-鍵の追加方法も変える必要がある。</p>
-
-<p>メッセージ通り DEPRECATION セクションを見ると次のように書かれている。</p>
-
-<blockquote>
-  <p>DEPRECATION</p>
-
-  <p>Except for using apt-key del in maintainer scripts, the use of apt-key is deprecated. This section shows how to replace existing use of apt-key.</p>
-
-  <p>If your existing use of apt-key add looks like this:</p>
-
-  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget -qO- https://myrepo.example/myrepo.asc | sudo apt-key add -
-</code></pre></div>  </div>
-
-  <p>Then you can directly replace this with (though note the recommendation below):</p>
-
-  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget -qO- https://myrepo.example/myrepo.asc | sudo tee /etc/apt/trusted.gpg.d/myrepo.asc
-</code></pre></div>  </div>
-
-  <p>Make sure to use the “asc” extension for ASCII armored keys and the “gpg” extension for the binary OpenPGP format (also known as “GPG key public ring”). The binary OpenPGP format works for all apt versions, while the ASCII armored format works for apt version &gt;= 1.4.</p>
-
-  <p>Recommended: Instead of placing keys into the /etc/apt/trusted.gpg.d directory, you can place them anywhere on your filesystem by using the Signed-By option in your sources.list and pointing to the filename of the key. See sources.list(5) for details. Since APT 2.4, /etc/apt/keyrings is provided as the recommended location for keys not managed by packages. When using a deb822-style sources.list, and with apt version &gt;= 2.4, the Signed-By option can also be used to include the full ASCII armored keyring directly in the sources.list without an additional file.</p>
-</blockquote>
-
-<p>以下のような形式で使用している場合は</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget <span class="nt">-qO-</span> https://myrepo.example/myrepo.asc | <span class="nb">sudo </span>apt-key add -
-</code></pre></div></div>
-
-<p>次のように書き換えればよい。</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget <span class="nt">-qO-</span> https://myrepo.example/myrepo.asc | <span class="nb">sudo tee</span> /etc/apt/trusted.gpg.d/myrepo.asc
-</code></pre></div></div>
-
-<p>拡張子が <code class="language-plaintext highlighter-rouge">.asc</code> のファイルを置けば ASCII armored 形式 (テキスト形式)、
-<code class="language-plaintext highlighter-rouge">.gpg</code> のファイルを置けばバイナリ形式として処理される。
-Ubuntu 22.04 の場合 ASCII armored 形式からバイナリ形式への変換 (<code class="language-plaintext highlighter-rouge">gpg --dearmor</code>) は不要らしい。</p>
-
-<p>また、パッケージで管理されていない鍵は <code class="language-plaintext highlighter-rouge">/etc/apt/keyrings</code> に置くことが推奨されている。
-よって冒頭のコマンドとなる。</p>]]></content><author><name>saasan</name></author><category term="blog" /><category term="Ubuntu" /><category term="Linux" /><category term="APT" /><summary type="html"><![CDATA[結論から言うと、以下のコマンドで鍵を追加すれば良い。]]></summary></entry></feed>
+<p>私は10インチ用を買ったけど大きすぎたのでたぶん8インチ用でいい。</p>]]></content><author><name>saasan</name></author><category term="blog" /><category term="ガジェット" /><summary type="html"><![CDATA[今年買ってよかったものとか]]></summary></entry></feed>
