@@ -679,6 +679,88 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 <h2 class="post-title">
+        <a class="post-link" href="/blog/2025/07/26/optimize-vhd%E3%81%A7%E7%A0%B4%E5%A3%8A%E3%81%95%E3%82%8C%E3%81%9Fwsl%E3%81%AEext4.vhdx%E3%81%8B%E3%82%89%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%92%E5%8F%96%E3%82%8A%E5%87%BA%E3%81%99.html">
+          Optimize-VHD に破壊された WSL の ext4.vhdx からファイルを取り出す
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> 2025-07-26 14:50</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 7 mins</span>
+      </div>
+      <a class="post-excerpt" href="/blog/2025/07/26/optimize-vhd%E3%81%A7%E7%A0%B4%E5%A3%8A%E3%81%95%E3%82%8C%E3%81%9Fwsl%E3%81%AEext4.vhdx%E3%81%8B%E3%82%89%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%92%E5%8F%96%E3%82%8A%E5%87%BA%E3%81%99.html">
+        <p>
+        WSL の VHDX ファイルが 850GB くらいまで肥大化してたんで
+Optimize-VHD を実行したら、ファイルが破損して WSL が起動しなくなった。
+Windows 11 自体でのマウントや diskpart での認識、
+Hyper-V マネージャーのディスクの検査、市販 VHD 修復ソフトの無料デモなど試... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags"><a class="post-tag" href="/tags.html#WSL">#WSL</a></div>
+    </li>
+<li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
         <a class="post-link" href="/blog/2025/07/13/wsl-%E3%81%AE%E8%B5%B7%E5%8B%95%E4%B8%AD%E3%81%AB%E3%82%A8%E3%83%A9%E3%83%BC%E3%81%8C%E7%99%BA%E7%94%9F%E3%81%97%E3%81%BE%E3%81%97%E3%81%9F-%E3%81%B8%E3%81%AE%E5%AF%BE%E5%BF%9C.html">
           「WSL の起動中にエラーが発生しました」への対応
         </a>
@@ -964,98 +1046,6 @@ Flatcar Co... <span class="read_more">Read More</span>
 <a class="post-tag" href="/tags.html#VMware">#VMware</a><a class="post-tag" href="/tags.html#ESXi">#ESXi</a><a class="post-tag" href="/tags.html#Flatcar%20Container%20Linux">#Flatcar Container Linux</a>
 </div>
     </li>
-<li>
-      
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h2 class="post-title">
-        <a class="post-link" href="/blog/2025/02/23/windows-11%E3%81%AEWSL%E3%81%A7ext4%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E3%81%AE%E3%83%89%E3%83%A9%E3%82%A4%E3%83%96%E3%81%AE%E5%86%85%E5%AE%B9%E3%82%92%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B.html">
-          Windows 11 の WSL で ext4 ファイルシステムのドライブの内容を確認する
-        </a>
-      </h2>
-      <div class="post-meta">
-        <span class="post-date"><i class="fa fa-calendar"></i> 2025-02-23 03:20</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 2 mins</span>
-      </div>
-      <a class="post-excerpt" href="/blog/2025/02/23/windows-11%E3%81%AEWSL%E3%81%A7ext4%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E3%81%AE%E3%83%89%E3%83%A9%E3%82%A4%E3%83%96%E3%81%AE%E5%86%85%E5%AE%B9%E3%82%92%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B.html">
-        <p>
-        WSL 2 で Linux ディスクのマウントを開始する
-の内容を自分用にまとめたやつ
-
-
-  
-    PowerShell でドライブを確認
-
-    GET-CimInstance -query "SELECT * from Win32_DiskDrive"
-    
-  
-  
-    PowerShell でドライブをマウント (要管理... <span class="read_more">Read More</span>
-        </p>
-      </a>
-      <div class="post-tags">
-<a class="post-tag" href="/tags.html#Windows">#Windows</a><a class="post-tag" href="/tags.html#WSL">#WSL</a>
-</div>
-    </li>
 </ul>
 
   <!-- Pagination links -->
@@ -1108,14 +1098,14 @@ Flatcar Co... <span class="read_more">Read More</span>
   <ul>
     <li>
       <a href="/index.html">
-        All<span>43</span>
+        All<span>44</span>
       </a>
     </li>
 
     
       <li>
         <a href="/categories.html#h-blog">
-          blog <span>38</span>
+          blog <span>39</span>
         </a>
       </li>
     

@@ -1,4 +1,146 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ja"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://slx.jp/feed.xml" rel="self" type="application/atom+xml" /><link href="https://slx.jp/" rel="alternate" type="text/html" hreflang="ja" /><updated>2025-07-13T23:52:57+09:00</updated><id>https://slx.jp/feed.xml</id><title type="html">slx.jp</title><author><name>saasan</name></author><entry><title type="html">「WSL の起動中にエラーが発生しました」への対応</title><link href="https://slx.jp/blog/2025/07/13/wsl-%E3%81%AE%E8%B5%B7%E5%8B%95%E4%B8%AD%E3%81%AB%E3%82%A8%E3%83%A9%E3%83%BC%E3%81%8C%E7%99%BA%E7%94%9F%E3%81%97%E3%81%BE%E3%81%97%E3%81%9F-%E3%81%B8%E3%81%AE%E5%AF%BE%E5%BF%9C.html" rel="alternate" type="text/html" title="「WSL の起動中にエラーが発生しました」への対応" /><published>2025-07-13T23:45:00+09:00</published><updated>2025-07-13T23:45:00+09:00</updated><id>https://slx.jp/blog/2025/07/13/%E3%80%8Cwsl-%E3%81%AE%E8%B5%B7%E5%8B%95%E4%B8%AD%E3%81%AB%E3%82%A8%E3%83%A9%E3%83%BC%E3%81%8C%E7%99%BA%E7%94%9F%E3%81%97%E3%81%BE%E3%81%97%E3%81%9F%E3%80%8D%E3%81%B8%E3%81%AE%E5%AF%BE%E5%BF%9C</id><content type="html" xml:base="https://slx.jp/blog/2025/07/13/wsl-%E3%81%AE%E8%B5%B7%E5%8B%95%E4%B8%AD%E3%81%AB%E3%82%A8%E3%83%A9%E3%83%BC%E3%81%8C%E7%99%BA%E7%94%9F%E3%81%97%E3%81%BE%E3%81%97%E3%81%9F-%E3%81%B8%E3%81%AE%E5%AF%BE%E5%BF%9C.html"><![CDATA[<p>結論から言うと Docker Desktop を更新したら直った。</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ja"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://slx.jp/feed.xml" rel="self" type="application/atom+xml" /><link href="https://slx.jp/" rel="alternate" type="text/html" hreflang="ja" /><updated>2025-07-26T14:54:45+09:00</updated><id>https://slx.jp/feed.xml</id><title type="html">slx.jp</title><author><name>saasan</name></author><entry><title type="html">Optimize-VHD に破壊された WSL の ext4.vhdx からファイルを取り出す</title><link href="https://slx.jp/blog/2025/07/26/optimize-vhd%E3%81%A7%E7%A0%B4%E5%A3%8A%E3%81%95%E3%82%8C%E3%81%9Fwsl%E3%81%AEext4.vhdx%E3%81%8B%E3%82%89%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%92%E5%8F%96%E3%82%8A%E5%87%BA%E3%81%99.html" rel="alternate" type="text/html" title="Optimize-VHD に破壊された WSL の ext4.vhdx からファイルを取り出す" /><published>2025-07-26T14:50:00+09:00</published><updated>2025-07-26T14:50:00+09:00</updated><id>https://slx.jp/blog/2025/07/26/optimize-vhd%E3%81%A7%E7%A0%B4%E5%A3%8A%E3%81%95%E3%82%8C%E3%81%9Fwsl%E3%81%AEext4.vhdx%E3%81%8B%E3%82%89%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%92%E5%8F%96%E3%82%8A%E5%87%BA%E3%81%99</id><content type="html" xml:base="https://slx.jp/blog/2025/07/26/optimize-vhd%E3%81%A7%E7%A0%B4%E5%A3%8A%E3%81%95%E3%82%8C%E3%81%9Fwsl%E3%81%AEext4.vhdx%E3%81%8B%E3%82%89%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%92%E5%8F%96%E3%82%8A%E5%87%BA%E3%81%99.html"><![CDATA[<p>WSL の VHDX ファイルが 850GB くらいまで肥大化してたんで
+Optimize-VHD を実行したら、ファイルが破損して WSL が起動しなくなった。
+Windows 11 自体でのマウントや diskpart での認識、
+Hyper-V マネージャーのディスクの検査、市販 VHD 修復ソフトの無料デモなど試したけどどれもダメ。</p>
+
+<p>最近開発は全部 WSL 上でやってたうえに、
+作りかけのものは GitHub に push しておらずバックアップなし。
+数ヶ月の作業が消えてしまった…。</p>
+
+<h2 id="状況確認">状況確認</h2>
+
+<p>諦めきれないので Claude に相談しつつ状況確認と復旧を試みる。</p>
+
+<p>まずは ext4.vhdx をいつも使ってる Zorin OS へ持っていき <code class="language-plaintext highlighter-rouge">qemu-img info ext4.vhdx</code> を実行。<br />
+※Zorin OS は Ubuntu 系 Linux ディストリビューション</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>apt <span class="nb">install </span>libguestfs-tools qemu-utils
+<span class="o">(</span>略<span class="o">)</span>
+<span class="nv">$ </span>qemu-img info ext4.vhdx
+qemu-img: VHDX BAT entry 5939 start offset 211707494400 points after end of file <span class="o">(</span>27629977600<span class="o">)</span><span class="nb">.</span> Image has probably been truncated.
+qemu-img: Could not open <span class="s1">'ext4.vhdx'</span>: Could not open <span class="s1">'ext4.vhdx'</span>: Invalid argument
+</code></pre></div></div>
+
+<h3 id="claude-による解説">Claude による解説</h3>
+
+<blockquote>
+  <p>このエラーメッセージは、VHDXファイルが<strong>深刻に破損している</strong>ことを示しています。</p>
+
+  <h4 id="エラーの詳細解析">エラーの詳細解析</h4>
+
+  <p><code class="language-plaintext highlighter-rouge">VHDX BAT entry 5939 start offset 211707494400 points after end of file (27629977600)</code></p>
+
+  <p><strong>BAT (Block Allocation Table)</strong>: VHDXファイル内のデータブロックの位置を管理するテーブル</p>
+
+  <ul>
+    <li><strong>エントリ5939</strong>: データブロック#5939の位置情報</li>
+    <li><strong>start offset 211707494400</strong>: このブロックが211GB地点にあるとBAT記録</li>
+    <li><strong>end of file (27629977600)</strong>: 実際のファイルサイズは約27GB</li>
+    <li><strong>問題</strong>: 27GBしかないファイルの211GB地点を参照しようとしている</li>
+  </ul>
+
+  <p><code class="language-plaintext highlighter-rouge">Image has probably been truncated</code></p>
+
+  <p>ファイルが途中で切断されている（不完全な状態）</p>
+
+  <p><code class="language-plaintext highlighter-rouge">Could not open 'ext4.vhdx': Invalid argument</code></p>
+
+  <p>QEMU/libguestfsがファイルを認識できない</p>
+</blockquote>
+
+<p>うおお…</p>
+
+<blockquote>
+  <p><strong>深刻に破損している</strong></p>
+</blockquote>
+
+<p>終わった……</p>
+
+<p>と思ったが Claude は部分的なデータ救出方法も提案してくれた。</p>
+
+<h2 id="claude-による現実的な復旧方法の提案">Claude による現実的な復旧方法の提案</h2>
+
+<blockquote>
+  <h3 id="期待できる救出レベル">期待できる救出レベル</h3>
+
+  <ul>
+    <li><strong>完全復旧</strong>: 困難（BAT破損のため）</li>
+    <li><strong>部分データ</strong>: 可能性あり</li>
+    <li><strong>設定ファイル</strong>: 救出可能かも</li>
+  </ul>
+
+  <h3 id="推奨アプローチ">推奨アプローチ</h3>
+
+  <ol>
+    <li><strong>ddrescue</strong>で読み取り可能な部分をコピー</li>
+    <li>部分イメージから<strong>testdisk/photorec</strong>でファイル救出</li>
+    <li>重要データのみ手動で救出</li>
+    <li>WSL環境は<strong>再構築</strong></li>
+  </ol>
+
+  <h3 id="データ救出の順序">データ救出の順序</h3>
+
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 1. 部分コピー作成</span>
+ddrescue <span class="nt">-d</span> <span class="nt">-r3</span> ext4.vhdx recovered.raw recovery.log
+
+<span class="c"># 2. パーティション情報の確認</span>
+testdisk recovered.raw
+
+<span class="c"># 3. ファイル救出</span>
+photorec recovered.raw
+</code></pre></div>  </div>
+
+  <p>残念ながら、このレベルの破損では完全復旧は困難です。部分的なデータ救出に焦点を当てることをお勧めします。</p>
+</blockquote>
+
+<h2 id="データの救出">データの救出</h2>
+
+<h3 id="ddrescue">ddrescue</h3>
+
+<p><code class="language-plaintext highlighter-rouge">ddrescue -d -r3 ext4.vhdx recovered.raw recovery.log</code></p>
+
+<p><code class="language-plaintext highlighter-rouge">ddrescue</code> は不良セクタの多いディスクを扱える dd の強化版みたいなものらしい
+(<a href="https://ja.wikipedia.org/wiki/Ddrescue" target="_blank">Wikipedia</a> 調べ)。</p>
+
+<p><code class="language-plaintext highlighter-rouge">-d</code> が入力ファイルへのダイレクトディスクアクセス、<code class="language-plaintext highlighter-rouge">-r</code> が試行回数の指定。
+問題なさそうなのでそのまま実行したあと、しばらく待つと <code class="language-plaintext highlighter-rouge">recovered.raw</code> が出力された。</p>
+
+<h3 id="testdisk">TestDisk</h3>
+
+<p><code class="language-plaintext highlighter-rouge">testdisk recovered.raw</code></p>
+
+<p><code class="language-plaintext highlighter-rouge">testdisk</code> は失われたパーティションの復元や壊れたファイルシステムの復元ができるらしい
+(<a href="https://ja.wikipedia.org/wiki/TestDisk" target="_blank">Wikipedia</a> 調べ)。</p>
+
+<p>実行してみたが ext4 パーティションの存在が確認できただけで、ファイルの救出には至らなかった。</p>
+
+<h3 id="photorec">PhotoRec</h3>
+
+<p><code class="language-plaintext highlighter-rouge">photorec recovered.raw</code></p>
+
+<p><code class="language-plaintext highlighter-rouge">photorec</code> は失われたファイルを回復することができるらしい
+(<a href="https://ja.wikipedia.org/wiki/PhotoRec" target="_blank">Wikipedia</a> 調べ)。</p>
+
+<p>救出対象とするファイルは拡張子単位で指定可能だが、
+今回はできる限り復旧したかったため指定せずに実行。
+約15万ファイルが出力された。</p>
+
+<p>救出されたファイルは <code class="language-plaintext highlighter-rouge">recup_dir.x</code> というディレクトリに
+<code class="language-plaintext highlighter-rouge">fxxxxxxx.ext</code> というファイル名で出力される (<code class="language-plaintext highlighter-rouge">x</code> は数字)。
+救出したかった JavaScript と JSON ファイルは
+テキストファイル (<code class="language-plaintext highlighter-rouge">*.txt</code>) として出力されていた。</p>
+
+<p>以下のように検索・コピーして、ファイルの一部を取り出すことができた。</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 検索</span>
+<span class="nv">$ </span>find recup_dir.<span class="k">*</span> <span class="nt">-name</span> <span class="s1">'*.txt'</span> <span class="nt">-print0</span> | xargs <span class="nt">-0</span> <span class="nb">grep</span> <span class="nt">-l</span> <span class="s1">'検索する文字列'</span>
+<span class="c"># コピー</span>
+<span class="nv">$ </span>find recup_dir.<span class="k">*</span> <span class="nt">-name</span> <span class="s1">'*.txt'</span> <span class="nt">-print0</span> | xargs <span class="nt">-0</span> <span class="nb">grep</span> <span class="nt">-l</span> <span class="s1">'検索する文字列'</span> | xargs <span class="nt">-I</span> <span class="o">{}</span> <span class="nb">cp</span> <span class="o">{}</span> コピー先
+</code></pre></div></div>
+
+<h2 id="まとめ">まとめ</h2>
+
+<p>ちゃんとバックアップは取ろう！</p>]]></content><author><name>saasan</name></author><category term="blog" /><category term="WSL" /><summary type="html"><![CDATA[バックアップは取っとけ！]]></summary></entry><entry><title type="html">「WSL の起動中にエラーが発生しました」への対応</title><link href="https://slx.jp/blog/2025/07/13/wsl-%E3%81%AE%E8%B5%B7%E5%8B%95%E4%B8%AD%E3%81%AB%E3%82%A8%E3%83%A9%E3%83%BC%E3%81%8C%E7%99%BA%E7%94%9F%E3%81%97%E3%81%BE%E3%81%97%E3%81%9F-%E3%81%B8%E3%81%AE%E5%AF%BE%E5%BF%9C.html" rel="alternate" type="text/html" title="「WSL の起動中にエラーが発生しました」への対応" /><published>2025-07-13T23:45:00+09:00</published><updated>2025-07-13T23:45:00+09:00</updated><id>https://slx.jp/blog/2025/07/13/%E3%80%8Cwsl-%E3%81%AE%E8%B5%B7%E5%8B%95%E4%B8%AD%E3%81%AB%E3%82%A8%E3%83%A9%E3%83%BC%E3%81%8C%E7%99%BA%E7%94%9F%E3%81%97%E3%81%BE%E3%81%97%E3%81%9F%E3%80%8D%E3%81%B8%E3%81%AE%E5%AF%BE%E5%BF%9C</id><content type="html" xml:base="https://slx.jp/blog/2025/07/13/wsl-%E3%81%AE%E8%B5%B7%E5%8B%95%E4%B8%AD%E3%81%AB%E3%82%A8%E3%83%A9%E3%83%BC%E3%81%8C%E7%99%BA%E7%94%9F%E3%81%97%E3%81%BE%E3%81%97%E3%81%9F-%E3%81%B8%E3%81%AE%E5%AF%BE%E5%BF%9C.html"><![CDATA[<p>結論から言うと Docker Desktop を更新したら直った。</p>
 
 <p>今後のために原因の確認方法を残しておく。</p>
 
@@ -1295,111 +1437,4 @@ Interrupt / Skip ボタンが Generate ボタンへ戻るのに時間がかか�
 <p>xFormers と併用するなら</p>
 
 <div class="language-bat highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">set</span> <span class="kd">COMMANDLINE_ARGS</span><span class="o">=</span><span class="na">--xformers --no-half-vae
-</span></code></pre></div></div>]]></content><author><name>saasan</name></author><category term="blog" /><category term="Stable Diffusion" /><summary type="html"><![CDATA[Windows 10 へのインストール方法と使い方、画像生成のコツを紹介]]></summary></entry><entry><title type="html">【2022年】買ってよかったものとか</title><link href="https://slx.jp/blog/2022/12/31/2022%E5%B9%B4-%E8%B2%B7%E3%81%A3%E3%81%A6%E3%82%88%E3%81%8B%E3%81%A3%E3%81%9F%E3%82%82%E3%81%AE%E3%81%A8%E3%81%8B.html" rel="alternate" type="text/html" title="【2022年】買ってよかったものとか" /><published>2022-12-31T21:30:00+09:00</published><updated>2022-12-31T21:30:00+09:00</updated><id>https://slx.jp/blog/2022/12/31/%E3%80%902022%E5%B9%B4%E3%80%91%E8%B2%B7%E3%81%A3%E3%81%A6%E3%82%88%E3%81%8B%E3%81%A3%E3%81%9F%E3%82%82%E3%81%AE%E3%81%A8%E3%81%8B</id><content type="html" xml:base="https://slx.jp/blog/2022/12/31/2022%E5%B9%B4-%E8%B2%B7%E3%81%A3%E3%81%A6%E3%82%88%E3%81%8B%E3%81%A3%E3%81%9F%E3%82%82%E3%81%AE%E3%81%A8%E3%81%8B.html"><![CDATA[<p>今年買ってよかったものとか</p>
-
-<h2 id="かみ田先生に雪美とペロを描いてもらった">かみ田先生に雪美とペロを描いてもらった</h2>
-
-<p>初っ端から買ったものじゃないですが
-<a href="https://skeb.jp/@kamita_k/works/17" target="_blank">Skeb でかみ田先生にリクエスト</a>
-してめちゃくちゃ可愛い雪美とペロを描いていただきました！</p>
-
-<p>かみ田先生に雪美を描いてもらえたら絶対可愛いだろうと以前から思ってたので
-リクエストを受けていただけて夢が叶った感じです。</p>
-
-<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">雪美ちゃん <a href="https://t.co/PXBtc7hAGu">pic.twitter.com/PXBtc7hAGu</a></p>&mdash; かみ田🥲土曜日東タ-37b (@kamita_k) <a href="https://twitter.com/kamita_k/status/1601831710286827521?ref_src=twsrc%5Etfw">December 11, 2022</a></blockquote>
-<script async="" src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-
-<h2 id="ブリヂストン-tb1e">ブリヂストン TB1e</h2>
-
-<div class="affiliate-product-list">
-    <a href="https://www.amazon.co.jp/dp/B09VGJHKQ2?tag=saasan-22" class="affiliate-product">
-        <img src="https://m.media-amazon.com/images/I/41zZ3xsH8WL._AC_SX355_.jpg" alt="電動自転車 クロスバイク ブリヂストン(BRIDGESTONE) TB1e M.Xオーシャンブルー 27インチ 2022年モデル TB7B40 e-bike" />
-        <span class="affiliate-product-name">電動自転車 クロスバイク ブリヂストン(BRIDGESTONE) TB1e M.Xオーシャンブルー 27インチ 2022年モデル TB7B40 e-bike</span>
-    </a>
-</div>
-
-<p>電動アシストのクロスバイク。
-アシストがあるので 10km くらいまでなら運動不足気味の私でも楽に走れる。</p>
-
-<p>8ヶ月で 600km 以上走りました。たぶん1年でこんなに自転車に乗ったのは初めて。
-通勤も駅が遠いので電車に乗るより自転車で行ったほうが早くて楽になりました。</p>
-
-<h2 id="サイクルコンピューター-xoss-g">サイクルコンピューター XOSS G</h2>
-
-<div class="affiliate-product-list">
-    <a href="https://www.amazon.co.jp/dp/B083WK3BV5?tag=saasan-22" class="affiliate-product">
-        <img src="https://m.media-amazon.com/images/I/61Uz-fdUCaL._AC_SY450_.jpg" alt="XOSS G サイクルコンピュータ GPS サイコン 無線 自転車スピードメーター バッテリー内蔵 Bluetooth対応 日本語説明書付き (G)" />
-        <span class="affiliate-product-name">XOSS G サイクルコンピュータ GPS サイコン 無線 自転車スピードメーター バッテリー内蔵 Bluetooth対応 日本語説明書付き (G)</span>
-    </a>
-</div>
-
-<p>TB1e に乗り始めてから購入。
-速度や走行距離、時間が測れる。</p>
-
-<p>某有名自転車アプリだと無課金では停車中も走行時間がカウントされるけど
-これなら3,000円くらいで実際の走行時間だけが測れる。
-スマホアプリと連動すれば走行ルートを Google マップ上に表示したりも可能。</p>
-
-<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">今日は道を間違えずに着いた <a href="https://t.co/JZsveyGX71">pic.twitter.com/JZsveyGX71</a></p>&mdash; カガミ (@saasan) <a href="https://twitter.com/saasan/status/1528275360114126849?ref_src=twsrc%5Etfw">May 22, 2022</a></blockquote>
-<script async="" src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-
-<h2 id="xbox-elite-ワイヤレス-コントローラー-シリーズ-2">Xbox Elite ワイヤレス コントローラー シリーズ 2</h2>
-
-<div class="affiliate-product-list">
-    <a href="https://www.amazon.co.jp/dp/B07V8VMY9Q?tag=saasan-22" class="affiliate-product">
-        <img src="https://m.media-amazon.com/images/I/61o3VwNkdVL._AC_SX522_.jpg" alt="【純正品】Xbox Elite ワイヤレス コントローラー シリーズ 2" />
-        <span class="affiliate-product-name">【純正品】Xbox Elite ワイヤレス コントローラー シリーズ 2</span>
-    </a>
-</div>
-
-<p>初代エリコンと比べ背面のパドルが小さくなり誤って押すことが減った。
-初代エリコンでは手前側2つは誤爆が多くて使い物にならなかったけど
-シリーズ2ではそれがなくなり4つ全部使えてる。</p>
-
-<p><a href="https://www.rewasd.com/" target="_blank">reWASD</a>
-でパドルにサブパレット(キーボード)を割り当てたら PSO2 がかなり快適になった。</p>
-
-<h2 id="dell-ドッキングステーション-wd15">Dell ドッキングステーション WD15</h2>
-
-<div class="affiliate-product-list">
-    <a href="https://www.amazon.co.jp/dp/B07J5P9TJD?tag=saasan-22" class="affiliate-product">
-        <img src="https://m.media-amazon.com/images/I/61PC+kfiDQL._AC_SY450_.jpg" alt="Dell WD15 モニター ドック 4K 130Wアダプター付き USB-C(450-AFGM、6GFRT) (更新)" />
-        <span class="affiliate-product-name">Dell WD15 モニター ドック 4K 130Wアダプター付き USB-C(450-AFGM、6GFRT) (更新)</span>
-    </a>
-</div>
-
-<p>以前使用していたバッファロー製のドッキングステーションは動作が不安定で
-実質電源と HDMI 出力だけにしか使えていなかったので、
-会社の PC と同じ Dell 製で相性が良いかと思ったこちらを購入。</p>
-
-<p>電源、HDMI と DisplayPort による2画面出力、USBキーボードとマウスが
-ケーブル1本で繋がるのは便利。</p>
-
-<h2 id="ベッセルvessel-ボールラチェットドライバー-2200-2100">ベッセル(VESSEL) ボールラチェットドライバー 2200 +2×100</h2>
-
-<div class="affiliate-product-list">
-    <a href="https://www.amazon.co.jp/dp/B019C821PC?tag=saasan-22" class="affiliate-product">
-        <img src="https://m.media-amazon.com/images/I/61lQKR9RGnL.__AC_SX300_SY300_QL70_ML2_.jpg" alt="ベッセル(VESSEL) ボールラチェットドライバー 2200 +2×100" />
-        <span class="affiliate-product-name">ベッセル(VESSEL) ボールラチェットドライバー 2200 +2×100</span>
-    </a>
-</div>
-
-<p>ボールグリップドライバーにラチェット機構がついてて押さえながら回せる。
-自転車や PC などのメンテが楽になった。</p>
-
-<h2 id="ピザ焼網">ピザ焼網</h2>
-
-<div class="affiliate-product-list">
-    <a href="https://www.amazon.co.jp/dp/B001U7ENTQ?tag=saasan-22" class="affiliate-product">
-        <img src="https://m.media-amazon.com/images/I/81z662mB4TL._AC_SX522_.jpg" alt="遠藤商事 TKG 焼き網 ピザ 直径(mm)205 ステンレスで錆びにくく衛生的 いろんな食材も焼ける キャンプBBQアウトドア 業務用 日本 WPZ01008" />
-        <span class="affiliate-product-name">遠藤商事 TKG 焼き網 ピザ 直径(mm)205 ステンレスで錆びにくく衛生的 いろんな食材も焼ける キャンプBBQアウトドア 業務用 日本 WPZ01008</span>
-    </a>
-</div>
-
-<p>オーブンレンジがあるのにオーブン機能をまったく使ってなかったんで
-試しに市販のチルドピザ(<a href="https://www.nipponham.co.jp/ishigama/" target="_blank">石窯工房</a> とか)を焼いてみたらおいしかった。</p>
-
-<p>しかし皿に乗せて焼くとあまりカリッとした感じにならないんでこちらを購入。
-ピザがさらにおいしく焼けるようになった。</p>
-
-<p>私は10インチ用を買ったけど大きすぎたのでたぶん8インチ用でいい。</p>]]></content><author><name>saasan</name></author><category term="blog" /><category term="ガジェット" /><summary type="html"><![CDATA[今年買ってよかったものとか]]></summary></entry></feed>
+</span></code></pre></div></div>]]></content><author><name>saasan</name></author><category term="blog" /><category term="Stable Diffusion" /><summary type="html"><![CDATA[Windows 10 へのインストール方法と使い方、画像生成のコツを紹介]]></summary></entry></feed>
