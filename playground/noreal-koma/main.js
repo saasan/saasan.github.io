@@ -11,6 +11,18 @@ let currentTitle = "";
 
 const $ = (id) => document.getElementById(id);
 
+function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
+
 function shuffleArray(array) {
     const arr = array.slice();
     for (let i = arr.length - 1; i > 0; i--) {
@@ -420,18 +432,42 @@ function initializeSuggestedKeywords() {
     });
 }
 
+// --- Search Box Initialization ---
+
+function initializeSearchBox() {
+    const searchBox = $("search-box");
+    let isComposing = false;
+
+    const debouncedUpdate = debounce(() => updateSearchQuery(), 500);
+
+    searchBox.addEventListener("input", () => {
+        if (!isComposing) {
+            debouncedUpdate();
+        }
+    });
+
+    searchBox.addEventListener("compositionstart", () => {
+        isComposing = true;
+    });
+
+    searchBox.addEventListener("compositionend", () => {
+        isComposing = false;
+        debouncedUpdate();
+    });
+
+    $("clear-button").addEventListener("click", () => {
+        searchBox.value = "";
+        updateSearchQuery("", true);
+    });
+}
+
 // --- Main Entry Point ---
 
 function main() {
     loadMangaData();
+    initializeSearchBox();
     addRandomButton();
     addMoreButton("none");
-
-    $("clear-button").addEventListener("click", () => {
-        const searchBox = $("search-box");
-        searchBox.value = "";
-        updateSearchQuery("", true);
-    });
 }
 
 // --- Popstate (Back/Forward Navigation) ---
