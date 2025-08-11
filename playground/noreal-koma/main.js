@@ -157,6 +157,12 @@ function renderMangaItems(items, isSingleItem = false, append = false) {
                 <a href="${item.id}" target="_blank">X で見る</a>
                 </blockquote>`;
         }
+        else if (item.id.includes("instagram.com")) {
+            blockquote = `<blockquote class="instagram-media"
+                data-instgrm-permalink="${item.id}" data-instgrm-version="14">
+                <a href="${item.id}" target="_blank">Instagram で見る</a>
+                </blockquote>`;
+        }
 
         div.innerHTML = [
             blockquote,
@@ -176,6 +182,9 @@ function renderMangaItems(items, isSingleItem = false, append = false) {
 
     if (window.twttr?.widgets) {
         window.twttr.widgets.load();
+    }
+    if (window.instgrm) {
+        window.instgrm.Embeds.process();
     }
 }
 
