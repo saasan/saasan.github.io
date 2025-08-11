@@ -33,6 +33,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-noto-sans@0.0.72/index.min.css">
   <link rel="stylesheet" href="/assets/css/main.css">
+  
   <script src="/assets/js/main.js"></script>
   <script async src="/assets/js/copy-button.js"></script>
   <!-- Google Tag Manager -->
@@ -360,7 +361,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
           </label>
 
           <div class="trigger">
-<a class="page-link" href="/">HOME</a><a class="page-link" href="/archives.html">ARCHIVES</a><a class="page-link" href="/categories.html">CATEGORIES</a><a class="page-link" href="/tags.html">TAGS</a>
+<a class="page-link" href="/">HOME</a><a class="page-link" href="/archives.html">ARCHIVES</a><a class="page-link" href="/categories.html">CATEGORIES</a><a class="page-link" href="/tags.html">TAGS</a><a class="page-link" href="/playground/">PLAYGROUND</a>
 
 
 
@@ -606,48 +607,8 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 <header class="post-header">
   <h1 class="post-title p-name" itemprop="name headline">SideM風会話ジェネレータ</h1>
-  <h2 class="post-subtitle"></h2>
-
-  <p class="post-meta">
-    <time class="dt-published" datetime="2014-03-08T20:00:00+09:00" itemprop="datePublished"><i class="fa fa-calendar"></i> 2014-03-08 11:00
-    </time>
-
-    
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 3 mins</span>
-  </p></header>
+<div class="post-meta"><time class="dt-published" datetime="2014-03-08T20:00:00+09:00" itemprop="datePublished"><i class="fa fa-calendar"></i> 2014-03-08 11:00
+    </time></div></header>
 <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
     <div class="post-content e-content" itemprop="articleBody">
@@ -684,7 +645,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
         <li>各コマの上でマウスホイールを動かして画像を拡大/縮小します。</li>
         <li>完成したら「保存用画像を出力する」ボタンを押します。</li>
         <li>出てきた画像を右クリックして保存します。</li>
-        <li>画像とハッシュタグ「#SideM風会話」を付けてツイートすると<a href="https://x.com/saasan" target="_blank">作者</a>が喜びます！</li>
+        <li>画像とハッシュタグ「<a href="https://x.com/hashtag/SideM%E9%A2%A8%E4%BC%9A%E8%A9%B1" target="_blank">#SideM風会話</a>」を付けてポストすると<a href="https://x.com/saasan" target="_blank">作者</a>が喜びます！</li>
     </ol>
 </section>
 
@@ -735,156 +696,21 @@ document.addEventListener('DOMContentLoaded', function(event) {
     <p id="result"></p>
 </section>
 
-<section>
-    <a class="twitter-timeline" data-dnt="true" href="https://twitter.com/search?q=%23SideM%E9%A2%A8%E4%BC%9A%E8%A9%B1" data-widget-id="442248991078490114">Tweets about "#SideM風会話"</a>
-</section>
-
 <script src="js/sidem-mydesk.js"></script>
 <script src="js/sidem-mydesk-ui.js"></script>
 <script src="js/init.js"></script>
-<script async src="//platform.twitter.com/widgets.js"></script>
 
 
     </div>
 
 </article>
-<div class="post-nav">
-<span></span><span></span>
-</div>
-<div class="post-related">
-      <div>Related Articles</div>
-      <ul>
-        </ul>
-    </div>
 <div class="post-comments"></div></section>
 </div>
 
 
   </section>
   <section class="sidebar" style="margin-left: 15px;">
-    <!-- Get sidebar items --><style type="text/css" media="screen">
-.post-menu ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-</style>
-
-<div class="post-menu">
-  <div class="post-menu-title">TOC</div>
-  <div class="post-menu-content"></div>
-</div>
-
-<script>
-  function generateContent() {
-    var menu = document.querySelector(".post-menu");
-    var menuContent =  menu.querySelector(".post-menu-content");
-    var headings = document.querySelector(".post-content").querySelectorAll("h2, h3, h4, h5, h6");
-
-    // Hide menu when no headings
-    if (headings.length === 0) {
-      return menu.style.display = "none";
-    }
-
-    // Generate post menu
-    var menuHTML = '';
-    for (var i = 0; i < headings.length; i++) {
-      var h = headings[i];
-      menuHTML += (
-        '<li class="h-' + h.tagName.toLowerCase() + '">'
-        + '<a href="#h-' + h.getAttribute('id') + '">' + h.textContent + '</a></li>');
-    }
-
-    menuContent.innerHTML = '<ul>' + menuHTML + '</ul>';
-
-    // The header element
-    var header = document.querySelector('header.site-header');
-
-    function doMenuCollapse(index, over_items) {
-      var items = menuContent.firstChild.children;
-
-      if (over_items == undefined) {
-        over_items = 20;
-      }
-
-      if (items.length < over_items) {
-        return;
-      }
-
-      var activeItem = items[index];
-      var beginItem = activeItem
-      var endItem = activeItem
-      var beginIndex = index;
-      var endIndex = index + 1;
-      while (beginIndex >= 0
-        && !items[beginIndex].classList.contains('h-h2')) {
-        beginIndex -= 1;
-      }
-      while (endIndex < items.length
-        && !items[endIndex].classList.contains('h-h2')) {
-        endIndex += 1;
-      }
-      for (var i = 0; i < beginIndex; i++) {
-        item = items[i]
-        if (!item.classList.contains('h-h2')) {
-          item.style.display = 'none';
-        }
-      }
-      for (var i = beginIndex + 1; i < endIndex; i++) {
-        item = items[i]
-        // if (!item.classList.contains('h-h2')) {
-          item.style.display = '';
-        // }
-      }
-      for (var i = endIndex; i < items.length; i++) {
-        item = items[i]
-        if (!item.classList.contains('h-h2')) {
-          item.style.display = 'none';
-        }
-      }
-    }
-
-    // Init menu collapsed
-    doMenuCollapse(-1);
-
-    // Active the menu item
-    window.addEventListener('scroll', function (event) {
-      var lastActive = menuContent.querySelector('.active');
-      var changed = true;
-      var activeIndex = -1;
-      for (var i = headings.length - 1; i >= 0; i--) {
-        var h = headings[i];
-        var headingRect = h.getBoundingClientRect();
-        var headerRect = header.getBoundingClientRect();
-        var headerTop = Math.floor(headerRect.top);
-        var headerHeight = Math.floor(headerRect.height);
-        var headerHeight = headerTop + headerHeight + 20;
-        if (headingRect.top <= headerHeight) {
-          var id = 'h-' + h.getAttribute('id');
-          var a = menuContent.querySelector('a[href="#' + id  + '"]');
-          var curActive = a.parentNode;
-          if (curActive) {
-            curActive.classList.add('active');
-            activeIndex = i;
-          }
-          if (lastActive == curActive) {
-            changed = false;
-          }
-          break;
-        }
-      }
-      if (changed) {
-        if (lastActive) {
-          lastActive.classList.remove('active');
-        }
-        doMenuCollapse(activeIndex);
-      }
-      event.preventDefault();
-    });
-  }
-  generateContent();
-</script>
-</section>
+    <!-- Get sidebar items --></section>
 </div>
 
       </div>
