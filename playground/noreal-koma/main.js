@@ -431,7 +431,6 @@ function main() {
         const searchBox = $("search-box");
         searchBox.value = "";
         updateSearchQuery("", true);
-        searchBox.focus();
     });
 }
 
