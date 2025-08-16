@@ -150,6 +150,22 @@ function createLinkBlock(label, items) {
     return `<div>${label}: ${links}</div>`;
 }
 
+function createRelatedLinkBlocks(relatedLinks) {
+    if (!relatedLinks?.length) return [];
+
+    const groupedLinks = relatedLinks.reduce((acc, link) => {
+        let group = acc.find((g) => g.type === link.type);
+        if (!group) {
+            group = { type: link.type, links: [] };
+            acc.push(group);
+        }
+        group.links.push(link);
+        return acc;
+    }, []);
+
+    return groupedLinks.map((g) => createLinkBlock(g.type, g.links));
+}
+
 function createTextBlock(item, isSingleItem) {
     if (!isSingleItem || !item?.text?.length) return "";
     return item.text.map((t) => `<div class="manga-text">${t}</div>`).join("");
@@ -182,10 +198,7 @@ function renderMangaItems(items, isSingleItem = false, append = false) {
             createInfoBlock("タグ", item.tag),
             createInfoBlock("シリーズ", item.series),
             createInfoBlock("キャラ", item.characters),
-            createLinkBlock("Instagram", item.instagram),
-            createLinkBlock("SUZURI", item.suzuri),
-            createLinkBlock("LINEスタンプ", item.lineSticker),
-            createLinkBlock("QRコード", item.QRCode),
+            ...createRelatedLinkBlocks(item.relatedLinks),
             createTextBlock(item, isSingleItem),
         ].join("");
 
@@ -210,7 +223,7 @@ function addMoreButton(display = "block") {
         button.textContent = "もっと見る";
         button.type = "button";
         button.style.display = display;
-        button.className = "more-button"
+        button.className = "more-button";
         button.onclick = showMoreManga;
         $("result-container").after(button);
     }
