@@ -63,6 +63,12 @@
     align-items: center;
 }
 
+.result-item iframe.youtube {
+    width: 100%;
+    max-width: 560px;
+    aspect-ratio: 16 / 9;
+}
+
 #keyword-container button,
 .clickable,
 .more-button {

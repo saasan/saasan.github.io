@@ -180,16 +180,29 @@ function renderMangaItems(items, isSingleItem = false, append = false) {
         div.className = "result-item";
 
         let blockquote = "";
-        if (item.id.includes("twitter.com")) {
+        if (item.embed.includes("twitter.com")) {
             blockquote = `<blockquote class="twitter-tweet" data-media-max-width="560">
-                <a href="${item.id}" target="_blank">X で見る</a>
+                <a href="${item.embed}" target="_blank">X で見る</a>
                 </blockquote>`;
         }
-        else if (item.id.includes("instagram.com")) {
+        else if (item.embed.includes("instagram.com")) {
             blockquote = `<blockquote class="instagram-media"
-                data-instgrm-permalink="${item.id}" data-instgrm-version="14">
-                <a href="${item.id}" target="_blank">Instagram で見る</a>
+                data-instgrm-permalink="${item.embed}" data-instgrm-version="14">
+                <a href="${item.embed}" target="_blank">Instagram で見る</a>
                 </blockquote>`;
+        }
+        else if (item.embed.includes("suzuri.jp")) {
+            blockquote = `<iframe height="162" width="360" src="${item.embed}" frameborder="0">
+                <a href="${item.id}" target="_blank">SUZURI で見る</a>
+                </iframe>`;
+        }
+        else if (item.embed.includes("youtube.com")) {
+            blockquote = `<iframe class="youtube" src="${item.embed}"
+                title="YouTube video player" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+                <a href="${item.id}" target="_blank">YouTube で見る</a>
+                </iframe>`;
         }
 
         div.innerHTML = [
