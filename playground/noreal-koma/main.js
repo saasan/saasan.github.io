@@ -78,12 +78,15 @@ async function loadMangaData() {
 function handleInitialView() {
     const idParam = getUrlParam("id");
     const searchQuery = getUrlParam("search");
+    const randomParam = getUrlParam("random");
 
     if (idParam) {
         showMangaById(idParam);
     } else if (searchQuery) {
         $("search-box").value = searchQuery;
         searchManga(searchQuery);
+    } else if (randomParam !== null) {
+        showRandomManga();
     } else {
         showLatestManga();
     }
@@ -347,14 +350,9 @@ function showLatestManga() {
 }
 
 function showRandomManga() {
-    if (!mangaData.length) return;
-
-    $("search-box").value = "";
-    updateSearchQuery("", true);
-
     currentItems = shuffleArray(mangaData);
     currentOffset = 0;
-    currentTitle = "";
+    currentTitle = "ランダム表示";
     showPagedManga();
 }
 
@@ -362,11 +360,11 @@ function showRandomManga() {
 
 function addRandomButton() {
     const keywordContainer = $("keyword-container");
-    const button = document.createElement("button");
-    button.textContent = "ランダム";
-    button.type = "button";
-    button.onclick = showRandomManga;
-    keywordContainer.appendChild(button);
+    const link = document.createElement("a");
+    link.className = "clickable";
+    link.href = "?random";
+    link.textContent = "ランダム";
+    keywordContainer.appendChild(link);
     keywordContainer.appendChild(document.createTextNode("\n"));
 }
 
