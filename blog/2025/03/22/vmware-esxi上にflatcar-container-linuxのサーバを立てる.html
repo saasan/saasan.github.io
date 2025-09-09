@@ -647,7 +647,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 
-    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 13 mins</span>
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 17 mins</span>
   </p>
 <div class="post-tags">
 <a class="post-tag" href="/tags.html#VMware">#VMware</a><a class="post-tag" href="/tags.html#ESXi">#ESXi</a><a class="post-tag" href="/tags.html#Flatcar%20Container%20Linux">#Flatcar Container Linux</a>
@@ -688,10 +688,12 @@ document.addEventListener('DOMContentLoaded', function(event) {
   <li><a href="https://www.flatcar.org/docs/latest/installing/cloud/vmware/" target="_blank">Running Flatcar Container Linux on VMware</a></li>
 </ul>
 
-<h3 id="ovftool-のインストール">ovftool のインストール</h3>
+<h3 id="ovf-tool-のインストール">OVF Tool のインストール</h3>
 
 <p>仮想マシン作成時に Base64 エンコードした設定ファイルを指定する必要がある。
-GUI でも構築可能だが、CLI で ovftool を使用したほうが楽。</p>
+GUI でも構築可能だが、CLI で
+<a href="https://developer.broadcom.com/tools/open-virtualization-format-ovf-tool/latest" target="_blank">OVF Tool</a>
+を使用したほうが楽。</p>
 
 <h2 id="butane-設定ファイルを作成">Butane 設定ファイルを作成</h2>
 
@@ -700,6 +702,13 @@ GUI でも構築可能だが、CLI で ovftool を使用したほうが楽。</p
 
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">variant</span><span class="pi">:</span> <span class="s">flatcar</span>
 <span class="na">version</span><span class="pi">:</span> <span class="s">1.0.0</span>
+
+<span class="na">passwd</span><span class="pi">:</span>
+  <span class="na">users</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">core</span>
+      <span class="na">ssh_authorized_keys</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="s">SSH公開鍵</span>
+
 <span class="na">storage</span><span class="pi">:</span>
   <span class="na">files</span><span class="pi">:</span>
     <span class="pi">-</span> <span class="na">path</span><span class="pi">:</span> <span class="s">/etc/systemd/network/00-static.network</span>
@@ -714,17 +723,10 @@ GUI でも構築可能だが、CLI で ovftool を使用したほうが楽。</p
           <span class="s">DNS=192.168.xxx.xxx</span>
           <span class="s">LinkLocalAddressing=no</span>
           <span class="s">IPv6AcceptRA=no</span>
-
     <span class="pi">-</span> <span class="na">path</span><span class="pi">:</span> <span class="s">/etc/hostname</span>
       <span class="na">mode</span><span class="pi">:</span> <span class="m">0644</span>
       <span class="na">contents</span><span class="pi">:</span>
         <span class="na">inline</span><span class="pi">:</span> <span class="s">ホスト名</span>
-
-<span class="na">passwd</span><span class="pi">:</span>
-  <span class="na">users</span><span class="pi">:</span>
-    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">core</span>
-      <span class="na">ssh_authorized_keys</span><span class="pi">:</span>
-        <span class="pi">-</span> <span class="s">SSH公開鍵</span>
 </code></pre></div></div>
 
 <h2 id="ignition-設定ファイルへトランスパイル">Ignition 設定ファイルへトランスパイル</h2>
@@ -741,31 +743,53 @@ GUI でも構築可能だが、CLI で ovftool を使用したほうが楽。</p
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run <span class="nt">--pull</span><span class="o">=</span>always <span class="nt">--rm</span> <span class="nt">-i</span> quay.io/coreos/ignition-validate:release - &lt; ignition_config.json
 </code></pre></div></div>
 
-<h2 id="ovftool-で-ignition-設定ファイルを指定して起動">ovftool で Ignition 設定ファイルを指定して起動</h2>
+<p>エラーメッセージが表示されなければ問題なし。</p>
+
+<h2 id="ovf-tool-で-ignition-設定ファイルを指定して起動">OVF Tool で Ignition 設定ファイルを指定して起動</h2>
 
 <p>作業 PC にて ovftool を実行する。
 オプションとして Ignition 設定ファイルを指定し
 ESXi サーバ上で仮想マシンを作成・起動する。</p>
 
-<p><code class="language-plaintext highlighter-rouge">vi:///～</code> は デプロイ先の ESXi サーバの情報。</p>
+<p><code class="language-plaintext highlighter-rouge">vi://～</code> は デプロイ先の ESXi サーバの情報。</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ovftool <span class="nt">--name</span><span class="o">=</span>testvm <span class="se">\</span>
-  <span class="nt">--skipManifestCheck</span> <span class="nt">--noSSLVerify</span> <span class="se">\</span>
-  <span class="nt">--datastore</span><span class="o">=</span>datastore1 <span class="nt">--powerOn</span><span class="o">=</span>True <span class="se">\</span>
-  <span class="nt">--net</span>:<span class="s2">"VM Network=VM Network"</span> <span class="nt">--X</span>:waitForIp <span class="se">\</span>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ovftool <span class="se">\</span>
+  <span class="nt">--name</span><span class="o">=</span>testvm <span class="se">\</span>
+  <span class="nt">--datastore</span><span class="o">=</span>datastore1 <span class="se">\</span>
+  <span class="nt">--diskMode</span><span class="o">=</span>thin <span class="se">\</span>
+  <span class="nt">--network</span><span class="o">=</span><span class="s2">"VM Network"</span> <span class="se">\</span>
+  <span class="nt">--allowExtraConfig</span> <span class="se">\</span>
+  <span class="nt">--extraConfig</span>:guestinfo.ignition.config.data<span class="o">=</span><span class="s2">"</span><span class="si">$(</span><span class="nb">base64</span> <span class="nt">-w0</span> ignition_config.json<span class="si">)</span><span class="s2">"</span> <span class="se">\</span>
+  <span class="nt">--extraConfig</span>:guestinfo.ignition.config.data.encoding<span class="o">=</span><span class="s2">"base64"</span> <span class="se">\</span>
+  <span class="nt">--powerOn</span> <span class="se">\</span>
   <span class="nt">--overwrite</span> <span class="nt">--powerOffTarget</span> <span class="se">\</span>
-  <span class="nt">--X</span>:guest:ignition.config.data<span class="o">=</span><span class="si">$(</span><span class="nb">cat </span>ignition_config.json | <span class="nb">base64</span> <span class="nt">--wrap</span><span class="o">=</span>0<span class="si">)</span> <span class="se">\</span>
-  <span class="nt">--X</span>:guest:ignition.config.data.encoding<span class="o">=</span><span class="nb">base64</span> <span class="se">\</span>
-  ./flatcar_production_vmware_ova.ova <span class="se">\</span>
-  <span class="s1">'vi:///&lt;YOUR_USER&gt;@&lt;ESXI_HOST_IP&gt;'</span>
+  <span class="nt">--X</span>:waitForIp <span class="se">\</span>
+  flatcar_production_vmware_ova.ova <span class="se">\</span>
+  <span class="s1">'vi://&lt;YOUR_USER&gt;@&lt;ESXI_HOST_IP&gt;'</span>
 </code></pre></div></div>
 
-<p>コンソール上に設定した IP アドレスが表示されていれば OK。
+<p>実行後、コンソール上に設定した IP アドレスが表示されれば OK。
 SSH で接続し <code class="language-plaintext highlighter-rouge">docker</code> コマンドも実行できた。</p>
 
-<h2 id="docker-compose-を含めたサーバの構築">Docker Compose を含めたサーバの構築</h2>
+<h2 id="docker-サービスの自動起動設定">Docker サービスの自動起動設定</h2>
 
-<p>標準状態では Docker Compose が含まれていなかった。</p>
+<p>標準状態では Docker サービスが無効となっている。</p>
+
+<p>Flatcar は自動アップデート機能があり、システムが自動的に再起動することがある。
+この時、Docker サービスが無効のままだと、再起動後にコンテナが自動で立ち上がらない。</p>
+
+<h3 id="必要な設定">必要な設定</h3>
+
+<h4 id="docker-サービスの有効化">Docker サービスの有効化</h4>
+
+<p><a href="https://www.flatcar.org/docs/latest/container-runtimes/getting-started-with-docker/#permanently-running-a-container" target="_blank">Permanently running a container</a>
+に書かれている設定を追加し Docker サービスを有効化する。</p>
+
+<h4 id="コンテナの再起動ポリシー設定">コンテナの再起動ポリシー設定</h4>
+
+<p>コンテナ作成時に <code class="language-plaintext highlighter-rouge">--restart=always</code> または <code class="language-plaintext highlighter-rouge">--restart=unless-stopped</code> オプションを指定する。</p>
+
+<h2 id="docker-compose-の追加">Docker Compose の追加</h2>
 
 <p>Flatcar では <code class="language-plaintext highlighter-rouge">systemd-sysext</code> を利用して機能を拡張する仕組みになっている。
 Docker Compose を利用するには、以下の公式ドキュメントを参考に Butane 設定ファイルを変更する。</p>
@@ -780,8 +804,17 @@ Docker Compose を利用するには、以下の公式ドキュメントを参�
   <li><a href="https://github.com/flatcar/sysext-bakery/releases/tag/docker-compose" target="_blank">Release docker-compose · flatcar/sysext-bakery</a></li>
 </ul>
 
+<h2 id="最終的な-butane-設定ファイル">最終的な Butane 設定ファイル</h2>
+
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">variant</span><span class="pi">:</span> <span class="s">flatcar</span>
 <span class="na">version</span><span class="pi">:</span> <span class="s">1.0.0</span>
+
+<span class="na">passwd</span><span class="pi">:</span>
+  <span class="na">users</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">core</span>
+      <span class="na">ssh_authorized_keys</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="s">SSH公開鍵</span>
+
 <span class="na">storage</span><span class="pi">:</span>
   <span class="na">files</span><span class="pi">:</span>
     <span class="pi">-</span> <span class="na">path</span><span class="pi">:</span> <span class="s">/etc/systemd/network/00-static.network</span>
@@ -796,16 +829,16 @@ Docker Compose を利用するには、以下の公式ドキュメントを参�
           <span class="s">DNS=192.168.xxx.xxx</span>
           <span class="s">LinkLocalAddressing=no</span>
           <span class="s">IPv6AcceptRA=no</span>
-
     <span class="pi">-</span> <span class="na">path</span><span class="pi">:</span> <span class="s">/etc/hostname</span>
       <span class="na">mode</span><span class="pi">:</span> <span class="m">0644</span>
       <span class="na">contents</span><span class="pi">:</span>
         <span class="na">inline</span><span class="pi">:</span> <span class="s">ホスト名</span>
 
-    <span class="pi">-</span> <span class="na">path</span><span class="pi">:</span> <span class="s">/opt/extensions/docker-compose/docker-compose-2.34.0-x86-64.raw</span>
+    <span class="c1"># Docker-compose sysext</span>
+    <span class="pi">-</span> <span class="na">path</span><span class="pi">:</span> <span class="s">/opt/extensions/docker-compose/docker-compose-2.39.2-x86-64.raw</span>
       <span class="na">mode</span><span class="pi">:</span> <span class="m">0644</span>
       <span class="na">contents</span><span class="pi">:</span>
-        <span class="na">source</span><span class="pi">:</span> <span class="s">https://extensions.flatcar.org/extensions/docker-compose-2.34.0-x86-64.raw</span>
+        <span class="na">source</span><span class="pi">:</span> <span class="s">https://extensions.flatcar.org/extensions/docker-compose-2.39.2-x86-64.raw</span>
     <span class="pi">-</span> <span class="na">path</span><span class="pi">:</span> <span class="s">/etc/sysupdate.docker-compose.d/docker-compose.conf</span>
       <span class="na">contents</span><span class="pi">:</span>
         <span class="na">source</span><span class="pi">:</span> <span class="s">https://extensions.flatcar.org/extensions/docker-compose.conf</span>
@@ -813,13 +846,39 @@ Docker Compose を利用するには、以下の公式ドキュメントを参�
       <span class="na">contents</span><span class="pi">:</span>
         <span class="na">source</span><span class="pi">:</span> <span class="s">https://extensions.flatcar.org/extensions/noop.conf</span>
 
+    <span class="c1"># Dockerのアドレスプール設定</span>
+    <span class="pi">-</span> <span class="na">path</span><span class="pi">:</span> <span class="s">/etc/docker/daemon.json</span>
+      <span class="na">mode</span><span class="pi">:</span> <span class="m">0644</span>
+      <span class="na">contents</span><span class="pi">:</span>
+        <span class="na">inline</span><span class="pi">:</span> <span class="pi">|</span>
+          <span class="s">{</span>
+            <span class="s">"default-address-pools": [</span>
+              <span class="s">{</span>
+                <span class="s">"base": "172.17.0.0/12",</span>
+                <span class="s">"size": 24</span>
+              <span class="s">}</span>
+            <span class="s">]</span>
+          <span class="s">}</span>
+
   <span class="na">links</span><span class="pi">:</span>
-    <span class="pi">-</span> <span class="na">target</span><span class="pi">:</span> <span class="s">/opt/extensions/docker-compose/docker-compose-2.34.0-x86-64.raw</span>
+    <span class="c1"># Dockerサービスの有効化</span>
+    <span class="pi">-</span> <span class="na">path</span><span class="pi">:</span> <span class="s">/etc/systemd/system/multi-user.target.wants/docker.service</span>
+      <span class="na">target</span><span class="pi">:</span> <span class="s">/usr/lib/systemd/system/docker.service</span>
+      <span class="na">hard</span><span class="pi">:</span> <span class="kc">false</span>
+      <span class="na">overwrite</span><span class="pi">:</span> <span class="kc">true</span>
+
+    <span class="c1"># Docker-compose sysext</span>
+    <span class="pi">-</span> <span class="na">target</span><span class="pi">:</span> <span class="s">/opt/extensions/docker-compose/docker-compose-2.39.2-x86-64.raw</span>
       <span class="na">path</span><span class="pi">:</span> <span class="s">/etc/extensions/docker-compose.raw</span>
       <span class="na">hard</span><span class="pi">:</span> <span class="kc">false</span>
 
 <span class="na">systemd</span><span class="pi">:</span>
   <span class="na">units</span><span class="pi">:</span>
+    <span class="c1"># Dockerサービスの有効化</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">docker.service</span>
+      <span class="na">enabled</span><span class="pi">:</span> <span class="kc">true</span>
+
+    <span class="c1"># Docker-compose sysext</span>
     <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">systemd-sysupdate.timer</span>
       <span class="na">enabled</span><span class="pi">:</span> <span class="kc">true</span>
     <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">systemd-sysupdate.service</span>
@@ -831,13 +890,10 @@ Docker Compose を利用するには、以下の公式ドキュメントを参�
             <span class="s">ExecStartPre=/usr/lib/systemd/systemd-sysupdate -C docker-compose update</span>
             <span class="s">ExecStartPost=/usr/bin/sh -c "readlink --canonicalize /etc/extensions/docker-compose.raw &gt; /tmp/docker-compose-new"</span>
             <span class="s">ExecStartPost=/usr/bin/sh -c "if ! cmp --silent /tmp/docker-compose /tmp/docker-compose-new; then touch /run/reboot-required; fi"</span>
-
-<span class="na">passwd</span><span class="pi">:</span>
-  <span class="na">users</span><span class="pi">:</span>
-    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">core</span>
-      <span class="na">ssh_authorized_keys</span><span class="pi">:</span>
-        <span class="pi">-</span> <span class="s">SSH公開鍵</span>
 </code></pre></div></div>
+
+<p>Ignition の仕様的には <code class="language-plaintext highlighter-rouge">ignition.config.merge</code> で他のファイルを取り込むことができるようだが、
+これを使用したところ OS が起動しなかったためベタ書きしている。</p>
 
 <p>先ほど作成した仮想マシンを削除し再構築したところ、
 無事 Docker Compose が利用できる環境ができあがった。</p>
@@ -845,7 +901,8 @@ Docker Compose を利用するには、以下の公式ドキュメントを参�
 <h2 id="参考サイト">参考サイト</h2>
 
 <ul>
-  <li><a href="https://www.flatcar.org/docs/latest/installing/cloud/vmware/" target="_blank">Running Flatcar Container Linux on VMware</a></li>
+  <li><a href="https://www.flatcar.org/docs/latest/installing/cloud/vmware/" target="_blank">Running Flatcar Container Linux on VMware | Flatcar Container Linux</a></li>
+  <li><a href="https://www.flatcar.org/docs/latest/container-runtimes/getting-started-with-docker/" target="_blank">Getting started with Docker | Flatcar Container Linux</a></li>
   <li><a href="https://coreos.github.io/ignition/getting-started/#config-validation" target="_blank">Getting Started | Ignition</a></li>
   <li><a href="https://coreos.github.io/butane/getting-started/" target="_blank">Getting started | Butane</a></li>
   <li><a href="https://www.flatcar.org/docs/latest/setup/customization/network-config-with-networkd/" target="_blank">Network configuration with networkd</a></li>
@@ -853,7 +910,6 @@ Docker Compose を利用するには、以下の公式ドキュメントを参�
   <li><a href="https://flatcar.github.io/sysext-bakery/docker_compose/" target="_blank">Docker-compose sysext | sysext-bakery</a></li>
   <li><a href="https://github.com/flatcar/sysext-bakery/releases/tag/docker-compose" target="_blank">Release docker-compose · flatcar/sysext-bakery</a></li>
 </ul>
-
 
 
     </div>
@@ -865,10 +921,10 @@ Docker Compose を利用するには、以下の公式ドキュメントを参�
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/blog/2020/06/07/m5stickc-speaker-hat%E3%81%A7spiffs%E3%81%8B%E3%82%89%E8%AA%AD%E3%81%BF%E8%BE%BC%E3%82%93%E3%81%A0wav%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%92%E5%86%8D%E7%94%9F%E3%81%99%E3%82%8B.html" title="cloud-config で固定 IP アドレスを設定し Amazon Linux 2023 をオンプレミスの VMware ESXi サーバ上にデプロイする">M5StickC + Speaker Hat で SPIFFS から読み込んだ WAV ファイルを再生する</a></li>
+        <li><a class="post-link" href="/software/2021/08/20/pso2utility-pso2%E7%94%A8%E3%83%A6%E3%83%BC%E3%83%86%E3%82%A3%E3%83%AA%E3%83%86%E3%82%A3.html" title="cloud-config で固定 IP アドレスを設定し Amazon Linux 2023 をオンプレミスの VMware ESXi サーバ上にデプロイする">PSO2Utility - PSO2用ユーティリティ</a></li>
+<li><a class="post-link" href="/blog/2021/04/04/m5stickc%E3%81%A7%E3%82%AD%E3%83%BC%E3%83%9C%E3%83%BC%E3%83%89%E6%93%8D%E4%BD%9C%E3%82%92%E8%87%AA%E5%8B%95%E5%8C%96%E3%81%99%E3%82%8B.html" title="cloud-config で固定 IP アドレスを設定し Amazon Linux 2023 をオンプレミスの VMware ESXi サーバ上にデプロイする">M5StickC でキーボード操作を自動化する</a></li>
 <li><a class="post-link" href="/blog/2016/02/19/Google-AdSense%E3%81%AE%E7%A2%BA%E5%AE%9A%E7%94%B3%E5%91%8A.html" title="cloud-config で固定 IP アドレスを設定し Amazon Linux 2023 をオンプレミスの VMware ESXi サーバ上にデプロイする">Google AdSenseの確定申告</a></li>
-<li><a class="post-link" href="/blog/2022/09/07/mozilla-firefox%E3%81%A7web%E3%82%B5%E3%82%A4%E3%83%88%E3%81%AE%E3%83%80%E3%83%BC%E3%82%AF%E3%83%A2%E3%83%BC%E3%83%89%E3%82%92%E7%84%A1%E5%8A%B9%E5%8C%96%E3%81%99%E3%82%8B.html" title="cloud-config で固定 IP アドレスを設定し Amazon Linux 2023 をオンプレミスの VMware ESXi サーバ上にデプロイする">Mozilla Firefox で Web サイトのダークモードを無効化する</a></li>
-<li><a class="post-link" href="/blog/2021/08/14/m5stack-atom-lite%E7%94%A8%E3%81%AE%E9%96%8B%E7%99%BA%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89.html" title="cloud-config で固定 IP アドレスを設定し Amazon Linux 2023 をオンプレミスの VMware ESXi サーバ上にデプロイする">M5Stack ATOM Lite 用の開発環境構築</a></li>
+<li><a class="post-link" href="/blog/2017/01/14/save-vscode-markdown-preview.html" title="cloud-config で固定 IP アドレスを設定し Amazon Linux 2023 をオンプレミスの VMware ESXi サーバ上にデプロイする">Visual Studio Code で Markdown のプレビューを保存する</a></li>
 </ul>
     </div>
 <div class="post-comments"></div></section>

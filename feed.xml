@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ja"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://slx.jp/feed.xml" rel="self" type="application/atom+xml" /><link href="https://slx.jp/" rel="alternate" type="text/html" hreflang="ja" /><updated>2025-08-26T06:16:19+09:00</updated><id>https://slx.jp/feed.xml</id><title type="html">slx.jp</title><author><name>saasan</name></author><entry><title type="html">Optimize-VHD に破壊された WSL の ext4.vhdx からファイルを取り出す</title><link href="https://slx.jp/blog/2025/07/26/optimize-vhd%E3%81%A7%E7%A0%B4%E5%A3%8A%E3%81%95%E3%82%8C%E3%81%9Fwsl%E3%81%AEext4.vhdx%E3%81%8B%E3%82%89%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%92%E5%8F%96%E3%82%8A%E5%87%BA%E3%81%99.html" rel="alternate" type="text/html" title="Optimize-VHD に破壊された WSL の ext4.vhdx からファイルを取り出す" /><published>2025-07-26T14:50:00+09:00</published><updated>2025-07-26T14:50:00+09:00</updated><id>https://slx.jp/blog/2025/07/26/optimize-vhd%E3%81%A7%E7%A0%B4%E5%A3%8A%E3%81%95%E3%82%8C%E3%81%9Fwsl%E3%81%AEext4.vhdx%E3%81%8B%E3%82%89%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%92%E5%8F%96%E3%82%8A%E5%87%BA%E3%81%99</id><content type="html" xml:base="https://slx.jp/blog/2025/07/26/optimize-vhd%E3%81%A7%E7%A0%B4%E5%A3%8A%E3%81%95%E3%82%8C%E3%81%9Fwsl%E3%81%AEext4.vhdx%E3%81%8B%E3%82%89%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%92%E5%8F%96%E3%82%8A%E5%87%BA%E3%81%99.html"><![CDATA[<p>WSL の VHDX ファイルが 850GB くらいまで肥大化してたんで
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ja"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://slx.jp/feed.xml" rel="self" type="application/atom+xml" /><link href="https://slx.jp/" rel="alternate" type="text/html" hreflang="ja" /><updated>2025-09-10T06:39:45+09:00</updated><id>https://slx.jp/feed.xml</id><title type="html">slx.jp</title><author><name>saasan</name></author><entry><title type="html">Optimize-VHD に破壊された WSL の ext4.vhdx からファイルを取り出す</title><link href="https://slx.jp/blog/2025/07/26/optimize-vhd%E3%81%A7%E7%A0%B4%E5%A3%8A%E3%81%95%E3%82%8C%E3%81%9Fwsl%E3%81%AEext4.vhdx%E3%81%8B%E3%82%89%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%92%E5%8F%96%E3%82%8A%E5%87%BA%E3%81%99.html" rel="alternate" type="text/html" title="Optimize-VHD に破壊された WSL の ext4.vhdx からファイルを取り出す" /><published>2025-07-26T14:50:00+09:00</published><updated>2025-07-26T14:50:00+09:00</updated><id>https://slx.jp/blog/2025/07/26/optimize-vhd%E3%81%A7%E7%A0%B4%E5%A3%8A%E3%81%95%E3%82%8C%E3%81%9Fwsl%E3%81%AEext4.vhdx%E3%81%8B%E3%82%89%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%92%E5%8F%96%E3%82%8A%E5%87%BA%E3%81%99</id><content type="html" xml:base="https://slx.jp/blog/2025/07/26/optimize-vhd%E3%81%A7%E7%A0%B4%E5%A3%8A%E3%81%95%E3%82%8C%E3%81%9Fwsl%E3%81%AEext4.vhdx%E3%81%8B%E3%82%89%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%92%E5%8F%96%E3%82%8A%E5%87%BA%E3%81%99.html"><![CDATA[<p>WSL の VHDX ファイルが 850GB くらいまで肥大化してたんで
 Optimize-VHD を実行したら、ファイルが破損して WSL が起動しなくなった。
 Windows 11 自体でのマウントや diskpart での認識、
 Hyper-V マネージャーのディスクの検査、市販 VHD 修復ソフトの無料デモなど試したけどどれもダメ。</p>
@@ -348,10 +348,12 @@ AI に聞くと <code class="language-plaintext highlighter-rouge">--prop</code>
   <li><a href="https://www.flatcar.org/docs/latest/installing/cloud/vmware/" target="_blank">Running Flatcar Container Linux on VMware</a></li>
 </ul>
 
-<h3 id="ovftool-のインストール">ovftool のインストール</h3>
+<h3 id="ovf-tool-のインストール">OVF Tool のインストール</h3>
 
 <p>仮想マシン作成時に Base64 エンコードした設定ファイルを指定する必要がある。
-GUI でも構築可能だが、CLI で ovftool を使用したほうが楽。</p>
+GUI でも構築可能だが、CLI で
+<a href="https://developer.broadcom.com/tools/open-virtualization-format-ovf-tool/latest" target="_blank">OVF Tool</a>
+を使用したほうが楽。</p>
 
 <h2 id="butane-設定ファイルを作成">Butane 設定ファイルを作成</h2>
 
@@ -360,6 +362,13 @@ GUI でも構築可能だが、CLI で ovftool を使用したほうが楽。</p
 
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">variant</span><span class="pi">:</span> <span class="s">flatcar</span>
 <span class="na">version</span><span class="pi">:</span> <span class="s">1.0.0</span>
+
+<span class="na">passwd</span><span class="pi">:</span>
+  <span class="na">users</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">core</span>
+      <span class="na">ssh_authorized_keys</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="s">SSH公開鍵</span>
+
 <span class="na">storage</span><span class="pi">:</span>
   <span class="na">files</span><span class="pi">:</span>
     <span class="pi">-</span> <span class="na">path</span><span class="pi">:</span> <span class="s">/etc/systemd/network/00-static.network</span>
@@ -374,17 +383,10 @@ GUI でも構築可能だが、CLI で ovftool を使用したほうが楽。</p
           <span class="s">DNS=192.168.xxx.xxx</span>
           <span class="s">LinkLocalAddressing=no</span>
           <span class="s">IPv6AcceptRA=no</span>
-
     <span class="pi">-</span> <span class="na">path</span><span class="pi">:</span> <span class="s">/etc/hostname</span>
       <span class="na">mode</span><span class="pi">:</span> <span class="m">0644</span>
       <span class="na">contents</span><span class="pi">:</span>
         <span class="na">inline</span><span class="pi">:</span> <span class="s">ホスト名</span>
-
-<span class="na">passwd</span><span class="pi">:</span>
-  <span class="na">users</span><span class="pi">:</span>
-    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">core</span>
-      <span class="na">ssh_authorized_keys</span><span class="pi">:</span>
-        <span class="pi">-</span> <span class="s">SSH公開鍵</span>
 </code></pre></div></div>
 
 <h2 id="ignition-設定ファイルへトランスパイル">Ignition 設定ファイルへトランスパイル</h2>
@@ -401,31 +403,53 @@ GUI でも構築可能だが、CLI で ovftool を使用したほうが楽。</p
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run <span class="nt">--pull</span><span class="o">=</span>always <span class="nt">--rm</span> <span class="nt">-i</span> quay.io/coreos/ignition-validate:release - &lt; ignition_config.json
 </code></pre></div></div>
 
-<h2 id="ovftool-で-ignition-設定ファイルを指定して起動">ovftool で Ignition 設定ファイルを指定して起動</h2>
+<p>エラーメッセージが表示されなければ問題なし。</p>
+
+<h2 id="ovf-tool-で-ignition-設定ファイルを指定して起動">OVF Tool で Ignition 設定ファイルを指定して起動</h2>
 
 <p>作業 PC にて ovftool を実行する。
 オプションとして Ignition 設定ファイルを指定し
 ESXi サーバ上で仮想マシンを作成・起動する。</p>
 
-<p><code class="language-plaintext highlighter-rouge">vi:///～</code> は デプロイ先の ESXi サーバの情報。</p>
+<p><code class="language-plaintext highlighter-rouge">vi://～</code> は デプロイ先の ESXi サーバの情報。</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ovftool <span class="nt">--name</span><span class="o">=</span>testvm <span class="se">\</span>
-  <span class="nt">--skipManifestCheck</span> <span class="nt">--noSSLVerify</span> <span class="se">\</span>
-  <span class="nt">--datastore</span><span class="o">=</span>datastore1 <span class="nt">--powerOn</span><span class="o">=</span>True <span class="se">\</span>
-  <span class="nt">--net</span>:<span class="s2">"VM Network=VM Network"</span> <span class="nt">--X</span>:waitForIp <span class="se">\</span>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ovftool <span class="se">\</span>
+  <span class="nt">--name</span><span class="o">=</span>testvm <span class="se">\</span>
+  <span class="nt">--datastore</span><span class="o">=</span>datastore1 <span class="se">\</span>
+  <span class="nt">--diskMode</span><span class="o">=</span>thin <span class="se">\</span>
+  <span class="nt">--network</span><span class="o">=</span><span class="s2">"VM Network"</span> <span class="se">\</span>
+  <span class="nt">--allowExtraConfig</span> <span class="se">\</span>
+  <span class="nt">--extraConfig</span>:guestinfo.ignition.config.data<span class="o">=</span><span class="s2">"</span><span class="si">$(</span><span class="nb">base64</span> <span class="nt">-w0</span> ignition_config.json<span class="si">)</span><span class="s2">"</span> <span class="se">\</span>
+  <span class="nt">--extraConfig</span>:guestinfo.ignition.config.data.encoding<span class="o">=</span><span class="s2">"base64"</span> <span class="se">\</span>
+  <span class="nt">--powerOn</span> <span class="se">\</span>
   <span class="nt">--overwrite</span> <span class="nt">--powerOffTarget</span> <span class="se">\</span>
-  <span class="nt">--X</span>:guest:ignition.config.data<span class="o">=</span><span class="si">$(</span><span class="nb">cat </span>ignition_config.json | <span class="nb">base64</span> <span class="nt">--wrap</span><span class="o">=</span>0<span class="si">)</span> <span class="se">\</span>
-  <span class="nt">--X</span>:guest:ignition.config.data.encoding<span class="o">=</span><span class="nb">base64</span> <span class="se">\</span>
-  ./flatcar_production_vmware_ova.ova <span class="se">\</span>
-  <span class="s1">'vi:///&lt;YOUR_USER&gt;@&lt;ESXI_HOST_IP&gt;'</span>
+  <span class="nt">--X</span>:waitForIp <span class="se">\</span>
+  flatcar_production_vmware_ova.ova <span class="se">\</span>
+  <span class="s1">'vi://&lt;YOUR_USER&gt;@&lt;ESXI_HOST_IP&gt;'</span>
 </code></pre></div></div>
 
-<p>コンソール上に設定した IP アドレスが表示されていれば OK。
+<p>実行後、コンソール上に設定した IP アドレスが表示されれば OK。
 SSH で接続し <code class="language-plaintext highlighter-rouge">docker</code> コマンドも実行できた。</p>
 
-<h2 id="docker-compose-を含めたサーバの構築">Docker Compose を含めたサーバの構築</h2>
+<h2 id="docker-サービスの自動起動設定">Docker サービスの自動起動設定</h2>
 
-<p>標準状態では Docker Compose が含まれていなかった。</p>
+<p>標準状態では Docker サービスが無効となっている。</p>
+
+<p>Flatcar は自動アップデート機能があり、システムが自動的に再起動することがある。
+この時、Docker サービスが無効のままだと、再起動後にコンテナが自動で立ち上がらない。</p>
+
+<h3 id="必要な設定">必要な設定</h3>
+
+<h4 id="docker-サービスの有効化">Docker サービスの有効化</h4>
+
+<p><a href="https://www.flatcar.org/docs/latest/container-runtimes/getting-started-with-docker/#permanently-running-a-container" target="_blank">Permanently running a container</a>
+に書かれている設定を追加し Docker サービスを有効化する。</p>
+
+<h4 id="コンテナの再起動ポリシー設定">コンテナの再起動ポリシー設定</h4>
+
+<p>コンテナ作成時に <code class="language-plaintext highlighter-rouge">--restart=always</code> または <code class="language-plaintext highlighter-rouge">--restart=unless-stopped</code> オプションを指定する。</p>
+
+<h2 id="docker-compose-の追加">Docker Compose の追加</h2>
 
 <p>Flatcar では <code class="language-plaintext highlighter-rouge">systemd-sysext</code> を利用して機能を拡張する仕組みになっている。
 Docker Compose を利用するには、以下の公式ドキュメントを参考に Butane 設定ファイルを変更する。</p>
@@ -440,8 +464,17 @@ Docker Compose を利用するには、以下の公式ドキュメントを参�
   <li><a href="https://github.com/flatcar/sysext-bakery/releases/tag/docker-compose" target="_blank">Release docker-compose · flatcar/sysext-bakery</a></li>
 </ul>
 
+<h2 id="最終的な-butane-設定ファイル">最終的な Butane 設定ファイル</h2>
+
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">variant</span><span class="pi">:</span> <span class="s">flatcar</span>
 <span class="na">version</span><span class="pi">:</span> <span class="s">1.0.0</span>
+
+<span class="na">passwd</span><span class="pi">:</span>
+  <span class="na">users</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">core</span>
+      <span class="na">ssh_authorized_keys</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="s">SSH公開鍵</span>
+
 <span class="na">storage</span><span class="pi">:</span>
   <span class="na">files</span><span class="pi">:</span>
     <span class="pi">-</span> <span class="na">path</span><span class="pi">:</span> <span class="s">/etc/systemd/network/00-static.network</span>
@@ -456,16 +489,16 @@ Docker Compose を利用するには、以下の公式ドキュメントを参�
           <span class="s">DNS=192.168.xxx.xxx</span>
           <span class="s">LinkLocalAddressing=no</span>
           <span class="s">IPv6AcceptRA=no</span>
-
     <span class="pi">-</span> <span class="na">path</span><span class="pi">:</span> <span class="s">/etc/hostname</span>
       <span class="na">mode</span><span class="pi">:</span> <span class="m">0644</span>
       <span class="na">contents</span><span class="pi">:</span>
         <span class="na">inline</span><span class="pi">:</span> <span class="s">ホスト名</span>
 
-    <span class="pi">-</span> <span class="na">path</span><span class="pi">:</span> <span class="s">/opt/extensions/docker-compose/docker-compose-2.34.0-x86-64.raw</span>
+    <span class="c1"># Docker-compose sysext</span>
+    <span class="pi">-</span> <span class="na">path</span><span class="pi">:</span> <span class="s">/opt/extensions/docker-compose/docker-compose-2.39.2-x86-64.raw</span>
       <span class="na">mode</span><span class="pi">:</span> <span class="m">0644</span>
       <span class="na">contents</span><span class="pi">:</span>
-        <span class="na">source</span><span class="pi">:</span> <span class="s">https://extensions.flatcar.org/extensions/docker-compose-2.34.0-x86-64.raw</span>
+        <span class="na">source</span><span class="pi">:</span> <span class="s">https://extensions.flatcar.org/extensions/docker-compose-2.39.2-x86-64.raw</span>
     <span class="pi">-</span> <span class="na">path</span><span class="pi">:</span> <span class="s">/etc/sysupdate.docker-compose.d/docker-compose.conf</span>
       <span class="na">contents</span><span class="pi">:</span>
         <span class="na">source</span><span class="pi">:</span> <span class="s">https://extensions.flatcar.org/extensions/docker-compose.conf</span>
@@ -473,13 +506,39 @@ Docker Compose を利用するには、以下の公式ドキュメントを参�
       <span class="na">contents</span><span class="pi">:</span>
         <span class="na">source</span><span class="pi">:</span> <span class="s">https://extensions.flatcar.org/extensions/noop.conf</span>
 
+    <span class="c1"># Dockerのアドレスプール設定</span>
+    <span class="pi">-</span> <span class="na">path</span><span class="pi">:</span> <span class="s">/etc/docker/daemon.json</span>
+      <span class="na">mode</span><span class="pi">:</span> <span class="m">0644</span>
+      <span class="na">contents</span><span class="pi">:</span>
+        <span class="na">inline</span><span class="pi">:</span> <span class="pi">|</span>
+          <span class="s">{</span>
+            <span class="s">"default-address-pools": [</span>
+              <span class="s">{</span>
+                <span class="s">"base": "172.17.0.0/12",</span>
+                <span class="s">"size": 24</span>
+              <span class="s">}</span>
+            <span class="s">]</span>
+          <span class="s">}</span>
+
   <span class="na">links</span><span class="pi">:</span>
-    <span class="pi">-</span> <span class="na">target</span><span class="pi">:</span> <span class="s">/opt/extensions/docker-compose/docker-compose-2.34.0-x86-64.raw</span>
+    <span class="c1"># Dockerサービスの有効化</span>
+    <span class="pi">-</span> <span class="na">path</span><span class="pi">:</span> <span class="s">/etc/systemd/system/multi-user.target.wants/docker.service</span>
+      <span class="na">target</span><span class="pi">:</span> <span class="s">/usr/lib/systemd/system/docker.service</span>
+      <span class="na">hard</span><span class="pi">:</span> <span class="kc">false</span>
+      <span class="na">overwrite</span><span class="pi">:</span> <span class="kc">true</span>
+
+    <span class="c1"># Docker-compose sysext</span>
+    <span class="pi">-</span> <span class="na">target</span><span class="pi">:</span> <span class="s">/opt/extensions/docker-compose/docker-compose-2.39.2-x86-64.raw</span>
       <span class="na">path</span><span class="pi">:</span> <span class="s">/etc/extensions/docker-compose.raw</span>
       <span class="na">hard</span><span class="pi">:</span> <span class="kc">false</span>
 
 <span class="na">systemd</span><span class="pi">:</span>
   <span class="na">units</span><span class="pi">:</span>
+    <span class="c1"># Dockerサービスの有効化</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">docker.service</span>
+      <span class="na">enabled</span><span class="pi">:</span> <span class="kc">true</span>
+
+    <span class="c1"># Docker-compose sysext</span>
     <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">systemd-sysupdate.timer</span>
       <span class="na">enabled</span><span class="pi">:</span> <span class="kc">true</span>
     <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">systemd-sysupdate.service</span>
@@ -491,13 +550,10 @@ Docker Compose を利用するには、以下の公式ドキュメントを参�
             <span class="s">ExecStartPre=/usr/lib/systemd/systemd-sysupdate -C docker-compose update</span>
             <span class="s">ExecStartPost=/usr/bin/sh -c "readlink --canonicalize /etc/extensions/docker-compose.raw &gt; /tmp/docker-compose-new"</span>
             <span class="s">ExecStartPost=/usr/bin/sh -c "if ! cmp --silent /tmp/docker-compose /tmp/docker-compose-new; then touch /run/reboot-required; fi"</span>
-
-<span class="na">passwd</span><span class="pi">:</span>
-  <span class="na">users</span><span class="pi">:</span>
-    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">core</span>
-      <span class="na">ssh_authorized_keys</span><span class="pi">:</span>
-        <span class="pi">-</span> <span class="s">SSH公開鍵</span>
 </code></pre></div></div>
+
+<p>Ignition の仕様的には <code class="language-plaintext highlighter-rouge">ignition.config.merge</code> で他のファイルを取り込むことができるようだが、
+これを使用したところ OS が起動しなかったためベタ書きしている。</p>
 
 <p>先ほど作成した仮想マシンを削除し再構築したところ、
 無事 Docker Compose が利用できる環境ができあがった。</p>
@@ -505,7 +561,8 @@ Docker Compose を利用するには、以下の公式ドキュメントを参�
 <h2 id="参考サイト">参考サイト</h2>
 
 <ul>
-  <li><a href="https://www.flatcar.org/docs/latest/installing/cloud/vmware/" target="_blank">Running Flatcar Container Linux on VMware</a></li>
+  <li><a href="https://www.flatcar.org/docs/latest/installing/cloud/vmware/" target="_blank">Running Flatcar Container Linux on VMware | Flatcar Container Linux</a></li>
+  <li><a href="https://www.flatcar.org/docs/latest/container-runtimes/getting-started-with-docker/" target="_blank">Getting started with Docker | Flatcar Container Linux</a></li>
   <li><a href="https://coreos.github.io/ignition/getting-started/#config-validation" target="_blank">Getting Started | Ignition</a></li>
   <li><a href="https://coreos.github.io/butane/getting-started/" target="_blank">Getting started | Butane</a></li>
   <li><a href="https://www.flatcar.org/docs/latest/setup/customization/network-config-with-networkd/" target="_blank">Network configuration with networkd</a></li>
