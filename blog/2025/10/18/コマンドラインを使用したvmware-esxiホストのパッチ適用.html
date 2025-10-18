@@ -6,21 +6,22 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- Begin Jekyll SEO tag v2.8.0 -->
-<title>Page 5 of 9 for Home | slx.jp</title>
+<title>コマンドラインを使用した VMware ESXi ホストのパッチ適用 | slx.jp</title>
 <meta name="generator" content="Jekyll v4.4.1">
-<meta property="og:title" content="Home">
+<meta property="og:title" content="コマンドラインを使用した VMware ESXi ホストのパッチ適用">
 <meta name="author" content="saasan">
 <meta property="og:locale" content="ja">
-<link rel="canonical" href="https://slx.jp/blog/page5/">
-<meta property="og:url" content="https://slx.jp/blog/page5/">
+<meta name="description" content="手順を忘れがちなのでメモしておく。">
+<meta property="og:description" content="手順を忘れがちなのでメモしておく。">
+<link rel="canonical" href="https://slx.jp/blog/2025/10/18/%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%83%A9%E3%82%A4%E3%83%B3%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%97%E3%81%9Fvmware-esxi%E3%83%9B%E3%82%B9%E3%83%88%E3%81%AE%E3%83%91%E3%83%83%E3%83%81%E9%81%A9%E7%94%A8.html">
+<meta property="og:url" content="https://slx.jp/blog/2025/10/18/%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%83%A9%E3%82%A4%E3%83%B3%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%97%E3%81%9Fvmware-esxi%E3%83%9B%E3%82%B9%E3%83%88%E3%81%AE%E3%83%91%E3%83%83%E3%83%81%E9%81%A9%E7%94%A8.html">
 <meta property="og:site_name" content="slx.jp">
-<meta property="og:type" content="website">
-<link rel="prev" href="https://slx.jp/blog/page4/">
-<link rel="next" href="https://slx.jp/blog/page6/">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2025-10-18T12:36:47+09:00">
 <meta name="twitter:card" content="summary">
-<meta property="twitter:title" content="Home">
+<meta property="twitter:title" content="コマンドラインを使用した VMware ESXi ホストのパッチ適用">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebPage","author":{"@type":"Person","name":"saasan"},"headline":"Home","url":"https://slx.jp/blog/page5/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"saasan"},"dateModified":"2025-10-18T12:36:47+09:00","datePublished":"2025-10-18T12:36:47+09:00","description":"手順を忘れがちなのでメモしておく。","headline":"コマンドラインを使用した VMware ESXi ホストのパッチ適用","mainEntityOfPage":{"@type":"WebPage","@id":"https://slx.jp/blog/2025/10/18/%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%83%A9%E3%82%A4%E3%83%B3%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%97%E3%81%9Fvmware-esxi%E3%83%9B%E3%82%B9%E3%83%88%E3%81%AE%E3%83%91%E3%83%83%E3%83%81%E9%81%A9%E7%94%A8.html"},"url":"https://slx.jp/blog/2025/10/18/%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%83%A9%E3%82%A4%E3%83%B3%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%97%E3%81%9Fvmware-esxi%E3%83%9B%E3%82%B9%E3%83%88%E3%81%AE%E3%83%91%E3%83%83%E3%83%81%E9%81%A9%E7%94%A8.html"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="icon" href="/assets/images/favicon.png">
   <link rel="canonical" href="https://slx.jp">
@@ -341,7 +342,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 
-<header class="site-header site-header-transparent" role="banner">
+<header class="site-header " role="banner">
 
   <div class="wrapper">
     <div class="site-header-inner">
@@ -377,7 +378,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
     var documentElement = document.documentElement;
 
     function storeScrollData() {
-      var y = getScrollPos().y;documentElement.setAttribute("data-header-transparent", "");var scrollStatus = "";
+      var y = getScrollPos().y;var scrollStatus = "";
 
       if (y <= 0) {
         scrollStatus = "top";
@@ -544,22 +545,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 
-<section class="page-banner">
-    <div class="page-banner-img">
-<div style="background-image: url(/assets/images/banners/l_091_256.png)"></div>
-        <img class="img-placeholder" src="/assets/images/banners/l_091_256.png">
-</div>
-    <div class="wrapper">
-      <div class="page-banner-inner"><div class="page-banner-default">
-            <h1 class="page-banner-heading">
-              SLX.jp
-            </h1>
-            <h2 class="page-banner-subheading">
-              S2 Logical eXperience
-            </h2>
-          </div></div>
-    </div>
-  </section><script>
+<script>
   function hashLocate(hashValue) {
     hashValue = hashValue.replace(/^.*#h-/, '');
     hashValue = decodeURIComponent(hashValue);
@@ -608,25 +594,27 @@ document.addEventListener('DOMContentLoaded', function(event) {
         <div class="framework">
   <section class="main">
 
-     <div class="articles">
-  
+     <div class="post">
+  <section>
 
-  
 
 
-  <div class="pagination">
-  <!-- Post list links -->
-  <ul class="post-list">
-<li>
-      
 
 
 
 
 
 
+<header class="post-header">
+  <h1 class="post-title p-name" itemprop="name headline">コマンドラインを使用した VMware ESXi ホストのパッチ適用</h1>
+  <h2 class="post-subtitle"></h2>
 
+  <p class="post-meta">
+    <time class="dt-published" datetime="2025-10-18T12:36:47+09:00" itemprop="datePublished"><i class="fa fa-calendar"></i> 2025-10-18 12:36
+    </time>
 
+    
+    
 
 
 
@@ -659,491 +647,193 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 2 mins</span>
+  </p></header>
+<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
+    <div class="post-content e-content" itemprop="articleBody">
 
+      <p>手順を忘れがちなのでメモしておく。</p>
 
+<h2 id="手順">手順</h2>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h2 class="post-title">
-        <a class="post-link" href="/software/2021/08/20/pso2utility-pso2%E7%94%A8%E3%83%A6%E3%83%BC%E3%83%86%E3%82%A3%E3%83%AA%E3%83%86%E3%82%A3.html">
-          PSO2Utility - PSO2用ユーティリティ
-        </a>
-      </h2>
-      <div class="post-meta">
-        <span class="post-date"><i class="fa fa-calendar"></i> 2021-08-20 06:27</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 1 min</span>
-      </div>
-      <a class="post-excerpt" href="/software/2021/08/20/pso2utility-pso2%E7%94%A8%E3%83%A6%E3%83%BC%E3%83%86%E3%82%A3%E3%83%AA%E3%83%86%E3%82%A3.html">
-        <p>
-        
-PSO2Utility
-
-ファンタシースターオンライン2用ユーティリティ。
-主な機能は以下の通り。
-
-
-  UACを経由せずにPSO2を起動
-  PSO2のウィンドウに最小化ボタンを表示
-  PSO2のウィンドウ位置を保存、自動復元
-
-
-ダウンロード
-
-PSO2Utility-v1.2.z... <span class="read_more">Read More</span>
-        </p>
-      </a>
-      <div class="post-tags">
-<a class="post-tag" href="/tags.html#PC">#PC</a><a class="post-tag" href="/tags.html#%E3%82%B2%E3%83%BC%E3%83%A0">#ゲーム</a><a class="post-tag" href="/tags.html#PSO2">#PSO2</a>
-</div>
-    </li>
-<li>
-      
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h2 class="post-title">
-        <a class="post-link" href="/blog/2021/08/14/m5stack-atom-lite%E7%94%A8%E3%81%AE%E9%96%8B%E7%99%BA%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89.html">
-          M5Stack ATOM Lite 用の開発環境構築
-        </a>
-      </h2>
-      <div class="post-meta">
-        <span class="post-date"><i class="fa fa-calendar"></i> 2021-08-14 16:33</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 5 mins</span>
-      </div>
-      <a class="post-excerpt" href="/blog/2021/08/14/m5stack-atom-lite%E7%94%A8%E3%81%AE%E9%96%8B%E7%99%BA%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89.html">
-        <p>
-        M5StickC 1台だけだと用途ごとにプログラムを転送し直す必要があり手間がかかるので
-ATOM Lite を購入してみた。
-
-先日 PC を変えたこともあり
-再度 Arduino IDE での開発環境を構築する必要があったため
-手順を備忘録として残しておく。
-
-内容は基本的に
-m5-docs
-と同じ。
-PC... <span class="read_more">Read More</span>
-        </p>
-      </a>
-      <div class="post-tags">
-<a class="post-tag" href="/tags.html#M5Stack">#M5Stack</a><a class="post-tag" href="/tags.html#ATOM-Lite">#ATOM-Lite</a><a class="post-tag" href="/tags.html#ESP32">#ESP32</a>
-</div>
-    </li>
-<li>
-      
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h2 class="post-title">
-        <a class="post-link" href="/blog/2021/05/20/slack%E3%81%B8%E9%80%9A%E7%9F%A5%E3%81%99%E3%82%8B%E3%82%B7%E3%82%A7%E3%83%AB%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88.html">
-          Slack へ通知するシェルスクリプト
-        </a>
-      </h2>
-      <div class="post-meta">
-        <span class="post-date"><i class="fa fa-calendar"></i> 2021-05-20 23:59</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 1 min</span>
-      </div>
-      <a class="post-excerpt" href="/blog/2021/05/20/slack%E3%81%B8%E9%80%9A%E7%9F%A5%E3%81%99%E3%82%8B%E3%82%B7%E3%82%A7%E3%83%AB%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88.html">
-        <p>
-        プログラマーの君！ 騙されるな！ シェルスクリプトはそう書いちゃ駄目だ！！ という話 - Qiita
-を読み、シェルスクリプトで関数へ値を渡す際は
-引数よりも標準入出力を使ったほうがシンプルに書けるようだったので、
-以前書いた Slack へ通知メッセージを送るスクリプトを書き直してみた。
-
-#!/bin/bash
-
-WEBHO... <span class="read_more">Read More</span>
-        </p>
-      </a>
-      <div class="post-tags">
-<a class="post-tag" href="/tags.html#Linux">#Linux</a><a class="post-tag" href="/tags.html#Bash">#Bash</a><a class="post-tag" href="/tags.html#%E3%82%B7%E3%82%A7%E3%83%AB%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88">#シェルスクリプト</a><a class="post-tag" href="/tags.html#Slack">#Slack</a>
-</div>
-    </li>
-<li>
-      
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h2 class="post-title">
-        <a class="post-link" href="/blog/2021/04/04/m5stickc%E3%81%A7%E3%82%AD%E3%83%BC%E3%83%9C%E3%83%BC%E3%83%89%E6%93%8D%E4%BD%9C%E3%82%92%E8%87%AA%E5%8B%95%E5%8C%96%E3%81%99%E3%82%8B.html">
-          M5StickC でキーボード操作を自動化する
-        </a>
-      </h2>
-      <div class="post-meta">
-        <span class="post-date"><i class="fa fa-calendar"></i> 2021-04-04 05:50</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 10 mins</span>
-      </div>
-      <a class="post-excerpt" href="/blog/2021/04/04/m5stickc%E3%81%A7%E3%82%AD%E3%83%BC%E3%83%9C%E3%83%BC%E3%83%89%E6%93%8D%E4%BD%9C%E3%82%92%E8%87%AA%E5%8B%95%E5%8C%96%E3%81%99%E3%82%8B.html">
-        <p>
-        某ゲームでアイテムを交換する作業が面倒になってきたので
-キーボード操作を自動化したいと思った。
-
-まず思いついたのは、手元にあった
-サンワサプライ製のプログラマブルテンキー NT-19UH2BK。
-久しぶりに引っぱりだして確認したところ、これは Ctrl + C のような同時押しには対応しているが、
-ウェイトをはさみながら複数の... <span class="read_more">Read More</span>
-        </p>
-      </a>
-      <div class="post-tags">
-<a class="post-tag" href="/tags.html#M5Stack">#M5Stack</a><a class="post-tag" href="/tags.html#M5StickC">#M5StickC</a><a class="post-tag" href="/tags.html#ESP32">#ESP32</a><a class="post-tag" href="/tags.html#ESP32-BLE-Keyboard">#ESP32-BLE-Keyboard</a>
-</div>
-    </li>
-<li>
-      
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h2 class="post-title">
-        <a class="post-link" href="/blog/2021/01/03/m5stickc%E3%81%A7%E6%AF%8E%E6%9C%9D%E7%85%A7%E6%98%8E%E3%82%92%E8%87%AA%E5%8B%95%E3%81%A7%E7%82%B9%E7%81%AF%E3%81%99%E3%82%8B.html">
-          M5StickC で毎朝照明を自動で点灯する
-        </a>
-      </h2>
-      <div class="post-meta">
-        <span class="post-date"><i class="fa fa-calendar"></i> 2021-01-03 10:05</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 15 mins</span>
-      </div>
-      <a class="post-excerpt" href="/blog/2021/01/03/m5stickc%E3%81%A7%E6%AF%8E%E6%9C%9D%E7%85%A7%E6%98%8E%E3%82%92%E8%87%AA%E5%8B%95%E3%81%A7%E7%82%B9%E7%81%AF%E3%81%99%E3%82%8B.html">
-        <p>
-        最近寒いのでカーテンを遮光・遮熱のものに変えた。
-遮熱のほうはあまり実感がないが遮光のほうはばっちりで、
-昼間でもカーテンを閉めれば部屋がかなり暗くなる。
-
-寝てる間は暗くてよいのだが、
-朝になっても明るさで自然に目が覚めるということがなくなった。
-時計を見ないと大まかな時間すら分からないのは思いの外不便だ。
-そこで、以前購入した M5Stic... <span class="read_more">Read More</span>
-        </p>
-      </a>
-      <div class="post-tags">
-<a class="post-tag" href="/tags.html#M5Stack">#M5Stack</a><a class="post-tag" href="/tags.html#M5StickC">#M5StickC</a><a class="post-tag" href="/tags.html#ESP32">#ESP32</a><a class="post-tag" href="/tags.html#IRremoteESP8266">#IRremoteESP8266</a>
-</div>
-    </li>
+<ul>
+  <li>事前に Broadcom のサイトからパッチをダウンロードしてデータストアに格納しておくこと</li>
+  <li>SSH で接続できない場合は vCenter や Host Client の Web 画面から SSH のサービスを有効化すること</li>
 </ul>
 
-  <!-- Pagination links -->
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># バージョン確認</span>
+vmware <span class="nt">-v</span>
+<span class="c"># メンテナンスモードへの移行</span>
+vim-cmd /hostsvc/maintenance_mode_enter
+<span class="c"># ホストがメンテナンスモードか確認</span>
+vim-cmd /hostsvc/hostsummary | <span class="nb">grep </span>inMaintenanceMode
+<span class="c"># プロファイルリストの表示</span>
+esxcli software sources profile list <span class="nt">--depot</span> /vmfs/volumes/datastore1/VMware-ESXi-8.0U3f-24784735-depot.zip
+<span class="c"># ドライラン</span>
+esxcli software profile update <span class="nt">--dry-run</span> <span class="nt">--profile</span> ESXi-8.0U3f-24784735-standard <span class="nt">--depot</span> /vmfs/volumes/datastore1/VMware-ESXi-8.0U3f-24784735-depot.zip
+<span class="c"># パッチ適用</span>
+esxcli software profile update <span class="nt">--profile</span> ESXi-8.0U3f-24784735-standard <span class="nt">--depot</span> /vmfs/volumes/datastore1/VMware-ESXi-8.0U3f-24784735-depot.zip
+<span class="c"># ESXi ホストを再起動</span>
+esxcli system shutdown reboot <span class="nt">-r</span> <span class="s1">'apply patch'</span>
+</code></pre></div></div>
+<p>再起動を待って SSH で再接続</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># メンテナンスモードの終了</span>
+vim-cmd hostsvc/maintenance_mode_exit
+<span class="c"># ホストがメンテナンスモードか確認</span>
+vim-cmd /hostsvc/hostsummary | <span class="nb">grep </span>inMaintenanceMode
+<span class="c"># バージョン確認</span>
+vmware <span class="nt">-v</span>
+</code></pre></div></div>
+
+<h2 id="参考サイト">参考サイト</h2>
+
+<p><a href="https://knowledge.broadcom.com/external/article/343840/patching-esxi-host-using-command-line.html" target="_blank">Patching ESXi host using Command Line</a></p>
 
 
-  <div class="paginator">
-    <span class="previous">
-    
-      <a href="/blog/page4/">Prev</a>
-    
-    </span>
+    </div>
 
-    <span class="indicator"> 5/9</span>
-
-    <span class="next">
-    
-      <a href="/blog/page6/">Next</a>
-    
-    </span>
-  </div>
-
+</article>
+<div class="post-nav">
+<a class="previous" href="/blog/2025/07/26/optimize-vhd%E3%81%A7%E7%A0%B4%E5%A3%8A%E3%81%95%E3%82%8C%E3%81%9Fwsl%E3%81%AEext4.vhdx%E3%81%8B%E3%82%89%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%92%E5%8F%96%E3%82%8A%E5%87%BA%E3%81%99.html" title="Optimize-VHD に破壊された WSL の ext4.vhdx からファイルを取り出す">Optimize-VHD に破壊された WSL の ext4.vhdx からファイルを取り出す...</a><span></span>
 </div>
+<div class="post-related">
+      <div>Related Articles</div>
+      <ul>
+        <li><a class="post-link" href="/script/2016/09/18/host2ip.html" title="">host2ip</a></li>
+<li><a class="post-link" href="/blog/2022/12/31/2022%E5%B9%B4-%E8%B2%B7%E3%81%A3%E3%81%A6%E3%82%88%E3%81%8B%E3%81%A3%E3%81%9F%E3%82%82%E3%81%AE%E3%81%A8%E3%81%8B.html" title="">【2022年】買ってよかったものとか</a></li>
+<li><a class="post-link" href="/blog/2025/07/13/wsl-%E3%81%AE%E8%B5%B7%E5%8B%95%E4%B8%AD%E3%81%AB%E3%82%A8%E3%83%A9%E3%83%BC%E3%81%8C%E7%99%BA%E7%94%9F%E3%81%97%E3%81%BE%E3%81%97%E3%81%9F-%E3%81%B8%E3%81%AE%E5%AF%BE%E5%BF%9C.html" title="">「WSL の起動中にエラーが発生しました」への対応</a></li>
+<li><a class="post-link" href="/blog/2015/12/15/jekyll-html-beautifier-plugin.html" title="">[Jekyll] HTMLを読みやすいように整形するプラグイン</a></li>
+</ul>
+    </div>
+<div class="post-comments"></div></section>
 </div>
 
 
   </section>
   <section class="sidebar" style="margin-left: 15px;">
-    <!-- Get sidebar items -->
+    <!-- Get sidebar items --><style type="text/css" media="screen">
+.post-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+</style>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div class="common-list">
-  <ul>
-    <li>
-      <a href="/index.html">
-        All<span>45</span>
-      </a>
-    </li>
-
-    
-      <li>
-        <a href="/categories.html#h-blog">
-          blog <span>40</span>
-        </a>
-      </li>
-    
-      <li>
-        <a href="/categories.html#h-script">
-          script <span>3</span>
-        </a>
-      </li>
-    
-      <li>
-        <a href="/categories.html#h-software">
-          software <span>2</span>
-        </a>
-      </li>
-    
-  </ul>
+<div class="post-menu">
+  <div class="post-menu-title">TOC</div>
+  <div class="post-menu-content"></div>
 </div>
 
+<script>
+  function generateContent() {
+    var menu = document.querySelector(".post-menu");
+    var menuContent =  menu.querySelector(".post-menu-content");
+    var headings = document.querySelector(".post-content").querySelectorAll("h2, h3, h4, h5, h6");
+
+    // Hide menu when no headings
+    if (headings.length === 0) {
+      return menu.style.display = "none";
+    }
+
+    // Generate post menu
+    var menuHTML = '';
+    for (var i = 0; i < headings.length; i++) {
+      var h = headings[i];
+      menuHTML += (
+        '<li class="h-' + h.tagName.toLowerCase() + '">'
+        + '<a href="#h-' + h.getAttribute('id') + '">' + h.textContent + '</a></li>');
+    }
+
+    menuContent.innerHTML = '<ul>' + menuHTML + '</ul>';
+
+    // The header element
+    var header = document.querySelector('header.site-header');
+
+    function doMenuCollapse(index, over_items) {
+      var items = menuContent.firstChild.children;
+
+      if (over_items == undefined) {
+        over_items = 20;
+      }
+
+      if (items.length < over_items) {
+        return;
+      }
+
+      var activeItem = items[index];
+      var beginItem = activeItem
+      var endItem = activeItem
+      var beginIndex = index;
+      var endIndex = index + 1;
+      while (beginIndex >= 0
+        && !items[beginIndex].classList.contains('h-h2')) {
+        beginIndex -= 1;
+      }
+      while (endIndex < items.length
+        && !items[endIndex].classList.contains('h-h2')) {
+        endIndex += 1;
+      }
+      for (var i = 0; i < beginIndex; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+      for (var i = beginIndex + 1; i < endIndex; i++) {
+        item = items[i]
+        // if (!item.classList.contains('h-h2')) {
+          item.style.display = '';
+        // }
+      }
+      for (var i = endIndex; i < items.length; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+    }
+
+    // Init menu collapsed
+    doMenuCollapse(-1);
+
+    // Active the menu item
+    window.addEventListener('scroll', function (event) {
+      var lastActive = menuContent.querySelector('.active');
+      var changed = true;
+      var activeIndex = -1;
+      for (var i = headings.length - 1; i >= 0; i--) {
+        var h = headings[i];
+        var headingRect = h.getBoundingClientRect();
+        var headerRect = header.getBoundingClientRect();
+        var headerTop = Math.floor(headerRect.top);
+        var headerHeight = Math.floor(headerRect.height);
+        var headerHeight = headerTop + headerHeight + 20;
+        if (headingRect.top <= headerHeight) {
+          var id = 'h-' + h.getAttribute('id');
+          var a = menuContent.querySelector('a[href="#' + id  + '"]');
+          var curActive = a.parentNode;
+          if (curActive) {
+            curActive.classList.add('active');
+            activeIndex = i;
+          }
+          if (lastActive == curActive) {
+            changed = false;
+          }
+          break;
+        }
+      }
+      if (changed) {
+        if (lastActive) {
+          lastActive.classList.remove('active');
+        }
+        doMenuCollapse(activeIndex);
+      }
+      event.preventDefault();
+    });
+  }
+  generateContent();
+</script>
 </section>
 </div>
 
