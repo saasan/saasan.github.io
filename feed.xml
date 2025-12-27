@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ja"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://slx.jp/feed.xml" rel="self" type="application/atom+xml" /><link href="https://slx.jp/" rel="alternate" type="text/html" hreflang="ja" /><updated>2025-10-31T00:46:55+09:00</updated><id>https://slx.jp/feed.xml</id><title type="html">slx.jp</title><author><name>saasan</name></author><entry><title type="html">コマンドラインを使用した VMware ESXi ホストのパッチ適用</title><link href="https://slx.jp/blog/2025/10/18/%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%83%A9%E3%82%A4%E3%83%B3%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%97%E3%81%9Fvmware-esxi%E3%83%9B%E3%82%B9%E3%83%88%E3%81%AE%E3%83%91%E3%83%83%E3%83%81%E9%81%A9%E7%94%A8.html" rel="alternate" type="text/html" title="コマンドラインを使用した VMware ESXi ホストのパッチ適用" /><published>2025-10-18T12:36:47+09:00</published><updated>2025-10-18T12:36:47+09:00</updated><id>https://slx.jp/blog/2025/10/18/%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%83%A9%E3%82%A4%E3%83%B3%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%97%E3%81%9Fvmware-esxi%E3%83%9B%E3%82%B9%E3%83%88%E3%81%AE%E3%83%91%E3%83%83%E3%83%81%E9%81%A9%E7%94%A8</id><content type="html" xml:base="https://slx.jp/blog/2025/10/18/%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%83%A9%E3%82%A4%E3%83%B3%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%97%E3%81%9Fvmware-esxi%E3%83%9B%E3%82%B9%E3%83%88%E3%81%AE%E3%83%91%E3%83%83%E3%83%81%E9%81%A9%E7%94%A8.html"><![CDATA[<p>手順を忘れがちなのでメモしておく。</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ja"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://slx.jp/feed.xml" rel="self" type="application/atom+xml" /><link href="https://slx.jp/" rel="alternate" type="text/html" hreflang="ja" /><updated>2025-12-27T13:27:05+09:00</updated><id>https://slx.jp/feed.xml</id><title type="html">slx.jp</title><author><name>saasan</name></author><entry><title type="html">コマンドラインを使用した VMware ESXi ホストのパッチ適用</title><link href="https://slx.jp/blog/2025/10/18/%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%83%A9%E3%82%A4%E3%83%B3%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%97%E3%81%9Fvmware-esxi%E3%83%9B%E3%82%B9%E3%83%88%E3%81%AE%E3%83%91%E3%83%83%E3%83%81%E9%81%A9%E7%94%A8.html" rel="alternate" type="text/html" title="コマンドラインを使用した VMware ESXi ホストのパッチ適用" /><published>2025-10-18T12:36:47+09:00</published><updated>2025-10-18T12:36:47+09:00</updated><id>https://slx.jp/blog/2025/10/18/%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%83%A9%E3%82%A4%E3%83%B3%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%97%E3%81%9Fvmware-esxi%E3%83%9B%E3%82%B9%E3%83%88%E3%81%AE%E3%83%91%E3%83%83%E3%83%81%E9%81%A9%E7%94%A8</id><content type="html" xml:base="https://slx.jp/blog/2025/10/18/%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%83%A9%E3%82%A4%E3%83%B3%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%97%E3%81%9Fvmware-esxi%E3%83%9B%E3%82%B9%E3%83%88%E3%81%AE%E3%83%91%E3%83%83%E3%83%81%E9%81%A9%E7%94%A8.html"><![CDATA[<p>手順を忘れがちなのでメモしておく。</p>
 
 <h2 id="手順">手順</h2>
 
@@ -669,7 +669,7 @@ Docker Compose を利用するには、以下の公式ドキュメントを参�
 <h2 id="skagen-jorn-hybrid-hr-スマートウォッチ-skt3000">SKAGEN JORN HYBRID HR スマートウォッチ SKT3000</h2>
 
 <div class="affiliate-product-list">
-    <a href="https://www.amazon.co.jp/dp/B08RDJSZ71?tag=saasan-22" class="affiliate-product">
+    <a href="https://www.amazon.co.jp/dp/B08RDJSZ71?tag=saasan-22" target="_blank" class="affiliate-product">
         <img src="https://m.media-amazon.com/images/I/81pMxAixRUL._AC_SX679_.jpg" alt="[スカーゲン] 腕時計 JORN 42MM HYBRID HR SKT3000 メンズ ブラウン" />
         <span class="affiliate-product-name">[スカーゲン] 腕時計 JORN 42MM HYBRID HR SKT3000 メンズ ブラウン</span>
     </a>
@@ -705,7 +705,7 @@ Docker Compose を利用するには、以下の公式ドキュメントを参�
 <h2 id="エレコム-bluetooth50-マウス-ex-g-pro-lサイズ-m-xgl50mbskbk">エレコム Bluetooth5.0 マウス EX-G PRO Lサイズ M-XGL50MBSKBK</h2>
 
 <div class="affiliate-product-list">
-    <a href="https://www.amazon.co.jp/dp/B0CGWN5V9N/?tag=saasan-22" class="affiliate-product">
+    <a href="https://www.amazon.co.jp/dp/B0CGWN5V9N/?tag=saasan-22" target="_blank" class="affiliate-product">
         <img src="https://m.media-amazon.com/images/I/71lZi6zwg1L._AC_SX679_.jpg" alt="エレコム ワイヤレスマウス 静音 EX-G PRO Lサイズ Bluetooth 無線2.4GHz 両対応 充電式 8ボタン 高速スクロール チルトホイール 抗菌 ブラック M-XGL50MBSKBK" />
         <span class="affiliate-product-name">エレコム ワイヤレスマウス 静音 EX-G PRO Lサイズ Bluetooth 無線2.4GHz 両対応 充電式 8ボタン 高速スクロール チルトホイール 抗菌 ブラック M-XGL50MBSKBK</span>
     </a>
@@ -733,7 +733,7 @@ Docker Compose を利用するには、以下の公式ドキュメントを参�
 <h2 id="電動空気入れ-panp-ride-mini">電動空気入れ PANP RIDE MINI</h2>
 
 <div class="affiliate-product-list">
-    <a href="https://www.amazon.co.jp/dp/B0D7MMH36N/?tag=saasan-22" class="affiliate-product">
+    <a href="https://www.amazon.co.jp/dp/B0D7MMH36N/?tag=saasan-22" target="_blank" class="affiliate-product">
         <img src="https://m.media-amazon.com/images/I/61csfSJXeKL._AC_SY879_.jpg" alt="PANP RIDE MINI 空気入れ 自転車 ロードバイク ツーリング 日本 メーカー (全バルブ対応) 米式 英式 仏式 バイク ボール 電動空気入れ 自動 軽量 小型コンパクト エアコンプレッサー KUKIIRE スマート空気入れ【保証2年間】" />
         <span class="affiliate-product-name">PANP RIDE MINI 空気入れ 自転車 ロードバイク ツーリング 日本 メーカー (全バルブ対応) 米式 英式 仏式 バイク ボール 電動空気入れ 自動 軽量 小型コンパクト エアコンプレッサー KUKIIRE スマート空気入れ【保証2年間】</span>
     </a>
@@ -744,7 +744,7 @@ Docker Compose を利用するには、以下の公式ドキュメントを参�
 <h2 id="créer-人感センサーライト">créer 人感センサーライト</h2>
 
 <div class="affiliate-product-list">
-    <a href="https://www.amazon.co.jp/dp/B0B11ZVBQ5/?tag=saasan-22" class="affiliate-product">
+    <a href="https://www.amazon.co.jp/dp/B0B11ZVBQ5/?tag=saasan-22" target="_blank" class="affiliate-product">
         <img src="https://m.media-amazon.com/images/I/61Pzaizi-nL._AC_SX679_.jpg" alt="créer(クレエ) 人感 センサーライト 室内 【PSE取得済】 明るさ調節(10段階)・点灯時間設定可能/足元灯 コンセント式 省エネ フットライト 電球色 暖色/白色 照明 (ホワイト)" />
         <span class="affiliate-product-name">créer(クレエ) 人感 センサーライト 室内 【PSE取得済】 明るさ調節(10段階)・点灯時間設定可能/足元灯 コンセント式 省エネ フットライト 電球色 暖色/白色 照明 (ホワイト)</span>
     </a>
@@ -756,7 +756,7 @@ Docker Compose を利用するには、以下の公式ドキュメントを参�
 <h2 id="マキタ-携帯電話ホルダー-a-73162">マキタ 携帯電話ホルダー A-73162</h2>
 
 <div class="affiliate-product-list">
-    <a href="https://www.amazon.co.jp/dp/B0BZCXXQPB/?tag=saasan-22" class="affiliate-product">
+    <a href="https://www.amazon.co.jp/dp/B0BZCXXQPB/?tag=saasan-22" target="_blank" class="affiliate-product">
         <img src="https://m.media-amazon.com/images/I/81HJjeNtTbL._AC_SX679_.jpg" alt="マキタ(Makita) 携帯電話ホルダー A-73162" />
         <span class="affiliate-product-name">マキタ(Makita) 携帯電話ホルダー A-73162</span>
     </a>
@@ -767,7 +767,7 @@ Docker Compose を利用するには、以下の公式ドキュメントを参�
 <h2 id="secrid-カードケース">Secrid カードケース</h2>
 
 <div class="affiliate-product-list">
-    <a href="https://www.amazon.co.jp/dp/B074MN1146/?tag=saasan-22" class="affiliate-product">
+    <a href="https://www.amazon.co.jp/dp/B074MN1146/?tag=saasan-22" target="_blank" class="affiliate-product">
         <img src="https://m.media-amazon.com/images/I/61Iur4dn5yL._AC_SX679_.jpg" alt="Secrid (シークリッド) - ミニ 財布 本革 RFID保護 カードケース カード最大12枚用, RFID財布。, ブラックオリーブ, 21 mm" />
         <span class="affiliate-product-name">Secrid (シークリッド) - ミニ 財布 本革 RFID保護 カードケース カード最大12枚用, RFID財布。, ブラックオリーブ, 21 mm</span>
     </a>
@@ -819,11 +819,11 @@ aptX LL 対応の機器が少なくいいものが見つからなかった。</p
 完全ワイヤレスイヤホン EarFun Air Pro 3 を購入した。</p>
 
 <div class="affiliate-product-list">
-    <a href="https://www.amazon.co.jp/dp/B0B1J2WTB2?tag=saasan-22" class="affiliate-product">
+    <a href="https://www.amazon.co.jp/dp/B0B1J2WTB2?tag=saasan-22" target="_blank" class="affiliate-product">
         <img src="https://m.media-amazon.com/images/I/41V33CRpvGL._AC_SY355_.jpg" alt="Creative BT-W4 Bluetooth トランスミッター USB オーディオ/チャット用アナログマイク付 aptX Adaptiveモデル HP-BTW4" />
         <span class="affiliate-product-name">Creative BT-W4 Bluetooth トランスミッター USB オーディオ/チャット用アナログマイク付 aptX Adaptiveモデル HP-BTW4</span>
     </a>
-    <a href="https://www.amazon.co.jp/dp/B0BNQ611R2?tag=saasan-22" class="affiliate-product">
+    <a href="https://www.amazon.co.jp/dp/B0BNQ611R2?tag=saasan-22" target="_blank" class="affiliate-product">
         <img src="https://m.media-amazon.com/images/I/51mtle79kTL._AC_SX522_.jpg" alt="【VGP金賞】EarFun Air Pro 3 ANC搭載完全ワイヤレスイヤホン【Bluetooth 5.3 + 43dBまでノイズキャンセリング】QCC3071チップ搭載/aptX adaptive対応/超低遅延55ms/マルチポイント接続/専用アプリ/cVc8.0通話ノイズリダクション/最大45時間再生/ワイヤレス充電/IPX5防水(ブラック)" />
         <span class="affiliate-product-name">【VGP金賞】EarFun Air Pro 3 ANC搭載完全ワイヤレスイヤホン【Bluetooth 5.3 + 43dBまでノイズキャンセリング】QCC3071チップ搭載/aptX adaptive対応/超低遅延55ms/マルチポイント接続/専用アプリ/cVc8.0通話ノイズリダクション/最大45時間再生/ワイヤレス充電/IPX5防水(ブラック)</span>
     </a>
