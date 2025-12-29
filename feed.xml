@@ -1,4 +1,190 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ja"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://slx.jp/feed.xml" rel="self" type="application/atom+xml" /><link href="https://slx.jp/" rel="alternate" type="text/html" hreflang="ja" /><updated>2025-12-27T13:27:05+09:00</updated><id>https://slx.jp/feed.xml</id><title type="html">slx.jp</title><author><name>saasan</name></author><entry><title type="html">コマンドラインを使用した VMware ESXi ホストのパッチ適用</title><link href="https://slx.jp/blog/2025/10/18/%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%83%A9%E3%82%A4%E3%83%B3%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%97%E3%81%9Fvmware-esxi%E3%83%9B%E3%82%B9%E3%83%88%E3%81%AE%E3%83%91%E3%83%83%E3%83%81%E9%81%A9%E7%94%A8.html" rel="alternate" type="text/html" title="コマンドラインを使用した VMware ESXi ホストのパッチ適用" /><published>2025-10-18T12:36:47+09:00</published><updated>2025-10-18T12:36:47+09:00</updated><id>https://slx.jp/blog/2025/10/18/%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%83%A9%E3%82%A4%E3%83%B3%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%97%E3%81%9Fvmware-esxi%E3%83%9B%E3%82%B9%E3%83%88%E3%81%AE%E3%83%91%E3%83%83%E3%83%81%E9%81%A9%E7%94%A8</id><content type="html" xml:base="https://slx.jp/blog/2025/10/18/%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%83%A9%E3%82%A4%E3%83%B3%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%97%E3%81%9Fvmware-esxi%E3%83%9B%E3%82%B9%E3%83%88%E3%81%AE%E3%83%91%E3%83%83%E3%83%81%E9%81%A9%E7%94%A8.html"><![CDATA[<p>手順を忘れがちなのでメモしておく。</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ja"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://slx.jp/feed.xml" rel="self" type="application/atom+xml" /><link href="https://slx.jp/" rel="alternate" type="text/html" hreflang="ja" /><updated>2025-12-29T20:52:46+09:00</updated><id>https://slx.jp/feed.xml</id><title type="html">slx.jp</title><author><name>saasan</name></author><entry><title type="html">【2025年】今年買ってよかったもの</title><link href="https://slx.jp/blog/2025/12/29/2025%E5%B9%B4-%E4%BB%8A%E5%B9%B4%E8%B2%B7%E3%81%A3%E3%81%A6%E3%82%88%E3%81%8B%E3%81%A3%E3%81%9F%E3%82%82%E3%81%AE.html" rel="alternate" type="text/html" title="【2025年】今年買ってよかったもの" /><published>2025-12-29T20:50:00+09:00</published><updated>2025-12-29T20:50:00+09:00</updated><id>https://slx.jp/blog/2025/12/29/%E3%80%902025%E5%B9%B4%E3%80%91%E4%BB%8A%E5%B9%B4%E8%B2%B7%E3%81%A3%E3%81%A6%E3%82%88%E3%81%8B%E3%81%A3%E3%81%9F%E3%82%82%E3%81%AE</id><content type="html" xml:base="https://slx.jp/blog/2025/12/29/2025%E5%B9%B4-%E4%BB%8A%E5%B9%B4%E8%B2%B7%E3%81%A3%E3%81%A6%E3%82%88%E3%81%8B%E3%81%A3%E3%81%9F%E3%82%82%E3%81%AE.html"><![CDATA[<p>個人的に今年買ってよかったもののメモ</p>
+
+<h2 id="samsung-galaxy-z-fold7">Samsung Galaxy Z Fold7</h2>
+
+<p>Fold5 から買い替え。</p>
+
+<p>大画面化と薄型化により、閉じていても普通のスマホとして使いやすくなったのが良い。</p>
+
+<p>画面のパンチホールも気になる場面はほとんどない。</p>
+
+<p>カメラが大きく飛び出しておりケースを付けても平坦にならないため、机に置いて使いづらいのが難点。</p>
+
+<div class="affiliate-product-list">
+    <a href="https://www.amazon.co.jp/dp/B0FGNN555T/?tag=saasan-22" target="_blank" class="affiliate-product">
+        <img src="https://m.media-amazon.com/images/I/51UtYeTOUlL._AC_SX679_.jpg" alt="Samsung Galaxy Z Fold7 256GB \|ジェットブラック\|Galaxy AI対応\|SIMフリースマホ 本体 端末\|FeliCa対応\|8.0インチ\|軽量215g\|IP48防水防塵\|QXGA+\|バッテリー 4,400mAh\|Android\|SM-F966QZKASJP" />
+        <span class="affiliate-product-name">Samsung Galaxy Z Fold7 256GB \|ジェットブラック\|Galaxy AI対応\|SIMフリースマホ 本体 端末\|FeliCa対応\|8.0インチ\|軽量215g\|IP48防水防塵\|QXGA+\|バッテリー 4,400mAh\|Android\|SM-F966QZKASJP</span>
+    </a>
+    <a href="https://www.amazon.co.jp/dp/B0F1BZ8YGD/?tag=saasan-22" target="_blank" class="affiliate-product">
+        <img src="https://m.media-amazon.com/images/I/71FwUZ6OoJL._AC_SX679_.jpg" alt="Spigen 【創業18年の技術力】Galaxy Z Fold7 ケース ヒンジ保護 耐衝撃 MagFit対応 指紋防止 レンズ保護 タフアーマー・プロ・マグフィット ACS09549 (ブラック)" />
+        <span class="affiliate-product-name">Spigen 【創業18年の技術力】Galaxy Z Fold7 ケース ヒンジ保護 耐衝撃 MagFit対応 指紋防止 レンズ保護 タフアーマー・プロ・マグフィット ACS09549 (ブラック)</span>
+    </a>
+    <a href="https://www.amazon.co.jp/dp/B0F8RDXNY5/?tag=saasan-22" target="_blank" class="affiliate-product">
+        <img src="https://m.media-amazon.com/images/I/71Q97RcfG7L._AC_SX679_.jpg" alt="Spigen Galaxy Z Fold7 ガラスフィルム EZ Fit Pro 貼り付けキット付き 9H硬度強化ガラス ナノコーティング 飛散防止 2枚入 AGL09576" />
+        <span class="affiliate-product-name">Spigen Galaxy Z Fold7 ガラスフィルム EZ Fit Pro 貼り付けキット付き 9H硬度強化ガラス ナノコーティング 飛散防止 2枚入 AGL09576</span>
+    </a>
+</div>
+
+<h2 id="スターツ-startts-su02-bk-suvbag-3way-タテ">スターツ STARTTS SU02 BK [SUVBAG 3WAY タテ]</h2>
+
+<p>壊れても同じものに買い替えるほど気に入ってた
+STARTTS FS02 が廃番になってしまったんで、同社の SU02 を購入。</p>
+
+<p>PC/タブレットが入れられるクッション付きスペース、
+内ポケットが多いが、それぞれに物を入れても互いに干渉しない作りなど、
+整理しつつもたくさん入れられるのは変わらずで良い。</p>
+
+<p>リュックのハーネス間を繋ぐチェストベルトが追加され、肩からすべり落ちなくなったのも良い。</p>
+
+<p>13インチノートPCが入るギリギリのコンパクトサイズで取り回しがよかった
+FS02 と比べ一回り大きいのが最初は不満だったけど、
+その分収納力があるんで荷物が多いときは助かる。</p>
+
+<div class="affiliate-product-list">
+    <a href="https://www.amazon.co.jp/dp/B085T3K6M6/?tag=saasan-22" target="_blank" class="affiliate-product">
+        <img src="https://m.media-amazon.com/images/I/41AniZsZaZL._AC_.jpg" alt="[STARTTS] SUV ビジネスバッグ SUVシリーズ" />
+        <span class="affiliate-product-name">[STARTTS] SUV ビジネスバッグ SUVシリーズ</span>
+    </a>
+</div>
+
+<h2 id="4-tb-ssd">4 TB SSD</h2>
+
+<p>やはりストレージはデカければデカいほどいい</p>
+
+<div class="affiliate-product-list">
+    <a href="https://www.amazon.co.jp/dp/B0DFG4DL36/?tag=saasan-22" target="_blank" class="affiliate-product">
+        <img src="https://m.media-amazon.com/images/I/61YYKR4CZWL._AC_SX679_.jpg" alt="Western Digital ウエスタンデジタル WD BLACK M.2 SSD 内蔵 ヒートシンク搭載 4TB PS5動作確認済 NVMe PCIe Gen4 x4 WDS400T2XHE-EC SN850X 【国内正規取扱代理店】" />
+        <span class="affiliate-product-name">Western Digital ウエスタンデジタル WD BLACK M.2 SSD 内蔵 ヒートシンク搭載 4TB PS5動作確認済 NVMe PCIe Gen4 x4 WDS400T2XHE-EC SN850X 【国内正規取扱代理店】</span>
+    </a>
+</div>
+
+<h2 id="冷蔵庫とレンジ">冷蔵庫とレンジ</h2>
+
+<p>20年くらい使ってた冷蔵庫とレンジを買い替え。</p>
+
+<p>以前の冷蔵庫は冷凍庫に nosh 10個入れると他になにも入らなかった。
+これは余裕があるんで、氷作ったり他の冷凍食品入れたりできて助かった。</p>
+
+<p>以前のレンジは回転するタイプだったけど、
+回転しないタイプになって大きめのものも温められるようになった。</p>
+
+<div class="affiliate-product-list">
+    <a href="https://www.amazon.co.jp/dp/B0DN4LZXH6/?tag=saasan-22" target="_blank" class="affiliate-product">
+        <img src="https://m.media-amazon.com/images/I/31Z2DOjGrmL._AC_SX679_.jpg" alt="シャープ 冷蔵庫 幅49.5cm 152L 両開き(つけかえどっちもドア) SJ-GD15P-B ピュアブラック 大容量冷凍室 プラズマクラスター 高品位ガラスドア" />
+        <span class="affiliate-product-name">シャープ 冷蔵庫 幅49.5cm 152L 両開き(つけかえどっちもドア) SJ-GD15P-B ピュアブラック 大容量冷凍室 プラズマクラスター 高品位ガラスドア</span>
+    </a>
+    <a href="https://www.amazon.co.jp/dp/B0F1T24TC3/?tag=saasan-22" target="_blank" class="affiliate-product">
+        <img src="https://m.media-amazon.com/images/I/51pBN+RVp8L._AC_SX679_.jpg" alt="シャープ オーブンレンジ PLAINLY RE-WF185-B ブラック系[18L]" />
+        <span class="affiliate-product-name">シャープ オーブンレンジ PLAINLY RE-WF185-B ブラック系[18L]</span>
+    </a>
+</div>
+
+<h2 id="icカードセパレーター">ICカードセパレーター</h2>
+
+<p>去年買った Secrid カードケースに非接触型 IC カードを入れているが、
+ケースを開かずにタッチしたとき Suica の反応が悪い自販機あったため購入。
+(改札だけなら問題ない)</p>
+
+<p>これを間に挟んだら一発で問題が解消した。</p>
+
+<div class="affiliate-product-list">
+    <a href="https://www.amazon.co.jp/dp/B08GYBT34F/?tag=saasan-22" target="_blank" class="affiliate-product">
+        <img src="https://m.media-amazon.com/images/I/61aadTRN2wL._AC_SY879_.jpg" alt="[Pretimo] 社員証 IDカード ICカードセパレーター 薄型 両面対応 ICカード 2枚用 防磁シート 磁気遮断 入退室 改札 エラー防止 干渉防止 パスケース対応" />
+        <span class="affiliate-product-name">[Pretimo] 社員証 IDカード ICカードセパレーター 薄型 両面対応 ICカード 2枚用 防磁シート 磁気遮断 入退室 改札 エラー防止 干渉防止 パスケース対応</span>
+    </a>
+    <a href="https://www.amazon.co.jp/dp/B074MN1146/?tag=saasan-22" target="_blank" class="affiliate-product">
+        <img src="https://m.media-amazon.com/images/I/61Iur4dn5yL._AC_SX679_.jpg" alt="Secrid (シークリッド) - ミニ 財布 本革 RFID保護 カードケース カード最大12枚用, RFID財布。, ブラックオリーブ, 21 mm" />
+        <span class="affiliate-product-name">Secrid (シークリッド) - ミニ 財布 本革 RFID保護 カードケース カード最大12枚用, RFID財布。, ブラックオリーブ, 21 mm</span>
+    </a>
+</div>
+
+<h2 id="自転車用スマホホルダー">自転車用スマホホルダー</h2>
+
+<p>駐輪場で他の自転車のハンドルでも当たったのか、
+以前使っていたものが破損したためシリコン製のものを購入。</p>
+
+<p>保持力は問題無し。プラスチック製と比べて壊れる心配もない。</p>
+
+<div class="affiliate-product-list">
+    <a href="https://www.amazon.co.jp/dp/B08BHQSNP8/?tag=saasan-22" target="_blank" class="affiliate-product">
+        <img src="https://m.media-amazon.com/images/I/71Hb4ojFaZL._AC_SX679_.jpg" alt="【Bone】Bike Tie Pro 4 自転車 スマホホルダー シリコン製 ステム用 スマートフォンホルダー, 携帯ホルダー, 自転車すまほホルダー, ケータイホルダー, smartphone holder, 落下防止, 防振, 振動吸収, 滑り止め, 簡単取付, ロードバイク, bike phone mount, iPhone, android, 4.7〜7.2インチ 縦型 黒ブラック" />
+        <span class="affiliate-product-name">【Bone】Bike Tie Pro 4 自転車 スマホホルダー シリコン製 ステム用 スマートフォンホルダー, 携帯ホルダー, 自転車すまほホルダー, ケータイホルダー, smartphone holder, 落下防止, 防振, 振動吸収, 滑り止め, 簡単取付, ロードバイク, bike phone mount, iPhone, android, 4.7〜7.2インチ 縦型 黒ブラック</span>
+    </a>
+</div>
+
+<h2 id="クリーニングクロス">クリーニングクロス</h2>
+
+<p>複数人が勧めてるのを見て半信半疑で購入したら、
+本当に驚くくらいスマホ/タブレットの指紋などが綺麗に落ちる</p>
+
+<div class="affiliate-product-list">
+    <a href="https://www.amazon.co.jp/dp/B0725FN1HM/?tag=saasan-22" target="_blank" class="affiliate-product">
+        <img src="https://m.media-amazon.com/images/I/71UdQSM41pL._AC_SX679_.jpg" alt="エレコム クリーニングクロス 超極細繊維 Lサイズ クリーナー マイクロファイバー 水性/油性汚れ対応 強力 ウォッシャブル 【日本製】 グレー KCT-008GY" />
+        <span class="affiliate-product-name">エレコム クリーニングクロス 超極細繊維 Lサイズ クリーナー マイクロファイバー 水性/油性汚れ対応 強力 ウォッシャブル 【日本製】 グレー KCT-008GY</span>
+    </a>
+</div>
+
+<h2 id="ノートpcタブレットスタンド">ノートPC/タブレットスタンド</h2>
+
+<p>5台まで立てられるんで平置きしてたのがスッキリ</p>
+
+<div class="affiliate-product-list">
+    <a href="https://www.amazon.co.jp/dp/B0DFWJJLSV/?tag=saasan-22" target="_blank" class="affiliate-product">
+        <img src="https://m.media-amazon.com/images/I/6146fZ2nr2L._AC_SX679_.jpg" alt="YIK TUNG ノートパソコンスタンド 縦置き 5台 収納 冷却 pcスタンド 縦型 収納 5スロット 幅調整可能 アルミ合金製 シリコーンゴム傷防止 パソコンスタンド 全機種対応 MacBook Pro Surface iPad HP Lenovo ThinkPad Huawei Surface Dell、HP、Lenovoなど" />
+        <span class="affiliate-product-name">YIK TUNG ノートパソコンスタンド 縦置き 5台 収納 冷却 pcスタンド 縦型 収納 5スロット 幅調整可能 アルミ合金製 シリコーンゴム傷防止 パソコンスタンド 全機種対応 MacBook Pro Surface iPad HP Lenovo ThinkPad Huawei Surface Dell、HP、Lenovoなど</span>
+    </a>
+</div>
+
+<h2 id="アイマスクとめぐりズム">アイマスクとめぐりズム</h2>
+
+<p>先に買ったアイマスクも使い心地が良かったんだけど、
+試しにポケモンスリープコラボのめぐりズムを買ってみたらこれがさらに良かった。</p>
+
+<p>めぐりズムは目元を温めて緊張をほぐすのが本来の効果だけど、
+開けたら最後の「使い捨て」だから「絶対に寝なきゃいけない」という気持ちになり、
+布団の中でだらだらとスマホ使うのを止められるのが個人的には良い。</p>
+
+<div class="affiliate-product-list">
+    <a href="https://www.amazon.co.jp/dp/B0CQWX8942/?tag=saasan-22" target="_blank" class="affiliate-product">
+        <img src="https://m.media-amazon.com/images/I/71f2-EgEBuL._AC_SX679_.jpg" alt="aimeve アイマスク 睡眠用 安眠 快眠 【光の遮断 premium】 遮光率99.99％ (睡眠栄養指導士推薦) 3D 立体 軽量 目隠し (ブラック)" />
+        <span class="affiliate-product-name">aimeve アイマスク 睡眠用 安眠 快眠 【光の遮断 premium】 遮光率99.99％ (睡眠栄養指導士推薦) 3D 立体 軽量 目隠し (ブラック)</span>
+    </a>
+    <a href="https://www.amazon.co.jp/dp/B0DDL7FSDP/?tag=saasan-22" target="_blank" class="affiliate-product">
+        <img src="https://m.media-amazon.com/images/I/81oNWJtWuaL._AC_SX679_PIbundle-12,TopRight,0,0_SH20_.jpg" alt="めぐりズム蒸気でホットアイマスク PoKéMoN企画品 12枚入" />
+        <span class="affiliate-product-name">めぐりズム蒸気でホットアイマスク PoKéMoN企画品 12枚入</span>
+    </a>
+</div>
+
+<h2 id="にゃんぷっぷーぬいぐるみ">にゃんぷっぷーぬいぐるみ</h2>
+
+<p>かわいい</p>
+
+<p>去年バージョン2を買ったけど、バージョン1が安くなってたので</p>
+
+<div class="affiliate-product-list">
+    <a href="https://www.amazon.co.jp/dp/B0D454WCKD/?tag=saasan-22" target="_blank" class="affiliate-product">
+        <img src="https://m.media-amazon.com/images/I/61VI0KFp8mL._AC_SX679_.jpg" alt="にゃんぷっぷーぬいぐるみ" />
+        <span class="affiliate-product-name">にゃんぷっぷーぬいぐるみ</span>
+    </a>
+    <a href="https://www.amazon.co.jp/dp/B0DL2J55RJ/?tag=saasan-22" target="_blank" class="affiliate-product">
+        <img src="https://m.media-amazon.com/images/I/71jC-E6oyfL._AC_SX679_.jpg" alt="meowcat にゃんぷっぷー ぬいぐるみ" />
+        <span class="affiliate-product-name">meowcat にゃんぷっぷー ぬいぐるみ</span>
+    </a>
+</div>
+
+<h2 id="青を踏む">青を踏む</h2>
+
+<p>ぱっつんツリ目好きなんでヒロインだけ見て連載読み始めた足フェチ漫画。</p>
+
+<p>残念ながら足フェチ要素はよくわからんが、
+こじらせてる跡辺くんを弄ぶ小悪魔の荊さんと天使の天川さんがかわいいし、話も面白い。</p>
+
+<div class="affiliate-product-list">
+    <a href="https://www.amazon.co.jp/dp/B0FFGV8VKB/?tag=saasan-22" target="_blank" class="affiliate-product">
+        <img src="https://m.media-amazon.com/images/I/81Pmr+zpItL._SY522_.jpg" alt="青を踏む　１巻 (ＦＵＺコミックス)" />
+        <span class="affiliate-product-name">青を踏む　１巻 (ＦＵＺコミックス)</span>
+    </a>
+</div>]]></content><author><name>saasan</name></author><category term="blog" /><category term="ガジェット" /><summary type="html"><![CDATA[2025年に買ってよかったものをご紹介]]></summary></entry><entry><title type="html">コマンドラインを使用した VMware ESXi ホストのパッチ適用</title><link href="https://slx.jp/blog/2025/10/18/%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%83%A9%E3%82%A4%E3%83%B3%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%97%E3%81%9Fvmware-esxi%E3%83%9B%E3%82%B9%E3%83%88%E3%81%AE%E3%83%91%E3%83%83%E3%83%81%E9%81%A9%E7%94%A8.html" rel="alternate" type="text/html" title="コマンドラインを使用した VMware ESXi ホストのパッチ適用" /><published>2025-10-18T12:36:47+09:00</published><updated>2025-10-18T12:36:47+09:00</updated><id>https://slx.jp/blog/2025/10/18/%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%83%A9%E3%82%A4%E3%83%B3%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%97%E3%81%9Fvmware-esxi%E3%83%9B%E3%82%B9%E3%83%88%E3%81%AE%E3%83%91%E3%83%83%E3%83%81%E9%81%A9%E7%94%A8</id><content type="html" xml:base="https://slx.jp/blog/2025/10/18/%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%83%A9%E3%82%A4%E3%83%B3%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%97%E3%81%9Fvmware-esxi%E3%83%9B%E3%82%B9%E3%83%88%E3%81%AE%E3%83%91%E3%83%83%E3%83%81%E9%81%A9%E7%94%A8.html"><![CDATA[<p>手順を忘れがちなのでメモしておく。</p>
 
 <h2 id="手順">手順</h2>
 
@@ -971,91 +1157,4 @@ Web サイト上で音に合わせてマウスをクリックするかスペー�
 <ul>
   <li><a href="https://uzuky.hatenablog.com/entry/20201215/1608005651" target="_blank">aptX LL / Adaptive でやる音ゲー - う！</a></li>
   <li><a href="https://androplus.org/entry/creative-bt-w5-review/" target="_blank">Creative BT-W5レビュー。aptX Adaptiveで24bit/96kHzや低遅延にできるトランスミッター - AndroPlus</a></li>
-</ul>]]></content><author><name>saasan</name></author><category term="blog" /><category term="ガジェット" /><category term="PC" /><summary type="html"><![CDATA[PC でゲームをしたり音楽を聞いたりする際に有線のイヤホンを使用していたが、 ケーブルが煩わしく感じていたのでゲームに使える完全ワイヤレスイヤホンを探すことにした。]]></summary></entry><entry><title type="html">IFTTT の Twitter 連携が有料化したので Python と GitHub Actions で RSS をツイートする</title><link href="https://slx.jp/blog/2023/07/05/ifttt%E3%81%AEtwitter%E9%80%A3%E6%90%BA%E3%81%8C%E6%9C%89%E6%96%99%E5%8C%96%E3%81%97%E3%81%9F%E3%81%AE%E3%81%A7python%E3%81%A8github-actions%E3%81%A7rss%E3%82%92%E3%83%84%E3%82%A4%E3%83%BC%E3%83%88%E3%81%99%E3%82%8B.html" rel="alternate" type="text/html" title="IFTTT の Twitter 連携が有料化したので Python と GitHub Actions で RSS をツイートする" /><published>2023-07-05T00:20:00+09:00</published><updated>2023-07-05T00:20:00+09:00</updated><id>https://slx.jp/blog/2023/07/05/ifttt%E3%81%AEtwitter%E9%80%A3%E6%90%BA%E3%81%8C%E6%9C%89%E6%96%99%E5%8C%96%E3%81%97%E3%81%9F%E3%81%AE%E3%81%A7python%E3%81%A8github-actions%E3%81%A7rss%E3%82%92%E3%83%84%E3%82%A4%E3%83%BC%E3%83%88%E3%81%99%E3%82%8B</id><content type="html" xml:base="https://slx.jp/blog/2023/07/05/ifttt%E3%81%AEtwitter%E9%80%A3%E6%90%BA%E3%81%8C%E6%9C%89%E6%96%99%E5%8C%96%E3%81%97%E3%81%9F%E3%81%AE%E3%81%A7python%E3%81%A8github-actions%E3%81%A7rss%E3%82%92%E3%83%84%E3%82%A4%E3%83%BC%E3%83%88%E3%81%99%E3%82%8B.html"><![CDATA[<p>IFTTT で動かしてた某ゲーム公式サイトの RSS をツイートするやつが
-Twitter 連携の有料化によって動かなくなったため、
-GitHub Actions で自作の Python スクリプトを動かして代用することにした。</p>
-
-<p>コードは以下のリポジトリにある。</p>
-
-<p><a href="https://github.com/saasan/feed2tweet" target="_blank"><img src="https://github-link-card.s3.ap-northeast-1.amazonaws.com/saasan/feed2tweet.png" width="460px" /></a></p>
-
-<h2 id="なぜ-github-actions-なのか">なぜ GitHub Actions なのか？</h2>
-
-<ol>
-  <li>Public リポジトリなら無料で利用可能</li>
-  <li>定期的な実行が可能</li>
-  <li>データの永続化に近いことが可能</li>
-  <li>GitHub Actions の利用経験がなかったため学習用として</li>
-</ol>
-
-<p>RSS 内のどこまでツイートしたかを判別するためその情報を保存しておきたいが、
-IFTTT を利用する前に調べた際は
-無料で利用可能でデータの永続化が可能なサービスが見つからなかった記憶がある。</p>
-
-<p>今回いくつかの候補の中から GitHub Actions について調べていたところ、
-<a href="https://mjhd.hatenablog.com/entry/2022/06/04/104711" target="_blank">Github Actionsのcacheをデータの永続化(?)に使う - MJHD</a>
-を見て cache が永続化に利用できると知り GitHub Actions を利用することとした。</p>
-
-<h2 id="github-actions-の-cache">Github Actions の cache</h2>
-
-<p>公式のドキュメント: 
-<a href="https://docs.github.com/ja/actions/using-workflows/caching-dependencies-to-speed-up-workflows" target="_blank">依存関係をキャッシュしてワークフローのスピードを上げる - GitHub Docs</a></p>
-
-<p>ファイルをキャッシュとして保存し、次回以降のワークフロー実行時に利用できる。</p>
-
-<p>本来はビルドに必要なライブラリなど依存関係を保持しておき
-ワークフローの実行を高速化するためのものだが、
-データの永続化に利用することも可能。</p>
-
-<p>ただし、7日間以上アクセスされていないキャッシュは削除される。容量は最大10 GB。</p>
-
-<h2 id="キャッシュの利用方法">キャッシュの利用方法</h2>
-
-<p>キャッシュを上書きすることはできないため、
-保存時は常に新しいキャッシュを作成し、
-読込時は最新のものを取得する必要がある。</p>
-
-<p>以下のように key に新しいキーを指定することで新しいキャッシュを作成、
-restore-keys に接頭辞のみ指定すると最新のものが取得できる。</p>
-
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">actions/cache用keyの生成</span>
-  <span class="na">run</span><span class="pi">:</span> <span class="s">echo "CACHE_TIMESTAMP=$(date +%s)" &gt;&gt; "$GITHUB_ENV"</span>
-
-<span class="pi">-</span> <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/cache@v3</span>
-  <span class="na">id</span><span class="pi">:</span> <span class="s">tweeted</span>
-  <span class="na">with</span><span class="pi">:</span>
-    <span class="na">path</span><span class="pi">:</span> <span class="s">./tweeted</span>
-    <span class="na">key</span><span class="pi">:</span> <span class="s">tweeted-${{ env.CACHE_TIMESTAMP }}</span>
-    <span class="na">restore-keys</span><span class="pi">:</span> <span class="s">tweeted-</span>
-</code></pre></div></div>
-
-<h2 id="古いキャッシュの削除">古いキャッシュの削除</h2>
-
-<p>前述の通り放置していても古いキャッシュは7日で消えるが、
-新しいものから5個を残して削除することとした。</p>
-
-<p>GitHub CLI の <code class="language-plaintext highlighter-rouge">gh cache</code> を使用している。</p>
-
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Cleanup cache</span>
-  <span class="na">run</span><span class="pi">:</span> <span class="pi">|</span>
-    <span class="s"># 新しいものから5個を残してキャッシュ削除</span>
-    <span class="s">gh cache list --key tweeted- --order asc --sort created_at --json id | \</span>
-      <span class="s">jq -r '.[0:-5][].id' | \</span>
-      <span class="s">xargs -r -I ID gh cache delete ID</span>
-  <span class="na">env</span><span class="pi">:</span>
-    <span class="na">GH_TOKEN</span><span class="pi">:</span> <span class="s">${{ secrets.GITHUB_TOKEN }}</span>
-</code></pre></div></div>
-
-<h2 id="github-actions-での定期実行に関する注意点">GitHub Actions での定期実行に関する注意点</h2>
-
-<p>以下のように schedule で10分毎に実行する設定としたが、
-<a href="https://docs.github.com/ja/actions/using-workflows/events-that-trigger-workflows#schedule" target="_blank">公式のドキュメント</a>
-にも書かれている通り、負荷が高い場合は遅延したりそもそも実行されない場合がある。</p>
-
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">on</span><span class="pi">:</span>
-  <span class="na">schedule</span><span class="pi">:</span>
-    <span class="pi">-</span> <span class="na">cron</span><span class="pi">:</span> <span class="s1">'</span><span class="s">3-59/10</span><span class="nv"> </span><span class="s">*</span><span class="nv"> </span><span class="s">*</span><span class="nv"> </span><span class="s">*</span><span class="nv"> </span><span class="s">*'</span>
-</code></pre></div></div>
-
-<p>実際半日で72回ほど動くはずが53回しか動いていなかった。
-確実に動かしたいものは避けたほうがよい。</p>]]></content><author><name>saasan</name></author><category term="blog" /><category term="Twitter" /><category term="Python" /><category term="GitHub Actions" /><summary type="html"><![CDATA[Github Actions の cache をデータの永続化に使う]]></summary></entry></feed>
+</ul>]]></content><author><name>saasan</name></author><category term="blog" /><category term="ガジェット" /><category term="PC" /><summary type="html"><![CDATA[PC でゲームをしたり音楽を聞いたりする際に有線のイヤホンを使用していたが、 ケーブルが煩わしく感じていたのでゲームに使える完全ワイヤレスイヤホンを探すことにした。]]></summary></entry></feed>
